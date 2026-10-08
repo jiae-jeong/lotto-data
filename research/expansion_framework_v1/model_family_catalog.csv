@@ -1,0 +1,10 @@
+family_id,description,current_examples,shared_signal_or_correlation,independence_guidance
+frequency,long-run occurrence counts,long_frequency; frequency_plus_gap,frequency_plus_gap includes frequency rank,Do not count full frequency and its rank blend as independent evidence
+recency_gap,time since last occurrence,current_gap; frequency_plus_gap,current_gap overlaps frequency_plus_gap,Cluster or report together
+momentum,short-vs-prior frequency change,recent_momentum,uses recent occurrence counts and overlaps frequency/time ensemble,Do not separately add correlated momentum ranks twice
+structure,draw-level profile likelihood,structure_profile,set-level structure scoring,Distinct ticket-level signal; still validate independently
+pair_relation,pair residual association,pair_association,co-occurrence residuals from same history,Not independent of triple/combined relation axis
+triple_relation,triple residual association,triple_association,uses related occurrence history and shared number frequencies,Report alongside pair relation as a family
+rank_ensemble,combined rank score,combined_equal_rank,blends frequency gap momentum pair and triple axes,Not an independent vote from all component models
+candidate_group,plural model-ticket voting,all8_consensus; frequency_time_consensus; structure_association_consensus,shares all constituent model ticket outcomes,Use group ticket walk-forward as the portfolio result; do not add member metrics again as independent proof
+new_family,fill for new hypothesis,NA,Describe shared source data and features,Assign after similarity review
