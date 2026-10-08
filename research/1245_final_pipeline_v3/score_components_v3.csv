@@ -1,0 +1,19 @@
+﻿candidate_group,component,value,period,evidence_status,independence,used_in_final_selection,note
+all8_consensus,historical_mean_hits_minus_random,-0.03084291187739463,201-1244,HISTORICAL_DESCRIPTIVE_ONLY,DUPLICATED_INFORMATION,NO,same historical rounds selected/ranked; descriptive only
+all8_consensus,recent_mean_hits,0.73,recent_100,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+all8_consensus,recent_mean_hits,0.7,recent_50,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+all8_consensus,recent_mean_hits,0.6818181818181818,recent_44,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+all8_consensus,independent_validation,EXPECTED_UNAVAILABLE_FOR_1245,prospective/untouched,EXPECTED_UNAVAILABLE_FOR_1245,NOT_APPLICABLE,NO,absence is expected; not required to generate before draw
+all8_consensus,model_independence_diagnostic,B pair/triple hit r=-0.022584; S006/S007 hit r=0.988715,historical 201-1244 / GitHub batch001,POST_HOC_CORRELATION,SEPARATE_MODEL_IDENTITIES; S006/S007=DUPLICATED_INFORMATION,NO,Do not transfer family correlation to B models; no correlation statistic is added as score
+frequency_time_consensus,historical_mean_hits_minus_random,-0.015517241379310431,201-1244,HISTORICAL_DESCRIPTIVE_ONLY,DUPLICATED_INFORMATION,NO,same historical rounds selected/ranked; descriptive only
+frequency_time_consensus,recent_mean_hits,0.65,recent_100,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+frequency_time_consensus,recent_mean_hits,0.62,recent_50,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+frequency_time_consensus,recent_mean_hits,0.6136363636363636,recent_44,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+frequency_time_consensus,independent_validation,EXPECTED_UNAVAILABLE_FOR_1245,prospective/untouched,EXPECTED_UNAVAILABLE_FOR_1245,NOT_APPLICABLE,NO,absence is expected; not required to generate before draw
+frequency_time_consensus,model_independence_diagnostic,B pair/triple hit r=-0.022584; S006/S007 hit r=0.988715,historical 201-1244 / GitHub batch001,POST_HOC_CORRELATION,SEPARATE_MODEL_IDENTITIES; S006/S007=DUPLICATED_INFORMATION,NO,Do not transfer family correlation to B models; no correlation statistic is added as score
+structure_association_consensus,historical_mean_hits_minus_random,-0.004980842911877392,201-1244,HISTORICAL_DESCRIPTIVE_ONLY,DUPLICATED_INFORMATION,NO,same historical rounds selected/ranked; descriptive only
+structure_association_consensus,recent_mean_hits,0.82,recent_100,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+structure_association_consensus,recent_mean_hits,0.74,recent_50,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+structure_association_consensus,recent_mean_hits,0.7272727272727273,recent_44,DIAGNOSTIC_POST_HOC,DUPLICATED_INFORMATION,NO,same historical target outcomes as full interval
+structure_association_consensus,independent_validation,EXPECTED_UNAVAILABLE_FOR_1245,prospective/untouched,EXPECTED_UNAVAILABLE_FOR_1245,NOT_APPLICABLE,NO,absence is expected; not required to generate before draw
+structure_association_consensus,model_independence_diagnostic,B pair/triple hit r=-0.022584; S006/S007 hit r=0.988715,historical 201-1244 / GitHub batch001,POST_HOC_CORRELATION,SEPARATE_MODEL_IDENTITIES; S006/S007=DUPLICATED_INFORMATION,NO,Do not transfer family correlation to B models; no correlation statistic is added as score
