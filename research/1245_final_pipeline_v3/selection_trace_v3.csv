@@ -1,0 +1,8 @@
+﻿stage,item,status,rule
+INPUT_AND_CUTOFF_CHECK,raw+all required inputs,PASS,exact raw SHA; 1..1244 only; every historical forecast cutoff t-1
+MODEL_CANDIDATES,registered S001-S008,IN_MEMORY_DIAGNOSTIC_ONLY,frozen prospective registry and code hash; train rounds 1..1244; no outcome row
+MODEL_INDEPENDENCE,S006/S007 and S008,DUPLICATED_INFORMATION_DEDUPED,S006/S007 averaged as one relationship family; S008 hybrid excluded from an extra vote
+HISTORICAL_SCORE,201-1244 candidate-group metrics,HISTORICAL_DESCRIPTIVE_ONLY_EXCLUDED,not passed to select_portfolio; no ranking or weight
+DETERMINISM,selector contract,PASS,fixed six-family rank consensus; lexical model-pair tiebreak; lower-number score tiebreak
+PROSPECTIVE_RESULT,1245 untouched outcome,EXPECTED_UNAVAILABLE_FOR_1245,absence is not an error; never read future result
+FINAL_SELECTION,three ticket selector,NOT_RUN_IN_CHECK_ONLY,"only GENERATE calls selector: independent families, structure coverage, unique numbers, lower pair overlap, model-id tie-break"
