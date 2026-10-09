@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "new_csv_count": 14,
+  "deterministic_outputs": 11,
+  "independent_conditional_covariance_checks": 10,
+  "existing_original_files_changed": 0,
+  "existing_original_B_A_hashes_preserved": true,
+  "actual_1245": "NOT READ / NOT USED",
+  "created_utc": "2026-10-09T15:14:41.239351+00:00",
+  "limitations": [
+    "A/C/contrarian originals NOT FOUND",
+    "Pre-outcome original recommendation missing; closedloop NOT EXECUTED",
+    "Some historic quoted numbers MISMATCH with cause UNCONFIRMED",
+    "Workspace-specific reproduction; portable single-folder packaging NOT EXECUTED"
+  ]
+}

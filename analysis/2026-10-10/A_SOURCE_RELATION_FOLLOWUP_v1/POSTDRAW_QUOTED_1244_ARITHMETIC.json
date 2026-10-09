@@ -1,0 +1,48 @@
+{
+  "target": 1244,
+  "quoted_ticket": [
+    13,
+    15,
+    18,
+    19,
+    31,
+    38
+  ],
+  "actual_numbers": [
+    1,
+    13,
+    18,
+    26,
+    34,
+    38
+  ],
+  "bonus": 25,
+  "hits": [
+    13,
+    18,
+    38
+  ],
+  "hit_count": 3,
+  "missed_actual": [
+    1,
+    26,
+    34
+  ],
+  "bonus_in_ticket": false,
+  "quoted_message_id": "25abcb70-7776-48d5-90c6-a1860730e6ec",
+  "quoted_thread_id": "6ac199de-0af4-83ee-80f4-8cf4c175d2f8",
+  "quote_utc": "2026-10-04T00:37:07.278538+00:00",
+  "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "arithmetic_status": "VERIFIED",
+  "primary_pre_outcome_source": "NOT FOUND",
+  "source_type": "POST_DRAW_QUOTATION",
+  "eligible_for_closedloop": false,
+  "original_recommendation_time": "NOT RECORDED",
+  "model": "NOT RECORDED",
+  "version": "NOT RECORDED",
+  "cutoff": "NOT RECORDED",
+  "selection_reason": "NOT RECORDED",
+  "exclusion_reason": "NOT RECORDED",
+  "other_five_lines": "SOURCE NOT FOUND",
+  "actual_1245": "NOT READ / NOT USED"
+}

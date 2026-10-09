@@ -1,0 +1,14 @@
+{
+  "A_MODEL_ORIGINAL": "NOT FOUND",
+  "C_MODEL_ORIGINAL": "NOT FOUND",
+  "CONTRARIAN_ORIGINAL": "NOT FOUND",
+  "historical_original_closedloop": "NOT EXECUTED",
+  "quoted_1244_arithmetic": "VERIFIED",
+  "pair_triple_multiplicity": "VERIFIED",
+  "top10_relation_walkforward": "VERIFIED NEW RETROSPECTIVE RUN; not past model reproduction",
+  "past_chat_model_performance": "NOT FOUND executable original; not used",
+  "B": "REPRODUCED prior frozen run, not rerun",
+  "B_MC": "MONTE_CARLO_VERIFIED prior frozen run, not rerun",
+  "predictive_superiority": "INSUFFICIENT EVIDENCE",
+  "actual_1245": "NOT READ / NOT USED"
+}

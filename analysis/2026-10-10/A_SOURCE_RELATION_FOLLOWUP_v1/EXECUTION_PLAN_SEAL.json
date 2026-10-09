@@ -1,0 +1,13 @@
+{
+  "created_utc": "2026-10-09T15:06:08.643571+00:00",
+  "git_base": "b6643b225e62ece4428216c363027b3a82c7d9cb",
+  "actual_1245": "NOT READ / NOT USED",
+  "prior_report_already_read": true,
+  "registration": "Fixed before this run; retrospective, not prospective",
+  "artifacts": {
+    "FOLLOWUP_CONFIG.json": "8b9b911d9f9bda2a8a1bbdaf1be00fb0dbe96bfeb09b5ef2407067ed4a932a78",
+    "FOLLOWUP_PROTOCOL.md": "9111e16aecd3b3629b2c9ff3e3c381c633a2a2720f758d0f4961eebb56f0a2cd",
+    "RUN_FOLLOWUP.py": "8e58fdd5d9d120a154a877c1032656989f8a87f4b74649642d2fe8e6c686dea1",
+    "OLDER_CHAT_EVIDENCE_INTAKE.json": "2fd37554ebb173a8ecabb48ee8765fef01a50fa8f6891d865e377888ab7e0bfa"
+  }
+}

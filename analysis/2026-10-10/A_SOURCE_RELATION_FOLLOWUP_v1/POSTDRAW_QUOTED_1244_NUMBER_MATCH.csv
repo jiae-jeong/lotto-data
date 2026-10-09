@@ -1,0 +1,7 @@
+target,quoted_number,main_hit,bonus_hit,source_type,eligible_for_closedloop
+1244,13,1,0,POST_DRAW_QUOTATION,False
+1244,15,0,0,POST_DRAW_QUOTATION,False
+1244,18,1,0,POST_DRAW_QUOTATION,False
+1244,19,0,0,POST_DRAW_QUOTATION,False
+1244,31,0,0,POST_DRAW_QUOTATION,False
+1244,38,1,0,POST_DRAW_QUOTATION,False

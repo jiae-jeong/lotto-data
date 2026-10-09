@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-10-09T15:06:17.484527+00:00",
+  "completed_utc": "2026-10-09T15:06:25.682401+00:00",
+  "independent_tail_formula": "lgamma sum, independently compared against recurrence",
+  "max_absolute_p_error": 1.0665912597573879e-12,
+  "verified_relation_rows": 15180,
+  "verified_daily_walkforward_rows": 1000,
+  "source_arithmetic_verified": true,
+  "closedloop_original_source": "NOT FOUND",
+  "closedloop_execution": "NOT EXECUTED",
+  "original_tracked_files_changed": 0,
+  "prior_A_B_content_size_mtime_unchanged": true,
+  "actual_1245": "NOT READ / NOT USED"
+}
