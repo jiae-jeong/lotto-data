@@ -1,0 +1,60 @@
+{
+  "B_stored_prediction_rows_checked": 33408,
+  "B_v1": [
+    {
+      "bytes": 27977,
+      "path": "research/1245_final_pipeline_v3/recovered_original_assets/b_model_backtest.py",
+      "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb",
+      "status": "PASS"
+    },
+    {
+      "bytes": 3236859,
+      "path": "research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_predictions.csv",
+      "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be",
+      "status": "PASS"
+    },
+    {
+      "bytes": 113856,
+      "path": "research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_holdout_metrics.csv",
+      "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4",
+      "status": "PASS"
+    },
+    {
+      "bytes": 3509,
+      "path": "research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_classification.csv",
+      "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2",
+      "status": "PASS"
+    },
+    {
+      "bytes": 6264,
+      "path": "research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_50_round_trends.csv",
+      "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df",
+      "status": "PASS"
+    }
+  ],
+  "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+  "data": {
+    "bonus_conflicts": 0,
+    "bytes": 43234,
+    "duplicate_rounds": 0,
+    "first_round": 1,
+    "invalid_main_numbers": 0,
+    "last_round": 1244,
+    "latest_date": "2026.10.03",
+    "missing_rounds": 0,
+    "rows": 1244,
+    "sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+    "source_external_crosscheck": "NOT_PERFORMED_THIS_RUN; repository input integrity only",
+    "status": "PASS"
+  },
+  "future_result_read": false,
+  "historical_evidence_completeness": "MAIN_INDEPENDENT_PARTIAL; ORIGINAL_LOCAL_COMPLETE; no retroactive repair",
+  "historical_v3_status": "SEALED V3 GATE NOT PASSED",
+  "local_independent_groups": 16,
+  "local_independent_rows": 3200,
+  "local_independent_rows_checked": 3200,
+  "main_independent_rows": 1798,
+  "model_execution_before_freeze": false,
+  "promoted_models": 0,
+  "reviewed_files": 163
+}

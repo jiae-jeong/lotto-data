@@ -1,0 +1,112 @@
+{
+  "V4_model_prediction_executed_before_freeze": false,
+  "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+  "created_at_utc": "2026-10-09T04:47:27.274091+00:00",
+  "creation_time_source": "Initial interrupted-build payload uses filesystem birthtime UTC; resumed files use UTC time immediately after exclusive creation.",
+  "cutoff_round": 1244,
+  "first_target": 1245,
+  "fixed_files": [
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 2211,
+      "created_at_utc": "2026-10-09T04:45:59.063269+00:00",
+      "path": "DATA_MANIFEST_V4.csv",
+      "sha256": "107a9818e4cccc9790ede3bb1bfb8215a719ddbeeb85eb9ce8914c99ff66b6e4"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 3098,
+      "created_at_utc": "2026-10-09T04:45:59.076230+00:00",
+      "path": "EVIDENCE_REVIEW_V4.md",
+      "sha256": "4e2439a44a774f571648e5c98fd4d88d1727a1bcd81b7e148c2f7cedde69ee1d"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 5195,
+      "created_at_utc": "2026-10-09T04:45:59.042467+00:00",
+      "path": "MODEL_MANIFEST_V4.csv",
+      "sha256": "cf79fdb55d0b40b75d6c724aeb9891345c225040a26dcf455bd1b9ade12bb1f2"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 9338,
+      "created_at_utc": "2026-10-09T04:45:59.076230+00:00",
+      "path": "PROSPECTIVE_PROTOCOL_V4.md",
+      "sha256": "7addf5c2e2af20638f21e9f7cb930a8dda86e738fe89020c3593cf85e0e98f4b"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 833,
+      "created_at_utc": "2026-10-09T04:47:27.240564+00:00",
+      "path": "RANDOM_BASELINE_V4.json",
+      "sha256": "55c64c398ef1ef1b5597233d724eeb4fc4b06a7937a0d218a5d567275f379e92"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 32643,
+      "created_at_utc": "2026-10-09T04:45:59.050519+00:00",
+      "path": "RESEARCH_REGISTRY_V4.csv",
+      "sha256": "01e5214150b783e2a352e41d0a6371d0ec7542f76b981941758fc95c3e4b07b4"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 2623,
+      "created_at_utc": "2026-10-09T04:45:59.042467+00:00",
+      "path": "RULES_V4.json",
+      "sha256": "b8d3387a38f2480dd0ca0057cf7696f66d420eb444c4d591ed6955a3b0f60dda"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 57892,
+      "created_at_utc": "2026-10-09T04:45:59.063269+00:00",
+      "path": "SOURCE_EVIDENCE_INVENTORY_V4.csv",
+      "sha256": "27ad60e261fa1d04c07b6633be77f01f39a5c1b78f313f835653d06ac3155d19"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 2243,
+      "created_at_utc": "2026-10-09T04:45:59.063269+00:00",
+      "path": "VALIDATION_GATES_V4.json",
+      "sha256": "357464e9de933ef042a940da12b3fcdb91206bbfee04645e22e67081fa1e607a"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 2567,
+      "created_at_utc": "2026-10-09T04:45:59.076230+00:00",
+      "path": "evaluation_v4.py",
+      "sha256": "9fae6c59956ce49489abb9c3ee08df030054254fc95ed1928fafb37cc087f22b"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 9263,
+      "created_at_utc": "2026-10-09T04:45:59.076230+00:00",
+      "path": "prospective_engine_v4.py",
+      "sha256": "f6ce9f995b7189a73cf54e9036b6053d388f2ea7e3f06a3357769669ee143b44"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 1996,
+      "created_at_utc": "2026-10-09T04:45:59.076230+00:00",
+      "path": "verify_freeze_v4.py",
+      "sha256": "5511923bb358ece8653d5cdddae67c89888eb867a0e4d9bb7a4cecb7f5989fbd"
+    },
+    {
+      "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+      "bytes": 2049,
+      "created_at_utc": "2026-10-09T04:47:27.263965+00:00",
+      "path": "SHA256_MANIFEST_V4.csv",
+      "sha256": "710dba7c0b9047f3575fff64f1ac7d3551f5d8b47818127d3aa61e74803c64c9"
+    }
+  ],
+  "future_result_read_before_freeze": false,
+  "historical_v3_status": "SEALED V3 GATE NOT PASSED",
+  "holdout_rounds": [
+    1245,
+    1444
+  ],
+  "original_local_head": "6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d",
+  "pre_draw_publication_eligibility": "PENDING_EXTERNAL_CONFIRMATION; freeze file alone is not holdout evidence",
+  "self_hash_policy": "Root seal SHA256 and subsequent freeze commit SHA are external completion records to avoid circular hashes; pass external seal SHA to verifier.",
+  "status": "NEW_PROSPECTIVE_FREEZE_CREATED_NOT_YET_REMOTE_VERIFIED",
+  "version": "prospective_v4"
+}
