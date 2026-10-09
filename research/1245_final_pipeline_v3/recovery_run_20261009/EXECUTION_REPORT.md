@@ -12,7 +12,7 @@ Date: 2026-10-09 (Asia/Seoul)
 ## Input validation
 
 - Raw file: `lotto_data.csv`
-- SHA-256: `10beb0a7974f648b39aa130bb714b1c338296bf59ecd106e9407bee5875538aa`
+- Windows worktree SHA-256: `10beb0a7974f648b39aa130bb714b1c338296bf59ecd106e9407bee5875538aa`; after CRLF-to-LF normalization: `243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f`, matching the pinned source/Git blob. The difference is line endings only.
 - Rows: 1244; rounds 1..1244 consecutive, unique; latest round 1244, date 2026.10.03.
 - All six main numbers are unique and in 1..45; bonus is in range and separate.
 - Target result for 1245 was not read.
@@ -51,11 +51,11 @@ Detailed rates and deltas are in `model_validation_summary.csv`. None of these p
 ## Blocking errors and outstanding verification
 
 - Original pipeline --check-only failed with 18 blocking errors in this environment.
-- The original pinned baseline manifest and B-model backtest/recent/candidate artifacts are absent from the GitHub repository.
+- The baseline manifest is present under `research/expansion_framework_v1/`, but V3 incorrectly expects it under `outputs/research_expansion_framework_v1/`. The pinned B-model backtest/recent/candidate data files remain absent.
 - The prospective protocol, registry, model manifest, and seal referenced by V3 are absent from the GitHub repository.
-- The raw CSV shipped with the repository is available and validates as rounds 1..1244; its SHA differs from the historical V3 machine-specific SHA.
+- The raw CSV is available and validates as rounds 1..1244. The V3 checker points to a missing old absolute path; its earlier worktree-byte SHA difference is only Windows line endings, because LF normalization matches the historical pinned SHA.
 - The V3 generator source run_batch.py and selector are executed, but no missing seal/hash checks are represented as passed.
-- A/B/C/contrarian unified validation and the old local B report's backtest rerun were not performed; only stored S001-S008 study summaries are available.
+- A/C/contrarian programs and unified results were not found. B has a short stored summary and study comparison table, but not its pinned detailed prediction/metrics/classification CSVs, so the B backtest was not rerun.
 - All historical study summaries are post-hoc and do not establish predictive advantage; exact random baseline is mean 0.8 hits and P(2+) 17.5308% per ticket.
 
 ## Re-run

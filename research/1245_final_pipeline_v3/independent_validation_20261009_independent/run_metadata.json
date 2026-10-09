@@ -1,0 +1,21 @@
+{
+  "run_id": "20261009_independent",
+  "source_rows": 1244,
+  "target_interval": "1045-1244",
+  "targets_per_mode": 200,
+  "windows": [
+    "expanding",
+    "rolling300"
+  ],
+  "target_1245_actual_read": false,
+  "prior_candidate_file_sha256": "d5e6da9e34d68f847a2d674b71e5d20512543d677734697333c21407f8478825",
+  "random_baseline": {
+    "mean_hits": 0.8,
+    "variance_hits": 0.6145454545454546,
+    "p2plus": 0.17530810086113546,
+    "p3plus": 0.023834078570323606
+  },
+  "source_lf_normalized_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "all_lines_match_prior_recovery": true,
+  "source_worktree_sha256": "10beb0a7974f648b39aa130bb714b1c338296bf59ecd106e9407bee5875538aa"
+}
