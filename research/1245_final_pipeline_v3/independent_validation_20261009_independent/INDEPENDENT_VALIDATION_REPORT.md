@@ -21,7 +21,7 @@ Date: 2026-10-09 (Asia/Seoul)
 
 - Mean hits per six-number ticket: 0.800000.
 - P(2+ hits): 17.530810%; P(3+ hits): 2.383408%.
-- The expanding S005 mean (0.680) falls just below the approximate pointwise mean band (0.691?0.909), while rolling S002 mean (0.925) and P(2+) (24.0%) exceed their approximate pointwise bands. These opposite-direction findings are exploratory: they are post-hoc across multiple models/metrics and are not adjusted for multiple comparisons. They do not establish a validated predictive signal. The scorecard bands are descriptive only.
+- The expanding S005 mean (0.680) falls just below the approximate pointwise mean band (0.691 to 0.909), while rolling S002 mean (0.925) and P(2+) (24.0%) exceed their approximate pointwise bands. These opposite-direction findings are exploratory: they are post-hoc across multiple models/metrics and are not adjusted for multiple comparisons. They do not establish a validated predictive signal. The scorecard bands are descriptive only.
 
 ## Fresh model results
 
