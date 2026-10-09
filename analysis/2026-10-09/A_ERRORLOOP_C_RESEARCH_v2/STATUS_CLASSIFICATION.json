@@ -1,0 +1,31 @@
+{
+  "VERIFIED": [
+    "pinned1244 integrity",
+    "independent signals",
+    "exact structure probabilities",
+    "cutoff-safe historical structure probability diagnosis",
+    "source/hash/history inventory"
+  ],
+  "REPRODUCED": [
+    "B-v1 prior frozen audit only; not rerun"
+  ],
+  "NOT_FOUND": [
+    "legacy A original",
+    "legacy C original",
+    "legacy contrarian original",
+    "authentic recommendations rounds1..1244"
+  ],
+  "NOT_EXECUTED": [
+    "original A/C walk-forward",
+    "authentic error-note closed loop",
+    "fair replacement-ticket veto comparison",
+    "B rerun / new candidates / 1245 result"
+  ],
+  "INSUFFICIENT_EVIDENCE": [
+    "predictive superiority",
+    "new hypothesis adoption"
+  ],
+  "MISMATCH": [
+    "no source numerical mismatch found; v1 serialization failure repaired only in new v2"
+  ]
+}

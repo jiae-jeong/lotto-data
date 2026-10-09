@@ -1,0 +1,16 @@
+archive,member,bytes
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/,0
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/restore_recovered_outputs.ps1,3026
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/data/,0
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/data/lotto_data.csv,43234
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/run.log,926
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/OUTPUT_SHA256.csv,1270
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/source/,0
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/source/b_model_backtest.py,27977
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/outputs/,0
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/outputs/b_model_50_round_trends.csv,6264
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/outputs/b_model_classification.csv,3509
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/outputs/b_model_backtest_report_regenerated_not_hash-identical.md,10817
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/outputs/b_model_predictions.csv,3236859
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/outputs/b_model_holdout_metrics.csv,113856
+C:\Users\admin\Downloads\lotto_b_model_recovery_package.zip,lotto_b_model_recovery_package/RECOVERY_README.md,2318

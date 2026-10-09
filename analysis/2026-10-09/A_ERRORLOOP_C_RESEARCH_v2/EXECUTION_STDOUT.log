@@ -1,0 +1,5 @@
+INPUT PASS rows=1244 cutoff=1244; frozen B/MC artifact checks=65; B NOT RERUN
+RELATIONS computed order=2 combinations=990 observations=18660
+RELATIONS computed order=3 combinations=14190 observations=24880
+STRUCTURES computed predicates=13 forecast_records=5200 targets=1045..1244; NO TICKETS GENERATED
+RESEARCH EXECUTION SUCCESS seconds=2.147; signals and structural diagnostics VERIFIED; original-model/errorloop execution blocked by missing provenance

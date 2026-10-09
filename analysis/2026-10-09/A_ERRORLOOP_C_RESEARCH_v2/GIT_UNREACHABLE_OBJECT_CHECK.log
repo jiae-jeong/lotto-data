@@ -1,0 +1,5 @@
+COMMAND: git fsck --full --unreachable --no-reflogs
+EXIT: 0
+STDOUT:
+
+STDERR:

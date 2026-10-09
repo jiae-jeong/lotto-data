@@ -1,0 +1,17 @@
+{
+  "A_MODEL_ORIGINAL": "NOT FOUND",
+  "C_MODEL_ORIGINAL": "NOT FOUND",
+  "CONTRARIAN_MODEL_ORIGINAL": "NOT FOUND",
+  "actual_recommendation_sources_rounds_1_1244": "SOURCE NOT FOUND",
+  "scope": "Accessible current PC project files and all reachable Git refs/versions; remote has only main. Unreachable object check logged.",
+  "no_formula_reconstruction": true,
+  "no_backtest_rows_relabelled_as_purchase": true,
+  "related_versions_found": [
+    "B-v1",
+    "S001-S008 study_batch_001",
+    "V3 select_portfolio",
+    "V4 models / portfolio"
+  ],
+  "historical_1245_prediction_artifacts": "EXISTING SEALED EVIDENCE ONLY; actual not read; not scored",
+  "not_found_is_not_proof_of_nonexistence": true
+}

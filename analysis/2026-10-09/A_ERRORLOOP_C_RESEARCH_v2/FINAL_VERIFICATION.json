@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "verified_utc": "2026-10-09T13:55:39.179838+00:00",
+  "checks": [
+    "independent raw integrity 1..1244 and pinned SHA",
+    "pre-run code/config seals; successful v2 and preserved failed v1",
+    "225 independent single-number/window counts, ranks, completed/current gaps",
+    "all 75900 pair/triple window records and exact marginal probabilities",
+    "1244 independent draw structures, 65 incidence records and first-draw overlap missingness",
+    "all 13 exact structure baselines independently counted; no Monte Carlo or tickets generated",
+    "5200 historical probability forecasts train strictly through t-1 and 13 coverage diagnoses",
+    "55980 longitudinal gap records recomputed with prefix-only counters",
+    "350 ending-digit multiplicity records",
+    "missing legacy sources/error loop recorded; six hypotheses not adopted",
+    "all pre-existing worktree and frozen B/MC file content/size/mtime unchanged",
+    "no legacy model execution import; no result after1244 used in inputs"
+  ],
+  "cutoff": 1244,
+  "actual_1245": "NOT READ / NOT USED",
+  "new_tickets_or_candidates_generated": false,
+  "B_rerun": false,
+  "original_A_C_contrarian": "NOT FOUND",
+  "authentic_errorloop": "NOT EXECUTED; SOURCE NOT FOUND",
+  "predictive_advantage": "INSUFFICIENT EVIDENCE",
+  "existing_tracked_file_changes": 0,
+  "verification_limit": "Statistical/counterfactual ticket performance not verified; source search covers accessible paths and reachable history only"
+}

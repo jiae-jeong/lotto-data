@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\report_a_research_20261009.py", line 29, in <module>
+    records=rr(p);targets=[int(x['target_round']) for x in records if x.get('target_round','').isdigit()]
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'isdigit'

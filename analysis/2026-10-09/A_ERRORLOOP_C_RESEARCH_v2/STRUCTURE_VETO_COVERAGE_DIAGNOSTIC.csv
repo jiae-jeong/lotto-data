@@ -1,0 +1,14 @@
+structure,start_target,end_target,n_targets,allow_all_winning_structure_coverage,veto_winning_structure_coverage,coverage_loss,coverage_loss_ci95_low,coverage_loss_ci95_high,exact_uniform_coverage_loss,ticket_performance
+consecutive_ge1,1045,1244,200,1.0,0.46499999999999997,0.535,0.4658664687236316,0.6028143584299599,0.5287474862063631,NOT EXECUTED; no allocation/replacement policy defined
+consecutive_ge2,1045,1244,200,1.0,0.895,0.105,0.06970748792681017,0.1551803199112304,0.12481676009753151,NOT EXECUTED; no allocation/replacement policy defined
+band_ge3,1045,1244,200,1.0,0.5900000000000001,0.41,0.34415674908482885,0.4792354096630791,0.45291992938050796,NOT EXECUTED; no allocation/replacement policy defined
+band_ge4,1045,1244,200,1.0,0.935,0.065,0.03837635464915299,0.10801907929906895,0.06628066582689385,NOT EXECUTED; no allocation/replacement policy defined
+odd_imbalance,1045,1244,200,1.0,0.835,0.165,0.11996855328217307,0.2226578153905955,0.18680279826054075,NOT EXECUTED; no allocation/replacement policy defined
+low_high_imbalance,1045,1244,200,1.0,0.8049999999999999,0.195,0.1460552053440051,0.25544044374612745,0.18680279826054075,NOT EXECUTED; no allocation/replacement policy defined
+repeated_end,1045,1244,200,1.0,0.24,0.76,0.6962665902079583,0.8139338400758631,0.790290065389328,NOT EXECUTED; no allocation/replacement policy defined
+end_multiplicity_ge3,1045,1244,200,1.0,0.91,0.09,0.05768744886219316,0.13776571876716542,0.08948245930662266,NOT EXECUTED; no allocation/replacement policy defined
+multiple_repeat_end_groups,1045,1244,200,1.0,0.765,0.235,0.18157433415232588,0.29841368882762537,0.22608550458805707,NOT EXECUTED; no allocation/replacement policy defined
+extreme_sum,1045,1244,200,1.0,0.905,0.095,0.06166310271738653,0.1436016116481994,0.11443770825506504,NOT EXECUTED; no allocation/replacement policy defined
+narrow_three_span_le4,1045,1244,200,1.0,0.75,0.25,0.19508168006817497,0.31434098312045833,0.26513371294993526,NOT EXECUTED; no allocation/replacement policy defined
+large_gap_ge15,1045,1244,200,1.0,0.65,0.35,0.28728824127358077,0.4183653566395992,0.4367856099279809,NOT EXECUTED; no allocation/replacement policy defined
+previous_overlap_ge2,1045,1244,200,1.0,0.8049999999999999,0.195,0.1460552053440051,0.25544044374612745,0.17530810086113546,NOT EXECUTED; no allocation/replacement policy defined

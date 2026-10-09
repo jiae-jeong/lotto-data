@@ -1,0 +1,18 @@
+{
+  "method": "Exact combinatorial state counts / C(45,6); no random tickets or candidates generated",
+  "probabilities": {
+    "consecutive_ge1": 0.5287474862063631,
+    "consecutive_ge2": 0.12481676009753151,
+    "band_ge3": 0.45291992938050796,
+    "band_ge4": 0.06628066582689385,
+    "odd_imbalance": 0.18680279826054075,
+    "low_high_imbalance": 0.18680279826054075,
+    "repeated_end": 0.790290065389328,
+    "end_multiplicity_ge3": 0.08948245930662266,
+    "multiple_repeat_end_groups": 0.22608550458805707,
+    "extreme_sum": 0.11443770825506504,
+    "narrow_three_span_le4": 0.26513371294993526,
+    "large_gap_ge15": 0.4367856099279809,
+    "previous_overlap_ge2": 0.17530810086113546
+  }
+}

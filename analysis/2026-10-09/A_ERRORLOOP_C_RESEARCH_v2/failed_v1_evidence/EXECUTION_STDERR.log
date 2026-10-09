@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\outputs\A_ERRORLOOP_C_RESEARCH_20261009_v1\run_independent_signal_research.py", line 200, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\outputs\A_ERRORLOOP_C_RESEARCH_20261009_v1\run_independent_signal_research.py", line 144, in main
+    write(out,'DRAW_STRUCTURE_FEATURES.csv',[dict(round=i+1,**p,**{k:'' if v is None else int(v) for k,v in binary[i].items()}) for i,p in enumerate(profiles)])
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'narrow_three_span_le4'

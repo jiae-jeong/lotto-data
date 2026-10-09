@@ -1,0 +1,111 @@
+SOURCE: research/expansion_framework_v1/studies/study_batch_001/run_batch.py
+RAW SHA256: 974f5163b95e38389d857f6ec6a2cafdb1c4b847c869f33d49808902914e3eab
+def make_models(train,bank):
+ n=len(train); F=Counter(x for d in train for x in d.numbers); den=max(n,1); p=6/45
+ occ={x:[d.round for d in train if x in d.numbers] for x in range(1,46)}
+ gaps={x:(train[-1].round-occ[x][-1] if occ[x] else n) for x in range(1,46)}
+ # Multi-window frequency rates standardized to each window's theoretical mean/SD.
+ s1=[]
+ for x in range(1,46):
+  vals=[]
+  for w in (10,30,100,300):
+   ww=min(w,n); c=sum(x in d.numbers for d in train[-ww:]);mu=ww*p;sd=max(math.sqrt(ww*p*(1-p)),1e-9);vals.append((c-mu)/sd)
+  s1.append(sum(vals)/4)
+ # Gap regime occurrence hazard estimated from completed historical inter-arrivals.
+ bins=lambda z: 0 if z==0 else 1 if z==1 else 2 if z==2 else 3 if z<=5 else 4 if z<=10 else 5
+ risk=Counter();hits=Counter()
+ for x in range(1,46):
+  seq=occ[x]
+  for a,b in zip(seq,seq[1:]):
+   g=b-a
+   for age in range(0,g):risk[bins(age)]+=1
+   hits[bins(g)]+=1
+ # Simplified hazard as interval termination by age-bin; shrink each rate to baseline.
+ s2=[]
+ for x in range(1,46):
+  j=bins(gaps[x]);s2.append((hits[j]+20*p)/(risk[j]+20))
+ # Hot/cold transition state counts, forward next-draw only.
+ trans=Counter(); trans_hit=Counter()
+ for i in range(40,n):
+  prev20=Counter(z for d in train[i-40:i-20] for z in d.numbers); curr20=Counter(z for d in train[i-20:i] for z in d.numbers)
+  for x in range(1,46):
+   st=('H' if prev20[x]>20*p else 'C','H' if curr20[x]>20*p else 'C');trans[st]+=1
+   if x in train[i].numbers:trans_hit[st]+=1
+ prev20=Counter(z for d in train[-40:-20] for z in d.numbers) if n>=40 else Counter()
+ curr20=Counter(z for d in train[-20:] for z in d.numbers)
+ s3=[]
+ for x in range(1,46):
+  st=('H' if prev20[x]>20*p else 'C','H' if curr20[x]>20*p else 'C');s3.append((trans_hit[st]+20*p)/(trans[st]+20))
+ # Conditional rate based on how many appearances in latest ten draws.
+ cond=Counter();cond_hit=Counter()
+ for i in range(10,n):
+  prev=train[i-10:i]
+  for x in range(1,46):
+   state=sum(x in d.numbers for d in prev);cond[state]+=1
+   if x in train[i].numbers:cond_hit[state]+=1
+ s4=[]
+ for x in range(1,46):
+  state=sum(x in d.numbers for d in train[-10:]);s4.append((cond_hit[state]+30*p)/(cond[state]+30))
+ # Structure transitions: categories from previous draw -> next draw's feature.
+ cats=['odd','low','sum_bin','bands','consecutive','end_repeat','overlap','cluster'];
+ prevprof=[prof(train[i-1].numbers,train[i-2].numbers if i>1 else ()) for i in range(1,n)]
+ nextprof=[prof(train[i].numbers,train[i-1].numbers) for i in range(1,n)]
+ trans_counts=[Counter() for _ in cats]; marg=[Counter() for _ in cats]; ntrans=max(0,n-1)
+ for a,b in zip(prevprof,nextprof):
+  for j,c in enumerate(cats):trans_counts[j][(a[c],b[c])]+=1;marg[j][b[c]]+=1
+ latest=prof(train[-1].numbers,train[-2].numbers if n>1 else ())
+ # finite, explicitly fixed random candidate bank; smooth transition likelihood
+ structural=[]
+ denominators=[]
+ logmaps=[]
+ for j,c in enumerate(cats):
+  denominators.append(sum(v for (a,_),v in trans_counts[j].items() if a==latest[c]))
+  possible=set(marg[j])|{BASE_PROFILES[q][c] for q in bank}
+  if c=='overlap':possible.update(range(7))
+  choices=max(1,len(possible))
+  logmaps.append({v:math.log((trans_counts[j][(latest[c],v)]+1)/(denominators[j]+choices)) for v in possible})
+ for ticket in bank:
+  target=BASE_PROFILES[ticket].copy();target['overlap']=len(set(ticket)&set(train[-1].numbers))
+  sc=sum(logmaps[j][target[c]] for j,c in enumerate(cats))
+  structural.append((sc,ticket))
+ s5ticket=max(structural,key=lambda z:(z[0],tuple(-x for x in z[1])))[1]
+ # Pair and triple residuals; fixed marginals, no target data.
+ pc=Counter();tc=Counter()
+ for d in train:
+  pc.update(combinations(d.numbers,2));tc.update(combinations(d.numbers,3))
+ s6=[0.]*45;s7=[0.]*45
+ for a,b in combinations(range(1,46),2):
+  exp=max((5/6)*(45/44)*F[a]*F[b]/den,1e-12);z=(pc[(a,b)]-exp)/math.sqrt(exp);s6[a-1]+=z;s6[b-1]+=z
+ for a,b,c in combinations(range(1,46),3):
+  factor=(5*4/(6**2))*(45**2/(44*43));exp=max(factor*F[a]*F[b]*F[c]/(den**2),1e-12);z=(tc[(a,b,c)]-exp)/math.sqrt(exp);s7[a-1]+=z;s7[b-1]+=z;s7[c-1]+=z
+ component=[s1,s2,s3,s4,s6,s7]
+ # Hybrid averages within-family percentile ranks; structure ticket contributes a separate one-vote family.
+ ranks=[rank(v) for v in component];
+ for x in range(1,46):
+  if x in s5ticket:ranks.append([45.]*45)
+  else:ranks.append([0.]*45)
+ s8=[sum(v[i] for v in ranks)/len(ranks) for i in range(45)]
+ return {'multi_window_frequency':(top(s1),s1),'gap_regime_hazard':(top(s2),s2),'momentum_state_transition':(top(s3),s3),'conditional_probability':(top(s4),s4),'structure_transition':(s5ticket,[45. if i+1 in s5ticket else 0. for i in range(45)]),'pair_residual_node':(top(s6),s6),'triple_residual_node':(top(s7),s7),'family_balanced_hybrid':(top(s8),s8)}
+
+SOURCE: research/1245_final_pipeline_v3/prepare_1245_final_three_lines_v3.py
+RAW SHA256: 09d2cf7f3c9002db906669371d9e2b580d592053b035d891e6c1202e05704e46
+def select_portfolio(model_outputs, model_module):
+ """Fixed rule: independent-family consensus plus two distinct-family model tickets."""
+ ranks={mid:model_module.rank(model_outputs[mid]["scores"]) for mid in ("S001","S002","S003","S004","S006","S007")}
+ families={"frequency":ranks["S001"],"gap_time":ranks["S002"],"momentum":ranks["S003"],"conditional":ranks["S004"],"structure":[45.0 if n in model_outputs["S005"]["ticket"] else 0.0 for n in range(1,46)],"relationship_residual":[(ranks["S006"][i]+ranks["S007"][i])/2 for i in range(45)]}
+ consensus_scores=[sum(families[f][i] for f in families)/len(families) for i in range(45)]
+ consensus=tuple(sorted(sorted(range(1,46),key=lambda n:(-consensus_scores[n-1],n))[:6]))
+ id_family={"S001":"frequency","S002":"gap_time","S003":"momentum","S004":"conditional","S005":"structure","S006":"relationship_residual","S007":"relationship_residual"}
+ eligible=sorted(id_family); pairs=[]
+ for left,right in combinations(eligible,2):
+  if id_family[left]==id_family[right]: continue
+  left_nums=set(model_outputs[left]["ticket"]); right_nums=set(model_outputs[right]["ticket"]); consensus_set=set(consensus)
+  profiles=[structure(x) for x in (consensus,left_nums,right_nums)]
+  structure_coverage=sum(len({p[k] for p in profiles}) for k in profiles[0])
+  pairs.append((-structure_coverage,-len(consensus_set|left_nums|right_nums),len(consensus_set&left_nums)+len(consensus_set&right_nums)+len(left_nums&right_nums),left,right))
+ if not pairs: raise ValueError("No supplemental tickets from distinct signal families")
+ _,_,_,left,right=min(pairs)
+ lines=[{"line":1,"numbers":consensus,"model_sources":"S001;S002;S003;S004;S005;S006;S007","signal_sources":"frequency;gap_time;momentum;conditional;structure;relationship_residual (S006/S007 averaged as one family)","rule":"equal-family-rank consensus; S008 hybrid not counted again; ties lower number"}]
+ for i,mid in ((2,left),(3,right)):
+  lines.append({"line":i,"numbers":tuple(model_outputs[mid]["ticket"]),"model_sources":mid,"signal_sources":id_family[mid],"rule":"registered model candidate; distinct signal family; maximize portfolio number coverage"})
+ return lines
