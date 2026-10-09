@@ -66,4 +66,4 @@ From the repository root run:
 & 'C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\1245_final_pipeline_v3\recover_and_run_20261009.py
 ```
 
-This dated runner refuses to overwrite its output directory. Use a new dated directory for another run.
+This runner refuses to overwrite its output directory. Use a new `--run-id` for another run.

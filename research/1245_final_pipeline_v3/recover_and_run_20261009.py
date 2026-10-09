@@ -6,6 +6,7 @@ passed, and it writes a new dated output directory without replacing V3 artifact
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import hashlib
 import importlib.util
@@ -17,7 +18,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-OUT = ROOT / "research" / "1245_final_pipeline_v3" / "recovery_run_20261009"
+OUT_BASE = ROOT / "research" / "1245_final_pipeline_v3"
+OUT = OUT_BASE / "recovery_run_20261009"
 RAW = ROOT / "lotto_data.csv"
 STUDY = ROOT / "research" / "expansion_framework_v1" / "studies" / "study_batch_001" / "run_batch.py"
 FRAMEWORK = ROOT / "research" / "expansion_framework_v1"
@@ -66,6 +68,14 @@ def validate_data():
 
 
 def main():
+    global OUT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--run-id", default="20261009",
+                        help="unique output suffix (letters, numbers, hyphens, underscores)")
+    run_id = parser.parse_args().run_id
+    if not run_id or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_" for c in run_id):
+        parser.error("--run-id may contain only letters, numbers, hyphens, and underscores")
+    OUT = OUT_BASE / f"recovery_run_{run_id}"
     OUT.mkdir(parents=True, exist_ok=False)
     rows, latest_date = validate_data()
     sys.path.insert(0, str(FRAMEWORK))
@@ -155,8 +165,8 @@ def main():
                "", "## Blocking errors and outstanding verification", ""]
     report += [f"- {item}" for item in issues]
     report += ["", "## Re-run", "", "From the repository root run:", "", "```powershell",
-               "& 'C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' research\\1245_final_pipeline_v3\\recover_and_run_20261009.py",
-               "```", "", "This dated runner refuses to overwrite its output directory. Use a new dated directory for another run.", ""]
+               "& 'C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' research\\1245_final_pipeline_v3\\recover_and_run_20261009.py --run-id rerun1",
+               "```", "", "This runner refuses to overwrite its output directory. Use a new `--run-id` for another run.", ""]
     (OUT / "EXECUTION_REPORT.md").write_text("\n".join(report), encoding="utf-8")
     (OUT / "run_metadata.json").write_text(json.dumps({"raw_sha256": sha256(RAW), "raw_rows": len(rows),
         "latest_round": 1244, "model_count": len(model_rows), "final_line_count": len(final_rows),
