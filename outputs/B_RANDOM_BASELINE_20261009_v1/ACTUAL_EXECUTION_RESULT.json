@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\outputs\\B_RANDOM_BASELINE_20261009_v1\\run_b_random_baseline.py"
+  ],
+  "cwd": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\outputs\\B_RANDOM_BASELINE_20261009_v1",
+  "start_utc": "2026-10-09T12:19:28.964844+00:00",
+  "end_utc": "2026-10-09T12:19:31.996585+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 3.0469999997876585,
+  "stderr_bytes": 0,
+  "official_monte_carlo_execution": true
+}

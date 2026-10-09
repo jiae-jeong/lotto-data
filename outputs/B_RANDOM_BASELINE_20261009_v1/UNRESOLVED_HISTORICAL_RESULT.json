@@ -1,0 +1,13 @@
+{
+  "status": "UNRESOLVED_HISTORICAL_RESULT",
+  "evidence_status": "NOT FOUND",
+  "claims": {
+    "frequency_plus_gap": 0.7743,
+    "structure_profile": 0.7571,
+    "random": 0.8065
+  },
+  "cause": "UNKNOWN / 미확인",
+  "excluded_from_evaluation": true,
+  "merged_or_averaged": false,
+  "reference": "Previous DIVERGENT_RESULT_INVESTIGATION.json;no original attributable code/output/log/seed/denominator located."
+}

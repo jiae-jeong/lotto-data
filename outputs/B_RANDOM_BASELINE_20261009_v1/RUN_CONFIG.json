@@ -1,0 +1,77 @@
+{
+  "random_seed": 20261009,
+  "tickets_per_target": 10000,
+  "bootstrap_seed": 20261010,
+  "bootstrap_repetitions": 20000,
+  "anchors": [
+    200,
+    400,
+    600,
+    800,
+    1000,
+    1100,
+    1150
+  ],
+  "blocks": [
+    [
+      201,
+      250
+    ],
+    [
+      401,
+      450
+    ],
+    [
+      601,
+      650
+    ],
+    [
+      801,
+      850
+    ],
+    [
+      1001,
+      1050
+    ],
+    [
+      1101,
+      1150
+    ],
+    [
+      1151,
+      1200
+    ]
+  ],
+  "historical_targets": 350,
+  "total_random_ticket_comparisons": 3500000,
+  "model_names": [
+    "long_frequency",
+    "current_gap",
+    "frequency_plus_gap",
+    "recent_momentum",
+    "structure_profile",
+    "pair_association",
+    "triple_association",
+    "combined_equal_rank"
+  ],
+  "reference_sha256": {
+    "EXECUTED_INPUT_lotto_data.csv": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+    "EXECUTED_b_model_backtest.py": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb",
+    "b_model_predictions.csv": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be",
+    "b_model_classification.csv": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2",
+    "b_model_holdout_metrics.csv": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4",
+    "b_model_50_round_trends.csv": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df",
+    "AUDIT_SHA256.csv": "1f2f234b957b2ca4a802a6354fe8ca10c026baecc91b8fea55d6d1f42d888ed1"
+  },
+  "audit_commit": "2892b0d4424c72554612d464b7a7093f814e3fc3",
+  "inference_rules": {
+    "mean_ci": "95% Student-t df349, Cornish-Fisher approximation fixed",
+    "rate_ci": "95% Wilson",
+    "block_bootstrap": "20000 resamples of7 whole50-target blocks;percentile95%;same bootstrap weights across all8models",
+    "exploratory_tests": "Mean:exact350-fold hypergeometric sum convolution;2+:exact two-sided probability-ordered binomial;Holm across16",
+    "no_superiority_claim": "Regardless of Monte Carlo realization, no B class/rules change and no validated predictive superiority claim.",
+    "distribution_diagnostic": "Chi-square bins0/1/2/3/4/5+,df5;diagnostic only;never rerun/change seed if unfavorable"
+  },
+  "sample_size_reason": "350actual targets x10000independent uniform tickets=3.5million comparisons. Mean simulation SE approx sqrt(0.614545/3.5e6)=0.000419,95% half-width0.000821. P6 expected0.43events so jackpot-rate precision remains limited;zero6-hits is possible. B historical uncertainty still n350,not3.5million.",
+  "actual_1245": "NOT READ / NOT USED"
+}
