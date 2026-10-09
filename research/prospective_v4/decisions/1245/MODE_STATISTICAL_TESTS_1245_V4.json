@@ -1,0 +1,231 @@
+{
+  "all_200_target_random_deltas": {
+    "expanding": {
+      "mean_ticket_hits": -0.011666666666666714,
+      "portfolio_3plus_rate": 0.02970700000000001,
+      "portfolio_4plus_rate": 0.0007850000000000001,
+      "portfolio_max_hits_mean": -0.009614500000000081
+    },
+    "rolling300": {
+      "mean_ticket_hits": 0.013333333333333308,
+      "portfolio_3plus_rate": -0.010292999999999997,
+      "portfolio_4plus_rate": -0.004215,
+      "portfolio_max_hits_mean": 0.00038549999999992757
+    }
+  },
+  "alpha": 0.05,
+  "block_length": 10,
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 2026100905,
+  "limitations": "Retrospective reused data, 200 targets, rare 4+ events; block resampling only approximates dependence. No prospective predictive superiority is established.",
+  "mode_block_bootstrap_95_ci": {
+    "expanding": {
+      "mean_ticket_hits": [
+        0.7299999999999999,
+        0.8483333333333333
+      ],
+      "portfolio_3plus": [
+        0.06,
+        0.145
+      ],
+      "portfolio_4plus": [
+        0.0,
+        0.015
+      ],
+      "portfolio_max_hits": [
+        1.355,
+        1.535
+      ]
+    },
+    "rolling300": {
+      "mean_ticket_hits": [
+        0.7566666666666662,
+        0.8733749999999972
+      ],
+      "portfolio_3plus": [
+        0.03,
+        0.095
+      ],
+      "portfolio_4plus": [
+        0.0,
+        0.0
+      ],
+      "portfolio_max_hits": [
+        1.365,
+        1.55
+      ]
+    }
+  },
+  "permutation_replicates": 50000,
+  "permutation_seed": 2026100906,
+  "primary_family": [
+    "portfolio_3plus",
+    "portfolio_4plus",
+    "portfolio_max_hits",
+    "mean_ticket_hits"
+  ],
+  "primary_tests": {
+    "mean_ticket_hits": {
+      "expanding_minus_rolling300": -0.025,
+      "holm_adjusted_p": 1.0,
+      "nonzero_target_differences": 154,
+      "paired_10_target_block_sign_flip_two_sided_p": 0.5757884842303154,
+      "paired_block_bootstrap_95_ci": [
+        -0.1,
+        0.046666666666666676
+      ],
+      "paired_standardized_effect_dz": -0.04100071654586373
+    },
+    "portfolio_3plus": {
+      "expanding_minus_rolling300": 0.04,
+      "holm_adjusted_p": 0.8915821683566328,
+      "nonzero_target_differences": 24,
+      "paired_10_target_block_sign_flip_two_sided_p": 0.2228955420891582,
+      "paired_block_bootstrap_95_ci": [
+        -0.01,
+        0.09
+      ],
+      "paired_standardized_effect_dz": 0.11595665546205594
+    },
+    "portfolio_4plus": {
+      "expanding_minus_rolling300": 0.005,
+      "holm_adjusted_p": 1.0,
+      "nonzero_target_differences": 1,
+      "paired_10_target_block_sign_flip_two_sided_p": 1.0,
+      "paired_block_bootstrap_95_ci": [
+        0.0,
+        0.015
+      ],
+      "paired_standardized_effect_dz": 0.07071067811865474
+    },
+    "portfolio_max_hits": {
+      "expanding_minus_rolling300": -0.01,
+      "holm_adjusted_p": 1.0,
+      "nonzero_target_differences": 112,
+      "paired_10_target_block_sign_flip_two_sided_p": 0.9404011919761605,
+      "paired_block_bootstrap_95_ci": [
+        -0.12,
+        0.1
+      ],
+      "paired_standardized_effect_dz": -0.01045718299152572
+    }
+  },
+  "relationships": {
+    "expanding": [
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "portfolio_3plus",
+        "pearson_correlation": -0.018312062585756003,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "portfolio_4plus",
+        "pearson_correlation": -0.05118253213980199,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "portfolio_max_hits",
+        "pearson_correlation": -0.08720159474389493,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "mean_ticket_hits",
+        "pearson_correlation": 0.008167426331528406,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "portfolio_3plus",
+        "pearson_correlation": 0.032288935782154936,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "portfolio_4plus",
+        "pearson_correlation": 0.049374885365132966,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "portfolio_max_hits",
+        "pearson_correlation": 0.10441896242887296,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "mean_ticket_hits",
+        "pearson_correlation": 0.0003887674844417093,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      }
+    ],
+    "rolling300": [
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "portfolio_3plus",
+        "pearson_correlation": -0.09951245500476187,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "portfolio_4plus",
+        "pearson_correlation": null,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "portfolio_max_hits",
+        "pearson_correlation": -0.07703470267432347,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "mean_pair_overlap",
+        "historical_outcome": "mean_ticket_hits",
+        "pearson_correlation": 0.03461200549181477,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "portfolio_3plus",
+        "pearson_correlation": 0.10275981813565428,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "portfolio_4plus",
+        "pearson_correlation": null,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "portfolio_max_hits",
+        "pearson_correlation": 0.07200637039141626,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      },
+      {
+        "feature": "union_coverage",
+        "historical_outcome": "mean_ticket_hits",
+        "pearson_correlation": -0.03575074420738513,
+        "use": "diagnostic only; excluded from selection/tie-break"
+      }
+    ]
+  },
+  "secondary_mcnemar": {
+    "portfolio_3plus": {
+      "discordant_targets": 24,
+      "expanding_only": 16,
+      "interpretation": "secondary paired binary diagnostic; temporal exchangeability not guaranteed",
+      "rolling300_only": 8,
+      "two_sided_exact_p": 0.15158963203430176
+    },
+    "portfolio_4plus": {
+      "discordant_targets": 1,
+      "expanding_only": 1,
+      "interpretation": "secondary paired binary diagnostic; temporal exchangeability not guaranteed",
+      "rolling300_only": 0,
+      "two_sided_exact_p": 1.0
+    }
+  }
+}

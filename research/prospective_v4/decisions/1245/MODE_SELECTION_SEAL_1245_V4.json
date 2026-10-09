@@ -1,0 +1,361 @@
+{
+  "actual_numbers": null,
+  "actual_result": "NOT READ / NOT USED",
+  "artifacts": [
+    {
+      "bytes": 2830,
+      "created_at_utc": "2026-10-09T06:12:23.289048+00:00",
+      "decision_target": 1245,
+      "file": "EXECUTION_LOG_1245_V4.log",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "9300c334319637603bcf450bffd9c57292ba60ba932ff5d700172f3c8f3e0121"
+    },
+    {
+      "bytes": 10960,
+      "created_at_utc": "2026-10-09T06:06:09.163497+00:00",
+      "decision_target": 1245,
+      "file": "mode_analysis_1245_v4.py",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "4bb2beb0c64321a741e5b168030c6c8d7831f670f59dc6cbe3dcf7c1a38f0e99"
+    },
+    {
+      "bytes": 254373,
+      "created_at_utc": "2026-10-09T06:12:23.290039+00:00",
+      "decision_target": 1245,
+      "file": "MODE_BACKTEST_1245_V4.csv",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "c138ee7018cf51908523e9b9dc5fb3dc282c635801891da94749327c36c728b1"
+    },
+    {
+      "bytes": 1707,
+      "created_at_utc": "2026-10-09T06:14:31.866660+00:00",
+      "decision_target": 1245,
+      "file": "MODE_BLOCK_STABILITY_1245_V4.csv",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "5af1fa31be6728719f5064dfaa06227c28f2b922db835138d9c35415d9b3c499"
+    },
+    {
+      "bytes": 1235,
+      "created_at_utc": "2026-10-09T06:14:31.871918+00:00",
+      "decision_target": 1245,
+      "file": "MODE_MODEL_CONTRIBUTIONS_1245_V4.csv",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "58d155c7e3a369c0fddd70615ef7377af7b99fe1b029d6ed1df79a7c8042a94e"
+    },
+    {
+      "bytes": 73848,
+      "created_at_utc": "2026-10-09T06:12:23.291031+00:00",
+      "decision_target": 1245,
+      "file": "MODE_RANDOM_BASELINE_1245_V4.csv",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "63a6ec9fc2d00957e9c124ed5685b6c6710f036f622a2266a3a15bbae4c1c078"
+    },
+    {
+      "bytes": 3001,
+      "created_at_utc": "2026-10-09T06:11:46.263520+00:00",
+      "decision_target": 1245,
+      "file": "MODE_SELECTION_CONFIG_1245_V4.json",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "f3aca472f96f7e796e45192b15bde26694625875a94f07475cc9b1d12cff2eba"
+    },
+    {
+      "bytes": 949,
+      "created_at_utc": "2026-10-09T06:11:46.289365+00:00",
+      "decision_target": 1245,
+      "file": "MODE_SELECTION_PRERUN_LOCK_1245_V4.json",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "ec0708d733123a2b214cdf48679f162fa365df6b21263469d76ef967c2acef36"
+    },
+    {
+      "bytes": 4093,
+      "created_at_utc": "2026-10-09T06:11:46.265520+00:00",
+      "decision_target": 1245,
+      "file": "MODE_SELECTION_PROTOCOL_1245_V4.md",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "6b3a12a800f58d7693cbcd5d73f7be9b50c717d4aa0aa264b3c06ff0e6b9a79d"
+    },
+    {
+      "bytes": 7316,
+      "created_at_utc": "2026-10-09T06:14:31.859104+00:00",
+      "decision_target": 1245,
+      "file": "MODE_STATISTICAL_TESTS_1245_V4.json",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "40e9e1f6a0438e0762eea51a8cac9ac11edb4f63d655e79ff324ed1a40950d3e"
+    },
+    {
+      "bytes": 10788,
+      "created_at_utc": "2026-10-09T06:14:31.863743+00:00",
+      "decision_target": 1245,
+      "file": "MODE_SUMMARY_1245_V4.json",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "f984a951a6137cf70f509ae842d2fcc7ba220e8ffa293ea7e78929c979ce532b"
+    },
+    {
+      "bytes": 5795,
+      "created_at_utc": "2026-10-09T06:14:31.877472+00:00",
+      "decision_target": 1245,
+      "file": "PRIMARY_PURCHASE_DECISION_1245_V4.json",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "74fea63eb4512b1e7443d0b4ab0e4b78c3621ac20effcf881309552c475d3f5d"
+    },
+    {
+      "bytes": 1616,
+      "created_at_utc": "2026-10-09T06:14:31.873433+00:00",
+      "decision_target": 1245,
+      "file": "PRIMARY_PURCHASE_LINES_1245_V4.csv",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "87e9238d094fc44fab8ec841fb4b8202f2322b4b474d3acf0de171b4cb5f5422"
+    },
+    {
+      "bytes": 11269,
+      "created_at_utc": "2026-10-09T06:08:16.932734+00:00",
+      "decision_target": 1245,
+      "file": "run_mode_comparison_1245_v4.py",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "efeff81d9608018af4917f4a3842768ff7669c7f673860a990cc589dcd5d8f31"
+    },
+    {
+      "bytes": 2793,
+      "created_at_utc": "2026-10-09T06:16:40.597276+00:00",
+      "decision_target": 1245,
+      "file": "VERIFICATION_1245_V4.json",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "4ca2b2c7c0df13fa9206b8887975cdaf417a2c5fcc1fdd088615f870efc962fe"
+    },
+    {
+      "bytes": 36255,
+      "created_at_utc": "2026-10-09T06:16:40.614441+00:00",
+      "decision_target": 1245,
+      "file": "VERIFICATION_EXECUTION_1245_V4.log",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "52ab8d42b93c74f153da389e62796459a4e27ab09bb8deb75e7fff02e321ea38"
+    },
+    {
+      "bytes": 9795,
+      "created_at_utc": "2026-10-09T06:14:45.166905+00:00",
+      "decision_target": 1245,
+      "file": "verify_primary_mode_1245_v4.py",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "9685cb97229e3801652976edf63f74916dbb3dc9b05e796a48499ee44c8e53de"
+    },
+    {
+      "bytes": 2643,
+      "created_at_utc": "2026-10-09T06:16:40.615440+00:00",
+      "decision_target": 1245,
+      "file": "MODE_SELECTION_MANIFEST_1245_V4.csv",
+      "historical_first": 1045,
+      "historical_last": 1244,
+      "sha256": "eb5c1bc47519c1f7b7b4a0c9142fe3a489080ca86d15f747e1a2b0e8fa970027"
+    }
+  ],
+  "bootstrap_seed": 2026100905,
+  "created_at_utc": "2026-10-09T06:16:40.615440+00:00",
+  "deterministic_tie_break": [
+    "higher 200-target portfolio3+ count",
+    "higher sum portfolio max hits",
+    "higher all600-ticket mean hits",
+    "lower population variance of four50-block portfolio3+ rates, exact integer numerator /40000",
+    "expanding"
+  ],
+  "draw_deadline_independent_confirmation": "NOT CHECKED; outcome websites not accessed",
+  "evaluation_rules": {
+    "actual_1245": "NOT READ / NOT USED",
+    "alpha": 0.05,
+    "blocks": [
+      [
+        1045,
+        1094
+      ],
+      [
+        1095,
+        1144
+      ],
+      [
+        1145,
+        1194
+      ],
+      [
+        1195,
+        1244
+      ]
+    ],
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 2026100905,
+    "created_at_utc": "2026-10-09T06:11:46.262519+00:00",
+    "decision_target": 1245,
+    "diagnostic_features": [
+      "overlap",
+      "union_coverage",
+      "G/C/S contributions"
+    ],
+    "diagnostics_affect_selection": false,
+    "exclusions": "none; any invalid/missing target, training integrity failure or engine failure aborts entire decision, no performance-based exclusion",
+    "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+    "freeze_seal_sha256": "6a018e3036187a26ac9bcffda9fd7379d65d86cde84514faa08f4ea349b0f4bb",
+    "historical_first_target": 1045,
+    "historical_last_target": 1244,
+    "historical_target_count": 200,
+    "model_order": [
+      "V4_G",
+      "V4_C",
+      "V4_S"
+    ],
+    "new_prediction_numbers_allowed": false,
+    "numpy_version": "2.3.5",
+    "past_data_reuse": "retrospective reused V4 development data; no untouched validation, no future predictive edge claim",
+    "permutation_replicates": 50000,
+    "permutation_seed": 2026100906,
+    "prediction_commit": "c8782a6063c6148fea0d7292b2a5c1a61fe2b974",
+    "prediction_seal_sha256": "5300807aacfba8b37f3f8db5aaf5eefcb7e522e910d79fc016e37bc86ca61fe5",
+    "primary_test_family": [
+      "portfolio_3plus",
+      "portfolio_4plus",
+      "portfolio_max_hits",
+      "mean_ticket_hits"
+    ],
+    "random_generator": "NumPy PCG64, first8 big-endian SHA256(seed|historical_target|t); uniform sample via random45 argpartition6; unique candidate prefixes max37; same greedy overlap<=2 and exact fallback; no actual outcome in generation",
+    "random_replicates_per_target": 10000,
+    "random_seed": 2026100904,
+    "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+    "recent_windows": [
+      50,
+      100,
+      200
+    ],
+    "resampling_block_length": 10,
+    "selected_lines": "copy three rows of selected mode from sealed FINAL_THREE_LINES only, no mixing",
+    "statistical_tests": "paired nonoverlapping10-target block sign-flip Monte Carlo two-sided + Holm4; circular10-target block bootstrap95%; exact McNemar secondary",
+    "support_gate": "positive paired 3+,4+,mean deltas, all three Holm p<.05 and bootstrap CI excludes0 in same direction; nonnegative max delta; positive overall random 3+/4+/mean; all4 blocks nonnegative random3+/mean and paired3+/mean; otherwise deterministic tie-break",
+    "tie_break": [
+      "higher 200-target portfolio3+ count",
+      "higher sum portfolio max hits",
+      "higher all600-ticket mean hits",
+      "lower population variance of four50-block portfolio3+ rates, exact integer numerator /40000",
+      "expanding"
+    ],
+    "tie_break_is_predictive_superiority": false,
+    "training": "frozen engine fit/candidates/portfolio, expanding1..t-1 and rolling last300; prospective predict/load guards are not modified"
+  },
+  "final_three_lines": [
+    [
+      1,
+      9,
+      13,
+      24,
+      43,
+      44
+    ],
+    [
+      11,
+      13,
+      18,
+      34,
+      38,
+      43
+    ],
+    [
+      1,
+      20,
+      22,
+      25,
+      36,
+      41
+    ]
+  ],
+  "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+  "freeze_seal_sha256": "6a018e3036187a26ac9bcffda9fd7379d65d86cde84514faa08f4ea349b0f4bb",
+  "git_commit_planned_parent": "c8782a6063c6148fea0d7292b2a5c1a61fe2b974",
+  "historical_evaluation_targets": [
+    1045,
+    1244
+  ],
+  "historical_v3_status": "SEALED V3 GATE NOT PASSED",
+  "new_target1245_prediction_generated": false,
+  "permutation_seed": 2026100906,
+  "prediction_commit": "c8782a6063c6148fea0d7292b2a5c1a61fe2b974",
+  "prediction_seal_sha256": "5300807aacfba8b37f3f8db5aaf5eefcb7e522e910d79fc016e37bc86ca61fe5",
+  "prerun_lock_sha256": "ec0708d733123a2b214cdf48679f162fa365df6b21263469d76ef967c2acef36",
+  "prospective_models_status": "REGISTERED_UNEVALUATED",
+  "publication_status_at_creation": "PENDING_GITHUB_RECEIPT; observe externally without changing seal",
+  "random_seed": 2026100904,
+  "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "selected_primary_mode": "expanding",
+  "selection_trace": {
+    "four_block_variance": {
+      "expanding": 0.0018,
+      "rolling300": 0.0014
+    },
+    "support_gate": {
+      "expanding": {
+        "conditions": {
+          "all_four_blocks_nonnegative_paired_3plus_and_mean": false,
+          "all_four_blocks_nonnegative_random_3plus_and_mean": false,
+          "mean_ticket_hits_holm_significant": false,
+          "mean_ticket_hits_positive_ci": false,
+          "mean_ticket_hits_positive_paired_delta": false,
+          "nonnegative_max_hits_paired_delta": false,
+          "overall_positive_random_delta": false,
+          "portfolio_3plus_holm_significant": false,
+          "portfolio_3plus_positive_ci": false,
+          "portfolio_3plus_positive_paired_delta": true,
+          "portfolio_4plus_holm_significant": false,
+          "portfolio_4plus_positive_ci": false,
+          "portfolio_4plus_positive_paired_delta": true
+        },
+        "passed": false
+      },
+      "rolling300": {
+        "conditions": {
+          "all_four_blocks_nonnegative_paired_3plus_and_mean": false,
+          "all_four_blocks_nonnegative_random_3plus_and_mean": false,
+          "mean_ticket_hits_holm_significant": false,
+          "mean_ticket_hits_positive_ci": false,
+          "mean_ticket_hits_positive_paired_delta": true,
+          "nonnegative_max_hits_paired_delta": true,
+          "overall_positive_random_delta": false,
+          "portfolio_3plus_holm_significant": false,
+          "portfolio_3plus_positive_ci": false,
+          "portfolio_3plus_positive_paired_delta": false,
+          "portfolio_4plus_holm_significant": false,
+          "portfolio_4plus_positive_ci": false,
+          "portfolio_4plus_positive_paired_delta": false
+        },
+        "passed": false
+      }
+    },
+    "tie_break_applied": true,
+    "tie_break_trace": [
+      {
+        "criterion": "portfolio_3plus_count",
+        "selected_if_unequal": "expanding",
+        "values": {
+          "expanding": 20,
+          "rolling300": 12
+        }
+      }
+    ]
+  },
+  "selection_type": "DETERMINISTIC_TIE_BREAK_NO_VERIFIED_SUPERIORITY",
+  "self_hash_policy": "root seal hash and publishing commit recorded externally; manifest binds17 payloads, seal binds payload plus manifest; no circular self-hash",
+  "statistical_test": "paired nonoverlapping10-target block sign-flip Monte Carlo two-sided + Holm4; circular10-target block bootstrap95%; exact McNemar secondary",
+  "target": 1245,
+  "training_cutoff": 1244,
+  "version": "PRIMARY_PURCHASE_MODE_1245_V4_DECISION_V1"
+}

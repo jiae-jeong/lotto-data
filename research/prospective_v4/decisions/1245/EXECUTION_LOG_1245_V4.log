@@ -1,0 +1,24 @@
+PRERUN_PROTOCOL_CONFIG_CODE_LOCK_SHA256=ec0708d733123a2b214cdf48679f162fa365df6b21263469d76ef967c2acef36
+RUN_STARTED_UTC=2026-10-09T06:12:23.288042+00:00; historical_targets=1045..1244; ACTUAL_1245=NOT READ / NOT USED; outcome inputs historical only
+PROGRESS targets=10/200; last_historical_target=1054; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=20/200; last_historical_target=1064; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=30/200; last_historical_target=1074; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=40/200; last_historical_target=1084; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=50/200; last_historical_target=1094; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=60/200; last_historical_target=1104; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=70/200; last_historical_target=1114; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=80/200; last_historical_target=1124; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=90/200; last_historical_target=1134; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=100/200; last_historical_target=1144; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=110/200; last_historical_target=1154; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=120/200; last_historical_target=1164; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=130/200; last_historical_target=1174; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=140/200; last_historical_target=1184; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=150/200; last_historical_target=1194; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=160/200; last_historical_target=1204; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=170/200; last_historical_target=1214; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=180/200; last_historical_target=1224; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=190/200; last_historical_target=1234; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=200/200; last_historical_target=1244; all training cutoff=t-1; random portfolios per target=10000
+COMPARISON_SUCCESS: targets200; model portfolios400; random portfolios2000000; PRIMARY_PURCHASE_MODE_1245=expanding; type=DETERMINISTIC_TIE_BREAK_NO_VERIFIED_SUPERIORITY; actual1245 NOT READ / NOT USED
+PRIMARY_PURCHASE_LINES_1245=[[1,9,13,24,43,44],[11,13,18,34,38,43],[1,20,22,25,36,41]]

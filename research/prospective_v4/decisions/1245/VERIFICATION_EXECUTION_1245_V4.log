@@ -1,0 +1,327 @@
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo rev-parse HEAD
+EXIT: 0
+6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo status --porcelain=v1 --untracked-files=all
+EXIT: 0
+ M research/1245_final_pipeline_v3/recover_and_run_20261009.py
+ M research/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md
+?? research/1245_final_pipeline_v3/SOURCE_ASSET_SEARCH_v2.md
+?? research/1245_final_pipeline_v3/__pycache__/prepare_1245_final_three_lines_v3.cpython-312.pyc
+?? research/1245_final_pipeline_v3/independent_validation_20261009.py
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/SOURCE_ASSET_SEARCH.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/execution.log
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_number_frequency.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_overlaps.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_model_scorecard.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_metrics.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_walkforward.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_walkforward_predictions.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_1245_three_lines.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_portfolio_overlap.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/run_metadata.json
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/stored_reproduction_check.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/OUTPUT_SHA256.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/RECOVERY_README.md
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_50_round_trends.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_classification.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_holdout_metrics.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_predictions.csv
+?? research/1245_final_pipeline_v3/source_asset_search_v2.log
+?? research/expansion_framework_v1/__pycache__/walkforward_core.cpython-312.pyc
+?? research/expansion_framework_v1/studies/study_batch_001/__pycache__/run_batch.cpython-312.pyc
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo diff --cached --name-only
+EXIT: 0
+COMMAND: C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\official_gh_2_102_0\portable\bin\gh.exe auth status --hostname github.com
+EXIT: 0
+github.com
+  ✓ Logged in to github.com account jiae-jeong (keyring)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: gho_************************************
+  - Token scopes: 'gist', 'read:org', 'repo'
+KEYRING_READ_VIA_OFFICIAL_GH: exit 0; credential output withheld
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo -c http.sslBackend=openssl fetch origin main
+EXIT: 0
+From https://github.com/jiae-jeong/lotto-data
+ * branch            main       -> FETCH_HEAD
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo rev-parse origin/main
+EXIT: 0
+c8782a6063c6148fea0d7292b2a5c1a61fe2b974
+KEYRING_READ_VIA_OFFICIAL_GH: exit 0; credential output withheld
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo -c http.sslBackend=openssl ls-remote origin refs/heads/main
+EXIT: 0
+c8782a6063c6148fea0d7292b2a5c1a61fe2b974	refs/heads/main
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo -c core.autocrlf=false worktree add -b seal-v4-primary-mode-1245-20261009 C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009 c8782a6063c6148fea0d7292b2a5c1a61fe2b974
+EXIT: 0
+HEAD is now at c8782a6 Seal V4 prospective prediction for draw 1245
+Preparing worktree (new branch 'seal-v4-primary-mode-1245-20261009')
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009 status --porcelain=v1
+EXIT: 0
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009 rev-parse HEAD
+EXIT: 0
+c8782a6063c6148fea0d7292b2a5c1a61fe2b974
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009 ls-files
+EXIT: 0
+LOTTO_PROJECT_PROTOCOL.md
+analysis/2026-10-06/B_MODEL_RESULTS.md
+lotto_data.csv
+lotto_project_state_2026-10-06.md
+research/1245_final_pipeline_v3/CURRENT_STATUS_2026-10-09.md
+research/1245_final_pipeline_v3/FINAL_PIPELINE_V3_AUDIT.md
+research/1245_final_pipeline_v3/README_v3.md
+research/1245_final_pipeline_v3/SOURCE_ASSET_SEARCH_v2.md
+research/1245_final_pipeline_v3/V3_CHANGELOG.md
+research/1245_final_pipeline_v3/candidate_overlap_v3.csv
+research/1245_final_pipeline_v3/independent_validation_20261009.py
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/SOURCE_ASSET_SEARCH.md
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/execution.log
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_number_frequency.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_overlaps.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_model_scorecard.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_metrics.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_walkforward.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_walkforward_predictions.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_1245_three_lines.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_portfolio_overlap.csv
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/run_metadata.json
+research/1245_final_pipeline_v3/independent_validation_20261009_independent/stored_reproduction_check.csv
+research/1245_final_pipeline_v3/input_audit_v3.md
+research/1245_final_pipeline_v3/prepare_1245_final_three_lines_v3.py
+research/1245_final_pipeline_v3/recover_and_run_20261009.py
+research/1245_final_pipeline_v3/recovered_original_assets/B_MODEL_RECOVERY_REPORT_2026-10-09.md
+research/1245_final_pipeline_v3/recovered_original_assets/b_model_backtest.py
+research/1245_final_pipeline_v3/recovered_original_assets/outputs/OUTPUT_SHA256.csv
+research/1245_final_pipeline_v3/recovered_original_assets/outputs/RECOVERY_README.md
+research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_50_round_trends.csv
+research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_classification.csv
+research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_holdout_metrics.csv
+research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_predictions.csv
+research/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md
+research/1245_final_pipeline_v3/recovery_run_20261009/PIPELINE_ERROR_REPORT.md
+research/1245_final_pipeline_v3/recovery_run_20261009/execution.log
+research/1245_final_pipeline_v3/recovery_run_20261009/final_three_lines_1245_v3_recovery.csv
+research/1245_final_pipeline_v3/recovery_run_20261009/model_candidates.csv
+research/1245_final_pipeline_v3/recovery_run_20261009/model_validation_summary.csv
+research/1245_final_pipeline_v3/recovery_run_20261009/portfolio_overlap.csv
+research/1245_final_pipeline_v3/recovery_run_20261009/run_metadata.json
+research/1245_final_pipeline_v3/score_components_v3.csv
+research/1245_final_pipeline_v3/selection_trace_v3.csv
+research/1245_final_pipeline_v3/source_asset_search_v2.log
+research/expansion_framework_v1/GITHUB_SYNC_GUIDE.md
+research/expansion_framework_v1/README.md
+research/expansion_framework_v1/UPLOAD_SHA256_MANIFEST.csv
+research/expansion_framework_v1/audit_project.py
+research/expansion_framework_v1/data_quality.py
+research/expansion_framework_v1/hypothesis_template.py
+research/expansion_framework_v1/model_family_catalog.csv
+research/expansion_framework_v1/project_audit.md
+research/expansion_framework_v1/project_baseline_manifest.csv
+research/expansion_framework_v1/research_registry.csv
+research/expansion_framework_v1/run_study.py
+research/expansion_framework_v1/studies/README.md
+research/expansion_framework_v1/studies/study_batch_001/RUN_GUIDE.md
+research/expansion_framework_v1/studies/study_batch_001/STUDY_BATCH_001_REPORT.md
+research/expansion_framework_v1/studies/study_batch_001/b_model_comparison.csv
+research/expansion_framework_v1/studies/study_batch_001/bootstrap_confidence_intervals.csv
+research/expansion_framework_v1/studies/study_batch_001/build_confidence.py
+research/expansion_framework_v1/studies/study_batch_001/build_diagnostics.py
+research/expansion_framework_v1/studies/study_batch_001/build_rolling_summary.py
+research/expansion_framework_v1/studies/study_batch_001/conditional_number_transitions.csv
+research/expansion_framework_v1/studies/study_batch_001/failure_registry.csv
+research/expansion_framework_v1/studies/study_batch_001/model_correlation.csv
+research/expansion_framework_v1/studies/study_batch_001/model_metrics.csv
+research/expansion_framework_v1/studies/study_batch_001/number_temporal_features.csv
+research/expansion_framework_v1/studies/study_batch_001/pair_triple_temporal_stability.csv
+research/expansion_framework_v1/studies/study_batch_001/rolling300_failure_registry.csv
+research/expansion_framework_v1/studies/study_batch_001/rolling300_metrics.csv
+research/expansion_framework_v1/studies/study_batch_001/rolling300_predictions.csv
+research/expansion_framework_v1/studies/study_batch_001/rolling300_study_results.csv
+research/expansion_framework_v1/studies/study_batch_001/run_batch.py
+research/expansion_framework_v1/studies/study_batch_001/run_rolling300.py
+research/expansion_framework_v1/studies/study_batch_001/structure_transition_analysis.csv
+research/expansion_framework_v1/studies/study_batch_001/study_registry.csv
+research/expansion_framework_v1/studies/study_batch_001/study_results.csv
+research/expansion_framework_v1/studies/study_batch_001/surviving_models.csv
+research/expansion_framework_v1/studies/study_batch_001/walkforward_predictions.csv
+research/expansion_framework_v1/study_template.md
+research/expansion_framework_v1/walkforward_core.py
+research/prospective_v4/DATA_MANIFEST_V4.csv
+research/prospective_v4/EVIDENCE_REVIEW_V4.md
+research/prospective_v4/MODEL_MANIFEST_V4.csv
+research/prospective_v4/PROSPECTIVE_PROTOCOL_V4.md
+research/prospective_v4/RANDOM_BASELINE_V4.json
+research/prospective_v4/RESEARCH_REGISTRY_V4.csv
+research/prospective_v4/RULES_V4.json
+research/prospective_v4/SHA256_MANIFEST_V4.csv
+research/prospective_v4/SOURCE_EVIDENCE_INVENTORY_V4.csv
+research/prospective_v4/V4_FREEZE_SEAL.json
+research/prospective_v4/VALIDATION_GATES_V4.json
+research/prospective_v4/evaluation_v4.py
+research/prospective_v4/predictions/1245/CANDIDATES_1245_V4.csv
+research/prospective_v4/predictions/1245/CANDIDATE_AUDIT_1245_V4.json
+research/prospective_v4/predictions/1245/ENGINE_PREDICTION_1245_V4.json
+research/prospective_v4/predictions/1245/EXECUTION_PRESEAL_1245_V4.log
+research/prospective_v4/predictions/1245/FINAL_THREE_LINES_1245_V4.csv
+research/prospective_v4/predictions/1245/FROZEN_SCORE_CAPTURE_1245_V4.json
+research/prospective_v4/predictions/1245/MODEL_PREDICTIONS_1245_V4.csv
+research/prospective_v4/predictions/1245/NUMBER_SCORES_1245_V4.csv
+research/prospective_v4/predictions/1245/PREDICTION_1245_V4.json
+research/prospective_v4/predictions/1245/PREDICTION_MANIFEST_1245_V4.csv
+research/prospective_v4/predictions/1245/PREDICTION_SEAL_1245_V4.json
+research/prospective_v4/predictions/1245/RANDOM_BASELINE_1245_V4.json
+research/prospective_v4/predictions/1245/README_1245_V4.md
+research/prospective_v4/predictions/1245/SELECTION_TRACE_1245_V4.csv
+research/prospective_v4/predictions/1245/STRUCTURE_DIAGNOSTICS_1245_V4.csv
+research/prospective_v4/predictions/1245/TICKET_SCORES_1245_V4.csv
+research/prospective_v4/predictions/1245/VERIFICATION_1245_V4.json
+research/prospective_v4/predictions/1245/run_prediction_1245_v4.py
+research/prospective_v4/predictions/1245/verify_prediction_1245_v4.py
+research/prospective_v4/prospective_engine_v4.py
+research/prospective_v4/verify_freeze_v4.py
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009\research\prospective_v4\verify_freeze_v4.py --expected-seal-sha 6a018e3036187a26ac9bcffda9fd7379d65d86cde84514faa08f4ea349b0f4bb
+EXIT: 0
+{"V4_FREEZE": "PASS", "fixed_files": 13, "V3": "SEALED V3 GATE NOT PASSED", "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05"}
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009\research\prospective_v4\predictions\1245\verify_prediction_1245_v4.py
+EXIT: 0
+{"actual_nonuse_verification_method": "input pinned to cutoff1244; no outcome input/network retrieval in engine or runner; actual_numbers=null; result_rows_read=false; not comparison against unknown winning numbers", "actual_result": "NOT READ / NOT USED", "candidate_tickets": 592, "freeze_verification": "PASS", "hash_records_checked": 18, "model_mode_records": 16, "number_scores": 720, "portfolios": {"expanding": [[1, 9, 13, 24, 43, 44], [11, 13, 18, 34, 38, 43], [1, 20, 22, 25, 36, 41]], "rolling300": [[6, 12, 15, 21, 29, 35], [1, 4, 6, 9, 12, 19], [1, 9, 14, 28, 37, 39]]}, "raw_integrity": "PASS", "status": "REGISTERED_UNEVALUATED", "structure_veto_count": 0, "target": 1245, "ticket_scores": 20518, "trace_rows": 222, "training_cutoff": 1244, "unique_portfolio_lines_each_mode": 3, "verification": "PASS"}
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo rev-parse HEAD
+EXIT: 0
+6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo status --porcelain=v1 --untracked-files=all
+EXIT: 0
+ M research/1245_final_pipeline_v3/recover_and_run_20261009.py
+ M research/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md
+?? research/1245_final_pipeline_v3/SOURCE_ASSET_SEARCH_v2.md
+?? research/1245_final_pipeline_v3/__pycache__/prepare_1245_final_three_lines_v3.cpython-312.pyc
+?? research/1245_final_pipeline_v3/independent_validation_20261009.py
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/SOURCE_ASSET_SEARCH.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/execution.log
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_number_frequency.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_overlaps.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_model_scorecard.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_metrics.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_walkforward.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_walkforward_predictions.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_1245_three_lines.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_portfolio_overlap.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/run_metadata.json
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/stored_reproduction_check.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/OUTPUT_SHA256.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/RECOVERY_README.md
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_50_round_trends.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_classification.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_holdout_metrics.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_predictions.csv
+?? research/1245_final_pipeline_v3/source_asset_search_v2.log
+?? research/expansion_framework_v1/__pycache__/walkforward_core.cpython-312.pyc
+?? research/expansion_framework_v1/studies/study_batch_001/__pycache__/run_batch.cpython-312.pyc
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo diff --cached --name-only
+EXIT: 0
+ORIGINAL_ALL_FILES_HEAD_INDEX_STATUS: PRESERVED
+START_GATES_PASS: main pinned; freeze/prediction seals pass; raw max1244; existing six lines unchanged; comparison not run; actual1245 NOT READ / NOT USED
+PRERUN_RULES_FIXED_BEFORE_COMPARISON UTC=2026-10-09T06:11:46.262519+00:00 LOCK_SHA256=ec0708d733123a2b214cdf48679f162fa365df6b21263469d76ef967c2acef36
+{"actual_1245": "NOT READ / NOT USED", "alpha": 0.05, "blocks": [[1045, 1094], [1095, 1144], [1145, 1194], [1195, 1244]], "bootstrap_replicates": 20000, "bootstrap_seed": 2026100905, "created_at_utc": "2026-10-09T06:11:46.262519+00:00", "decision_target": 1245, "diagnostic_features": ["overlap", "union_coverage", "G/C/S contributions"], "diagnostics_affect_selection": false, "exclusions": "none; any invalid/missing target, training integrity failure or engine failure aborts entire decision, no performance-based exclusion", "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4", "freeze_seal_sha256": "6a018e3036187a26ac9bcffda9fd7379d65d86cde84514faa08f4ea349b0f4bb", "historical_first_target": 1045, "historical_last_target": 1244, "historical_target_count": 200, "model_order": ["V4_G", "V4_C", "V4_S"], "new_prediction_numbers_allowed": false, "numpy_version": "2.3.5", "past_data_reuse": "retrospective reused V4 development data; no untouched validation, no future predictive edge claim", "permutation_replicates": 50000, "permutation_seed": 2026100906, "prediction_commit": "c8782a6063c6148fea0d7292b2a5c1a61fe2b974", "prediction_seal_sha256": "5300807aacfba8b37f3f8db5aaf5eefcb7e522e910d79fc016e37bc86ca61fe5", "primary_test_family": ["portfolio_3plus", "portfolio_4plus", "portfolio_max_hits", "mean_ticket_hits"], "random_generator": "NumPy PCG64, first8 big-endian SHA256(seed|historical_target|t); uniform sample via random45 argpartition6; unique candidate prefixes max37; same greedy overlap<=2 and exact fallback; no actual outcome in generation", "random_replicates_per_target": 10000, "random_seed": 2026100904, "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f", "recent_windows": [50, 100, 200], "resampling_block_length": 10, "selected_lines": "copy three rows of selected mode from sealed FINAL_THREE_LINES only, no mixing", "statistical_tests": "paired nonoverlapping10-target block sign-flip Monte Carlo two-sided + Holm4; circular10-target block bootstrap95%; exact McNemar secondary", "support_gate": "positive paired 3+,4+,mean deltas, all three Holm p<.05 and bootstrap CI excludes0 in same direction; nonnegative max delta; positive overall random 3+/4+/mean; all4 blocks nonnegative random3+/mean and paired3+/mean; otherwise deterministic tie-break", "tie_break": ["higher 200-target portfolio3+ count", "higher sum portfolio max hits", "higher all600-ticket mean hits", "lower population variance of four50-block portfolio3+ rates, exact integer numerator /40000", "expanding"], "tie_break_is_predictive_superiority": false, "training": "frozen engine fit/candidates/portfolio, expanding1..t-1 and rolling last300; prospective predict/load guards are not modified"}
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009\research\prospective_v4\decisions\1245\run_mode_comparison_1245_v4.py
+PRERUN_PROTOCOL_CONFIG_CODE_LOCK_SHA256=ec0708d733123a2b214cdf48679f162fa365df6b21263469d76ef967c2acef36
+RUN_STARTED_UTC=2026-10-09T06:12:23.288042+00:00; historical_targets=1045..1244; ACTUAL_1245=NOT READ / NOT USED; outcome inputs historical only
+PROGRESS targets=10/200; last_historical_target=1054; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=20/200; last_historical_target=1064; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=30/200; last_historical_target=1074; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=40/200; last_historical_target=1084; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=50/200; last_historical_target=1094; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=60/200; last_historical_target=1104; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=70/200; last_historical_target=1114; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=80/200; last_historical_target=1124; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=90/200; last_historical_target=1134; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=100/200; last_historical_target=1144; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=110/200; last_historical_target=1154; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=120/200; last_historical_target=1164; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=130/200; last_historical_target=1174; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=140/200; last_historical_target=1184; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=150/200; last_historical_target=1194; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=160/200; last_historical_target=1204; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=170/200; last_historical_target=1214; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=180/200; last_historical_target=1224; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=190/200; last_historical_target=1234; all training cutoff=t-1; random portfolios per target=10000
+PROGRESS targets=200/200; last_historical_target=1244; all training cutoff=t-1; random portfolios per target=10000
+COMPARISON_SUCCESS: targets200; model portfolios400; random portfolios2000000; PRIMARY_PURCHASE_MODE_1245=expanding; type=DETERMINISTIC_TIE_BREAK_NO_VERIFIED_SUPERIORITY; actual1245 NOT READ / NOT USED
+PRIMARY_PURCHASE_LINES_1245=[[1,9,13,24,43,44],[11,13,18,34,38,43],[1,20,22,25,36,41]]
+{"decision_lines":[[1,9,13,24,43,44],[11,13,18,34,38,43],[1,20,22,25,36,41]],"historical_range":[1045,1244],"random":{"exact_mean_ticket_hits":0.8,"hit_distribution_0_to_6":[2402828,2545247,908398,135090,8253,184,0],"mean_pair_overlap":0.7453394999999999,"mean_ticket_hits":0.8002075,"mean_union_coverage":15.849640999999998,"portfolio_3plus_expected_targets":14.0586,"portfolio_3plus_monte_carlo_se":0.0001807555001929402,"portfolio_3plus_rate":0.070293,"portfolio_4plus_expected_targets":0.843,"portfolio_4plus_monte_carlo_se":4.580841844028235e-05,"portfolio_4plus_rate":0.004215,"portfolio_max_hits_mean":1.4546145000000001,"portfolio_simulations":2000000,"replicates_per_target":10000,"targets":200,"ticket_2plus_rate":0.17532083333333334,"ticket_3plus_rate":0.023921166666666667,"ticket_4plus_rate":0.0014061666666666667,"tickets":6000000},"selected_primary_mode":"expanding","selection_type":"DETERMINISTIC_TIE_BREAK_NO_VERIFIED_SUPERIORITY","summary":{"expanding":{"hit_distribution_0_to_6":[247,255,77,20,1,0,0],"mean_pair_overlap":0.9733333333333333,"mean_ticket_hits":0.7883333333333333,"mean_union_coverage":15.245,"portfolio_3plus_count":20,"portfolio_3plus_rate":0.1,"portfolio_4plus_count":1,"portfolio_4plus_rate":0.005,"portfolio_max_hits_mean":1.445,"portfolio_max_hits_sum":289,"targets":200,"ticket_2plus_rate":0.16333333333333333,"ticket_3plus_rate":0.035,"ticket_4plus_rate":0.0016666666666666668,"tickets":600,"total_hits":473},"rolling300":{"hit_distribution_0_to_6":[240,245,102,13,0,0,0],"mean_pair_overlap":0.8183333333333332,"mean_ticket_hits":0.8133333333333334,"mean_union_coverage":15.67,"portfolio_3plus_count":12,"portfolio_3plus_rate":0.06,"portfolio_4plus_count":0,"portfolio_4plus_rate":0.0,"portfolio_max_hits_mean":1.455,"portfolio_max_hits_sum":291,"targets":200,"ticket_2plus_rate":0.19166666666666668,"ticket_3plus_rate":0.021666666666666667,"ticket_4plus_rate":0.0,"tickets":600,"total_hits":488}}}
+EXIT: 0
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo rev-parse HEAD
+EXIT: 0
+6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo status --porcelain=v1 --untracked-files=all
+EXIT: 0
+ M research/1245_final_pipeline_v3/recover_and_run_20261009.py
+ M research/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md
+?? research/1245_final_pipeline_v3/SOURCE_ASSET_SEARCH_v2.md
+?? research/1245_final_pipeline_v3/__pycache__/prepare_1245_final_three_lines_v3.cpython-312.pyc
+?? research/1245_final_pipeline_v3/independent_validation_20261009.py
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/SOURCE_ASSET_SEARCH.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/execution.log
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_number_frequency.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_overlaps.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_model_scorecard.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_metrics.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_walkforward.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_walkforward_predictions.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_1245_three_lines.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_portfolio_overlap.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/run_metadata.json
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/stored_reproduction_check.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/OUTPUT_SHA256.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/RECOVERY_README.md
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_50_round_trends.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_classification.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_holdout_metrics.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_predictions.csv
+?? research/1245_final_pipeline_v3/source_asset_search_v2.log
+?? research/expansion_framework_v1/__pycache__/walkforward_core.cpython-312.pyc
+?? research/expansion_framework_v1/studies/study_batch_001/__pycache__/run_batch.cpython-312.pyc
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo diff --cached --name-only
+EXIT: 0
+ORIGINAL_ALL_FILES_HEAD_INDEX_STATUS: PRESERVED
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009\research\prospective_v4\decisions\1245\verify_primary_mode_1245_v4.py --deep --pre-seal
+EXIT: 0
+{"actual1245": "NOT READ / NOT USED", "deep_model_anchors": [{"match": true, "mode": "expanding", "target": 1045}, {"match": true, "mode": "rolling300", "target": 1045}, {"match": true, "mode": "expanding", "target": 1094}, {"match": true, "mode": "rolling300", "target": 1094}, {"match": true, "mode": "expanding", "target": 1095}, {"match": true, "mode": "rolling300", "target": 1095}, {"match": true, "mode": "expanding", "target": 1144}, {"match": true, "mode": "rolling300", "target": 1144}, {"match": true, "mode": "expanding", "target": 1145}, {"match": true, "mode": "rolling300", "target": 1145}, {"match": true, "mode": "expanding", "target": 1194}, {"match": true, "mode": "rolling300", "target": 1194}, {"match": true, "mode": "expanding", "target": 1195}, {"match": true, "mode": "rolling300", "target": 1195}, {"match": true, "mode": "expanding", "target": 1244}, {"match": true, "mode": "rolling300", "target": 1244}], "deep_random_anchors": [{"match": true, "portfolios": 10000, "target": 1045}, {"match": true, "portfolios": 10000, "target": 1144}, {"match": true, "portfolios": 10000, "target": 1244}], "existing_six_lines_unchanged": true, "hash_records_checked": 0, "historical_targets": [1045, 1244], "no_new_target1245_prediction": true, "random_portfolios": 2000000, "selected_lines": [[1, 9, 13, 24, 43, 44], [11, 13, 18, 34, 38, 43], [1, 20, 22, 25, 36, 41]], "selected_mode": "expanding", "selection_type": "DETERMINISTIC_TIE_BREAK_NO_VERIFIED_SUPERIORITY", "statistics_recomputed": true, "targets_each_mode": 200, "tickets_each_mode": 600, "verification": "PASS"}
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo rev-parse HEAD
+EXIT: 0
+6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo status --porcelain=v1 --untracked-files=all
+EXIT: 0
+ M research/1245_final_pipeline_v3/recover_and_run_20261009.py
+ M research/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md
+?? research/1245_final_pipeline_v3/SOURCE_ASSET_SEARCH_v2.md
+?? research/1245_final_pipeline_v3/__pycache__/prepare_1245_final_three_lines_v3.cpython-312.pyc
+?? research/1245_final_pipeline_v3/independent_validation_20261009.py
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/SOURCE_ASSET_SEARCH.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/execution.log
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_number_frequency.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_overlaps.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_model_scorecard.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_metrics.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_walkforward.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_walkforward_predictions.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_1245_three_lines.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_portfolio_overlap.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/run_metadata.json
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/stored_reproduction_check.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/OUTPUT_SHA256.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/RECOVERY_README.md
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_50_round_trends.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_classification.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_holdout_metrics.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_predictions.csv
+?? research/1245_final_pipeline_v3/source_asset_search_v2.log
+?? research/expansion_framework_v1/__pycache__/walkforward_core.cpython-312.pyc
+?? research/expansion_framework_v1/studies/study_batch_001/__pycache__/run_batch.cpython-312.pyc
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo diff --cached --name-only
+EXIT: 0
+ORIGINAL_ALL_FILES_HEAD_INDEX_STATUS: PRESERVED
+DEEP_VERIFICATION_PASS: all400 historical rows/hits/cutoffs; recomputed paired statistics;16 frozen-model replay anchors;30000 random replay portfolios; selected three rows exact original match
