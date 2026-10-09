@@ -1,0 +1,49 @@
+{
+  "actual_result": "NOT READ / NOT USED",
+  "exact_pmf": {
+    "0": {
+      "denominator": 8145060,
+      "numerator": 3262623,
+      "probability": 0.40056463672459136
+    },
+    "1": {
+      "denominator": 8145060,
+      "numerator": 3454542,
+      "probability": 0.4241272624142732
+    },
+    "2": {
+      "denominator": 8145060,
+      "numerator": 1233765,
+      "probability": 0.15147402229081186
+    },
+    "3": {
+      "denominator": 8145060,
+      "numerator": 182780,
+      "probability": 0.02244059589493509
+    },
+    "4": {
+      "denominator": 8145060,
+      "numerator": 11115,
+      "probability": 0.0013646308314487555
+    },
+    "5": {
+      "denominator": 8145060,
+      "numerator": 234,
+      "probability": 2.872907013576327e-05
+    },
+    "6": {
+      "denominator": 8145060,
+      "numerator": 1,
+      "probability": 1.2277380399898834e-07
+    }
+  },
+  "expected_hits": 0.8,
+  "observed_performance": null,
+  "portfolio_dependence": "three lines are not independent; no independent-line win claim",
+  "source_file": "../../RANDOM_BASELINE_V4.json",
+  "source_sha256": "55c64c398ef1ef1b5597233d724eeb4fc4b06a7937a0d218a5d567275f379e92",
+  "status": "REGISTERED_UNEVALUATED",
+  "superiority_claim": false,
+  "target": 1245,
+  "training_cutoff": 1244
+}
