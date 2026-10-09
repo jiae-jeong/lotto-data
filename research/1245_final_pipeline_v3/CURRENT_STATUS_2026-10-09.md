@@ -1,42 +1,38 @@
-# Current authoritative status — 1245 V3 (2026-10-09)
+# Current authoritative status — 1245 V3 (2026-10-09, updated)
 
-**Status: V3 SEALED GATE NOT PASSED. Candidate reassessment exists, but is unsealed and does not establish predictive advantage.**
+**Status: SEALED V3 GATE NOT PASSED. Four pinned B-v1 CSV outputs have now been independently regenerated with exact historical hashes, but other required files and the prospective seal remain unavailable.**
 
-This note is an additive status index. It does not replace or alter prior reports, candidate lines, model results, the source dataset, or automation settings.
+This is an additive status correction. It preserves prior model reports, candidate lines, and execution history; it does not rewrite historical results as prospective evidence.
 
-## Evidence currently confirmed
+## Confirmed asset recovery after the initial status note
 
-- The current `main` head before this note was `1ae9e4fe55db5aadce4cc095d7cce14ce4a36f4c`.
-- The corrected local asset search is recorded in [SOURCE_ASSET_SEARCH_v2.md](SOURCE_ASSET_SEARCH_v2.md) and its actual read-only log in [source_asset_search_v2.log](source_asset_search_v2.log).
-- The repository data has 1,244 consecutive rounds (1–1244), with the round 1244 date 2026-10-03. The independent report records the exact source validation and LF-normalized hash.
-- The new post-hoc walk-forward run evaluated targets 1045–1244 using eight models and two windows: 200 target rounds × 8 models × 2 windows = 3,200 model predictions. Round 1245's actual result was not read.
-- The exact random baseline is 0.800000 mean hits per six-number ticket, 17.530810% for 2+ hits, and 2.383408% for 3+ hits.
-- Reassessment kept the three prior recovery lines unchanged. Historical portfolio means were 0.7283 hits per line (expanding) and 0.8117 (rolling-300), against 0.8000 random mean. This post-hoc evidence does **not** establish a repeatable predictive advantage.
-- The detailed results are in [INDEPENDENT_VALIDATION_REPORT.md](independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md), [fresh_model_scorecard.csv](independent_validation_20261009_independent/fresh_model_scorecard.csv), and [fresh_portfolio_metrics.csv](independent_validation_20261009_independent/fresh_portfolio_metrics.csv).
+A search of the ChatGPT file library found the originally uploaded B-v1 source and raw dataset, even though they were absent from the current PC's scanned paths:
 
-## Why the V3 gate remains blocked
+- Original B-v1 source: [recovered_original_assets/b_model_backtest.py](recovered_original_assets/b_model_backtest.py). The 27,977-byte materialized source matched the pinned SHA-256 3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb.
+- Raw dataset: 43,234 bytes, SHA-256 243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f, matching the pinned historical data hash.
+- Running the exact source in a separate scratch directory against the exact source data reproduced four historical CSV outputs with exact pinned hashes: predictions (33,408 records), holdout metrics (256 rows), classification (8 rows), and 50-round trends (56 rows).
+- Verification table and result interpretation: [B_MODEL_RECOVERY_REPORT_2026-10-09.md](recovered_original_assets/B_MODEL_RECOVERY_REPORT_2026-10-09.md).
+- The regenerated Markdown report is **not** byte-identical to the historical report: its path and newline environment differ. It is clearly labelled as regenerated and is not claimed as recovered verbatim.
+- The four exact CSVs and the exact source/data are packaged separately in the recovery archive shared in the conversation; the CSVs have not yet been committed to this repository as raw files.
 
-The 2026-10-09 asset search did not find the pinned original B-model assets or prospective seal package on the current PC. Related summaries and the study comparison CSV are not replacements for the expected original files or their hashes. Other V3-required historical B recent/candidate outputs are also absent from the current repository locations.
+## Current independent validation findings
 
-The existing V3 code additionally points to machine-specific directories, and its baseline-manifest path does not match the tracked repository location. Correcting paths alone would not restore the missing pinned inputs and must not be treated as passing the gate.
+The 2026-10-09 independent run validated repository data rounds 1–1244 and recomputed 3,200 model predictions across expanding and rolling-300 windows for targets 1045–1244. It did not read round 1245's actual result.
 
-The prior recorded V3 check-only attempt in [PIPELINE_ERROR_REPORT.md](recovery_run_20261009/PIPELINE_ERROR_REPORT.md) exited 1 with 18 blocking errors. The 2026-10-09 search did **not** rerun `--check-only`, because inspection showed it writes/overwrites four audit artifacts in place. Any future diagnostic run must use a disposable copy/worktree and capture the exit code and full log.
+The exact random baseline is 0.800000 mean hits per six-number ticket, 17.530810% for 2+ hits, and 2.383408% for 3+ hits. The selected three candidate lines remain the prior recovery lines. This post-hoc test did not demonstrate a repeatable advantage over random; see [the independent validation report](independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md).
 
-## Important distinction: historical READY snapshot
+## Remaining V3 blockers
 
-The tracked [README_v3.md](README_v3.md), [FINAL_PIPELINE_V3_AUDIT.md](FINAL_PIPELINE_V3_AUDIT.md), and [input_audit_v3.md](input_audit_v3.md) contain an earlier 2026-10-08 snapshot saying `READY_WITH_WARNINGS` and listing historical external assets as present. That snapshot is not the current machine's asset-search result and must not be cited as evidence that the gate is ready today. The earlier files are intentionally preserved; this status note clarifies their temporal scope rather than rewriting them.
+The exact original B-v1 core outputs are reproducible, but the separate Oct 8 recent-validation/candidate output set remains unavailable. The original prospective protocol, registry, frozen model manifest, and seal are also unavailable. The baseline manifest itself is tracked at research/expansion_framework_v1/project_baseline_manifest.csv; the old V3 script expects it at a stale output path and also embeds machine-specific external paths.
 
-## Next actions
+The current-PC search was corrected to inspect the exact requested paths, and the search log is in [source_asset_search_v2.log](source_asset_search_v2.log). That search did not find the Oct 8 artifact set or prospective seal package locally.
 
-1. If an original PC, external disk, backup, cloud-synced folder, or archived project copy becomes accessible, recover the original assets and compare each to its recorded SHA-256 before use.
-2. Do not fabricate the missing files, substitute summaries for pinned originals, or recreate a historical seal retroactively.
-3. If the originals cannot be recovered, continue only in a clearly labelled unsealed research track based on the available repository sources; keep the sealed V3 gate marked **NOT PASSED**.
-4. For future rounds, define and freeze any new protocol/model registry before producing those round's candidates, store its hashes and logs, and validate in an isolated worktree. Do not backdate a new protocol to round 1245.
-5. Preserve prior candidate lines and research records. Do not change automation settings without an explicit request.
+The old README_v3.md, FINAL_PIPELINE_V3_AUDIT.md, and input_audit_v3.md show a historical 2026-10-08 READY_WITH_WARNINGS check-only snapshot. That does not override the later 2026-10-09 recovery result. The prior recorded current-environment V3 check-only attempt exited 1 with 18 blocking errors. It was not rerun during the corrected asset search because the existing script writes/overwrites four audit files in place. A future diagnostic run must use a disposable worktree/copy.
 
-## Source links
+## Required next step
 
-- [Asset search v2](SOURCE_ASSET_SEARCH_v2.md)
-- [Actual search log v2](source_asset_search_v2.log)
-- [Independent validation](independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md)
-- [Recovery pipeline error report](recovery_run_20261009/PIPELINE_ERROR_REPORT.md)
+1. Bring the four exact CSVs from the provided recovery package into a dedicated tracked recovery directory, verify them against OUTPUT_SHA256.csv, and commit them without replacing prior files.
+2. Search any genuine original-machine/backup copy for the missing Oct 8 recent/candidate artifacts and prospective seal files. If unavailable, keep them marked missing.
+3. Do not fabricate old outputs, recreate a historical seal retroactively, or label the V3 gate READY. If the originals cannot be recovered, continue future research in a new, prospectively frozen version and keep the sealed V3 gate NOT PASSED.
+
+No candidate file or automation setting was changed by this status correction.
