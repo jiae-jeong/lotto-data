@@ -1,0 +1,11 @@
+{
+  "command": [
+    "C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\outputs\\B_MODEL_REPRODUCTION_20261009_v1\\VERIFY_AUDIT.py"
+  ],
+  "utc": "2026-10-09T12:05:49.498044+00:00",
+  "exit_code": 0,
+  "stdout": "{\r\n  \"status\": \"PASS\",\r\n  \"manifest_files\": 41,\r\n  \"raw_rows\": 1244,\r\n  \"max_raw_round\": 1244,\r\n  \"B_output_records\": 33408,\r\n  \"actual_1245\": \"NOT READ / NOT USED\",\r\n  \"new_1245_predictions\": false\r\n}\r\n",
+  "stderr": "",
+  "manifest_sha256": "1f2f234b957b2ca4a802a6354fe8ca10c026baecc91b8fea55d6d1f42d888ed1"
+}

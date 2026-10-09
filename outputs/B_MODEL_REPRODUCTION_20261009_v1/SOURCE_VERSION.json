@@ -1,0 +1,44 @@
+{
+  "source": {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py",
+    "bytes": 27977,
+    "mtime_ns": 1791525791556250900,
+    "mtime_utc": "2026-10-09T06:03:11.556251+00:00",
+    "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb"
+  },
+  "constants": {
+    "ANCHORS": [
+      200,
+      400,
+      600,
+      800,
+      1000,
+      1100,
+      1150,
+      1200
+    ],
+    "HORIZONS": [
+      10,
+      25,
+      50,
+      "to_end"
+    ],
+    "RECENT_WINDOW": 50,
+    "STRUCTURE_BANK_SEED": 20261006,
+    "STRUCTURE_BANK_SIZE": 10000,
+    "MODEL_NAMES": [
+      "long_frequency",
+      "current_gap",
+      "frequency_plus_gap",
+      "recent_momentum",
+      "structure_profile",
+      "pair_association",
+      "triple_association",
+      "combined_equal_rank"
+    ]
+  },
+  "ast_parse": "PASS",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "run_context": "Unmodified source copied byte-for-byte; hardcoded ROOT/work/lotto-data and ROOT/outputs provided in isolated sandbox.",
+  "mode_note": "This source expands training 1..t-1; anchor/horizon holdouts roll target forward. It does not implement a separate fixed-length rolling300 training mode."
+}

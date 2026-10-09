@@ -1,0 +1,60 @@
+[
+  {
+    "command": [
+      "rg",
+      "--files",
+      "C:\\Users\\admin\\Documents\\Codex",
+      "-g",
+      "B_MODEL_RESULTS.md",
+      "-g",
+      "OUTPUT_SHA256.csv",
+      "-g",
+      "RECOVERY_README.md",
+      "-g",
+      "b_model_50_round_trends.csv",
+      "-g",
+      "b_model_backtest.py",
+      "-g",
+      "b_model_backtest_report.md",
+      "-g",
+      "b_model_backtest_report_regenerated_not_hash-identical.md",
+      "-g",
+      "b_model_classification.csv",
+      "-g",
+      "b_model_holdout_metrics.csv",
+      "-g",
+      "b_model_predictions.csv"
+    ],
+    "exit_code": 0,
+    "stderr": ""
+  },
+  {
+    "command": [
+      "rg",
+      "--files",
+      "C:\\Users\\admin\\Downloads",
+      "-g",
+      "B_MODEL_RESULTS.md",
+      "-g",
+      "OUTPUT_SHA256.csv",
+      "-g",
+      "RECOVERY_README.md",
+      "-g",
+      "b_model_50_round_trends.csv",
+      "-g",
+      "b_model_backtest.py",
+      "-g",
+      "b_model_backtest_report.md",
+      "-g",
+      "b_model_backtest_report_regenerated_not_hash-identical.md",
+      "-g",
+      "b_model_classification.csv",
+      "-g",
+      "b_model_holdout_metrics.csv",
+      "-g",
+      "b_model_predictions.csv"
+    ],
+    "exit_code": 1,
+    "stderr": ""
+  }
+]

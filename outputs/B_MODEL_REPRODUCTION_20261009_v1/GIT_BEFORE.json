@@ -1,0 +1,46 @@
+{
+  "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo": {
+    "rev-parse HEAD": {
+      "exit_code": 0,
+      "stdout": "6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d\n",
+      "stderr": ""
+    },
+    "status --short --branch": {
+      "exit_code": 0,
+      "stdout": "## main...origin/main [ahead 1, behind 16]\n M research/1245_final_pipeline_v3/recover_and_run_20261009.py\n M research/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md\n?? research/1245_final_pipeline_v3/SOURCE_ASSET_SEARCH_v2.md\n?? research/1245_final_pipeline_v3/__pycache__/\n?? research/1245_final_pipeline_v3/independent_validation_20261009.py\n?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/\n?? research/1245_final_pipeline_v3/recovered_original_assets/\n?? research/1245_final_pipeline_v3/source_asset_search_v2.log\n?? research/expansion_framework_v1/__pycache__/\n?? research/expansion_framework_v1/studies/study_batch_001/__pycache__/\n",
+      "stderr": ""
+    },
+    "diff --cached --name-status": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "diff --name-status": {
+      "exit_code": 0,
+      "stdout": "M\tresearch/1245_final_pipeline_v3/recover_and_run_20261009.py\nM\tresearch/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md\n",
+      "stderr": "warning: in the working copy of 'research/1245_final_pipeline_v3/recover_and_run_20261009.py', LF will be replaced by CRLF the next time Git touches it\n"
+    }
+  },
+  "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009": {
+    "rev-parse HEAD": {
+      "exit_code": 0,
+      "stdout": "f777d7888bce208fa7b196689278f41fec387caf\n",
+      "stderr": ""
+    },
+    "status --short --branch": {
+      "exit_code": 0,
+      "stdout": "## seal-v4-primary-mode-1245-20261009\n",
+      "stderr": ""
+    },
+    "diff --cached --name-status": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "diff --name-status": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  }
+}

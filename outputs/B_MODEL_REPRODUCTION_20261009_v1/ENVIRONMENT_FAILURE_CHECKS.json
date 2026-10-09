@@ -1,0 +1,20 @@
+{
+  "status": "VERIFIED",
+  "direct_recovered_source_diagnostic": {
+    "command": [
+      "C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py"
+    ],
+    "exit_code": 1,
+    "expected_missing_input": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\work\\lotto-data\\lotto_data.csv",
+    "error": "FileNotFoundError",
+    "performance_run": false
+  },
+  "missing_output_dir_diagnostic": {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_reproduction_20261009_v1\\missing_outputs_negative_test",
+    "error": "FileNotFoundError",
+    "scope": "Only the exact first output file open operation tested; not a second complete backtest."
+  },
+  "successful_main_run_unchanged": true,
+  "source_variants_identical_after_lineending_normalization": true
+}

@@ -1,0 +1,13 @@
+{
+  "status": "VERIFIED",
+  "checked_existing_assets": 68,
+  "all_hash_size_mtime_unchanged": true,
+  "git_head_status_and_diff_name_lists_unchanged": true,
+  "clean_main_worktree_unchanged": true,
+  "original_worktree_kept_dirty_as_found": true,
+  "actual_1245_read": false,
+  "V3_gate": "SEALED V3 GATE NOT PASSED",
+  "V4_modified": false,
+  "automation_modified": false,
+  "commit_push_this_task": "NOT EXECUTED: this request asked for local reproduction/audit and did not request publication."
+}

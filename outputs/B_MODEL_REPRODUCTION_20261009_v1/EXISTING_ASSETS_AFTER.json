@@ -1,0 +1,410 @@
+[
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\remote_download_verify_20261009_v4\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791519954485414600,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\remote_download_verify_20261009_v4\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791519954216450000,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\remote_download_verify_20261009_v4\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791519952920248500,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\remote_download_verify_20261009_v4\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791519953349911800,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\remote_download_verify_20261009_v4\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791519953654634200,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\remote_download_verify_20261009_v4\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791519953958248800,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\source\\b_model_backtest.py",
+    "bytes": 27977,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\outputs\\b_model_backtest_report_regenerated_not_hash-identical.md",
+    "bytes": 10817,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "4f3a02ba45ba7fb94498a7e23bb5307beff533ae322b6b47f303cce9465cd1b8"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo\\analysis\\2026-10-06\\B_MODEL_RESULTS.md",
+    "bytes": 2340,
+    "mtime_ns": 1791505909403096400,
+    "sha256": "ec771a8d4a6a3ad340e6df126b0da20afbe74b317bf963dac0e37e9cfe095e22"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791526730901013400,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791526730670757400,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791526730502789400,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791526730537454000,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791526730766947900,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791526730563742500,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py",
+    "bytes": 27977,
+    "mtime_ns": 1791526730817452100,
+    "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py",
+    "bytes": 27977,
+    "mtime_ns": 1791523749961672200,
+    "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\analysis\\2026-10-06\\B_MODEL_RESULTS.md",
+    "bytes": 2301,
+    "mtime_ns": 1791520358358911800,
+    "sha256": "34e54b5a62493044333df85e8d54f9272e088021cba6f8287abcfb197e637ac8"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791523749993614100,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791523749844964600,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791523749932510200,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791523749824522900,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791523750019906000,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_remote_verified_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791523749872868200,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\lotto-data-main\\analysis\\2026-10-06\\B_MODEL_RESULTS.md",
+    "bytes": 2301,
+    "mtime_ns": 1791390046000000000,
+    "sha256": "34e54b5a62493044333df85e8d54f9272e088021cba6f8287abcfb197e637ac8"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\analysis\\2026-10-06\\B_MODEL_RESULTS.md",
+    "bytes": 2340,
+    "mtime_ns": 1791519877511716000,
+    "sha256": "ec771a8d4a6a3ad340e6df126b0da20afbe74b317bf963dac0e37e9cfe095e22"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\analysis\\2026-10-06\\B_MODEL_RESULTS.md",
+    "bytes": 2301,
+    "mtime_ns": 1791525791459758400,
+    "sha256": "34e54b5a62493044333df85e8d54f9272e088021cba6f8287abcfb197e637ac8"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791520358435268100,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791520358435268100,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791520358454664200,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791520358449937600,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791520358435268100,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791520358435268100,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prospective_v4_latest_main_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py",
+    "bytes": 27977,
+    "mtime_ns": 1791520358435268100,
+    "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\lotto-repo\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791476974000000000,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\analysis\\2026-10-06\\B_MODEL_RESULTS.md",
+    "bytes": 2301,
+    "mtime_ns": 1791523232980634900,
+    "sha256": "34e54b5a62493044333df85e8d54f9272e088021cba6f8287abcfb197e637ac8"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py",
+    "bytes": 28431,
+    "mtime_ns": 1791519877733622100,
+    "sha256": "9071335eea9b83cd416811f54286a4a9a1c1361889fa1288d87b5e0ca764a683"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py",
+    "bytes": 27977,
+    "mtime_ns": 1791523233049104800,
+    "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791519878782453500,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791519878752879800,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791519878775442200,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791519878718823000,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791519878802251800,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_restore_latest_main_20261009_v4\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791519878809272200,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\b_model_backtest.py",
+    "bytes": 27977,
+    "mtime_ns": 1791525791556250900,
+    "sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791523233055475200,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791523233053464600,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791523233080095200,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791523233064290300,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791523233059984800,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791523233057984100,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\RECOVERY_README.md",
+    "bytes": 2318,
+    "mtime_ns": 1791525791563361300,
+    "sha256": "c1eff0ff2bc82ecadcd6db82582f942203a7126ecd766fbcb25df6a1befe9948"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\OUTPUT_SHA256.csv",
+    "bytes": 1270,
+    "mtime_ns": 1791525791560359200,
+    "sha256": "f122d0b9a995a76b031a2e5f881f33e39b51ac7804e608505e0bb991d2a73852"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_predictions.csv",
+    "bytes": 3236859,
+    "mtime_ns": 1791525791578387800,
+    "sha256": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_holdout_metrics.csv",
+    "bytes": 113856,
+    "mtime_ns": 1791525791570255900,
+    "sha256": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_classification.csv",
+    "bytes": 3509,
+    "mtime_ns": 1791525791566864100,
+    "sha256": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2"
+  },
+  {
+    "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\recovered_original_assets\\outputs\\b_model_50_round_trends.csv",
+    "bytes": 6264,
+    "mtime_ns": 1791525791565366000,
+    "sha256": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df"
+  }
+]

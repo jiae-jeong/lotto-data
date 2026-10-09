@@ -1,0 +1,14 @@
+{
+  "exact_historical_report_status": "NOT FOUND",
+  "pinned_historical_report_sha256": "2d9314c793c6508f2d6d5aab983c74b271c5b0f6c042997cfff1079742cf0512",
+  "new_report_sha256": "b9e3804e02f2c4fed548222b77cf90ff58083d54f184cb4bbee0c5b20489994a",
+  "package_regenerated_report_path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\recovery_package_20261009\\lotto_b_model_recovery_package\\outputs\\b_model_backtest_report_regenerated_not_hash-identical.md",
+  "package_regenerated_report_sha256": "4f3a02ba45ba7fb94498a7e23bb5307beff533ae322b6b47f303cce9465cd1b8",
+  "historical_hash_match": false,
+  "whole_file_status": "MISMATCH",
+  "normalized_package_report_status": "REPRODUCED",
+  "normalized_after_only_input_path_and_newlines_match": true,
+  "reason": "Execution input absolute path and Windows CRLF differ from Linux scratch report. Exact historical report bytes are unavailable; the package explicitly labels its report regenerated and not historical-hash-identical.",
+  "short_original_report": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\analysis\\2026-10-06\\B_MODEL_RESULTS.md",
+  "short_report_model_table_numeric_match": true
+}

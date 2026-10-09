@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009\research\1245_final_pipeline_v3\recovered_original_assets\b_model_backtest.py", line 454, in <module>
+    main()
+  File "C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009\research\1245_final_pipeline_v3\recovered_original_assets\b_model_backtest.py", line 221, in main
+    draws = read_data()
+            ^^^^^^^^^^^
+  File "C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\primary_mode_1245_v4_clean_20261009\research\1245_final_pipeline_v3\recovered_original_assets\b_model_backtest.py", line 33, in read_data
+    with INPUT.open(newline="", encoding="utf-8-sig") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\research\\1245_final_pipeline_v3\\work\\lotto-data\\lotto_data.csv'
