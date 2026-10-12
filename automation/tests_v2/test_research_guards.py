@@ -6,6 +6,7 @@ import math
 import subprocess
 import sys
 import tempfile
+import types
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -13,6 +14,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import daily_research_v2 as daily
 import research_engine_v2 as engine
+import check_environment_v2 as environment
 
 def fixture(output, task):
     output.mkdir(parents=True)
@@ -123,10 +125,32 @@ class ResearchGuards(unittest.TestCase):
         self.assertAlmostEqual(sum(i * p for i, p in enumerate(values)), 1)
         self.assertAlmostEqual(sum((i - 1)**2 * p for i, p in enumerate(values)), .8)
 
+    def test_dependency_failure_does_not_claim_empirical_readiness(self):
+        wrong = types.SimpleNamespace(__version__='unavailable')
+        captured = io.StringIO()
+        with patch.dict(sys.modules, {'numpy': wrong}), contextlib.redirect_stdout(captured):
+            self.assertEqual(environment.main(self.root, allow_theory_fallback=True), 0)
+            with self.assertRaises(SystemExit): environment.main(self.root)
+            with self.assertRaises(RuntimeError): engine.comparison_tests({}, [])
+        result = json.loads(captured.getvalue())
+        self.assertEqual(result['environment'], 'EMPIRICAL_BLOCKED')
+        self.assertFalse(result['new_study_claimed'])
+
     def test_existing_result_is_protected(self):
         queue = self.root / 'queue.json'; engine.jsonfile(queue, {'tasks': [self.task]})
         result = self.root / 'result.json'; result.write_text('existing')
         with self.assertRaises(FileExistsError): daily.run(self.root, self.output, queue, result, '2026-10-12')
         self.assertEqual(result.read_text(), 'existing')
+
+    def test_missing_empirical_source_allows_only_theory_recovery(self):
+        available = types.SimpleNamespace(__version__='2.3.5')
+        captured = io.StringIO()
+        with patch.dict(sys.modules, {'numpy': available}), contextlib.redirect_stdout(captured):
+            self.assertEqual(environment.main(self.root, allow_theory_fallback=True), 0)
+            with self.assertRaises(SystemExit): environment.main(self.root)
+        result = json.loads(captured.getvalue())
+        self.assertEqual(result['environment'], 'EMPIRICAL_BLOCKED')
+        self.assertTrue(result['independent_theory_possible'])
+        self.assertFalse(result['new_study_claimed'])
 
 if __name__ == '__main__': unittest.main()

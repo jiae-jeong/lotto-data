@@ -127,6 +127,8 @@ def holm(records, field='p_raw'):
 
 def comparison_tests(series, primary):
     import numpy as np
+    if np.__version__ != '2.3.5':
+        raise RuntimeError('Empirical bootstrap requires frozen NumPy 2.3.5; use independent stdlib fallback')
     names = list(series); hs = np.asarray([series[name] for name in names]).T
     n = len(hs); features = np.stack([hs, hs >= 2, hs >= 3, hs >= 4], axis=2).astype(float)
     rng = np.random.Generator(np.random.PCG64(2026101210))
@@ -299,7 +301,8 @@ def run(root, output, task):
     if digest(__file__) != frozen['code_sha256']: raise ValueError('Code changed during study')
     evidence = {'status': 'COMPLETE', 'classification': 'NEW_STUDY', 'task_id': task['id'],
                 'question': task['question'], 'novelty': task['novelty'], 'executed_cases': result['executed_cases'],
-                'validation': 'PASS', 'data_cutoff': 1245, 'evidence': 'POST_HOC_EXPLORATORY',
+                'validation': 'PASS', 'data_cutoff': None if task['kind'] == 'power' else 1245,
+                'evidence': 'ANALYTIC_HYPOTHETICAL_EFFECTS' if task['kind'] == 'power' else 'POST_HOC_EXPLORATORY',
                 'protected_existing_files': len(protected), 'protected_files_unchanged': True,
                 'future_predictions': 0, 'result': result, 'report': 'REPORT.md',
                 'completed_utc': datetime.now(timezone.utc).isoformat()}
