@@ -1,0 +1,26 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E012_EXACT_TAIL_POWER_v1",
+  "question": "How much confirmatory data is required for 3+/4+ effect sizes at a prespecified family error rate?",
+  "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback.",
+  "executed_cases": 24,
+  "validation": "PASS",
+  "data_cutoff": null,
+  "evidence": "ANALYTIC_HYPOTHETICAL_EFFECTS",
+  "protected_existing_files": 405,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 24,
+    "verification": {
+      "status": "PASS",
+      "exact_binomial_cases": 24,
+      "null_error_bound": "PASS",
+      "future_predictions": 0
+    },
+    "positive_adjusted_comparisons": 0
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-12T23:37:07.821750+00:00"
+}

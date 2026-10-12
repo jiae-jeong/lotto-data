@@ -1,0 +1,45 @@
+{
+  "task": {
+    "id": "E012_EXACT_TAIL_POWER_v1",
+    "kind": "power",
+    "question": "How much confirmatory data is required for 3+/4+ effect sizes at a prespecified family error rate?",
+    "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback."
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "f1fa04756590c955b078160422f118e5948686bf9a9a207038c149837f891275",
+  "data_sha256": null,
+  "cache_sha256": null,
+  "code_sha256": "4a99a06a231f024c4a2bcf552e4f6ed87e64d59a39f8e148662484a306785a14",
+  "created_utc": "2026-10-12T23:37:07.722080+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}
