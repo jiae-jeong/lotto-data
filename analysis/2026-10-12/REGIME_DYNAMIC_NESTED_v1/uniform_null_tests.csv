@@ -1,0 +1,13 @@
+﻿model,metric,n,observed_sum_or_count,raw_upper_p,holm_family_size,holm_upper_p
+D001_nested_mean,mean,645,493,0.8814563795353879,12,1.0
+D001_nested_mean,2plus,645,108,0.7155386697758764,12,1.0
+D001_nested_mean,3plus,645,7,0.9944082513414548,12,1.0
+D001_nested_mean,4plus,645,0,1.0,12,1.0
+D002_nested_2plus,mean,645,507,0.682076787810195,12,1.0
+D002_nested_2plus,2plus,645,104,0.8392540196729597,12,1.0
+D002_nested_2plus,3plus,645,9,0.9706300862592212,12,1.0
+D002_nested_2plus,4plus,645,1,0.5931957374213436,12,1.0
+D003_nested_regime,mean,645,477,0.977165370929627,12,1.0
+D003_nested_regime,2plus,645,97,0.9590762304639812,12,1.0
+D003_nested_regime,3plus,645,5,0.9994180590405822,12,1.0
+D003_nested_regime,4plus,645,1,0.5931957374213436,12,1.0
