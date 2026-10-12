@@ -1,0 +1,2 @@
+2026-10-12T09:00:00+09:00
+run=actual-daily-study-through-round-1245
