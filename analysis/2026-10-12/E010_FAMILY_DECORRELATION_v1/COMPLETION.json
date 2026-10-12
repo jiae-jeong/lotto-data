@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E010_FAMILY_DECORRELATION_v1",
+  "question": "Do B hybrid/family duplicate votes dilute an ensemble, and does pre-target ticket geometry provide a better weighting control?",
+  "novelty": "Controlled B-ticket ensemble ablation: remove frequency-gap hybrid, merge semantic relationship family, or weight current forecast overlap. Prior V3 used different batch001 rank/portfolio models; prior dynamic study selected single B components.",
+  "executed_cases": 1935,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 376,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 1935,
+    "verification": {
+      "status": "PASS",
+      "prediction_records_checked": 7740,
+      "unique_targets": 645,
+      "independent_weight_predictions": 1935,
+      "independent_nested_decisions": 0,
+      "future_mutation_checks": 0,
+      "future_predictions": 0
+    },
+    "positive_adjusted_comparisons": 0
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-12T08:48:11.646078+00:00"
+}

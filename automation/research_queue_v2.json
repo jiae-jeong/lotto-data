@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "timezone": "Asia/Seoul",
+  "schedule_local": "09:00",
+  "tasks": [
+    {
+      "id": "E010_FAMILY_DECORRELATION_v1",
+      "kind": "family",
+      "question": "Do B hybrid/family duplicate votes dilute an ensemble, and does pre-target ticket geometry provide a better weighting control?",
+      "novelty": "Controlled B-ticket ensemble ablation: remove frequency-gap hybrid, merge semantic relationship family, or weight current forecast overlap. Prior V3 used different batch001 rank/portfolio models; prior dynamic study selected single B components."
+    },
+    {
+      "id": "E011_NESTED_3_4_TAIL_v1",
+      "kind": "tail",
+      "question": "Does nested 3+ or 4+ selection of overlap-weighted ensembles improve the high-hit tail compared with fixed equal weighting?",
+      "novelty": "Select ensemble redundancy exponents, not component identity. Four pre-frozen exponents are evaluated on 200 preceding out-of-sample targets; 3+/4+ objectives remain separate from prior mean/2+ selector research."
+    },
+    {
+      "id": "E012_EXACT_TAIL_POWER_v1",
+      "kind": "power",
+      "question": "How much confirmatory data is required for 3+/4+ effect sizes at a prespecified family error rate?",
+      "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback."
+    }
+  ]
+}
