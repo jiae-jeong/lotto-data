@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E011_NESTED_3_4_TAIL_v1",
+  "question": "Does nested 3+ or 4+ selection of overlap-weighted ensembles improve the high-hit tail compared with fixed equal weighting?",
+  "novelty": "Select ensemble redundancy exponents, not component identity. Four pre-frozen exponents are evaluated on 200 preceding out-of-sample targets; 3+/4+ objectives remain separate from prior mean/2+ selector research.",
+  "executed_cases": 1290,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 394,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 1290,
+    "verification": {
+      "status": "PASS",
+      "prediction_records_checked": 7095,
+      "unique_targets": 645,
+      "independent_weight_predictions": 0,
+      "independent_nested_decisions": 1290,
+      "future_mutation_checks": 1290,
+      "future_predictions": 0
+    },
+    "positive_adjusted_comparisons": 0
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-12T09:17:09.819045+00:00"
+}

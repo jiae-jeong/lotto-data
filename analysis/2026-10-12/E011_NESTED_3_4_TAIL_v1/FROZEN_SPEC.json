@@ -1,0 +1,45 @@
+{
+  "task": {
+    "id": "E011_NESTED_3_4_TAIL_v1",
+    "kind": "tail",
+    "question": "Does nested 3+ or 4+ selection of overlap-weighted ensembles improve the high-hit tail compared with fixed equal weighting?",
+    "novelty": "Select ensemble redundancy exponents, not component identity. Four pre-frozen exponents are evaluated on 200 preceding out-of-sample targets; 3+/4+ objectives remain separate from prior mean/2+ selector research."
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "4d246a961f11ba99ff683fc2d7f370bfea45466ddc1ded23eef8792d7774f682",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "0436f0c7412ecb10d0f24c25816faa991f1d704c54295db34f7bcf88d51b3320",
+  "code_sha256": "4cfbd776d3fc98a14cb103e417765f076176c43dbb8f4ec00c952edd5e40c36d",
+  "created_utc": "2026-10-12T09:17:08.159904+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "Select ensemble redundancy exponents, not component identity. Four pre-frozen exponents are evaluated on 200 preceding out-of-sample targets; 3+/4+ objectives remain separate from prior mean/2+ selector research.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}
