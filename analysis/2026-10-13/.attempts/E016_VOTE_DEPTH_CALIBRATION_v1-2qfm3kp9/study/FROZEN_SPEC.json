@@ -1,0 +1,151 @@
+{
+  "task": {
+    "id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+    "kind": "vote_depth",
+    "question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
+    "novelty": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
+    "spec": {
+      "study_id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+      "kind": "vote_depth",
+      "research_question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
+      "data_cutoff": 1245,
+      "target_rounds": "601..1245 inclusive",
+      "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+      "primary_metric": "mean main-number hits per target round",
+      "secondary_metrics": [
+        "0..6 hit distribution",
+        "2+/3+/4+/5+/6 rates",
+        "paired difference",
+        "temporal block stability"
+      ],
+      "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+      "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+      "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+      "block_stability": [
+        50,
+        100,
+        200
+      ],
+      "tie_break": "lower number for score ties; source component order retained",
+      "random_seed": 20261013,
+      "expected_output_files": [
+        "VOTE_DEPTH_OBSERVATIONS.csv",
+        "VOTE_DEPTH_CALIBRATION.csv",
+        "RANDOM_DEPTH_CALIBRATION.csv",
+        "DEPTH_MONOTONICITY.csv",
+        "VERIFICATION.json",
+        "REPORT.md"
+      ],
+      "expected_record_counts": {
+        "VOTE_DEPTH_OBSERVATIONS.csv": 29025,
+        "VOTE_DEPTH_CALIBRATION.csv": 8,
+        "RANDOM_DEPTH_CALIBRATION.csv": 8,
+        "DEPTH_MONOTONICITY.csv": 7
+      },
+      "novelty_signature": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
+      "study_class": "empirical",
+      "random_ensembles_per_target": 100,
+      "bootstrap_unit": "whole target round with 45 number outcomes",
+      "bootstrap_replicates": 2000
+    }
+  },
+  "study_spec": {
+    "study_id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+    "kind": "vote_depth",
+    "research_question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
+    "data_cutoff": 1245,
+    "target_rounds": "601..1245 inclusive",
+    "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+    "primary_metric": "mean main-number hits per target round",
+    "secondary_metrics": [
+      "0..6 hit distribution",
+      "2+/3+/4+/5+/6 rates",
+      "paired difference",
+      "temporal block stability"
+    ],
+    "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+    "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+    "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+    "block_stability": [
+      50,
+      100,
+      200
+    ],
+    "tie_break": "lower number for score ties; source component order retained",
+    "random_seed": 20261013,
+    "expected_output_files": [
+      "VOTE_DEPTH_OBSERVATIONS.csv",
+      "VOTE_DEPTH_CALIBRATION.csv",
+      "RANDOM_DEPTH_CALIBRATION.csv",
+      "DEPTH_MONOTONICITY.csv",
+      "VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "expected_record_counts": {
+      "VOTE_DEPTH_OBSERVATIONS.csv": 29025,
+      "VOTE_DEPTH_CALIBRATION.csv": 8,
+      "RANDOM_DEPTH_CALIBRATION.csv": 8,
+      "DEPTH_MONOTONICITY.csv": 7
+    },
+    "novelty_signature": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
+    "study_class": "empirical",
+    "random_ensembles_per_target": 100,
+    "bootstrap_unit": "whole target round with 45 number outcomes",
+    "bootstrap_replicates": 2000
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "c1c68a79e60a3eecf17a6f0a4f0e4cc75f638e85b3439db2a5a6da565a3afb66",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "c21b7abdcff238dd88fe17f3d0da6d3c164672c9431642eaacedbd2bf535a04b",
+  "source_file_sha256": {
+    "research_engine_v2.py": "c21b7abdcff238dd88fe17f3d0da6d3c164672c9431642eaacedbd2bf535a04b",
+    "expanded_studies_v2.py": "84d9b04cb6f8ee88326141161ab1fd85a4c38f18932aa0816c5282a767d0d5a3"
+  },
+  "expected_output_files": [
+    "VOTE_DEPTH_OBSERVATIONS.csv",
+    "VOTE_DEPTH_CALIBRATION.csv",
+    "RANDOM_DEPTH_CALIBRATION.csv",
+    "DEPTH_MONOTONICITY.csv",
+    "VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "expected_record_counts": {
+    "VOTE_DEPTH_OBSERVATIONS.csv": 29025,
+    "VOTE_DEPTH_CALIBRATION.csv": 8,
+    "RANDOM_DEPTH_CALIBRATION.csv": 8,
+    "DEPTH_MONOTONICITY.csv": 7
+  },
+  "created_utc": "2026-10-13T01:10:52.124561+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}

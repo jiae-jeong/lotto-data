@@ -8,6 +8,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+TEXT_SUFFIXES = {'.csv','.json','.md','.py','.txt','.yml','.yaml','.log'}
+
+def canonical_text(path):
+    content = Path(path).read_bytes()
+    return content.replace(b'\r\n', b'\n') if Path(path).suffix.lower() in TEXT_SUFFIXES else content
+
 def empirical_check(root):
     import numpy
     if numpy.__version__ != '2.3.5': raise ImportError('Frozen NumPy 2.3.5 unavailable')
@@ -19,7 +25,11 @@ def empirical_check(root):
     for row in manifest:
         path = prefix / row['file']
         if path.parent != prefix or not path.is_file(): raise ValueError('Invalid published file path')
-        if path.stat().st_size != int(row['bytes']) or hashlib.sha256(path.read_bytes()).hexdigest() != row['sha256']:
+        raw = path.read_bytes()
+        canonical = canonical_text(path)
+        raw_match = len(raw) == int(row['bytes']) and hashlib.sha256(raw).hexdigest() == row['sha256']
+        canonical_match = len(canonical) == int(row['bytes']) and hashlib.sha256(canonical).hexdigest() == row['sha256']
+        if not (raw_match or canonical_match):
             raise ValueError('Published research integrity failure')
     cp = subprocess.run([sys.executable, '-B', str(root / 'research/expansion_framework_v1/data_quality.py'),
         '--data', str(root / 'analysis/2026-10-12/lotto_data_1_1245_snapshot.csv'), '--through-round', '1245'], cwd=root, capture_output=True, text=True)

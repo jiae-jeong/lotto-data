@@ -1,0 +1,153 @@
+{
+  "task": {
+    "id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+    "kind": "portfolio",
+    "question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
+    "novelty": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
+    "spec": {
+      "study_id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+      "kind": "portfolio",
+      "research_question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
+      "data_cutoff": 1245,
+      "target_rounds": "601..1245 inclusive",
+      "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+      "primary_metric": "mean main-number hits per target round",
+      "secondary_metrics": [
+        "0..6 hit distribution",
+        "2+/3+/4+/5+/6 rates",
+        "paired difference",
+        "temporal block stability"
+      ],
+      "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+      "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+      "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+      "block_stability": [
+        50,
+        100,
+        200
+      ],
+      "tie_break": "lower number for score ties; source component order retained",
+      "random_seed": 20261013,
+      "expected_output_files": [
+        "BUNDLE_RESULTS.csv",
+        "RANDOM_BUNDLE_RESULTS.csv",
+        "BUNDLE_METRICS.csv",
+        "VERIFICATION.json",
+        "REPORT.md"
+      ],
+      "expected_record_counts": {
+        "BUNDLE_RESULTS.csv": 645,
+        "RANDOM_BUNDLE_RESULTS.csv": 64500,
+        "BUNDLE_METRICS.csv": 2
+      },
+      "novelty_signature": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
+      "study_class": "empirical",
+      "bundle_components": [
+        "long_frequency",
+        "structure_profile",
+        "pair_association"
+      ],
+      "random_bundles_per_target": 100,
+      "bundle_frozen_before_outcome": true
+    }
+  },
+  "study_spec": {
+    "study_id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+    "kind": "portfolio",
+    "research_question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
+    "data_cutoff": 1245,
+    "target_rounds": "601..1245 inclusive",
+    "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+    "primary_metric": "mean main-number hits per target round",
+    "secondary_metrics": [
+      "0..6 hit distribution",
+      "2+/3+/4+/5+/6 rates",
+      "paired difference",
+      "temporal block stability"
+    ],
+    "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+    "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+    "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+    "block_stability": [
+      50,
+      100,
+      200
+    ],
+    "tie_break": "lower number for score ties; source component order retained",
+    "random_seed": 20261013,
+    "expected_output_files": [
+      "BUNDLE_RESULTS.csv",
+      "RANDOM_BUNDLE_RESULTS.csv",
+      "BUNDLE_METRICS.csv",
+      "VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "expected_record_counts": {
+      "BUNDLE_RESULTS.csv": 645,
+      "RANDOM_BUNDLE_RESULTS.csv": 64500,
+      "BUNDLE_METRICS.csv": 2
+    },
+    "novelty_signature": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
+    "study_class": "empirical",
+    "bundle_components": [
+      "long_frequency",
+      "structure_profile",
+      "pair_association"
+    ],
+    "random_bundles_per_target": 100,
+    "bundle_frozen_before_outcome": true
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "118107c04f3651c1447da1cacd0330eedc1816522ec39dd6a2a928a39493ed7f",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "662483b3ac28025420f6f3106f62ab4e861ca38d5b60ec63ea52bf0b25faaf35",
+  "source_file_sha256": {
+    "research_engine_v2.py": "662483b3ac28025420f6f3106f62ab4e861ca38d5b60ec63ea52bf0b25faaf35",
+    "expanded_studies_v2.py": "84d9b04cb6f8ee88326141161ab1fd85a4c38f18932aa0816c5282a767d0d5a3"
+  },
+  "expected_output_files": [
+    "BUNDLE_RESULTS.csv",
+    "RANDOM_BUNDLE_RESULTS.csv",
+    "BUNDLE_METRICS.csv",
+    "VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "expected_record_counts": {
+    "BUNDLE_RESULTS.csv": 645,
+    "RANDOM_BUNDLE_RESULTS.csv": 64500,
+    "BUNDLE_METRICS.csv": 2
+  },
+  "created_utc": "2026-10-13T01:12:51.631582+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}

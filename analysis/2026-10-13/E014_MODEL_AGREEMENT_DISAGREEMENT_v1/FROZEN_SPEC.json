@@ -1,0 +1,177 @@
+{
+  "task": {
+    "id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+    "kind": "agreement",
+    "question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
+    "novelty": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
+    "spec": {
+      "study_id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+      "kind": "agreement",
+      "research_question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
+      "data_cutoff": 1245,
+      "target_rounds": "601..1245 inclusive",
+      "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+      "primary_metric": "mean main-number hits per target round",
+      "secondary_metrics": [
+        "0..6 hit distribution",
+        "2+/3+/4+/5+/6 rates",
+        "paired difference",
+        "temporal block stability"
+      ],
+      "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+      "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+      "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+      "block_stability": [
+        50,
+        100,
+        200
+      ],
+      "tie_break": "lower number for score ties; source component order retained",
+      "random_seed": 20261013,
+      "expected_output_files": [
+        "GEOMETRY_AND_REGIMES.csv",
+        "REGIME_PREDICTIONS.csv",
+        "RANDOM_PREDICTIONS.csv",
+        "METRICS_BY_REGIME.csv",
+        "HIGH_LOW_TESTS.csv",
+        "BLOCK_STABILITY.csv",
+        "VERIFICATION.json",
+        "REPORT.md"
+      ],
+      "expected_record_counts": {
+        "GEOMETRY_AND_REGIMES.csv": 645,
+        "REGIME_PREDICTIONS.csv": 5805,
+        "RANDOM_PREDICTIONS.csv": 64500,
+        "METRICS_BY_REGIME.csv": 30,
+        "HIGH_LOW_TESTS.csv": 36,
+        "BLOCK_STABILITY.csv": 130
+      },
+      "novelty_signature": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
+      "study_class": "empirical",
+      "geometry_features": [
+        "mean_pairwise_overlap",
+        "mean_pairwise_jaccard",
+        "union_size",
+        "vote_concentration",
+        "vote_entropy",
+        "maximum_vote_depth"
+      ],
+      "regime_lookback": 200,
+      "random_repeats": 100
+    }
+  },
+  "study_spec": {
+    "study_id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+    "kind": "agreement",
+    "research_question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
+    "data_cutoff": 1245,
+    "target_rounds": "601..1245 inclusive",
+    "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+    "primary_metric": "mean main-number hits per target round",
+    "secondary_metrics": [
+      "0..6 hit distribution",
+      "2+/3+/4+/5+/6 rates",
+      "paired difference",
+      "temporal block stability"
+    ],
+    "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+    "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+    "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+    "block_stability": [
+      50,
+      100,
+      200
+    ],
+    "tie_break": "lower number for score ties; source component order retained",
+    "random_seed": 20261013,
+    "expected_output_files": [
+      "GEOMETRY_AND_REGIMES.csv",
+      "REGIME_PREDICTIONS.csv",
+      "RANDOM_PREDICTIONS.csv",
+      "METRICS_BY_REGIME.csv",
+      "HIGH_LOW_TESTS.csv",
+      "BLOCK_STABILITY.csv",
+      "VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "expected_record_counts": {
+      "GEOMETRY_AND_REGIMES.csv": 645,
+      "REGIME_PREDICTIONS.csv": 5805,
+      "RANDOM_PREDICTIONS.csv": 64500,
+      "METRICS_BY_REGIME.csv": 30,
+      "HIGH_LOW_TESTS.csv": 36,
+      "BLOCK_STABILITY.csv": 130
+    },
+    "novelty_signature": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
+    "study_class": "empirical",
+    "geometry_features": [
+      "mean_pairwise_overlap",
+      "mean_pairwise_jaccard",
+      "union_size",
+      "vote_concentration",
+      "vote_entropy",
+      "maximum_vote_depth"
+    ],
+    "regime_lookback": 200,
+    "random_repeats": 100
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "095fd54902975491909594781c8925bbec920280aa15031add49a8bd3a5a05ce",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "662483b3ac28025420f6f3106f62ab4e861ca38d5b60ec63ea52bf0b25faaf35",
+  "source_file_sha256": {
+    "research_engine_v2.py": "662483b3ac28025420f6f3106f62ab4e861ca38d5b60ec63ea52bf0b25faaf35",
+    "expanded_studies_v2.py": "84d9b04cb6f8ee88326141161ab1fd85a4c38f18932aa0816c5282a767d0d5a3"
+  },
+  "expected_output_files": [
+    "GEOMETRY_AND_REGIMES.csv",
+    "REGIME_PREDICTIONS.csv",
+    "RANDOM_PREDICTIONS.csv",
+    "METRICS_BY_REGIME.csv",
+    "HIGH_LOW_TESTS.csv",
+    "BLOCK_STABILITY.csv",
+    "VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "expected_record_counts": {
+    "GEOMETRY_AND_REGIMES.csv": 645,
+    "REGIME_PREDICTIONS.csv": 5805,
+    "RANDOM_PREDICTIONS.csv": 64500,
+    "METRICS_BY_REGIME.csv": 30,
+    "HIGH_LOW_TESTS.csv": 36,
+    "BLOCK_STABILITY.csv": 130
+  },
+  "created_utc": "2026-10-13T01:12:04.274386+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}

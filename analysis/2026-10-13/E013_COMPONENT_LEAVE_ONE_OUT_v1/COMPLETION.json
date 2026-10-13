@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+  "question": "Does dropping any one of the seven frozen B components change equal-vote ensemble performance on the same 601–1245 OOS targets?",
+  "novelty": "component-identity leave-one-out; seven frozen single-component ablations; full equal-vote and cached equal-rank comparators; exact uniform reference; 601..1245; lower-number tie.",
+  "executed_cases": 5805,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 412,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 5805,
+    "verification": {
+      "status": "PASS",
+      "targets_checked": 645,
+      "prediction_records_checked": 5805,
+      "policies": 9,
+      "paired_comparisons": 56,
+      "leakage_failures": 0,
+      "independent_ticket_replay": "PASS",
+      "future_predictions": 0
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-13T01:16:32.750811+00:00"
+}

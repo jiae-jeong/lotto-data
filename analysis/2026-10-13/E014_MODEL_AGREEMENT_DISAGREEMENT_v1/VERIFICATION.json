@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "primary_targets": 645,
+  "geometry_records": 645,
+  "model_prediction_records": 5805,
+  "random_records": 64500,
+  "rolling_threshold_lookback": 200,
+  "threshold_outcome_use": "NO",
+  "leakage_failures": 0,
+  "random_repeats_per_target": 100,
+  "future_predictions": 0
+}

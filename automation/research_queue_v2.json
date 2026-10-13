@@ -20,6 +20,356 @@
       "kind": "power",
       "question": "How much confirmatory data is required for 3+/4+ effect sizes at a prespecified family error rate?",
       "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback."
+    },
+    {
+      "id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+      "kind": "component_loo",
+      "question": "Does dropping any one of the seven frozen B components change equal-vote ensemble performance on the same 601–1245 OOS targets?",
+      "novelty": "component-identity leave-one-out; seven frozen single-component ablations; full equal-vote and cached equal-rank comparators; exact uniform reference; 601..1245; lower-number tie.",
+      "spec": {
+        "study_id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+        "kind": "component_loo",
+        "research_question": "Does dropping any one of the seven frozen B components change equal-vote ensemble performance on the same 601–1245 OOS targets?",
+        "data_cutoff": 1245,
+        "target_rounds": "601..1245 inclusive",
+        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+        "primary_metric": "mean main-number hits per target round",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "paired difference",
+          "temporal block stability"
+        ],
+        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "lower number for score ties; source component order retained",
+        "random_seed": 20261013,
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "METRICS.csv",
+          "PAIRED_COMPARISONS.csv",
+          "BLOCK_STABILITY.csv",
+          "EXACT_UNIFORM_BASELINE.json",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS.csv": 5805,
+          "METRICS.csv": 10,
+          "PAIRED_COMPARISONS.csv": 56,
+          "BLOCK_STABILITY.csv": 216
+        },
+        "novelty_signature": "component-identity leave-one-out; seven frozen single-component ablations; full equal-vote and cached equal-rank comparators; exact uniform reference; 601..1245; lower-number tie.",
+        "study_class": "empirical",
+        "component_set": [
+          "long_frequency",
+          "current_gap",
+          "frequency_plus_gap",
+          "recent_momentum",
+          "structure_profile",
+          "pair_association",
+          "triple_association"
+        ],
+        "ablation": "drop each component once; equal ticket weights",
+        "random_repeats": 0
+      }
+    },
+    {
+      "id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+      "kind": "agreement",
+      "question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
+      "novelty": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
+      "spec": {
+        "study_id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+        "kind": "agreement",
+        "research_question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
+        "data_cutoff": 1245,
+        "target_rounds": "601..1245 inclusive",
+        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+        "primary_metric": "mean main-number hits per target round",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "paired difference",
+          "temporal block stability"
+        ],
+        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "lower number for score ties; source component order retained",
+        "random_seed": 20261013,
+        "expected_output_files": [
+          "GEOMETRY_AND_REGIMES.csv",
+          "REGIME_PREDICTIONS.csv",
+          "RANDOM_PREDICTIONS.csv",
+          "METRICS_BY_REGIME.csv",
+          "HIGH_LOW_TESTS.csv",
+          "BLOCK_STABILITY.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {
+          "GEOMETRY_AND_REGIMES.csv": 645,
+          "REGIME_PREDICTIONS.csv": 5805,
+          "RANDOM_PREDICTIONS.csv": 64500,
+          "METRICS_BY_REGIME.csv": 30,
+          "HIGH_LOW_TESTS.csv": 36,
+          "BLOCK_STABILITY.csv": 130
+        },
+        "novelty_signature": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
+        "study_class": "empirical",
+        "geometry_features": [
+          "mean_pairwise_overlap",
+          "mean_pairwise_jaccard",
+          "union_size",
+          "vote_concentration",
+          "vote_entropy",
+          "maximum_vote_depth"
+        ],
+        "regime_lookback": 200,
+        "random_repeats": 100
+      }
+    },
+    {
+      "id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+      "kind": "pair_drop",
+      "question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
+      "novelty": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
+      "spec": {
+        "study_id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+        "kind": "pair_drop",
+        "research_question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
+        "data_cutoff": 1245,
+        "target_rounds": "601..1245 inclusive",
+        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+        "primary_metric": "mean main-number hits per target round",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "paired difference",
+          "temporal block stability"
+        ],
+        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "lower number for score ties; source component order retained",
+        "random_seed": 20261013,
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "METRICS.csv",
+          "PAIRED_COMPARISONS.csv",
+          "BLOCK_STABILITY.csv",
+          "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv",
+          "EXACT_UNIFORM_BASELINE.json",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS.csv": 14835,
+          "METRICS.csv": 24,
+          "PAIRED_COMPARISONS.csv": 168,
+          "BLOCK_STABILITY.csv": 552,
+          "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv": 21
+        },
+        "novelty_signature": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
+        "study_class": "empirical",
+        "component_pair_count": 21,
+        "ablation": "drop each unordered component pair; equal weights"
+      }
+    },
+    {
+      "id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+      "kind": "vote_depth",
+      "question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
+      "novelty": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
+      "spec": {
+        "study_id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+        "kind": "vote_depth",
+        "research_question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
+        "data_cutoff": 1245,
+        "target_rounds": "601..1245 inclusive",
+        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+        "primary_metric": "mean main-number hits per target round",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "paired difference",
+          "temporal block stability"
+        ],
+        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "lower number for score ties; source component order retained",
+        "random_seed": 20261013,
+        "expected_output_files": [
+          "VOTE_DEPTH_OBSERVATIONS.csv",
+          "VOTE_DEPTH_CALIBRATION.csv",
+          "RANDOM_DEPTH_CALIBRATION.csv",
+          "DEPTH_MONOTONICITY.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {
+          "VOTE_DEPTH_OBSERVATIONS.csv": 29025,
+          "VOTE_DEPTH_CALIBRATION.csv": 8,
+          "RANDOM_DEPTH_CALIBRATION.csv": 8,
+          "DEPTH_MONOTONICITY.csv": 7
+        },
+        "novelty_signature": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
+        "study_class": "empirical",
+        "random_ensembles_per_target": 100,
+        "bootstrap_unit": "whole target round with 45 number outcomes",
+        "bootstrap_replicates": 2000
+      }
+    },
+    {
+      "id": "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
+      "kind": "blocked",
+      "question": "Can the original S008 structure score be faithfully repaired and evaluated without inventing a new formula?",
+      "novelty": "requires recovered original S005/S008 bank, score formula, and rank-vector generation source; block until provenance is sufficient.",
+      "spec": {
+        "study_id": "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
+        "kind": "blocked",
+        "research_question": "Can the original S008 structure score be faithfully repaired and evaluated without inventing a new formula?",
+        "data_cutoff": null,
+        "target_rounds": [],
+        "training_cutoff_rule": "No execution until source recovery.",
+        "primary_metric": "mean main-number hits per target round",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "paired difference",
+          "temporal block stability"
+        ],
+        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "lower number for score ties; source component order retained",
+        "random_seed": 20261013,
+        "expected_output_files": [],
+        "expected_record_counts": {},
+        "novelty_signature": "requires recovered original S005/S008 bank, score formula, and rank-vector generation source; block until provenance is sufficient.",
+        "study_class": "blocked",
+        "blocked_status": "BLOCKED_SOURCE_MISSING",
+        "blocked_reason": "Searched tracked repository, research/, analysis/, automation/, historical docs, and Git object history for S005/S008 bank generation, score formula and rank-vector source; original artifacts are not present, so no replacement formula is authorized."
+      }
+    },
+    {
+      "id": "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1",
+      "kind": "blocked",
+      "question": "Can authentic sealed purchase lines be decomposed into per-component contributions and repeated failure modes without reconstructing missing rounds?",
+      "novelty": "one authenticated 1245 sealed purchase source is present, but complete as-of-cutoff per-number component rank vectors and multiple authentic purchased rounds are unavailable; block full decomposition pending evidence recovery.",
+      "spec": {
+        "study_id": "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1",
+        "kind": "blocked",
+        "research_question": "Can authentic sealed purchase lines be decomposed into per-component contributions and repeated failure modes without reconstructing missing rounds?",
+        "data_cutoff": 1245,
+        "target_rounds": [
+          1245
+        ],
+        "training_cutoff_rule": "Only contemporaneous sealed source with training cutoff 1244 may be considered; do not reconstruct other rounds.",
+        "primary_metric": "mean main-number hits per target round",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "paired difference",
+          "temporal block stability"
+        ],
+        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "lower number for score ties; source component order retained",
+        "random_seed": 20261013,
+        "expected_output_files": [],
+        "expected_record_counts": {},
+        "novelty_signature": "one authenticated 1245 sealed purchase source is present, but complete as-of-cutoff per-number component rank vectors and multiple authentic purchased rounds are unavailable; block full decomposition pending evidence recovery.",
+        "study_class": "blocked",
+        "blocked_status": "BLOCKED_SOURCE_MISSING",
+        "blocked_reason": "The frozen 1245 purchase CSV and review were found, but only one round is available and the registered source lacks complete excluded-winning-number component rank vectors needed for requested attribution. No other round is reconstructed."
+      }
+    },
+    {
+      "id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+      "kind": "portfolio",
+      "question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
+      "novelty": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
+      "spec": {
+        "study_id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+        "kind": "portfolio",
+        "research_question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
+        "data_cutoff": 1245,
+        "target_rounds": "601..1245 inclusive",
+        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+        "primary_metric": "mean main-number hits per target round",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "paired difference",
+          "temporal block stability"
+        ],
+        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "lower number for score ties; source component order retained",
+        "random_seed": 20261013,
+        "expected_output_files": [
+          "BUNDLE_RESULTS.csv",
+          "RANDOM_BUNDLE_RESULTS.csv",
+          "BUNDLE_METRICS.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {
+          "BUNDLE_RESULTS.csv": 645,
+          "RANDOM_BUNDLE_RESULTS.csv": 64500,
+          "BUNDLE_METRICS.csv": 2
+        },
+        "novelty_signature": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
+        "study_class": "empirical",
+        "bundle_components": [
+          "long_frequency",
+          "structure_profile",
+          "pair_association"
+        ],
+        "random_bundles_per_target": 100,
+        "bundle_frozen_before_outcome": true
+      }
     }
   ]
 }

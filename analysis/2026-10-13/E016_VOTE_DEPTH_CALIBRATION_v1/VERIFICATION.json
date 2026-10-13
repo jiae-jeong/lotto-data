@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "targets": 645,
+  "cluster_rows": 29025,
+  "random_ensembles_per_target": 100,
+  "bootstrap_unit": "target round; all 45 number outcomes retained within cluster",
+  "bootstrap_replicates": 2000,
+  "naive_number_independence_test": "NOT USED",
+  "future_predictions": 0
+}

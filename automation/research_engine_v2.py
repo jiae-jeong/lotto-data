@@ -27,10 +27,41 @@ def experiment_signature(task):
                  'objectives': [3, 4], 'nested_past_targets': 200, 'ties': 'other tail; mean; lower exponent'},
         'power': {'lottery': [45, 6], 'tails': [3, 4], 'effects': [1.5, 2.],
                   'samples': [200, 500, 1000, 2000, 5000, 10000], 'alpha': .05 / 4}}
-    return hashlib.sha256(json.dumps(recipes[task['kind']], sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    if task['kind'] in recipes:
+        payload = recipes[task['kind']]
+    else:
+        spec = task.get('spec') or {}
+        if not spec.get('novelty_signature'):
+            raise ValueError('New study requires a frozen novelty_signature')
+        payload = {'kind': task['kind'],
+                   'data_cutoff': spec.get('data_cutoff'), 'target_rounds': spec.get('target_rounds'),
+                   'training_cutoff_rule': spec.get('training_cutoff_rule'),
+                   'primary_metric': spec.get('primary_metric'), 'secondary_metrics': spec.get('secondary_metrics'),
+                   'comparator': spec.get('comparator'), 'baseline': spec.get('baseline'),
+                   'multiplicity_correction': spec.get('multiplicity_correction'),
+                   'block_stability': spec.get('block_stability'), 'tie_break': spec.get('tie_break'),
+                   'novelty_signature': spec['novelty_signature']}
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 def digest(path):
+    path = Path(path)
+    content = path.read_bytes()
+    if path.suffix.lower() in {'.csv','.json','.md','.py','.txt','.yml','.yaml','.log'}:
+        content = content.replace(b'\r\n', b'\n')
+    return hashlib.sha256(content).hexdigest()
+
+def raw_digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+def raw_size(path):
+    return Path(path).stat().st_size
+
+def portable_size(path):
+    path = Path(path)
+    content = path.read_bytes()
+    if path.suffix.lower() in {'.csv','.json','.md','.py','.txt','.yml','.yaml','.log'}:
+        content = content.replace(b'\r\n', b'\n')
+    return len(content)
 
 def readcsv(path):
     with Path(path).open(encoding='utf-8-sig', newline='') as stream:
@@ -64,7 +95,7 @@ def load_panel(root):
         actual[int(row['round'])] = numbers
     manifest = readcsv(root / 'analysis/2026-10-12/REGIME_DYNAMIC_NESTED_v1/FINAL_SHA256_MANIFEST.csv')
     cache_record = next(r for r in manifest if r['file'] == 'base_predictions_reused.csv')
-    if digest(root / CACHE) != cache_record['sha256']:
+    if raw_digest(root / CACHE) != cache_record['sha256'] or raw_size(root / CACHE) != int(cache_record['bytes']):
         raise ValueError('Published component-cache hash mismatch')
     lookup = {}
     for row in readcsv(root / CACHE):
@@ -285,20 +316,34 @@ def run(root, output, task):
     if out.exists(): raise FileExistsError('Refuse to overwrite study directory')
     protected = protect(root)
     out.mkdir(parents=True)
-    frozen = {'task': task, 'scope': 'POST_HOC_EXPLORATORY',
+    expanded_source = Path(__file__).with_name('expanded_studies_v2.py')
+    source_hashes = {Path(__file__).name: digest(__file__)}
+    if task['kind'] not in ['family', 'tail', 'power']:
+        source_hashes[expanded_source.name] = digest(expanded_source)
+    frozen = {'task': task, 'study_spec': task.get('spec'), 'scope': 'POST_HOC_EXPLORATORY',
               'experiment_signature': experiment_signature(task),
               'data_sha256': digest(root / DATA) if task['kind'] != 'power' else None,
               'cache_sha256': digest(root / CACHE) if task['kind'] != 'power' else None,
-              'code_sha256': digest(__file__),
+              'code_sha256': digest(__file__), 'source_file_sha256': source_hashes,
+              'expected_output_files': task.get('spec', {}).get('expected_output_files'),
+              'expected_record_counts': task.get('spec', {}).get('expected_record_counts'),
               'created_utc': datetime.now(timezone.utc).isoformat(), 'first_target': 601, 'last_target': 1245,
               'weights': {'drop_hybrid': [1, 1, 0, 1, 1, 1, 1], 'family_balanced': [1, 1, 0, 1, 1, .5, .5]},
               'tail_exponents': [0., .5, 1., 2.], 'inner_targets': 200,
               'novelty': task['novelty'], 'prior_completed': 'B v1; large MC; H001/H002; relation tests; regime/dynamic v1'}
     jsonfile(out / 'FROZEN_SPEC.json', frozen)
     (out / 'ENGINE_SOURCE.py').write_bytes(Path(__file__).read_bytes())
-    result = power_study(root, out, task) if task['kind'] == 'power' else predictor_study(root, out, task)
+    if task['kind'] not in ['family', 'tail', 'power']:
+        (out / 'EXPANDED_ENGINE_SOURCE.py').write_bytes(expanded_source.read_bytes())
+        from expanded_studies_v2 import run_study
+        result = run_study(root, out, task)
+    elif task['kind'] == 'power':
+        result = power_study(root, out, task)
+    else:
+        result = predictor_study(root, out, task)
     check_protection(root, protected)
-    if digest(__file__) != frozen['code_sha256']: raise ValueError('Code changed during study')
+    if any(digest(Path(__file__).with_name(name)) != sha for name, sha in source_hashes.items()):
+        raise ValueError('Research source changed during study')
     evidence = {'status': 'COMPLETE', 'classification': 'NEW_STUDY', 'task_id': task['id'],
                 'question': task['question'], 'novelty': task['novelty'], 'executed_cases': result['executed_cases'],
                 'validation': 'PASS', 'data_cutoff': None if task['kind'] == 'power' else 1245,
@@ -307,5 +352,5 @@ def run(root, output, task):
                 'future_predictions': 0, 'result': result, 'report': 'REPORT.md',
                 'completed_utc': datetime.now(timezone.utc).isoformat()}
     jsonfile(out / 'COMPLETION.json', evidence)
-    csvfile(out / 'SHA256_MANIFEST.csv', [{'file': p.name, 'bytes': p.stat().st_size, 'sha256': digest(p)} for p in sorted(out.iterdir()) if p.is_file()])
+    csvfile(out / 'SHA256_MANIFEST.csv', [{'file': p.name, 'bytes': portable_size(p), 'sha256': digest(p)} for p in sorted(out.iterdir()) if p.is_file()])
     return evidence
