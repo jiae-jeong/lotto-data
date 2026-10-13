@@ -34,8 +34,13 @@ def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def git_content(path: Path) -> bytes:
+    """Normalize Windows text checkout line endings to the bytes committed by Git."""
+    return path.read_bytes().replace(b"\r\n", b"\n")
+
+
 def normalized_sha(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    return hashlib.sha256(git_content(path)).hexdigest()
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -483,13 +488,16 @@ def main() -> int:
     files = []
     for p in sorted(out.rglob("*")):
         if p.is_file() and p.name != "SHA256_MANIFEST.csv":
-            files.append({"path": p.relative_to(out).as_posix(), "bytes": p.stat().st_size, "sha256": sha(p)})
+            committed = git_content(p)
+            files.append({"path": p.relative_to(out).as_posix(), "bytes": len(committed),
+                          "sha256": hashlib.sha256(committed).hexdigest()})
     write_csv(out / "SHA256_MANIFEST.csv", ["path", "bytes", "sha256"], files)
     # Reopen every output and ensure manifest entries still match disk.
     with (out / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="") as f:
         for entry in csv.DictReader(f):
             p = out / Path(entry["path"])
-            if not p.is_file() or p.stat().st_size != int(entry["bytes"]) or sha(p) != entry["sha256"]:
+            committed = git_content(p) if p.is_file() else b""
+            if not p.is_file() or len(committed) != int(entry["bytes"]) or hashlib.sha256(committed).hexdigest() != entry["sha256"]:
                 raise RuntimeError(f"output read-back/hash verification failed: {entry['path']}")
     print(f"MASTER_STATUS={master_status}")
     print(f"OUTPUT_VERIFICATION=PASS; file_count={len(files)}; run_dir={out}")
