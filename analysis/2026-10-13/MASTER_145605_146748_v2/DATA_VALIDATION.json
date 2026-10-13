@@ -1,0 +1,27 @@
+{
+  "canonical_path": "lotto_data.csv",
+  "canonical_rounds": {
+    "rows": 1244,
+    "first_round": 1,
+    "latest_round": 1244,
+    "latest_date": "2026-10-03",
+    "integrity": "PASS",
+    "error_count": 0
+  },
+  "canonical_sha256_normalized_lf": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "snapshot_path": "analysis\\2026-10-12\\lotto_data_1_1245_snapshot.csv",
+  "snapshot_rounds": {
+    "rows": 1245,
+    "first_round": 1,
+    "latest_round": 1245,
+    "latest_date": "2026-10-10",
+    "integrity": "PASS",
+    "error_count": 0
+  },
+  "snapshot_sha256_normalized_lf": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "snapshot_sha256_worktree_bytes": "25c8ea48eb8fc8d98f1be5552aae3c229f63da6cb1babf7ad3d2ae253784d20c",
+  "prefix_equals_canonical": true,
+  "snapshot_provenance": "2026-10-12 report and frozen input manifest record two-source verification; local full integrity and canonical-prefix validation repeated today",
+  "selected_master_source": "analysis\\2026-10-12\\lotto_data_1_1245_snapshot.csv",
+  "selection_reason": "highest locally available dataset with continuous rounds, valid fields, historical two-source verification record, exact manifest SHA, and canonical-prefix match"
+}

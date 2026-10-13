@@ -105,13 +105,15 @@ class ResearchGuards(unittest.TestCase):
         self.assertEqual(code,3)
         self.assertEqual(len(list((self.output/'2026-10-12').glob('E013_ONE_SUCCESS/COMPLETION.json'))),1)
 
-    def test_two_successes_reach_full_complete(self):
+    def test_two_successes_complete_research_quota_but_not_master(self):
         tasks=[self.registered_task('E013_FIRST',novelty='first'),self.registered_task('E014_SECOND',novelty='second')]
         queue=self.root/'queue.json'; engine.jsonfile(queue,{'tasks':tasks}); result_file=self.root/'result.json'
         with patch.object(engine,'run',side_effect=lambda root,out,task:fixture(Path(out),task)), contextlib.redirect_stdout(io.StringIO()):
             code=daily.run(self.root,self.output,queue,result_file,'2026-10-12')
         result=json.loads(result_file.read_text())
-        self.assertEqual(code,0); self.assertEqual(result['status'],'FULL_COMPLETE')
+        self.assertEqual(code,0); self.assertEqual(result['status'],'RESEARCH_QUOTA_COMPLETE')
+        self.assertEqual(result['research_quota_status'],'RESEARCH_QUOTA_COMPLETE')
+        self.assertEqual(result['master_status'],'NOT_ASSESSED_BY_QUOTA_RUNNER')
         self.assertEqual(len(result['completed_now']),2)
 
     def test_theory_only_does_not_satisfy_empirical_gate(self):
@@ -120,7 +122,8 @@ class ResearchGuards(unittest.TestCase):
         with patch.object(engine,'run',side_effect=lambda root,out,task:fixture(Path(out),task)), contextlib.redirect_stdout(io.StringIO()):
             code=daily.run(self.root,self.output,queue,result_file,'2026-10-12')
         result=json.loads(result_file.read_text())
-        self.assertEqual(code,3); self.assertEqual(result['status'],'PARTIAL')
+        self.assertEqual(code,3); self.assertEqual(result['status'],'RESEARCH_QUOTA_PARTIAL')
+        self.assertEqual(result['master_status'],'NOT_ASSESSED_BY_QUOTA_RUNNER')
 
     def test_daily_cap_counts_validated_same_day_studies(self):
         existing=self.registered_task('E013_TODAY_EXISTING',novelty='existing')

@@ -204,7 +204,8 @@ def _daily_master_report(root, date, result):
       '11. Historical recommendation / mistake notes','', recommendation_status,'',
       '12. Prior hypothesis revalidation','', 'Prior E010–E012 studies are not recounted as new studies. New queue study results and explicit statuses are in the run result/individual research outputs.','',
       '13. Limits / not computed','', 'Exact legacy A/C/contrarian models, fully sourced purchase history, and a fresh full B rerun are not claimed unless corresponding execution evidence exists.','',
-      f"- Daily research gate: {result['status']} ({result.get('successful_studies_today',len(result['completed_now']))} successful studies, {result.get('empirical_studies_today',result['empirical_successes'])} empirical).",'']
+      f"- RESEARCH_QUOTA_STATUS: {result['research_quota_status']} ({result.get('successful_studies_today',len(result['completed_now']))} successful studies, {result.get('empirical_studies_today',result['empirical_successes'])} empirical).",'',
+      f"- MASTER_STATUS: {result['master_status']}; this quota runner does not execute the full MASTER checklist.",'']
     return '\n'.join(lines)
 
 
@@ -298,11 +299,17 @@ def run(root, output_root, queue, result_file, run_date=None, min_successful_stu
     result['successful_studies_today'] = successful_today
     result['empirical_studies_today'] = empirical_today
     if successful_today >= min_successful_studies and empirical_today >= required_empirical_studies:
-        result['status'] = 'FULL_COMPLETE'
+        result['research_quota_status'] = 'RESEARCH_QUOTA_COMPLETE'
+        result['master_status'] = 'NOT_ASSESSED_BY_QUOTA_RUNNER'
+        result['status'] = result['research_quota_status']
     elif not pending or successful_today < min_successful_studies:
-        result['status'] = 'INSUFFICIENT_RESEARCH_QUEUE'
+        result['research_quota_status'] = 'INSUFFICIENT_RESEARCH_QUEUE'
+        result['master_status'] = 'NOT_ASSESSED_BY_QUOTA_RUNNER'
+        result['status'] = result['research_quota_status']
     else:
-        result['status'] = 'PARTIAL'
+        result['research_quota_status'] = 'RESEARCH_QUOTA_PARTIAL'
+        result['master_status'] = 'NOT_ASSESSED_BY_QUOTA_RUNNER'
+        result['status'] = result['research_quota_status']
     report_name = f"DAILY_MASTER_REPORT_{datetime.now().strftime('%H%M%S_%f')}.md"
     report_path = date_root / report_name
     with report_path.open('x', encoding='utf-8') as stream:
@@ -312,7 +319,7 @@ def run(root, output_root, queue, result_file, run_date=None, min_successful_stu
     if result_file:
         engine.jsonfile(result_file, result)
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if result['status'] == 'FULL_COMPLETE' else 3
+    return 0 if result['research_quota_status'] == 'RESEARCH_QUOTA_COMPLETE' else 3
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

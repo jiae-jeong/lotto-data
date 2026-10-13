@@ -1,0 +1,9 @@
+﻿signal,family,classification,evidence
+long_frequency,A/C candidate,still_unverified,H001 not executed as a standalone confirmatory test
+gap,A/C candidate,still_unverified,H002 not executed as a standalone confirmatory test
+recent_change,A/C candidate,still_unverified,H001 nested-window conflict; no promotion
+pair,A/C candidate,still_unverified,"H003 sparse relation signal, insufficient evidence"
+triple,A/C candidate,still_unverified,"H003 sparse relation signal, insufficient evidence"
+structure_veto,C candidate,rejected_from_promotion,H004 coverage diagnostic only; no predictive benefit established
+S008_related_structure,C candidate,rejected_from_model_identity,H005 source inspection only; corrected variant not frozen or run
+contrarian_structural_flags,contrarian,still_unverified,descriptive base rates do not validate integrated contrarian model
