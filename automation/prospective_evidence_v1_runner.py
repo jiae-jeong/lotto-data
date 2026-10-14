@@ -574,4 +574,3 @@ if __name__ == "__main__":
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
     print(json.dumps(run(args.root),ensure_ascii=False,indent=2))
-

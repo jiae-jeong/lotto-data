@@ -43,4 +43,3 @@ def promotion_gates(any3_differences: list[float], max_hit_differences: list[flo
     gates["block_stability"]=(sum(x["positive_both"] for x in block_checks)>=3
         and all(x["within_registered_floor"] for x in block_checks))
     return {"pass": all(gates.values()), "gates": gates, "blocks": block_checks}
-

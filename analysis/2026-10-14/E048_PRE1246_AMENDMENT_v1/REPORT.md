@@ -5,4 +5,3 @@ The amendment was frozen at 2026-10-14T07:24:52Z, before target 1246 outcome acc
 The 1246–1445 span is an `INTERIM_PROSPECTIVE_CHECKPOINT`, not a confirmatory horizon. A full gate pass can support the registered evidence conclusion. Failure to pass at 200 targets is `PROSPECTIVE_INSUFFICIENT_EVIDENCE`; this amendment registers no futility/equivalence boundary and does not authorize `REJECTED`. E047 alpha and allocation, models, predictions, thresholds, E030, and random pools remain unchanged.
 
 The purchase intake path is prepared with schema and append-only sealing code. No 1246 purchase lines or intake record were created.
-

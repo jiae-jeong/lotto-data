@@ -32,4 +32,3 @@
   },
   "anyOf": [{"required": ["rationale"]}, {"required": ["source_reference"]}]
 }
-

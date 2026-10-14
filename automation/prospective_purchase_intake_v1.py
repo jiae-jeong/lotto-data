@@ -193,4 +193,3 @@ def seal_intake(root: Path, target_round: int, opener=urllib.request.urlopen,
             "ledger_path": ledger_path.relative_to(root).as_posix(),
             "intake_sha256": intake_sha, "bundle_sha256": bundle["bundle_sha256"],
             "line_sha256": line_hashes}
-

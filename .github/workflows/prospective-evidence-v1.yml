@@ -41,4 +41,3 @@ jobs:
         run: python automation/verify_prospective_amendment_v1.py
       - name: Frozen protocol and artifact verification
         run: python research/prospective_v1/verify_prospective_v1.py --require-e030 --require-canonical
-

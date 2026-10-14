@@ -70,4 +70,3 @@ jobs:
           fi
           git commit -m 'research: append verified prospective draw evidence'
           git push origin HEAD:main
-
