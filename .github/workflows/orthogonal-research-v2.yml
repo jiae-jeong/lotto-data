@@ -50,13 +50,18 @@ jobs:
           import json
           from pathlib import Path
           ids=[x['id'] for x in json.loads(Path('automation/research_queue_v2.json').read_text(encoding='utf-8'))['tasks']]
-          assert ids[-6:] == [
+          assert ids[-13:-7] == [
               'E030_PROSPECTIVE_SIGNAL_FREEZE_v1',
               'E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2',
               'E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1',
               'E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1',
               'E034_SINGLE_EDGE_PROMOTION_GATE_v1',
               'E035_FIVE_LINE_REBUILD_GATE_v1']
+          assert ids[-7:] == [
+              'E036_NULL_GATE_CALIBRATION_v2','E037_PREDICTABILITY_FALSIFICATION_v1',
+              'E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3','E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2',
+              'E040_SINGLE_EDGE_PROMOTION_GATE_v2','E041_FIVE_LINE_PORTFOLIO_REBUILD_v2',
+              'E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1']
           for prior in ('E010_FAMILY_DECORRELATION_v1','E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1','E025_INDEPENDENT_SIGNAL_DISCOVERY_v1','E029_FIVE_LINE_PROMOTION_GATE_v2'):
               assert ids.count(prior)==1, prior
           print('E030-E035 queue contract PASS; prior IDs retained')

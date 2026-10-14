@@ -17,8 +17,8 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1", "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
             "E027_FIVE_LINE_CANDIDATE_BANK_v1", "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
             "E029_FIVE_LINE_PROMOTION_GATE_v2"])
-        self.assertEqual(ids[-11:-6], expected_prior)
-        self.assertEqual(ids[-6:], [
+        self.assertEqual(ids[-18:-13], expected_prior)
+        self.assertEqual(ids[-13:-7], [
             "E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
             "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
             "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
@@ -26,9 +26,16 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
             "E035_FIVE_LINE_REBUILD_GATE_v1",
         ])
+        self.assertEqual(ids[-7:], [
+            "E036_NULL_GATE_CALIBRATION_v2", "E037_PREDICTABILITY_FALSIFICATION_v1",
+            "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3", "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+            "E040_SINGLE_EDGE_PROMOTION_GATE_v2", "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+            "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+        ])
         self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
                          "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
-        for task in queue["tasks"][-11:-6]: daily._validate_task(task)
+        for task in queue["tasks"][-18:-13]: daily._validate_task(task)
+        for task in queue["tasks"][-7:]: daily._validate_task(task)
 
     def test_season_and_fixed_sum_regimes_are_predefined(self):
         self.assertEqual([study._season(m) for m in (1, 4, 7, 10)], ["winter", "spring", "summer", "autumn"])

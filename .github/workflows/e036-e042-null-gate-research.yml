@@ -54,7 +54,15 @@ jobs:
               'E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1']
           for old in ('E030_PROSPECTIVE_SIGNAL_FREEZE_v1','E035_FIVE_LINE_REBUILD_GATE_v1'):
               assert ids.count(old)==1
-          print('E036-E042 preregistration queue and canonical data checks PASS')
+          import sys
+          sys.path.insert(0,str(root/'automation'))
+          import daily_research_v2 as daily
+          for task in json.loads((root/'automation/research_queue_v2.json').read_text(encoding='utf-8'))['tasks'][-7:]:
+              daily._validate_task(task)
+              assert task['spec'].get('execution_mode')=='dedicated_workflow'
+          prereg=json.loads((root/'automation/e036_e042_preregistration.json').read_text(encoding='utf-8'))
+          assert [x['id'] for x in prereg['studies']]==ids[-7:]
+          print('E036-E042 preregistration queue, dispatch, and canonical data checks PASS')
           PY
 
   research:

@@ -711,11 +711,42 @@
       "novelty": "Freeze the gate with 2,000 replicates per mechanism (1,000 calibration, 1,000 verification), six null candidates, and mean/3+/4+ endpoints. Candidate outcomes are excluded.",
       "spec": {
         "study_id": "E036_NULL_GATE_CALIBRATION_v2",
+        "kind": "null_gate_calibration",
+        "research_question": "Can a null-only max-statistic gate keep independent familywise false promotion at or below 5% across four null mechanisms?",
         "data_cutoff": 1245,
-        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
-        "seed": 20261016036,
-        "preregistration": "automation/e036_e042_preregistration.json",
-        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+        "target_rounds": "601..1245",
+        "training_cutoff_rule": "target t uses rounds 1..t-1 when applicable",
+        "primary_metric": "Null-only familywise false promotion rate <= 5%",
+        "secondary_metrics": [
+          "paired random delta",
+          "temporal block stability",
+          "leakage/future-prediction audit"
+        ],
+        "comparator": "same-target random tickets or RANDOM_5_LINES; frozen B/E026/E031 where applicable",
+        "baseline": "uniform six-of-45 random baseline with fixed seed 20261016036",
+        "multiplicity_correction": "Holm across six E037 families and all registered confirmatory candidates where applicable",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "fixed formula and lower-number lexicographic tie break",
+        "random_seed": 20261016036,
+        "expected_output_files": [
+          "NULL_REPLICATES.csv",
+          "FALSE_PROMOTION_RATE.csv",
+          "CALIBRATED_GATE.json",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "Freeze the gate with 2,000 replicates per mechanism (1,000 calibration, 1,000 verification), six null candidates, and mean/3+/4+ endpoints. Candidate outcomes are excluded.",
+        "study_class": "blocked",
+        "blocked_status": "DEDICATED_WORKFLOW_ONLY",
+        "blocked_reason": "This registered task is dispatched by .github/workflows/e036-e042-null-gate-research.yml; do not route it through the generic daily runner.",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+        "preregistration": "automation/e036_e042_preregistration.json"
       }
     },
     {
@@ -725,11 +756,43 @@
       "novelty": "Test six frozen families over targets 601..1245 with t-1 cutoff, 100 same-target random tickets, paired block CI, 50-target sign stability, Holm correction, and formula-level duplicate screen.",
       "spec": {
         "study_id": "E037_PREDICTABILITY_FALSIFICATION_v1",
+        "kind": "predictability_falsification",
+        "research_question": "Does the canonical historical series show stable walk-forward predictability beyond pre-registered dependence families?",
         "data_cutoff": 1245,
-        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
-        "seed": 20261016036,
-        "preregistration": "automation/e036_e042_preregistration.json",
-        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+        "target_rounds": "601..1245",
+        "training_cutoff_rule": "target t uses rounds 1..t-1 when applicable",
+        "primary_metric": "At least one nonduplicate family with positive block CI lower bound, Holm p<.05, and >=60% positive blocks",
+        "secondary_metrics": [
+          "paired random delta",
+          "temporal block stability",
+          "leakage/future-prediction audit"
+        ],
+        "comparator": "same-target random tickets or RANDOM_5_LINES; frozen B/E026/E031 where applicable",
+        "baseline": "uniform six-of-45 random baseline with fixed seed 20261016036",
+        "multiplicity_correction": "Holm across six E037 families and all registered confirmatory candidates where applicable",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "fixed formula and lower-number lexicographic tie break",
+        "random_seed": 20261016036,
+        "expected_output_files": [
+          "PREREGISTRATION.json",
+          "FAMILY_PREDICTIONS.csv",
+          "FAMILY_TESTS.csv",
+          "RANDOM_BY_TARGET.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "Test six frozen families over targets 601..1245 with t-1 cutoff, 100 same-target random tickets, paired block CI, 50-target sign stability, Holm correction, and formula-level duplicate screen.",
+        "study_class": "blocked",
+        "blocked_status": "DEDICATED_WORKFLOW_ONLY",
+        "blocked_reason": "This registered task is dispatched by .github/workflows/e036-e042-null-gate-research.yml; do not route it through the generic daily runner.",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+        "preregistration": "automation/e036_e042_preregistration.json"
       }
     },
     {
@@ -739,11 +802,42 @@
       "novelty": "Use E037 survivors only. If fewer than three survive, record blocked and do not fabricate candidates.",
       "spec": {
         "study_id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+        "kind": "orthogonal_signal_discovery",
+        "research_question": "Can nonduplicate E037-supported structures yield at least three independent candidate families without post-outcome invention?",
         "data_cutoff": 1245,
-        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
-        "seed": 20261016036,
-        "preregistration": "automation/e036_e042_preregistration.json",
-        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+        "target_rounds": "601..1245",
+        "training_cutoff_rule": "target t uses rounds 1..t-1 when applicable",
+        "primary_metric": "At least three E037-supported nonduplicate families",
+        "secondary_metrics": [
+          "paired random delta",
+          "temporal block stability",
+          "leakage/future-prediction audit"
+        ],
+        "comparator": "same-target random tickets or RANDOM_5_LINES; frozen B/E026/E031 where applicable",
+        "baseline": "uniform six-of-45 random baseline with fixed seed 20261016036",
+        "multiplicity_correction": "Holm across six E037 families and all registered confirmatory candidates where applicable",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "fixed formula and lower-number lexicographic tie break",
+        "random_seed": 20261016036,
+        "expected_output_files": [
+          "PREREGISTRATION.json",
+          "CANDIDATE_REGISTRY.csv",
+          "INDEPENDENCE_SCREEN.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "Use E037 survivors only. If fewer than three survive, record blocked and do not fabricate candidates.",
+        "study_class": "blocked",
+        "blocked_status": "DEDICATED_WORKFLOW_ONLY",
+        "blocked_reason": "This registered task is dispatched by .github/workflows/e036-e042-null-gate-research.yml; do not route it through the generic daily runner.",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+        "preregistration": "automation/e036_e042_preregistration.json"
       }
     },
     {
@@ -753,11 +847,43 @@
       "novelty": "Run only for E038-eligible survivors; target t training cutoff t-1; record full hit distribution, paired bootstrap CIs, blocks, influence, Holm, leakage, and future predictions.",
       "spec": {
         "study_id": "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+        "kind": "orthogonal_walkforward_confirmation",
+        "research_question": "Do E038 survivors outperform same-target random, frozen B, E026, and E031 comparators?",
         "data_cutoff": 1245,
-        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
-        "seed": 20261016036,
-        "preregistration": "automation/e036_e042_preregistration.json",
-        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+        "target_rounds": "601..1245",
+        "training_cutoff_rule": "target t uses rounds 1..t-1 when applicable",
+        "primary_metric": "Only E038 survivors, with leakage 0 and future predictions 0",
+        "secondary_metrics": [
+          "paired random delta",
+          "temporal block stability",
+          "leakage/future-prediction audit"
+        ],
+        "comparator": "same-target random tickets or RANDOM_5_LINES; frozen B/E026/E031 where applicable",
+        "baseline": "uniform six-of-45 random baseline with fixed seed 20261016036",
+        "multiplicity_correction": "Holm across six E037 families and all registered confirmatory candidates where applicable",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "fixed formula and lower-number lexicographic tie break",
+        "random_seed": 20261016036,
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "PAIRED_COMPARISONS.csv",
+          "METRICS.csv",
+          "BLOCK_STABILITY.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "Run only for E038-eligible survivors; target t training cutoff t-1; record full hit distribution, paired bootstrap CIs, blocks, influence, Holm, leakage, and future predictions.",
+        "study_class": "blocked",
+        "blocked_status": "DEDICATED_WORKFLOW_ONLY",
+        "blocked_reason": "This registered task is dispatched by .github/workflows/e036-e042-null-gate-research.yml; do not route it through the generic daily runner.",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+        "preregistration": "automation/e036_e042_preregistration.json"
       }
     },
     {
@@ -767,11 +893,41 @@
       "novelty": "Require leakage/future=0, positive random-delta CI, noninferior 3+/4+, Holm, 60% positive blocks, leave-block stability, independence, and null-gate pass.",
       "spec": {
         "study_id": "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+        "kind": "single_edge_promotion_gate",
+        "research_question": "Does any signal meet all single-edge promotion criteria under the null-only E036 gate?",
         "data_cutoff": 1245,
-        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
-        "seed": 20261016036,
-        "preregistration": "automation/e036_e042_preregistration.json",
-        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+        "target_rounds": "601..1245",
+        "training_cutoff_rule": "target t uses rounds 1..t-1 when applicable",
+        "primary_metric": "All E040 conditions must pass or status NO_VALIDATED_EDGE",
+        "secondary_metrics": [
+          "paired random delta",
+          "temporal block stability",
+          "leakage/future-prediction audit"
+        ],
+        "comparator": "same-target random tickets or RANDOM_5_LINES; frozen B/E026/E031 where applicable",
+        "baseline": "uniform six-of-45 random baseline with fixed seed 20261016036",
+        "multiplicity_correction": "Holm across six E037 families and all registered confirmatory candidates where applicable",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "fixed formula and lower-number lexicographic tie break",
+        "random_seed": 20261016036,
+        "expected_output_files": [
+          "PROMOTION_GATE.json",
+          "PROMOTION_TESTS.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "Require leakage/future=0, positive random-delta CI, noninferior 3+/4+, Holm, 60% positive blocks, leave-block stability, independence, and null-gate pass.",
+        "study_class": "blocked",
+        "blocked_status": "DEDICATED_WORKFLOW_ONLY",
+        "blocked_reason": "This registered task is dispatched by .github/workflows/e036-e042-null-gate-research.yml; do not route it through the generic daily runner.",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+        "preregistration": "automation/e036_e042_preregistration.json"
       }
     },
     {
@@ -781,11 +937,43 @@
       "novelty": "Conditional on E040 validated edge only; compare all registered 5-line strategies and coverage/overlap metrics.",
       "spec": {
         "study_id": "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+        "kind": "five_line_portfolio_rebuild",
+        "research_question": "Can a validated single-ticket edge produce a five-line portfolio that beats same-target RANDOM_5_LINES?",
         "data_cutoff": 1245,
-        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
-        "seed": 20261016036,
-        "preregistration": "automation/e036_e042_preregistration.json",
-        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+        "target_rounds": "601..1245",
+        "training_cutoff_rule": "target t uses rounds 1..t-1 when applicable",
+        "primary_metric": "Requires at least one E040 VALIDATED_EDGE",
+        "secondary_metrics": [
+          "paired random delta",
+          "temporal block stability",
+          "leakage/future-prediction audit"
+        ],
+        "comparator": "same-target random tickets or RANDOM_5_LINES; frozen B/E026/E031 where applicable",
+        "baseline": "uniform six-of-45 random baseline with fixed seed 20261016036",
+        "multiplicity_correction": "Holm across six E037 families and all registered confirmatory candidates where applicable",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "fixed formula and lower-number lexicographic tie break",
+        "random_seed": 20261016036,
+        "expected_output_files": [
+          "PORTFOLIO_TICKETS.csv",
+          "RANDOM_5_BY_TARGET.csv",
+          "STRATEGY_BY_TARGET.csv",
+          "STRATEGY_SUMMARY.csv",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "Conditional on E040 validated edge only; compare all registered 5-line strategies and coverage/overlap metrics.",
+        "study_class": "blocked",
+        "blocked_status": "DEDICATED_WORKFLOW_ONLY",
+        "blocked_reason": "This registered task is dispatched by .github/workflows/e036-e042-null-gate-research.yml; do not route it through the generic daily runner.",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+        "preregistration": "automation/e036_e042_preregistration.json"
       }
     },
     {
@@ -795,11 +983,41 @@
       "novelty": "PROMOTE only if all random5, block, CI, null, multiplicity, and leakage conditions pass. Preserve E030 ledger. Never emit recommendation numbers in report.",
       "spec": {
         "study_id": "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+        "kind": "five_line_promotion_and_freeze",
+        "research_question": "Does an E041 five-line strategy meet every promotion gate and qualify for a prospective shadow freeze?",
         "data_cutoff": 1245,
-        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
-        "seed": 20261016036,
-        "preregistration": "automation/e036_e042_preregistration.json",
-        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+        "target_rounds": "601..1245",
+        "training_cutoff_rule": "target t uses rounds 1..t-1 when applicable",
+        "primary_metric": "Every preregistered CI, block, null, multiplicity, and leakage criterion must pass",
+        "secondary_metrics": [
+          "paired random delta",
+          "temporal block stability",
+          "leakage/future-prediction audit"
+        ],
+        "comparator": "same-target random tickets or RANDOM_5_LINES; frozen B/E026/E031 where applicable",
+        "baseline": "uniform six-of-45 random baseline with fixed seed 20261016036",
+        "multiplicity_correction": "Holm across six E037 families and all registered confirmatory candidates where applicable",
+        "block_stability": [
+          50,
+          100,
+          200
+        ],
+        "tie_break": "fixed formula and lower-number lexicographic tie break",
+        "random_seed": 20261016036,
+        "expected_output_files": [
+          "PROMOTION_GATE.json",
+          "PROSPECTIVE_FREEZE.json",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "PROMOTE only if all random5, block, CI, null, multiplicity, and leakage conditions pass. Preserve E030 ledger. Never emit recommendation numbers in report.",
+        "study_class": "blocked",
+        "blocked_status": "DEDICATED_WORKFLOW_ONLY",
+        "blocked_reason": "This registered task is dispatched by .github/workflows/e036-e042-null-gate-research.yml; do not route it through the generic daily runner.",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+        "preregistration": "automation/e036_e042_preregistration.json"
       }
     }
   ]
