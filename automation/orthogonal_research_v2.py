@@ -527,8 +527,17 @@ def _e033_metrics(draws,b,predictions,survivors,random_tickets,folder:Path):
     write_csv(folder/"RANDOM_BY_TARGET.csv",baseline)
     write_csv(folder/"RANDOM_TICKETS.csv",random_rows)
     write_csv(folder/"MODEL_PREDICTIONS.csv",predictions_out, fields=(list(predictions_out[0]) if predictions_out else ["target_round","training_through_round","model","predicted_numbers","hits"]))
-    e026=read_csv(E026_PRED); e026_lookup={(int(x["target_round"]),x["signal"]):parse_nums(x["predicted_numbers"])
-        for x in e026 if x["signal"] in E026_SIGNAL_IDS}
+    e026=read_csv(E026_PRED); e026_lookup={}
+    for row in e026:
+        model=row["model"]
+        if model not in E026_SIGNAL_IDS: continue
+        target=int(row["target_round"])
+        cutoff=int(row["training_cutoff"])
+        if cutoff != target-1:
+            raise ValueError(f"E026 comparator leakage at target {target}: cutoff {cutoff}")
+        key=(target,model)
+        if key in e026_lookup: raise ValueError(f"duplicate E026 comparator prediction {key}")
+        e026_lookup[key]=parse_nums(row["predicted_numbers"])
     comparison=[]; comparator_rows=[]
     for sig in survivors:
         for prior in E026_SIGNAL_IDS:

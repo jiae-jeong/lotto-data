@@ -84,7 +84,7 @@ jobs:
           RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
-          python -B automation/orthogonal_research_v2.py --root . --date "$DATE" --run-id "$RUN_ID" | tee /tmp/e030-e035-summary.json
+          python -B automation/orthogonal_research_v2.py --root . --date "$DATE" --run-id "$RUN_ID"
       - name: Update official prospective ledger when a draw is available
         run: python -B automation/update_prospective_ledger_v1.py --root .
       - name: Verify generated evidence and publish to main
