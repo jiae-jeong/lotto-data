@@ -1,0 +1,11 @@
+{
+  "study_id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+  "data_cutoff": 1245,
+  "candidate_families_from_E037_only": [],
+  "minimum_families_requested": 3,
+  "no_fabrication_policy": true,
+  "training_cutoff_rule": "target t uses 1..t-1",
+  "seed": 20261016036,
+  "hyperparameter_grid": "none; frozen formulas from E037",
+  "status": "BLOCKED_INSUFFICIENT_SUPPORTED_FAMILIES"
+}

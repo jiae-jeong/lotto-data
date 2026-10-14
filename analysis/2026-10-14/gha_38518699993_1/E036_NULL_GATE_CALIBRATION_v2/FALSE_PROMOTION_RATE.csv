@@ -1,0 +1,6 @@
+mechanism,false_promotions,verification_replicates,false_promotion_rate,pass_le_5pct
+EXACT_UNIFORM_TICKET,10,1000,0.01,True
+TARGET_OUTCOME_PERMUTATION,14,1000,0.014,True
+TEMPORAL_BLOCK_PERMUTATION,5,1000,0.005,True
+SIGNAL_RANK_RANDOM_SCORE,15,1000,0.015,True
+POOLED,44,4000,0.011,True
