@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "target_rounds": 645,
+  "fixed_bundle_records": 645,
+  "random_bundle_records": 64500,
+  "bundle_components_frozen": [
+    "long_frequency",
+    "structure_profile",
+    "pair_association"
+  ],
+  "future_predictions": 0,
+  "component_sources": "cutoff-safe stored OOS forecasts"
+}
