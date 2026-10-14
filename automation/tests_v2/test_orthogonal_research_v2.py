@@ -1,43 +1,54 @@
-YªçŠx³¬uç%j·Â+ar‰ì¶ë•ë_¢ºŞjË"‚v›•ëÚ®&›•ë[\ÜœÛÛ‚š[\ÜŞ\Âš[\Ü[š]\İ™œ›ÛH]Xˆ[\Ü]‚œŞ\Ëœ]š[œÙ\
-İŠ]
-×Ùš[W×ÊKœ™\ÛÛ™J
-Kœ\™[ÖÌWJJBš[\ÜÜÙÛÛ˜[Ü™\ÙX\˜ÚİŒˆ\ÈİYB‚‚˜Û\ÜÈÜÙÛÛ˜[™\ÙX\˜Ú\İÊ[š]\İ•\İØ\ÙJN‚ˆYˆ\İÜ™\™YÚ\İ˜][Û—Ú\×Ù›İ\—Ù\İ[˜İÙ˜[Z[Y\×Ø[™Ü›İXİYÜØÛÜJÙ[ŠN‚ˆÜXÏZœÛÛ‹›ØYÊİYK”‘T‘QËœ™XYİ^
-[˜ÛÙ[™ÏH]‹NŠJBˆÙ[‹˜\ÜÙ\\]X[
-[ŠÜXÖÈ˜Ø[™Y]WÙ˜[Z[Y\È—JK
-BˆÙ[‹˜\ÜÙ\\]X[
-ÜXÖÈ˜Ø[›ÛšXØ[Øİ]Ù™ˆ—KLJBˆÙ[‹˜\ÜÙ\YJÜXÖÈ››×ÑLLÑLWÜ™\[œÈ—JBˆÙ[‹˜\ÜÙ\\]X[
-ÜXÖÈ‘LÍWÜ[H—KœÜ]
+import json
+import sys
+import unittest
+from pathlib import Path
 
-VÌK”[ˆŠB‚ˆYˆ\İÙ]WÚ[YÜš]WÚ\×ÌWİ›İYÚÌLJÙ[ŠN‚ˆ›İÜÏ\İYK›ØYÙ]J
-BˆÙ[‹˜\ÜÙ\\]X[
-[Š›İÜÊKLJBˆÙ[‹˜\ÜÙ\\]X[
-›İÜÖÌVÈœ›İ[™—KJBˆÙ[‹˜\ÜÙ\\]X[
-›İÜÖËLWVÈœ›İ[™—KLJBˆÙ[‹˜\ÜÙ\YJ[
-[ŠÙ]
-È›[X™\œÈ—JJOOMˆ›Üˆ[ˆ›İÜÊJB‚ˆYˆ\İÙœ›Ş™[—İXÚÙ]İYWØœ™XZ×Ü™Y™\œ×ÛİÙ\—Û[X™\œÊÙ[ŠN‚ˆ[\Ü[\H\ÈœˆÙ[‹˜\ÜÙ\\]X[
-İYK—İXÚÙ]
-œ™\›ÜÊJJK
-K‹ËKŠJB‚ˆYˆ\İÜ™\ÚYX[ÜÚYÛ˜[Ú\×Ü™Wİ\™Ù]Ú\İÜWØ]Ùš\œİÜØÛÜ™YØİ]Ù™ŠÙ[ŠN‚ˆ˜]ÜÏ\İYK›ØYÙ]J
-NÈ\İYK›ØYØŠ
-Bˆ™\ÚYX[Ï\İYK—Ü™\]Y[X[Ü™\ÚYX[Ê˜]ÜËŠBˆÙ[‹˜\ÜÙ\\]X[
-Z[Š™\ÚYX[ÊKŒJBˆÙ[‹˜\ÜÙ\\]X[
-X^
-™\ÚYX[ÊKL
-BˆØÛÜ™\Ï\İYK—ØÜ›ÜÜÙš]Ü™\ÚYX[ÜØÛÜ™\Ê˜]ÜË‹ŒK™\ÚYX[ÊBˆÙ[‹˜\ÜÙ\\]X[
-ØÛÜ™\ËœÚ\K
-K
-JB‚ˆYˆ\İÚÛWØY\İY[Ú\×Û[Û›İÛšX×Ø[™Ø›İ[™Y
-Ù[ŠN‚ˆY\İY\İYK—ÚÛJËŒKŒŒ×JBˆÙ[‹˜\ÜÙ\YJ[
-^LH›Üˆ[ˆY\İY
-JBˆÙ[‹˜\ÜÙ\Ü™X]\‘\]X[
-Y\İYÌKŒJBˆÙ[‹˜\ÜÙ\\]X[
-Y\İYÌWKŒŠB‚ˆYˆ\İØ›Ûİİ˜\Ü™\X]×Ù^XİWİÚ]Ùœ›Ş™[—ÜÙYY
-Ù[ŠN‚ˆ[\Ü[\H\Èœˆ˜[Y\Ï[œ˜\œ˜^JËŒKKŒ‹ŒËŒJŒÌ
-BˆÙ[‹˜\ÜÙ\\]X[
-İYK—Ø›Ûİİ˜\
-˜[Y\Ë™\ÏLL
-KİYK—Ø›Ûİİ˜\
-˜[Y\Ë™\ÏLL
-JB‚ˆYˆ\İÜ[—ÚYÜ™Z™Xİ×Ü]İ˜]™\œØ[
-Ù[ŠN‚ˆÚ]Ù[‹˜\ÜÙ\˜Z\Ù\Ê˜[YQ\œ›ÜŠN‚ˆİYKœ[ŠİYK”“ÓÕŒŒ‹LLLM‹‹‹‹İ[œØY™HŠB‚‚šYˆ×Û˜[YW×ÏOH—×ÛXZ[—×È‚ˆ[š]\İ›XZ[Š
-B
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import orthogonal_research_v2 as study
+
+
+class OrthogonalResearchTests(unittest.TestCase):
+    def test_preregistration_has_four_distinct_families_and_protected_scope(self):
+        spec=json.loads(study.PREREG.read_text(encoding="utf-8"))
+        self.assertEqual(len(spec["candidate_families"]),4)
+        self.assertEqual(spec["canonical_cutoff"],1245)
+        self.assertTrue(spec["no_E010_E029_reruns"])
+        self.assertEqual(spec["E035_rule"].split()[0],"Run")
+
+    def test_data_integrity_is_1_through_1245(self):
+        rows=study.load_data()
+        self.assertEqual(len(rows),1245)
+        self.assertEqual(rows[0]["round"],1)
+        self.assertEqual(rows[-1]["round"],1245)
+        self.assertTrue(all(len(set(x["numbers"]))==6 for x in rows))
+
+    def test_frozen_ticket_tie_break_prefers_lower_numbers(self):
+        import numpy as np
+        self.assertEqual(study._ticket(np.zeros(45)),(1,2,3,4,5,6))
+
+    def test_residual_signal_has_pre_target_history_at_first_scored_cutoff(self):
+        draws=study.load_data(); b=study.load_b()
+        residuals=study._prequential_residuals(draws,b)
+        self.assertEqual(min(residuals),201)
+        self.assertEqual(max(residuals),1244)
+        scores=study._crossfit_residual_scores(draws,b,601,residuals)
+        self.assertEqual(scores.shape,(45,))
+
+    def test_holm_adjustment_is_monotonic_and_bounded(self):
+        adjusted=study._holm([.01,.04,.03])
+        self.assertTrue(all(0<=x<=1 for x in adjusted))
+        self.assertGreaterEqual(adjusted[0],.01)
+        self.assertEqual(adjusted[1],.06)
+
+    def test_bootstrap_repeats_exactly_with_frozen_seed(self):
+        import numpy as np
+        values=np.array([.1,-.2,.3,0.0]*30)
+        self.assertEqual(study._bootstrap(values,44,reps=100),study._bootstrap(values,44,reps=100))
+
+    def test_run_id_rejects_path_traversal(self):
+        with self.assertRaises(ValueError):
+            study.run(study.ROOT,"2026-10-14","../unsafe")
+
+
+if __name__=="__main__":
+    unittest.main()

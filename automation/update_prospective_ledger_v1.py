@@ -1,136 +1,201 @@
-YªçŠx³¬uç%j·Â+ar‰ì¶ë•ë_¢ºÞjË"‚v›•ëÚ®&›•ëÈKÝ\Ü‹Øš[‹Ù[ˆ]ÛŒÂˆˆˆ”™XÛÜ™Ù™šXÚX[Ý]ÛÛY\È›Üˆ[[]]X›HLÌÚYÝÈ›Ü™XØ\ÝÈ[™œ™Y^™HH™^Û™K‚‚“›È\˜Ú\ÙH™XÛÛ[Y[™][ÛœÈ\™HÜ™X]Yˆ^\Ý[™È›Ü™XØ\ÝÜ™\Ý[\Y˜XÝÈ\™H™]™\ˆY]Y‚ˆˆˆ‚™œ›ÛH×Ù]\™W×È[\Ü[››Ý][ÛœÂ‚š[\Ü\™Ü\œÙBš[\Ü\ÚX‚š[\ÜœÛÛ‚š[\Ü\›X‹™\œ›Ü‚š[\Ü\›X‹œ™\]Y\Ý™œ›ÛH]][YH[\Ü]K]][YK[YY[K[Y^›Û™B™œ›ÛH]Xˆ[\Ü]‚š[\Ü[\H\Èœ‚”“ÓÕH]
-×Ùš[W×ÊKœ™\ÛÛ™J
-Kœ\™[ÖÌWB‘UHH“ÓÕÈ˜[˜[\Ú\ËÌŒ‹LLLL‹ÛÝ×Ù]WÌWÌLWÜÛ˜\ÚÝ˜ÜÝˆ‚•PÒÑTˆH“ÓÕÈ˜[˜[\Ú\ËÜ›ÜÜXÝ]™KÑLÌ‚THHšÎ‹ËÝÝÝË™Ý\žK˜ÛËšÜ‹ØÛÛ[[Û‹™ÏÛY]ÙYÙ]ÝÓ[X™\‰™Ó›Ï^ßH‚‚‚™YˆYÙ\Ý
-]ˆ]
-HOˆÝŽ‚ˆ˜]ÈH]œ™XYØž]\Ê
-Kœ™\XÙJˆ——ˆ‹ˆ—ˆŠBˆ™]\›ˆ\ÚX‹œÚLMŠ˜]ÊKš^YÙ\Ý
+#!/usr/bin/env python3
+"""Record official outcomes for immutable E030 shadow forecasts and freeze the next one.
 
-B‚‚™YˆØYÙ˜]ÜÊ
-HOˆ\ÝÙXÝN‚ˆ[\ÜÜÝ‚ˆÚ]UK›Ü[Š[˜ÛÙ[™ÏH]‹N\ÚYÈ‹™]Û[™OHˆŠH\ÈÝ™X[N‚ˆ›ÝÜÈH\Ý
-ÜÝ‹‘XÝ™XY\ŠÝ™X[JJBˆYˆ[Š›ÝÜÊHOHLN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆ˜Ø[›ÛšXØ[Û˜\ÚÝ›ÝÈÛÝ[Û[Š›ÝÜÊ_HOHLHŠBˆ˜]ÜÈH×Bˆ›Üˆ^XÝY›ÝÈ[ˆ[[Y\˜]J›ÝÜËJN‚ˆ[X™\œÈH\JÛÜY
-[
-›ÝÖÙˆ››ÞÚ_H—JH›ÜˆH[ˆ˜[™ÙJKÊJJBˆ›Û\ÈH[
-›ÝÖÈ˜›Û\È—JBˆ˜]×Ù]HH]][YKœÝœ[YJ›ÝÖÈ™]H—K‰VK‰[K‰YŠK™]J
-BˆYˆ[
-›ÝÖÈœ›Ý[™—JHOH^XÝYÜˆ[ŠÙ]
-[X™\œÊJHOHˆÜˆZ[Š[X™\œÊHHÜˆX^
-[X™\œÊHˆN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆš[˜[YØ[›ÛšXØ[˜]È›ÝÈÙ^XÝYHŠBˆYˆ›ÝHH›Û\ÈHHÜˆ›Û\È[ˆ[X™\œÎ‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆš[˜[Y›Û\È]›Ý[™Ù^XÝYHŠBˆ˜]ÜË˜\[™
-Èœ›Ý[™Žˆ^XÝY™]HŽˆ˜]×Ù]K›[X™\œÈŽˆ[X™\œË˜›Û\ÈŽˆ›Û\ßJBˆ™]\›ˆ˜]ÜÂ‚‚™Yˆ™]ÚÛÙ™šXÚX[
-›Ý[™Û›Îˆ[Ü[™\]\›X‹œ™\]Y\Ý\›Ü[ŠHOˆXÝ›Û™N‚ˆ™\]Y\ÝH\›X‹œ™\]Y\Ý”™\]Y\Ý
-TK™›Ü›X]
-›Ý[™Û›ÊKXY\œÏ^È•\Ù\‹PYÙ[Žˆ›ÝË\™\ÙX\˜Ú\ÚYÝËÌKŒŸJBˆžN‚ˆÚ]Ü[™\Š™\]Y\Ý[Y[Ý]LŒ
-H\È™\ÜÛœÙN‚ˆ^[ØYHœÛÛ‹›ØYÊ™\ÜÛœÙKœ™XY
+No purchase recommendations are created. Existing forecast/result artifacts are never edited.
+"""
+from __future__ import annotations
 
-K™XÛÙJ]‹NŠJBˆ^Ù\
-\›X‹™\œ›Ü‹•T“\œ›Ü‹[Y[Ý]\œ›Ü‹œÛÛ‹’”ÓÓ‘XÛÙQ\œ›Ü‹[šXÛÙQXÛÙQ\œ›ÜŠN‚ˆ™]\›ˆ›Û™BˆYˆ^[ØY™Ù]
-œ™]\›•˜[YHŠHOHœÝXØÙ\ÜÈŽ‚ˆ™]\›ˆ›Û™Bˆ™]\›™YÜ›Ý[™H[
-^[ØYÈ™Ó›È—JBˆYˆ™]\›™YÜ›Ý[™OH›Ý[™Û›Î‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆ›Ù™šXÚX[TH™]\›™Y›Ý[™Ü™]\›™YÜ›Ý[™K™\]Y\ÝYÜ›Ý[™Û›ßHŠBˆ[\ÈH\JÛÜY
-[
-^[ØYÙˆ™Ý›ÞÚ_H—JH›ÜˆH[ˆ˜[™ÙJKÊJJBˆ›Û\ÈH[
-^[ØYÈ˜›\Ó›È—JBˆ˜]×Ù]HH]][YKœÝœ[YJ^[ØYÈ™Ó›Ñ]H—K‰VKI[KIYŠK™]J
-BˆYˆ[ŠÙ]
-[\ÊJHOHˆÜˆZ[Š[\ÊHHÜˆX^
-[\ÊHˆHÜˆ›ÝHH›Û\ÈHHÜˆ›Û\È[ˆ[\Î‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆ›Ù™šXÚX[TH™]\›™Y[˜[Y[X™\œÈ›Üˆ›Ý[™Ü›Ý[™Û›ßHŠBˆ™]\›ˆÈœ›Ý[™Žˆ›Ý[™Û›Ë™]HŽˆ˜]×Ù]K›[X™\œÈŽˆ[\Ë˜›Û\ÈŽˆ›Û\ßB‚‚™YˆÜÙX\ÛÛŠ[Ûˆ[
-HOˆ[‚ˆ™]\›ˆYˆ[Û[ˆ
-L‹KŠH[ÙHHYˆ[Û[ˆ
-ËJH[ÙHˆYˆ[Û[ˆ
-‹Ë
-H[ÙHÂ‚‚™YˆÜÝ[WØš[ŠÝ[ˆ[
-HOˆ[‚ˆ™]\›ˆYˆÝ[LŒ[ÙHHYˆÝ[MH[ÙHˆYˆÝ[MÌ[ÙHÂ‚‚™YˆXZÙWÙœ›Þ™[—Ü™YXÝ[ÛŠ˜]ÜÎˆ\ÝÙXÝKÙ[™\˜]YØ]ˆÝŠHOˆXÝ‚ˆˆˆ‘^XÝLHÙX\ÛÛ˜[ÜÝ[K\™YÚ[YH›Ü›][\Ë›È[š[™È[™˜Z[ˆÝ]Ù™ˆH\™Ù]LKˆˆˆ‚ˆ\™Ù]H[Š˜]ÜÊH
-ÈBˆ\™Ù]Ù]HH˜]ÜÖËLWVÈ™]H—H
-È[YY[J^\ÏMÊBˆÛØ˜[ØÛÝ[ÈHœž™\›ÜÊJNÈÙX\ÛÛ˜[ØÛÝ[ÈHœž™\›ÜÊJNÈ™YÚ[YWØÛÝ[ÈHœž™\›ÜÊJBˆÙX\ÛÛ—ÛˆHÈ™YÚ[YWÛˆHˆ›ÜˆK[ˆ[[Y\˜]J˜]ÜÊN‚ˆ›Üˆˆ[ˆÈ›[X™\œÈ—NˆÛØ˜[ØÛÝ[ÖÛˆHWH
-ÏHBˆYˆÜÙX\ÛÛŠÈ™]H—K›[Û
-HOHÜÙX\ÛÛŠ\™Ù]Ù]K›[Û
-N‚ˆÙX\ÛÛ—Ûˆ
-ÏHBˆ›Üˆˆ[ˆÈ›[X™\œÈ—NˆÙX\ÛÛ˜[ØÛÝ[ÖÛˆHWH
-ÏHBˆYˆHˆ[™ÜÝ[WØš[ŠÝ[J˜]ÜÖÚHHWVÈ›[X™\œÈ—JJHOHÜÝ[WØš[ŠÝ[J˜]ÜÖËLWVÈ›[X™\œÈ—JJN‚ˆ™YÚ[YWÛˆ
-ÏHBˆ›Üˆˆ[ˆÈ›[X™\œÈ—Nˆ™YÚ[YWØÛÝ[ÖÛˆHWH
-ÏHBˆÛØ˜[Ü˜]HHÛØ˜[ØÛÝ[ÈÈ[Š˜]ÜÊBˆÙX\ÛÛ—ÜØÛÜ™HH
-ÙX\ÛÛ˜[ØÛÝ[È
-ÈÌŒ
-ˆÛØ˜[Ü˜]JHÈ
-ÙX\ÛÛ—Ûˆ
-ÈÌŒ
-Bˆ™YÚ[YWÜØÛÜ™HH
-™YÚ[YWØÛÝ[È
-ÈŒŒ
-ˆÛØ˜[Ü˜]JHÈ
-™YÚ[YWÛˆ
-ÈŒŒ
-BˆYˆXZÙJÚYÛ˜[ˆÝ‹ØÛÜ™\Îˆœ›™\œ˜^JHOˆXÝ‚ˆÜ™\ˆH
-œ˜\™ÜÛÜ
-\ØÛÜ™\ËÚ[™HœÝX›HŠH
-ÈJKÛ\Ý
+import argparse
+import hashlib
+import json
+import urllib.error
+import urllib.request
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
 
-Bˆ™]\›ˆÈœÚYÛ˜[ŽˆÚYÛ˜[›[Ù[Ý™\œÚ[ÛˆŽˆ‘LWÑ”“Ö‘S—ÝŒH‹ˆ›[X™\œÈŽˆÛÜY
-Ü™\–Î—JKœØÛÜ™WÛÜ™\ˆŽˆÜ™\ŸBˆ™]\›ˆÈœÝ]\ÈŽˆ‘”“Ö‘S—Ô“ÔÔPÕU‘WÔÒQÕ×ÓÓ“H‹\™Ù]Ü›Ý[™Žˆ\™Ù]ˆ˜Z[š[™×Ý›ÝYÚÜ›Ý[™Žˆ\™Ù]HK\™Ù]Ù˜]×Ù]WØ\ÜÝ[\[ÛˆŽˆ\™Ù]Ù]Kš\ÛÙ›Ü›X]
+import numpy as np
 
-Kˆ˜Ø[›ÛšXØ[ÜÛ˜\ÚÝÜÚLMˆŽˆYÙ\Ý
-UJK™Ù[™\˜]YØ]Ý]ÈŽˆÙ[™\˜]YØ]ˆœÚYÛ˜[ÈŽˆÛXZÙJÐSS‘T—ÔÑPTÓÓ—ÐÓÓ‘USÓSÝŒH‹ÙX\ÛÛ—ÜØÛÜ™JKˆXZÙJ”‘U’SÕT×ÔÕSWÔ‘QÒSQWÐÓÓ‘USÓSÝŒH‹™YÚ[YWÜØÛÜ™JWKˆ™›Ü›][WÜÛÝ\˜ÙHŽˆ˜]]ÛX][Û‹Ú[™\[™[ÜÚYÛ˜[Ùš]™WÛ[™WÝŒKœHLHœ›Þ™[ˆ›Ü›][\È‹ˆœ\˜Ú\ÙWÜ™XÛÛ[Y[™][ÛˆŽˆ˜[ÙKˆ™Y][™×ÜÛXÞHŽˆš[[]]X›NÈÛÜœ™XÝ[ÛœÈ™\]Z\™HH™]È\Y˜XÝ[™ØÝ[Y[Y™X\ÛÛˆŸB‚‚™Yˆ™\Ý[Ø\Y˜XÝ
-œ›Þ™[ŽˆXÝ™YXÝ[Û—Ü]ˆ]XÝX[ˆXÝ™]ÚYØ]ˆÝ‹ˆ™\ÜÚ]ÜžWÜ›ÛÝˆ]›Û™HH›Û™JHOˆXÝ‚ˆÝ]ÛÛYHHÙ]
-XÝX[È›[X™\œÈ—JBˆØÛÜ™YH×Bˆ›ÜˆÚYÛ˜[[ˆœ›Þ™[–ÈœÚYÛ˜[È—N‚ˆ]ÈH[ŠÙ]
-ÚYÛ˜[È›[X™\œÈ—JH	ˆÝ]ÛÛYJBˆØÛÜ™Y˜\[™
-ÈœÚYÛ˜[ŽˆÚYÛ˜[ÈœÚYÛ˜[—K›[Ù[Ý™\œÚ[ÛˆŽˆÚYÛ˜[È›[Ù[Ý™\œÚ[Ûˆ—Kˆœ™YXÝ[Û—Û[X™\œÈŽˆÚYÛ˜[È›[X™\œÈ—K›XZ[—Ú]ÈŽˆ]Ëˆ˜›Û\×Ú[˜ÛYYŽˆXÝX[È˜›Û\È—H[ˆÚYÛ˜[È›[X™\œÈ—Kˆ›Ù™šXÚX[ÛXZ[—Û[X™\œÈŽˆÛÜY
-XÝX[È›[X™\œÈ—JK›Ù™šXÚX[Ø›Û\ÈŽˆXÝX[È˜›Û\È—_JBˆ™]\›ˆÈœÝ]\ÈŽˆ“Ñ‘’PÒPSÓÕUÓÓQWÔ‘PÓÔ‘Q‹\™Ù]Ü›Ý[™ŽˆXÝX[Èœ›Ý[™—Kˆ›Ù™šXÚX[Ù˜]×Ù]HŽˆXÝX[È™]H—Kš\ÛÙ›Ü›X]
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "analysis/2026-10-12/lotto_data_1_1245_snapshot.csv"
+TRACKER = ROOT / "analysis/prospective/E030"
+API = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={}"
 
-Kˆœ™YXÝ[Û—Ùš[HŽˆ™YXÝ[Û—Ü]œ™[]]™WÝÊ™\ÜÚ]ÜžWÜ›ÛÝ
-K˜\×ÜÜÚ^
 
-HYˆ™\ÜÚ]ÜžWÜ›ÛÝ[ÙH™YXÝ[Û—Ü]˜\×ÜÜÚ^
+def digest(path: Path) -> str:
+    raw = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(raw).hexdigest()
 
-Kˆœ™YXÝ[Û—ÜÚLMˆŽˆYÙ\Ý
-™YXÝ[Û—Ü]
-K›Ù™šXÚX[ÜÛÝ\˜ÙWÝ\›ŽˆTK™›Ü›X]
-XÝX[Èœ›Ý[™—JKˆœÛÝ\˜ÙWÝ\HŽˆ‘Ó‘ÒQS‘×ÓÕT–WÓÑ‘’PÒPSÒ”ÓÓ—ÑS‘ÒS•‹™™]ÚYØ]Ý]ÈŽˆ™]ÚYØ]ˆœÚYÛ˜[ÈŽˆØÛÜ™Yœ\˜Ú\ÙWÜ™XÛÛ[Y[™][ÛˆŽˆ˜[Ù_B‚‚™YˆÜ™XYÙœ›Þ™[—Ùš[\Ê›ÛÝˆ]
-HOˆ\ÝÔ]N‚ˆ™]\›ˆÛÜY
-›Üˆ[ˆ
-›ÛÝÈ˜[˜[\Ú\ÈŠKœ™ÛØŠ‘”“Ö‘S—ÔÒQÓS×Ê‹šœÛÛˆŠBˆYˆ‹˜][\Èˆ›Ý[ˆœ\È[™œ\™[›˜[YKœÝ\ÝÚ]
-‘LÌŠJB‚‚™YˆÙ^[™Ùœ›ÛWÜ™\Ý[Ù]™[Ê˜]ÜÎˆ\ÝÙXÝK˜XÚÙ\Žˆ]
-HOˆ\ÝÙXÝN‚ˆˆˆ“ØYÛ›HÛÛYÝ[Ý\Ë™]š[Ý\ÛH™XÛÜ™YÙ™šXÚX[™\Ý[]™[Ëˆˆˆ‚ˆ™\Ý[Ùš[\ÈHÛÜY
-˜XÚÙ\‹™ÛØŠ”‘TÕSÊ‹šœÛÛˆŠKÙ^O[[X™Hˆ[
-œÝ[KœÜ]
-—ÈŠVËLWJJBˆ›Üˆ][ˆ™\Ý[Ùš[\Î‚ˆ™XÛÜ™HœÛÛ‹›ØYÊ]œ™XYÝ^
-[˜ÛÙ[™ÏH]‹NŠJBˆ›Ý[™Û›ÈH[
-™XÛÜ™È\™Ù]Ü›Ý[™—JBˆYˆ›Ý[™Û›ÈH[Š˜]ÜÊN‚ˆÛÛ[YBˆYˆ›Ý[™Û›ÈOH[Š˜]ÜÊH
-ÈN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆ››Û‹XÛÛYÝ[Ý\È›ÜÜXÝ]™H™\Ý[Ù\]Y[˜ÙH]Ü]›˜[Y_HŠBˆš\œÝH™XÛÜ™ÈœÚYÛ˜[È—VÌBˆ[X™\œÈH\JÛÜY
-[
-ŠH›Üˆˆ[ˆš\œÝÈ›Ù™šXÚX[ÛXZ[—Û[X™\œÈ—JJBˆ›Û\ÈH[
-š\œÝÈ›Ù™šXÚX[Ø›Û\È—JBˆYˆ[Š[X™\œÊHOHˆÜˆ[ŠÙ]
-[X™\œÊJHOHˆÜˆZ[Š[X™\œÊHHÜˆX^
-[X™\œÊHˆHÜˆ›Û\È›Ý[ˆ˜[™ÙJKŠHÜˆ›Û\È[ˆ[X™\œÎ‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆš[˜[Y™XÛÜ™YÙ™šXÚX[Ý]ÛÛYH[ˆÜ]HŠBˆ˜]ÜË˜\[™
-Èœ›Ý[™Žˆ›Ý[™Û›Ë™]HŽˆ]][YKœÝœ[YJ™XÛÜ™È›Ù™šXÚX[Ù˜]×Ù]H—K‰VKI[KIYŠK™]J
-Kˆ›[X™\œÈŽˆ[X™\œË˜›Û\ÈŽˆ›Û\ßJBˆ™]\›ˆ˜]ÜÂ‚‚™Yˆ[Š›ÛÝˆ]H“ÓÕÜ[™\]\›X‹œ™\]Y\Ý\›Ü[ŠHOˆXÝ‚ˆ›ÛÝH›ÛÝœ™\ÛÛ™J
-NÈ˜]ÜÈHÙ^[™Ùœ›ÛWÜ™\Ý[Ù]™[ÊØYÙ˜]ÜÊ
-KPÒÑTŠBˆœ›Þ™[—Ùš[\ÈHÜ™XYÙœ›Þ™[—Ùš[\Ê›ÛÝ
-BˆYˆ›Ýœ›Þ™[—Ùš[\Î‚ˆ˜Z\ÙHš[S›Ý›Ý[™\œ›ÜŠ“›È[[]]X›HLÌœ›Þ™[ˆ™YXÝ[Ûˆ›Ý[™ŠBˆœ›Þ™[—Ùš[\ËœÛÜ
-Ù^O[[X™Hˆ[
-œÛÛ‹›ØYÊœ™XYÝ^
-[˜ÛÙ[™ÏH]‹NŠJVÈ\™Ù]Ü›Ý[™—JJBˆÈH›ÜÜXÝ]™H™\Ý[]™[\ÈÜ™X]YÛ›HÛ˜ÙKˆ^\Ý[™È™YXÝ[Ûˆž]\È™[XZ[ˆ[ÝXÚY‚ˆœ›Þ™[ˆHœÛÛ‹›ØYÊœ›Þ™[—Ùš[\ÖËLWKœ™XYÝ^
-[˜ÛÙ[™ÏH]‹NŠJBˆ\™Ù]H[
-œ›Þ™[–È\™Ù]Ü›Ý[™—JBˆYˆ[
-œ›Þ™[–È˜Z[š[™×Ý›ÝYÚÜ›Ý[™—JHOH\™Ù]HN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆ™œ›Þ™[ˆ™YXÝ[ÛˆÝ]Ù™ˆZ\ÛX]Ú›Üˆ\™Ù]Ý\™Ù]HŠBˆXÝX[H™]ÚÛÙ™šXÚX[
-\™Ù]Ü[™\[Ü[™\ŠBˆ™\Ý[Ü]HPÒÑTˆÈˆ”‘TÕSÞÝ\™Ù]KšœÛÛˆ‚ˆÜ™X]YÜ™\Ý[H˜[ÙBˆYˆXÝX[\È›Ý›Û™H[™›Ý™\Ý[Ü]™^\ÝÊ
-N‚ˆPÒÑT‹›ZÙ\Š\™[ÏUYK^\ÝÛÚÏUYJBˆ™XÛÜ™H™\Ý[Ø\Y˜XÝ
-œ›Þ™[‹œ›Þ™[—Ùš[\ÖËLWKXÝX[ˆ]][YK››ÝÊ[Y^›Û™K]ÊKš\ÛÙ›Ü›X]
 
-K™\ÜÚ]ÜžWÜ›ÛÝ\›ÛÝ
-BˆÚ]™\Ý[Ü]›Ü[Šž‹[˜ÛÙ[™ÏH]‹N‹™]Û[™OH—ˆŠH\ÈÝ™X[N‚ˆœÛÛ‹™[\
-™XÛÜ™Ý™X[K[œÝ\™WØ\ØÚZOQ˜[ÙK[™[LŠNÈÝ™X[KÜš]J—ˆŠBˆÜ™X]YÜ™\Ý[HYBˆ[YˆXÝX[\È›Ý›Û™H[™™\Ý[Ü]™^\ÝÊ
-N‚ˆš[ÜˆHœÛÛ‹›ØYÊ™\Ý[Ü]œ™XYÝ^
-[˜ÛÙ[™ÏH]‹NŠJBˆš[Ü—Û[\ÈH\Jš[Ü–ÈœÚYÛ˜[È—VÌVÈ›Ù™šXÚX[ÛXZ[—Û[X™\œÈ—JBˆYˆš[Ü—Û[\ÈOH\JÛÜY
-XÝX[È›[X™\œÈ—JJHÜˆš[Ü–ÈœÚYÛ˜[È—VÌVÈ›Ù™šXÚX[Ø›Û\È—HOHXÝX[È˜›Û\È—N‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆ›Ù™šXÚX[™\Ý[™]š\Ú[Ûˆ]XÝY›ÜˆÝ\™Ù]NÈ™\Ù\š[™Èš[Üˆ[™™\]Z\š[™È™]šY]ÈŠBˆÙ[™\˜]YÜ™YXÝ[ÛˆH›Û™BˆYˆXÝX[\È›Ý›Û™N‚ˆÈHÛ˜\ÚÝ\È™XY[Û›NÈÙ™šXÚX[Ý]ÛÛY\È\™H[[ˆY[[ÜžH›ÜˆÝXœÙ\]Y[Ý]Ù™œË‚ˆYˆ\™Ù]OH[Š˜]ÜÊH
-ÈN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠˆ˜Ø[››Ý^[™ÛÛYÝ[Ý\ÈØ[›ÛšXØ[›Ý[™Îˆ\™Ù]Ý\™Ù]K™^Û[Š˜]ÜÊJÌ_HŠBˆ˜]ÜË˜\[™
-XÝX[
-Bˆ™^Ùœ›Þ™[ˆHXZÙWÙœ›Þ™[—Ü™YXÝ[ÛŠ˜]ÜË]][YK››ÝÊ[Y^›Û™K]ÊKš\ÛÙ›Ü›X]
+def load_draws() -> list[dict]:
+    import csv
+    with DATA.open(encoding="utf-8-sig", newline="") as stream:
+        rows = list(csv.DictReader(stream))
+    if len(rows) != 1245:
+        raise ValueError(f"canonical snapshot row count {len(rows)} != 1245")
+    draws = []
+    for expected, row in enumerate(rows, 1):
+        numbers = tuple(sorted(int(row[f"no{i}"]) for i in range(1, 7)))
+        bonus = int(row["bonus"])
+        draw_date = datetime.strptime(row["date"], "%Y.%m.%d").date()
+        if int(row["round"]) != expected or len(set(numbers)) != 6 or min(numbers) < 1 or max(numbers) > 45:
+            raise ValueError(f"invalid canonical draw row {expected}")
+        if not 1 <= bonus <= 45 or bonus in numbers:
+            raise ValueError(f"invalid bonus at round {expected}")
+        draws.append({"round": expected, "date": draw_date, "numbers": numbers, "bonus": bonus})
+    return draws
 
-JBˆPÒÑT‹›ZÙ\Š\™[ÏUYK^\ÝÛÚÏUYJBˆ™^Ü]HPÒÑTˆÈˆ‘”“Ö‘S—ÔÒQÓS×ÞÛ™^Ùœ›Þ™[–ÉÝ\™Ù]Ü›Ý[™	×_KšœÛÛˆ‚ˆYˆ›Ý™^Ü]™^\ÝÊ
-N‚ˆÚ]™^Ü]›Ü[Šž‹[˜ÛÙ[™ÏH]‹N‹™]Û[™OH—ˆŠH\ÈÝ™X[N‚ˆœÛÛ‹™[\
-™^Ùœ›Þ™[‹Ý™X[K[œÝ\™WØ\ØÚZOQ˜[ÙK[™[LŠNÈÝ™X[KÜš]J—ˆŠBˆÙ[™\˜]YÜ™YXÝ[ÛˆHÝŠ™^Ü]œ™[]]™WÝÊ›ÛÝ
-JBˆ™]\›ˆÈœÝ]\ÈŽˆ•TUQˆYˆXÝX[[ÙH”S‘S‘×ÓÑ‘’PÒPSÑUÈ‹ˆ\™Ù]Ü›Ý[™Žˆ\™Ù]œ™\Ý[ØÜ™X]YŽˆÜ™X]YÜ™\Ý[ˆ›™^Ü™YXÝ[Û—ØÜ™X]YŽˆÙ[™\˜]YÜ™YXÝ[Ûˆ\È›Ý›Û™Kˆœ™\Ý[Ü]ŽˆÝŠ™\Ý[Ü]œ™[]]™WÝÊ›ÛÝ
-JHYˆÜ™X]YÜ™\Ý[[ÙH›Û™Kˆ›™^Ü™YXÝ[Û—Ü]ŽˆÙ[™\˜]YÜ™YXÝ[Û‹ˆœ\˜Ú\ÙWÜ™XÛÛ[Y[™][ÛˆŽˆ˜[Ù_B‚‚šYˆ×Û˜[YW×ÈOH—×ÛXZ[—×ÈŽ‚ˆ\œÙ\ˆH\™Ü\œÙK\™Ý[Y[\œÙ\Š
-Bˆ\œÙ\‹˜YØ\™Ý[Y[
-‹K\›ÛÝ‹\OT]Y˜][T“ÓÕ
-Bˆ\™ÜÈH\œÙ\‹œ\œÙWØ\™ÜÊ
-Bˆš[
-œÛÛ‹™[\Ê[Š\™ÜËœ›ÛÝ
-K[œÝ\™WØ\ØÚZOQ˜[ÙK[™[LŠJB
+
+def fetch_official(round_no: int, opener=urllib.request.urlopen) -> dict | None:
+    request = urllib.request.Request(API.format(round_no), headers={"User-Agent": "lotto-research-shadow/1.0"})
+    try:
+        with opener(request, timeout=20) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, UnicodeDecodeError):
+        return None
+    if payload.get("returnValue") != "success":
+        return None
+    returned_round = int(payload["drwNo"])
+    if returned_round != round_no:
+        raise ValueError(f"official API returned round {returned_round}, requested {round_no}")
+    nums = tuple(sorted(int(payload[f"drwtNo{i}"]) for i in range(1, 7)))
+    bonus = int(payload["bnusNo"])
+    draw_date = datetime.strptime(payload["drwNoDate"], "%Y-%m-%d").date()
+    if len(set(nums)) != 6 or min(nums) < 1 or max(nums) > 45 or not 1 <= bonus <= 45 or bonus in nums:
+        raise ValueError(f"official API returned invalid numbers for round {round_no}")
+    return {"round": round_no, "date": draw_date, "numbers": nums, "bonus": bonus}
+
+
+def _season(month: int) -> int:
+    return 0 if month in (12, 1, 2) else 1 if month in (3, 4, 5) else 2 if month in (6, 7, 8) else 3
+
+
+def _sum_bin(total: int) -> int:
+    return 0 if total < 120 else 1 if total < 145 else 2 if total < 170 else 3
+
+
+def make_frozen_prediction(draws: list[dict], generated_at: str) -> dict:
+    """Exact E025 seasonal/sum-regime formulas, no tuning and train cutoff = target-1."""
+    target = len(draws) + 1
+    target_date = draws[-1]["date"] + timedelta(days=7)
+    global_counts = np.zeros(45); seasonal_counts = np.zeros(45); regime_counts = np.zeros(45)
+    season_n = 0; regime_n = 0
+    for i, d in enumerate(draws):
+        for n in d["numbers"]: global_counts[n - 1] += 1
+        if _season(d["date"].month) == _season(target_date.month):
+            season_n += 1
+            for n in d["numbers"]: seasonal_counts[n - 1] += 1
+        if i > 0 and _sum_bin(sum(draws[i - 1]["numbers"])) == _sum_bin(sum(draws[-1]["numbers"])):
+            regime_n += 1
+            for n in d["numbers"]: regime_counts[n - 1] += 1
+    global_rate = global_counts / len(draws)
+    season_score = (seasonal_counts + 30.0 * global_rate) / (season_n + 30.0)
+    regime_score = (regime_counts + 20.0 * global_rate) / (regime_n + 20.0)
+    def make(signal: str, scores: np.ndarray) -> dict:
+        order = (np.argsort(-scores, kind="stable") + 1).tolist()
+        return {"signal": signal, "model_version": "E025_FROZEN_v1",
+                "numbers": sorted(order[:6]), "score_order": order}
+    return {"status": "FROZEN_PROSPECTIVE_SHADOW_ONLY", "target_round": target,
+        "training_through_round": target - 1, "target_draw_date_assumption": target_date.isoformat(),
+        "canonical_snapshot_sha256": digest(DATA), "generated_at_utc": generated_at,
+        "signals": [make("CALENDAR_SEASON_CONDITIONAL_v1", season_score),
+                    make("PREVIOUS_SUM_REGIME_CONDITIONAL_v1", regime_score)],
+        "formula_source": "automation/independent_signal_five_line_v1.py E025 frozen formulas",
+        "purchase_recommendation": False,
+        "editing_policy": "immutable; corrections require a new artifact and documented reason"}
+
+
+def result_artifact(frozen: dict, prediction_path: Path, actual: dict, fetched_at: str,
+                    repository_root: Path | None = None) -> dict:
+    outcome = set(actual["numbers"])
+    scored = []
+    for signal in frozen["signals"]:
+        hits = len(set(signal["numbers"]) & outcome)
+        scored.append({"signal": signal["signal"], "model_version": signal["model_version"],
+            "prediction_numbers": signal["numbers"], "main_hits": hits,
+            "bonus_included": actual["bonus"] in signal["numbers"],
+            "official_main_numbers": sorted(actual["numbers"]), "official_bonus": actual["bonus"]})
+    return {"status": "OFFICIAL_OUTCOME_RECORDED", "target_round": actual["round"],
+        "official_draw_date": actual["date"].isoformat(),
+        "prediction_file": prediction_path.relative_to(repository_root).as_posix() if repository_root else prediction_path.as_posix(),
+        "prediction_sha256": digest(prediction_path), "official_source_url": API.format(actual["round"]),
+        "source_type": "DONGHAENG_LOTTERY_OFFICIAL_JSON_ENDPOINT", "fetched_at_utc": fetched_at,
+        "signals": scored, "purchase_recommendation": False}
+
+
+def _read_frozen_files(root: Path) -> list[Path]:
+    return sorted(p for p in (root / "analysis").rglob("FROZEN_SIGNALS_*.json")
+                  if ".attempts" not in p.parts and p.parent.name.startswith("E030"))
+
+
+def _extend_from_result_events(draws: list[dict], tracker: Path) -> list[dict]:
+    """Load only contiguous, previously recorded official result events."""
+    result_files = sorted(tracker.glob("RESULT_*.json"), key=lambda p: int(p.stem.split("_")[-1]))
+    for path in result_files:
+        record = json.loads(path.read_text(encoding="utf-8"))
+        round_no = int(record["target_round"])
+        if round_no <= len(draws):
+            continue
+        if round_no != len(draws) + 1:
+            raise ValueError(f"non-contiguous prospective result sequence at {path.name}")
+        first = record["signals"][0]
+        numbers = tuple(sorted(int(n) for n in first["official_main_numbers"]))
+        bonus = int(first["official_bonus"])
+        if len(numbers) != 6 or len(set(numbers)) != 6 or min(numbers) < 1 or max(numbers) > 45 or bonus not in range(1, 46) or bonus in numbers:
+            raise ValueError(f"invalid recorded official outcome in {path}")
+        draws.append({"round": round_no, "date": datetime.strptime(record["official_draw_date"], "%Y-%m-%d").date(),
+                      "numbers": numbers, "bonus": bonus})
+    return draws
+
+
+def run(root: Path = ROOT, opener=urllib.request.urlopen) -> dict:
+    root = root.resolve(); draws = _extend_from_result_events(load_draws(), TRACKER)
+    frozen_files = _read_frozen_files(root)
+    if not frozen_files:
+        raise FileNotFoundError("No immutable E030 frozen prediction found")
+    frozen_files.sort(key=lambda p: int(json.loads(p.read_text(encoding="utf-8"))["target_round"]))
+    # A prospective result event is created only once. Existing prediction bytes remain untouched.
+    frozen = json.loads(frozen_files[-1].read_text(encoding="utf-8"))
+    target = int(frozen["target_round"])
+    if int(frozen["training_through_round"]) != target - 1:
+        raise ValueError(f"frozen prediction cutoff mismatch for target {target}")
+    actual = fetch_official(target, opener=opener)
+    result_path = TRACKER / f"RESULT_{target}.json"
+    created_result = False
+    if actual is not None and not result_path.exists():
+        TRACKER.mkdir(parents=True, exist_ok=True)
+        record = result_artifact(frozen, frozen_files[-1], actual,
+                                 datetime.now(timezone.utc).isoformat(), repository_root=root)
+        with result_path.open("x", encoding="utf-8", newline="\n") as stream:
+            json.dump(record, stream, ensure_ascii=False, indent=2); stream.write("\n")
+        created_result = True
+    elif actual is not None and result_path.exists():
+        prior = json.loads(result_path.read_text(encoding="utf-8"))
+        prior_nums = tuple(prior["signals"][0]["official_main_numbers"])
+        if prior_nums != tuple(sorted(actual["numbers"])) or prior["signals"][0]["official_bonus"] != actual["bonus"]:
+            raise ValueError(f"official result revision detected for {target}; preserving prior and requiring review")
+    generated_prediction = None
+    if actual is not None:
+        # The snapshot is read-only; official outcomes are held in memory for subsequent cutoffs.
+        if target != len(draws) + 1:
+            raise ValueError(f"cannot extend contiguous canonical rounds: target {target}, next {len(draws)+1}")
+        draws.append(actual)
+        next_frozen = make_frozen_prediction(draws, datetime.now(timezone.utc).isoformat())
+        TRACKER.mkdir(parents=True, exist_ok=True)
+        next_path = TRACKER / f"FROZEN_SIGNALS_{next_frozen['target_round']}.json"
+        if not next_path.exists():
+            with next_path.open("x", encoding="utf-8", newline="\n") as stream:
+                json.dump(next_frozen, stream, ensure_ascii=False, indent=2); stream.write("\n")
+        generated_prediction = str(next_path.relative_to(root))
+    return {"status": "UPDATED" if actual else "PENDING_OFFICIAL_DRAW",
+            "target_round": target, "result_created": created_result,
+            "next_prediction_created": generated_prediction is not None,
+            "result_path": str(result_path.relative_to(root)) if created_result else None,
+            "next_prediction_path": generated_prediction,
+            "purchase_recommendation": False}
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=ROOT)
+    args = parser.parse_args()
+    print(json.dumps(run(args.root), ensure_ascii=False, indent=2))
