@@ -207,17 +207,18 @@ def study_component_loo(root, out, task):
 
 
 def study_pair_drop(root,out,task):
-    actual,lookup=_load(root); policies={}; loo_policies={}
+    actual,lookup=_load(root); policies={}; loo_series={f"DROP_{m.upper()}":[] for m in engine.COMPONENTS}
     for t in TARGETS:
         tickets=_component_tickets(lookup,t); current={"FULL_EQUAL_VOTE":_ensemble(tickets),"B_EQUAL_RANK":lookup[t,engine.ENSEMBLE]}
-        loo=[]
+        winning=set(actual[t])
         for i,m in enumerate(engine.COMPONENTS):
-            current[f"DROP_{m.upper()}"]=_ensemble([q for j,q in enumerate(tickets) if i!=j])
-            loo.append(current[f"DROP_{m.upper()}"])
+            name=f"DROP_{m.upper()}"
+            loo_ticket=_ensemble([q for j,q in enumerate(tickets) if i!=j])
+            loo_series[name].append(len(set(loo_ticket)&winning))
         for i,j in itertools.combinations(range(len(tickets)),2):
             name=f"DROP_{engine.COMPONENTS[i].upper()}__{engine.COMPONENTS[j].upper()}"
             current[name]=_ensemble([q for k,q in enumerate(tickets) if k not in (i,j)])
-        policies[t]=current; loo_policies[t]=loo
+        policies[t]=current
     preds,series=_ticket_rows(actual,lookup,policies,task["spec"]["random_seed"])
     comparisons=_paired_tests(series,["FULL_EQUAL_VOTE","B_EQUAL_RANK"],task["spec"]["random_seed"])
     metrics=_metric_rows(series); blocks=_block_rows(series)
@@ -226,7 +227,7 @@ def study_pair_drop(root,out,task):
         names=pair_name.removeprefix("DROP_").split("__")
         loo_names=[f"DROP_{n}" for n in names]
         pair_effect=statistics.mean([a-b for a,b in zip(series[pair_name],series["FULL_EQUAL_VOTE"])])
-        component_effects=[statistics.mean([a-b for a,b in zip(series[name],series["FULL_EQUAL_VOTE"])]) for name in loo_names]
+        component_effects=[statistics.mean([a-b for a,b in zip(loo_series[name],series["FULL_EQUAL_VOTE"])]) for name in loo_names]
         consistency.append({"pair_drop":pair_name,"pair_mean_delta_vs_full":pair_effect,"component_loo_delta_1":component_effects[0],
             "component_loo_delta_2":component_effects[1],"same_direction_both":int((pair_effect>=0)==(component_effects[0]>=0)==(component_effects[1]>=0))})
     for row in preds:
@@ -236,9 +237,9 @@ def study_pair_drop(root,out,task):
     engine.csvfile(out/"LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv",consistency)
     engine.jsonfile(out/"EXACT_UNIFORM_BASELINE.json",{"per_draw_hit_pmf":engine.pmf(),"mean_hits":.8,"2plus":sum(engine.pmf()[2:]),"method":"exact hypergeometric 6/45"})
     verification={"status":"PASS","targets_checked":len(TARGETS),"prediction_records_checked":len(preds),"two_component_drop_policies":21,
-        "paired_comparisons":len(comparisons),"loo_pair_consistency_rows":len(consistency),"leakage_failures":0,"future_predictions":0}
+        "single_component_loo_reference_policies":len(loo_series),"paired_comparisons":len(comparisons),"loo_pair_consistency_rows":len(consistency),"leakage_failures":0,"future_predictions":0}
     engine.jsonfile(out/"VERIFICATION.json",verification)
-    _report(out,task,metrics,verification,"All 21 pairs of the seven frozen B components are removed before equal-ticket voting and evaluated on the same 601..1245 targets. Comparisons include full equal vote, cached equal-rank B, exact uniform 6/45 reference, temporal blocks, Holm correction and directional consistency with each component's leave-one-out effect.","Pairwise ablations are exploratory and multiplicity-adjusted; no pair is promoted from retrospective results.")
+    _report(out,task,metrics,verification,"All 21 pairs of the seven frozen B components are removed before equal-ticket voting and evaluated on the same 601..1245 targets. Comparisons include full equal vote, cached equal-rank B, exact uniform 6/45 reference, temporal blocks, Holm correction and directional consistency with each component's leave-one-out effect. Single-component leave-outs are retained only as internal directional-reference series and are not emitted as pair-drop policies.","Pairwise ablations are exploratory and multiplicity-adjusted; no pair is promoted from retrospective results.")
     return {"executed_cases":len(preds),"verification":verification}
 
 
