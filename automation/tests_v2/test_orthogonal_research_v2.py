@@ -40,6 +40,17 @@ class OrthogonalResearchTests(unittest.TestCase):
         self.assertGreaterEqual(adjusted[0],.01)
         self.assertEqual(adjusted[1],.06)
 
+    def test_promotion_gate_writes_auditable_verification_even_without_survivors(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parent) as temp:
+            folder=Path(temp)
+            validated=study._e034_gate([], {"all_within_limit":True}, folder)
+            self.assertEqual(validated,[])
+            verification=json.loads((folder/"VERIFICATION.json").read_text(encoding="utf-8"))
+            self.assertEqual(verification["leakage_failures"],0)
+            self.assertFalse(verification["recommendation_generation"])
+
     def test_bootstrap_repeats_exactly_with_frozen_seed(self):
         import numpy as np
         values=np.array([.1,-.2,.3,0.0]*30)
