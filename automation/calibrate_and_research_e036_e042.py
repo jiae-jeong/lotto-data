@@ -106,75 +106,104 @@ def block_bootstrap(values: np.ndarray, seed: int, reps: int = 4000, block: int 
     return float(np.quantile(means, .025)), float(np.quantile(means, .975))
 
 
-def e036(folder: Path, nrep: int) -> tuple[dict, list[dict]]:
-    # A per-target random ticket has an exact Hypergeometric(45,6,6) hit count.
-    # Each simulated model and each of its 100 same-target random comparators
-    # use the same marginal null; each mechanism changes the dependence engine.
+def e036(folder: Path, nrep: int, draws: list[tuple[int, ...]],
+         predictions: dict[str, list[tuple[int, ...]]]) -> tuple[dict, list[dict]]:
+    """Calibrate on four genuinely distinct generators and never on aligned outcomes.
+
+    The permutation mechanisms use E037's frozen pre-target tickets but randomly
+    reassign observed outcomes; they do not inspect the aligned candidate results.
+    The two synthetic mechanisms use exact uniform-ticket null draws.
+    """
     rng = np.random.default_rng(SEED)
-    targets = 645
+    targets = 1245 - TARGET_START + 1
+    family_count = len(FAMILIES)
     calibration = nrep // 2
     verification = nrep - calibration
+    target_ix = np.arange(targets)
+    outcomes = np.zeros((targets, 45), dtype=np.int8)
+    pred = np.zeros((family_count, targets, 45), dtype=np.int8)
+    random_tickets = np.zeros((targets, 100, 45), dtype=np.int8)
+    for i, t in enumerate(range(TARGET_START, 1246)):
+        for number in draws[t - 1]: outcomes[i, number - 1] = 1
+        for fi, family in enumerate(FAMILIES):
+            for number in predictions[family][i]: pred[fi, i, number - 1] = 1
+        rr = random.Random(SEED + t * 31)
+        for j in range(100):
+            for number in rr.sample(range(1, 46), 6): random_tickets[i, j, number - 1] = 1
+
+    # Pairwise candidate/outcome and random-ticket/outcome hit matrices permit
+    # actual target-label permutation and block permutation without resampling
+    # or changing candidate predictions.
+    candidate_hit = (pred.reshape(family_count * targets, 45) @ outcomes.T).reshape(family_count, targets, targets)
+    random_hit = (random_tickets.reshape(targets * 100, 45) @ outcomes.T).reshape(targets, 100, targets)
+    random_mean = random_hit.mean(axis=1)
+    random_3 = (random_hit >= 3).mean(axis=1)
+    random_4 = (random_hit >= 4).mean(axis=1)
+    block_groups = [np.arange(s, min(s + 20, targets)) for s in range(0, targets, 20)]
+
+    def statistic(delta_mean: np.ndarray, delta_3: np.ndarray, delta_4: np.ndarray) -> np.ndarray:
+        by_family = np.maximum.reduce((delta_mean / .03, delta_3 / .01, delta_4 / .003))
+        return by_family.max(axis=1)
+
     rows: list[dict] = []
-    calibrated: dict[str, list[float]] = {}
+    calibrated: dict[str, float] = {}
     verification_counts: dict[str, dict] = {}
     for mechanism in NULL_MECHANISMS:
-        all_stats = []
+        split_stats: dict[str, np.ndarray] = {}
         for split, reps in (("CALIBRATION", calibration), ("INDEPENDENT_VERIFICATION", verification)):
-            # Independent per-target hypergeometric draws are the exact outcome
-            # permutation null; block modes resample blocks of those null draws.
-            # Six simultaneous null candidates are included so the max statistic
-            # protects the family of registered E037 signals as well as endpoints.
-            model = rng.hypergeometric(6, 39, 6, size=(reps, targets, len(FAMILIES))).astype(np.int8)
-            baseline_tickets = rng.hypergeometric(6, 39, 6, size=(reps, targets, 100))
-            base = baseline_tickets.mean(axis=2)
-            base3 = (baseline_tickets >= 3).mean(axis=2)
-            base4 = (baseline_tickets >= 4).mean(axis=2)
-            if mechanism == "TEMPORAL_BLOCK_PERMUTATION":
-                blocks = [np.arange(s, min(s + 20, targets)) for s in range(0, targets, 20)]
-                for r in range(reps):
-                    order = rng.permutation(len(blocks))
-                    ix = np.concatenate([blocks[j] for j in order])
-                    model[r] = model[r, ix]
-                    base[r] = base[r, ix]
-                    base3[r] = base3[r, ix]
-                    base4[r] = base4[r, ix]
-            elif mechanism == "TARGET_OUTCOME_PERMUTATION":
-                for r in range(reps):
-                    ix = rng.permutation(targets)
-                    model[r] = model[r, ix]
-                    base[r] = base[r, ix]
-                    base3[r] = base3[r, ix]
-                    base4[r] = base4[r, ix]
-            elif mechanism == "SIGNAL_RANK_RANDOM_SCORE":
-                # A uniformly random score ranking independently selects a
-                # uniform 6-subset for each registered null candidate.
-                model = rng.hypergeometric(6, 39, 6, size=(reps, targets, len(FAMILIES))).astype(np.int8)
-            delta_mean = (model - base[:, :, None]).mean(axis=1)
-            delta_3 = ((model >= 3).astype(float) - base3[:, :, None]).mean(axis=1)
-            delta_4 = ((model >= 4).astype(float) - base4[:, :, None]).mean(axis=1)
-            # Max-statistic over the three registered endpoints controls familywise
-            # false promotion; calibration and verification sets never overlap.
-            stat_by_family = np.maximum.reduce((delta_mean / .03, delta_3 / .01, delta_4 / .003))
-            stat = stat_by_family.max(axis=1)
+            dm = np.zeros((reps, family_count)); d3 = np.zeros_like(dm); d4 = np.zeros_like(dm)
+            for r in range(reps):
+                if mechanism in {"EXACT_UNIFORM_TICKET", "SIGNAL_RANK_RANDOM_SCORE"}:
+                    if mechanism == "EXACT_UNIFORM_TICKET":
+                        # Exact ticket/draw null: hypergeometric hit counts, six
+                        # independent registered families, 100 random comparator lines.
+                        model_hits = rng.hypergeometric(6, 39, 6, size=(targets, family_count))
+                        baseline_hits = rng.hypergeometric(6, 39, 6, size=(targets, 100))
+                        dm[r] = model_hits.mean(axis=0) - baseline_hits.mean()
+                        d3[r] = (model_hits >= 3).mean(axis=0) - (baseline_hits >= 3).mean()
+                        d4[r] = (model_hits >= 4).mean(axis=0) - (baseline_hits >= 4).mean()
+                    else:
+                        # Independent random-score rankings select actual six-number
+                        # tickets against the observed target draws; comparator tickets
+                        # are the same 100 random lines used for each target.
+                        scores = rng.random((family_count, targets, 45))
+                        chosen = np.argpartition(scores, -6, axis=2)[:, :, -6:]
+                        target_outcomes = np.broadcast_to(outcomes[None, :, :],
+                                                         (family_count, targets, 45))
+                        model_hits = np.take_along_axis(target_outcomes, chosen, axis=2).sum(axis=2)
+                        base = random_hit[target_ix, :, target_ix]
+                        dm[r] = model_hits.mean(axis=1) - base.mean(axis=1).mean()
+                        d3[r] = (model_hits >= 3).mean(axis=1) - (base >= 3).mean(axis=1).mean()
+                        d4[r] = (model_hits >= 4).mean(axis=1) - (base >= 4).mean(axis=1).mean()
+                else:
+                    if mechanism == "TARGET_OUTCOME_PERMUTATION":
+                        outcome_order = rng.permutation(targets)
+                    else:
+                        order = rng.permutation(len(block_groups))
+                        outcome_order = np.concatenate([block_groups[j] for j in order])
+                    model_hits = candidate_hit[:, target_ix, outcome_order]
+                    base_mean = random_mean[target_ix, outcome_order]
+                    base3 = random_3[target_ix, outcome_order]
+                    base4 = random_4[target_ix, outcome_order]
+                    dm[r] = model_hits.mean(axis=1) - base_mean.mean()
+                    d3[r] = (model_hits >= 3).mean(axis=1) - base3.mean()
+                    d4[r] = (model_hits >= 4).mean(axis=1) - base4.mean()
+            stats = statistic(dm, d3, d4)
+            split_stats[split] = stats
             for i in range(reps):
                 rows.append({"mechanism": mechanism, "split": split, "replicate": i + 1,
-                             "delta_mean_hits": f"{delta_mean[i].max():.8f}",
-                             "delta_rate_3plus": f"{delta_3[i].max():.8f}",
-                             "delta_rate_4plus": f"{delta_4[i].max():.8f}",
-                             "max_delta_mean_hits": f"{delta_mean[i].max():.8f}",
-                             "null_candidate_families": len(FAMILIES),
-                             "max_registered_stat": f"{stat[i]:.8f}"})
-            all_stats.append((split, stat))
-        cal = all_stats[0][1]
-        val = all_stats[1][1]
-        # 99th percentile is frozen to provide margin below the 5% FPR ceiling.
-        threshold = float(np.quantile(cal, .99, method="higher"))
-        fp = int(np.sum(val >= threshold))
-        fpr = fp / len(val)
-        calibrated[mechanism] = [threshold]
-        verification_counts[mechanism] = {"false_promotions": fp, "verification_replicates": len(val),
+                             "max_delta_mean_hits": f"{dm[i].max():.8f}",
+                             "max_delta_rate_3plus": f"{d3[i].max():.8f}",
+                             "max_delta_rate_4plus": f"{d4[i].max():.8f}",
+                             "null_candidate_families": family_count,
+                             "max_registered_stat": f"{stats[i]:.8f}"})
+        threshold = float(np.quantile(split_stats["CALIBRATION"], .99, method="higher"))
+        val = split_stats["INDEPENDENT_VERIFICATION"]
+        false_count = int(np.sum(val >= threshold)); fpr = false_count / len(val)
+        calibrated[mechanism] = threshold
+        verification_counts[mechanism] = {"false_promotions": false_count, "verification_replicates": len(val),
                                           "false_promotion_rate": fpr, "pass_le_5pct": fpr <= .05}
-    thresholds = {k: v[0] for k, v in calibrated.items()}
+    thresholds = dict(calibrated)
     # One conservative global threshold for all four null mechanisms.
     global_threshold = max(thresholds.values())
     all_verification_false = sum(v["false_promotions"] for v in verification_counts.values())
@@ -190,6 +219,10 @@ def e036(folder: Path, nrep: int) -> tuple[dict, list[dict]]:
             "verification_by_mechanism": verification_counts,
             "familywise_false_promotion_ceiling": .05,
             "candidate_outcomes_used_for_calibration": False,
+            "calibration_uses_unpermuted_candidate_target_pairing": False,
+            "permutation_sources": "Observed target outcomes are permuted or block-permuted relative to frozen t-1 candidate tickets; unpermuted candidate hit alignment is not scored.",
+            "supersedes_prior_run": "gha_38518699993_1",
+            "supersession_reason": "The earlier run used hypergeometric hit-array permutations rather than distinct outcome-level permutation and random-score generators.",
             "historical_evidence_label": "screening/OOS evidence; not untouched holdout"}
     write_csv(folder / "NULL_REPLICATES.csv", rows)
     write_csv(folder / "FALSE_PROMOTION_RATE.csv", [
@@ -272,19 +305,27 @@ def family_scores(history: list[tuple[int, ...]], family: str) -> np.ndarray:
     raise KeyError(family)
 
 
-def e037(draws: list[tuple[int, ...]], folder: Path, gate_pass: bool) -> list[dict]:
+def build_family_predictions(draws: list[tuple[int, ...]]) -> dict[str, list[tuple[int, ...]]]:
+    predictions: dict[str, list[tuple[int, ...]]] = {f: [] for f in FAMILIES}
+    for t in range(TARGET_START, 1246):
+        train = draws[:t - 1]
+        for family in FAMILIES:
+            predictions[family].append(ticket(family_scores(train, family)))
+    return predictions
+
+
+def e037(draws: list[tuple[int, ...]], folder: Path, gate_pass: bool,
+         predictions: dict[str, list[tuple[int, ...]]]) -> list[dict]:
     targets = list(range(TARGET_START, 1246))
     random_rows = []
     pred_rows = []
     hits_by_family = {f: [] for f in FAMILIES}
     random_by_target = []
-    predictions: dict[str, list[tuple[int, ...]]] = {f: [] for f in FAMILIES}
-    for t in targets:
+    for target_index, t in enumerate(targets):
         train = draws[:t - 1]
         actual = draws[t - 1]
         for family in FAMILIES:
-            ticket_numbers = ticket(family_scores(train, family))
-            predictions[family].append(ticket_numbers)
+            ticket_numbers = predictions[family][target_index]
             h = hits(ticket_numbers, actual)
             hits_by_family[family].append(h)
             pred_rows.append({"target_round": t, "training_cutoff": t - 1,
@@ -356,7 +397,8 @@ def run(date: str, run_id: str, nrep: int) -> Path:
               "target_rounds": f"{TARGET_START}..1245", "historical_evidence": "screening/OOS, not untouched holdout"}
     gate_folder = out / "E036_NULL_GATE_CALIBRATION_v2"
     gate_folder.mkdir(exist_ok=False)
-    gate, _ = e036(gate_folder, nrep)
+    predictions = build_family_predictions(draws)
+    gate, _ = e036(gate_folder, nrep, draws, predictions)
     write_json(gate_folder / "VERIFICATION.json", {**common, **gate,
                "leakage_failures": 0, "future_predictions": 0})
     with (gate_folder / "REPORT.md").open("x", encoding="utf-8", newline="\n") as f:
@@ -383,7 +425,7 @@ def run(date: str, run_id: str, nrep: int) -> Path:
         "survival_rule": "E036 gate calibrated; not duplicate; CI lower >0; Holm p<.05; at least 60% positive 50-round blocks",
         "seed": SEED, "hyperparameter_tuning": "none; fixed formulas and parameters"}
     write_json(family_folder / "PREREGISTRATION.json", preregistration)
-    tests = e037(draws, family_folder, gate["status"] == "CALIBRATED")
+    tests = e037(draws, family_folder, gate["status"] == "CALIBRATED", predictions)
     survivors = [x["family"] for x in tests if x["survives"]]
     details037 = {**common, "study_id": "E037_PREDICTABILITY_FALSIFICATION_v1", "survivors": survivors,
                   "families_tested": len(tests), "multiple_testing": "Holm step-down across six families",
@@ -423,6 +465,8 @@ def run(date: str, run_id: str, nrep: int) -> Path:
                     "leakage_failures": 0, "future_predictions": 0, "recommendation_numbers_generated": False}, explanation)
 
     summary = {**common, "status": "COMPLETE_WITH_GATED_STUDIES",
+               "supersedes_prior_run": "gha_38518699993_1",
+               "supersession_reason": "E036 null mechanisms were reimplemented at outcome/ticket level; prior run is retained but not treated as final calibration.",
                "study_ids": ["E036_NULL_GATE_CALIBRATION_v2", "E037_PREDICTABILITY_FALSIFICATION_v1",
                              "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3", *[x for x, _ in remaining]],
                "e036_status": gate["status"], "e037_survivors": survivors,

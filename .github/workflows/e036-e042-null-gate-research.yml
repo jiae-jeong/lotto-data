@@ -100,6 +100,12 @@ jobs:
           summary=json.loads((folder/'E036_E042_RUN_SUMMARY.json').read_text(encoding='utf-8'))
           assert summary['data_cutoff']==1245 and summary['canonical_sha256']=='e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4'
           assert summary['leakage_failures']==0 and summary['future_predictions']==0
+          gate=json.loads((folder/'E036_NULL_GATE_CALIBRATION_v2/CALIBRATED_GATE.json').read_text(encoding='utf-8'))
+          assert gate['status']=='CALIBRATED' and gate['total_replicates']==8000
+          assert len(gate['verification_by_mechanism'])==4
+          assert gate['pooled_verification_false_promotion_rate']<=0.05
+          assert gate['supersedes_prior_run']=='gha_38518699993_1'
+          assert not gate['candidate_outcomes_used_for_calibration']
           expected=['E036_NULL_GATE_CALIBRATION_v2','E037_PREDICTABILITY_FALSIFICATION_v1','E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3','E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2','E040_SINGLE_EDGE_PROMOTION_GATE_v2','E041_FIVE_LINE_PORTFOLIO_REBUILD_v2','E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1']
           for name in expected:
               d=folder/name

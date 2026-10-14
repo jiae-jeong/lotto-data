@@ -16,8 +16,9 @@
       ],
       "replicates_per_mechanism": 2000,
       "split": "1000 calibration + 1000 independent verification",
-      "null_hit_distribution": "Hypergeometric(population=45, successes=6, draws=6), exact under uniform six-number ticket and draw",
+      "null_hit_distribution": "EXACT_UNIFORM_TICKET uses Hypergeometric(45,6,6); TARGET_OUTCOME_PERMUTATION permutes observed target draws relative to frozen t-1 tickets; TEMPORAL_BLOCK_PERMUTATION permutes 20-target outcome blocks relative to those tickets; SIGNAL_RANK_RANDOM_SCORE selects six numbers from independent random score rankings against observed target outcomes.",
       "familywise_family": "six registered E037 candidate families x three endpoints",
+      "permutation_rule": "Use frozen E037 predictions only as pre-target objects; do not score the unpermuted candidate/target alignment during calibration.",
       "max_statistic": "max(delta_mean_hits/0.03, delta_rate_3plus/0.01, delta_rate_4plus/0.003) across all six candidates",
       "calibration_quantile": 0.99,
       "acceptance": "each mechanism and pooled independent verification false-promotion rate <= 0.05"
