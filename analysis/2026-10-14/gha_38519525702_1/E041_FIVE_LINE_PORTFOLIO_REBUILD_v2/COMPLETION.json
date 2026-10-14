@@ -1,0 +1,15 @@
+{
+  "study_id": "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+  "status": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+  "completed_at_utc": "2026-10-14T05:59:13.219556+00:00",
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+  "seed": 20261016036,
+  "target_rounds": "601..1245",
+  "historical_evidence": "screening/OOS, not untouched holdout",
+  "reason": "Blocked by prior registered gate; no portfolio or prospective prediction was generated.",
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "recommendation_numbers_generated": false
+}

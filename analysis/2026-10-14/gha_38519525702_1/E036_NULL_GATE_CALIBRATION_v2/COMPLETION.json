@@ -1,0 +1,6 @@
+{
+  "study_id": "E036_NULL_GATE_CALIBRATION_v2",
+  "status": "CALIBRATED",
+  "executed_cases": 8000,
+  "candidate_outcomes_used_for_calibration": false
+}

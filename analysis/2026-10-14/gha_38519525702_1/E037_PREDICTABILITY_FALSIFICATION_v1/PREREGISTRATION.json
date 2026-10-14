@@ -1,0 +1,41 @@
+{
+  "study_id": "E037_PREDICTABILITY_FALSIFICATION_v1",
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+  "seed": 20261016036,
+  "target_rounds": "601..1245",
+  "historical_evidence": "screening/OOS, not untouched holdout",
+  "families": [
+    {
+      "id": "MULTISCALE_SERIAL_DEPENDENCE",
+      "formula": "fixed lag incidence weights at 1,2,3,5,13; ticket=top six; duplicate screen=recent-momentum overlap"
+    },
+    {
+      "id": "LAG_DIRECTIONAL_DEPENDENCE",
+      "formula": "lagged 45x45 incidence transition matrix with 2x global-rate smoothing; ticket=top six"
+    },
+    {
+      "id": "SPECTRAL_PHASE_DEPENDENCE",
+      "formula": "training-only FFT strongest eligible period per number, phase-weighted amplitude; ticket=top six"
+    },
+    {
+      "id": "CONDITIONAL_RECURRENCE_HAZARD",
+      "formula": "empirical completed inter-arrival hazard in age +/-3; duplicate screen=current-gap overlap"
+    },
+    {
+      "id": "REGIME_PERSISTENCE",
+      "formula": "exponential similarity of coarse prior-draw states; weighted next-draw incidence; duplicate screen=structure profile"
+    },
+    {
+      "id": "IRREDUCIBLE_JOINT_SET_DEPENDENCE",
+      "formula": "full-set recurrence similarity exp(1.2*intersection) on prior draw sets; duplicate screen=pair/triple overlap"
+    }
+  ],
+  "target_rule": "for target t, every score uses rounds 1..t-1 only",
+  "random_tickets_per_target": 100,
+  "bootstrap": "paired circular moving-block percentile CI, block length 20, 4000 reps",
+  "p_value": "one-sided exact sign test across contiguous 50-target block mean deltas; Holm across six families",
+  "survival_rule": "E036 gate calibrated; not duplicate; CI lower >0; Holm p<.05; at least 60% positive 50-round blocks",
+  "hyperparameter_tuning": "none; fixed formulas and parameters"
+}
