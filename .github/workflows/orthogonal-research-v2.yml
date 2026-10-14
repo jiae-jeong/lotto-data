@@ -103,7 +103,9 @@ jobs:
           expected=summary['study_ids']; assert len(expected)==6
           for study in expected:
               d=folder/study
-              assert (d/'COMPLETION.json').is_file() and (d/'VERIFICATION.json').is_file() and (d/'REPORT.md').is_file()
+              required=['COMPLETION.json','VERIFICATION.json','REPORT.md','SHA256_MANIFEST.csv']
+              missing=[name for name in required if not (d/name).is_file()]
+              assert not missing, f'{study}: missing required artifacts {missing}; files={[p.name for p in d.iterdir()] if d.exists() else "folder missing"}'
               manifest=list(csv.DictReader((d/'SHA256_MANIFEST.csv').open(encoding='utf-8',newline='')))
               assert manifest
               for row in manifest:
@@ -117,6 +119,16 @@ jobs:
           if git diff --cached --quiet; then echo 'No new evidence to publish'; exit 1; fi
           git commit -m "research: execute E030-E035 [evidence]"
           git push origin HEAD:main
+
+      - name: Preserve failed run evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e030-e035-failed-attempt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            analysis/${{ steps.study.outputs.date }}/${{ steps.study.outputs.run_id }}/**
+            analysis/${{ steps.study.outputs.date }}/.attempts/${{ steps.study.outputs.run_id }}/**
+          if-no-files-found: warn
 
   prospective-ledger:
     if: github.event_name == 'schedule'
