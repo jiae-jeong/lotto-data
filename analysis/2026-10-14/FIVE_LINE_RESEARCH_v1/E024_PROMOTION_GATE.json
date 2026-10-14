@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "data_cutoff": 1245,
+  "operational_ticket_count": 5,
+  "candidate_portfolio_count": 21,
+  "selector_lookback": 200,
+  "selector_targets": 445,
+  "future_predictions": 0,
+  "leakage_failures": 0,
+  "tests": [
+    {
+      "metric": "max_hits",
+      "selector_minus_random5": -0.05103370786516853,
+      "ci95_low": -0.10591011235955056,
+      "ci95_high": 0.002853932584269676,
+      "p_two_sided_block_bootstrap": 0.06423394151462135,
+      "targets": 445,
+      "block": 20,
+      "reps": 4000
+    },
+    {
+      "metric": "any_3plus",
+      "selector_minus_random5": -0.02321348314606742,
+      "ci95_low": -0.050898876404494385,
+      "ci95_high": 0.004359550561797752,
+      "p_two_sided_block_bootstrap": 0.09822544363909022,
+      "targets": 445,
+      "block": 20,
+      "reps": 4000
+    },
+    {
+      "metric": "any_4plus",
+      "selector_minus_random5": -0.004921348314606742,
+      "ci95_low": -0.0076179775280898875,
+      "ci95_high": -0.00024719101123595516,
+      "p_two_sided_block_bootstrap": 0.018245438640339916,
+      "targets": 445,
+      "block": 20,
+      "reps": 4000
+    },
+    {
+      "metric": "winning_union_coverage",
+      "selector_minus_random5": -0.15665168539325844,
+      "ci95_low": -0.2678202247191011,
+      "ci95_high": -0.05382022471910114,
+      "p_two_sided_block_bootstrap": 0.0029992501874531365,
+      "targets": 445,
+      "block": 20,
+      "reps": 4000
+    }
+  ],
+  "temporal_any3_blocks": [
+    {
+      "block": "801..900",
+      "any3_delta": -0.06620000000000001,
+      "positive": false
+    },
+    {
+      "block": "901..1000",
+      "any3_delta": -2.7755575615628914e-19,
+      "positive": false
+    },
+    {
+      "block": "1001..1100",
+      "any3_delta": -0.0234,
+      "positive": false
+    },
+    {
+      "block": "1101..1200",
+      "any3_delta": -0.016700000000000003,
+      "positive": false
+    },
+    {
+      "block": "1201..1245",
+      "any3_delta": 0.0066666666666666645,
+      "positive": true
+    }
+  ],
+  "promotion_status": "DO_NOT_PROMOTE",
+  "promotion_rule": "Require lower 95% block-bootstrap bound >0 for any3 and max_hits, nonnegative lower bound for any4, and positive any3 delta in at least 60% of ~100-target blocks (minimum three).",
+  "interpretation": "This gate may reject the historical five-line selector. Rejection means retain research status and do not use the selector as a validated purchase rule."
+}
