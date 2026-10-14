@@ -1,0 +1,16 @@
+{
+  "study_id": "E046_SHADOW_MODEL_PROSPECTIVE_LEDGER_v2",
+  "target_round": 1246,
+  "status": "PREDICTION_FROZEN_PENDING_DRAW",
+  "prediction_file": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/FROZEN_SIGNALS_1246.json",
+  "prediction_sha256": "719c4cc11174c80dd1ddef75e438a2de36ec76842869128bf17ecacf646cb931",
+  "training_cutoff": 1245,
+  "models": [
+    "CALENDAR_SEASON_CONDITIONAL_v1",
+    "PREVIOUS_SUM_REGIME_CONDITIONAL_v1"
+  ],
+  "outcome_path": "analysis/prospective_v1/outcomes/ROUND_1246.json",
+  "outcome_evaluation_path": "analysis/prospective_v1/outcomes/E046_SHADOW_OUTCOME_1246.json",
+  "prediction_mutation_after_draw": "forbidden",
+  "next_prediction": "freeze only after official target outcome is verified and evaluated"
+}

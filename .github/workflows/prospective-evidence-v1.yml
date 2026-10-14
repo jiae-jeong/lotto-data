@@ -1,0 +1,30 @@
+name: Prospective evidence freeze v1 validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'research/prospective_v1/**'
+      - 'analysis/2026-10-14/E043_E049_PROSPECTIVE_EVIDENCE_v1/**'
+      - 'analysis/2026-10-14/E045_PROSPECTIVE_RANDOM5_BASELINE_v1/**'
+      - 'analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/**'
+      - '.github/workflows/prospective-evidence-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-prospective-freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax validation
+        run: python -m compileall -q research/prospective_v1
+      - name: Unit tests
+        run: python -m unittest discover -s research/prospective_v1/tests -v
+      - name: Frozen protocol and artifact verification
+        run: python research/prospective_v1/verify_prospective_v1.py --require-e030 --require-canonical

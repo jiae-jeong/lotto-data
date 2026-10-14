@@ -1,0 +1,59 @@
+{
+  "study_id": "E047_ANYTIME_VALID_PROSPECTIVE_EVIDENCE_v1",
+  "method": "mixture e-processes for bounded paired differences",
+  "familywise_alpha": 0.05,
+  "alpha_allocation": {
+    "five_line_any3plus": 0.02,
+    "five_line_mean_max_hits": 0.02,
+    "shadow_single_ticket_mean_hits": 0.01
+  },
+  "null": "E[D] <= 0",
+  "D_definition": "same-target actual statistic minus mean over frozen matched random pool statistic; one D per target",
+  "bounds": {
+    "any3plus": [
+      -1,
+      1
+    ],
+    "mean_max_hits": [
+      -6,
+      6
+    ],
+    "shadow_single_ticket_mean_hits": [
+      -6,
+      6
+    ]
+  },
+  "lambda_grid": [
+    0.005,
+    0.01,
+    0.02,
+    0.04,
+    0.08,
+    0.16,
+    0.32
+  ],
+  "weights": "equal weights over positive lambda grid",
+  "component": "exp(lambda * cumulative_sum(D) - n * lambda^2 * (upper-lower)^2 / 8)",
+  "mixture_e_value": "arithmetic mean of component e-values",
+  "reject_boundary": "mixture e-value >= 1/allocated_alpha",
+  "no_weekly_pvalue_restarts": true,
+  "shadow_single_ticket": {
+    "method": "separate one-sided bounded-difference e-process",
+    "alpha": 0.01,
+    "bounds_hits_difference": [
+      -6,
+      6
+    ],
+    "lambda_grid": [
+      0.001,
+      0.002,
+      0.004,
+      0.008,
+      0.016,
+      0.032,
+      0.064
+    ]
+  },
+  "stop_rule": "no interim efficacy stop or promotion; stop early only for an integrity failure; final decision at target 1445 after all 200 registered targets",
+  "first_outcome_policy": "This file and protocol hash must be committed before target 1246 outcome is accessed."
+}

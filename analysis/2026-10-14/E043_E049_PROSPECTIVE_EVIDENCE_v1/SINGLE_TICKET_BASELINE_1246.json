@@ -1,0 +1,12 @@
+{
+  "study_id": "E047_RANDOM_SINGLE_BASELINE_v1",
+  "target_round": 1246,
+  "status": "FROZEN_PRE_DRAW",
+  "seed": 20261015290,
+  "base_seed": 20261014044,
+  "samples": 10000,
+  "pool_path": "analysis/2026-10-14/E045_PROSPECTIVE_RANDOM5_BASELINE_v1/SINGLE_TICKET_POOL_1246.jsonl.gz",
+  "pool_sha256": "16a7b9ff3da87c9670a87a412baafe14ca2d14728188d2024f80c90d7c1f0cf3",
+  "pool_bytes": 86067,
+  "sampling": "Uniform six-number tickets sampled independently with replacement at the ticket level."
+}

@@ -1,0 +1,133 @@
+{
+  "study_id": "E043_E049_PROSPECTIVE_EVIDENCE_v1",
+  "status": "FROZEN_BEFORE_TARGET_1246_OUTCOME",
+  "created_at_utc": "2026-10-14T06:41:56.809752+00:00",
+  "source_commit": "997adeb22bc7c1b68c8f5fe6390ab5c658416873",
+  "canonical_data": {
+    "path": "lotto_data.csv",
+    "rounds": [
+      1,
+      1245
+    ],
+    "latest_round": 1245,
+    "sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+    "handling": "read-only; future outcomes kept as separate immutable events"
+  },
+  "target_round": 1246,
+  "models": [
+    {
+      "model": "CALENDAR_SEASON_CONDITIONAL_v1",
+      "model_version": "E025_FROZEN_v1",
+      "role": "shadow only",
+      "formula": "seasonal number counts with a 30-draw global-rate prior; frozen model implementation identified by code/config SHA",
+      "training_cutoff": 1245,
+      "prediction_generated_at_utc": "2026-10-14T04:39:53.357018+00:00",
+      "prediction_path": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/FROZEN_SIGNALS_1246.json",
+      "prediction_sha256": "719c4cc11174c80dd1ddef75e438a2de36ec76842869128bf17ecacf646cb931",
+      "code_sha256": "2ccc817e5d9d21807d709173772a1384039eac74f68ec2c3580107d0a77ee783",
+      "config_sha256": "ddd916d0c0c1db500301fcd16297e1ca98f60775b49e1c45ea381e6eef3e6ed1"
+    },
+    {
+      "model": "PREVIOUS_SUM_REGIME_CONDITIONAL_v1",
+      "model_version": "E025_FROZEN_v1",
+      "role": "shadow only",
+      "formula": "number counts conditional on prior-draw sum regime with a 20-draw global-rate prior; frozen model implementation identified by code/config SHA",
+      "training_cutoff": 1245,
+      "prediction_generated_at_utc": "2026-10-14T04:39:53.357018+00:00",
+      "prediction_path": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/FROZEN_SIGNALS_1246.json",
+      "prediction_sha256": "719c4cc11174c80dd1ddef75e438a2de36ec76842869128bf17ecacf646cb931",
+      "code_sha256": "2ccc817e5d9d21807d709173772a1384039eac74f68ec2c3580107d0a77ee783",
+      "config_sha256": "ddd916d0c0c1db500301fcd16297e1ca98f60775b49e1c45ea381e6eef3e6ed1"
+    },
+    {
+      "model": "ACTUAL_PURCHASE_FIVE_LINES",
+      "model_version": "purchase-recorded-per-target",
+      "role": "only verified actual purchase lines; none inferred",
+      "training_cutoff": "per-source-record",
+      "prediction_generated_at_utc": "must be before official draw",
+      "prediction_sha256": "per sealed bundle"
+    }
+  ],
+  "cutoff_rule": "Every target t uses only canonical or frozen information through t-1. E030 target 1246 cutoff is 1245. Do not recompute target 1246 after outcome.",
+  "confirmatory_horizon": {
+    "first_target": 1246,
+    "last_target": 1445,
+    "targets": 200,
+    "blocks": [
+      [
+        1246,
+        1295
+      ],
+      [
+        1296,
+        1345
+      ],
+      [
+        1346,
+        1395
+      ],
+      [
+        1396,
+        1445
+      ]
+    ]
+  },
+  "registered_config_sha256": "5fd20a1c5930e0f7e395c7ea1c3b2d765512dc03920acfde93e8edec4d12aa8d",
+  "random_comparators": {
+    "single_ticket": {
+      "distribution": "uniform 6-subsets from 1..45; 10000 frozen draws per target",
+      "seed_rule": "single_base_seed + target_round",
+      "base_seed": 20261014044,
+      "target_1246_seed": 20261015290,
+      "pool_file": "analysis/2026-10-14/E045_PROSPECTIVE_RANDOM5_BASELINE_v1/SINGLE_TICKET_POOL_1246.jsonl.gz",
+      "pool_sha256": "16a7b9ff3da87c9670a87a412baafe14ca2d14728188d2024f80c90d7c1f0cf3",
+      "pool_bytes": 86067
+    },
+    "random5": {
+      "distribution": "uniform 6-subsets; five distinct tickets per portfolio; 10,000 independently sampled portfolios",
+      "seed_rule": "Python random.Random(base_seed + target_round)",
+      "base_seed": 20261014045,
+      "target_1246_seed": 20261015291,
+      "pool_file": "analysis/2026-10-14/E045_PROSPECTIVE_RANDOM5_BASELINE_v1/RANDOM5_POOL_1246.jsonl.gz",
+      "pool_sha256": "da3f890aac5c6eb4ac911bdd5d56de58a66a7bb986927791910e428858f0d583",
+      "pool_bytes": 293322
+    }
+  },
+  "metrics": [
+    "single-ticket mean hits",
+    "single-ticket 2+/3+/4+/5+/6+",
+    "five-line max hits",
+    "five-line any2+/3+/4+/5+/6",
+    "winning-number union coverage",
+    "unique-number coverage",
+    "mean pairwise overlap",
+    "model-minus-random paired difference"
+  ],
+  "outcome_policy": "Prediction, purchase, random pool and outcome artifacts are separate. Outcome events are write-once. Never edit pre-draw bytes after draw.",
+  "status_rules": {
+    "initial": "PROSPECTIVE_PENDING",
+    "weak": "PROSPECTIVE_WEAK_SIGNAL",
+    "validated": "PROSPECTIVE_VALIDATED_EDGE only when E047 anytime-valid and E048 horizon gates pass",
+    "reject": "REJECTED only under the frozen futility rule; otherwise pending",
+    "historical": "HISTORICAL_SCREENING; rounds 1..1245 are not untouched validation"
+  },
+  "promotion": {
+    "familywise_alpha": 0.05,
+    "all_primary_gates_required": true,
+    "portfolio_primary": [
+      "any3plus paired difference > 0",
+      "mean max hits paired difference > 0"
+    ],
+    "harm_gate": "any4plus paired difference >= 0 at confirmatory horizon",
+    "block_stability": "at least 3 of 4 fixed 50-round blocks have positive paired differences; the remaining block may not be below -0.02 for any3plus or -0.10 for max hits",
+    "leakage_failures_allowed": 0,
+    "one_or_two_draw_promotion": false,
+    "no_selector_retuning_before_validation": true
+  },
+  "e030_immutable": {
+    "path": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/FROZEN_SIGNALS_1246.json",
+    "sha256": "719c4cc11174c80dd1ddef75e438a2de36ec76842869128bf17ecacf646cb931",
+    "prohibition": "no edit, rerun, or retuning of target-1246 prediction"
+  },
+  "no_recommendation_generation": true
+}

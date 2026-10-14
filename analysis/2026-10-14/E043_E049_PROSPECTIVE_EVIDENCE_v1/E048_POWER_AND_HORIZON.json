@@ -1,0 +1,79 @@
+{
+  "method": "one-sided normal planning approximation; alpha 0.02 per co-primary portfolio metric and 0.01 for shadow single-ticket evidence; not evidence",
+  "alpha_each_primary": 0.02,
+  "false_positive_gate_familywise": 0.05,
+  "assumptions": "prospective independent target rounds; fixed effect; no optional stopping; sequential decisions use E047 e-process, so these fixed-horizon approximations are planning only",
+  "single_ticket_mean_hits": {
+    "0.02": {
+      "0.8": 30838,
+      "0.9": 39998
+    },
+    "0.04": {
+      "0.8": 7710,
+      "0.9": 10000
+    },
+    "0.06": {
+      "0.8": 3427,
+      "0.9": 4445
+    },
+    "0.1": {
+      "0.8": 1234,
+      "0.9": 1600
+    }
+  },
+  "five_line_any3plus": {
+    "0.01": {
+      "0.8": 17526,
+      "0.9": 23256
+    },
+    "0.02": {
+      "0.8": 4538,
+      "0.9": 6021
+    },
+    "0.03": {
+      "0.8": 2084,
+      "0.9": 2766
+    },
+    "0.05": {
+      "0.8": 797,
+      "0.9": 1058
+    }
+  },
+  "five_line_mean_max_hits": {
+    "0.05": {
+      "0.8": 3180,
+      "0.9": 4220
+    },
+    "0.1": {
+      "0.8": 795,
+      "0.9": 1055
+    },
+    "0.15": {
+      "0.8": 354,
+      "0.9": 469
+    },
+    "0.2": {
+      "0.8": 199,
+      "0.9": 264
+    }
+  },
+  "random5_null_reference": {
+    "any3plus": 0.11362357327424644,
+    "mean_max_hits": 1.7289356370565372,
+    "max_hits_variance": 0.47412305165266805
+  },
+  "monitoring_phases": {
+    "EARLY_MONITORING": {
+      "targets": "1-24",
+      "allowed": "integrity and descriptive summaries only"
+    },
+    "INTERMEDIATE_EVIDENCE": {
+      "targets": "25-199",
+      "allowed": "e-process and confidence-sequence monitoring; no promotion before 200"
+    },
+    "CONFIRMATORY_EVIDENCE": {
+      "targets": "200",
+      "allowed": "apply E049 promotion gate once the fixed horizon and all integrity requirements are met"
+    }
+  }
+}

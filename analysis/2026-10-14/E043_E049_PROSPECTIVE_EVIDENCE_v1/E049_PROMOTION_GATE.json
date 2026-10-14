@@ -1,0 +1,22 @@
+{
+  "study_id": "E049_PROSPECTIVE_PROMOTION_GATE_v1",
+  "status": "PROSPECTIVE_PENDING",
+  "historical_status": "HISTORICAL_SCREENING",
+  "validated_status_requires": [
+    "E047 anytime-valid rejection under frozen family alpha",
+    "E048 minimum horizon reached",
+    "positive paired any3plus and max-hit mean differences",
+    "any4plus no harm",
+    "block stability condition from E043",
+    "zero leakage and zero post-draw prediction rewrites",
+    "complete pre-draw publication and pool hash evidence"
+  ],
+  "weak_signal_status": "positive point estimates but gates not met",
+  "rejected_status": "registered futility boundary met or material integrity violation",
+  "prohibited_before_validation": [
+    "E041/E042 selector retuning",
+    "historical threshold tuning",
+    "renamed reuse of failed signals",
+    "promotion based on one or two draws"
+  ]
+}
