@@ -1,0 +1,32 @@
+{
+  "status": "COMPLETE",
+  "study_ids": [
+    "E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
+    "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
+    "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
+    "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+    "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
+    "E035_FIVE_LINE_REBUILD_GATE_v1"
+  ],
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "canonical_raw_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "b_cache_raw_sha256": "0436f0c7412ecb10d0f24c25816faa991f1d704c54295db34f7bcf88d51b3320",
+  "candidate_families": [
+    "CROSS_FIT_RESIDUAL_SIGNAL",
+    "DRAW_STATE_TRANSITION",
+    "ONLINE_CHANGE_POINT_SCORE",
+    "DIRICHLET_GAP_TICKET_GENERATOR"
+  ],
+  "survivors": [
+    "CROSS_FIT_RESIDUAL_SIGNAL",
+    "ONLINE_CHANGE_POINT_SCORE",
+    "DIRICHLET_GAP_TICKET_GENERATOR"
+  ],
+  "validated_edges": [],
+  "e035_status": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+  "future_predictions": 0,
+  "leakage_failures": 0,
+  "config_sha256": "ddd916d0c0c1db500301fcd16297e1ca98f60775b49e1c45ea381e6eef3e6ed1",
+  "code_sha256": "2ccc817e5d9d21807d709173772a1384039eac74f68ec2c3580107d0a77ee783"
+}

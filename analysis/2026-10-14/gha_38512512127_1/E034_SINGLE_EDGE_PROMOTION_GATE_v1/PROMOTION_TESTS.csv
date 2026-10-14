@@ -1,0 +1,4 @@
+signal,status,positive_mean_ci,holm_adjusted_p_below_0_05,rate_3plus_noninferior,positive_blocks_at_least_60pct,positive_after_every_50_block_removed,independence_screen_passed,negative_controls_within_5pct,leakage_zero,mean_delta,ci95_low,ci95_high,rate_3plus_delta,p_holm
+CROSS_FIT_RESIDUAL_SIGNAL,NO_VALIDATED_EDGE,False,False,True,False,False,True,False,True,0.008356589147286814,-0.047089922480620175,0.06612751937984494,-0.005627906976744188,1.0
+ONLINE_CHANGE_POINT_SCORE,NO_VALIDATED_EDGE,False,False,True,False,False,True,False,True,-0.011798449612403098,-0.08310000000000001,0.05579922480620156,-0.004077519379844965,1.0
+DIRICHLET_GAP_TICKET_GENERATOR,NO_VALIDATED_EDGE,False,False,True,False,False,True,False,True,-0.008697674418604645,-0.06676782945736434,0.0512492248062015,0.0005736434108527106,1.0

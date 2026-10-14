@@ -1,0 +1,11 @@
+{
+  "study_id": "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
+  "status": "COMPLETE",
+  "executed_cases": 20640,
+  "completed_at_utc": "2026-10-14T04:40:34.340203+00:00",
+  "survivors": [
+    "CROSS_FIT_RESIDUAL_SIGNAL",
+    "ONLINE_CHANGE_POINT_SCORE",
+    "DIRICHLET_GAP_TICKET_GENERATOR"
+  ]
+}

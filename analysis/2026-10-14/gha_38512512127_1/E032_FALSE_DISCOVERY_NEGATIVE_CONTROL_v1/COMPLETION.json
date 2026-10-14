@@ -1,0 +1,7 @@
+{
+  "study_id": "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
+  "status": "COMPLETE",
+  "executed_cases": 400,
+  "completed_at_utc": "2026-10-14T04:41:49.591362+00:00",
+  "false_promotions": 24
+}
