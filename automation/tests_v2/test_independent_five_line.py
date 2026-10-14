@@ -1,61 +1,49 @@
-"""Unit and registration guards for the independent five-line research path."""
-import json
-import sys
-import unittest
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import daily_research_v2 as daily
-import independent_signal_five_line_v1 as study
-
-
-class IndependentFiveLineTests(unittest.TestCase):
-    def test_registered_queue_has_new_order_without_relabeling_e019(self):
-        queue = json.loads((Path(__file__).resolve().parents[1] / "research_queue_v2.json").read_text(encoding="utf-8"))
-        ids = [task["id"] for task in queue["tasks"]]
-        self.assertEqual(ids[-5:], study.__dict__.get("TASK_IDS", [
-            "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1", "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
-            "E027_FIVE_LINE_CANDIDATE_BANK_v1", "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
-            "E029_FIVE_LINE_PROMOTION_GATE_v2"]))
-        self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
-                         "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
-        for task in queue["tasks"][-5:]: daily._validate_task(task)
-
-    def test_season_and_fixed_sum_regimes_are_predefined(self):
-        self.assertEqual([study._season(m) for m in (1, 4, 7, 10)], ["winter", "spring", "summer", "autumn"])
-        self.assertEqual([study._sum_regime(x) for x in (119, 120, 144, 145, 169, 170)], [0, 1, 1, 2, 2, 3])
-
-    def test_lower_number_breaks_score_ties(self):
-        scores = {n: 1.0 for n in range(1, 46)}
-        self.assertEqual(study._top_ticket(scores), (1, 2, 3, 4, 5, 6))
-
-    def test_fixed_portfolio_strategies_return_five_distinct_candidates(self):
-        candidates = []
-        for i in range(12):
-            candidates.append({"candidate_id": f"C{i:02}", "numbers": tuple(range(i + 1, i + 7)),
-                "source_model": f"M{i}", "source_models": f"M{i}",
-                "source_family": "INDEPENDENT" if i >= 8 else "B", "candidate_score": 1 - i / 100,
-                "candidate_score_rank": i + 1, "eligible_independent": i >= 8})
-        for strategy in study.FIXED_STRATEGIES:
-            result = study._select_portfolio(strategy, candidates)
-            self.assertEqual(len(result), 5, strategy)
-            self.assertEqual(len({x["candidate_id"] for x in result}), 5, strategy)
-
-    def test_block_bootstrap_is_reproducible_and_reports_uncertainty(self):
-        values = [0.1, -0.2, 0.3, 0.0] * 10
-        a = study._block_bootstrap(values, 20261015, reps=120, block=4)
-        b = study._block_bootstrap(values, 20261015, reps=120, block=4)
-        self.assertEqual(a, b)
-        self.assertLessEqual(a["ci95_low"], a["estimate"] + 1e-12)
-        self.assertGreaterEqual(a["ci95_high"] + 1e-12, a["estimate"])
-
-    def test_holm_stepdown_is_monotone(self):
-        rows = [{"p_raw": p} for p in (0.01, 0.03, 0.04)]
-        study._holm(rows)
-        adjusted = [r["p_holm"] for r in rows]
-        self.assertEqual(adjusted, sorted(adjusted))
-        self.assertTrue(all(x <= 1 for x in adjusted))
-
-
-if __name__ == "__main__":
-    unittest.main()
+YªçŠx³¬uç%j·Â+ar‰ì¶ë•ë_¢ºÞjË"‚v›•ëÚ®&›•ëˆˆ•[š][™™YÚ\Ý˜][ÛˆÝX\™È›ÜˆH[™\[™[š]™K[[™H™\ÙX\˜Ú]ˆˆˆ‚š[\ÜœÛÛ‚š[\ÜÞ\Âš[\Ü[š]\Ý™œ›ÛH]Xˆ[\Ü]‚œÞ\Ëœ]š[œÙ\
+ÝŠ]
+×Ùš[W×ÊKœ™\ÛÛ™J
+Kœ\™[ÖÌWJJBš[\ÜZ[WÜ™\ÙX\˜ÚÝŒˆ\ÈZ[Bš[\Ü[™\[™[ÜÚYÛ˜[Ùš]™WÛ[™WÝŒH\ÈÝYB‚‚˜Û\ÜÈ[™\[™[š]™S[™U\ÝÊ[š]\Ý•\ÝØ\ÙJN‚ˆYˆ\ÝÜ™YÚ\Ý\™YÜ]Y]YWÚ\×Û™]×ÛÜ™\—ÝÚ]Ý]Ü™[X™[[™×ÙLNJÙ[ŠN‚ˆ]Y]YHHœÛÛ‹›ØYÊ
+]
+×Ùš[W×ÊKœ™\ÛÛ™J
+Kœ\™[ÖÌWHÈœ™\ÙX\˜ÚÜ]Y]YWÝŒ‹šœÛÛˆŠKœ™XYÝ^
+[˜ÛÙ[™ÏH]‹NŠJBˆYÈHÝ\ÚÖÈšY—H›Üˆ\ÚÈ[ˆ]Y]YVÈ\ÚÜÈ—WBˆ^XÝYÜš[ÜˆHÝYK—×ÙXÝ×Ë™Ù]
+•TÒ×ÒQÈ‹Âˆ‘LWÒS‘TS‘S•ÔÒQÓSÑTÐÓÕ‘T–WÝŒH‹‘L—ÒS‘TS‘S•ÓSÑSÕÐSÑ“Ô•ÐT‘ÝŒH‹ˆ‘L×Ñ’U‘WÓS‘WÐÐS‘QUWÐS’×ÝŒH‹‘LŽÑ’U‘WÓS‘WÔÔ•“ÓS×ÔÑSPÕÔ—ÝŒˆ‹ˆ‘LŽWÑ’U‘WÓS‘WÔ“ÓSÕSÓ—ÑÐUWÝŒˆ—JBˆÙ[‹˜\ÜÙ\\]X[
+YÖËLLN‹M—K^XÝYÜš[ÜŠBˆÙ[‹˜\ÜÙ\\]X[
+YÖËMŽ—KÂˆ‘LÌÔ“ÔÔPÕU‘WÔÒQÓSÑ”‘QV‘WÝŒH‹ˆ‘LÌWÓÔ•ÑÓÓSÔÒQÓSÑTÐÓÕ‘T–WÝŒˆ‹ˆ‘LÌ—ÑSÑWÑTÐÓÕ‘T–WÓ‘QÐUU‘WÐÓÓ•“ÓÝŒH‹ˆ‘LÌ×ÓÔ•ÑÓÓSÔÒQÓSÕÐSÑ“Ô•ÐT‘ÝŒH‹ˆ‘LÍÔÒS‘ÓWÑQÑWÔ“ÓSÕSÓ—ÑÐUWÝŒH‹ˆ‘LÍWÑ’U‘WÓS‘WÔ‘P•RSÑÐUWÝŒH‹ˆJBˆÙ[‹˜\ÜÙ\\]X[
+YÖÚYËš[™^
+‘LNWÕ‘QWÕPÒÑUÔÔ•“ÓS×ÐÓÕ‘TQÑWÝŒHŠWKˆ‘LNWÕ‘QWÕPÒÑUÔÔ•“ÓS×ÐÓÕ‘TQÑWÝŒHŠBˆ›Üˆ\ÚÈ[ˆ]Y]YVÈ\ÚÜÈ—VËLLN‹M—NˆZ[K—Ý˜[Y]WÝ\ÚÊ\ÚÊB‚ˆYˆ\ÝÜÙX\ÛÛ—Ø[™Ùš^YÜÝ[WÜ™YÚ[Y\×Ø\™WÜ™YYš[™Y
+Ù[ŠN‚ˆÙ[‹˜\ÜÙ\\]X[
+ÜÝYK—ÜÙX\ÛÛŠJH›ÜˆH[ˆ
+KËL
+WKÈÚ[\ˆ‹œÜš[™È‹œÝ[[Y\ˆ‹˜]][[ˆ—JBˆÙ[‹˜\ÜÙ\\]X[
+ÜÝYK—ÜÝ[WÜ™YÚ[YJ
+H›Üˆ[ˆ
+LNKLŒMMKMŽKMÌ
+WKÌKK‹‹×JB‚ˆYˆ\ÝÛÝÙ\—Û[X™\—Øœ™XZÜ×ÜØÛÜ™WÝY\ÊÙ[ŠN‚ˆØÛÜ™\ÈHÛŽˆKŒ›Üˆˆ[ˆ˜[™ÙJKŠ_BˆÙ[‹˜\ÜÙ\\]X[
+ÝYK—ÝÜÝXÚÙ]
+ØÛÜ™\ÊK
+K‹ËKŠJB‚ˆYˆ\ÝÙš^YÜÜ›Û[×ÜÝ˜]YÚY\×Ü™]\›—Ùš]™WÙ\Ý[˜ÝØØ[™Y]\ÊÙ[ŠN‚ˆØ[™Y]\ÈH×Bˆ›ÜˆH[ˆ˜[™ÙJLŠN‚ˆØ[™Y]\Ë˜\[™
+È˜Ø[™Y]WÚYŽˆˆÞÚNŒŸH‹›[X™\œÈŽˆ\J˜[™ÙJH
+ÈKH
+ÈÊJKˆœÛÝ\˜ÙWÛ[Ù[Žˆˆ“^Ú_H‹œÛÝ\˜ÙWÛ[Ù[ÈŽˆˆ“^Ú_H‹ˆœÛÝ\˜ÙWÙ˜[Z[HŽˆ’S‘TS‘S•ˆYˆHH[ÙHˆ‹˜Ø[™Y]WÜØÛÜ™HŽˆHHHÈLˆ˜Ø[™Y]WÜØÛÜ™WÜ˜[šÈŽˆH
+ÈK™[YÚX›WÚ[™\[™[ŽˆHHJBˆ›ÜˆÝ˜]YÞH[ˆÝYK‘’VQÔÕUQÒQTÎ‚ˆ™\Ý[HÝYK—ÜÙ[XÝÜÜ›Û[ÊÝ˜]YÞKØ[™Y]\ÊBˆÙ[‹˜\ÜÙ\\]X[
+[Š™\Ý[
+KKÝ˜]YÞJBˆÙ[‹˜\ÜÙ\\]X[
+[ŠÞÈ˜Ø[™Y]WÚY—H›Üˆ[ˆ™\Ý[JKKÝ˜]YÞJB‚ˆYˆ\ÝØ›ØÚ×Ø›ÛÝÝ˜\Ú\×Ü™\›ÙXÚX›WØ[™Ü™\Ü×Ý[˜Ù\Z[JÙ[ŠN‚ˆ˜[Y\ÈHÌŒKLŒ‹ŒËŒH
+ˆLˆHHÝYK—Ø›ØÚ×Ø›ÛÝÝ˜\
+˜[Y\ËŒŒLMK™\ÏLLŒ›ØÚÏM
+BˆˆHÝYK—Ø›ØÚ×Ø›ÛÝÝ˜\
+˜[Y\ËŒŒLMK™\ÏLLŒ›ØÚÏM
+BˆÙ[‹˜\ÜÙ\\]X[
+KŠBˆÙ[‹˜\ÜÙ\\ÜÑ\]X[
+VÈ˜ÚNMWÛÝÈ—KVÈ™\Ý[X]H—H
+ÈYKLLŠBˆÙ[‹˜\ÜÙ\Ü™X]\‘\]X[
+VÈ˜ÚNMWÚYÚ—H
+ÈYKLL‹VÈ™\Ý[X]H—JB‚ˆYˆ\ÝÚÛWÜÝ\ÝÛ—Ú\×Û[Û›ÝÛ™JÙ[ŠN‚ˆ›ÝÜÈHÞÈœÜ˜]ÈŽˆH›Üˆ[ˆ
+ŒKŒËŒ
+WBˆÝYK—ÚÛJ›ÝÜÊBˆY\ÝYHÜ–ÈœÚÛH—H›Üˆˆ[ˆ›ÝÜ×BˆÙ[‹˜\ÜÙ\\]X[
+Y\ÝYÛÜY
+Y\ÝY
+JBˆÙ[‹˜\ÜÙ\YJ[
+HH›Üˆ[ˆY\ÝY
+JB‚‚šYˆ×Û˜[YW×ÈOH—×ÛXZ[—×ÈŽ‚ˆ[š]\Ý›XZ[Š
+B

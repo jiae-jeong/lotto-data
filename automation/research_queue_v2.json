@@ -1,486 +1,12 @@
-{
-  "version": 2,
-  "timezone": "Asia/Seoul",
-  "schedule_local": "09:00",
-  "tasks": [
-    {
-      "id": "E010_FAMILY_DECORRELATION_v1",
-      "kind": "family",
-      "question": "Do B hybrid/family duplicate votes dilute an ensemble, and does pre-target ticket geometry provide a better weighting control?",
-      "novelty": "Controlled B-ticket ensemble ablation: remove frequency-gap hybrid, merge semantic relationship family, or weight current forecast overlap. Prior V3 used different batch001 rank/portfolio models; prior dynamic study selected single B components."
-    },
-    {
-      "id": "E011_NESTED_3_4_TAIL_v1",
-      "kind": "tail",
-      "question": "Does nested 3+ or 4+ selection of overlap-weighted ensembles improve the high-hit tail compared with fixed equal weighting?",
-      "novelty": "Select ensemble redundancy exponents, not component identity. Four pre-frozen exponents are evaluated on 200 preceding out-of-sample targets; 3+/4+ objectives remain separate from prior mean/2+ selector research."
-    },
-    {
-      "id": "E012_EXACT_TAIL_POWER_v1",
-      "kind": "power",
-      "question": "How much confirmatory data is required for 3+/4+ effect sizes at a prespecified family error rate?",
-      "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback."
-    },
-    {
-      "id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
-      "kind": "component_loo",
-      "question": "Does dropping any one of the seven frozen B components change equal-vote ensemble performance on the same 601â€“1245 OOS targets?",
-      "novelty": "component-identity leave-one-out; seven frozen single-component ablations; full equal-vote and cached equal-rank comparators; exact uniform reference; 601..1245; lower-number tie.",
-      "spec": {
-        "study_id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
-        "kind": "component_loo",
-        "research_question": "Does dropping any one of the seven frozen B components change equal-vote ensemble performance on the same 601â€“1245 OOS targets?",
-        "data_cutoff": 1245,
-        "target_rounds": "601..1245 inclusive",
-        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
-        "primary_metric": "mean main-number hits per target round",
-        "secondary_metrics": [
-          "0..6 hit distribution",
-          "2+/3+/4+/5+/6 rates",
-          "paired difference",
-          "temporal block stability"
-        ],
-        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
-        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
-        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
-        "block_stability": [
-          50,
-          100,
-          200
-        ],
-        "tie_break": "lower number for score ties; source component order retained",
-        "random_seed": 20261013,
-        "expected_output_files": [
-          "PREDICTIONS.csv",
-          "METRICS.csv",
-          "PAIRED_COMPARISONS.csv",
-          "BLOCK_STABILITY.csv",
-          "EXACT_UNIFORM_BASELINE.json",
-          "VERIFICATION.json",
-          "REPORT.md"
-        ],
-        "expected_record_counts": {
-          "PREDICTIONS.csv": 5805,
-          "METRICS.csv": 10,
-          "PAIRED_COMPARISONS.csv": 56,
-          "BLOCK_STABILITY.csv": 216
-        },
-        "novelty_signature": "component-identity leave-one-out; seven frozen single-component ablations; full equal-vote and cached equal-rank comparators; exact uniform reference; 601..1245; lower-number tie.",
-        "study_class": "empirical",
-        "component_set": [
-          "long_frequency",
-          "current_gap",
-          "frequency_plus_gap",
-          "recent_momentum",
-          "structure_profile",
-          "pair_association",
-          "triple_association"
-        ],
-        "ablation": "drop each component once; equal ticket weights",
-        "random_repeats": 0
-      }
-    },
-    {
-      "id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
-      "kind": "agreement",
-      "question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
-      "novelty": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
-      "spec": {
-        "study_id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
-        "kind": "agreement",
-        "research_question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
-        "data_cutoff": 1245,
-        "target_rounds": "601..1245 inclusive",
-        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
-        "primary_metric": "mean main-number hits per target round",
-        "secondary_metrics": [
-          "0..6 hit distribution",
-          "2+/3+/4+/5+/6 rates",
-          "paired difference",
-          "temporal block stability"
-        ],
-        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
-        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
-        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
-        "block_stability": [
-          50,
-          100,
-          200
-        ],
-        "tie_break": "lower number for score ties; source component order retained",
-        "random_seed": 20261013,
-        "expected_output_files": [
-          "GEOMETRY_AND_REGIMES.csv",
-          "REGIME_PREDICTIONS.csv",
-          "RANDOM_PREDICTIONS.csv",
-          "METRICS_BY_REGIME.csv",
-          "HIGH_LOW_TESTS.csv",
-          "BLOCK_STABILITY.csv",
-          "VERIFICATION.json",
-          "REPORT.md"
-        ],
-        "expected_record_counts": {
-          "GEOMETRY_AND_REGIMES.csv": 645,
-          "REGIME_PREDICTIONS.csv": 5805,
-          "RANDOM_PREDICTIONS.csv": 64500,
-          "METRICS_BY_REGIME.csv": 30,
-          "HIGH_LOW_TESTS.csv": 36,
-          "BLOCK_STABILITY.csv": 130
-        },
-        "novelty_signature": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
-        "study_class": "empirical",
-        "geometry_features": [
-          "mean_pairwise_overlap",
-          "mean_pairwise_jaccard",
-          "union_size",
-          "vote_concentration",
-          "vote_entropy",
-          "maximum_vote_depth"
-        ],
-        "regime_lookback": 200,
-        "random_repeats": 100
-      }
-    },
-    {
-      "id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
-      "kind": "pair_drop",
-      "question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
-      "novelty": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
-      "spec": {
-        "study_id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
-        "kind": "pair_drop",
-        "research_question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
-        "data_cutoff": 1245,
-        "target_rounds": "601..1245 inclusive",
-        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
-        "primary_metric": "mean main-number hits per target round",
-        "secondary_metrics": [
-          "0..6 hit distribution",
-          "2+/3+/4+/5+/6 rates",
-          "paired difference",
-          "temporal block stability"
-        ],
-        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
-        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
-        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
-        "block_stability": [
-          50,
-          100,
-          200
-        ],
-        "tie_break": "lower number for score ties; source component order retained",
-        "random_seed": 20261013,
-        "expected_output_files": [
-          "PREDICTIONS.csv",
-          "METRICS.csv",
-          "PAIRED_COMPARISONS.csv",
-          "BLOCK_STABILITY.csv",
-          "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv",
-          "EXACT_UNIFORM_BASELINE.json",
-          "VERIFICATION.json",
-          "REPORT.md"
-        ],
-        "expected_record_counts": {
-          "PREDICTIONS.csv": 14835,
-          "METRICS.csv": 24,
-          "PAIRED_COMPARISONS.csv": 168,
-          "BLOCK_STABILITY.csv": 552,
-          "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv": 21
-        },
-        "novelty_signature": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
-        "study_class": "empirical",
-        "component_pair_count": 21,
-        "ablation": "drop each unordered component pair; equal weights"
-      }
-    },
-    {
-      "id": "E016_VOTE_DEPTH_CALIBRATION_v1",
-      "kind": "vote_depth",
-      "question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
-      "novelty": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
-      "spec": {
-        "study_id": "E016_VOTE_DEPTH_CALIBRATION_v1",
-        "kind": "vote_depth",
-        "research_question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
-        "data_cutoff": 1245,
-        "target_rounds": "601..1245 inclusive",
-        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
-        "primary_metric": "mean main-number hits per target round",
-        "secondary_metrics": [
-          "0..6 hit distribution",
-          "2+/3+/4+/5+/6 rates",
-          "paired difference",
-          "temporal block stability"
-        ],
-        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
-        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
-        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
-        "block_stability": [
-          50,
-          100,
-          200
-        ],
-        "tie_break": "lower number for score ties; source component order retained",
-        "random_seed": 20261013,
-        "expected_output_files": [
-          "VOTE_DEPTH_OBSERVATIONS.csv",
-          "VOTE_DEPTH_CALIBRATION.csv",
-          "RANDOM_DEPTH_CALIBRATION.csv",
-          "DEPTH_MONOTONICITY.csv",
-          "VERIFICATION.json",
-          "REPORT.md"
-        ],
-        "expected_record_counts": {
-          "VOTE_DEPTH_OBSERVATIONS.csv": 29025,
-          "VOTE_DEPTH_CALIBRATION.csv": 8,
-          "RANDOM_DEPTH_CALIBRATION.csv": 8,
-          "DEPTH_MONOTONICITY.csv": 7
-        },
-        "novelty_signature": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
-        "study_class": "empirical",
-        "random_ensembles_per_target": 100,
-        "bootstrap_unit": "whole target round with 45 number outcomes",
-        "bootstrap_replicates": 2000
-      }
-    },
-    {
-      "id": "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
-      "kind": "blocked",
-      "question": "Can the original S008 structure score be faithfully repaired and evaluated without inventing a new formula?",
-      "novelty": "requires recovered original S005/S008 bank, score formula, and rank-vector generation source; block until provenance is sufficient.",
-      "spec": {
-        "study_id": "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
-        "kind": "blocked",
-        "research_question": "Can the original S008 structure score be faithfully repaired and evaluated without inventing a new formula?",
-        "data_cutoff": null,
-        "target_rounds": [],
-        "training_cutoff_rule": "No execution until source recovery.",
-        "primary_metric": "mean main-number hits per target round",
-        "secondary_metrics": [
-          "0..6 hit distribution",
-          "2+/3+/4+/5+/6 rates",
-          "paired difference",
-          "temporal block stability"
-        ],
-        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
-        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
-        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
-        "block_stability": [
-          50,
-          100,
-          200
-        ],
-        "tie_break": "lower number for score ties; source component order retained",
-        "random_seed": 20261013,
-        "expected_output_files": [],
-        "expected_record_counts": {},
-        "novelty_signature": "requires recovered original S005/S008 bank, score formula, and rank-vector generation source; block until provenance is sufficient.",
-        "study_class": "blocked",
-        "blocked_status": "BLOCKED_SOURCE_MISSING",
-        "blocked_reason": "Searched tracked repository, research/, analysis/, automation/, historical docs, and Git object history for S005/S008 bank generation, score formula and rank-vector source; original artifacts are not present, so no replacement formula is authorized."
-      }
-    },
-    {
-      "id": "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1",
-      "kind": "blocked",
-      "question": "Can authentic sealed purchase lines be decomposed into per-component contributions and repeated failure modes without reconstructing missing rounds?",
-      "novelty": "one authenticated 1245 sealed purchase source is present, but complete as-of-cutoff per-number component rank vectors and multiple authentic purchased rounds are unavailable; block full decomposition pending evidence recovery.",
-      "spec": {
-        "study_id": "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1",
-        "kind": "blocked",
-        "research_question": "Can authentic sealed purchase lines be decomposed into per-component contributions and repeated failure modes without reconstructing missing rounds?",
-        "data_cutoff": 1245,
-        "target_rounds": [
-          1245
-        ],
-        "training_cutoff_rule": "Only contemporaneous sealed source with training cutoff 1244 may be considered; do not reconstruct other rounds.",
-        "primary_metric": "mean main-number hits per target round",
-        "secondary_metrics": [
-          "0..6 hit distribution",
-          "2+/3+/4+/5+/6 rates",
-          "paired difference",
-          "temporal block stability"
-        ],
-        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
-        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
-        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
-        "block_stability": [
-          50,
-          100,
-          200
-        ],
-        "tie_break": "lower number for score ties; source component order retained",
-        "random_seed": 20261013,
-        "expected_output_files": [],
-        "expected_record_counts": {},
-        "novelty_signature": "one authenticated 1245 sealed purchase source is present, but complete as-of-cutoff per-number component rank vectors and multiple authentic purchased rounds are unavailable; block full decomposition pending evidence recovery.",
-        "study_class": "blocked",
-        "blocked_status": "BLOCKED_SOURCE_MISSING",
-        "blocked_reason": "The frozen 1245 purchase CSV and review were found, but only one round is available and the registered source lacks complete excluded-winning-number component rank vectors needed for requested attribution. No other round is reconstructed."
-      }
-    },
-    {
-      "id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
-      "kind": "portfolio",
-      "question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
-      "novelty": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
-      "spec": {
-        "study_id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
-        "kind": "portfolio",
-        "research_question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
-        "data_cutoff": 1245,
-        "target_rounds": "601..1245 inclusive",
-        "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
-        "primary_metric": "mean main-number hits per target round",
-        "secondary_metrics": [
-          "0..6 hit distribution",
-          "2+/3+/4+/5+/6 rates",
-          "paired difference",
-          "temporal block stability"
-        ],
-        "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
-        "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
-        "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
-        "block_stability": [
-          50,
-          100,
-          200
-        ],
-        "tie_break": "lower number for score ties; source component order retained",
-        "random_seed": 20261013,
-        "expected_output_files": [
-          "BUNDLE_RESULTS.csv",
-          "RANDOM_BUNDLE_RESULTS.csv",
-          "BUNDLE_METRICS.csv",
-          "VERIFICATION.json",
-          "REPORT.md"
-        ],
-        "expected_record_counts": {
-          "BUNDLE_RESULTS.csv": 645,
-          "RANDOM_BUNDLE_RESULTS.csv": 64500,
-          "BUNDLE_METRICS.csv": 2
-        },
-        "novelty_signature": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
-        "study_class": "empirical",
-        "bundle_components": [
-          "long_frequency",
-          "structure_profile",
-          "pair_association"
-        ],
-        "random_bundles_per_target": 100,
-        "bundle_frozen_before_outcome": true
-      }
-    },
-    {
-      "id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
-      "kind": "independent_signal_discovery",
-      "question": "Do frozen cross-round transition and season-conditioned signals add genuinely independent number rankings beyond the seven B components?",
-      "novelty": "Pre-outcome screening of three prespecified transition/season conditional signal families by rank-to-selection correlation and same-target Jaccard; no outcomes enter the independence screen.",
-      "spec": {
-        "study_id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1", "kind": "independent_signal_discovery",
-        "research_question": "Do frozen cross-round transition and season-conditioned signals add genuinely independent number rankings beyond the seven B components?",
-        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive", "training_cutoff_rule": "For target t, all signal counts and the prior-round state use only rounds 1..t-1; transition labels stop at t-1.",
-        "primary_metric": "mean absolute candidate-rank to B-ticket-membership correlation and mean same-target top-six Jaccard",
-        "secondary_metrics": ["max component-level Jaccard", "survivor count", "target-wise cutoff audit"],
-        "comparator": "same-target seven frozen B component tickets plus combined_equal_rank",
-        "baseline": "B-redundancy thresholds are fixed at mean |correlation| <0.20, mean Jaccard <0.20, and max component mean Jaccard <0.35",
-        "multiplicity_correction": "No outcome-based hypothesis tests are used for the geometry-only screen; all three prespecified signals are reported.",
-        "block_stability": [50, 100, 200], "tie_break": "descending frozen signal score, then lower number",
-        "random_seed": 20261015,
-        "expected_output_files": ["SIGNAL_DEFINITIONS.json", "SIGNAL_INDEPENDENCE.csv", "TARGET_SIMILARITY.csv", "SURVIVOR_STATUS.csv", "PREDICTIONS.csv", "VERIFICATION.json", "REPORT.md"],
-        "expected_record_counts": {"SIGNAL_INDEPENDENCE.csv": 3, "TARGET_SIMILARITY.csv": 15480, "SURVIVOR_STATUS.csv": 3, "PREDICTIONS.csv": 1935},
-        "novelty_signature": "cross-round Markov transition matrix; calendar-season conditional incidence; fixed previous-draw-sum-regime conditional incidence; B rank-membership correlation and top-six Jaccard screen",
-        "study_class": "empirical"
-      }
-    },
-    {
-      "id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
-      "kind": "independent_model_walkforward",
-      "question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
-      "novelty": "Frozen top-six predictors evaluated over 645 expanding-information targets with 100 same-target random tickets per target, B component comparators, block uncertainty, and Holm correction.",
-      "spec": {
-        "study_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1", "kind": "independent_model_walkforward",
-        "research_question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
-        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive", "training_cutoff_rule": "Each signal prediction for target t is generated from rounds 1..t-1; no tuning is performed on target outcomes.",
-        "primary_metric": "mean hits and rate_ge_3 versus same-target random tickets",
-        "secondary_metrics": ["0..6 hit distribution", "2+/3+/4+/5+/6", "variance", "paired confidence intervals", "100-round block stability", "B comparisons"],
-        "comparator": "same-target seven frozen B components and combined_equal_rank",
-        "baseline": "100 independently sampled uniform six-number tickets per target round",
-        "multiplicity_correction": "Holm step-down over 3 candidate signals x 5 registered random-comparison metrics.",
-        "block_stability": [50, 100, 200], "tie_break": "descending frozen signal score, then lower number",
-        "random_seed": 20261015,
-        "expected_output_files": ["PREDICTIONS.csv", "RANDOM_BY_TARGET.csv", "TARGET_RANDOM_SUMMARY.csv", "METRICS.csv", "PAIRED_RANDOM_COMPARISON.csv", "BLOCK_STABILITY.csv", "VERIFICATION.json", "REPORT.md"],
-        "expected_record_counts": {"PREDICTIONS.csv": 7095, "RANDOM_BY_TARGET.csv": 64500, "TARGET_RANDOM_SUMMARY.csv": 645, "METRICS.csv": 12, "PAIRED_RANDOM_COMPARISON.csv": 15, "BLOCK_STABILITY.csv": 21},
-        "novelty_signature": "E025 fixed independent formulas; 601..1245; same-target 100-ticket random simulation; B component comparisons; circular moving-block paired CI; Holm15",
-        "study_class": "empirical"
-      }
-    },
-    {
-      "id": "E027_FIVE_LINE_CANDIDATE_BANK_v1",
-      "kind": "five_line_candidate_bank",
-      "question": "Can a cutoff-safe five-line candidate bank preserve source provenance while removing duplicate and near-duplicate lines?",
-      "novelty": "Target-specific bank combines frozen B and E025 survivors, merges lines with at least five shared numbers, and retains every source and training cutoff.",
-      "spec": {
-        "study_id": "E027_FIVE_LINE_CANDIDATE_BANK_v1", "kind": "five_line_candidate_bank",
-        "research_question": "Can a cutoff-safe five-line candidate bank preserve source provenance while removing duplicate and near-duplicate lines?",
-        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive", "training_cutoff_rule": "Each candidate line comes from a B cached forecast or E025 signal forecast with training cutoff t-1; target outcomes are not read during bank construction.",
-        "primary_metric": "candidate-bank validity, provenance completeness, and pairwise overlap after deduplication",
-        "secondary_metrics": ["unique candidate count", "eligible independent sources", "source score/rank", "cutoff audit"],
-        "comparator": "pre-dedup B and E025 source candidates on the same target",
-        "baseline": "Merge candidates when intersection count >=5; retain highest frozen score as canonical and preserve all aliases.",
-        "multiplicity_correction": "Not applicable; no outcome-based comparisons.",
-        "block_stability": [50, 100, 200], "tie_break": "higher source score, then source model name; candidate ID follows target/source order",
-        "random_seed": 20261015,
-        "expected_output_files": ["CANDIDATE_BANK.csv", "CANDIDATE_PROVENANCE.csv", "CANDIDATE_OVERLAP.csv", "VERIFICATION.json", "REPORT.md"],
-        "expected_record_counts": {},
-        "novelty_signature": "target-specific provenance bank; five-number-intersection near-duplicate merge; frozen B plus E025/E026 independent survivors",
-        "study_class": "empirical"
-      }
-    },
-    {
-      "id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
-      "kind": "five_line_portfolio_selector",
-      "question": "Can any frozen five-line construction strategy repeatedly outperform same-target random five-line bundles?",
-      "novelty": "Seven distinct five-line strategies plus a nested trailing-200 dynamic selector are compared with 100 random five-line bundles on identical targets.",
-      "spec": {
-        "study_id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2", "kind": "five_line_portfolio_selector",
-        "research_question": "Can any frozen five-line construction strategy repeatedly outperform same-target random five-line bundles?",
-        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive; nested selector 801..1245",
-        "training_cutoff_rule": "Candidate bank uses target t-1 only; nested dynamic selector uses exactly the prior 200 completed target outcomes to choose among frozen strategies.",
-        "primary_metric": "five-line max hits, any_3plus, any_4plus, and winning-number union coverage",
-        "secondary_metrics": ["any_2plus/5plus/6", "unique-number coverage", "mean pairwise overlap", "line-hit variance"],
-        "comparator": "same-target 100-random-five-line baseline; fixed seven strategies and nested 200-target selector",
-        "baseline": "100 target-seeded portfolios of five distinct uniform six-number lines per target",
-        "multiplicity_correction": "Construction strategy comparisons are exploratory; promotion gate pre-registers only nested selector any_3plus and max_hits.",
-        "block_stability": [50, 100, 200], "tie_break": "strategy-specific frozen rule; lexical model/candidate order for remaining ties",
-        "random_seed": 20261015,
-        "expected_output_files": ["PORTFOLIO_TICKETS.csv", "RANDOM_5_BY_TARGET.csv", "STRATEGY_BY_TARGET.csv", "STRATEGY_SUMMARY.csv", "NESTED_SELECTOR_TRACE.csv", "VERIFICATION.json", "REPORT.md"],
-        "expected_record_counts": {"RANDOM_5_BY_TARGET.csv": 64500, "STRATEGY_BY_TARGET.csv": 5605, "STRATEGY_SUMMARY.csv": 9, "NESTED_SELECTOR_TRACE.csv": 445},
-        "novelty_signature": "five-line strategies top5/min/mid/high overlap/source diversity/independent centered/B-independent mix; nested trailing-200 selector; 100 same-target RANDOM_5_LINES bundles",
-        "study_class": "empirical"
-      }
-    },
-    {
-      "id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
-      "kind": "five_line_promotion_gate",
-      "question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
-      "novelty": "Paired circular moving-block uncertainty, Holm-adjusted primary tests, temporal block consistency, and best-block deletion sensitivity determine promotion without retrospective tuning.",
-      "spec": {
-        "study_id": "E029_FIVE_LINE_PROMOTION_GATE_v2", "kind": "five_line_promotion_gate",
-        "research_question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
-        "data_cutoff": 1245, "target_rounds": "801..1245 inclusive", "training_cutoff_rule": "E028 nested selector decisions use only the immediately preceding 200 target results; gate comparisons use identical target rounds.",
-        "primary_metric": "paired any_3plus and max_hits deltas with 95% block-bootstrap CI lower bounds above zero",
-        "secondary_metrics": ["any_4plus non-worsening", "50-round block consistency", "best-block removal", "leakage", "multiple comparisons"],
-        "comparator": "same-target mean of 100 random five-line portfolios",
-        "baseline": "RANDOM_5_LINES target-matched portfolio reference",
-        "multiplicity_correction": "Holm step-down across the two registered primary tests for NESTED_DYNAMIC_5.",
-        "block_stability": [50, 100, 200], "tie_break": "not applicable to gate",
-        "random_seed": 20261015,
-        "expected_output_files": ["PROMOTION_TESTS.csv", "PROMOTION_BLOCKS.csv", "PROMOTION_GATE.json", "VERIFICATION.json", "REPORT.md"],
-        "expected_record_counts": {"PROMOTION_TESTS.csv": 80, "PROMOTION_BLOCKS.csv": 27},
-        "novelty_signature": "nested-five-line vs RANDOM_5_LINES; primary any3plus and max_hits; Holm2; paired circular block bootstrap; 50-round stability and best-block removal",
-        "study_class": "empirical"
-      }
-    }
-  ]
-}
+YªçŠx³¬uç%j·Â+ar‰ì¶ë•ë_¢ºŞjË"‚v›•ëÚ®&›•ëÂˆ™\œÚ[Ûˆˆ‹ˆ[Y^›Û™Hˆ\ÚXKÔÙ[İ[‹ˆœØÚY[WÛØØ[ˆŒNŒ‹ˆ\ÚÜÈˆÂˆÂˆšYˆ‘LLÑSRSWÑPÓÔ”‘SUSÓ—İŒH‹ˆšÚ[™ˆ™˜[Z[H‹ˆœ]Y\İ[Ûˆˆ‘ÈˆXœšYÙ˜[Z[H\XØ]H›İ\È[]H[ˆ[œÙ[X›K[™Ù\È™K]\™Ù]XÚÙ]Ù[ÛY]H›İšYHH™]\ˆÙZYÚ[™ÈÛÛ›ÛÈ‹ˆ››İ™[HˆÛÛ›ÛY‹]XÚÙ][œÙ[X›HX›][Ûˆ™[[İ™Hœ™\]Y[˜ŞKYØ\XœšYY\™ÙHÙ[X[XÈ™[][ÛœÚ\˜[Z[KÜˆÙZYÚİ\œ™[›Ü™XØ\İİ™\›\ˆš[ÜˆŒÈ\ÙYY™™\™[˜]ÚH˜[šËÜÜ›Û[È[Ù[ÎÈš[Üˆ[˜[ZXÈİYHÙ[XİYÚ[™ÛHˆÛÛ\Û™[Ëˆ‚ˆKˆÂˆšYˆ‘LLWÓ‘TÕQÌ×ÍÕRSİŒH‹ˆšÚ[™ˆZ[‹ˆœ]Y\İ[Ûˆˆ‘Ù\È™\İYÊÈÜˆ
+ÈÙ[Xİ[ÛˆÙˆİ™\›\]ÙZYÚY[œÙ[X›\È[\›İ™HHYÚZ]Z[ÛÛ\\™YÚ]š^Y\]X[ÙZYÚ[™ÏÈ‹ˆ››İ™[Hˆ”Ù[Xİ[œÙ[X›H™Y[™[˜ŞH^Û™[Ë›İÛÛ\Û™[Y[]Kˆ›İ\ˆ™KYœ›Ş™[ˆ^Û™[È\™H]˜[X]YÛˆŒ™XÙY[™Èİ][Ù‹\Ø[\H\™Ù]ÎÈÊËÍ
+ÈØš™Xİ]™\È™[XZ[ˆÙ\\˜]Hœ›ÛHš[ÜˆYX[‹ÌŠÈÙ[XİÜˆ™\ÙX\˜Úˆ‚ˆKˆÂˆšYˆ‘LL—ÑVPÕÕRSÔÕÑT—İŒH‹ˆšÚ[™ˆœİÙ\ˆ‹ˆœ]Y\İ[Ûˆˆ’İÈ]XÚÛÛ™š\›X]ÜH]H\È™\]Z\™Y›ÜˆÊËÍ
+ÈY™™XİÚ^™\È]H™\ÜXÚYšYY˜[Z[H\œ›Üˆ˜]OÈ‹ˆ››İ™[Hˆ‘^XİYÚ]Z[İÙ\ˆ]K^Ì[šY›Ü›H˜]\È[™Ù]™\˜[Ø[\HÚ^™\ÎÈHİYHÙˆ™\šYšXØ][ÛˆİY™šXÚY[˜ŞK›İ[›İ\ˆ[ÛHØ\›È˜\Ù[[™HÜˆœ™\]Y[˜ŞH™\Üˆİ[™\™[Xœ˜\H[™\[™[˜[˜XÚËˆ‚ˆKˆÂˆšYˆ‘LL×ĞÓÓTÓ‘S•ÓPU‘WÓÓ‘WÓÕUİŒH‹ˆšÚ[™ˆ˜ÛÛ\Û™[ÛÛÈ‹ˆœ]Y\İ[Ûˆˆ‘Ù\È›Ü[™È[HÛ™HÙˆHÙ]™[ˆœ›Ş™[ˆˆÛÛ\Û™[ÈÚ[™ÙH\]X[]›İH[œÙ[X›H\™›Ü›X[˜ÙHÛˆHØ[YHŒx $ÌLHÓÔÈ\™Ù]ÏÈ‹ˆ››İ™[Hˆ˜ÛÛ\Û™[ZY[]HX]™K[Û™K[İ]ÈÙ]™[ˆœ›Ş™[ˆÚ[™ÛKXÛÛ\Û™[X›][ÛœÎÈ[\]X[]›İH[™ØXÚY\]X[\˜[šÈÛÛ\\˜]ÜœÎÈ^Xİ[šY›Ü›H™Y™\™[˜ÙNÈŒK‹ŒLNÈİÙ\‹[[X™\ˆYKˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LL×ĞÓÓTÓ‘S•ÓPU‘WÓÓ‘WÓÕUİŒH‹ˆšÚ[™ˆ˜ÛÛ\Û™[ÛÛÈ‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ‘Ù\È›Ü[™È[HÛ™HÙˆHÙ]™[ˆœ›Ş™[ˆˆÛÛ\Û™[ÈÚ[™ÙH\]X[]›İH[œÙ[X›H\™›Ü›X[˜ÙHÛˆHØ[YHŒx $ÌLHÓÔÈ\™Ù]ÏÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘XXÚØXÚYÓÔÈ™YXİ[Ûˆ›Üˆ\™Ù]]\İ]™H˜Z[š[™×İ›İYÚÜ›İ[™]LNÈÛ›H™K]\™Ù]œ›Ş™[ˆÛÛ\Û™[XÚÙ]È\™H\ÙYˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXZ[‹[[X™\ˆ]È\ˆ\™Ù]›İ[™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ˜]\È‹ˆœZ\™YY™™\™[˜ÙH‹ˆ[\Ü˜[›ØÚÈİXš[]H‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YH\™Ù]\›İ[™ØXÚYˆÛÛ\Û™[›Ü™XØ\İÈ[™\]X[\˜[šÈˆÚ\™H\XØX›H‹ˆ˜˜\Ù[[™Hˆ™^Xİ[šY›Ü›H‹ÍH\İšX][ÛÈÚ[][]YØ[YK]\™Ù]˜[™ÛHXÚÙ]ÈÚ[ˆÜXÚYšYY‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆ›Üˆ™YÚ\İ\™Y˜[Z[HÙˆÛÛ˜\İÎÈ\ØÜš\]™Hİ]]ÈX™[Y^Ü˜]ÜH‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ›İÙ\ˆ[X™\ˆ›ÜˆØÛÜ™HY\ÎÈÛİ\˜ÙHÛÛ\Û™[Ü™\ˆ™]Z[™Y‹ˆœ˜[™ÛWÜÙYYˆŒŒLLËˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ”‘QPÕSÓ”Ë˜Üİˆ‹ˆ“QU’PÔË˜Üİˆ‹ˆ”RT‘QĞÓÓTT’TÓÓ”Ë˜Üİˆ‹ˆ“ĞÒ×ÔÕP’SUK˜Üİˆ‹ˆ‘VPÕÕS’Q“Ô“WĞTÑSS‘KšœÛÛˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ”‘QPÕSÓ”Ë˜ÜİˆˆNKˆ“QU’PÔË˜ÜİˆˆLˆ”RT‘QĞÓÓTT’TÓÓ”Ë˜ÜİˆˆM‹ˆ“ĞÒ×ÔÕP’SUK˜ÜİˆˆŒM‚ˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ˜ÛÛ\Û™[ZY[]HX]™K[Û™K[İ]ÈÙ]™[ˆœ›Ş™[ˆÚ[™ÛKXÛÛ\Û™[X›][ÛœÎÈ[\]X[]›İH[™ØXÚY\]X[\˜[šÈÛÛ\\˜]ÜœÎÈ^Xİ[šY›Ü›H™Y™\™[˜ÙNÈŒK‹ŒLNÈİÙ\‹[[X™\ˆYKˆ‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‹ˆ˜ÛÛ\Û™[ÜÙ]ˆÂˆ›Û™×Ùœ™\]Y[˜ŞH‹ˆ˜İ\œ™[ÙØ\‹ˆ™œ™\]Y[˜ŞWÜ\×ÙØ\‹ˆœ™XÙ[Û[ÛY[[H‹ˆœİXİ\™WÜ›Ùš[H‹ˆœZ\—Ø\ÜÛØÚX][Ûˆ‹ˆš\WØ\ÜÛØÚX][Ûˆ‚ˆKˆ˜X›][Ûˆˆ™›ÜXXÚÛÛ\Û™[Û˜ÙNÈ\]X[XÚÙ]ÙZYÚÈ‹ˆœ˜[™ÛWÜ™\X]ÈˆˆBˆKˆÂˆšYˆ‘LMÓSÑSĞQÔ‘QSQS•ÑTĞQÔ‘QSQS•İŒH‹ˆšÚ[™ˆ˜YÜ™Y[Y[‹ˆœ]Y\İ[Ûˆˆ‘Ù\Èİ]ÛÛYKYœ™YHYÜ™Y[Y[Ù[ÛY]H[[Û™ÈÙ]™[ˆˆÛÛ\Û™[ÈÛ\ÜÚYHÓÔÈ›İ[™ÈÚ]Y™™\™[\™›Ü›X[˜ÙOÈ‹ˆ››İ™[Hˆ™Ù[ÛY]K[Û›H›Û[™ÈYÜ™Y[Y[™YÚ[YH\Ú[™Èš[ÜˆŒ\™Ù]Ù[ÛY]šY\ÎÈYX[ˆZ\Ú\ÙH˜XØØ\™ÈÛÛ\Û™[[™[œÙ[X›H]˜[X][ÛÈLØ[YK]\™Ù]˜[™ÛHXÚÙ]Ëˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LMÓSÑSĞQÔ‘QSQS•ÑTĞQÔ‘QSQS•İŒH‹ˆšÚ[™ˆ˜YÜ™Y[Y[‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ‘Ù\Èİ]ÛÛYKYœ™YHYÜ™Y[Y[Ù[ÛY]H[[Û™ÈÙ]™[ˆˆÛÛ\Û™[ÈÛ\ÜÚYHÓÔÈ›İ[™ÈÚ]Y™™\™[\™›Ü›X[˜ÙOÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘XXÚØXÚYÓÔÈ™YXİ[Ûˆ›Üˆ\™Ù]]\İ]™H˜Z[š[™×İ›İYÚÜ›İ[™]LNÈÛ›H™K]\™Ù]œ›Ş™[ˆÛÛ\Û™[XÚÙ]È\™H\ÙYˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXZ[‹[[X™\ˆ]È\ˆ\™Ù]›İ[™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ˜]\È‹ˆœZ\™YY™™\™[˜ÙH‹ˆ[\Ü˜[›ØÚÈİXš[]H‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YH\™Ù]\›İ[™ØXÚYˆÛÛ\Û™[›Ü™XØ\İÈ[™\]X[\˜[šÈˆÚ\™H\XØX›H‹ˆ˜˜\Ù[[™Hˆ™^Xİ[šY›Ü›H‹ÍH\İšX][ÛÈÚ[][]YØ[YK]\™Ù]˜[™ÛHXÚÙ]ÈÚ[ˆÜXÚYšYY‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆ›Üˆ™YÚ\İ\™Y˜[Z[HÙˆÛÛ˜\İÎÈ\ØÜš\]™Hİ]]ÈX™[Y^Ü˜]ÜH‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ›İÙ\ˆ[X™\ˆ›ÜˆØÛÜ™HY\ÎÈÛİ\˜ÙHÛÛ\Û™[Ü™\ˆ™]Z[™Y‹ˆœ˜[™ÛWÜÙYYˆŒŒLLËˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ‘ÑSÓQU–WĞS‘Ô‘QÒSQTË˜Üİˆ‹ˆ”‘QÒSQWÔ‘QPÕSÓ”Ë˜Üİˆ‹ˆ”S‘ÓWÔ‘QPÕSÓ”Ë˜Üİˆ‹ˆ“QU’PÔ×Ğ–WÔ‘QÒSQK˜Üİˆ‹ˆ’QÒÓÕ×ÕTÕË˜Üİˆ‹ˆ“ĞÒ×ÔÕP’SUK˜Üİˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ‘ÑSÓQU–WĞS‘Ô‘QÒSQTË˜ÜİˆˆKˆ”‘QÒSQWÔ‘QPÕSÓ”Ë˜ÜİˆˆNKˆ”S‘ÓWÔ‘QPÕSÓ”Ë˜ÜİˆˆLˆ“QU’PÔ×Ğ–WÔ‘QÒSQK˜ÜİˆˆÌˆ’QÒÓÕ×ÕTÕË˜ÜİˆˆÍ‹ˆ“ĞÒ×ÔÕP’SUK˜ÜİˆˆLÌˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ™Ù[ÛY]K[Û›H›Û[™ÈYÜ™Y[Y[™YÚ[YH\Ú[™Èš[ÜˆŒ\™Ù]Ù[ÛY]šY\ÎÈYX[ˆZ\Ú\ÙH˜XØØ\™ÈÛÛ\Û™[[™[œÙ[X›H]˜[X][ÛÈLØ[YK]\™Ù]˜[™ÛHXÚÙ]Ëˆ‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‹ˆ™Ù[ÛY]WÙ™X]\™\ÈˆÂˆ›YX[—ÜZ\Ú\ÙWÛİ™\›\‹ˆ›YX[—ÜZ\Ú\ÙWÚ˜XØØ\™‹ˆ[š[Û—ÜÚ^™H‹ˆ›İWØÛÛ˜Ù[˜][Ûˆ‹ˆ›İWÙ[›ÜH‹ˆ›X^[][Wİ›İWÙ\‚ˆKˆœ™YÚ[YWÛÛÚØ˜XÚÈˆŒˆœ˜[™ÛWÜ™\X]ÈˆLˆBˆKˆÂˆšYˆ‘LMWÕÓ×ĞÓÓTÓ‘S•Ñ“ÔÒS•TPÕSÓ—İŒH‹ˆšÚ[™ˆœZ\—Ù›Ü‹ˆœ]Y\İ[Ûˆˆ‘È[HÙˆHŒHœ›Ş™[ˆÛËXÛÛ\Û™[›ÜÈÚİÈ™Xİ\œš[™È[\˜Xİ[Ûˆ™^[Û™Ú[™ÛKXÛÛ\Û™[X]™K[Û™K[İ]È‹ˆ››İ™[Hˆ˜[ŒHÊËŠHÛËXÛÛ\Û™[X›][ÛœÎÈØ[YH\™Ù]ÎÈÛKXÛÜœ™XİYZ\™YÛÛ\\š\ÛÛœÎÈ\™Xİ[Û˜[ÛÛœÚ\İ[˜ŞHÚ]Ú[™ÛHX]™K[Û™K[İ]ˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LMWÕÓ×ĞÓÓTÓ‘S•Ñ“ÔÒS•TPÕSÓ—İŒH‹ˆšÚ[™ˆœZ\—Ù›Ü‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ‘È[HÙˆHŒHœ›Ş™[ˆÛËXÛÛ\Û™[›ÜÈÚİÈ™Xİ\œš[™È[\˜Xİ[Ûˆ™^[Û™Ú[™ÛKXÛÛ\Û™[X]™K[Û™K[İ]È‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘XXÚØXÚYÓÔÈ™YXİ[Ûˆ›Üˆ\™Ù]]\İ]™H˜Z[š[™×İ›İYÚÜ›İ[™]LNÈÛ›H™K]\™Ù]œ›Ş™[ˆÛÛ\Û™[XÚÙ]È\™H\ÙYˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXZ[‹[[X™\ˆ]È\ˆ\™Ù]›İ[™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ˜]\È‹ˆœZ\™YY™™\™[˜ÙH‹ˆ[\Ü˜[›ØÚÈİXš[]H‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YH\™Ù]\›İ[™ØXÚYˆÛÛ\Û™[›Ü™XØ\İÈ[™\]X[\˜[šÈˆÚ\™H\XØX›H‹ˆ˜˜\Ù[[™Hˆ™^Xİ[šY›Ü›H‹ÍH\İšX][ÛÈÚ[][]YØ[YK]\™Ù]˜[™ÛHXÚÙ]ÈÚ[ˆÜXÚYšYY‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆ›Üˆ™YÚ\İ\™Y˜[Z[HÙˆÛÛ˜\İÎÈ\ØÜš\]™Hİ]]ÈX™[Y^Ü˜]ÜH‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ›İÙ\ˆ[X™\ˆ›ÜˆØÛÜ™HY\ÎÈÛİ\˜ÙHÛÛ\Û™[Ü™\ˆ™]Z[™Y‹ˆœ˜[™ÛWÜÙYYˆŒŒLLËˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ”‘QPÕSÓ”Ë˜Üİˆ‹ˆ“QU’PÔË˜Üİˆ‹ˆ”RT‘QĞÓÓTT’TÓÓ”Ë˜Üİˆ‹ˆ“ĞÒ×ÔÕP’SUK˜Üİˆ‹ˆ“Ó×ÔRT—ÑT‘PÕSÓSĞÓÓ”ÒTÕSÖK˜Üİˆ‹ˆ‘VPÕÕS’Q“Ô“WĞTÑSS‘KšœÛÛˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ”‘QPÕSÓ”Ë˜ÜİˆˆMÍKˆ“QU’PÔË˜Üİˆˆˆ”RT‘QĞÓÓTT’TÓÓ”Ë˜ÜİˆˆMˆ“ĞÒ×ÔÕP’SUK˜ÜİˆˆML‹ˆ“Ó×ÔRT—ÑT‘PÕSÓSĞÓÓ”ÒTÕSÖK˜ÜİˆˆŒBˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ˜[ŒHÊËŠHÛËXÛÛ\Û™[X›][ÛœÎÈØ[YH\™Ù]ÎÈÛKXÛÜœ™XİYZ\™YÛÛ\\š\ÛÛœÎÈ\™Xİ[Û˜[ÛÛœÚ\İ[˜ŞHÚ]Ú[™ÛHX]™K[Û™K[İ]ˆ‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‹ˆ˜ÛÛ\Û™[ÜZ\—ØÛİ[ˆŒKˆ˜X›][Ûˆˆ™›ÜXXÚ[›Ü™\™YÛÛ\Û™[Z\È\]X[ÙZYÚÈ‚ˆBˆKˆÂˆšYˆ‘LM—Õ“ÕWÑTĞĞSP”USÓ—İŒH‹ˆšÚ[™ˆ›İWÙ\‹ˆœ]Y\İ[Ûˆˆ‘Ù\È›İH\XÜ›ÜÜÈÙ]™[ˆœ›Ş™[ˆˆÛÛ\Û™[XÚÙ]È\ÜÛØÚX]HÚ]ÓÔÈÚ[›š[™Ë[[X™\ˆY[X™\œÚ\[™\ˆ›İ[™XÛ\İ\™Y[˜Ù\Z[OÈ‹ˆ››İ™[Hˆœ\‹]\™Ù]\‹[[X™\ˆ\È‹ÎÈH[X™\œÈ™]Z[™Y\ÈH›İ[™Û\İ\ÈŒ›İ[™XÛ\İ\ˆ›Ûİİ˜\™\XØ]\ÎÈL˜[™ÛHÙ]™[‹]XÚÙ][œÙ[X›\È\ˆ\™Ù]ˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LM—Õ“ÕWÑTĞĞSP”USÓ—İŒH‹ˆšÚ[™ˆ›İWÙ\‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ‘Ù\È›İH\XÜ›ÜÜÈÙ]™[ˆœ›Ş™[ˆˆÛÛ\Û™[XÚÙ]È\ÜÛØÚX]HÚ]ÓÔÈÚ[›š[™Ë[[X™\ˆY[X™\œÚ\[™\ˆ›İ[™XÛ\İ\™Y[˜Ù\Z[OÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘XXÚØXÚYÓÔÈ™YXİ[Ûˆ›Üˆ\™Ù]]\İ]™H˜Z[š[™×İ›İYÚÜ›İ[™]LNÈÛ›H™K]\™Ù]œ›Ş™[ˆÛÛ\Û™[XÚÙ]È\™H\ÙYˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXZ[‹[[X™\ˆ]È\ˆ\™Ù]›İ[™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ˜]\È‹ˆœZ\™YY™™\™[˜ÙH‹ˆ[\Ü˜[›ØÚÈİXš[]H‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YH\™Ù]\›İ[™ØXÚYˆÛÛ\Û™[›Ü™XØ\İÈ[™\]X[\˜[šÈˆÚ\™H\XØX›H‹ˆ˜˜\Ù[[™Hˆ™^Xİ[šY›Ü›H‹ÍH\İšX][ÛÈÚ[][]YØ[YK]\™Ù]˜[™ÛHXÚÙ]ÈÚ[ˆÜXÚYšYY‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆ›Üˆ™YÚ\İ\™Y˜[Z[HÙˆÛÛ˜\İÎÈ\ØÜš\]™Hİ]]ÈX™[Y^Ü˜]ÜH‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ›İÙ\ˆ[X™\ˆ›ÜˆØÛÜ™HY\ÎÈÛİ\˜ÙHÛÛ\Û™[Ü™\ˆ™]Z[™Y‹ˆœ˜[™ÛWÜÙYYˆŒŒLLËˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ•“ÕWÑTÓĞ”ÑT•USÓ”Ë˜Üİˆ‹ˆ•“ÕWÑTĞĞSP”USÓ‹˜Üİˆ‹ˆ”S‘ÓWÑTĞĞSP”USÓ‹˜Üİˆ‹ˆ‘TÓSÓ“ÕÓ’PÒUK˜Üİˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ•“ÕWÑTÓĞ”ÑT•USÓ”Ë˜ÜİˆˆLKˆ•“ÕWÑTĞĞSP”USÓ‹˜Üİˆˆˆ”S‘ÓWÑTĞĞSP”USÓ‹˜Üİˆˆˆ‘TÓSÓ“ÕÓ’PÒUK˜ÜİˆˆÂˆKˆ››İ™[WÜÚYÛ˜]\™Hˆœ\‹]\™Ù]\‹[[X™\ˆ\È‹ÎÈH[X™\œÈ™]Z[™Y\ÈH›İ[™Û\İ\ÈŒ›İ[™XÛ\İ\ˆ›Ûİİ˜\™\XØ]\ÎÈL˜[™ÛHÙ]™[‹]XÚÙ][œÙ[X›\È\ˆ\™Ù]ˆ‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‹ˆœ˜[™ÛWÙ[œÙ[X›\×Ü\—İ\™Ù]ˆLˆ˜›Ûİİ˜\İ[š]ˆÚÛH\™Ù]›İ[™Ú]H[X™\ˆİ]ÛÛY\È‹ˆ˜›Ûİİ˜\Ü™\XØ]\ÈˆŒˆBˆKˆÂˆšYˆ‘LM×ÔÌÔÕ•PÕT‘WÑQ‘‘T‘S•PSÑ’VİŒH‹ˆšÚ[™ˆ˜›ØÚÙY‹ˆœ]Y\İ[ÛˆˆØ[ˆHÜšYÚ[˜[ÌİXİ\™HØÛÜ™H™H˜Z][H™\Z\™Y[™]˜[X]YÚ]İ][™[[™ÈH™]È›Ü›][OÈ‹ˆ››İ™[Hˆœ™\]Z\™\È™XÛİ™\™YÜšYÚ[˜[ÌKÔÌ˜[šËØÛÜ™H›Ü›][K[™˜[šË]™XİÜˆÙ[™\˜][ÛˆÛİ\˜ÙNÈ›ØÚÈ[[›İ™[˜[˜ÙH\ÈİY™šXÚY[ˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LM×ÔÌÔÕ•PÕT‘WÑQ‘‘T‘S•PSÑ’VİŒH‹ˆšÚ[™ˆ˜›ØÚÙY‹ˆœ™\ÙX\˜ÚÜ]Y\İ[ÛˆˆØ[ˆHÜšYÚ[˜[ÌİXİ\™HØÛÜ™H™H˜Z][H™\Z\™Y[™]˜[X]YÚ]İ][™[[™ÈH™]È›Ü›][OÈ‹ˆ™]WØİ]Ù™ˆˆ[ˆ\™Ù]Ü›İ[™Èˆ×Kˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ“›È^Xİ][Ûˆ[[Ûİ\˜ÙH™XÛİ™\Kˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXZ[‹[[X™\ˆ]È\ˆ\™Ù]›İ[™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ˜]\È‹ˆœZ\™YY™™\™[˜ÙH‹ˆ[\Ü˜[›ØÚÈİXš[]H‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YH\™Ù]\›İ[™ØXÚYˆÛÛ\Û™[›Ü™XØ\İÈ[™\]X[\˜[šÈˆÚ\™H\XØX›H‹ˆ˜˜\Ù[[™Hˆ™^Xİ[šY›Ü›H‹ÍH\İšX][ÛÈÚ[][]YØ[YK]\™Ù]˜[™ÛHXÚÙ]ÈÚ[ˆÜXÚYšYY‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆ›Üˆ™YÚ\İ\™Y˜[Z[HÙˆÛÛ˜\İÎÈ\ØÜš\]™Hİ]]ÈX™[Y^Ü˜]ÜH‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ›İÙ\ˆ[X™\ˆ›ÜˆØÛÜ™HY\ÎÈÛİ\˜ÙHÛÛ\Û™[Ü™\ˆ™]Z[™Y‹ˆœ˜[™ÛWÜÙYYˆŒŒLLËˆ™^XİYÛİ]]Ùš[\Èˆ×Kˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆßKˆ››İ™[WÜÚYÛ˜]\™Hˆœ™\]Z\™\È™XÛİ™\™YÜšYÚ[˜[ÌKÔÌ˜[šËØÛÜ™H›Ü›][K[™˜[šË]™XİÜˆÙ[™\˜][ÛˆÛİ\˜ÙNÈ›ØÚÈ[[›İ™[˜[˜ÙH\ÈİY™šXÚY[ˆ‹ˆœİYWØÛ\ÜÈˆ˜›ØÚÙY‹ˆ˜›ØÚÙYÜİ]\Èˆ“ĞÒÑQÔÓÕTÑWÓRTÔÒS‘È‹ˆ˜›ØÚÙYÜ™X\ÛÛˆˆ”ÙX\˜ÚY˜XÚÙY™\ÜÚ]ÜK™\ÙX\˜ÚË[˜[\Ú\ËË]]ÛX][Û‹Ë\İÜšXØ[ØÜË[™Ú]Øš™Xİ\İÜH›ÜˆÌKÔÌ˜[šÈÙ[™\˜][Û‹ØÛÜ™H›Ü›][H[™˜[šË]™XİÜˆÛİ\˜ÙNÈÜšYÚ[˜[\Y˜XİÈ\™H›İ™\Ù[ÛÈ›È™\XÙ[Y[›Ü›][H\È]]Üš^™Yˆ‚ˆBˆKˆÂˆšYˆ‘LNÒTÕÔ’PĞSÔTÒTÑWÑRST‘WÑPÓÓTÔÒUSÓ—İŒH‹ˆšÚ[™ˆ˜›ØÚÙY‹ˆœ]Y\İ[ÛˆˆØ[ˆ]][XÈÙX[Y\˜Ú\ÙH[™\È™HXÛÛ\ÜÙY[È\‹XÛÛ\Û™[ÛÛšX][ÛœÈ[™™\X]Y˜Z[\™H[Ù\ÈÚ]İ]™XÛÛœİXİ[™ÈZ\ÜÚ[™È›İ[™ÏÈ‹ˆ››İ™[Hˆ›Û™H]][XØ]YLHÙX[Y\˜Ú\ÙHÛİ\˜ÙH\È™\Ù[]ÛÛ\]H\Ë[Ù‹Xİ]Ù™ˆ\‹[[X™\ˆÛÛ\Û™[˜[šÈ™XİÜœÈ[™][\H]][XÈ\˜Ú\ÙY›İ[™È\™H[˜]˜Z[X›NÈ›ØÚÈ[XÛÛ\ÜÚ][Ûˆ[™[™È]šY[˜ÙH™XÛİ™\Kˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LNÒTÕÔ’PĞSÔTÒTÑWÑRST‘WÑPÓÓTÔÒUSÓ—İŒH‹ˆšÚ[™ˆ˜›ØÚÙY‹ˆœ™\ÙX\˜ÚÜ]Y\İ[ÛˆˆØ[ˆ]][XÈÙX[Y\˜Ú\ÙH[™\È™HXÛÛ\ÜÙY[È\‹XÛÛ\Û™[ÛÛšX][ÛœÈ[™™\X]Y˜Z[\™H[Ù\ÈÚ]İ]™XÛÛœİXİ[™ÈZ\ÜÚ[™È›İ[™ÏÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆÂˆLBˆKˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ“Û›HÛÛ[\Ü˜[™[İ\ÈÙX[YÛİ\˜ÙHÚ]˜Z[š[™Èİ]Ù™ˆLX^H™HÛÛœÚY\™YÈÈ›İ™XÛÛœİXİİ\ˆ›İ[™Ëˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXZ[‹[[X™\ˆ]È\ˆ\™Ù]›İ[™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ˜]\È‹ˆœZ\™YY™™\™[˜ÙH‹ˆ[\Ü˜[›ØÚÈİXš[]H‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YH\™Ù]\›İ[™ØXÚYˆÛÛ\Û™[›Ü™XØ\İÈ[™\]X[\˜[šÈˆÚ\™H\XØX›H‹ˆ˜˜\Ù[[™Hˆ™^Xİ[šY›Ü›H‹ÍH\İšX][ÛÈÚ[][]YØ[YK]\™Ù]˜[™ÛHXÚÙ]ÈÚ[ˆÜXÚYšYY‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆ›Üˆ™YÚ\İ\™Y˜[Z[HÙˆÛÛ˜\İÎÈ\ØÜš\]™Hİ]]ÈX™[Y^Ü˜]ÜH‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ›İÙ\ˆ[X™\ˆ›ÜˆØÛÜ™HY\ÎÈÛİ\˜ÙHÛÛ\Û™[Ü™\ˆ™]Z[™Y‹ˆœ˜[™ÛWÜÙYYˆŒŒLLËˆ™^XİYÛİ]]Ùš[\Èˆ×Kˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆßKˆ››İ™[WÜÚYÛ˜]\™Hˆ›Û™H]][XØ]YLHÙX[Y\˜Ú\ÙHÛİ\˜ÙH\È™\Ù[]ÛÛ\]H\Ë[Ù‹Xİ]Ù™ˆ\‹[[X™\ˆÛÛ\Û™[˜[šÈ™XİÜœÈ[™][\H]][XÈ\˜Ú\ÙY›İ[™È\™H[˜]˜Z[X›NÈ›ØÚÈ[XÛÛ\ÜÚ][Ûˆ[™[™È]šY[˜ÙH™XÛİ™\Kˆ‹ˆœİYWØÛ\ÜÈˆ˜›ØÚÙY‹ˆ˜›ØÚÙYÜİ]\Èˆ“ĞÒÑQÔÓÕTÑWÓRTÔÒS‘È‹ˆ˜›ØÚÙYÜ™X\ÛÛˆˆ•Hœ›Ş™[ˆLH\˜Ú\ÙHÔÕˆ[™™]šY]ÈÙ\™H›İ[™]Û›HÛ™H›İ[™\È]˜Z[X›H[™H™YÚ\İ\™YÛİ\˜ÙHXÚÜÈÛÛ\]H^ÛYY]Ú[›š[™Ë[[X™\ˆÛÛ\Û™[˜[šÈ™XİÜœÈ™YYY›Üˆ™\]Y\İY]šX][Û‹ˆ›Èİ\ˆ›İ[™\È™XÛÛœİXİYˆ‚ˆBˆKˆÂˆšYˆ‘LNWÕ‘QWÕPÒÑUÔÔ•“ÓS×ĞÓÕ‘TQÑWİŒH‹ˆšÚ[™ˆœÜ›Û[È‹ˆœ]Y\İ[Ûˆˆ’İÈÙ\ÈH™KYœ›Ş™[ˆ™YKXÛÛ\Û™[XÚÙ][™HÛÛ\\™HÚ]Ø[YK]\™Ù]˜[™ÛH™YK]XÚÙ][™\ÈÛˆÓÔÈÛİ™\˜YÙOÈ‹ˆ››İ™[Hˆ™š^Y™YKXÛÛ\Û™[[™H™\œİ\ÈL[™\[™[HÚ[][]YØ[YK]\™Ù]™YK]XÚÙ][™\ÎÈ]˜[X]H[š[ÛˆÛİ™\˜YÙKİ™\›\[™[™HX^[XHXÜ›ÜÜÈŒK‹ŒLKˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LNWÕ‘QWÕPÒÑUÔÔ•“ÓS×ĞÓÕ‘TQÑWİŒH‹ˆšÚ[™ˆœÜ›Û[È‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ’İÈÙ\ÈH™KYœ›Ş™[ˆ™YKXÛÛ\Û™[XÚÙ][™HÛÛ\\™HÚ]Ø[YK]\™Ù]˜[™ÛH™YK]XÚÙ][™\ÈÛˆÓÔÈÛİ™\˜YÙOÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘XXÚØXÚYÓÔÈ™YXİ[Ûˆ›Üˆ\™Ù]]\İ]™H˜Z[š[™×İ›İYÚÜ›İ[™]LNÈÛ›H™K]\™Ù]œ›Ş™[ˆÛÛ\Û™[XÚÙ]È\™H\ÙYˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXZ[‹[[X™\ˆ]È\ˆ\™Ù]›İ[™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ˜]\È‹ˆœZ\™YY™™\™[˜ÙH‹ˆ[\Ü˜[›ØÚÈİXš[]H‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YH\™Ù]\›İ[™ØXÚYˆÛÛ\Û™[›Ü™XØ\İÈ[™\]X[\˜[šÈˆÚ\™H\XØX›H‹ˆ˜˜\Ù[[™Hˆ™^Xİ[šY›Ü›H‹ÍH\İšX][ÛÈÚ[][]YØ[YK]\™Ù]˜[™ÛHXÚÙ]ÈÚ[ˆÜXÚYšYY‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆ›Üˆ™YÚ\İ\™Y˜[Z[HÙˆÛÛ˜\İÎÈ\ØÜš\]™Hİ]]ÈX™[Y^Ü˜]ÜH‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ›İÙ\ˆ[X™\ˆ›ÜˆØÛÜ™HY\ÎÈÛİ\˜ÙHÛÛ\Û™[Ü™\ˆ™]Z[™Y‹ˆœ˜[™ÛWÜÙYYˆŒŒLLËˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ•S‘WÔ‘TÕSË˜Üİˆ‹ˆ”S‘ÓWĞ•S‘WÔ‘TÕSË˜Üİˆ‹ˆ•S‘WÓQU’PÔË˜Üİˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ•S‘WÔ‘TÕSË˜ÜİˆˆKˆ”S‘ÓWĞ•S‘WÔ‘TÕSË˜ÜİˆˆLˆ•S‘WÓQU’PÔË˜Üİˆˆ‚ˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ™š^Y™YKXÛÛ\Û™[[™H™\œİ\ÈL[™\[™[HÚ[][]YØ[YK]\™Ù]™YK]XÚÙ][™\ÎÈ]˜[X]H[š[ÛˆÛİ™\˜YÙKİ™\›\[™[™HX^[XHXÜ›ÜÜÈŒK‹ŒLKˆ‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‹ˆ˜[™WØÛÛ\Û™[ÈˆÂˆ›Û™×Ùœ™\]Y[˜ŞH‹ˆœİXİ\™WÜ›Ùš[H‹ˆœZ\—Ø\ÜÛØÚX][Ûˆ‚ˆKˆœ˜[™ÛWØ[™\×Ü\—İ\™Ù]ˆLˆ˜[™WÙœ›Ş™[—Ø™Y›Ü™WÛİ]ÛÛYHˆYBˆBˆKˆÂˆšYˆ‘LWÒS‘TS‘S•ÔÒQÓSÑTĞÓÕ‘T–WİŒH‹ˆšÚ[™ˆš[™\[™[ÜÚYÛ˜[Ù\ØÛİ™\H‹ˆœ]Y\İ[Ûˆˆ‘Èœ›Ş™[ˆÜ›ÜÜË\›İ[™˜[œÚ][Ûˆ[™ÙX\ÛÛ‹XÛÛ™][Û™YÚYÛ˜[ÈYÙ[Z[™[H[™\[™[[X™\ˆ˜[šÚ[™ÜÈ™^[Û™HÙ]™[ˆˆÛÛ\Û™[ÏÈ‹ˆ››İ™[Hˆ”™K[İ]ÛÛYHØÜ™Y[š[™ÈÙˆ™YH™\ÜXÚYšYY˜[œÚ][Û‹ÜÙX\ÛÛˆÛÛ™][Û˜[ÚYÛ˜[˜[Z[Y\ÈH˜[šË]Ë\Ù[Xİ[ÛˆÛÜœ™[][Ûˆ[™Ø[YK]\™Ù]˜XØØ\™È›Èİ]ÛÛY\È[\ˆH[™\[™[˜ÙHØÜ™Y[‹ˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LWÒS‘TS‘S•ÔÒQÓSÑTĞÓÕ‘T–WİŒH‹ˆšÚ[™ˆš[™\[™[ÜÚYÛ˜[Ù\ØÛİ™\H‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ‘Èœ›Ş™[ˆÜ›ÜÜË\›İ[™˜[œÚ][Ûˆ[™ÙX\ÛÛ‹XÛÛ™][Û™YÚYÛ˜[ÈYÙ[Z[™[H[™\[™[[X™\ˆ˜[šÚ[™ÜÈ™^[Û™HÙ]™[ˆˆÛÛ\Û™[ÏÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘›Üˆ\™Ù][ÚYÛ˜[Ûİ[È[™Hš[Ü‹\›İ[™İ]H\ÙHÛ›H›İ[™ÈK‹LNÈ˜[œÚ][ÛˆX™[ÈİÜ]LKˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆXœÛÛ]HØ[™Y]K\˜[šÈÈ‹]XÚÙ][Y[X™\œÚ\ÛÜœ™[][Ûˆ[™YX[ˆØ[YK]\™Ù]Ü\Ú^˜XØØ\™‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆ›X^ÛÛ\Û™[[]™[˜XØØ\™‹ˆœİ\š]›ÜˆÛİ[‹ˆ\™Ù]]Ú\ÙHİ]Ù™ˆ]Y]‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YK]\™Ù]Ù]™[ˆœ›Ş™[ˆˆÛÛ\Û™[XÚÙ]È\ÈÛÛXš[™YÙ\]X[Ü˜[šÈ‹ˆ˜˜\Ù[[™Hˆ‹\™Y[™[˜ŞH™\ÚÛÈ\™Hš^Y]YX[ˆÛÜœ™[][ÛŸŒŒYX[ˆ˜XØØ\™ŒŒ[™X^ÛÛ\Û™[YX[ˆ˜XØØ\™ŒÍH‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ“›Èİ]ÛÛYKX˜\ÙY\İ\Ú\È\İÈ\™H\ÙY›ÜˆHÙ[ÛY]K[Û›HØÜ™Y[È[™YH™\ÜXÚYšYYÚYÛ˜[È\™H™\ÜYˆ‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ™\ØÙ[™[™Èœ›Ş™[ˆÚYÛ˜[ØÛÜ™K[ˆİÙ\ˆ[X™\ˆ‹ˆœ˜[™ÛWÜÙYYˆŒŒLMKˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ”ÒQÓSÑQ’S’USÓ”ËšœÛÛˆ‹ˆ”ÒQÓSÒS‘TS‘SÑK˜Üİˆ‹ˆ•T‘ÑUÔÒSRST’UK˜Üİˆ‹ˆ”ÕT•’U“Ô—ÔÕUTË˜Üİˆ‹ˆ”‘QPÕSÓ”Ë˜Üİˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ”ÒQÓSÒS‘TS‘SÑK˜ÜİˆˆËˆ•T‘ÑUÔÒSRST’UK˜ÜİˆˆMMˆ”ÕT•’U“Ô—ÔÕUTË˜ÜİˆˆËˆ”‘QPÕSÓ”Ë˜ÜİˆˆNLÍBˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ˜Ü›ÜÜË\›İ[™X\šÛİˆ˜[œÚ][ÛˆX]š^ÈØ[[™\‹\ÙX\ÛÛˆÛÛ™][Û˜[[˜ÚY[˜ÙNÈš^Y™]š[İ\ËY˜]Ë\İ[K\™YÚ[YHÛÛ™][Û˜[[˜ÚY[˜ÙNÈˆ˜[šË[Y[X™\œÚ\ÛÜœ™[][Ûˆ[™Ü\Ú^˜XØØ\™ØÜ™Y[ˆ‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‚ˆBˆKˆÂˆšYˆ‘L—ÒS‘TS‘S•ÓSÑSÕĞSÑ“Ô•ĞT‘İŒH‹ˆšÚ[™ˆš[™\[™[Û[Ù[İØ[Ù›ÜØ\™‹ˆœ]Y\İ[Ûˆˆ‘ÈLH[™\[™[\ÚYÛ˜[Ø[™Y]\È[\›İ™HØ[YK]\™Ù]Ø[ËY›ÜØ\™İ]ÛÛY\Èİ™\ˆˆ[™[šY›Ü›H˜[™ÛHXÚÙ]ÏÈ‹ˆ››İ™[Hˆ‘œ›Ş™[ˆÜ\Ú^™YXİÜœÈ]˜[X]Yİ™\ˆH^[™[™ËZ[™›Ü›X][Ûˆ\™Ù]ÈÚ]LØ[YK]\™Ù]˜[™ÛHXÚÙ]È\ˆ\™Ù]ˆÛÛ\Û™[ÛÛ\\˜]ÜœË›ØÚÈ[˜Ù\Z[K[™ÛHÛÜœ™Xİ[Û‹ˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘L—ÒS‘TS‘S•ÓSÑSÕĞSÑ“Ô•ĞT‘İŒH‹ˆšÚ[™ˆš[™\[™[Û[Ù[İØ[Ù›ÜØ\™‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ‘ÈLH[™\[™[\ÚYÛ˜[Ø[™Y]\È[\›İ™HØ[YK]\™Ù]Ø[ËY›ÜØ\™İ]ÛÛY\Èİ™\ˆˆ[™[šY›Ü›H˜[™ÛHXÚÙ]ÏÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘XXÚÚYÛ˜[™YXİ[Ûˆ›Üˆ\™Ù]\ÈÙ[™\˜]Yœ›ÛH›İ[™ÈK‹LNÈ›È[š[™È\È\™›Ü›YYÛˆ\™Ù]İ]ÛÛY\Ëˆ‹ˆœš[X\WÛY]šXÈˆ›YX[ˆ]È[™˜]WÙÙWÌÈ™\œİ\ÈØ[YK]\™Ù]˜[™ÛHXÚÙ]È‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆŒ‹ˆ]\İšX][Ûˆ‹ˆŒŠËÌÊËÍ
+ËÍJËÍˆ‹ˆ˜\šX[˜ÙH‹ˆœZ\™YÛÛ™šY[˜ÙH[\˜[È‹ˆŒL\›İ[™›ØÚÈİXš[]H‹ˆˆÛÛ\\š\ÛÛœÈ‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YK]\™Ù]Ù]™[ˆœ›Ş™[ˆˆÛÛ\Û™[È[™ÛÛXš[™YÙ\]X[Ü˜[šÈ‹ˆ˜˜\Ù[[™HˆŒL[™\[™[HØ[\Y[šY›Ü›HÚ^[[X™\ˆXÚÙ]È\ˆ\™Ù]›İ[™‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆİ™\ˆÈØ[™Y]HÚYÛ˜[ÈH™YÚ\İ\™Y˜[™ÛKXÛÛ\\š\ÛÛˆY]šXÜËˆ‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ™\ØÙ[™[™Èœ›Ş™[ˆÚYÛ˜[ØÛÜ™K[ˆİÙ\ˆ[X™\ˆ‹ˆœ˜[™ÛWÜÙYYˆŒŒLMKˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ”‘QPÕSÓ”Ë˜Üİˆ‹ˆ”S‘ÓWĞ–WÕT‘ÑU˜Üİˆ‹ˆ•T‘ÑUÔS‘ÓWÔÕSSPT–K˜Üİˆ‹ˆ“QU’PÔË˜Üİˆ‹ˆ”RT‘QÔS‘ÓWĞÓÓTT’TÓÓ‹˜Üİˆ‹ˆ“ĞÒ×ÔÕP’SUK˜Üİˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ”‘QPÕSÓ”Ë˜ÜİˆˆÌMKˆ”S‘ÓWĞ–WÕT‘ÑU˜ÜİˆˆLˆ•T‘ÑUÔS‘ÓWÔÕSSPT–K˜ÜİˆˆKˆ“QU’PÔË˜ÜİˆˆL‹ˆ”RT‘QÔS‘ÓWĞÓÓTT’TÓÓ‹˜ÜİˆˆMKˆ“ĞÒ×ÔÕP’SUK˜ÜİˆˆŒBˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ‘LHš^Y[™\[™[›Ü›][\ÎÈŒK‹ŒLNÈØ[YK]\™Ù]L]XÚÙ]˜[™ÛHÚ[][][ÛÈˆÛÛ\Û™[ÛÛ\\š\ÛÛœÎÈÚ\˜İ[\ˆ[İš[™ËX›ØÚÈZ\™YÒNÈÛLMH‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‚ˆBˆKˆÂˆšYˆ‘L×Ñ’U‘WÓS‘WĞĞS‘QUWĞS’×İŒH‹ˆšÚ[™ˆ™š]™WÛ[™WØØ[™Y]WØ˜[šÈ‹ˆœ]Y\İ[ÛˆˆØ[ˆHİ]Ù™‹\ØY™Hš]™K[[™HØ[™Y]H˜[šÈ™\Ù\™HÛİ\˜ÙH›İ™[˜[˜ÙHÚ[H™[[İš[™È\XØ]H[™™X\‹Y\XØ]H[™\ÏÈ‹ˆ››İ™[Hˆ•\™Ù]\ÜXÚYšXÈ˜[šÈÛÛXš[™\Èœ›Ş™[ˆˆ[™LHİ\š]›ÜœËY\™Ù\È[™\ÈÚ]]X\İš]™HÚ\™Y[X™\œË[™™]Z[œÈ]™\HÛİ\˜ÙH[™˜Z[š[™Èİ]Ù™‹ˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘L×Ñ’U‘WÓS‘WĞĞS‘QUWĞS’×İŒH‹ˆšÚ[™ˆ™š]™WÛ[™WØØ[™Y]WØ˜[šÈ‹ˆœ™\ÙX\˜ÚÜ]Y\İ[ÛˆˆØ[ˆHİ]Ù™‹\ØY™Hš]™K[[™HØ[™Y]H˜[šÈ™\Ù\™HÛİ\˜ÙH›İ™[˜[˜ÙHÚ[H™[[İš[™È\XØ]H[™™X\‹Y\XØ]H[™\ÏÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘XXÚØ[™Y]H[™HÛÛY\Èœ›ÛHHˆØXÚY›Ü™XØ\İÜˆLHÚYÛ˜[›Ü™XØ\İÚ]˜Z[š[™Èİ]Ù™ˆLNÈ\™Ù]İ]ÛÛY\È\™H›İ™XY\š[™È˜[šÈÛÛœİXİ[Û‹ˆ‹ˆœš[X\WÛY]šXÈˆ˜Ø[™Y]KX˜[šÈ˜[Y]K›İ™[˜[˜ÙHÛÛ\][™\ÜË[™Z\Ú\ÙHİ™\›\Y\ˆY\XØ][Ûˆ‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆ[š\]YHØ[™Y]HÛİ[‹ˆ™[YÚX›H[™\[™[Ûİ\˜Ù\È‹ˆœÛİ\˜ÙHØÛÜ™KÜ˜[šÈ‹ˆ˜İ]Ù™ˆ]Y]‚ˆKˆ˜ÛÛ\\˜]Üˆˆœ™KYY\ˆ[™LHÛİ\˜ÙHØ[™Y]\ÈÛˆHØ[YH\™Ù]‹ˆ˜˜\Ù[[™Hˆ“Y\™ÙHØ[™Y]\ÈÚ[ˆ[\œÙXİ[ÛˆÛİ[MNÈ™]Z[ˆYÚ\İœ›Ş™[ˆØÛÜ™H\ÈØ[›ÛšXØ[[™™\Ù\™H[[X\Ù\Ëˆ‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ“›İ\XØX›NÈ›Èİ]ÛÛYKX˜\ÙYÛÛ\\š\ÛÛœËˆ‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆšYÚ\ˆÛİ\˜ÙHØÛÜ™K[ˆÛİ\˜ÙH[Ù[˜[YNÈØ[™Y]HQ›ÛİÜÈ\™Ù]ÜÛİ\˜ÙHÜ™\ˆ‹ˆœ˜[™ÛWÜÙYYˆŒŒLMKˆ™^XİYÛİ]]Ùš[\ÈˆÂˆĞS‘QUWĞS’Ë˜Üİˆ‹ˆĞS‘QUWÔ“Õ‘SSÑK˜Üİˆ‹ˆĞS‘QUWÓÕ‘T“T˜Üİˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆßKˆ››İ™[WÜÚYÛ˜]\™Hˆ\™Ù]\ÜXÚYšXÈ›İ™[˜[˜ÙH˜[šÎÈš]™K[[X™\‹Z[\œÙXİ[Ûˆ™X\‹Y\XØ]HY\™ÙNÈœ›Ş™[ˆˆ\ÈLKÑLˆ[™\[™[İ\š]›ÜœÈ‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‚ˆBˆKˆÂˆšYˆ‘LÑ’U‘WÓS‘WÔÔ•“ÓS×ÔÑSPÕÔ—İŒˆ‹ˆšÚ[™ˆ™š]™WÛ[™WÜÜ›Û[×ÜÙ[XİÜˆ‹ˆœ]Y\İ[ÛˆˆØ[ˆ[Hœ›Ş™[ˆš]™K[[™HÛÛœİXİ[Ûˆİ˜]YŞH™\X]YHİ]\™›Ü›HØ[YK]\™Ù]˜[™ÛHš]™K[[™H[™\ÏÈ‹ˆ››İ™[Hˆ”Ù]™[ˆ\İ[˜İš]™K[[™Hİ˜]YÚY\È\ÈH™\İY˜Z[[™ËLŒ[˜[ZXÈÙ[XİÜˆ\™HÛÛ\\™YÚ]L˜[™ÛHš]™K[[™H[™\ÈÛˆY[XØ[\™Ù]Ëˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LÑ’U‘WÓS‘WÔÔ•“ÓS×ÔÑSPÕÔ—İŒˆ‹ˆšÚ[™ˆ™š]™WÛ[™WÜÜ›Û[×ÜÙ[XİÜˆ‹ˆœ™\ÙX\˜ÚÜ]Y\İ[ÛˆˆØ[ˆ[Hœ›Ş™[ˆš]™K[[™HÛÛœİXİ[Ûˆİ˜]YŞH™\X]YHİ]\™›Ü›HØ[YK]\™Ù]˜[™ÛHš]™K[[™H[™\ÏÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH[˜Û\Ú]™NÈ™\İYÙ[XİÜˆK‹ŒLH‹ˆ˜Z[š[™×Øİ]Ù™—Ü[HˆØ[™Y]H˜[šÈ\Ù\È\™Ù]LHÛ›NÈ™\İY[˜[ZXÈÙ[XİÜˆ\Ù\È^XİHHš[ÜˆŒÛÛ\]Y\™Ù]İ]ÛÛY\ÈÈÚÛÜÙH[[Û™Èœ›Ş™[ˆİ˜]YÚY\Ëˆ‹ˆœš[X\WÛY]šXÈˆ™š]™K[[™HX^]Ë[WÌÜ\Ë[WÍ\Ë[™Ú[›š[™Ë[[X™\ˆ[š[ÛˆÛİ™\˜YÙH‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆ˜[WÌœ\ËÍ\\ËÍˆ‹ˆ[š\]YK[[X™\ˆÛİ™\˜YÙH‹ˆ›YX[ˆZ\Ú\ÙHİ™\›\‹ˆ›[™KZ]˜\šX[˜ÙH‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YK]\™Ù]L\˜[™ÛKYš]™K[[™H˜\Ù[[™NÈš^YÙ]™[ˆİ˜]YÚY\È[™™\İYŒ]\™Ù]Ù[XİÜˆ‹ˆ˜˜\Ù[[™HˆŒL\™Ù]\ÙYYYÜ›Û[ÜÈÙˆš]™H\İ[˜İ[šY›Ü›HÚ^[[X™\ˆ[™\È\ˆ\™Ù]‹ˆ›][\XÚ]WØÛÜœ™Xİ[ÛˆˆÛÛœİXİ[Ûˆİ˜]YŞHÛÛ\\š\ÛÛœÈ\™H^Ü˜]ÜNÈ›Û[İ[ÛˆØ]H™K\™YÚ\İ\œÈÛ›H™\İYÙ[XİÜˆ[WÌÜ\È[™X^Ú]Ëˆ‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆœİ˜]YŞK\ÜXÚYšXÈœ›Ş™[ˆ[NÈ^XØ[[Ù[ØØ[™Y]HÜ™\ˆ›Üˆ™[XZ[š[™ÈY\È‹ˆœ˜[™ÛWÜÙYYˆŒŒLMKˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ”Ô•“ÓS×ÕPÒÑUË˜Üİˆ‹ˆ”S‘ÓWÍWĞ–WÕT‘ÑU˜Üİˆ‹ˆ”ÕUQÖWĞ–WÕT‘ÑU˜Üİˆ‹ˆ”ÕUQÖWÔÕSSPT–K˜Üİˆ‹ˆ“‘TÕQÔÑSPÕÔ—ÕPÑK˜Üİˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ”S‘ÓWÍWĞ–WÕT‘ÑU˜ÜİˆˆLˆ”ÕUQÖWĞ–WÕT‘ÑU˜ÜİˆˆMŒKˆ”ÕUQÖWÔÕSSPT–K˜ÜİˆˆKˆ“‘TÕQÔÑSPÕÔ—ÕPÑK˜ÜİˆˆBˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ™š]™K[[™Hİ˜]YÚY\ÈÜKÛZ[‹ÛZYÚYÚİ™\›\ÜÛİ\˜ÙH]™\œÚ]KÚ[™\[™[Ù[\™YĞ‹Z[™\[™[Z^È™\İY˜Z[[™ËLŒÙ[XİÜÈLØ[YK]\™Ù]S‘ÓWÍWÓS‘TÈ[™\È‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‚ˆBˆKˆÂˆšYˆ‘LWÑ’U‘WÓS‘WÔ“ÓSÕSÓ—ÑĞUWİŒˆ‹ˆšÚ[™ˆ™š]™WÛ[™WÜ›Û[İ[Û—ÙØ]H‹ˆœ]Y\İ[Ûˆˆ‘Ù\ÈH™\İYš]™K[[™HÙ[XİÜˆYY]]™\H™K\™YÚ\İ\™Y›Û[İ[ÛˆØ]H™\œİ\ÈØ[YK]\™Ù]˜[™ÛHš]™K[[™H[™\ÏÈ‹ˆ››İ™[Hˆ”Z\™YÚ\˜İ[\ˆ[İš[™ËX›ØÚÈ[˜Ù\Z[KÛKXY\İYš[X\H\İË[\Ü˜[›ØÚÈÛÛœÚ\İ[˜ŞK[™™\İX›ØÚÈ[][ÛˆÙ[œÚ]]š]H]\›Z[™H›Û[İ[ÛˆÚ]İ]™]›ÜÜXİ]™H[š[™Ëˆ‹ˆœÜXÈˆÂˆœİYWÚYˆ‘LWÑ’U‘WÓS‘WÔ“ÓSÕSÓ—ÑĞUWİŒˆ‹ˆšÚ[™ˆ™š]™WÛ[™WÜ›Û[İ[Û—ÙØ]H‹ˆœ™\ÙX\˜ÚÜ]Y\İ[Ûˆˆ‘Ù\ÈH™\İYš]™K[[™HÙ[XİÜˆYY]]™\H™K\™YÚ\İ\™Y›Û[İ[ÛˆØ]H™\œİ\ÈØ[YK]\™Ù]˜[™ÛHš]™K[[™H[™\ÏÈ‹ˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆK‹ŒLH[˜Û\Ú]™H‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ‘L™\İYÙ[XİÜˆXÚ\Ú[ÛœÈ\ÙHÛ›HH[[YYX][H™XÙY[™ÈŒ\™Ù]™\İ[ÎÈØ]HÛÛ\\š\ÛÛœÈ\ÙHY[XØ[\™Ù]›İ[™Ëˆ‹ˆœš[X\WÛY]šXÈˆœZ\™Y[WÌÜ\È[™X^Ú]È[\ÈÚ]MIH›ØÚËX›Ûİİ˜\ÒHİÙ\ˆ›İ[™ÈX›İ™H™\›È‹ˆœÙXÛÛ™\WÛY]šXÜÈˆÂˆ˜[WÍ\È›Û‹]ÛÜœÙ[š[™È‹ˆL\›İ[™›ØÚÈÛÛœÚ\İ[˜ŞH‹ˆ˜™\İX›ØÚÈ™[[İ˜[‹ˆ›XZØYÙH‹ˆ›][\HÛÛ\\š\ÛÛœÈ‚ˆKˆ˜ÛÛ\\˜]ÜˆˆœØ[YK]\™Ù]YX[ˆÙˆL˜[™ÛHš]™K[[™HÜ›Û[ÜÈ‹ˆ˜˜\Ù[[™Hˆ”S‘ÓWÍWÓS‘TÈ\™Ù][X]ÚYÜ›Û[È™Y™\™[˜ÙH‹ˆ›][\XÚ]WØÛÜœ™Xİ[Ûˆˆ’ÛHİ\YİÛˆXÜ›ÜÜÈHÛÈ™YÚ\İ\™Yš[X\H\İÈ›Üˆ‘TÕQÑSSRP×ÍKˆ‹ˆ˜›ØÚ×ÜİXš[]HˆÂˆLˆLˆŒˆKˆYWØœ™XZÈˆ››İ\XØX›HÈØ]H‹ˆœ˜[™ÛWÜÙYYˆŒŒLMKˆ™^XİYÛİ]]Ùš[\ÈˆÂˆ”“ÓSÕSÓ—ÕTÕË˜Üİˆ‹ˆ”“ÓSÕSÓ—Ğ“ĞÒÔË˜Üİˆ‹ˆ”“ÓSÕSÓ—ÑĞUKšœÛÛˆ‹ˆ•‘T’Q’PĞUSÓ‹šœÛÛˆ‹ˆ”‘TÔ•›Y‚ˆKˆ™^XİYÜ™XÛÜ™ØÛİ[ÈˆÂˆ”“ÓSÕSÓ—ÕTÕË˜Üİˆˆˆ”“ÓSÕSÓ—Ğ“ĞÒÔË˜ÜİˆˆÂˆKˆ››İ™[WÜÚYÛ˜]\™Hˆ›™\İYYš]™K[[™HœÈS‘ÓWÍWÓS‘TÎÈš[X\H[LÜ\È[™X^Ú]ÎÈÛLÈZ\™YÚ\˜İ[\ˆ›ØÚÈ›Ûİİ˜\ÈL\›İ[™İXš[]H[™™\İX›ØÚÈ™[[İ˜[‹ˆœİYWØÛ\ÜÈˆ™[\\šXØ[‚ˆBˆKˆÂˆšYˆ‘LÌÔ“ÔÔPÕU‘WÔÒQÓSÑ”‘QV‘WİŒH‹ˆšÚ[™ˆœ›ÜÜXİ]™WÜÚYÛ˜[Ùœ™Y^™H‹ˆœ]Y\İ[ÛˆˆØ[ˆHÛÈLˆ[™\[™[][˜[Y]YÚYÛ˜[È™Hœ›Ş™[ˆ›Üˆ›ÜÜXİ]™HÚYİË[Û›H˜XÚÚ[™ÏÈ‹ˆœÜXÈˆÂˆ™]WØİ]Ù™ˆˆLKˆœÚYÛ˜[ÈˆÂˆ”‘U’SÕT×ÔÕSWÔ‘QÒSQWĞÓÓ‘USÓSİŒH‹ˆĞSS‘T—ÔÑPTÓÓ—ĞÓÓ‘USÓSİŒH‚ˆKˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ\™Ù]\Ù\È›İ[™È›İYÚLH‹ˆ›İ]]ˆš[[]]X›HÚYİÈ™YXİ[Ûˆ[™›ÜÜXİ]™HYÙ\ˆ‹ˆœ\˜Ú\ÙWÜ™XÛÛ[Y[™][Ûˆˆ˜[ÙKˆ››İ™[WÜÚYÛ˜]\™Hˆ™œ™Y^™HLˆİ\š]›ÜœÈÚ]İ][š[™È[™İ\\™Ù]LˆÚYİÈYÙ\ˆ‚ˆBˆKˆÂˆšYˆ‘LÌWÓÔ•ÑÓÓSÔÒQÓSÑTĞÓÕ‘T–WİŒˆ‹ˆšÚ[™ˆ›ÜÙÛÛ˜[ÜÚYÛ˜[Ù\ØÛİ™\H‹ˆœ]Y\İ[Ûˆˆ‘È[H™\™YÚ\İ\™YÚYÛ˜[˜[Z[Y\ÈÛÛZ[ˆ™YXİ]™H[™›Ü›X][Ûˆ[™\[™[ÙˆÈ‹ˆœÜXÈˆÂˆ™]WØİ]Ù™ˆˆLKˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH‹ˆ˜Ø[™Y]WÙ˜[Z[Y\ÈˆÂˆÔ“ÔÔ×Ñ’UÔ‘TÒQPSÔÒQÓS‹ˆ‘U×ÔÕUWÕS”ÒUSÓˆ‹ˆ“Ó“S‘WĞÒS‘ÑWÔÒS•ÔĞÓÔ‘H‹ˆ‘T’PÒUÑĞTÕPÒÑUÑÑS‘TUÔˆ‚ˆKˆš[™\[™[˜ÙWÜØÜ™Y[ˆˆ™œ›Ş™[ˆ˜[šËİXÚÙ]Y[X™\œÚ\ÛÜœ™[][Ûˆ[™˜XØØ\™™\ÚÛÈ‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ\™Ù]\Ù\È›İ[™È›İYÚLH‹ˆ››İ™[WÜÚYÛ˜]\™Hˆ™›İ\ˆ™\™YÚ\İ\™Y™\ÚYX[Üİ]K]˜[œÚ][Û‹ØÚ[™ÙK\Ú[Ù[]XÚÙ]ZÙ[ZÛÙ˜[Z[Y\È\İYYØZ[œİˆ‚ˆBˆKˆÂˆšYˆ‘LÌ—ÑSÑWÑTĞÓÕ‘T–WÓ‘QĞUU‘WĞÓÓ•“ÓİŒH‹ˆšÚ[™ˆ™˜[ÙWÙ\ØÛİ™\WÛ™YØ]]™WØÛÛ›Û‹ˆœ]Y\İ[Ûˆˆ‘Ù\ÈHÛÛ\]HÚYÛ˜[Ù[Xİ[Ûˆ[™›Û[İ[Ûˆ›ØÙY\™H˜[Ù[H›Û[İH[ÛÛ›ÛÏÈ‹ˆœÜXÈˆÂˆ˜ÛÛ›Ûİ\\ÈˆÂˆ”T—Ó•SP‘T—ÓP‘SÔT“UUUSÓˆ‹ˆ•ÒÓWÑU×ÕT‘ÑUÔÒQ‘“H‹ˆ•S’S‘“Ô“PUU‘WÔS‘ÓWÑ‘PUT‘TÈ‹ˆ—ÑTÕ’P•USÓ—ÔÖS•UP×ÔĞÓÔ‘TÈ‚ˆKˆœ™\XØ]\×Ü\—ØÛÛ›ÛˆLˆ™˜[Z[Y\×Ü\—Ü™\XØ]Hˆˆ›][\WØÛÛ\\š\ÛÛˆˆ’ÛHXÜ›ÜÜÈ›İ\ˆØ[™Y]\È‹ˆ›X^[][WÙ˜[ÙWÜ›Û[İ[Û—Ü˜]HˆŒKˆ››İ™[WÜÚYÛ˜]\™Hˆ™›İ\ˆ[™\[™[[ÛÛ›ÛÙ[™\˜]ÜœÈÚ]Ø[YH\™Ù]˜\Ù[[™H[™Ø[YH›Û[İ[ÛˆØ]H‚ˆBˆKˆÂˆšYˆ‘LÌ×ÓÔ•ÑÓÓSÔÒQÓSÕĞSÑ“Ô•ĞT‘İŒH‹ˆšÚ[™ˆ›ÜÙÛÛ˜[ÜÚYÛ˜[İØ[Ù›ÜØ\™‹ˆœ]Y\İ[Ûˆˆ‘È[™\[™[İ\š]›ÜœÈ™X]Ø[YK]\™Ù]˜[™ÛK‹[™LˆÚYÛ˜[Èİ]ÙˆØ[\OÈ‹ˆœÜXÈˆÂˆ\™Ù]Ü›İ[™ÈˆŒK‹ŒLH‹ˆ˜Z[š[™×Øİ]Ù™—Ü[Hˆ\™Ù]\Ù\È›İ[™È›İYÚLH‹ˆœ˜[™ÛWİXÚÙ]×Ü\—İ\™Ù]ˆLˆ˜›Ûİİ˜\ˆœZ\™YÚ\˜İ[\ˆ[İš[™È›ØÚÜË[™İŒŒ™\È‹ˆœš[X\WÛY]šXÜÈˆÂˆ›YX[—Ú]È‹ˆœ˜]WÌÜ\È‹ˆœ˜]WÍ\È‚ˆKˆ››İ™[WÜÚYÛ˜]\™HˆØ[ËY›ÜØ\™ÙˆLÌHİ\š]›ÜœÈYØZ[œİ˜[™ÛKˆ[™Lˆ‚ˆBˆKˆÂˆšYˆ‘LÍÔÒS‘ÓWÑQÑWÔ“ÓSÕSÓ—ÑĞUWİŒH‹ˆšÚ[™ˆœÚ[™ÛWÙYÙWÜ›Û[İ[Û—ÙØ]H‹ˆœ]Y\İ[Ûˆˆ‘Ù\È[HÜÙÛÛ˜[ÚYÛ˜[Ø]\ÙHHœ›Ş™[ˆ]šY[˜ÙH™\ÚÛ›ÜˆH˜[Y]YYÙOÈ‹ˆœÜXÈˆÂˆœš[X\WÛY]šXÈˆ›YX[—Ú]È‹ˆœ™\]Z\™[Y[ÈˆÂˆœZ\™Y›ØÚÈÒHİÙ\ˆŒ‹ˆ’ÛHŒH‹ˆŒÜ\È›Ûš[™™\š[Üš]H‹ˆŒ\˜Ù[ÜÚ]]™H›ØÚÜÈ‹ˆœÜÚ]]™HY\ˆ]™\HL\›İ[™[][Ûˆ‹ˆ›™YØ]]™HÛÛ›ÛÈMH\˜Ù[‹ˆ›XZØYÙH™\›È‹ˆˆ[™\[™[˜ÙH‚ˆKˆ™˜Z[\™WÜİ]\Èˆ““×ÕSQUQÑQÑH‹ˆ››İ™[WÜÚYÛ˜]\™HˆœİšXİÚ[™ÛK]XÚÙ]YÙHØ]H[˜ÛY[™È[˜[ÙK\›Û[İ[Ûˆ˜]H‚ˆBˆKˆÂˆšYˆ‘LÍWÑ’U‘WÓS‘WÔ‘P•RSÑĞUWİŒH‹ˆšÚ[™ˆ™š]™WÛ[™WÜ™XZ[ÙØ]H‹ˆœ]Y\İ[Ûˆˆ“X^Hš]™K[[™HÜ›Û[È™\ÙX\˜Ú™\İ[YH\Ú[™ÈÛ™HÜˆ[Ü™H˜[Y]YÚ[™ÛK]XÚÙ]YÙ\ÏÈ‹ˆœÜXÈˆÂˆ˜ÛÛ™][Ûˆˆœ[ˆÜ›Û[È™\ÙX\˜ÚÛ›HÚ[ˆLÍ\È]X\İÛ™HSQUQÑQÑH‹ˆ›İ\Ú\ÙHˆ“ĞÒÑQÓ“×ÕSQUQÔÒS‘ÓWÑQÑH‹ˆ››İ™[WÜÚYÛ˜]\™Hˆ˜ÛÛ™][Û˜[š]™K[[™H™XZ[Ø]H™\]Z\š[™È˜[Y]YÚ[™ÛK]XÚÙ]YÙH‚ˆBˆBˆBŸB
