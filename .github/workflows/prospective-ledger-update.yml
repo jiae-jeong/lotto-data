@@ -1,0 +1,66 @@
+name: Prospective evidence weekly update
+
+on:
+  schedule:
+    # Saturday 23:00 KST, after the official draw result is normally published.
+    - cron: '0 14 * * 6'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/prospective_evidence_v1_runner.py'
+      - 'research/prospective_v1/ledger_v1.py'
+      - 'research/prospective_v1/prepare_prospective_v1.py'
+      - 'automation/tests_v2/test_prospective_runner.py'
+      - '.github/workflows/prospective-ledger-update.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prospective-ledger-main
+  cancel-in-progress: false
+
+jobs:
+  update-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax validation
+        run: python -m compileall -q research/prospective_v1 automation/prospective_evidence_v1_runner.py
+      - name: Unit tests
+        run: |
+          python -m unittest discover -s research/prospective_v1/tests -v
+          python -m unittest discover -s automation/tests_v2 -p 'test_prospective_runner.py' -v
+      - name: Verify frozen source artifacts
+        run: python research/prospective_v1/verify_prospective_v1.py --require-e030 --require-canonical
+      - name: Check environment
+        run: python -c "import sys; assert sys.version_info[:2] == (3, 12), sys.version; print(sys.version)"
+      - name: Check draw and update prospective evidence
+        id: update
+        run: python automation/prospective_evidence_v1_runner.py
+      - name: Commit verified append-only update
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- lotto_data.csv
+          if [ -d analysis/prospective_v1 ]; then
+            git add -- analysis/prospective_v1
+          fi
+          if [ -d analysis/$(date -u +%F)/E045_PROSPECTIVE_RANDOM5_BASELINE_v1 ]; then
+            git add -- "analysis/$(date -u +%F)/E045_PROSPECTIVE_RANDOM5_BASELINE_v1"
+          fi
+          if git diff --cached --quiet; then
+            echo 'No verified new draw or ledger artifact to publish.'
+            exit 0
+          fi
+          git commit -m 'research: append verified prospective draw evidence'
+          git push origin HEAD:main
+
