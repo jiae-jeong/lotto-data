@@ -9,9 +9,14 @@ on:
     branches: [main]
     paths:
       - 'automation/prospective_evidence_v1_runner.py'
+      - 'automation/prospective_purchase_intake_v1.py'
+      - 'automation/prospective_checkpoint_v1.py'
       - 'research/prospective_v1/ledger_v1.py'
       - 'research/prospective_v1/prepare_prospective_v1.py'
       - 'automation/tests_v2/test_prospective_runner.py'
+      - 'automation/tests_v2/test_prospective_intake.py'
+      - 'automation/tests_v2/test_prospective_checkpoint.py'
+      - 'analysis/prospective_v1/purchases/intake/**'
       - '.github/workflows/prospective-ledger-update.yml'
 
 permissions:
@@ -33,11 +38,13 @@ jobs:
         with:
           python-version: '3.12'
       - name: Syntax validation
-        run: python -m compileall -q research/prospective_v1 automation/prospective_evidence_v1_runner.py
+        run: python -m compileall -q research/prospective_v1 automation/prospective_evidence_v1_runner.py automation/prospective_purchase_intake_v1.py automation/prospective_checkpoint_v1.py
       - name: Unit tests
         run: |
           python -m unittest discover -s research/prospective_v1/tests -v
           python -m unittest discover -s automation/tests_v2 -p 'test_prospective_runner.py' -v
+          python -m unittest discover -s automation/tests_v2 -p 'test_prospective_intake.py' -v
+          python -m unittest discover -s automation/tests_v2 -p 'test_prospective_checkpoint.py' -v
       - name: Verify frozen source artifacts
         run: python research/prospective_v1/verify_prospective_v1.py --require-e030 --require-canonical
       - name: Check environment

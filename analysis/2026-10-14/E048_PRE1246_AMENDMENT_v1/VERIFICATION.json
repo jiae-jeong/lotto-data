@@ -1,0 +1,19 @@
+{
+  "study_id": "E043_E049_PROSPECTIVE_EVIDENCE_v1",
+  "amendment_id": "PROSPECTIVE_PROTOCOL_AMENDMENT_PRE1246_v1",
+  "status": "PASS",
+  "created_at_utc": "2026-10-14T07:24:52Z",
+  "source_main_sha": "b528ea6eb6e10e118178ccac474bc64885208d8a",
+  "amendment_sha256": "35680ae7372bf0ce9cd7b373479779c91898e526f742c856417900abc320d1b1",
+  "original_protocol_sha256": "a1a7777dd5a1a01a91328b60695b5a6c7ebaa277dd5bafe2e1b8f826575e1abf",
+  "original_e048_power_sha256": "1eda3d67b486394e07310be72135d9657b327d87e04764a79ff5f0b20b8a9314",
+  "e047_alpha_unchanged": true,
+  "e030_prediction_sha256": "719c4cc11174c80dd1ddef75e438a2de36ec76842869128bf17ecacf646cb931",
+  "random5_pool_sha256": "da3f890aac5c6eb4ac911bdd5d56de58a66a7bb986927791910e428858f0d583",
+  "canonical_data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "target_1246_outcome_accessed": false,
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "recommendation_lines_generated": 0
+}
+

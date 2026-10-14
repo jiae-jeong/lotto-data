@@ -7,7 +7,13 @@ on:
       - 'research/prospective_v1/**'
       - 'analysis/2026-10-14/E043_E049_PROSPECTIVE_EVIDENCE_v1/**'
       - 'analysis/2026-10-14/E045_PROSPECTIVE_RANDOM5_BASELINE_v1/**'
+      - 'analysis/2026-10-14/E048_PRE1246_AMENDMENT_v1/**'
       - 'analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/**'
+      - 'automation/prospective_checkpoint_v1.py'
+      - 'automation/verify_prospective_amendment_v1.py'
+      - 'automation/prospective_purchase_intake_v1.py'
+      - 'automation/tests_v2/test_prospective_checkpoint.py'
+      - 'automation/tests_v2/test_prospective_intake.py'
       - '.github/workflows/prospective-evidence-v1.yml'
   workflow_dispatch:
 
@@ -23,8 +29,16 @@ jobs:
         with:
           python-version: '3.12'
       - name: Syntax validation
-        run: python -m compileall -q research/prospective_v1
+        run: python -m compileall -q research/prospective_v1 automation/prospective_evidence_v1_runner.py automation/prospective_purchase_intake_v1.py automation/prospective_checkpoint_v1.py automation/verify_prospective_amendment_v1.py
       - name: Unit tests
         run: python -m unittest discover -s research/prospective_v1/tests -v
+      - name: Prospective amendment and intake tests
+        run: |
+          python -m unittest discover -s automation/tests_v2 -p 'test_prospective_checkpoint.py' -v
+          python -m unittest discover -s automation/tests_v2 -p 'test_prospective_intake.py' -v
+          python -m unittest discover -s automation/tests_v2 -p 'test_prospective_runner.py' -v
+      - name: Verify pre-outcome amendment
+        run: python automation/verify_prospective_amendment_v1.py
       - name: Frozen protocol and artifact verification
         run: python research/prospective_v1/verify_prospective_v1.py --require-e030 --require-canonical
+

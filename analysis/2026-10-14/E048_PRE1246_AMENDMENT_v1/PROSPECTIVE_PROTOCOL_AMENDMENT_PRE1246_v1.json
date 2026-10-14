@@ -1,0 +1,56 @@
+{
+  "study_id": "E043_E049_PROSPECTIVE_EVIDENCE_v1",
+  "amendment_id": "PROSPECTIVE_PROTOCOL_AMENDMENT_PRE1246_v1",
+  "status": "FROZEN_PRE_TARGET_1246_OUTCOME",
+  "created_at_utc": "2026-10-14T07:24:52Z",
+  "source_main_sha": "b528ea6eb6e10e118178ccac474bc64885208d8a",
+  "supersedes": {
+    "protocol_path": "analysis/2026-10-14/E043_E049_PROSPECTIVE_EVIDENCE_v1/PROSPECTIVE_PROTOCOL.json",
+    "protocol_sha256": "a1a7777dd5a1a01a91328b60695b5a6c7ebaa277dd5bafe2e1b8f826575e1abf",
+    "power_path": "analysis/2026-10-14/E043_E049_PROSPECTIVE_EVIDENCE_v1/E048_POWER_AND_HORIZON.json",
+    "power_sha256": "1eda3d67b486394e07310be72135d9657b327d87e04764a79ff5f0b20b8a9314",
+    "amendment_sha256_sidecar": "PROSPECTIVE_PROTOCOL_AMENDMENT_PRE1246_v1_SHA256.txt"
+  },
+  "scope": "E048 horizon interpretation and E049 status at the first 200 prospective targets only",
+  "checkpoint": {
+    "first_target": 1246,
+    "last_target": 1445,
+    "target_count": 200,
+    "status_name": "INTERIM_PROSPECTIVE_CHECKPOINT",
+    "confirmatory_horizon": false,
+    "interpretation": "An interim evidence checkpoint; the 200-target point is not a claim that the registered effect sizes have adequate power."
+  },
+  "power_context_unchanged": {
+    "single_ticket_mean_hit_delta_0_10_n80": 1234,
+    "five_line_any3plus_delta_0_05_n80": 797,
+    "five_line_max_hit_mean_delta_0_20_n80": 199,
+    "source": "superseded E048_POWER_AND_HORIZON.json; values remain approximations for planning, not evidence"
+  },
+  "checkpoint_decision_rule": {
+    "promotion_pass": "If and only if every existing E047/E049 preregistered e-process, alpha allocation, harm, stability, integrity and cutoff requirement is met, the resulting evidence may support PROSPECTIVE_VALIDATED_EDGE.",
+    "promotion_fail": "At target 1445, if promotion requirements are not all met, record PROSPECTIVE_INSUFFICIENT_EVIDENCE. Do not label the result REJECTED solely because the checkpoint was not passed.",
+    "rejected": "REJECTED is unavailable at this checkpoint unless an explicit futility/equivalence boundary was separately registered before the first prospective outcome. No such numeric boundary is registered by this amendment; therefore this amendment does not authorize REJECTED.",
+    "weak_signal": "Positive descriptive estimates that do not pass the full promotion gate remain PROSPECTIVE_INSUFFICIENT_EVIDENCE at the 200-target checkpoint."
+  },
+  "unchanged": {
+    "e047_method": "mixture e-process for bounded paired differences",
+    "familywise_alpha": 0.05,
+    "alpha_allocation": {
+      "five_line_any3plus": 0.02,
+      "five_line_mean_max_hits": 0.02,
+      "shadow_single_ticket_mean_hits": 0.01
+    },
+    "models": true,
+    "predictions": true,
+    "thresholds": true,
+    "random_seeds_and_pools": true,
+    "historical_data_or_research": true,
+    "e030_target_1246_prediction": true
+  },
+  "pre_outcome_guard": {
+    "target_1246_outcome_accessed_when_amendment_created": false,
+    "target_1246_prediction_regenerated": false,
+    "recommendation_lines_generated": 0
+  }
+}
+

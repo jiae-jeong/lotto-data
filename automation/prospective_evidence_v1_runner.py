@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "research/prospective_v1"))
 import ledger_v1 as ledger
 import prepare_prospective_v1 as prospective
+import prospective_checkpoint_v1 as checkpoint
+from prospective_purchase_intake_v1 import IntakeRejected, seal_intake
 
 CANONICAL = ROOT / "lotto_data.csv"
 OFFICIAL_URL = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={}"
@@ -272,25 +274,81 @@ def _csv_append_row(path: Path, draw: dict) -> str:
 def _write_cumulative_evidence(target: int) -> Path:
     shadow_files = sorted((TRACKER / "outcomes").glob("E046_SHADOW_OUTCOME_*.json"), key=lambda p:int(p.stem.split("_")[-1]))
     purchase_files = sorted((TRACKER / "outcomes").glob("E044_PURCHASE_OUTCOME_*.json"), key=lambda p:int(p.stem.split("_")[-1]))
-    shadow_d=[]; any3_d=[]; max_d=[]
+    shadow_by_round={}; any3_by_round={}; max_by_round={}; any4_by_round={}
     for path in shadow_files:
         if int(json.loads(path.read_text(encoding="utf-8"))["target_round"])>target: continue
         row=json.loads(path.read_text(encoding="utf-8")); models=row["models"]
-        if models: shadow_d.append(sum(x["model_hits"]-x["same_target_random_mean_hits"] for x in models)/len(models))
+        if models:
+            t=int(row["target_round"])
+            shadow_by_round[t]=sum(x["model_hits"]-x["same_target_random_mean_hits"] for x in models)/len(models)
     purchase_map={int(json.loads(p.read_text(encoding="utf-8"))["target_round"]):json.loads(p.read_text(encoding="utf-8")) for p in purchase_files}
     for path in sorted((TRACKER / "outcomes").glob("E045_RANDOM5_OUTCOME_*.json"),key=lambda p:int(p.stem.split("_")[-1])):
         random_result=json.loads(path.read_text(encoding="utf-8")); t=int(random_result["target_round"])
         if t not in purchase_map or t>target: continue
         purchase=purchase_map[t]; rand=random_result["random5_metric_means"]
-        any3_d.append(float(purchase["any3plus"])-float(rand["any3plus"]))
-        max_d.append(float(purchase["max_hits"])-float(rand["max_hits"]))
+        any3_by_round[t]=float(purchase["any3plus"])-float(rand["any3plus"])
+        max_by_round[t]=float(purchase["max_hits"])-float(rand["max_hits"])
+        any4_by_round[t]=float(purchase["any4plus"])-float(rand["any4plus"])
+    shadow_d=[shadow_by_round[t] for t in sorted(shadow_by_round)]
+    any3_d=[any3_by_round[t] for t in sorted(any3_by_round)]
+    max_d=[max_by_round[t] for t in sorted(max_by_round)]
+    any4_d=[any4_by_round[t] for t in sorted(any4_by_round)]
     lambdas=[0.005,0.01,0.02,0.04,0.08,0.16,0.32]
+    shadow_e=ledger.mixture_e_value(shadow_d,-6,6,[0.001,0.002,0.004,0.008,0.016,0.032,0.064])
+    any3_e=ledger.mixture_e_value(any3_d,-1,1,lambdas)
+    max_e=ledger.mixture_e_value(max_d,-6,6,lambdas)
+    checkpoint_reached=target>=1445
+    checkpoint_rounds=list(range(1246,1446)) if checkpoint_reached else []
+    checkpoint_complete=(checkpoint_reached and all(t in shadow_by_round for t in checkpoint_rounds)
+        and all(t in any3_by_round and t in max_by_round and t in any4_by_round for t in checkpoint_rounds))
+    gate_result={"pass":False,"reason":"checkpoint_not_reached"}
+    checkpoint_evalues={"any3plus":None,"max_hits":None,"shadow_mean_hits":None}
+    if checkpoint_complete:
+        cp_any3=[any3_by_round[t] for t in checkpoint_rounds]
+        cp_max=[max_by_round[t] for t in checkpoint_rounds]
+        cp_any4=[any4_by_round[t] for t in checkpoint_rounds]
+        cp_shadow=[shadow_by_round[t] for t in checkpoint_rounds]
+        checkpoint_evalues={"any3plus":ledger.mixture_e_value(cp_any3,-1,1,lambdas),
+            "max_hits":ledger.mixture_e_value(cp_max,-6,6,lambdas),
+            "shadow_mean_hits":ledger.mixture_e_value(cp_shadow,-6,6,[0.001,0.002,0.004,0.008,0.016,0.032,0.064])}
+        gate_result=checkpoint.promotion_gates(
+            cp_any3,cp_max,cp_any4,cp_shadow,checkpoint_evalues["any3plus"],
+            checkpoint_evalues["max_hits"],shadow_e_value=checkpoint_evalues["shadow_mean_hits"])
+    promotion_status=checkpoint.checkpoint_status(200 if checkpoint_reached else target-1245,
+        bool(gate_result.get("pass")),futility_registered=False,futility_met=False)
+    integrity_failures=0
+    if checkpoint_reached:
+        for t in checkpoint_rounds:
+            shadow_path=TRACKER/"outcomes"/f"E046_SHADOW_OUTCOME_{t}.json"
+            shadow_record=json.loads(shadow_path.read_text(encoding="utf-8")) if shadow_path.exists() else {}
+            if (not shadow_record or int(shadow_record.get("prediction_provenance",{}).get("training_cutoff",-1))!=t-1
+                    or int(shadow_record.get("prediction_provenance",{}).get("leakage_failures",-1))!=0):
+                integrity_failures+=1
+                continue
+            if t==1246:
+                expected_prediction_sha=prospective.E030_PREDICTION_SHA256
+            else:
+                seal_path=ROOT/"analysis/prospective_v1/rounds"/str(t)/f"SHADOW_PREDICTION_SEAL_{t}.json"
+                if not seal_path.is_file():
+                    integrity_failures+=1
+                    continue
+                expected_prediction_sha=json.loads(seal_path.read_text(encoding="utf-8"))["prediction_sha256"]
+            if shadow_record.get("prediction_file_sha256")!=expected_prediction_sha:
+                integrity_failures+=1
+        if integrity_failures:
+            promotion_status="PROSPECTIVE_INSUFFICIENT_EVIDENCE"
     result={"study_id":"E047_E049_CUMULATIVE_EVIDENCE_v1","through_target":target,
-            "shadow_model_mean_hit_differences":shadow_d,"shadow_mean_hit_e_value":ledger.mixture_e_value(shadow_d,-6,6,[0.001,0.002,0.004,0.008,0.016,0.032,0.064]),
-            "actual_five_line_any3plus_differences":any3_d,"actual_five_line_any3plus_e_value":ledger.mixture_e_value(any3_d,-1,1,lambdas),
-            "actual_five_line_max_hit_differences":max_d,"actual_five_line_max_hit_e_value":ledger.mixture_e_value(max_d,-6,6,lambdas),
+            "shadow_model_mean_hit_differences":shadow_d,"shadow_mean_hit_e_value":shadow_e,
+            "actual_five_line_any3plus_differences":any3_d,"actual_five_line_any3plus_e_value":any3_e,
+            "actual_five_line_max_hit_differences":max_d,"actual_five_line_max_hit_e_value":max_e,
+            "actual_five_line_any4plus_differences":any4_d,
             "targets_with_verified_purchase":len(any3_d),"prospective_targets_with_shadow":len(shadow_d),
-            "promotion_status":"PROSPECTIVE_PENDING","formal_promotion_before_200_targets":False}
+            "checkpoint_status":"INTERIM_PROSPECTIVE_CHECKPOINT" if checkpoint_reached else "PROSPECTIVE_PENDING",
+            "checkpoint_target_count":max(0,target-1245),"checkpoint_e_values":checkpoint_evalues,
+            "checkpoint_promotion_gates":gate_result,
+            "checkpoint_integrity_failures":integrity_failures,"promotion_status":promotion_status,
+            "rejection_enabled":False,"rejection_reason":"no pre-registered numeric futility/equivalence boundary",
+            "formal_promotion_before_200_targets":False}
     out=TRACKER/"evidence"/f"EVIDENCE_THROUGH_{target}.json"
     _write_once_json(out,result)
     return out
@@ -438,12 +496,18 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen) -> dict:
             _write_round_audit(root,prior,prior_prediction,prior_sha,prior_random5,prior_random5_sha,
                                prior_single,prior_single_sha,sha_file(data),
                                (root/"analysis/prospective_v1/purchases"/f"ROUND_{prior}.json").is_file())
+    try:
+        intake_status=seal_intake(root,target,opener=opener)
+    except IntakeRejected as error:
+        # A late or edited intake must not prevent processing an already-published
+        # official outcome in this same scheduled run.
+        intake_status={"status":"REJECTED","target_round":target,"reason":str(error)}
     primary=parse_official(fetch_json(OFFICIAL_URL.format(target),opener),target)
     secondary=parse_secondary(fetch_json(SECONDARY_URL.format(target),opener),target)
     if primary is None or secondary is None:
         return {"status":"PENDING_INDEPENDENT_SOURCE_CONFIRMATION","target_round":target,
                 "official_available":primary is not None,"secondary_available":secondary is not None,
-                "data_changed":False,"prediction_sha256":prediction_sha}
+                "data_changed":False,"prediction_sha256":prediction_sha,"purchase_intake":intake_status}
     if (primary["date"],primary["numbers"],primary["bonus"]) != (secondary["date"],secondary["numbers"],secondary["bonus"]):
         raise ValueError(f"official and independent sources disagree for round {target}; no files changed")
     actual={"target_round":target,"draw_date":primary["date"],"draw_at_utc":f"{primary['date']}T20:45:00+09:00",
@@ -501,7 +565,7 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen) -> dict:
             "next_target":next_target,"next_prediction_path":pred_path.relative_to(root).as_posix(),
             "next_prediction_sha256":sha_file(pred_path),"next_random5_pool_sha256":baseline_seal["random5_sha256"],
             "next_single_pool_sha256":baseline_seal["single_sha256"],"cumulative_evidence_path":evidence_path.relative_to(root).as_posix(),
-            "purchase_record_present":purchase_path.is_file(),"recommendation_generated":False}
+            "purchase_record_present":purchase_path.is_file(),"purchase_intake":intake_status,"recommendation_generated":False}
 
 
 if __name__ == "__main__":
