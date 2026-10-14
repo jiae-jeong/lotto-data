@@ -8,6 +8,7 @@ on:
     paths:
       - 'automation/daily_research_v2.py'
       - 'automation/research_engine_v2.py'
+      - 'automation/expanded_studies_v2.py'
       - 'automation/research_queue_v2.json'
       - 'automation/check_environment_v2.py'
       - 'automation/tests_v2/**'
@@ -75,7 +76,10 @@ jobs:
           from daily_research_v2 import publication_paths
           root = Path.cwd().resolve()
           result = json.loads(Path(os.environ['RESEARCH_RESULT']).read_text())
-          assert result['status'] == 'FULL_COMPLETE'
+          # Research quota completion is intentionally distinct from DAILY MASTER FULL_COMPLETE.
+          assert result['research_quota_status'] == 'RESEARCH_QUOTA_COMPLETE'
+          assert result['status'] == 'RESEARCH_QUOTA_COMPLETE'
+          assert result['master_status'] == 'NOT_ASSESSED_BY_QUOTA_RUNNER'
           assert result['successful_studies_today'] >= result['minimum_successful_studies']
           assert result['empirical_studies_today'] >= result['required_empirical_studies']
           paths = publication_paths(root, result)
