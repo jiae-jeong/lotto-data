@@ -1,0 +1,92 @@
+name: independent-five-line-research-v1
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'automation/independent_signal_five_line_v1.py'
+      - 'automation/run_independent_five_line_v1.py'
+      - 'automation/research_engine_v2.py'
+      - 'automation/daily_research_v2.py'
+      - 'automation/research_queue_v2.json'
+      - 'automation/tests_v2/**'
+      - '.github/workflows/independent-five-line-research-v1.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: independent-five-line-research-v1
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  validate:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run-e025-e029]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile dispatch and study code
+        run: |
+          python -m py_compile automation/independent_signal_five_line_v1.py automation/run_independent_five_line_v1.py automation/research_engine_v2.py automation/daily_research_v2.py
+      - name: Validate data and environment
+        run: python -B automation/check_environment_v2.py --allow-theory-fallback
+      - name: Validate unit and queue contracts
+        run: |
+          python -B -m unittest discover -s automation/tests_v2 -p 'test_*.py' -v
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          queue = json.loads(Path('automation/research_queue_v2.json').read_text(encoding='utf-8'))
+          ids = [x['id'] for x in queue['tasks']]
+          assert ids[-5:] == [
+              'E025_INDEPENDENT_SIGNAL_DISCOVERY_v1',
+              'E026_INDEPENDENT_MODEL_WALKFORWARD_v1',
+              'E027_FIVE_LINE_CANDIDATE_BANK_v1',
+              'E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2',
+              'E029_FIVE_LINE_PROMOTION_GATE_v2']
+          assert ids.count('E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1') == 1
+          print('E025-E029 queue contract PASS')
+          PY
+
+  execute:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run-e025-e029]')
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute only new E025-E029 studies
+        run: python -B automation/run_independent_five_line_v1.py
+      - name: Verify outputs and push evidence
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          root = Path.cwd()
+          date = datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat()
+          candidates = sorted((root / 'analysis' / date).glob('E025_E029_EXECUTION_SUMMARY_*.json'))
+          assert candidates, 'No versioned E025-E029 execution summary found'
+          summary = json.loads(candidates[-1].read_text())
+          assert summary['status'] in {'ALL_FIVE_EXECUTED', 'ALL_FIVE_VALIDATED'}
+          assert len(summary['studies']) == 5 and not summary['failures']
+          subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
+          subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
+          subprocess.run(['git','add','--',str(Path('analysis')/date)],check=True)
+          subprocess.run(['git','commit','-m','research: execute E025-E029 independent five-line studies'],check=True)
+          subprocess.run(['git','push','origin','HEAD:main'],check=True)
+          PY

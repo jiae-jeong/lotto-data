@@ -1,0 +1,36 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+  "question": "Do frozen cross-round transition and season-conditioned signals add genuinely independent number rankings beyond the seven B components?",
+  "novelty": "Pre-outcome screening of three prespecified transition/season conditional signal families by rank-to-selection correlation and same-target Jaccard; no outcomes enter the independence screen.",
+  "executed_cases": 17415,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 590,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 17415,
+    "verification": {
+      "status": "PASS",
+      "target_count": 645,
+      "signals": 3,
+      "similarity_rows": 15480,
+      "cutoff_violations": 0,
+      "invalid_lines": 0,
+      "screening_uses_outcomes": false,
+      "future_predictions": 0,
+      "survivors": [
+        "CALENDAR_SEASON_CONDITIONAL_v1",
+        "PREVIOUS_SUM_REGIME_CONDITIONAL_v1"
+      ],
+      "dropped": [
+        "CROSS_ROUND_MARKOV_v1"
+      ]
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-14T02:11:26.837337+00:00"
+}

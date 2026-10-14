@@ -1,0 +1,139 @@
+{
+  "task": {
+    "id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
+    "kind": "five_line_promotion_gate",
+    "question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
+    "novelty": "Paired circular moving-block uncertainty, Holm-adjusted primary tests, temporal block consistency, and best-block deletion sensitivity determine promotion without retrospective tuning.",
+    "spec": {
+      "study_id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
+      "kind": "five_line_promotion_gate",
+      "research_question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
+      "data_cutoff": 1245,
+      "target_rounds": "801..1245 inclusive",
+      "training_cutoff_rule": "E028 nested selector decisions use only the immediately preceding 200 target results; gate comparisons use identical target rounds.",
+      "primary_metric": "paired any_3plus and max_hits deltas with 95% block-bootstrap CI lower bounds above zero",
+      "secondary_metrics": [
+        "any_4plus non-worsening",
+        "50-round block consistency",
+        "best-block removal",
+        "leakage",
+        "multiple comparisons"
+      ],
+      "comparator": "same-target mean of 100 random five-line portfolios",
+      "baseline": "RANDOM_5_LINES target-matched portfolio reference",
+      "multiplicity_correction": "Holm step-down across the two registered primary tests for NESTED_DYNAMIC_5.",
+      "block_stability": [
+        50,
+        100,
+        200
+      ],
+      "tie_break": "not applicable to gate",
+      "random_seed": 20261015,
+      "expected_output_files": [
+        "PROMOTION_TESTS.csv",
+        "PROMOTION_BLOCKS.csv",
+        "PROMOTION_GATE.json",
+        "VERIFICATION.json",
+        "REPORT.md"
+      ],
+      "expected_record_counts": {
+        "PROMOTION_TESTS.csv": 80,
+        "PROMOTION_BLOCKS.csv": 27
+      },
+      "novelty_signature": "nested-five-line vs RANDOM_5_LINES; primary any3plus and max_hits; Holm2; paired circular block bootstrap; 50-round stability and best-block removal",
+      "study_class": "empirical"
+    }
+  },
+  "study_spec": {
+    "study_id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
+    "kind": "five_line_promotion_gate",
+    "research_question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
+    "data_cutoff": 1245,
+    "target_rounds": "801..1245 inclusive",
+    "training_cutoff_rule": "E028 nested selector decisions use only the immediately preceding 200 target results; gate comparisons use identical target rounds.",
+    "primary_metric": "paired any_3plus and max_hits deltas with 95% block-bootstrap CI lower bounds above zero",
+    "secondary_metrics": [
+      "any_4plus non-worsening",
+      "50-round block consistency",
+      "best-block removal",
+      "leakage",
+      "multiple comparisons"
+    ],
+    "comparator": "same-target mean of 100 random five-line portfolios",
+    "baseline": "RANDOM_5_LINES target-matched portfolio reference",
+    "multiplicity_correction": "Holm step-down across the two registered primary tests for NESTED_DYNAMIC_5.",
+    "block_stability": [
+      50,
+      100,
+      200
+    ],
+    "tie_break": "not applicable to gate",
+    "random_seed": 20261015,
+    "expected_output_files": [
+      "PROMOTION_TESTS.csv",
+      "PROMOTION_BLOCKS.csv",
+      "PROMOTION_GATE.json",
+      "VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "expected_record_counts": {
+      "PROMOTION_TESTS.csv": 80,
+      "PROMOTION_BLOCKS.csv": 27
+    },
+    "novelty_signature": "nested-five-line vs RANDOM_5_LINES; primary any3plus and max_hits; Holm2; paired circular block bootstrap; 50-round stability and best-block removal",
+    "study_class": "empirical"
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "a16b8ec9e72a648cdab7af70846a6905bbc657f4407dcc8527c68d556118d749",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "ec39dfe8113a36b6c929619a40a04e7a9be3b832932c4b4573f87ec9bb2c8d00",
+  "source_file_sha256": {
+    "research_engine_v2.py": "ec39dfe8113a36b6c929619a40a04e7a9be3b832932c4b4573f87ec9bb2c8d00",
+    "expanded_studies_v2.py": "b94e897a7caad59299ece71b3ef73a53c4494feca47332580e6488ad5709097a",
+    "independent_signal_five_line_v1.py": "978661f72df7b3370a63756a048b1e1d895138c7cd2c549ad0cd289103402a1e"
+  },
+  "expected_output_files": [
+    "PROMOTION_TESTS.csv",
+    "PROMOTION_BLOCKS.csv",
+    "PROMOTION_GATE.json",
+    "VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "expected_record_counts": {
+    "PROMOTION_TESTS.csv": 80,
+    "PROMOTION_BLOCKS.csv": 27
+  },
+  "created_utc": "2026-10-14T02:12:12.955043+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "Paired circular moving-block uncertainty, Holm-adjusted primary tests, temporal block consistency, and best-block deletion sensitivity determine promotion without retrospective tuning.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}

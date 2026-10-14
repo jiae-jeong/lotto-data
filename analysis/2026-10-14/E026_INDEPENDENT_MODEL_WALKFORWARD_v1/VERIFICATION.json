@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "target_count": 645,
+  "candidate_signal_predictions": 1935,
+  "random_tickets": 64500,
+  "random_repeats_per_target": 100,
+  "b_comparator_predictions": 5160,
+  "cutoff_violations": 0,
+  "random_seed": 20261015,
+  "target_outcome_used_for_tuning": false,
+  "future_predictions": 0,
+  "independent_survivors": [
+    "CALENDAR_SEASON_CONDITIONAL_v1",
+    "PREVIOUS_SUM_REGIME_CONDITIONAL_v1"
+  ]
+}

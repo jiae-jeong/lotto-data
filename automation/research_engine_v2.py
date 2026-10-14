@@ -317,9 +317,15 @@ def run(root, output, task):
     protected = protect(root)
     out.mkdir(parents=True)
     expanded_source = Path(__file__).with_name('expanded_studies_v2.py')
+    independent_source = Path(__file__).with_name('independent_signal_five_line_v1.py')
     source_hashes = {Path(__file__).name: digest(__file__)}
     if task['kind'] not in ['family', 'tail', 'power']:
         source_hashes[expanded_source.name] = digest(expanded_source)
+    independent_kinds = {'independent_signal_discovery', 'independent_model_walkforward',
+                         'five_line_candidate_bank', 'five_line_portfolio_selector',
+                         'five_line_promotion_gate'}
+    if task['kind'] in independent_kinds:
+        source_hashes[independent_source.name] = digest(independent_source)
     frozen = {'task': task, 'study_spec': task.get('spec'), 'scope': 'POST_HOC_EXPLORATORY',
               'experiment_signature': experiment_signature(task),
               'data_sha256': digest(root / DATA) if task['kind'] != 'power' else None,
@@ -335,8 +341,13 @@ def run(root, output, task):
     (out / 'ENGINE_SOURCE.py').write_bytes(Path(__file__).read_bytes())
     if task['kind'] not in ['family', 'tail', 'power']:
         (out / 'EXPANDED_ENGINE_SOURCE.py').write_bytes(expanded_source.read_bytes())
-        from expanded_studies_v2 import run_study
-        result = run_study(root, out, task)
+        if task['kind'] in independent_kinds:
+            (out / 'INDEPENDENT_ENGINE_SOURCE.py').write_bytes(independent_source.read_bytes())
+            from independent_signal_five_line_v1 import run_study
+            result = run_study(root, out, task)
+        else:
+            from expanded_studies_v2 import run_study
+            result = run_study(root, out, task)
     elif task['kind'] == 'power':
         result = power_study(root, out, task)
     else:

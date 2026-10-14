@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "target_count": 645,
+  "candidate_rows": 6251,
+  "provenance_rows": 6450,
+  "overlap_rows": 27254,
+  "cutoff_violations": 0,
+  "duplicate_or_near_duplicate_pairs": 0,
+  "independent_sources_included": [
+    "CALENDAR_SEASON_CONDITIONAL_v1",
+    "PREVIOUS_SUM_REGIME_CONDITIONAL_v1"
+  ],
+  "future_outcomes_used_for_bank": false,
+  "future_predictions": 0
+}

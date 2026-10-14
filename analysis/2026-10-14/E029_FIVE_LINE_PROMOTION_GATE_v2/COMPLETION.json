@@ -1,0 +1,23 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
+  "question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
+  "novelty": "Paired circular moving-block uncertainty, Holm-adjusted primary tests, temporal block consistency, and best-block deletion sensitivity determine promotion without retrospective tuning.",
+  "executed_cases": 107,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 590,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 107,
+    "verification": {
+      "status": "PASS",
+      "promotion_status": "DO_NOT_PROMOTE"
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-14T02:14:24.588466+00:00"
+}

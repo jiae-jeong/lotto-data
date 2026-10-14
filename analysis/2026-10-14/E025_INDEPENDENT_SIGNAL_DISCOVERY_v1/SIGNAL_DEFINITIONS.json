@@ -1,0 +1,43 @@
+{
+  "study_id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+  "target_rounds": [
+    601,
+    1245
+  ],
+  "training_cutoff": "t-1",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "canonical_data_sha256_lf": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "canonical_source_commit": "69426c16711d7d6c43f82da601249fb108f5f2b6",
+  "canonical_github_blob_sha1": "a898f212846057af9e79c8ebbbe3a33347c63898",
+  "b_cache_sha256": "0436f0c7412ecb10d0f24c25816faa991f1d704c54295db34f7bcf88d51b3320",
+  "random_seed": 20261015,
+  "tie_break": "descending score, then lower number; ticket numbers sorted ascending",
+  "selection_rule": "top six by frozen signal score; no outcome based parameter selection",
+  "screening_rule": "A signal survives only if all three B similarity thresholds pass; outcome metrics do not enter screening.",
+  "signals": [
+    {
+      "name": "CROSS_ROUND_MARKOV_v1",
+      "formula": "mean over m in previous draw of (cooccur[m,n]+20*global_rate[n])/(source_exposure[m]+20)",
+      "variables": "prior-round source number m; next-round target number n; global_rate from draws 1..t-1",
+      "training_range": "transition source rounds 1..t-2; transition outcomes 2..t-1",
+      "weight": "equal 1/6 over prior-round numbers",
+      "smoothing": "20 pseudo-transitions at target-specific global rate"
+    },
+    {
+      "name": "CALENDAR_SEASON_CONDITIONAL_v1",
+      "formula": "(season_count[n]+30*global_rate[n])/(season_draws+30)",
+      "variables": "fixed four-season bucket of target date; counts of n in prior outcomes from the same season",
+      "training_range": "outcome rounds 1..t-1",
+      "weight": "one season bucket; no learned weight",
+      "smoothing": "30 pseudo-draws at target-specific global rate"
+    },
+    {
+      "name": "PREVIOUS_SUM_REGIME_CONDITIONAL_v1",
+      "formula": "(conditional_count[previous_sum_bin,n]+20*global_rate[n])/(bin_draws+20)",
+      "variables": "sum of draw t-1; fixed bins <120, 120..144, 145..169, >=170; target-number counts in successor draws",
+      "training_range": "transition source rounds 1..t-2; successor outcomes 2..t-1",
+      "weight": "one fixed prior-sum bin",
+      "smoothing": "20 pseudo-draws at target-specific global rate"
+    }
+  ]
+}

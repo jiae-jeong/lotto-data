@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "target_count": 645,
+  "random_portfolios": 64500,
+  "random_portfolios_per_target": 100,
+  "fixed_strategies": [
+    "TOP_5",
+    "MIN_OVERLAP_5",
+    "MID_OVERLAP_5",
+    "HIGH_OVERLAP_5",
+    "SOURCE_DIVERSITY_5",
+    "INDEPENDENT_SIGNAL_CENTRED_5",
+    "B_PLUS_INDEPENDENT_MIX_5"
+  ],
+  "nested_dynamic_targets": 445,
+  "nested_history_targets": 200,
+  "portfolio_line_rows": 24800,
+  "cutoff_violations": 0,
+  "future_outcomes_used_in_candidate_bank": false,
+  "future_outcomes_used_in_dynamic_choice": false,
+  "future_predictions": 0
+}

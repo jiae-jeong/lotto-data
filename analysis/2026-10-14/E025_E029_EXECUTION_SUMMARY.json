@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-14",
+  "status": "PARTIAL_OR_FAILED",
+  "base_study_ids": [
+    "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+    "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+    "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+    "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+    "E029_FIVE_LINE_PROMOTION_GATE_v2"
+  ],
+  "canonical_source_commit": "69426c16711d7d6c43f82da601249fb108f5f2b6",
+  "canonical_snapshot_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "b_cache_sha256": "0436f0c7412ecb10d0f24c25816faa991f1d704c54295db34f7bcf88d51b3320",
+  "draw_rows": 1245,
+  "first_round": 1,
+  "latest_round": 1245,
+  "studies": [],
+  "failures": [
+    {
+      "task_id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+      "status": "FAILED",
+      "stage": "completion_validation",
+      "error_type": "ValueError",
+      "reason": "Frozen record count mismatch for TARGET_SIMILARITY.csv: 15480 != 1935",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 71, in run\n    record = daily.validate_completion(stage, task[\"id\"])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\daily_research_v2.py\", line 53, in validate_completion\n    raise ValueError(f'Frozen record count mismatch for {name}: {len(rows)} != {expected}')\nValueError: Frozen record count mismatch for TARGET_SIMILARITY.csv: 15480 != 1935\n",
+      "protected_files_unchanged": true,
+      "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+      "attempt_path": "analysis\\2026-10-14\\.attempts\\E025_INDEPENDENT_SIGNAL_DISCOVERY_v1-0srtvlws"
+    },
+    {
+      "task_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "status": "FAILED",
+      "stage": "engine_execution",
+      "error_type": "KeyError",
+      "reason": "'p_raw'",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 69, in run\n    engine.run(root, stage, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 347, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 799, in run_study\n    return handlers[kind](root, out, task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 397, in _e026\n    _holm(paired)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 224, in _holm\n    order = sorted(range(len(rows)), key=lambda i: (rows[i][p_field], i))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 224, in <lambda>\n    order = sorted(range(len(rows)), key=lambda i: (rows[i][p_field], i))\n                                                    ~~~~~~~^^^^^^^^^\nKeyError: 'p_raw'\n",
+      "protected_files_unchanged": true,
+      "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+      "attempt_path": "analysis\\2026-10-14\\.attempts\\E026_INDEPENDENT_MODEL_WALKFORWARD_v1-0z59cfvn"
+    },
+    {
+      "task_id": "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+      "status": "FAILED",
+      "stage": "engine_execution",
+      "error_type": "FileNotFoundError",
+      "reason": "Expected one completed E026_INDEPENDENT_MODEL_WALKFORWARD_v1; found 0",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 69, in run\n    engine.run(root, stage, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 347, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 799, in run_study\n    return handlers[kind](root, out, task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 428, in _e027\n    e026 = _task_path(root, \"E026_INDEPENDENT_MODEL_WALKFORWARD_v1\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 287, in _task_path\n    if len(matches) != 1: raise FileNotFoundError(f\"Expected one completed {task_id}; found {len(matches)}\")\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: Expected one completed E026_INDEPENDENT_MODEL_WALKFORWARD_v1; found 0\n",
+      "protected_files_unchanged": true,
+      "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+      "attempt_path": "analysis\\2026-10-14\\.attempts\\E027_FIVE_LINE_CANDIDATE_BANK_v1-qzqu0hsn"
+    },
+    {
+      "task_id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "status": "FAILED",
+      "stage": "engine_execution",
+      "error_type": "FileNotFoundError",
+      "reason": "Expected one completed E027_FIVE_LINE_CANDIDATE_BANK_v1; found 0",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 69, in run\n    engine.run(root, stage, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 347, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 799, in run_study\n    return handlers[kind](root, out, task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 581, in _e028\n    e027 = _task_path(root, \"E027_FIVE_LINE_CANDIDATE_BANK_v1\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 287, in _task_path\n    if len(matches) != 1: raise FileNotFoundError(f\"Expected one completed {task_id}; found {len(matches)}\")\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: Expected one completed E027_FIVE_LINE_CANDIDATE_BANK_v1; found 0\n",
+      "protected_files_unchanged": true,
+      "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+      "attempt_path": "analysis\\2026-10-14\\.attempts\\E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2-8dctqbql"
+    },
+    {
+      "task_id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
+      "status": "FAILED",
+      "stage": "engine_execution",
+      "error_type": "FileNotFoundError",
+      "reason": "Expected one completed E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2; found 0",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 69, in run\n    engine.run(root, stage, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 347, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 799, in run_study\n    return handlers[kind](root, out, task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 691, in _e029\n    e028 = _task_path(root, \"E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 287, in _task_path\n    if len(matches) != 1: raise FileNotFoundError(f\"Expected one completed {task_id}; found {len(matches)}\")\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: Expected one completed E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2; found 0\n",
+      "protected_files_unchanged": true,
+      "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+      "attempt_path": "analysis\\2026-10-14\\.attempts\\E029_FIVE_LINE_PROMOTION_GATE_v2-n9ush1yt"
+    }
+  ],
+  "old_research_rerun": false
+}

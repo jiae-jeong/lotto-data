@@ -370,6 +370,117 @@
         "random_bundles_per_target": 100,
         "bundle_frozen_before_outcome": true
       }
+    },
+    {
+      "id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+      "kind": "independent_signal_discovery",
+      "question": "Do frozen cross-round transition and season-conditioned signals add genuinely independent number rankings beyond the seven B components?",
+      "novelty": "Pre-outcome screening of three prespecified transition/season conditional signal families by rank-to-selection correlation and same-target Jaccard; no outcomes enter the independence screen.",
+      "spec": {
+        "study_id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1", "kind": "independent_signal_discovery",
+        "research_question": "Do frozen cross-round transition and season-conditioned signals add genuinely independent number rankings beyond the seven B components?",
+        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive", "training_cutoff_rule": "For target t, all signal counts and the prior-round state use only rounds 1..t-1; transition labels stop at t-1.",
+        "primary_metric": "mean absolute candidate-rank to B-ticket-membership correlation and mean same-target top-six Jaccard",
+        "secondary_metrics": ["max component-level Jaccard", "survivor count", "target-wise cutoff audit"],
+        "comparator": "same-target seven frozen B component tickets plus combined_equal_rank",
+        "baseline": "B-redundancy thresholds are fixed at mean |correlation| <0.20, mean Jaccard <0.20, and max component mean Jaccard <0.35",
+        "multiplicity_correction": "No outcome-based hypothesis tests are used for the geometry-only screen; all three prespecified signals are reported.",
+        "block_stability": [50, 100, 200], "tie_break": "descending frozen signal score, then lower number",
+        "random_seed": 20261015,
+        "expected_output_files": ["SIGNAL_DEFINITIONS.json", "SIGNAL_INDEPENDENCE.csv", "TARGET_SIMILARITY.csv", "SURVIVOR_STATUS.csv", "PREDICTIONS.csv", "VERIFICATION.json", "REPORT.md"],
+        "expected_record_counts": {"SIGNAL_INDEPENDENCE.csv": 3, "TARGET_SIMILARITY.csv": 15480, "SURVIVOR_STATUS.csv": 3, "PREDICTIONS.csv": 1935},
+        "novelty_signature": "cross-round Markov transition matrix; calendar-season conditional incidence; fixed previous-draw-sum-regime conditional incidence; B rank-membership correlation and top-six Jaccard screen",
+        "study_class": "empirical"
+      }
+    },
+    {
+      "id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "kind": "independent_model_walkforward",
+      "question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
+      "novelty": "Frozen top-six predictors evaluated over 645 expanding-information targets with 100 same-target random tickets per target, B component comparators, block uncertainty, and Holm correction.",
+      "spec": {
+        "study_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1", "kind": "independent_model_walkforward",
+        "research_question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
+        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive", "training_cutoff_rule": "Each signal prediction for target t is generated from rounds 1..t-1; no tuning is performed on target outcomes.",
+        "primary_metric": "mean hits and rate_ge_3 versus same-target random tickets",
+        "secondary_metrics": ["0..6 hit distribution", "2+/3+/4+/5+/6", "variance", "paired confidence intervals", "100-round block stability", "B comparisons"],
+        "comparator": "same-target seven frozen B components and combined_equal_rank",
+        "baseline": "100 independently sampled uniform six-number tickets per target round",
+        "multiplicity_correction": "Holm step-down over 3 candidate signals x 5 registered random-comparison metrics.",
+        "block_stability": [50, 100, 200], "tie_break": "descending frozen signal score, then lower number",
+        "random_seed": 20261015,
+        "expected_output_files": ["PREDICTIONS.csv", "RANDOM_BY_TARGET.csv", "TARGET_RANDOM_SUMMARY.csv", "METRICS.csv", "PAIRED_RANDOM_COMPARISON.csv", "BLOCK_STABILITY.csv", "VERIFICATION.json", "REPORT.md"],
+        "expected_record_counts": {"PREDICTIONS.csv": 7095, "RANDOM_BY_TARGET.csv": 64500, "TARGET_RANDOM_SUMMARY.csv": 645, "METRICS.csv": 12, "PAIRED_RANDOM_COMPARISON.csv": 15, "BLOCK_STABILITY.csv": 21},
+        "novelty_signature": "E025 fixed independent formulas; 601..1245; same-target 100-ticket random simulation; B component comparisons; circular moving-block paired CI; Holm15",
+        "study_class": "empirical"
+      }
+    },
+    {
+      "id": "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+      "kind": "five_line_candidate_bank",
+      "question": "Can a cutoff-safe five-line candidate bank preserve source provenance while removing duplicate and near-duplicate lines?",
+      "novelty": "Target-specific bank combines frozen B and E025 survivors, merges lines with at least five shared numbers, and retains every source and training cutoff.",
+      "spec": {
+        "study_id": "E027_FIVE_LINE_CANDIDATE_BANK_v1", "kind": "five_line_candidate_bank",
+        "research_question": "Can a cutoff-safe five-line candidate bank preserve source provenance while removing duplicate and near-duplicate lines?",
+        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive", "training_cutoff_rule": "Each candidate line comes from a B cached forecast or E025 signal forecast with training cutoff t-1; target outcomes are not read during bank construction.",
+        "primary_metric": "candidate-bank validity, provenance completeness, and pairwise overlap after deduplication",
+        "secondary_metrics": ["unique candidate count", "eligible independent sources", "source score/rank", "cutoff audit"],
+        "comparator": "pre-dedup B and E025 source candidates on the same target",
+        "baseline": "Merge candidates when intersection count >=5; retain highest frozen score as canonical and preserve all aliases.",
+        "multiplicity_correction": "Not applicable; no outcome-based comparisons.",
+        "block_stability": [50, 100, 200], "tie_break": "higher source score, then source model name; candidate ID follows target/source order",
+        "random_seed": 20261015,
+        "expected_output_files": ["CANDIDATE_BANK.csv", "CANDIDATE_PROVENANCE.csv", "CANDIDATE_OVERLAP.csv", "VERIFICATION.json", "REPORT.md"],
+        "expected_record_counts": {},
+        "novelty_signature": "target-specific provenance bank; five-number-intersection near-duplicate merge; frozen B plus E025/E026 independent survivors",
+        "study_class": "empirical"
+      }
+    },
+    {
+      "id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "kind": "five_line_portfolio_selector",
+      "question": "Can any frozen five-line construction strategy repeatedly outperform same-target random five-line bundles?",
+      "novelty": "Seven distinct five-line strategies plus a nested trailing-200 dynamic selector are compared with 100 random five-line bundles on identical targets.",
+      "spec": {
+        "study_id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2", "kind": "five_line_portfolio_selector",
+        "research_question": "Can any frozen five-line construction strategy repeatedly outperform same-target random five-line bundles?",
+        "data_cutoff": 1245, "target_rounds": "601..1245 inclusive; nested selector 801..1245",
+        "training_cutoff_rule": "Candidate bank uses target t-1 only; nested dynamic selector uses exactly the prior 200 completed target outcomes to choose among frozen strategies.",
+        "primary_metric": "five-line max hits, any_3plus, any_4plus, and winning-number union coverage",
+        "secondary_metrics": ["any_2plus/5plus/6", "unique-number coverage", "mean pairwise overlap", "line-hit variance"],
+        "comparator": "same-target 100-random-five-line baseline; fixed seven strategies and nested 200-target selector",
+        "baseline": "100 target-seeded portfolios of five distinct uniform six-number lines per target",
+        "multiplicity_correction": "Construction strategy comparisons are exploratory; promotion gate pre-registers only nested selector any_3plus and max_hits.",
+        "block_stability": [50, 100, 200], "tie_break": "strategy-specific frozen rule; lexical model/candidate order for remaining ties",
+        "random_seed": 20261015,
+        "expected_output_files": ["PORTFOLIO_TICKETS.csv", "RANDOM_5_BY_TARGET.csv", "STRATEGY_BY_TARGET.csv", "STRATEGY_SUMMARY.csv", "NESTED_SELECTOR_TRACE.csv", "VERIFICATION.json", "REPORT.md"],
+        "expected_record_counts": {"RANDOM_5_BY_TARGET.csv": 64500, "STRATEGY_BY_TARGET.csv": 5605, "STRATEGY_SUMMARY.csv": 9, "NESTED_SELECTOR_TRACE.csv": 445},
+        "novelty_signature": "five-line strategies top5/min/mid/high overlap/source diversity/independent centered/B-independent mix; nested trailing-200 selector; 100 same-target RANDOM_5_LINES bundles",
+        "study_class": "empirical"
+      }
+    },
+    {
+      "id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
+      "kind": "five_line_promotion_gate",
+      "question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
+      "novelty": "Paired circular moving-block uncertainty, Holm-adjusted primary tests, temporal block consistency, and best-block deletion sensitivity determine promotion without retrospective tuning.",
+      "spec": {
+        "study_id": "E029_FIVE_LINE_PROMOTION_GATE_v2", "kind": "five_line_promotion_gate",
+        "research_question": "Does the nested five-line selector meet every pre-registered promotion gate versus same-target random five-line bundles?",
+        "data_cutoff": 1245, "target_rounds": "801..1245 inclusive", "training_cutoff_rule": "E028 nested selector decisions use only the immediately preceding 200 target results; gate comparisons use identical target rounds.",
+        "primary_metric": "paired any_3plus and max_hits deltas with 95% block-bootstrap CI lower bounds above zero",
+        "secondary_metrics": ["any_4plus non-worsening", "50-round block consistency", "best-block removal", "leakage", "multiple comparisons"],
+        "comparator": "same-target mean of 100 random five-line portfolios",
+        "baseline": "RANDOM_5_LINES target-matched portfolio reference",
+        "multiplicity_correction": "Holm step-down across the two registered primary tests for NESTED_DYNAMIC_5.",
+        "block_stability": [50, 100, 200], "tie_break": "not applicable to gate",
+        "random_seed": 20261015,
+        "expected_output_files": ["PROMOTION_TESTS.csv", "PROMOTION_BLOCKS.csv", "PROMOTION_GATE.json", "VERIFICATION.json", "REPORT.md"],
+        "expected_record_counts": {"PROMOTION_TESTS.csv": 80, "PROMOTION_BLOCKS.csv": 27},
+        "novelty_signature": "nested-five-line vs RANDOM_5_LINES; primary any3plus and max_hits; Holm2; paired circular block bootstrap; 50-round stability and best-block removal",
+        "study_class": "empirical"
+      }
     }
   ]
 }

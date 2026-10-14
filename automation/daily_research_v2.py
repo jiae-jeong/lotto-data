@@ -52,8 +52,13 @@ def validate_completion(output, task_id):
             if len(rows) != int(expected):
                 raise ValueError(f'Frozen record count mismatch for {name}: {len(rows)} != {expected}')
         source_hashes = frozen.get('source_file_sha256', {})
+        source_copies = {'research_engine_v2.py': 'ENGINE_SOURCE.py',
+                         'expanded_studies_v2.py': 'EXPANDED_ENGINE_SOURCE.py',
+                         'independent_signal_five_line_v1.py': 'INDEPENDENT_ENGINE_SOURCE.py'}
         for source_name, source_sha in source_hashes.items():
-            source_copy = output / ('ENGINE_SOURCE.py' if source_name == 'research_engine_v2.py' else 'EXPANDED_ENGINE_SOURCE.py')
+            if source_name not in source_copies:
+                raise ValueError('Unknown frozen source file: ' + source_name)
+            source_copy = output / source_copies[source_name]
             if not source_copy.is_file() or engine.digest(source_copy) != source_sha:
                 raise ValueError('Frozen study source hash mismatch: ' + source_name)
     else:

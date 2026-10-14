@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-14",
+  "status": "ALL_FIVE_EXECUTED",
+  "base_study_ids": [
+    "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+    "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+    "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+    "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+    "E029_FIVE_LINE_PROMOTION_GATE_v2"
+  ],
+  "canonical_source_commit": "69426c16711d7d6c43f82da601249fb108f5f2b6",
+  "canonical_snapshot_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "b_cache_sha256": "0436f0c7412ecb10d0f24c25816faa991f1d704c54295db34f7bcf88d51b3320",
+  "draw_rows": 1245,
+  "first_round": 1,
+  "latest_round": 1245,
+  "run_id": "111416_562913",
+  "studies": [
+    {
+      "task_id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+      "status": "ALREADY_VALIDATED",
+      "executed_cases": 17415,
+      "path": "analysis\\2026-10-14\\E025_INDEPENDENT_SIGNAL_DISCOVERY_v1"
+    },
+    {
+      "task_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "status": "ALREADY_VALIDATED",
+      "executed_cases": 71595,
+      "path": "analysis\\2026-10-14\\E026_INDEPENDENT_MODEL_WALKFORWARD_v1"
+    },
+    {
+      "task_id": "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+      "status": "ALREADY_VALIDATED",
+      "executed_cases": 39955,
+      "path": "analysis\\2026-10-14\\E027_FIVE_LINE_CANDIDATE_BANK_v1"
+    },
+    {
+      "task_id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "status": "ALREADY_VALIDATED",
+      "executed_cases": 94905,
+      "path": "analysis\\2026-10-14\\E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2"
+    },
+    {
+      "task_id": "E029_FIVE_LINE_PROMOTION_GATE_v2",
+      "status": "COMPLETE",
+      "executed_cases": 107,
+      "path": "analysis\\2026-10-14\\E029_FIVE_LINE_PROMOTION_GATE_v2"
+    }
+  ],
+  "failures": [],
+  "old_research_rerun": false
+}

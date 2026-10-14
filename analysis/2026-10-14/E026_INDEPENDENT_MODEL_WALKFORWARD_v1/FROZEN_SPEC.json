@@ -1,0 +1,162 @@
+{
+  "task": {
+    "id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+    "kind": "independent_model_walkforward",
+    "question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
+    "novelty": "Frozen top-six predictors evaluated over 645 expanding-information targets with 100 same-target random tickets per target, B component comparators, block uncertainty, and Holm correction.",
+    "spec": {
+      "study_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "kind": "independent_model_walkforward",
+      "research_question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
+      "data_cutoff": 1245,
+      "target_rounds": "601..1245 inclusive",
+      "training_cutoff_rule": "Each signal prediction for target t is generated from rounds 1..t-1; no tuning is performed on target outcomes.",
+      "primary_metric": "mean hits and rate_ge_3 versus same-target random tickets",
+      "secondary_metrics": [
+        "0..6 hit distribution",
+        "2+/3+/4+/5+/6",
+        "variance",
+        "paired confidence intervals",
+        "100-round block stability",
+        "B comparisons"
+      ],
+      "comparator": "same-target seven frozen B components and combined_equal_rank",
+      "baseline": "100 independently sampled uniform six-number tickets per target round",
+      "multiplicity_correction": "Holm step-down over 3 candidate signals x 5 registered random-comparison metrics.",
+      "block_stability": [
+        50,
+        100,
+        200
+      ],
+      "tie_break": "descending frozen signal score, then lower number",
+      "random_seed": 20261015,
+      "expected_output_files": [
+        "PREDICTIONS.csv",
+        "RANDOM_BY_TARGET.csv",
+        "TARGET_RANDOM_SUMMARY.csv",
+        "METRICS.csv",
+        "PAIRED_RANDOM_COMPARISON.csv",
+        "BLOCK_STABILITY.csv",
+        "VERIFICATION.json",
+        "REPORT.md"
+      ],
+      "expected_record_counts": {
+        "PREDICTIONS.csv": 7095,
+        "RANDOM_BY_TARGET.csv": 64500,
+        "TARGET_RANDOM_SUMMARY.csv": 645,
+        "METRICS.csv": 12,
+        "PAIRED_RANDOM_COMPARISON.csv": 15,
+        "BLOCK_STABILITY.csv": 21
+      },
+      "novelty_signature": "E025 fixed independent formulas; 601..1245; same-target 100-ticket random simulation; B component comparisons; circular moving-block paired CI; Holm15",
+      "study_class": "empirical"
+    }
+  },
+  "study_spec": {
+    "study_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+    "kind": "independent_model_walkforward",
+    "research_question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
+    "data_cutoff": 1245,
+    "target_rounds": "601..1245 inclusive",
+    "training_cutoff_rule": "Each signal prediction for target t is generated from rounds 1..t-1; no tuning is performed on target outcomes.",
+    "primary_metric": "mean hits and rate_ge_3 versus same-target random tickets",
+    "secondary_metrics": [
+      "0..6 hit distribution",
+      "2+/3+/4+/5+/6",
+      "variance",
+      "paired confidence intervals",
+      "100-round block stability",
+      "B comparisons"
+    ],
+    "comparator": "same-target seven frozen B components and combined_equal_rank",
+    "baseline": "100 independently sampled uniform six-number tickets per target round",
+    "multiplicity_correction": "Holm step-down over 3 candidate signals x 5 registered random-comparison metrics.",
+    "block_stability": [
+      50,
+      100,
+      200
+    ],
+    "tie_break": "descending frozen signal score, then lower number",
+    "random_seed": 20261015,
+    "expected_output_files": [
+      "PREDICTIONS.csv",
+      "RANDOM_BY_TARGET.csv",
+      "TARGET_RANDOM_SUMMARY.csv",
+      "METRICS.csv",
+      "PAIRED_RANDOM_COMPARISON.csv",
+      "BLOCK_STABILITY.csv",
+      "VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "expected_record_counts": {
+      "PREDICTIONS.csv": 7095,
+      "RANDOM_BY_TARGET.csv": 64500,
+      "TARGET_RANDOM_SUMMARY.csv": 645,
+      "METRICS.csv": 12,
+      "PAIRED_RANDOM_COMPARISON.csv": 15,
+      "BLOCK_STABILITY.csv": 21
+    },
+    "novelty_signature": "E025 fixed independent formulas; 601..1245; same-target 100-ticket random simulation; B component comparisons; circular moving-block paired CI; Holm15",
+    "study_class": "empirical"
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "6d8e051ba5cb8229282698e6875a49d3bc36c1acfad640c03fb22b18c4a99d01",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "ec39dfe8113a36b6c929619a40a04e7a9be3b832932c4b4573f87ec9bb2c8d00",
+  "source_file_sha256": {
+    "research_engine_v2.py": "ec39dfe8113a36b6c929619a40a04e7a9be3b832932c4b4573f87ec9bb2c8d00",
+    "expanded_studies_v2.py": "b94e897a7caad59299ece71b3ef73a53c4494feca47332580e6488ad5709097a",
+    "independent_signal_five_line_v1.py": "978661f72df7b3370a63756a048b1e1d895138c7cd2c549ad0cd289103402a1e"
+  },
+  "expected_output_files": [
+    "PREDICTIONS.csv",
+    "RANDOM_BY_TARGET.csv",
+    "TARGET_RANDOM_SUMMARY.csv",
+    "METRICS.csv",
+    "PAIRED_RANDOM_COMPARISON.csv",
+    "BLOCK_STABILITY.csv",
+    "VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "expected_record_counts": {
+    "PREDICTIONS.csv": 7095,
+    "RANDOM_BY_TARGET.csv": 64500,
+    "TARGET_RANDOM_SUMMARY.csv": 645,
+    "METRICS.csv": 12,
+    "PAIRED_RANDOM_COMPARISON.csv": 15,
+    "BLOCK_STABILITY.csv": 21
+  },
+  "created_utc": "2026-10-14T02:12:00.442135+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "Frozen top-six predictors evaluated over 645 expanding-information targets with 100 same-target random tickets per target, B component comparators, block uncertainty, and Holm correction.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}
