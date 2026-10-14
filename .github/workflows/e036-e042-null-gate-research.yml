@@ -1,0 +1,119 @@
+name: e036-e042-null-gate-research
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/calibrate_and_research_e036_e042.py'
+      - 'automation/research_queue_v2.json'
+      - 'automation/e036_e042_preregistration.json'
+      - '.github/workflows/e036-e042-null-gate-research.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: e036-e042-main
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  validate:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run-e036-e042]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen numerical runtime
+        run: python -m pip install 'numpy==2.3.5'
+      - name: Compile runner and validate frozen queue/data contract
+        run: |
+          python -m py_compile automation/calibrate_and_research_e036_e042.py
+          python - <<'PY'
+          import csv, json, hashlib
+          from pathlib import Path
+          root=Path.cwd()
+          rows=list(csv.DictReader((root/'analysis/2026-10-12/lotto_data_1_1245_snapshot.csv').open(encoding='utf-8-sig',newline='')))
+          assert len(rows)==1245 and [int(r['round']) for r in rows]==list(range(1,1246))
+          actual=hashlib.sha256((root/'analysis/2026-10-12/lotto_data_1_1245_snapshot.csv').read_bytes().replace(b'\r\n',b'\n')).hexdigest()
+          assert actual=='e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4', actual
+          ids=[t['id'] for t in json.loads((root/'automation/research_queue_v2.json').read_text(encoding='utf-8'))['tasks']]
+          assert ids[-7:]==[
+              'E036_NULL_GATE_CALIBRATION_v2','E037_PREDICTABILITY_FALSIFICATION_v1',
+              'E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3','E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2',
+              'E040_SINGLE_EDGE_PROMOTION_GATE_v2','E041_FIVE_LINE_PORTFOLIO_REBUILD_v2',
+              'E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1']
+          for old in ('E030_PROSPECTIVE_SIGNAL_FREEZE_v1','E035_FIVE_LINE_REBUILD_GATE_v1'):
+              assert ids.count(old)==1
+          print('E036-E042 preregistration queue and canonical data checks PASS')
+          PY
+
+  research:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run-e036-e042]')
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen numerical runtime
+        run: python -m pip install 'numpy==2.3.5'
+      - name: Execute E036-E042 in a new immutable run directory
+        id: study
+        run: |
+          DATE="$(TZ=Asia/Seoul date +%F)"
+          RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          python -B automation/calibrate_and_research_e036_e042.py --date "$DATE" --run-id "$RUN_ID" --null-replicates-per-mechanism 2000
+      - name: Verify immutable evidence and publish
+        env:
+          RUN_DATE: ${{ steps.study.outputs.date }}
+          RUN_ID: ${{ steps.study.outputs.run_id }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os
+          from pathlib import Path
+          root=Path.cwd(); folder=root/'analysis'/os.environ['RUN_DATE']/os.environ['RUN_ID']
+          summary=json.loads((folder/'E036_E042_RUN_SUMMARY.json').read_text(encoding='utf-8'))
+          assert summary['data_cutoff']==1245 and summary['canonical_sha256']=='e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4'
+          assert summary['leakage_failures']==0 and summary['future_predictions']==0
+          expected=['E036_NULL_GATE_CALIBRATION_v2','E037_PREDICTABILITY_FALSIFICATION_v1','E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3','E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2','E040_SINGLE_EDGE_PROMOTION_GATE_v2','E041_FIVE_LINE_PORTFOLIO_REBUILD_v2','E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1']
+          for name in expected:
+              d=folder/name
+              for required in ('COMPLETION.json','VERIFICATION.json','REPORT.md','SHA256_MANIFEST.csv'):
+                  assert (d/required).is_file(), f'{name}: missing {required}'
+              manifest=list(csv.DictReader((d/'SHA256_MANIFEST.csv').open(encoding='utf-8',newline='')))
+              for row in manifest:
+                  p=d/row['path']; assert hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256'], p
+          root_manifest=list(csv.DictReader((folder/'SHA256_MANIFEST.csv').open(encoding='utf-8',newline='')))
+          for row in root_manifest:
+              p=folder/row['path']; assert hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256'], p
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "analysis/$RUN_DATE/$RUN_ID"
+          git commit -m "research: record E036-E042 evidence [e036-e042-evidence]"
+          git push origin HEAD:main
+      - name: Preserve failed run evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e036-e042-failed-attempt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            analysis/${{ steps.study.outputs.date }}/${{ steps.study.outputs.run_id }}/**
+          if-no-files-found: warn

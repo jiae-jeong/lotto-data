@@ -1,0 +1,68 @@
+{
+  "protocol_version": "E036-E042_v1",
+  "canonical_data_cutoff": 1245,
+  "canonical_data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "historical_evidence_label": "screening/OOS evidence; not untouched holdout",
+  "seed": 20261016036,
+  "studies": [
+    {
+      "id": "E036_NULL_GATE_CALIBRATION_v2",
+      "candidate_outcomes_used_for_calibration": false,
+      "null_mechanisms": [
+        "EXACT_UNIFORM_TICKET",
+        "TARGET_OUTCOME_PERMUTATION",
+        "TEMPORAL_BLOCK_PERMUTATION",
+        "SIGNAL_RANK_RANDOM_SCORE"
+      ],
+      "replicates_per_mechanism": 2000,
+      "split": "1000 calibration + 1000 independent verification",
+      "null_hit_distribution": "Hypergeometric(population=45, successes=6, draws=6), exact under uniform six-number ticket and draw",
+      "familywise_family": "six registered E037 candidate families x three endpoints",
+      "max_statistic": "max(delta_mean_hits/0.03, delta_rate_3plus/0.01, delta_rate_4plus/0.003) across all six candidates",
+      "calibration_quantile": 0.99,
+      "acceptance": "each mechanism and pooled independent verification false-promotion rate <= 0.05"
+    },
+    {
+      "id": "E037_PREDICTABILITY_FALSIFICATION_v1",
+      "target_rounds": "601..1245",
+      "target_information_rule": "target t may use rounds 1..t-1 only",
+      "families": [
+        "MULTISCALE_SERIAL_DEPENDENCE",
+        "LAG_DIRECTIONAL_DEPENDENCE",
+        "SPECTRAL_PHASE_DEPENDENCE",
+        "CONDITIONAL_RECURRENCE_HAZARD",
+        "REGIME_PERSISTENCE",
+        "IRREDUCIBLE_JOINT_SET_DEPENDENCE"
+      ],
+      "random_tickets_per_target": 100,
+      "uncertainty": "paired circular moving-block bootstrap CI, block length 20, 4000 replicates",
+      "p_value": "one-sided exact sign test across contiguous 50-target block deltas; Holm correction across six families",
+      "survival": "E036 gate calibrated, nonduplicate formula, CI lower > 0, Holm p < 0.05, >=60% positive blocks",
+      "tuning": "none; formulas and parameters frozen in source before workflow execution"
+    },
+    {
+      "id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+      "selection_rule": "Only nonduplicate E037 survivors; do not fabricate families to satisfy minimum count of three",
+      "training_rule": "target t uses rounds 1..t-1"
+    },
+    {
+      "id": "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+      "condition": "Run only for E038 survivors; compare same targets to exact random, B, E026, and E031 frozen outputs",
+      "training_rule": "target t uses rounds 1..t-1"
+    },
+    {
+      "id": "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+      "condition": "Use only the null-only E036 frozen gate and require every registered criterion"
+    },
+    {
+      "id": "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+      "condition": "Run only if E040 has a validated edge; otherwise BLOCKED_NO_VALIDATED_SINGLE_EDGE"
+    },
+    {
+      "id": "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+      "condition": "PROMOTE_TO_PROSPECTIVE_SHADOW only if all registered E041 vs RANDOM_5_LINES criteria pass; otherwise DO_NOT_PROMOTE",
+      "preserve_existing_E030_ledger": true,
+      "recommendation_numbers_in_report": false
+    }
+  ]
+}

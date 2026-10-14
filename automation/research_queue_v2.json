@@ -703,6 +703,104 @@
         "otherwise": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
         "novelty_signature": "conditional five-line rebuild gate requiring validated single-ticket edge"
       }
+    },
+    {
+      "id": "E036_NULL_GATE_CALIBRATION_v2",
+      "kind": "null_gate_calibration",
+      "question": "Can a null-only max-statistic gate keep independent familywise false promotion at or below 5% across four null mechanisms?",
+      "novelty": "Freeze the gate with 2,000 replicates per mechanism (1,000 calibration, 1,000 verification), six null candidates, and mean/3+/4+ endpoints. Candidate outcomes are excluded.",
+      "spec": {
+        "study_id": "E036_NULL_GATE_CALIBRATION_v2",
+        "data_cutoff": 1245,
+        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
+        "seed": 20261016036,
+        "preregistration": "automation/e036_e042_preregistration.json",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+      }
+    },
+    {
+      "id": "E037_PREDICTABILITY_FALSIFICATION_v1",
+      "kind": "predictability_falsification",
+      "question": "Does the canonical historical series show stable walk-forward predictability beyond pre-registered dependence families?",
+      "novelty": "Test six frozen families over targets 601..1245 with t-1 cutoff, 100 same-target random tickets, paired block CI, 50-target sign stability, Holm correction, and formula-level duplicate screen.",
+      "spec": {
+        "study_id": "E037_PREDICTABILITY_FALSIFICATION_v1",
+        "data_cutoff": 1245,
+        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
+        "seed": 20261016036,
+        "preregistration": "automation/e036_e042_preregistration.json",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+      }
+    },
+    {
+      "id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+      "kind": "orthogonal_signal_discovery",
+      "question": "Can nonduplicate E037-supported structures yield at least three independent candidate families without post-outcome invention?",
+      "novelty": "Use E037 survivors only. If fewer than three survive, record blocked and do not fabricate candidates.",
+      "spec": {
+        "study_id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+        "data_cutoff": 1245,
+        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
+        "seed": 20261016036,
+        "preregistration": "automation/e036_e042_preregistration.json",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+      }
+    },
+    {
+      "id": "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+      "kind": "orthogonal_walkforward_confirmation",
+      "question": "Do E038 survivors outperform same-target random, frozen B, E026, and E031 comparators?",
+      "novelty": "Run only for E038-eligible survivors; target t training cutoff t-1; record full hit distribution, paired bootstrap CIs, blocks, influence, Holm, leakage, and future predictions.",
+      "spec": {
+        "study_id": "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+        "data_cutoff": 1245,
+        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
+        "seed": 20261016036,
+        "preregistration": "automation/e036_e042_preregistration.json",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+      }
+    },
+    {
+      "id": "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+      "kind": "single_edge_promotion_gate",
+      "question": "Does any signal meet all single-edge promotion criteria under the null-only E036 gate?",
+      "novelty": "Require leakage/future=0, positive random-delta CI, noninferior 3+/4+, Holm, 60% positive blocks, leave-block stability, independence, and null-gate pass.",
+      "spec": {
+        "study_id": "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+        "data_cutoff": 1245,
+        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
+        "seed": 20261016036,
+        "preregistration": "automation/e036_e042_preregistration.json",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+      }
+    },
+    {
+      "id": "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+      "kind": "five_line_portfolio_rebuild",
+      "question": "Can a validated single-ticket edge produce a five-line portfolio that beats same-target RANDOM_5_LINES?",
+      "novelty": "Conditional on E040 validated edge only; compare all registered 5-line strategies and coverage/overlap metrics.",
+      "spec": {
+        "study_id": "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+        "data_cutoff": 1245,
+        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
+        "seed": 20261016036,
+        "preregistration": "automation/e036_e042_preregistration.json",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+      }
+    },
+    {
+      "id": "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+      "kind": "five_line_promotion_and_freeze",
+      "question": "Does an E041 five-line strategy meet every promotion gate and qualify for a prospective shadow freeze?",
+      "novelty": "PROMOTE only if all random5, block, CI, null, multiplicity, and leakage conditions pass. Preserve E030 ledger. Never emit recommendation numbers in report.",
+      "spec": {
+        "study_id": "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+        "data_cutoff": 1245,
+        "training_cutoff_rule": "target t uses 1..t-1 when applicable",
+        "seed": 20261016036,
+        "preregistration": "automation/e036_e042_preregistration.json",
+        "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py"
+      }
     }
   ]
 }
