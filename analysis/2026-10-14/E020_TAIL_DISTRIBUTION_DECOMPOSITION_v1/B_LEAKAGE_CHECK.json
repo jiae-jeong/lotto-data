@@ -1,0 +1,17 @@
+{
+  "cached_feature_future_check": "source computes incrementally within each prefix; cache not used",
+  "failure_count": 0,
+  "future_data_in_prefix": "PASS; verified target-1 cutoff for every raw prediction row",
+  "maximum_feature_round": "t-1",
+  "overlap_duplicate_forecast_consistency": "PASS",
+  "random_baseline_target_alignment": "same target set",
+  "ranking_threshold_tuning": "none in source; fixed ranking/tie rules",
+  "raw_overlapping_prediction_rows": 33480,
+  "rolling_feature_end": "t-1; source slices rolling features from prefix only",
+  "rule": "each target t receives only prefix draws[0:t-1] from frozen B source; training_through_round=t-1",
+  "scaler_or_learned_normalizer": "not used by frozen B source",
+  "status": "PASS",
+  "target_result_excluded_before_forecast": "PASS; source calls predictions_for_round before incorporating draws[train_n]",
+  "target_round_count": 1045,
+  "unique_target_model_predictions": 8360
+}

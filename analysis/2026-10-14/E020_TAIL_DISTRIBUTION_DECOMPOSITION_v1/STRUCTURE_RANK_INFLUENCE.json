@@ -1,0 +1,31 @@
+{
+  "B_combined_equal_rank_structure_axis": "not included: frozen definition combines frequency, current gap, momentum, and pair/triple relation ranks; structure_profile is separate set-level model",
+  "E013_equal_vote_ticket_selection_change_vs_drop_structure": {
+    "changed_ticket_target_rate": 0.25426356589147286,
+    "changed_ticket_targets": 164,
+    "comparison": "DROP_STRUCTURE_PROFILE_minus_FULL_EQUAL_VOTE",
+    "delta_hits_0": -0.03410852713178292,
+    "delta_hits_1": 0.048062015503875954,
+    "delta_hits_2": -0.023255813953488386,
+    "delta_hits_3": 0.009302325581395349,
+    "delta_hits_4": 0.0,
+    "delta_hits_5": 0.0,
+    "delta_hits_6": 0.0,
+    "delta_p_ge_0": 0.8868217054263566,
+    "delta_p_ge_1": 0.14108527131782947,
+    "delta_p_le_minus_1": 0.11317829457364341,
+    "delta_rate_2plus": -0.01395348837209301,
+    "delta_rate_3plus": 0.009302325581395349,
+    "delta_rate_4plus": 0.0,
+    "delta_rate_5plus": 0.0,
+    "delta_rate_6plus": 0.0,
+    "mean_paired_hit_delta": 0.02945736434108527,
+    "n_targets": 645,
+    "variance_paired_delta": 0.29525629469382847
+  },
+  "frozen_b_source_sha256_lf": "5a2a810bcd9d7c86a27311555466ac90def6c973fe1de835a1ecb92545f897f2",
+  "interpretation": "Do not treat separate structure_profile ticket as a B combined-rank term. E013 equal-vote comparison quantifies ticket-level contribution retrospectively, not causal promotion evidence.",
+  "per_number_full_rank_arrays_available": "no; frozen B does not emit a 45-number score/rank table",
+  "source_mentions": [],
+  "spearman_kendall_and_rank_change": "NOT COMPUTABLE from authoritative frozen source outputs"
+}

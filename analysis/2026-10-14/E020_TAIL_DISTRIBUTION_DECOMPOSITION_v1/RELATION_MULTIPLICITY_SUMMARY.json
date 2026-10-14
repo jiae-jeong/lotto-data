@@ -1,0 +1,9 @@
+{
+  "correction": "BH separately within pair and triple families",
+  "dependence_note": "combinatorial tests are dependent; adjusted counts are exploratory, not confirmatory evidence",
+  "p_value": "two-sided exact binomial tails under per-draw uniform 6/45 inclusion probability",
+  "pair_bh_q_lt_0_05": 0,
+  "pair_test_count": 990,
+  "triple_bh_q_lt_0_05": 0,
+  "triple_test_count": 14190
+}

@@ -1,0 +1,27 @@
+{
+  "mean_of_path_mean_hits": 0.8001133492822966,
+  "mean_path_rate_2plus": 0.1753356937799043,
+  "mean_path_rate_3plus": 0.02381205741626794,
+  "mean_path_rate_4plus": 0.001397799043062201,
+  "method": "independent exact hypergeometric hit-count draws for each random uniform 6/45 target ticket",
+  "n_paths": 20000,
+  "n_targets_per_path": 1045,
+  "paired_target_set": "identical to B target rounds",
+  "path_mean_hits_ci95_percentile": [
+    0.75311004784689,
+    0.8478468899521531
+  ],
+  "path_rate_2plus_ci95_percentile": [
+    0.15311004784688995,
+    0.19904306220095694
+  ],
+  "path_rate_3plus_ci95_percentile": [
+    0.015311004784688996,
+    0.03349282296650718
+  ],
+  "path_rate_4plus_ci95_percentile": [
+    0.0,
+    0.003827751196172249
+  ],
+  "seed": 20261014
+}

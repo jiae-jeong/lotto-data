@@ -1,0 +1,4 @@
+﻿round,recommendation_id,model,model_version,recommendation_date,main_hits,bonus_match,rank,result,line_values_written,provenance
+1245,1,V4_G,V4 frozen source,pre-draw sealed commit; exact creation timestamp from Git history,0,False,unknown: official prize rank not transaction-verified,no_prize,False,prospective sealed source exists; actual purchase receipt not located
+1245,2,V4_C,V4 frozen source,pre-draw sealed commit; exact creation timestamp from Git history,0,False,unknown: official prize rank not transaction-verified,no_prize,False,prospective sealed source exists; actual purchase receipt not located
+1245,3,V4_S,V4 frozen source,pre-draw sealed commit; exact creation timestamp from Git history,1,False,unknown: official prize rank not transaction-verified,no_prize,False,prospective sealed source exists; actual purchase receipt not located

@@ -1,0 +1,7 @@
+﻿round,dataset_date_iso,date_match,main_numbers_match,bonus_match,source_1,source_2,overall_match,date_normalization
+1,2002.12.07,False,True,True,jottto.com/lotto/1,lottomoney.kr/result/1,False,source page YYYY.MM.DD normalized to dataset YYYY-MM-DD; no number values included
+1000,2022.01.29,False,True,True,dhlottery.co.kr allWinPrint,yna.co.kr/AKR20220129053100002,False,source page YYYY.MM.DD normalized to dataset YYYY-MM-DD; no number values included
+1242,2026.09.19,False,True,True,yna.co.kr/AKR20260919056800002,jottto.com/lotto/1242,False,source page YYYY.MM.DD normalized to dataset YYYY-MM-DD; no number values included
+1243,2026.09.26,False,True,True,dhlottery.co.kr QR archive,yna.co.kr/AKR20260926047651002,False,source page YYYY.MM.DD normalized to dataset YYYY-MM-DD; no number values included
+1244,2026.10.03,False,True,True,yna.co.kr/AKR20261003050551002,lottostory.kr/results/by-round/1244,False,source page YYYY.MM.DD normalized to dataset YYYY-MM-DD; no number values included
+1245,2026.10.10,False,True,True,m.dhlottery.co.kr/smarPage,newsis.com/NISX20261010_0003820692,False,source page YYYY.MM.DD normalized to dataset YYYY-MM-DD; no number values included
