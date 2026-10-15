@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-15",
+  "timezone": "Asia/Seoul",
+  "classification": "MANUAL_RECOVERY_AFTER_SCHEDULED_AUTOMATION_FAILURE",
+  "data_cutoff": 1245,
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "starting_main_sha": "284003c5a448c5c1b2906e1a4cca44d4a1e6943a",
+  "scheduled_workflow_run_id": 38659538088,
+  "scheduled_workflow_status": "failure_before_research_execution",
+  "scheduled_failure": "ValueError: Unregistered/unsafe research task",
+  "manual_execution": {
+    "full_data_rows": 1245,
+    "pair_universe": 990,
+    "triple_universe": 14190,
+    "pair_bh_q_lt_005": 0,
+    "triple_bh_q_lt_005": 0,
+    "b_prediction_records": 33480,
+    "b_unique_target_model_records": 8360,
+    "b_targets": 1045,
+    "b_models": 8,
+    "b_leakage_failures": 0,
+    "b_semantic_reproduction": {
+      "predictions": true,
+      "holdout_metrics": true,
+      "classification": true,
+      "50_round_trends": true
+    },
+    "random_seed": 20261015,
+    "random_tickets_per_target": 1000,
+    "random_total_tickets": 1045000,
+    "random_mean_hits": 0.8017244019138756,
+    "moving_block_bootstrap_reps": 4000,
+    "moving_block_length": 20
+  },
+  "local_execution_hashes": {
+    "path_patched_frozen_b_source": "50df1f33a60091bd81f3e94c4cc1a772532ab87ad9cc009827aa1f431a53d555",
+    "new_b_predictions_serialization": "fdb428a6f970e2f5b4e73880d0004704bb3202118a2841ad64a57192ac31c924",
+    "manual_daily_script": "f255629e5c892dd325f9593eb7d30dc89c4e533637adfac706507e72cb378fd5"
+  },
+  "hypotheses": [
+    {
+      "id": "H_B_MOMENTUM_DRIFT_001",
+      "status": "REGISTERED_NOT_ADOPTED",
+      "evidence_type": "retrospective temporal stability",
+      "reason": "recent_momentum early-to-late mean-hit decline remained after BH correction across 8 B models",
+      "required_next_evidence": "frozen future/out-of-sample confirmation"
+    },
+    {
+      "id": "H_B_RELATION_COLLAPSE_001",
+      "status": "REGISTERED_NOT_ADOPTED",
+      "evidence_type": "source-mechanism hypothesis",
+      "reason": "standalone pair/triple use greedy set interactions while combined_equal_rank collapses relation scores to per-number node ranks",
+      "required_next_evidence": "preregistered representation ablation on untouched evidence"
+    }
+  ],
+  "recommendation_generation": false,
+  "numbers_or_candidate_lines_reported": false
+}
