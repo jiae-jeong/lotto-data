@@ -8,6 +8,7 @@ on:
     paths:
       - 'automation/daily_research_v2.py'
       - 'automation/daily_research_queue_preflight_v1.py'
+      - 'automation/daily_research_safe_runner_v1.py'
       - 'automation/research_engine_v2.py'
       - 'automation/expanded_studies_v2.py'
       - 'automation/research_queue_v2.json'
@@ -70,7 +71,8 @@ jobs:
       - name: Execute unfinished registered studies
         if: steps.preflight.outputs.has_work == 'true'
         run: >-
-          python -B automation/daily_research_v2.py
+          python -B automation/daily_research_safe_runner_v1.py
+          --repository .
           --queue "$RUNNER_TEMP/research-queue-filtered.json"
           --min-successful-studies 2 --max-successful-studies 3
           --required-empirical-studies 1
