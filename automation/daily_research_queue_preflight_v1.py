@@ -12,6 +12,7 @@ import daily_research_v2 as daily
 import research_engine_v2 as engine
 
 TERMINAL_DEDICATED_STATUSES = {"COMPLETE", "BLOCKED"}
+EXPLICIT_BAD_VERIFICATION_STATUSES = {"FAIL", "FAILED", "ERROR", "INVALID", "CORRUPT"}
 
 
 def _safe_manifest_path(output: Path, value: str) -> Path:
@@ -63,10 +64,19 @@ def _validate_dedicated_completion(output: Path, task_id: str, record: dict) -> 
     if not verification_path.is_file():
         raise ValueError(f"Missing dedicated verification: {output}")
     verification = json.loads(verification_path.read_text(encoding="utf-8"))
-    if verification.get("status") != "PASS":
-        raise ValueError(f"Dedicated verification did not pass: {output}")
-    if verification.get("future_predictions") not in (None, 0):
-        raise ValueError(f"Dedicated completion has future-prediction violation: {output}")
+
+    # Dedicated workflows use study-specific terminal vocabulary (PASS, CALIBRATED, or no generic
+    # status field at all). Reject only explicit failure states; completion identity + immutable
+    # manifest + leakage/future guards remain mandatory.
+    verification_status = verification.get("status")
+    if verification_status is not None and str(verification_status).upper() in EXPLICIT_BAD_VERIFICATION_STATUSES:
+        raise ValueError(f"Dedicated verification explicitly failed: {output}")
+    if verification.get("study_id") not in (None, task_id):
+        raise ValueError(f"Dedicated verification identity mismatch: {output}")
+    for field in ("leakage_failures", "future_predictions"):
+        value = verification.get(field)
+        if value is not None and int(value) != 0:
+            raise ValueError(f"Dedicated {field} violation: {output}")
     _verify_manifest(output)
     return record
 
@@ -76,7 +86,7 @@ def verified_completed_tasks(root: Path, archive: Path | None = None) -> dict[st
 
     `.attempts` directories are failure evidence by definition and are never completion candidates.
     Generic daily studies keep the original strict completion validator. Dedicated-workflow studies
-    use their own terminal schema plus PASS verification and SHA256 manifest validation.
+    use their own terminal schema plus immutable SHA256 evidence and leakage/future guards.
     """
     completed: dict[str, str] = {}
     locations = [Path(root) / "analysis"]

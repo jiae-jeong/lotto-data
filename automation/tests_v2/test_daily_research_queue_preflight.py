@@ -51,14 +51,17 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
             },
         }
 
-    def _write_dedicated(self, task_id="E030_DEDICATED"):
+    def _write_dedicated(self, task_id="E030_DEDICATED", verification_status=None):
         out = self.root / "analysis" / "dedicated" / task_id
         out.mkdir(parents=True)
         completion = out / "COMPLETION.json"
         verification = out / "VERIFICATION.json"
         report = out / "REPORT.md"
         completion.write_text(json.dumps({"study_id": task_id, "status": "COMPLETE", "executed_cases": 1}) + "\n", encoding="utf-8")
-        verification.write_text(json.dumps({"status": "PASS", "future_predictions": 0}) + "\n", encoding="utf-8")
+        verification_payload = {"study_id": task_id, "leakage_failures": 0, "future_predictions": 0}
+        if verification_status is not None:
+            verification_payload["status"] = verification_status
+        verification.write_text(json.dumps(verification_payload) + "\n", encoding="utf-8")
         report.write_text("dedicated evidence\n", encoding="utf-8")
         with (out / "SHA256_MANIFEST.csv").open("w", encoding="utf-8", newline="") as stream:
             writer = csv.DictWriter(stream, fieldnames=["path", "bytes", "sha256"], lineterminator="\n")
@@ -70,14 +73,29 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
     def test_failed_attempt_completion_is_never_a_completion_candidate(self):
         attempt = self.root / "analysis" / "2026-10-14" / ".attempts" / "E025_BAD" / "study"
         attempt.mkdir(parents=True)
-        # Deliberately malformed generic completion; strict validation would fail if it were visited.
         (attempt / "COMPLETION.json").write_text(json.dumps({"task_id": "E025_BAD", "status": "COMPLETE"}), encoding="utf-8")
         self.assertEqual(preflight.verified_completed_tasks(self.root), {})
 
-    def test_dedicated_terminal_completion_requires_and_passes_manifest_integrity(self):
+    def test_dedicated_terminal_completion_allows_study_specific_status_vocabulary(self):
         out = self._write_dedicated()
         completed = preflight.verified_completed_tasks(self.root)
         self.assertEqual(completed["E030_DEDICATED"], str(out))
+        # CALIBRATED is a valid study-specific terminal status, not a generic PASS string.
+        other_root = Path(self.temp.name) / "other"
+        (other_root / "analysis").mkdir(parents=True)
+        old_root = self.root
+        self.root = other_root
+        try:
+            out2 = self._write_dedicated("E036_CALIBRATED", "CALIBRATED")
+            completed2 = preflight.verified_completed_tasks(self.root)
+            self.assertEqual(completed2["E036_CALIBRATED"], str(out2))
+        finally:
+            self.root = old_root
+
+    def test_explicit_dedicated_verification_failure_still_fails_closed(self):
+        self._write_dedicated("E031_FAILED", "FAIL")
+        with self.assertRaisesRegex(ValueError, "explicitly failed"):
+            preflight.verified_completed_tasks(self.root)
 
     def test_tampered_dedicated_evidence_still_fails_closed(self):
         out = self._write_dedicated("E031_DEDICATED")
