@@ -1,0 +1,73 @@
+name: daily-lotto-master-v4
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 09:00 Asia/Seoul
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-lotto-master-v4
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  OPENBLAS_NUM_THREADS: '2'
+
+jobs:
+  full-master:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run full daily MASTER
+        id: master
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python -B automation/daily_master_full_v4.py --date "$RUN_DATE" --random-per-target 1000 | tee "$RUNNER_TEMP/master-full-v4.log"
+          RUN_DIR="$(sed -n 's/^RUN_DIR=//p' "$RUNNER_TEMP/master-full-v4.log" | tail -1)"
+          test -n "$RUN_DIR"
+          test -f "$RUN_DIR/VERIFICATION.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          log = Path(os.environ['RUNNER_TEMP']) / 'master-full-v4.log'
+          run_dir = [line.split('=',1)[1].strip() for line in log.read_text().splitlines() if line.startswith('RUN_DIR=')][-1]
+          v = json.loads((Path(run_dir) / 'VERIFICATION.json').read_text())
+          assert v['status'] == 'PASS'
+          assert v['data_integrity'] == 'PASS'
+          assert v['pair_universe'] == 990
+          assert v['triple_universe'] == 14190
+          assert v['leakage_failures'] == 0
+          assert v['recommendation_generation'] is False
+          PY
+          echo "run_dir=$RUN_DIR" >> "$GITHUB_OUTPUT"
+      - name: Preserve validated MASTER output
+        env:
+          RUN_DIR: ${{ steps.master.outputs.run_dir }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$RUN_DIR"
+          git diff --cached --quiet && exit 0
+          git commit -m "research: daily full master $(TZ=Asia/Seoul date +%F)"
+          git push origin HEAD:main
+      - name: Preserve failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-master-v4-failure-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/master-full-v4.log
+            analysis/*/MASTER_FULL_V4_*/**
+          if-no-files-found: warn
