@@ -1,0 +1,46 @@
+name: recovered-models-v2-validation
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'automation/recovered_models_v2.py'
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main, fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Walk-forward successor models
+        run: |
+          python - <<'PY'
+          import csv,json,random,hashlib,importlib.util,datetime
+          from pathlib import Path
+          root=Path('.')
+          rows=list(csv.DictReader(open('lotto_data.csv',encoding='utf-8-sig')))
+          draws=[tuple(sorted(int(r[f'no{i}']) for i in range(1,7))) for r in rows]
+          spec=importlib.util.spec_from_file_location('m','automation/recovered_models_v2.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          start=200; rng=random.Random(20261016); stats={k:[] for k in ('A_v2','C_v2','contrarian_v2')}; rand=[]; leak=0
+          for idx in range(start,len(draws)):
+              hist=draws[:idx]; actual=set(draws[idx]); preds=m.predict(hist)
+              if len(hist)!=idx: leak+=1
+              for k,t in preds.items(): stats[k].append(len(set(t)&actual))
+              rand.append(sum(len(set(rng.sample(range(1,46),6))&actual) for _ in range(1000))/1000)
+          out=root/'analysis'/datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date().isoformat()/'RECOVERED_MODELS_V2_VALIDATION';out.mkdir(parents=True,exist_ok=True)
+          result={'identity':'NEW_SUCCESSOR_NOT_LEGACY_RECONSTRUCTION','data_cutoff':len(draws),'targets':len(draws)-start,'random_tickets':(len(draws)-start)*1000,'leakage_failures':leak,'random_mean':sum(rand)/len(rand),'models':{k:{'mean_hits':sum(v)/len(v),'ge2_rate':sum(x>=2 for x in v)/len(v),'ge3_rate':sum(x>=3 for x in v)/len(v),'hit_hist':{str(i):v.count(i) for i in range(7)}} for k,v in stats.items()}}
+          (out/'RESULT.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          src=Path('automation/recovered_models_v2.py'); result['source_sha256']=hashlib.sha256(src.read_bytes()).hexdigest(); (out/'VERIFICATION.json').write_text(json.dumps({'status':'PASS' if leak==0 else 'FAIL',**result},ensure_ascii=False,indent=2)+'\n')
+          assert leak==0
+          print(json.dumps(result,ensure_ascii=False))
+          PY
+      - name: Commit validation evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/
+          git diff --cached --quiet && exit 0
+          git commit -m 'research: validate recovered successor models v2'
+          git push origin HEAD:main
