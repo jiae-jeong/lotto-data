@@ -1,20 +1,7 @@
 name: daily-lotto-research-v2
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # 09:00 Asia/Seoul; GitHub may delay scheduled starts.
   workflow_dispatch:
-  push:
-    paths:
-      - 'automation/daily_research_v2.py'
-      - 'automation/daily_research_queue_preflight_v1.py'
-      - 'automation/daily_research_safe_runner_v1.py'
-      - 'automation/research_engine_v2.py'
-      - 'automation/expanded_studies_v2.py'
-      - 'automation/research_queue_v2.json'
-      - 'automation/check_environment_v2.py'
-      - 'automation/tests_v2/**'
-      - '.github/workflows/daily-lotto-research-v2.yml'
 
 permissions:
   contents: read
@@ -44,7 +31,6 @@ jobs:
       - run: python -B -m unittest discover -s automation/tests_v2 -p 'test_*.py' -v
 
   study:
-    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run-daily-research-v2]')
     needs: validate
     runs-on: ubuntu-latest
     permissions:
@@ -96,7 +82,6 @@ jobs:
           from daily_research_v2 import publication_paths
           root = Path.cwd().resolve()
           result = json.loads(Path(os.environ['RESEARCH_RESULT']).read_text())
-          # Research quota completion is intentionally distinct from DAILY MASTER FULL_COMPLETE.
           assert result['research_quota_status'] == 'RESEARCH_QUOTA_COMPLETE'
           assert result['status'] == 'RESEARCH_QUOTA_COMPLETE'
           assert result['master_status'] == 'NOT_ASSESSED_BY_QUOTA_RUNNER'
