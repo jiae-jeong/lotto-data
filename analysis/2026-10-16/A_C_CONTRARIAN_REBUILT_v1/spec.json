@@ -1,0 +1,37 @@
+{
+  "version": "A_C_CONTRARIAN_REBUILT_v1",
+  "date": "2026-10-16",
+  "data_rounds": "1-1245",
+  "no_1246_prediction_generated": true,
+  "classification": "functional reconstruction; not claimed as missing legacy executable identity",
+  "A_REBUILT_v1": {
+    "weights": {
+      "long_frequency": 0.35,
+      "recent100_frequency": 0.25,
+      "current_gap": 0.2,
+      "pair_residual_node": 0.2
+    },
+    "normalization": "deterministic within-component rank 45..1; lower-number tie",
+    "pair_formula": "S006 residual node E=(5/6)*(45/44)*F_a*F_b/n; z=(O-E)/sqrt(E)"
+  },
+  "C_REBUILT_v1": {
+    "rule": "At target t use only prior component hit records. Trailing <=200 mean >=0.8 and at least half nonoverlap <=50 blocks mean >=0.8; equal-rank blend survivors; if none, best prior mean component."
+  },
+  "CONTRARIAN_REBUILT_v1": {
+    "seed": 20261016,
+    "bank_size": 5000,
+    "score": "sum structural surprisal -log Laplace-smoothed empirical P(feature) for odd,low,sum_bin,bands,consecutive,end_repeat,cluster,overlap"
+  },
+  "baseline": {
+    "mean": 0.8,
+    "probabilities": [
+      0.40056463672459136,
+      0.4241272624142732,
+      0.15147402229081186,
+      0.02244059589493509,
+      0.0013646308314487555,
+      2.872907013576327e-05,
+      1.2277380399898834e-07
+    ]
+  }
+}
