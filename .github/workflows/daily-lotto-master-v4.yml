@@ -1,4 +1,4 @@
-name: daily-lotto-master-v4
+name: daily-lotto-master-v5
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: daily-lotto-master-v4
+  group: daily-lotto-master-v5
   cancel-in-progress: false
 
 env:
@@ -27,47 +27,42 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run full daily MASTER
-        id: master
+      - name: Run gated full daily MASTER v5
         shell: bash
         run: |
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
-          python -B automation/daily_master_full_v4.py --date "$RUN_DATE" --random-per-target 1000 | tee "$RUNNER_TEMP/master-full-v4.log"
-          RUN_DIR="$(sed -n 's/^RUN_DIR=//p' "$RUNNER_TEMP/master-full-v4.log" | tail -1)"
+          python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
+          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
           test -n "$RUN_DIR"
-          test -f "$RUN_DIR/VERIFICATION.json"
-          python - <<'PY'
-          import json, os
+          python - "$RUN_DIR" <<'PY'
+          import json,sys
           from pathlib import Path
-          log = Path(os.environ['RUNNER_TEMP']) / 'master-full-v4.log'
-          run_dir = [line.split('=',1)[1].strip() for line in log.read_text().splitlines() if line.startswith('RUN_DIR=')][-1]
-          v = json.loads((Path(run_dir) / 'VERIFICATION.json').read_text())
-          assert v['status'] == 'PASS'
-          assert v['data_integrity'] == 'PASS'
-          assert v['pair_universe'] == 990
-          assert v['triple_universe'] == 14190
-          assert v['leakage_failures'] == 0
-          assert v['recommendation_generation'] is False
+          d=Path(sys.argv[1]);v=json.loads((d/'VERIFICATION.json').read_text())
+          assert v['status']=='FULL_COMPLETE'
+          assert all(v['mandatory_checks'].values())
+          assert v['successor_leakage_failures']==0
+          assert v['successor_counts']['A_v2']==v['targets_expected']
+          assert v['successor_counts']['C_v2']==v['targets_expected']
+          assert v['successor_counts']['contrarian_v2']==v['targets_expected']
           PY
-          echo "run_dir=$RUN_DIR" >> "$GITHUB_OUTPUT"
-      - name: Preserve validated MASTER output
-        env:
-          RUN_DIR: ${{ steps.master.outputs.run_dir }}
+      - name: Preserve validated MASTER outputs
         run: |
           set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- "$RUN_DIR"
+          git add -- "analysis/$RUN_DATE"
           git diff --cached --quiet && exit 0
-          git commit -m "research: daily full master $(TZ=Asia/Seoul date +%F)"
+          git commit -m "research: daily full master v5 $RUN_DATE"
           git push origin HEAD:main
       - name: Preserve failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: daily-master-v4-failure-${{ github.run_id }}-${{ github.run_attempt }}
+          name: daily-master-v5-failure-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            ${{ runner.temp }}/master-full-v4.log
+            ${{ runner.temp }}/master-full-v5.log
             analysis/*/MASTER_FULL_V4_*/**
+            analysis/*/MASTER_FULL_V5_*/**
           if-no-files-found: warn
