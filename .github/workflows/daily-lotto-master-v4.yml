@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 0 * * *' # 09:00 Asia/Seoul
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/data_freshness_guard.py'
+      - '.github/workflows/daily-lotto-master-v4.yml'
 
 permissions:
   contents: write
@@ -27,6 +32,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Recover verified data and enforce freshness
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python -B automation/data_freshness_guard.py "$RUN_DATE"
+          if ! git diff --quiet -- lotto_data.csv; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add lotto_data.csv
+            git commit -m "data: add verified round 1246"
+            git push origin HEAD:main
+          fi
       - name: Run gated full daily MASTER v5
         shell: bash
         run: |
@@ -41,6 +59,7 @@ jobs:
           d=Path(sys.argv[1]);v=json.loads((d/'VERIFICATION.json').read_text())
           assert v['status']=='FULL_COMPLETE'
           assert all(v['mandatory_checks'].values())
+          assert v['data_cutoff'] >= 1246
           assert v['successor_leakage_failures']==0
           assert v['successor_counts']['A_v2']==v['targets_expected']
           assert v['successor_counts']['C_v2']==v['targets_expected']
@@ -52,6 +71,7 @@ jobs:
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
           git add -- "analysis/$RUN_DATE"
           git diff --cached --quiet && exit 0
           git commit -m "research: daily full master v5 $RUN_DATE"
