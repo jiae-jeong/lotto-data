@@ -1,0 +1,16 @@
+{
+  "cutoff_round": 1246,
+  "validation": "PASS: 1246 sequential rows; 6 unique mains; 1-45; bonus separate",
+  "new_draws_vs_prior_day": 0,
+  "number_summary": {"count_min":137,"count_max":187,"uniform_expected":166.1333333333,"max_current_gap":22,"max_historical_gap":74},
+  "structure_full": {"consecutive_rate":0.5176565008,"repeat_end_rate":0.7808988764,"band3_rate":0.4365971108,"odd_extreme_rate":0.1749598716,"mean_sum":138.2776886035,"mean_overlap":0.8265060241},
+  "relations": {"pair_max_full":34,"triple_max_full":8,"pair_ge2_recent_10_30_50_100":[10,73,173,452],"triple_ge2_recent_10_30_50_100":[2,11,32,118]},
+  "A_REBUILT": {"n":1046,"mean":0.7925430210,"variance":0.6347818696,"hits_0_6":[428,439,150,26,3,0,0],"ge2":0.1711281071,"ge3":0.0277246654,"ge4":0.0028680688},
+  "B_combined_equal_rank": {"n":1046,"mean":0.7638623327,"variance":0.5742581225,"hits_0_6":[431,450,149,13,3,0,0],"ge2":0.1577437859,"ge3":0.0152963671,"ge4":0.0028680688,"leakage_failures":0},
+  "C_REBUILT": {"n":846,"mean":0.7801418440,"variance":0.6183290579,"hits_0_6":[350,355,120,19,2,0,0],"ge2":0.1666666667,"ge3":0.0248226950,"ge4":0.0023640662},
+  "CONTRARIAN_REBUILT_today": {"n":846,"bank_size":1000,"seed":20261020,"mean":0.7884160757,"variance":0.6230809427,"hits_0_6":[350,346,130,19,1,0,0],"ge2":0.1773049645,"ge3":0.0236406620,"ge4":0.0011820331},
+  "fresh_random": {"seed":20261020,"tickets_per_target":500,"tickets_201_1246":523000,"mean_201_1246":0.8015391969,"mean_401_1246":0.8010992908},
+  "hypothesis_longfreq_top15_x_gap_top15": {"targets":846,"mean_hits":0.6052009456,"same_size_random_mean":0.6146572104,"delta":-0.0094562648,"status":"HOLD"},
+  "not_executed": ["repeated-core vs diversity full portfolio-policy backtest"],
+  "recommendation_numbers_generated": false
+}
