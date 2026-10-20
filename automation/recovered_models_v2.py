@@ -3,6 +3,11 @@
 
 These are NEW v2 models, not reconstructions of the lost legacy executables.
 All features for target t are computed from draws < t only.
+
+Performance note: the public model definitions are unchanged, but shared A scores
+and structure bounds are computed once per ``predict(history)`` call. This keeps
+predictions deterministic while avoiding thousands of repeated quantile
+calculations inside the C-model combination search.
 """
 from collections import Counter
 import itertools, statistics
@@ -34,32 +39,62 @@ def score_a(history):
     fs=_features(history); ws=list(A_WEIGHTS.values())
     return {x:sum(w*fs[j][x-1] for j,w in enumerate(ws)) for x in range(1,46)}
 
-def ticket_a(history):
-    s=score_a(history); return tuple(sorted(sorted(s,key=lambda x:(-s[x],x))[:6]))
+def _ticket_a_from_scores(scores):
+    return tuple(sorted(sorted(scores,key=lambda x:(-scores[x],x))[:6]))
 
-def _structure_ok(ticket, history):
-    sums=[sum(d) for d in history]; lo,hi=statistics.quantiles(sums,n=10)[0],statistics.quantiles(sums,n=10)[-1]
+def ticket_a(history):
+    return _ticket_a_from_scores(score_a(history))
+
+def _structure_bounds(history):
+    sums=[sum(d) for d in history]
+    qs=statistics.quantiles(sums,n=10)
+    return qs[0],qs[-1]
+
+def _structure_ok_with_bounds(ticket, lo, hi):
     odd=sum(x%2 for x in ticket); low=sum(x<=22 for x in ticket)
     return lo<=sum(ticket)<=hi and 1<=odd<=5 and 1<=low<=5
 
-def ticket_c(history):
-    # Combined successor: A evidence plus diversity/structure guard; deterministic exhaustive top-pool search.
-    s=score_a(history); pool=sorted(s,key=lambda x:(-s[x],x))[:14]; best=None
-    for t in itertools.combinations(pool,6):
-        val=sum(s[x] for x in t) + .02*len({x//10 for x in t}) + .01*len({x%10 for x in t})
-        if _structure_ok(t,history) and (best is None or val>best[0] or (val==best[0] and t<best[1])): best=(val,t)
-    return tuple(sorted(best[1] if best else ticket_a(history)))
+def _structure_ok(ticket, history):
+    lo,hi=_structure_bounds(history)
+    return _structure_ok_with_bounds(ticket,lo,hi)
 
-def ticket_contrarian(history):
+def _ticket_c_from_scores(history, scores, bounds=None, fallback=None):
+    # Combined successor: A evidence plus diversity/structure guard; deterministic exhaustive top-pool search.
+    lo,hi=bounds if bounds is not None else _structure_bounds(history)
+    pool=sorted(scores,key=lambda x:(-scores[x],x))[:14]; best=None
+    for t in itertools.combinations(pool,6):
+        val=sum(scores[x] for x in t) + .02*len({x//10 for x in t}) + .01*len({x%10 for x in t})
+        if _structure_ok_with_bounds(t,lo,hi) and (best is None or val>best[0] or (val==best[0] and t<best[1])): best=(val,t)
+    if best:
+        return tuple(sorted(best[1]))
+    return tuple(sorted(fallback if fallback is not None else _ticket_a_from_scores(scores)))
+
+def ticket_c(history):
+    s=score_a(history)
+    return _ticket_c_from_scores(history,s)
+
+def _ticket_contrarian_from_scores(history, scores):
     # Opposite-hypothesis successor: prefer low A-score numbers while explicitly allowing atypical structure.
-    s=score_a(history); pool=sorted(s,key=lambda x:(s[x],x))[:18]; best=None
+    pool=sorted(scores,key=lambda x:(scores[x],x))[:18]; best=None
     mean_sum=statistics.mean(sum(d) for d in history)
     for t in itertools.combinations(pool,6):
         odd=sum(x%2 for x in t); endings=6-len({x%10 for x in t}); consec=sum(b-a==1 for a,b in zip(t,t[1:])); skew=abs(odd-3)
         atyp=abs(sum(t)-mean_sum)/45 + .35*endings + .25*consec + .20*skew
-        val=atyp-.20*sum(s[x] for x in t)
+        val=atyp-.20*sum(scores[x] for x in t)
         if best is None or val>best[0] or (val==best[0] and t<best[1]): best=(val,t)
     return tuple(sorted(best[1]))
 
+def ticket_contrarian(history):
+    return _ticket_contrarian_from_scores(history,score_a(history))
+
 def predict(history):
-    return {'A_v2':ticket_a(history),'C_v2':ticket_c(history),'contrarian_v2':ticket_contrarian(history)}
+    # One feature/score pass and one quantile pass per target. The old code
+    # recomputed A scores three times and C structure quantiles once per combo.
+    s=score_a(history)
+    a=_ticket_a_from_scores(s)
+    bounds=_structure_bounds(history)
+    return {
+        'A_v2':a,
+        'C_v2':_ticket_c_from_scores(history,s,bounds=bounds,fallback=a),
+        'contrarian_v2':_ticket_contrarian_from_scores(history,s),
+    }
