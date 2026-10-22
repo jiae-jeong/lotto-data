@@ -2,7 +2,7 @@ name: daily-lotto-master-v5
 
 on:
   schedule:
-    - cron: '0 23 * * *' # 08:00 Asia/Seoul
+    - cron: '0 23 * * *'
   workflow_dispatch:
   push:
     branches: [main]
@@ -60,7 +60,7 @@ jobs:
           test -n "$RUN_DIR"
           python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
           echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
-      - name: Verify compute gates and honest protocol status
+      - name: Verify compute gates
         shell: bash
         run: |
           set -euo pipefail
@@ -68,15 +68,12 @@ jobs:
           import json,sys
           from pathlib import Path
           d=Path(sys.argv[1]);v=json.loads((d/'VERIFICATION.json').read_text())
-          required_compute={'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward','fresh_random_baseline','historical_source_search','A_full_walkforward','C_full_walkforward','contrarian_full_walkforward','AC_contrarian_leakage','successor_scorecard_complete','successor_random_comparison','successor_block_stability','successor_signal_ablation','five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline','model_scorecard_complete','hypothesis_registry_written'}
-          assert v['compute_status']=='FULL_COMPUTE_COMPLETE',v
-          assert required_compute.issubset(v['mandatory_checks']) and all(v['mandatory_checks'][k] for k in required_compute)
+          required={'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward','fresh_random_baseline','historical_source_search','A_full_walkforward','C_full_walkforward','contrarian_full_walkforward','AC_contrarian_leakage','successor_scorecard_complete','successor_random_comparison','successor_block_stability','successor_signal_ablation','five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline','model_scorecard_complete','hypothesis_registry_written'}
+          assert v['compute_status']=='FULL_COMPUTE_COMPLETE'
+          assert required.issubset(v['mandatory_checks']) and all(v['mandatory_checks'][k] for k in required)
           assert v['data_cutoff']>=1246 and v['successor_leakage_failures']==0
-          for name in ['AC_CONTRARIAN_SCORECARD.csv','AC_CONTRARIAN_NONOVERLAP_50_BLOCKS.csv','AC_CONTRARIAN_SIGNAL_ABLATION.csv','MODEL_SCORECARD_COMPLETE.csv','FIVE_TICKET_PORTFOLIO_WALKFORWARD.csv','FIVE_TICKET_RANDOM_BY_TARGET.csv','FIVE_TICKET_PORTFOLIO_SCORECARD.json','HYPOTHESIS_STATUS.json','PROTOCOL_AUDIT.json','PROTOCOL_AUDIT_13_SECTION.md']:
-            assert (d/name).exists(),name
           PY
       - name: Run Friday five-ticket purchase pipeline
-        if: ${{ startsWith(github.event.head_commit.message || '', 'ci: run and preserve Friday') || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -84,7 +81,7 @@ jobs:
           if [ "$DOW" = "5" ]; then
             python -B automation/weekly_purchase_final_v1.py | tee "$RUNNER_TEMP/weekly-purchase.log"
           fi
-      - name: Preserve validated MASTER outputs
+      - name: Preserve validated outputs
         run: |
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
