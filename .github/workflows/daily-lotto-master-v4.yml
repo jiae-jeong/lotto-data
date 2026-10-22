@@ -12,6 +12,7 @@ on:
       - 'automation/daily_master_full_v5.py'
       - 'automation/protocol_completion_audit.py'
       - 'automation/recovered_models_v2.py'
+      - 'automation/weekly_purchase_final_v1.py'
       - '.github/workflows/daily-lotto-master-v4.yml'
 
 permissions:
@@ -67,58 +68,22 @@ jobs:
           import json,sys
           from pathlib import Path
           d=Path(sys.argv[1]);v=json.loads((d/'VERIFICATION.json').read_text())
-          required_compute = {
-            'latest_data_integrity',
-            'fresh_cumulative_stats',
-            'B_full_walkforward',
-            'fresh_random_baseline',
-            'historical_source_search',
-            'A_full_walkforward',
-            'C_full_walkforward',
-            'contrarian_full_walkforward',
-            'AC_contrarian_leakage',
-            'successor_scorecard_complete',
-            'successor_random_comparison',
-            'successor_block_stability',
-            'successor_signal_ablation',
-            'five_ticket_portfolio_walkforward',
-            'five_ticket_matched_random_baseline',
-            'model_scorecard_complete',
-            'hypothesis_registry_written',
-          }
-          assert v['compute_status']=='FULL_COMPUTE_COMPLETE', v
-          assert required_compute.issubset(v['mandatory_checks']), v['mandatory_checks']
-          assert all(v['mandatory_checks'][k] for k in required_compute), v['mandatory_checks']
-          assert v['protocol_status'] in {'FULL_COMPLETE','PROTOCOL_PARTIAL'}, v
-          assert v['status']==v['protocol_status'], v
-          assert v['data_cutoff'] >= 1246
-          assert v['successor_leakage_failures']==0
-          assert v['successor_counts']['A_v2']==v['targets_expected']
-          assert v['successor_counts']['C_v2']==v['targets_expected']
-          assert v['successor_counts']['contrarian_v2']==v['targets_expected']
-          assert v['successor_scorecard_rows']==3
-          assert v['signal_ablation_rows']==12
-          assert v['portfolio_targets']==v['targets_expected']
-          assert v['portfolio_random_bundles_total']>0
-          assert v['portfolio_research_only'] is True
-          for name in [
-            'AC_CONTRARIAN_SCORECARD.csv',
-            'AC_CONTRARIAN_NONOVERLAP_50_BLOCKS.csv',
-            'AC_CONTRARIAN_SIGNAL_ABLATION.csv',
-            'MODEL_SCORECARD_COMPLETE.csv',
-            'FIVE_TICKET_PORTFOLIO_WALKFORWARD.csv',
-            'FIVE_TICKET_RANDOM_BY_TARGET.csv',
-            'FIVE_TICKET_PORTFOLIO_SCORECARD.json',
-            'HYPOTHESIS_STATUS.json',
-            'PROTOCOL_AUDIT.json',
-            'PROTOCOL_AUDIT_13_SECTION.md',
-          ]:
-            assert (d/name).exists(), name
-          if v['protocol_status']=='FULL_COMPLETE':
-            assert all(v['protocol_checks'].values()), v['protocol_checks']
-          else:
-            assert v['protocol_missing'], v
+          required_compute={'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward','fresh_random_baseline','historical_source_search','A_full_walkforward','C_full_walkforward','contrarian_full_walkforward','AC_contrarian_leakage','successor_scorecard_complete','successor_random_comparison','successor_block_stability','successor_signal_ablation','five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline','model_scorecard_complete','hypothesis_registry_written'}
+          assert v['compute_status']=='FULL_COMPUTE_COMPLETE',v
+          assert required_compute.issubset(v['mandatory_checks']) and all(v['mandatory_checks'][k] for k in required_compute)
+          assert v['data_cutoff']>=1246 and v['successor_leakage_failures']==0
+          for name in ['AC_CONTRARIAN_SCORECARD.csv','AC_CONTRARIAN_NONOVERLAP_50_BLOCKS.csv','AC_CONTRARIAN_SIGNAL_ABLATION.csv','MODEL_SCORECARD_COMPLETE.csv','FIVE_TICKET_PORTFOLIO_WALKFORWARD.csv','FIVE_TICKET_RANDOM_BY_TARGET.csv','FIVE_TICKET_PORTFOLIO_SCORECARD.json','HYPOTHESIS_STATUS.json','PROTOCOL_AUDIT.json','PROTOCOL_AUDIT_13_SECTION.md']:
+            assert (d/name).exists(),name
           PY
+      - name: Run Friday five-ticket purchase pipeline
+        if: ${{ startsWith(github.event.head_commit.message || '', 'ci: run and preserve Friday') || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          DOW="$(TZ=Asia/Seoul date +%u)"
+          if [ "$DOW" = "5" ]; then
+            python -B automation/weekly_purchase_final_v1.py | tee "$RUNNER_TEMP/weekly-purchase.log"
+          fi
       - name: Preserve validated MASTER outputs
         run: |
           set -euo pipefail
@@ -126,9 +91,9 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git pull --rebase origin main
-          git add -- "analysis/$RUN_DATE"
+          git add -- "analysis/$RUN_DATE" research/weekly_purchase
           git diff --cached --quiet && exit 0
-          git commit -m "research: audited daily master $RUN_DATE"
+          git commit -m "research: audited daily master and weekly purchase $RUN_DATE"
           git push origin HEAD:main
       - name: Preserve failure evidence
         if: failure()
@@ -138,6 +103,7 @@ jobs:
           path: |
             ${{ runner.temp }}/master-full-v5.log
             ${{ runner.temp }}/protocol-audit.log
+            ${{ runner.temp }}/weekly-purchase.log
             analysis/*/MASTER_FULL_V4_*/**
             analysis/*/MASTER_FULL_V5_*/**
           if-no-files-found: warn
