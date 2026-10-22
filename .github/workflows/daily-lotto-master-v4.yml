@@ -54,7 +54,7 @@ jobs:
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
           python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
-          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
+          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
           test -n "$RUN_DIR"
           python - "$RUN_DIR" <<'PY'
           import csv,json,sys
