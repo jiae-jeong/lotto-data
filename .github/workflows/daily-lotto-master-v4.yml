@@ -10,6 +10,7 @@ on:
       - 'automation/data_freshness_guard.py'
       - 'automation/daily_master_full_v4.py'
       - 'automation/daily_master_full_v5.py'
+      - 'automation/protocol_completion_audit.py'
       - 'automation/recovered_models_v2.py'
       - '.github/workflows/daily-lotto-master-v4.yml'
 
@@ -48,7 +49,7 @@ jobs:
             git commit -m "data: add verified latest round"
             git push origin HEAD:main
           fi
-      - name: Run strict gated daily MASTER
+      - name: Run strict gated daily MASTER and protocol audit
         shell: bash
         run: |
           set -euo pipefail
@@ -56,11 +57,17 @@ jobs:
           python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
           RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
           test -n "$RUN_DIR"
+          python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
+          echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
+      - name: Verify compute gates and honest protocol status
+        shell: bash
+        run: |
+          set -euo pipefail
           python - "$RUN_DIR" <<'PY'
-          import csv,json,sys
+          import json,sys
           from pathlib import Path
           d=Path(sys.argv[1]);v=json.loads((d/'VERIFICATION.json').read_text())
-          required = {
+          required_compute = {
             'latest_data_integrity',
             'fresh_cumulative_stats',
             'B_full_walkforward',
@@ -79,9 +86,11 @@ jobs:
             'model_scorecard_complete',
             'hypothesis_registry_written',
           }
-          assert v['status']=='FULL_COMPLETE', v
-          assert required.issubset(v['mandatory_checks']), v['mandatory_checks']
-          assert all(v['mandatory_checks'][k] for k in required), v['mandatory_checks']
+          assert v['compute_status']=='FULL_COMPUTE_COMPLETE', v
+          assert required_compute.issubset(v['mandatory_checks']), v['mandatory_checks']
+          assert all(v['mandatory_checks'][k] for k in required_compute), v['mandatory_checks']
+          assert v['protocol_status'] in {'FULL_COMPLETE','PROTOCOL_PARTIAL'}, v
+          assert v['status']==v['protocol_status'], v
           assert v['data_cutoff'] >= 1246
           assert v['successor_leakage_failures']==0
           assert v['successor_counts']['A_v2']==v['targets_expected']
@@ -101,8 +110,14 @@ jobs:
             'FIVE_TICKET_RANDOM_BY_TARGET.csv',
             'FIVE_TICKET_PORTFOLIO_SCORECARD.json',
             'HYPOTHESIS_STATUS.json',
+            'PROTOCOL_AUDIT.json',
+            'PROTOCOL_AUDIT_13_SECTION.md',
           ]:
             assert (d/name).exists(), name
+          if v['protocol_status']=='FULL_COMPLETE':
+            assert all(v['protocol_checks'].values()), v['protocol_checks']
+          else:
+            assert v['protocol_missing'], v
           PY
       - name: Preserve validated MASTER outputs
         run: |
@@ -113,7 +128,7 @@ jobs:
           git pull --rebase origin main
           git add -- "analysis/$RUN_DATE"
           git diff --cached --quiet && exit 0
-          git commit -m "research: strict daily full master $RUN_DATE"
+          git commit -m "research: audited daily master $RUN_DATE"
           git push origin HEAD:main
       - name: Preserve failure evidence
         if: failure()
@@ -122,6 +137,7 @@ jobs:
           name: daily-master-v5-failure-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             ${{ runner.temp }}/master-full-v5.log
+            ${{ runner.temp }}/protocol-audit.log
             analysis/*/MASTER_FULL_V4_*/**
             analysis/*/MASTER_FULL_V5_*/**
           if-no-files-found: warn
