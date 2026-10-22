@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-22",
+  "status": "PARTIAL_PROVENANCE",
+  "verified_rounds": [1245, 1246],
+  "verified_round_count": 2,
+  "verified_purchase_lines": 8,
+  "aggregate_hit_distribution": {
+    "0": 5,
+    "1": 3,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "mean_main_hits_per_line": 0.375,
+  "rate_ge2": 0.0,
+  "rate_ge3": 0.0,
+  "rate_ge4": 0.0,
+  "rate_ge5": 0.0,
+  "rate_ge6": 0.0,
+  "bonus_match_lines": 1,
+  "round_level_union_coverage": {
+    "1245": 1,
+    "1246": 2
+  },
+  "round_level_winning_numbers_absent_from_all_purchase_lines": {
+    "1245": 5,
+    "1246": 4
+  },
+  "sources": [
+    {
+      "round": 1245,
+      "review": "analysis/2026-10-11/ROUND_1245_REVIEW.md",
+      "structured_review": "analysis/2026-10-13/MASTER_145605_146748_v2/ROUND_1245_RECOMMENDATION_REVIEW.csv",
+      "purchase_original_status": "RECOVERED_PRE_DRAW_ORIGINAL; independent receipt not located in structured review",
+      "selection_reason_status": "RECORDED_AT_POLICY_LEVEL",
+      "per_winning_number_exclusion_reason_status": "INCOMPLETE"
+    },
+    {
+      "round": 1246,
+      "review": "analysis/2026-10-18/ROUND_1246_REVIEW.md",
+      "purchase_original": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+      "purchase_original_status": "PRE_DRAW_COMMIT_IDENTIFIED",
+      "selection_reason_status": "RECORDED_AT_POLICY_LEVEL",
+      "per_winning_number_exclusion_reason_status": "INCOMPLETE"
+    }
+  ],
+  "older_scope": {
+    "coverage_file": "analysis/2026-10-09/A_ERRORLOOP_C_RESEARCH_v2/HISTORICAL_RECOMMENDATION_SOURCE_COVERAGE.csv",
+    "note": "Many older target rounds are explicitly marked SOURCE NOT FOUND / UNKNOWN. They are not reconstructed or scored retrospectively."
+  },
+  "closed_loop_complete": false,
+  "blocking_reasons": [
+    "Authentic contemporaneous recommendation originals are not available for many older rounds.",
+    "Per-winning-number exclusion reasons are not fully recoverable for the verified rounds; only policy-level selection/exclusion rationale is preserved.",
+    "Therefore aggregate performance is reported only for the two verified rounds and must not be generalized to missing historical rounds."
+  ]
+}
