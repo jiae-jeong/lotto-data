@@ -8,6 +8,9 @@ on:
     branches: [main]
     paths:
       - 'automation/data_freshness_guard.py'
+      - 'automation/daily_master_full_v4.py'
+      - 'automation/daily_master_full_v5.py'
+      - 'automation/recovered_models_v2.py'
       - '.github/workflows/daily-lotto-master-v4.yml'
 
 permissions:
@@ -42,10 +45,10 @@ jobs:
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add lotto_data.csv
-            git commit -m "data: add verified round 1246"
+            git commit -m "data: add verified latest round"
             git push origin HEAD:main
           fi
-      - name: Run gated full daily MASTER v5
+      - name: Run strict gated daily MASTER
         shell: bash
         run: |
           set -euo pipefail
@@ -54,16 +57,52 @@ jobs:
           RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
           test -n "$RUN_DIR"
           python - "$RUN_DIR" <<'PY'
-          import json,sys
+          import csv,json,sys
           from pathlib import Path
           d=Path(sys.argv[1]);v=json.loads((d/'VERIFICATION.json').read_text())
-          assert v['status']=='FULL_COMPLETE'
-          assert all(v['mandatory_checks'].values())
+          required = {
+            'latest_data_integrity',
+            'fresh_cumulative_stats',
+            'B_full_walkforward',
+            'fresh_random_baseline',
+            'historical_source_search',
+            'A_full_walkforward',
+            'C_full_walkforward',
+            'contrarian_full_walkforward',
+            'AC_contrarian_leakage',
+            'successor_scorecard_complete',
+            'successor_random_comparison',
+            'successor_block_stability',
+            'successor_signal_ablation',
+            'five_ticket_portfolio_walkforward',
+            'five_ticket_matched_random_baseline',
+            'model_scorecard_complete',
+            'hypothesis_registry_written',
+          }
+          assert v['status']=='FULL_COMPLETE', v
+          assert required.issubset(v['mandatory_checks']), v['mandatory_checks']
+          assert all(v['mandatory_checks'][k] for k in required), v['mandatory_checks']
           assert v['data_cutoff'] >= 1246
           assert v['successor_leakage_failures']==0
           assert v['successor_counts']['A_v2']==v['targets_expected']
           assert v['successor_counts']['C_v2']==v['targets_expected']
           assert v['successor_counts']['contrarian_v2']==v['targets_expected']
+          assert v['successor_scorecard_rows']==3
+          assert v['signal_ablation_rows']==12
+          assert v['portfolio_targets']==v['targets_expected']
+          assert v['portfolio_random_bundles_total']>0
+          assert v['portfolio_research_only'] is True
+          for name in [
+            'AC_CONTRARIAN_SCORECARD.csv',
+            'AC_CONTRARIAN_NONOVERLAP_50_BLOCKS.csv',
+            'AC_CONTRARIAN_SIGNAL_ABLATION.csv',
+            'MODEL_SCORECARD_COMPLETE.csv',
+            'FIVE_TICKET_PORTFOLIO_WALKFORWARD.csv',
+            'FIVE_TICKET_RANDOM_BY_TARGET.csv',
+            'FIVE_TICKET_PORTFOLIO_SCORECARD.json',
+            'HYPOTHESIS_STATUS.json',
+          ]:
+            assert (d/name).exists(), name
           PY
       - name: Preserve validated MASTER outputs
         run: |
@@ -74,7 +113,7 @@ jobs:
           git pull --rebase origin main
           git add -- "analysis/$RUN_DATE"
           git diff --cached --quiet && exit 0
-          git commit -m "research: daily full master v5 $RUN_DATE"
+          git commit -m "research: strict daily full master $RUN_DATE"
           git push origin HEAD:main
       - name: Preserve failure evidence
         if: failure()
