@@ -23,7 +23,7 @@ permissions:
 
 concurrency:
   group: daily-lotto-master-v5
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   PYTHONDONTWRITEBYTECODE: '1'
