@@ -1,0 +1,60 @@
+{
+  "target_round": 1247,
+  "date_kst": "2026-10-23",
+  "data_cutoff": 1246,
+  "classification": "REJECTED_NEGATIVE_MATCHED_RANDOM_BENCHMARK",
+  "policy_version": "WEEKLY_FIVE_TICKET_PORTFOLIO_V2_PROTOCOL_FULL_R1",
+  "protocol_status": "FULL_COMPLETE",
+  "candidate_lines": [
+    [13,18,22,28,31,32],
+    [10,13,16,23,24,38],
+    [3,14,17,30,35,45],
+    [3,6,8,17,30,45],
+    [8,13,15,18,31,45]
+  ],
+  "integrity": {
+    "validator_1": "PASS",
+    "validator_2": "PASS",
+    "final_text_parse": "PASS",
+    "stored_vs_display_in_runner": "PASS",
+    "independent_runner_validation": "PASS"
+  },
+  "portfolio": {
+    "unique_number_coverage": 20,
+    "pairwise_overlaps": [1,0,0,3,0,0,1,4,1,2],
+    "mean_pair_overlap": 1.2,
+    "max_pair_overlap": 4,
+    "numbers_reused_3plus": 2,
+    "total_reuse_beyond_two": 2
+  },
+  "walkforward": {
+    "targets": 200,
+    "random_bundles_per_target": 100,
+    "policy": {
+      "max_hits": 1.555,
+      "any_2plus": 0.47,
+      "any_3plus": 0.10,
+      "any_4plus": 0.0,
+      "winning_union_coverage": 2.545,
+      "ticket_union_size": 20.24
+    },
+    "matched_uniform_random": {
+      "max_hits": 1.7385,
+      "any_2plus": 0.62445,
+      "any_3plus": 0.11575,
+      "any_4plus": 0.0077,
+      "winning_union_coverage": 3.07495,
+      "ticket_union_size": 22.99255
+    },
+    "delta_policy_minus_random": {
+      "max_hits": -0.1835,
+      "any_2plus": -0.15445,
+      "any_3plus": -0.01575,
+      "any_4plus": -0.0077,
+      "winning_union_coverage": -0.52995,
+      "ticket_union_size": -2.75255
+    }
+  },
+  "rejection_reason": "The protocol and integrity gates passed, but the exact five-ticket portfolio materially underperformed matched uniform-random bundles and concentrated too much overlap. It is therefore not promoted to the actual-purchase final set.",
+  "next_action": "Use a separately versioned V3 portfolio that removes cross-ticket duplication by construction, preserves model-guided selection where it survives evaluation, and measures both independent-random and diversity-matched baselines."
+}
