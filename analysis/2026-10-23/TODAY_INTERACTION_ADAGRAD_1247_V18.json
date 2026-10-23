@@ -1,0 +1,314 @@
+{
+  "created_kst": "2026-10-23T13:59:40.961769+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "ONLINE_ADAGRAD_INTERACTION_META_FIXED_CORE_DIVERSIFICATION_V18",
+  "no_future_leakage": true,
+  "feature_count": 169,
+  "portfolio_rule": "Rank 45 numbers by online interaction logit; line1 ranks1-6, lines2-3 repeat ranks1-2 with ranks7-14, lines4-5 redistribute ranks3-18. Union exactly 18; no random selection.",
+  "note": "All coefficients update only after each target outcome. Model-model and model-context interactions are learned online. Strict outer gate and matched joint label-permutation comparator unchanged.",
+  "current": {
+    "lines": [
+      [
+        8,
+        15,
+        21,
+        23,
+        30,
+        38
+      ],
+      [
+        8,
+        11,
+        17,
+        29,
+        38,
+        45
+      ],
+      [
+        4,
+        8,
+        14,
+        20,
+        38,
+        39
+      ],
+      [
+        17,
+        21,
+        26,
+        30,
+        42,
+        45
+      ],
+      [
+        11,
+        12,
+        15,
+        23,
+        29,
+        35
+      ]
+    ],
+    "top18_ranked_numbers": [
+      8,
+      38,
+      30,
+      21,
+      15,
+      23,
+      17,
+      45,
+      11,
+      29,
+      4,
+      39,
+      20,
+      14,
+      26,
+      42,
+      12,
+      35
+    ],
+    "number_logits": {
+      "1": -1.8851456364220138,
+      "2": -1.9056009725174847,
+      "3": -2.165996964877197,
+      "4": -1.8317273825729554,
+      "5": -1.9598964538627452,
+      "6": -1.9227042273851063,
+      "7": -1.9556746426241234,
+      "8": -1.5829002404006918,
+      "9": -1.9534199742385545,
+      "10": -1.9398788585580076,
+      "11": -1.8058231862391614,
+      "12": -1.8595198126772778,
+      "13": -2.0791947010050436,
+      "14": -1.8400259416585076,
+      "15": -1.7572345939843992,
+      "16": -1.8646355096757654,
+      "17": -1.7912188136423737,
+      "18": -2.102205305387004,
+      "19": -1.8841135809104483,
+      "20": -1.8395658275340399,
+      "21": -1.7411873444013468,
+      "22": -1.8911044162765207,
+      "23": -1.7847905931859809,
+      "24": -1.901833148110271,
+      "25": -1.9032292836720879,
+      "26": -1.8475006916870558,
+      "27": -1.9752270406241357,
+      "28": -2.114098741299407,
+      "29": -1.8144451943197033,
+      "30": -1.680359063159499,
+      "31": -2.1869109678857153,
+      "32": -1.871076589092691,
+      "33": -1.8663791745316098,
+      "34": -1.9987584856455767,
+      "35": -1.8597485690632476,
+      "36": -1.9211865820904372,
+      "37": -2.0061551198337724,
+      "38": -1.6616248680863985,
+      "39": -1.8363736840328795,
+      "40": -1.8708407190470362,
+      "41": -2.027577309029946,
+      "42": -1.8503271144135693,
+      "43": -1.9000390431194725,
+      "44": -1.9016470009128466,
+      "45": -1.7912633408585257
+    },
+    "top_abs_weights": [
+      [
+        "intercept",
+        -1.833834980477439
+      ],
+      [
+        "structure_profile*pair",
+        0.0978033264975902
+      ],
+      [
+        "structure_profile*pair_association",
+        -0.08467734903130764
+      ],
+      [
+        "current_gap*contrarian_v2",
+        -0.07262458901070197
+      ],
+      [
+        "frequency_plus_gap",
+        0.06735372993582892
+      ],
+      [
+        "combined_equal_rank*freq",
+        -0.06092393219648031
+      ],
+      [
+        "structure_profile*triple",
+        -0.05455782354751063
+      ],
+      [
+        "triple_association*pair",
+        -0.05244293181428151
+      ],
+      [
+        "triple_association*gap",
+        0.051567501365081814
+      ],
+      [
+        "contrarian_v2*pair",
+        0.05141401585068006
+      ],
+      [
+        "C_v2",
+        0.05032422744613812
+      ],
+      [
+        "structure_profile*contrarian_v2",
+        -0.049566641158351146
+      ],
+      [
+        "current_gap*recent_momentum",
+        -0.049511122481535046
+      ],
+      [
+        "long_frequency*recent",
+        -0.04750155061399328
+      ],
+      [
+        "pair_association*combined_equal_rank",
+        -0.047199741576277036
+      ],
+      [
+        "recent_momentum*pair",
+        0.047161638510509696
+      ],
+      [
+        "triple_association*combined_equal_rank",
+        -0.04604437696821075
+      ],
+      [
+        "combined_equal_rank*C_v2",
+        -0.045897712238524783
+      ],
+      [
+        "recent_momentum*structure_profile",
+        -0.0441536570702886
+      ],
+      [
+        "contrarian_v2*freq",
+        -0.04360146688428858
+      ],
+      [
+        "A_v2*momentum",
+        0.042409763422205676
+      ],
+      [
+        "long_frequency*structure_profile",
+        -0.04034174891586034
+      ],
+      [
+        "recent_momentum*A_v2",
+        -0.03946891600198836
+      ],
+      [
+        "current_gap*pair",
+        -0.03911071213637883
+      ],
+      [
+        "recent_momentum*combined_equal_rank",
+        -0.037814155063001384
+      ],
+      [
+        "long_frequency*triple_association",
+        -0.03684838139163999
+      ],
+      [
+        "current_gap*freq",
+        0.03583982236583051
+      ],
+      [
+        "combined_equal_rank*contrarian_v2",
+        -0.03572229860495332
+      ],
+      [
+        "pair_association*C_v2",
+        0.03470853242381566
+      ],
+      [
+        "triple_association",
+        0.03462250881498438
+      ]
+    ]
+  },
+  "walkforward_targets": 846,
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.6028368794326242,
+      "any2": 0.5260047281323877,
+      "any3": 0.11583924349881797,
+      "any4": 0.009456264775413711,
+      "any5": 0.0,
+      "any6": 0.0,
+      "winning_union_coverage": 2.347517730496454,
+      "union_size": 18.0,
+      "mean_overlap": 1.4,
+      "max_overlap": 2.0
+    },
+    "matched_label_permutation": {
+      "max_hits": 1.6400059101654847,
+      "any2": 0.5614184397163121,
+      "any3": 0.10887706855791962,
+      "any4": 0.007027186761229314,
+      "any5": 9.456264775413712e-05,
+      "any6": 0.0,
+      "winning_union_coverage": 2.4008924349881795,
+      "union_size": 18.0,
+      "mean_overlap": 1.4,
+      "max_overlap": 2.0
+    },
+    "delta": {
+      "max_hits": -0.037169030732860486,
+      "any2": -0.03541371158392437,
+      "any3": 0.006962174940898347,
+      "any4": 0.002429078014184397,
+      "any5": -9.456264775413712e-05,
+      "any6": 0.0,
+      "winning_union_coverage": -0.053374704491725655,
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    }
+  },
+  "inference": {
+    "max_hits": {
+      "adjusted_ci_delta": [
+        -0.08174117647058823,
+        0.006505882352941177
+      ],
+      "positive_50_round_block_share": 0.29411764705882354
+    },
+    "any2": {
+      "adjusted_ci_delta": [
+        -0.0655235294117647,
+        -0.0012410501193317418
+      ],
+      "positive_50_round_block_share": 0.23529411764705882
+    },
+    "any3": {
+      "adjusted_ci_delta": [
+        -0.018894799054373523,
+        0.03202352941176471
+      ],
+      "positive_50_round_block_share": 0.47058823529411764
+    },
+    "winning_union_coverage": {
+      "adjusted_ci_delta": [
+        -0.10548099762470307,
+        0.0042183770883054885
+      ],
+      "positive_50_round_block_share": 0.23529411764705882
+    },
+    "strict_portfolio_pass": false
+  },
+  "final_status": "FAIL_SAME_GATE"
+}
