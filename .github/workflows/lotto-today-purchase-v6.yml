@@ -21,12 +21,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Enforce write-once freeze implementation
+      - name: Enforce validator and write-once freeze implementation
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('automation/today_purchase_portfolio_v6.py')
           s=p.read_text()
+          v="x==sorted(x)"
+          assert s.count(v)==1
+          s=s.replace(v,"list(x)==sorted(x)")
           a="'stored_vs_display':'PENDING'"
           assert s.count(a)==1
           s=s.replace(a,"'stored_vs_display':'PASS'")
