@@ -1,4 +1,5 @@
 name: lotto-today-research-v8
+# rerun after distinct-role fix
 
 on:
   workflow_dispatch:
