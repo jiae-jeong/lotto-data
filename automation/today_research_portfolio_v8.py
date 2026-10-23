@@ -77,7 +77,7 @@ def choose_ticket(score, gscore, prior_lines, role_name):
     pool=sorted(range(1,46), key=lambda n:(-score[n],-gscore[n],n))[:16]
     best=None
     for t in itertools.combinations(pool,6):
-        if prior_lines and tuple(t) in prior_lines:
+        if prior_lines and tuple(sorted(t)) in prior_lines:
             continue
         odd=sum(n%2 for n in t)
         low=sum(n<=22 for n in t)
