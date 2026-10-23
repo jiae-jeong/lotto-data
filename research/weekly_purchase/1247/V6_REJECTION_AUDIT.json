@@ -1,0 +1,29 @@
+{
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "V3_ANCHORED_DIVERSIFIED_PURCHASE_V6",
+  "status": "REJECTED",
+  "reasons": [
+    "The V3 anchor did not pass the strict adjusted significance/stability gate.",
+    "The full V6 five-ticket portfolio underperformed a union-size-matched random baseline on max_hits, any2, any3, any4, and winning_union_coverage.",
+    "A stored-output comparison inside the V6 script compared JSON lists with in-memory tuples and raised after writing; the independent verifier nevertheless confirmed the exact five lines and integrity. This implementation defect is preserved as failure evidence and V6 is not promoted."
+  ],
+  "walkforward_policy": {
+    "max_hits": 1.7340425531914894,
+    "any2": 0.6300236406619385,
+    "any3": 0.1016548463356974,
+    "any4": 0.00591016548463357,
+    "winning_union_coverage": 3.215130023640662,
+    "union_size": 24.756501182033098
+  },
+  "matched_random": {
+    "max_hits": 1.7595271867612292,
+    "any2": 0.6416312056737589,
+    "any3": 0.11662529550827423,
+    "any4": 0.007299054373522459,
+    "winning_union_coverage": 3.3004609929078015,
+    "union_size": 24.756501182033098
+  },
+  "promotion": false,
+  "next_policy": "V7_UNIFORM_30_UNIQUE_FALLBACK"
+}
