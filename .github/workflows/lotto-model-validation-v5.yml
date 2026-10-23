@@ -1,0 +1,57 @@
+name: lotto-model-validation-v5
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/model_validation_v5_all_models_fast.py'
+      - '.github/workflows/lotto-model-validation-v5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-all-models:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit all preserved walk-forward models
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" | tee "$RUNNER_TEMP/model-validation-v5.log"
+      - name: Verify strict report
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python - "$RUN_DATE" <<'PY'
+          import json,sys
+          from pathlib import Path
+          p=Path('analysis')/sys.argv[1]/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json'
+          d=json.loads(p.read_text())
+          assert d['data_cutoff']==1246
+          assert len(d['models'])>=10
+          assert d['portfolio_v3_audit']['corrected_model_promotion_status'] in ('FAIL','REQUIRES_FURTHER_TEST')
+          print(json.dumps({'verdict':d['verdict'],'validated_models':d['validated_models'],'portfolio_v3':d['portfolio_v3_audit']['corrected_model_promotion_status']},ensure_ascii=False))
+          PY
+      - name: Commit strict report
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "analysis/$RUN_DATE/MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json"
+          git diff --cached --quiet && exit 0
+          git commit -m "validation: strict all-model audit $RUN_DATE"
+          git pull --rebase origin main
+          git push origin HEAD:main
