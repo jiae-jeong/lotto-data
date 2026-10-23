@@ -56,7 +56,6 @@ def reliability(hist):
         return 1.0
     mean=(sum(hs)+PRIOR_N*BASE_MEAN)/(n+PRIOR_N)
     ge2=(sum(h>=2 for h in hs)+PRIOR_N*BASE_GE2)/(n+PRIOR_N)
-    # Fixed before seeing V8 outcomes: most weight on mean hits, small reward for 2+ conversion.
     raw = 1.0 + 2.8*(mean-BASE_MEAN) + 1.2*(ge2-BASE_GE2)
     return max(0.35, min(1.65, raw))
 
@@ -71,7 +70,6 @@ def global_support(preds, hists):
 def role_score(role_models, preds, rel, gscore):
     den=sum(rel[m] for m in role_models)
     rs={n:sum(rel[m] for m in role_models if n in preds[m])/den for n in range(1,46)}
-    # Role signal dominates; global agreement keeps weak role-only accidents from winning.
     return {n:0.78*rs[n]+0.22*gscore[n] for n in range(1,46)}
 
 
@@ -79,6 +77,8 @@ def choose_ticket(score, gscore, prior_lines, role_name):
     pool=sorted(range(1,46), key=lambda n:(-score[n],-gscore[n],n))[:16]
     best=None
     for t in itertools.combinations(pool,6):
+        if prior_lines and tuple(t) in prior_lines:
+            continue
         odd=sum(n%2 for n in t)
         low=sum(n<=22 for n in t)
         bands=len({(n-1)//10 for n in t})
@@ -88,14 +88,13 @@ def choose_ticket(score, gscore, prior_lines, role_name):
         val += 0.004*bands
         if prior_lines:
             load={n:sum(n in x for x in prior_lines) for n in t}
-            # Repetition is allowed for truly strong consensus numbers; only weak repeats get a small penalty.
             val -= sum(0.016*load[n] for n in t if gscore[n] < 0.30)
         if role_name=='ac_crosscheck' and prior_lines:
-            # The hedge line should not collapse into an already identical line, but stays fully model-driven.
             val -= 0.018*max(len(set(t)&set(x)) for x in prior_lines)
         key=(val, tuple(-n for n in t))
         if best is None or key>best[0]:
             best=(key,t)
+    assert best is not None
     return tuple(sorted(best[1]))
 
 
