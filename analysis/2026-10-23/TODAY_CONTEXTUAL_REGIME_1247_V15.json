@@ -1,0 +1,310 @@
+{
+  "created_kst": "2026-10-23T13:47:43.886130+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "FULL_INFORMATION_CONTEXTUAL_REGIME_SELECTOR_V15",
+  "no_future_leakage": true,
+  "candidate_policies": {
+    "balanced": [
+      "triple_association",
+      "long_frequency",
+      "structure_profile",
+      "A_v2",
+      "contrarian_v2",
+      "pair_association",
+      "frequency_plus_gap",
+      "recent_momentum",
+      "current_gap",
+      "combined_equal_rank",
+      "C_v2"
+    ],
+    "relation": [
+      "triple_association",
+      "pair_association",
+      "structure_profile",
+      "combined_equal_rank",
+      "A_v2",
+      "contrarian_v2",
+      "long_frequency",
+      "recent_momentum",
+      "frequency_plus_gap",
+      "current_gap",
+      "C_v2"
+    ],
+    "freq_gap": [
+      "long_frequency",
+      "frequency_plus_gap",
+      "current_gap",
+      "combined_equal_rank",
+      "contrarian_v2",
+      "triple_association",
+      "structure_profile",
+      "A_v2",
+      "pair_association",
+      "recent_momentum",
+      "C_v2"
+    ],
+    "recent": [
+      "recent_momentum",
+      "structure_profile",
+      "triple_association",
+      "A_v2",
+      "current_gap",
+      "pair_association",
+      "contrarian_v2",
+      "long_frequency",
+      "frequency_plus_gap",
+      "combined_equal_rank",
+      "C_v2"
+    ],
+    "diverse": [
+      "contrarian_v2",
+      "long_frequency",
+      "pair_association",
+      "structure_profile",
+      "recent_momentum",
+      "triple_association",
+      "current_gap",
+      "A_v2",
+      "frequency_plus_gap",
+      "combined_equal_rank",
+      "C_v2"
+    ],
+    "core_plus_hedge": [
+      "triple_association",
+      "A_v2",
+      "long_frequency",
+      "contrarian_v2",
+      "structure_profile",
+      "pair_association",
+      "recent_momentum",
+      "frequency_plus_gap",
+      "current_gap",
+      "combined_equal_rank",
+      "C_v2"
+    ]
+  },
+  "context_features": [
+    "intercept",
+    "mean_model_overlap",
+    "max_vote_share",
+    "model_union_share",
+    "freq_cv",
+    "gap_cv",
+    "prev_odd_share",
+    "prev_low_share",
+    "prev_consecutive_share"
+  ],
+  "note": "At target t, regime selector uses parameters updated only through outcomes <t. Every policy is trained after each realized target on matched-permutation excess utility; strict outer gate/comparator unchanged.",
+  "policy_use_counts": {
+    "core_plus_hedge": 147,
+    "relation": 116,
+    "recent": 116,
+    "balanced": 119,
+    "diverse": 113,
+    "freq_gap": 235
+  },
+  "current": {
+    "policy": "freq_gap",
+    "predicted_excess_utility": {
+      "balanced": 0.24183853104420366,
+      "relation": -0.5055286973367996,
+      "freq_gap": 0.4066700349484564,
+      "recent": -0.6832381034604111,
+      "diverse": -0.20571951684002893,
+      "core_plus_hedge": 0.16652969596725553
+    },
+    "context": [
+      1.0,
+      0.16969696969696968,
+      0.45454545454545453,
+      0.7333333333333333,
+      0.06230380034423168,
+      0.9420729509796446,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.6
+    ],
+    "lines": [
+      [
+        12,
+        13,
+        18,
+        27,
+        33,
+        34
+      ],
+      [
+        3,
+        12,
+        14,
+        17,
+        33,
+        45
+      ],
+      [
+        3,
+        8,
+        14,
+        17,
+        30,
+        45
+      ],
+      [
+        13,
+        17,
+        18,
+        33,
+        34,
+        45
+      ],
+      [
+        22,
+        23,
+        32,
+        42,
+        43,
+        44
+      ]
+    ],
+    "theta": {
+      "balanced": [
+        0.12840595000129673,
+        -0.008775543416512672,
+        0.026909219735985115,
+        0.24172495588630638,
+        0.0025189528069797006,
+        0.0877511742625896,
+        -0.2320655435643057,
+        -0.4129047077336175,
+        0.09598411457590565
+      ],
+      "relation": [
+        -0.12462309899897879,
+        -0.01848968298490554,
+        -0.027278978253121113,
+        -0.02678325964196166,
+        -0.016407850145849827,
+        -0.017763550264912893,
+        -0.3316659759623446,
+        -0.49412199177003935,
+        -0.08784645829325144
+      ],
+      "freq_gap": [
+        0.0963482434060137,
+        0.02025986370382716,
+        -0.08681110562338731,
+        0.009897928247328443,
+        0.0016430106741672566,
+        0.3416946011141375,
+        0.10773564746722304,
+        -0.4218028500695525,
+        0.20295054555932185
+      ],
+      "recent": [
+        -0.23994284812941236,
+        -0.017131594632206794,
+        -0.08119410582836198,
+        -0.0845050830071786,
+        -0.024890607237670358,
+        -0.09648604800251066,
+        -0.24066611806855245,
+        -0.5224464793959117,
+        0.00884545254158631
+      ],
+      "diverse": [
+        -0.043075461392186126,
+        0.001316839575348644,
+        -0.05681021245537475,
+        0.0645353438138575,
+        -0.008807340142010405,
+        0.10419456347212203,
+        -0.29500933227807513,
+        -0.21141701348868266,
+        -0.18861996881504486
+      ],
+      "core_plus_hedge": [
+        0.07311635878054812,
+        0.0006539893495871862,
+        0.032166435314385816,
+        0.16616384658410724,
+        0.0011460036519197686,
+        0.13767037859410527,
+        -0.22497011408701947,
+        -0.474914480983131,
+        0.1005928125596646
+      ]
+    }
+  },
+  "walkforward_targets": 846,
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.6749408983451537,
+      "any2": 0.5874704491725768,
+      "any3": 0.09692671394799054,
+      "any4": 0.002364066193853428,
+      "any5": 0.0,
+      "any6": 0.0,
+      "winning_union_coverage": 2.858156028368794,
+      "union_size": 21.488179669030732,
+      "mean_overlap": 1.0674940898345153,
+      "max_overlap": 3.3617021276595747
+    },
+    "matched_label_permutation": {
+      "max_hits": 1.6880171394799055,
+      "any2": 0.5890661938534278,
+      "any3": 0.1083554964539007,
+      "any4": 0.006752364066193854,
+      "any5": 0.00014775413711583924,
+      "any6": 0.0,
+      "winning_union_coverage": 2.869813829787234,
+      "union_size": 21.488179669030732,
+      "mean_overlap": 1.0674940898345153,
+      "max_overlap": 3.3617021276595747
+    },
+    "delta": {
+      "max_hits": -0.01307624113475181,
+      "any2": -0.0015957446808509967,
+      "any3": -0.01142878250591016,
+      "any4": -0.004388297872340426,
+      "any5": -0.00014775413711583924,
+      "any6": 0.0,
+      "winning_union_coverage": -0.011657801418440084,
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    }
+  },
+  "inference": {
+    "max_hits": {
+      "adjusted_ci_delta": [
+        -0.08007535460992908,
+        0.0622464200477327
+      ],
+      "positive_50_round_block_share": 0.47058823529411764
+    },
+    "any2": {
+      "adjusted_ci_delta": [
+        -0.04462913711583924,
+        0.043897058823529414
+      ],
+      "positive_50_round_block_share": 0.47058823529411764
+    },
+    "any3": {
+      "adjusted_ci_delta": [
+        -0.03638970588235294,
+        0.018557919621749408
+      ],
+      "positive_50_round_block_share": 0.29411764705882354
+    },
+    "winning_union_coverage": {
+      "adjusted_ci_delta": [
+        -0.1222443853427896,
+        0.10483088235294118
+      ],
+      "positive_50_round_block_share": 0.47058823529411764
+    },
+    "strict_portfolio_pass": false
+  },
+  "final_status": "FAIL_SAME_GATE"
+}
