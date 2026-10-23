@@ -38,10 +38,15 @@ def quantile(xs,q):
     return xs[idx]
 
 
-def bootstrap_ci(values, baseline, alpha, seed):
-    rng=random.Random(seed); n=len(values); means=[]
+def block_means(values):
+    return [statistics.mean(values[i:i+BLOCK_SIZE]) for i in range(0,len(values),BLOCK_SIZE) if values[i:i+BLOCK_SIZE]]
+
+
+def block_bootstrap_ci(values, baseline, alpha, seed):
+    blocks=block_means(values)
+    rng=random.Random(seed); n=len(blocks); means=[]
     for _ in range(BOOT_REPS):
-        means.append(sum(values[rng.randrange(n)] for __ in range(n))/n - baseline)
+        means.append(sum(blocks[rng.randrange(n)] for __ in range(n))/n - baseline)
     return [quantile(means,alpha/2),quantile(means,1-alpha/2)]
 
 
@@ -54,10 +59,7 @@ def read_hits(path, model_col='model', hit_col='hits'):
 
 
 def block_share(hits, baseline_mean):
-    vals=[]
-    for i in range(0,len(hits),BLOCK_SIZE):
-        b=hits[i:i+BLOCK_SIZE]
-        vals.append(statistics.mean(b)-baseline_mean)
+    vals=[x-baseline_mean for x in block_means([float(h) for h in hits])]
     return {'positive_share':sum(v>0 for v in vals)/len(vals),'block_deltas':vals,'blocks':len(vals)}
 
 
@@ -74,8 +76,8 @@ def summarize_model(hits, base, alpha_adj, seed):
     for j,(k,vals) in enumerate(metrics.items()):
         obs=statistics.mean(vals); b=base[k]
         out['observed'][k]=obs; out['random_exact'][k]=b; out['delta'][k]=obs-b
-        out['ci95_delta'][k]=bootstrap_ci(vals,b,0.05,seed+j*101)
-        out['ci_bonferroni_delta'][k]=bootstrap_ci(vals,b,alpha_adj,seed+j*101+9000)
+        out['ci95_delta'][k]=block_bootstrap_ci(vals,b,0.05,seed+j*101)
+        out['ci_bonferroni_delta'][k]=block_bootstrap_ci(vals,b,alpha_adj,seed+j*101+9000)
     out['time_blocks_mean_hits']=block_share(hits,base['mean_hits'])
     out['edge_gate']={
         'mean_hits_adjusted_ci_lower_gt_0':out['ci_bonferroni_delta']['mean_hits'][0]>0,
@@ -101,14 +103,13 @@ def main():
     all_hits={**b_hits,**a_hits}
     all_targets={**b_targets,**a_targets}
     model_count=len(all_hits)
-    # Bonferroni correction across models and the two primary tests (mean hits, >=2 rate).
     alpha_adj=0.05/(model_count*2)
     base=exact_baseline()
     models={}
     for i,name in enumerate(sorted(all_hits)):
         ts=all_targets[name]
         assert len(ts)==len(all_hits[name]) and ts==sorted(ts)
-        assert all_targets[name][0]>=201 and all_targets[name][-1]==1246
+        assert ts[0]>=201 and ts[-1]==1246
         models[name]=summarize_model(all_hits[name],base,alpha_adj,SEED+i*10000)
         models[name]['target_range']=[ts[0],ts[-1]]
 
@@ -135,7 +136,7 @@ def main():
         'data_cutoff':1246,
         'leakage_checks':{'B':b_leak,'successor_leakage_failures':ver.get('successor_leakage_failures')},
         'exact_uniform_single_ticket_baseline':base,
-        'multiple_testing':{'model_count':model_count,'primary_tests_per_model':2,'bonferroni_alpha':alpha_adj,'bootstrap_reps':BOOT_REPS},
+        'multiple_testing':{'model_count':model_count,'primary_tests_per_model':2,'bonferroni_alpha':alpha_adj,'bootstrap_reps':BOOT_REPS,'bootstrap_unit':'non-overlapping 50-round blocks'},
         'models':models,
         'ranking_by_mean_hit_delta':ranked,
         'validated_models':validated,
