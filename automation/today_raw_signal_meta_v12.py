@@ -97,7 +97,7 @@ def main():
   pc.update(itertools.combinations(d['nums'],2));tc.update(itertools.combinations(d['nums'],3));pr=b.structure_profile(d['nums'],None)
   for i,v in enumerate(pr[:5]):profiles[i][v]+=1
  for i in range(1,200):profiles[5][b.structure_profile(draws[i]['nums'],draws[i-1]['nums'])[5]]+=1
- nfeat=1+len(MODELS)+10;p0=6/45;w=[math.log(p0/(1-p0))]+[0.0]*(nfeat-1);obs=[];null=[];diffs={k:[] for k in ('max_hits','any2','any3','winning_union_coverage')};current=None;step=0
+ nfeat=1+len(MODELS)+11;p0=6/45;w=[math.log(p0/(1-p0))]+[0.0]*(nfeat-1);obs=[];null=[];diffs={k:[] for k in ('max_hits','any2','any3','winning_union_coverage')};current=None;step=0
  for idx in range(200,len(draws)+1):
   hist=[x['nums'] for x in draws[:idx]];preds={**b.predictions_for_round(draws,idx,freq,last,pc,tc,profiles,bank),**ac.predict(hist)};X=raw_features(draws,idx,freq,last,pc,tc,preds);sc=score_all(X,w);lines=build(sc)
   if idx==len(draws):
