@@ -1,0 +1,358 @@
+{
+  "date_kst": "2026-10-23",
+  "data_cutoff": 1246,
+  "targets": 1046,
+  "target_range": [
+    201,
+    1246
+  ],
+  "leakage_rule": "For target t, every prediction uses only rounds <= t-1.",
+  "single_ticket_models": {
+    "A_v2": {
+      "observed": {
+        "mean_hits": 0.7925430210325047,
+        "rate_ge2": 0.1682600382409178,
+        "rate_ge3": 0.027724665391969407,
+        "rate_ge4": 0.0019120458891013384,
+        "rate_ge5": 0,
+        "rate_ge6": 0
+      },
+      "exact_uniform_random": {
+        "mean_hits": 0.8,
+        "rate_ge2": 0.17530810086113546,
+        "rate_ge3": 0.023834078570323606,
+        "rate_ge4": 0.0013934826753885178,
+        "rate_ge5": 2.885184393976226e-05,
+        "rate_ge6": 1.2277380399898834e-07
+      },
+      "delta": {
+        "mean_hits": -0.007456978967495309,
+        "rate_ge2": -0.007048062620217677,
+        "rate_ge3": 0.0038905868216458014,
+        "rate_ge4": 0.0005185632137128205,
+        "rate_ge5": -2.885184393976226e-05,
+        "rate_ge6": -1.2277380399898834e-07
+      },
+      "bootstrap_95ci_delta": {
+        "mean_hits": [
+          -0.05430210325047805,
+          0.03938814531548753
+        ],
+        "rate_ge2": [
+          -0.029036590344883074,
+          0.01589648804899838
+        ],
+        "rate_ge3": [
+          -0.005669642623860891,
+          0.014406839211703163
+        ],
+        "rate_ge4": [
+          -0.0013934826753885178,
+          0.0033866320473648283
+        ],
+        "rate_ge5": [
+          -2.885184393976226e-05,
+          -2.885184393976226e-05
+        ],
+        "rate_ge6": [
+          -1.2277380399898834e-07,
+          -1.2277380399898834e-07
+        ]
+      }
+    },
+    "C_v2": {
+      "observed": {
+        "mean_hits": 0.7963671128107075,
+        "rate_ge2": 0.17495219885277247,
+        "rate_ge3": 0.02581261950286807,
+        "rate_ge4": 0.0019120458891013384,
+        "rate_ge5": 0,
+        "rate_ge6": 0
+      },
+      "exact_uniform_random": {
+        "mean_hits": 0.8,
+        "rate_ge2": 0.17530810086113546,
+        "rate_ge3": 0.023834078570323606,
+        "rate_ge4": 0.0013934826753885178,
+        "rate_ge5": 2.885184393976226e-05,
+        "rate_ge6": 1.2277380399898834e-07
+      },
+      "delta": {
+        "mean_hits": -0.003632887189292555,
+        "rate_ge2": -0.000355902008362996,
+        "rate_ge3": 0.0019785409325444626,
+        "rate_ge4": 0.0005185632137128205,
+        "rate_ge5": -2.885184393976226e-05,
+        "rate_ge6": -1.2277380399898834e-07
+      },
+      "bootstrap_95ci_delta": {
+        "mean_hits": [
+          -0.05143403441682604,
+          0.04416826003824088
+        ],
+        "rate_ge2": [
+          -0.023300452677579058,
+          0.022588648660853063
+        ],
+        "rate_ge3": [
+          -0.00662566556841156,
+          0.012494793322601824
+        ],
+        "rate_ge4": [
+          -0.0013934826753885178,
+          0.0033866320473648283
+        ],
+        "rate_ge5": [
+          -2.885184393976226e-05,
+          -2.885184393976226e-05
+        ],
+        "rate_ge6": [
+          -1.2277380399898834e-07,
+          -1.2277380399898834e-07
+        ]
+      }
+    },
+    "contrarian_v2": {
+      "observed": {
+        "mean_hits": 0.7906309751434034,
+        "rate_ge2": 0.17208413001912046,
+        "rate_ge3": 0.027724665391969407,
+        "rate_ge4": 0,
+        "rate_ge5": 0,
+        "rate_ge6": 0
+      },
+      "exact_uniform_random": {
+        "mean_hits": 0.8,
+        "rate_ge2": 0.17530810086113546,
+        "rate_ge3": 0.023834078570323606,
+        "rate_ge4": 0.0013934826753885178,
+        "rate_ge5": 2.885184393976226e-05,
+        "rate_ge6": 1.2277380399898834e-07
+      },
+      "delta": {
+        "mean_hits": -0.00936902485659663,
+        "rate_ge2": -0.003223970842015006,
+        "rate_ge3": 0.0038905868216458014,
+        "rate_ge4": -0.0013934826753885178,
+        "rate_ge5": -2.885184393976226e-05,
+        "rate_ge6": -1.2277380399898834e-07
+      },
+      "bootstrap_95ci_delta": {
+        "mean_hits": [
+          -0.05812619502868072,
+          0.040344168260038206
+        ],
+        "rate_ge2": [
+          -0.025212498566680397,
+          0.018764556882650385
+        ],
+        "rate_ge3": [
+          -0.005669642623860891,
+          0.014406839211703163
+        ],
+        "rate_ge4": [
+          -0.0013934826753885178,
+          -0.0013934826753885178
+        ],
+        "rate_ge5": [
+          -2.885184393976226e-05,
+          -2.885184393976226e-05
+        ],
+        "rate_ge6": [
+          -1.2277380399898834e-07,
+          -1.2277380399898834e-07
+        ]
+      }
+    }
+  },
+  "single_ticket_predictive_edge_found": false,
+  "portfolio_model": {
+    "definition": "V3 model_guided 30-unique portfolio",
+    "comparison_baseline": "uniform random 30 unique numbers, randomly partitioned into five 6-number tickets",
+    "random_bundles_per_target": 1000,
+    "metrics": {
+      "any_2plus": {
+        "model_mean": 0.7284894837476099,
+        "diversity_matched_random_mean": 0.7101051625239005,
+        "delta": 0.018384321223709366,
+        "bootstrap_95ci_delta": [
+          -0.007979923518164405,
+          0.04542925430210328
+        ]
+      },
+      "max_hits": {
+        "model_mean": 1.849904397705545,
+        "diversity_matched_random_mean": 1.836434034416826,
+        "delta": 0.013470363288718978,
+        "bootstrap_95ci_delta": [
+          -0.024117590822179742,
+          0.051676864244741855
+        ]
+      },
+      "winning_union_coverage": {
+        "model_mean": 4.005736137667304,
+        "diversity_matched_random_mean": 4.000823135755258,
+        "delta": 0.0049130019120458,
+        "bootstrap_95ci_delta": [
+          -0.0587265774378585,
+          0.07127055449330784
+        ]
+      },
+      "any_3plus": {
+        "model_mean": 0.11376673040152964,
+        "diversity_matched_random_mean": 0.1196548757170172,
+        "delta": -0.005888145315487564,
+        "bootstrap_95ci_delta": [
+          -0.024764818355640535,
+          0.013777246653919694
+        ]
+      },
+      "any_4plus": {
+        "model_mean": 0.0076481835564053535,
+        "diversity_matched_random_mean": 0.007134799235181644,
+        "delta": 0.0005133843212237095,
+        "bootstrap_95ci_delta": [
+          -0.0042801147227533465,
+          0.006306883365200765
+        ]
+      }
+    },
+    "nonoverlap_time_blocks": [
+      {
+        "start_round": 201,
+        "end_round": 300,
+        "n": 100,
+        "delta_any_2plus": 0.10899000000000003,
+        "delta_max_hits": 0.14248999999999998,
+        "delta_winning_union_coverage": 0.14996,
+        "delta_any_3plus": 0.00986,
+        "delta_any_4plus": 0.02319
+      },
+      {
+        "start_round": 301,
+        "end_round": 400,
+        "n": 100,
+        "delta_any_2plus": 0.03094000000000003,
+        "delta_max_hits": -0.005120000000000011,
+        "delta_winning_union_coverage": -0.13249999999999998,
+        "delta_any_3plus": -0.02919,
+        "delta_any_4plus": -0.00733
+      },
+      {
+        "start_round": 401,
+        "end_round": 500,
+        "n": 100,
+        "delta_any_2plus": -0.02077999999999997,
+        "delta_max_hits": 0.023049999999999984,
+        "delta_winning_union_coverage": 0.057569999999999996,
+        "delta_any_3plus": 0.02052,
+        "delta_any_4plus": 0.02284
+      },
+      {
+        "start_round": 501,
+        "end_round": 600,
+        "n": 100,
+        "delta_any_2plus": 0.05032000000000003,
+        "delta_max_hits": 0.03455999999999997,
+        "delta_winning_union_coverage": 0.06320999999999999,
+        "delta_any_3plus": -0.0087,
+        "delta_any_4plus": -0.00742
+      },
+      {
+        "start_round": 601,
+        "end_round": 700,
+        "n": 100,
+        "delta_any_2plus": -0.029739999999999968,
+        "delta_max_hits": -0.016280000000000013,
+        "delta_winning_union_coverage": -0.06723999999999997,
+        "delta_any_3plus": 0.0199,
+        "delta_any_4plus": -0.00691
+      },
+      {
+        "start_round": 701,
+        "end_round": 800,
+        "n": 100,
+        "delta_any_2plus": -0.01906999999999997,
+        "delta_max_hits": -0.03509000000000002,
+        "delta_winning_union_coverage": 0.010580000000000029,
+        "delta_any_3plus": -0.01964,
+        "delta_any_4plus": 0.00319
+      },
+      {
+        "start_round": 801,
+        "end_round": 900,
+        "n": 100,
+        "delta_any_2plus": 0.09852000000000002,
+        "delta_max_hits": 0.10117,
+        "delta_winning_union_coverage": 0.20146,
+        "delta_any_3plus": -0.0007199999999999998,
+        "delta_any_4plus": 0.00281
+      },
+      {
+        "start_round": 901,
+        "end_round": 1000,
+        "n": 100,
+        "delta_any_2plus": -0.03897999999999997,
+        "delta_max_hits": -0.11461000000000002,
+        "delta_winning_union_coverage": -0.07765999999999999,
+        "delta_any_3plus": -0.06881,
+        "delta_any_4plus": -0.00721
+      },
+      {
+        "start_round": 1001,
+        "end_round": 1100,
+        "n": 100,
+        "delta_any_2plus": -0.029809999999999972,
+        "delta_max_hits": 0.023499999999999976,
+        "delta_winning_union_coverage": -0.16033,
+        "delta_any_3plus": 0.06021,
+        "delta_any_4plus": -0.00734
+      },
+      {
+        "start_round": 1101,
+        "end_round": 1200,
+        "n": 100,
+        "delta_any_2plus": -0.0004599999999999682,
+        "delta_max_hits": -0.046440000000000016,
+        "delta_winning_union_coverage": 0.0017800000000000081,
+        "delta_any_3plus": -0.03959,
+        "delta_any_4plus": -0.007
+      },
+      {
+        "start_round": 1201,
+        "end_round": 1246,
+        "n": 46,
+        "delta_any_2plus": 0.09210869565217394,
+        "delta_max_hits": 0.07319565217391302,
+        "delta_winning_union_coverage": 0.009913043478260887,
+        "delta_any_3plus": -0.011804347826086957,
+        "delta_any_4plus": -0.0075
+      }
+    ],
+    "strict_promotion_gate": {
+      "status": "FAIL",
+      "primary_metrics": [
+        "any_2plus",
+        "max_hits",
+        "winning_union_coverage"
+      ],
+      "secondary_metrics": [
+        "any_3plus",
+        "any_4plus"
+      ],
+      "criteria": {
+        "primary_mean_delta_gt_0": true,
+        "primary_bootstrap_95ci_lower_gt_0": false,
+        "primary_positive_block_share_ge_70pct": false,
+        "secondary_ci_not_strictly_below_zero": true
+      },
+      "positive_block_share": {
+        "any_2plus": 0.45454545454545453,
+        "max_hits": 0.5454545454545454,
+        "winning_union_coverage": 0.6363636363636364
+      }
+    }
+  },
+  "verdict": "NO_VALIDATED_PREDICTIVE_EDGE",
+  "interpretation": "30-unique coverage is a portfolio-structure property. It is not predictive evidence unless the model-guided 30-number set beats a 30-unique random baseline on untouched time-ordered targets with positive confidence bounds."
+}
