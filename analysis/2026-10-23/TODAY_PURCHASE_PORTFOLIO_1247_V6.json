@@ -1,0 +1,119 @@
+{
+  "created_kst": "2026-10-23T12:50:21.691214+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "V3_ANCHORED_DIVERSIFIED_PURCHASE_V6",
+  "model_anchor": "e0.3_d0.99_c0.35",
+  "model_anchor_validation_note": "V3 improved over random point estimates but did not pass adjusted significance/stability gate; V6 therefore evaluates the full purchase portfolio separately and does not claim predictive superiority unless supported by matched comparison.",
+  "walkforward_targets": 846,
+  "random_bundles_per_target": 200,
+  "matched_random": "union_size_matched",
+  "portfolio_scorecard": {
+    "policy": {
+      "max_hits": 1.7340425531914894,
+      "any2": 0.6300236406619385,
+      "any3": 0.1016548463356974,
+      "any4": 0.00591016548463357,
+      "any5": 0.0,
+      "any6": 0.0,
+      "winning_union_coverage": 3.215130023640662,
+      "union_size": 24.756501182033098,
+      "mean_overlap": 0.5533096926713948,
+      "max_overlap": 1.9609929078014185
+    },
+    "matched_random": {
+      "max_hits": 1.7595271867612292,
+      "any2": 0.6416312056737589,
+      "any3": 0.11662529550827423,
+      "any4": 0.007299054373522459,
+      "any5": 0.00016548463356973994,
+      "any6": 0.0,
+      "winning_union_coverage": 3.3004609929078015,
+      "union_size": 24.756501182033098,
+      "mean_overlap": 0.5698764775413712,
+      "max_overlap": 1.6346335697399528
+    },
+    "delta": {
+      "max_hits": -0.025484633569739845,
+      "any2": -0.011607565011820364,
+      "any3": -0.014970449172576838,
+      "any4": -0.0013888888888888892,
+      "any5": -0.00016548463356973994,
+      "any6": 0.0,
+      "winning_union_coverage": -0.08533096926713934,
+      "union_size": 0.0,
+      "mean_overlap": -0.016566784869976314,
+      "max_overlap": 0.3263593380614658
+    }
+  },
+  "sources": [
+    "V3_anchor",
+    "pair_association",
+    "long_frequency",
+    "contrarian_v2",
+    "structure_profile"
+  ],
+  "final_lines": [
+    [
+      2,
+      8,
+      13,
+      28,
+      37,
+      45
+    ],
+    [
+      5,
+      11,
+      14,
+      21,
+      26,
+      44
+    ],
+    [
+      12,
+      13,
+      18,
+      27,
+      33,
+      34
+    ],
+    [
+      22,
+      23,
+      32,
+      42,
+      43,
+      44
+    ],
+    [
+      5,
+      9,
+      15,
+      28,
+      38,
+      40
+    ]
+  ],
+  "anchor_weights": {
+    "triple_association": 0.35,
+    "C_v2": 0.05535949057605028,
+    "pair_association": 0.02072114840871104,
+    "structure_profile": 0.025054202875564164,
+    "A_v2": 0.07629864957910852,
+    "frequency_plus_gap": 0.09151603134519426,
+    "contrarian_v2": 0.020557111051534564,
+    "long_frequency": 0.21379109917657296,
+    "combined_equal_rank": 0.005258467278745573,
+    "recent_momentum": 0.001244128192044227,
+    "current_gap": 0.14019967151647442
+  },
+  "integrity": {
+    "validator_1": "PASS",
+    "validator_2": "PASS",
+    "final_text_parse": "PASS",
+    "stored_vs_display": "PASS"
+  },
+  "classification": "ACTUAL_PURCHASE_POLICY_BEST_AVAILABLE_NOT_STATISTICALLY_VALIDATED_MODEL",
+  "sha256": "5aee360e1e9e2d107ce0e4f933566075072d09e5345aae412b5e350fd4b5820c"
+}
