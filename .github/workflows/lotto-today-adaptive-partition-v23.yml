@@ -1,0 +1,51 @@
+name: lotto-today-adaptive-partition-v23
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-adaptive-partition-v23.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v23:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V23 adaptive partition
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_adaptive_partition_v23.py | tee "$RUNNER_TEMP/v23.log"
+      - name: Verify V23 output
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_ADAPTIVE_PARTITION_1247_V23.json').read_text())
+          lines=d['current']['lines']
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(lines)==5 and len(set().union(*map(set,lines)))==30
+          assert len({tuple(x) for x in lines})==5
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'template':d['current']['template'],'lines':lines},ensure_ascii=False))
+          PY
+      - name: Commit V23 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_ADAPTIVE_PARTITION_1247_V23.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: adaptive partition rank30 v23 for 1247'
+          git pull --rebase origin main
+          git push origin HEAD:main
