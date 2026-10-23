@@ -1,0 +1,130 @@
+{
+  "created_kst": "2026-10-23T15:40:56.611352+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "ADAPTIVE_EXPERT_SELECTION_V9",
+  "no_future_leakage": true,
+  "selection_rule": "At each target, rank models only by prior rolling 200-round hit history; choose five distinct model tickets with fixed overlap penalty and union-gain reward.",
+  "sources": [
+    "triple_association",
+    "frequency_plus_gap",
+    "structure_profile",
+    "contrarian_v2",
+    "long_frequency"
+  ],
+  "source_scores": [
+    0.736,
+    0.6455,
+    0.6635,
+    0.595,
+    0.6965
+  ],
+  "final_lines": [
+    [
+      2,
+      8,
+      13,
+      25,
+      28,
+      37
+    ],
+    [
+      3,
+      12,
+      14,
+      17,
+      33,
+      45
+    ],
+    [
+      5,
+      9,
+      15,
+      28,
+      38,
+      40
+    ],
+    [
+      22,
+      23,
+      32,
+      42,
+      43,
+      44
+    ],
+    [
+      12,
+      13,
+      18,
+      27,
+      33,
+      34
+    ]
+  ],
+  "walkforward_targets": 846,
+  "random_comparator": "Joint random label permutation preserving exact five-ticket overlap structure and union size.",
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.75177304964539,
+      "any2": 0.6536643026004728,
+      "any3": 0.10283687943262411,
+      "any4": 0.0035460992907801418,
+      "winning_union_coverage": 3.3250591016548463,
+      "union_size": 25.379432624113477,
+      "mean_overlap": 0.4829787234042553,
+      "max_overlap": 1.6264775413711583
+    },
+    "matched_label_permutation": {
+      "max_hits": 1.7716213553979512,
+      "any2": 0.6511918833727345,
+      "any3": 0.11713947990543735,
+      "any4": 0.008047675334909377,
+      "winning_union_coverage": 3.3882584712371946,
+      "union_size": 25.379432624113477,
+      "mean_overlap": 0.4829787234042553,
+      "max_overlap": 1.6264775413711583
+    },
+    "delta": {
+      "max_hits": -0.019848305752561135,
+      "any2": 0.0024724192277383317,
+      "any3": -0.014302600472813246,
+      "any4": -0.004501576044129235,
+      "winning_union_coverage": -0.06319936958234829,
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    }
+  },
+  "inference": {
+    "max_hits": {
+      "adjusted_ci_delta": [
+        -0.08375099443118536,
+        0.046892156862745095
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "any2": {
+      "adjusted_ci_delta": [
+        -0.04450079554494829,
+        0.04883333333333333
+      ],
+      "positive_50_round_block_share": 0.5882352941176471
+    },
+    "any3": {
+      "adjusted_ci_delta": [
+        -0.040179275019700554,
+        0.013563829787234043
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "winning_union_coverage": {
+      "adjusted_ci_delta": [
+        -0.2077296120348377,
+        0.08381372549019607
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "strict_portfolio_pass": false
+  },
+  "classification": "RESEARCH_BASED_ACTUAL_PURCHASE_CANDIDATE"
+}
