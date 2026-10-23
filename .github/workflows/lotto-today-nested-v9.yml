@@ -1,0 +1,55 @@
+name: lotto-today-nested-v9
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-nested-v9.yml'
+      - 'automation/today_nested_expert_portfolio_v9.py'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v9:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run nested prior-only V9
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_nested_expert_portfolio_v9.py | tee "$RUNNER_TEMP/v9.log"
+      - name: Independently verify V9 report
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/2026-10-23/TODAY_NESTED_EXPERT_PORTFOLIO_1247_V9.json')
+          d=json.loads(p.read_text())
+          assert d['target_round']==1247 and d['data_cutoff']==1246
+          assert d['policy']=='NESTED_PRIOR_ONLY_EXPERT_SELECTION_V9'
+          assert d['no_future_leakage'] is True
+          lines=d['current']['lines']
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'final_status':d['final_status'],'selector':d['current']['selector'],'models':d['current']['models'],'lines':lines},ensure_ascii=False))
+          PY
+      - name: Commit V9 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_NESTED_EXPERT_PORTFOLIO_1247_V9.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: nested expert portfolio v9 for 1247'
+          git pull --rebase origin main
+          git push origin HEAD:main
