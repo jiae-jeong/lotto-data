@@ -1,0 +1,45 @@
+name: lotto-today-topk-ensemble-v5
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/today_topk_ensemble_v5.py'
+      - '.github/workflows/lotto-today-topk-ensemble-v5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run top-k ensemble validation
+        run: python -B automation/today_topk_ensemble_v5.py | tee "$RUNNER_TEMP/topk-v5.log"
+      - name: Verify report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_TOPK_ENSEMBLE_1247_V5.json').read_text())
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(d['variants'])==9
+          print(json.dumps({'status':d['final_status'],'validated':d['validated_variants'],'best':d['current_best_variant']},ensure_ascii=False))
+          PY
+      - name: Commit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_TOPK_ENSEMBLE_1247_V5.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: 1247 top-k ensemble v5'
+          git pull --rebase origin main
+          git push origin HEAD:main
