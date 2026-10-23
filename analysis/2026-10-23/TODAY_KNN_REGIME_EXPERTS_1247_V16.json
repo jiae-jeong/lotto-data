@@ -1,0 +1,300 @@
+{
+  "created_kst": "2026-10-23T13:50:58.068078+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "NONPARAMETRIC_KNN_REGIME_EXPERT_SELECTION_V16",
+  "no_future_leakage": true,
+  "hyperparameters": {
+    "k_neighbors": 120,
+    "prior_n": 60,
+    "overlap_penalty": 0.035
+  },
+  "context_features": [
+    "mean_model_overlap",
+    "max_vote_share",
+    "model_union_share",
+    "freq_cv",
+    "gap_cv",
+    "prev_odd_share",
+    "prev_low_share",
+    "prev_consecutive_share",
+    "recent20_freq_cv"
+  ],
+  "note": "At t, model reliability is estimated only from earlier targets with similar pre-outcome contexts. Strict outer gate and matched joint label-permutation comparator unchanged.",
+  "model_use_counts": {
+    "triple_association": 518,
+    "recent_momentum": 380,
+    "combined_equal_rank": 133,
+    "structure_profile": 543,
+    "C_v2": 224,
+    "pair_association": 586,
+    "long_frequency": 292,
+    "contrarian_v2": 622,
+    "frequency_plus_gap": 368,
+    "current_gap": 450,
+    "A_v2": 114
+  },
+  "current": {
+    "models": [
+      "A_v2",
+      "frequency_plus_gap",
+      "long_frequency",
+      "pair_association",
+      "contrarian_v2"
+    ],
+    "lines": [
+      [
+        3,
+        13,
+        27,
+        37,
+        38,
+        45
+      ],
+      [
+        3,
+        12,
+        14,
+        17,
+        33,
+        45
+      ],
+      [
+        12,
+        13,
+        18,
+        27,
+        33,
+        34
+      ],
+      [
+        5,
+        11,
+        14,
+        21,
+        26,
+        44
+      ],
+      [
+        22,
+        23,
+        32,
+        42,
+        43,
+        44
+      ]
+    ],
+    "context": [
+      0.16969696969696968,
+      0.45454545454545453,
+      0.7333333333333333,
+      0.06230380034423168,
+      0.9420729509796446,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.6,
+      0.5645794893200935
+    ],
+    "model_local_scores": {
+      "long_frequency": 0.006641797858249077,
+      "current_gap": -0.017557337538177425,
+      "frequency_plus_gap": 0.020198081803919278,
+      "recent_momentum": -0.00037244849142301605,
+      "structure_profile": -0.07435709693649895,
+      "pair_association": 0.006558147677059817,
+      "triple_association": -0.01209699266225404,
+      "combined_equal_rank": -0.018978280129790408,
+      "A_v2": 0.026495264634691106,
+      "C_v2": 0.011802944043797652,
+      "contrarian_v2": 0.004362109921470816
+    },
+    "nearest_prior_rounds": [
+      {
+        "round": 819,
+        "distance": 1.6935611765098746
+      },
+      {
+        "round": 857,
+        "distance": 2.2464820820893956
+      },
+      {
+        "round": 498,
+        "distance": 2.2805277781372757
+      },
+      {
+        "round": 1200,
+        "distance": 2.423054958293636
+      },
+      {
+        "round": 1032,
+        "distance": 2.523052693529128
+      },
+      {
+        "round": 422,
+        "distance": 2.607100105760959
+      },
+      {
+        "round": 960,
+        "distance": 2.7248724457486255
+      },
+      {
+        "round": 1226,
+        "distance": 2.756438932124464
+      },
+      {
+        "round": 883,
+        "distance": 2.813128631441734
+      },
+      {
+        "round": 925,
+        "distance": 2.82805508391251
+      },
+      {
+        "round": 917,
+        "distance": 2.863968865916599
+      },
+      {
+        "round": 1134,
+        "distance": 2.8993877118519804
+      }
+    ],
+    "selection_details": [
+      {
+        "model": "A_v2",
+        "local_score": 0.026495264634691106,
+        "overlap_penalty": 0.0,
+        "ticket": [
+          3,
+          13,
+          27,
+          37,
+          38,
+          45
+        ]
+      },
+      {
+        "model": "frequency_plus_gap",
+        "local_score": 0.020198081803919278,
+        "overlap_penalty": 0.0,
+        "ticket": [
+          3,
+          12,
+          14,
+          17,
+          33,
+          45
+        ]
+      },
+      {
+        "model": "long_frequency",
+        "local_score": 0.006641797858249077,
+        "overlap_penalty": 0.0,
+        "ticket": [
+          12,
+          13,
+          18,
+          27,
+          33,
+          34
+        ]
+      },
+      {
+        "model": "pair_association",
+        "local_score": 0.006558147677059817,
+        "overlap_penalty": 0.0,
+        "ticket": [
+          5,
+          11,
+          14,
+          21,
+          26,
+          44
+        ]
+      },
+      {
+        "model": "contrarian_v2",
+        "local_score": 0.004362109921470816,
+        "overlap_penalty": 0.0,
+        "ticket": [
+          22,
+          23,
+          32,
+          42,
+          43,
+          44
+        ]
+      }
+    ]
+  },
+  "walkforward_targets": 846,
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.710401891252955,
+      "any2": 0.6276595744680851,
+      "any3": 0.08983451536643026,
+      "any4": 0.0035460992907801418,
+      "any5": 0.0,
+      "any6": 0.0,
+      "winning_union_coverage": 3.065011820330969,
+      "union_size": 23.317966903073287,
+      "mean_overlap": 0.7619385342789599,
+      "max_overlap": 2.140661938534279
+    },
+    "matched_label_permutation": {
+      "max_hits": 1.7331117021276596,
+      "any2": 0.6214612884160756,
+      "any3": 0.11447990543735224,
+      "any4": 0.006545508274231678,
+      "any5": 0.00012559101654846338,
+      "any6": 0.0,
+      "winning_union_coverage": 3.1086731678487,
+      "union_size": 23.317966903073287,
+      "mean_overlap": 0.7619385342789599,
+      "max_overlap": 2.140661938534279
+    },
+    "delta": {
+      "max_hits": -0.022709810874704583,
+      "any2": 0.00619828605200945,
+      "any3": -0.02464539007092198,
+      "any4": -0.0029994089834515366,
+      "any5": -0.00012559101654846338,
+      "any6": 0.0,
+      "winning_union_coverage": -0.043661347517730764,
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    }
+  },
+  "inference": {
+    "max_hits": {
+      "adjusted_ci_delta": [
+        -0.08523604513064133,
+        0.04121323529411764
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "any2": {
+      "adjusted_ci_delta": [
+        -0.03155289598108747,
+        0.04448529411764706
+      ],
+      "positive_50_round_block_share": 0.5294117647058824
+    },
+    "any3": {
+      "adjusted_ci_delta": [
+        -0.048477941176470585,
+        0.0022132352941176465
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "winning_union_coverage": {
+      "adjusted_ci_delta": [
+        -0.15002969121140142,
+        0.06941176470588237
+      ],
+      "positive_50_round_block_share": 0.29411764705882354
+    },
+    "strict_portfolio_pass": false
+  },
+  "final_status": "FAIL_SAME_GATE"
+}
