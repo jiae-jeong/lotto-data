@@ -1,0 +1,87 @@
+name: lotto-finalize-r3
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-finalize-r3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Close protocol evidence from today's verified compute
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
+          test -n "$RUN_DIR"
+          python - "$RUN_DIR" <<'PY'
+          import json,sys
+          from pathlib import Path
+          d=Path(sys.argv[1]); v=json.loads((d/'VERIFICATION.json').read_text())
+          assert v.get('compute_status')=='FULL_COMPUTE_COMPLETE'
+          assert int(v.get('data_cutoff',-1))==1246
+          assert int(v.get('successor_leakage_failures',1))==0
+          PY
+          python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR"
+          python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR"
+          python - "$RUN_DIR" <<'PY'
+          import json,sys
+          from pathlib import Path
+          d=Path(sys.argv[1]); a=json.loads((d/'PROTOCOL_AUDIT.json').read_text()); v=json.loads((d/'VERIFICATION.json').read_text())
+          assert a.get('protocol_status')=='FULL_COMPLETE', a
+          assert v.get('protocol_status')=='FULL_COMPLETE', v.get('protocol_missing')
+          assert all(a.get('protocol_checks',{}).values()), a.get('protocol_checks')
+          PY
+          echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+          echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
+      - name: Generate bounded exhaustive V2 R1
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/weekly_purchase_final_v2_recovery.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/final.log"
+      - name: Verify frozen file independently
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,glob,os
+          paths=sorted(glob.glob('research/weekly_purchase/1247/*PROTOCOL_FULL_V2.json'))
+          assert paths, 'V2 freeze missing'
+          p=paths[-1]; d=json.load(open(p,encoding='utf-8'))
+          lines=d['final_lines']
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['protocol_status']=='FULL_COMPLETE'
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(isinstance(n,int) and 1<=n<=45 for n in x) for x in lines)
+          display='\n'.join(' '.join(map(str,x)) for x in lines)
+          parsed=[[int(n) for n in row.split()] for row in display.splitlines()]
+          assert parsed==lines
+          print(json.dumps({'status':'INDEPENDENT_PASS','file':p,'final_lines':lines,'policy':d['policy_version'],'protocol':d['protocol_status'],'portfolio':d['portfolio'],'backtest':d['historical_matched_random_backtest']},ensure_ascii=False))
+          PY
+      - name: Commit evidence and final freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
+          git add -- "analysis/$RUN_DATE" research/weekly_purchase/1247
+          git diff --cached --quiet && exit 0
+          git commit -m "research: verified protocol-full 1247 V2 R1 final"
+          git push origin HEAD:main
