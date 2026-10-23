@@ -3,6 +3,7 @@ name: daily-lotto-master-v5
 on:
   schedule:
     - cron: '0 23 * * *'
+    - cron: '15 0 * * *'  # 09:15 KST fallback if primary scheduled event is missed
   workflow_dispatch:
   push:
     branches: [main]
