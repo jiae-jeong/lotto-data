@@ -1,0 +1,51 @@
+name: lotto-today-adaptive-experts-v9
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-adaptive-experts-v9.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v9:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run adaptive expert V9
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_adaptive_experts_v9.py | tee "$RUNNER_TEMP/v9.log"
+      - name: Verify V9 output
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/2026-10-23/TODAY_ADAPTIVE_EXPERTS_1247_V9.json')
+          d=json.loads(p.read_text()); lines=d['final_lines']
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'lines':lines,'sources':d['sources']},ensure_ascii=False))
+          PY
+      - name: Commit V9 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_ADAPTIVE_EXPERTS_1247_V9.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: 1247 adaptive expert portfolio v9'
+          git pull --rebase origin main
+          git push origin HEAD:main
