@@ -1,0 +1,62 @@
+name: lotto-model-validation-v4
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/model_validation_v4_strict.py'
+      - '.github/workflows/lotto-model-validation-v4.yml'
+
+permissions:
+  contents: write
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  OPENBLAS_NUM_THREADS: '2'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run strict time-ordered model validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python -B automation/model_validation_v4_strict.py "$RUN_DATE" | tee "$RUNNER_TEMP/model-validation-v4.log"
+      - name: Verify audit output
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python - "$RUN_DATE" <<'PY'
+          import json,sys
+          from pathlib import Path
+          p=Path('analysis')/sys.argv[1]/'MODEL_VALIDATION_V4_STRICT.json'
+          d=json.loads(p.read_text())
+          assert d['data_cutoff']==1246
+          assert d['targets']>=1000
+          assert d['portfolio_model']['comparison_baseline'].startswith('uniform random 30 unique')
+          assert len(d['portfolio_model']['nonoverlap_time_blocks'])>=10
+          print(json.dumps({'verdict':d['verdict'],'portfolio_gate':d['portfolio_model']['strict_promotion_gate']['status'],'single_ticket_edge':d['single_ticket_predictive_edge_found']},ensure_ascii=False))
+          PY
+      - name: Commit validation report
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "analysis/$RUN_DATE/MODEL_VALIDATION_V4_STRICT.json"
+          git diff --cached --quiet && exit 0
+          git commit -m "validation: strict time-ordered lotto model audit $RUN_DATE"
+          git pull --rebase origin main
+          git push origin HEAD:main
