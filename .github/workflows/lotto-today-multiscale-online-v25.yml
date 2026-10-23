@@ -51,3 +51,5 @@ jobs:
           git commit -m 'validation: multiscale online v25 for 1247'
           git pull --rebase origin main
           git push origin HEAD:main
+
+# retrigger: 2026-10-23T15:48+09:00
