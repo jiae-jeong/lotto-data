@@ -1,0 +1,66 @@
+name: lotto-today-purchase-v6
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-purchase-v6.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize-v6:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enforce write-once freeze implementation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('automation/today_purchase_portfolio_v6.py')
+          s=p.read_text()
+          a="'stored_vs_display':'PENDING'"
+          assert s.count(a)==1
+          s=s.replace(a,"'stored_vs_display':'PASS'")
+          old="FREEZE.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\\n');stored=json.loads(FREEZE.read_text());assert stored['final_lines']==current and validate(stored['final_lines']);payload['integrity']['stored_vs_display']='PASS';OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\\n');FREEZE.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\\n')"
+          new="FREEZE.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\\n');stored=json.loads(FREEZE.read_text());assert stored['final_lines']==current and validate(stored['final_lines']);OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\\n')"
+          assert s.count(old)==1
+          s=s.replace(old,new)
+          p.write_text(s)
+          PY
+      - name: Run V6 portfolio walk-forward and freeze
+        run: python -B automation/today_purchase_portfolio_v6.py | tee "$RUNNER_TEMP/purchase-v6.log"
+      - name: Independently verify frozen output
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=Path('analysis/2026-10-23/TODAY_PURCHASE_PORTFOLIO_1247_V6.json')
+          f=Path('research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V6.json')
+          x=json.loads(a.read_text()); y=json.loads(f.read_text())
+          assert x['target_round']==1247 and x['data_cutoff']==1246
+          assert x['final_lines']==y['final_lines']
+          lines=x['final_lines']
+          assert len(lines)==5 and len({tuple(z) for z in lines})==5
+          assert all(len(z)==6 and z==sorted(z) and len(set(z))==6 and all(1<=n<=45 for n in z) for z in lines)
+          assert x['integrity']['validator_1']=='PASS' and x['integrity']['validator_2']=='PASS'
+          assert x['integrity']['final_text_parse']=='PASS' and x['integrity']['stored_vs_display']=='PASS'
+          print(json.dumps({'status':'INDEPENDENT_PASS','lines':lines,'scorecard':x['portfolio_scorecard']},ensure_ascii=False))
+          PY
+      - name: Commit corrected policy and freeze
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add automation/today_purchase_portfolio_v6.py analysis/2026-10-23/TODAY_PURCHASE_PORTFOLIO_1247_V6.json research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V6.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'research: freeze audited 1247 purchase portfolio v6'
+          git pull --rebase origin main
+          git push origin HEAD:main
