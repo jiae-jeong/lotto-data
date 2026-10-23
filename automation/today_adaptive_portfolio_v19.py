@@ -33,14 +33,14 @@ def rank24(r):
  return [tuple(sorted(x)) for x in [r[0:6],r[0:2]+r[6:10],r[2:4]+r[10:14],r[4:6]+r[14:18],r[18:24]]]
 def rank30(r):return [tuple(sorted(r[i:i+6])) for i in range(0,30,6)]
 def expert50(preds,hists,anchor=None):
- ranked=sorted(MODELS,key=lambda m:(-(sum(hists[m][-50:])+40*.8)/(len(hists[m][-50:])+40),MODELS.index(m)))
+ def trailing50(m):return list(hists[m])[-50:]
+ ranked=sorted(MODELS,key=lambda m:(-(sum(trailing50(m))+40*.8)/(len(trailing50(m))+40),MODELS.index(m)))
  chosen=[];used=set()
  if anchor is not None:chosen=[('interaction_anchor',tuple(anchor))];used.add(tuple(anchor))
  for m in ranked:
   t=tuple(preds[m])
   if t in used:continue
   ovs=[len(set(t)&set(q[1])) for q in chosen]
-  # in hybrid, do not copy almost the whole anchor; otherwise retain strong repeats.
   if anchor is not None and ovs and max(ovs)>=5:continue
   chosen.append((m,t));used.add(t)
   if len(chosen)==5:break
@@ -88,7 +88,6 @@ def main():
   if target>=401:
    use[chosen]+=1;om=metrics(lines,actual);om['target']=target;obs.append(om);rng=random.Random(SEED+target);sm=[metrics(permuted(lines,rng),actual) for _ in range(TEST_NULL)];nm={k:statistics.mean(float(q[k]) for q in sm) for k in sm[0]};nm['target']=target;null.append(nm)
    for k in diffs:diffs[k].append(float(om[k])-nm[k])
-  # after outcome resolves, update every portfolio policy with its matched-null excess triple
   for pi,p in enumerate(POLICIES):
    real=metrics(ports[p],actual);rng=random.Random(SEED+900000+target*17+pi);sm=[metrics(permuted(ports[p],rng),actual) for _ in range(TRAIN_NULL)];bm={k:statistics.mean(q[k] for q in sm) for k in ('max_hits','any2','any3')};ph[p].append((real['max_hits']-bm['max_hits'],real['any2']-bm['any2'],real['any3']-bm['any3']))
   for m in MODELS:mh[m].append(len(set(preds[m])&actual))
