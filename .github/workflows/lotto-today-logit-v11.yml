@@ -1,0 +1,53 @@
+name: lotto-today-logit-v11
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-logit-v11.yml'
+      - 'automation/today_online_logit_portfolio_v11.py'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v11:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V11 online meta learner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_online_logit_portfolio_v11.py | tee "$RUNNER_TEMP/v11.log"
+      - name: Independently verify V11
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_ONLINE_LOGIT_PORTFOLIO_1247_V11.json').read_text())
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert d['policy']=='ONLINE_NUMBER_LEVEL_LOGIT_META_V11'
+          lines=d['current']['lines']
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'final_status':d['final_status'],'lines':lines,'weights':d['current']['weights']},ensure_ascii=False))
+          PY
+      - name: Commit V11 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_ONLINE_LOGIT_PORTFOLIO_1247_V11.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: online number-level logit v11 for 1247'
+          git pull --rebase origin main
+          git push origin HEAD:main
