@@ -1,0 +1,156 @@
+{
+  "target_round": 1247,
+  "created_kst": "2026-10-23T09:30:01.612073+09:00",
+  "data_cutoff": 1246,
+  "data_sha256": "023200840e2325321b0ecf0a088b9ccb67b1c0a37b2c90683fb4425e112a18b7",
+  "policy_version": "WEEKLY_FIVE_TICKET_PORTFOLIO_V3_DIVERSIFIED_HOLDOUT",
+  "classification": "PRIMARY_WEEKLY_PURCHASE_POLICY_PROTOCOL_FULL_V3",
+  "protocol_status": "FULL_COMPLETE",
+  "protocol_checks": {
+    "full_compute_execution": true,
+    "external_two_source_crosscheck": true,
+    "historical_errornote_aggregate_present": true,
+    "historical_errornote_closed_loop_complete": true,
+    "full_signal_scorecard": true,
+    "numeric_13_section_report": true
+  },
+  "protocol_run_dir": "analysis/2026-10-23/MASTER_FULL_V5_233420_110068",
+  "selected_policy": "hash",
+  "selection_source": {
+    "source": "HASH_DIVERSITY_BASELINE_30_UNIQUE",
+    "seed_sha256": "c9a1e9ce191a0c6605bafafad268d2e6d4a425b216b8e2e9a2be4647adb44703",
+    "structure_penalty": 2.2525932334710745
+  },
+  "final_lines": [
+    [
+      9,
+      16,
+      22,
+      24,
+      28,
+      39
+    ],
+    [
+      5,
+      8,
+      21,
+      29,
+      34,
+      42
+    ],
+    [
+      10,
+      11,
+      19,
+      26,
+      30,
+      43
+    ],
+    [
+      4,
+      12,
+      13,
+      27,
+      38,
+      44
+    ],
+    [
+      6,
+      14,
+      23,
+      31,
+      32,
+      33
+    ]
+  ],
+  "portfolio": {
+    "unique_number_coverage": 30,
+    "pairwise_overlaps": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mean_pair_overlap": 0.0,
+    "max_pair_overlap": 0,
+    "duplicate_numbers_across_lines": 0
+  },
+  "walkforward_holdout": {
+    "targets": 200,
+    "selection_targets": 100,
+    "holdout_targets": 100,
+    "random_bundles_per_target": 100,
+    "selection_window": {
+      "model": {
+        "max_hits": 1.86,
+        "any_2plus": 0.73,
+        "any_3plus": 0.13,
+        "winning_union_coverage": 3.88
+      },
+      "hash": {
+        "max_hits": 1.89,
+        "any_2plus": 0.77,
+        "any_3plus": 0.12,
+        "winning_union_coverage": 4.06
+      }
+    },
+    "selected_policy": "hash",
+    "fallback_used": false,
+    "holdout_selected": {
+      "max_hits": 1.73,
+      "any_2plus": 0.67,
+      "any_3plus": 0.06,
+      "any_4plus": 0.0,
+      "any_5plus": 0.0,
+      "any_6": 0.0,
+      "winning_union_coverage": 4.01,
+      "ticket_union_size": 30.0,
+      "mean_pair_overlap": 0.0,
+      "max_pair_overlap": 0.0
+    },
+    "holdout_independent_random": {
+      "max_hits": 1.734,
+      "any_2plus": 0.622,
+      "any_3plus": 0.115,
+      "any_4plus": 0.0052,
+      "any_5plus": 0.0002,
+      "any_6": 0.0,
+      "winning_union_coverage": 3.0701,
+      "ticket_union_size": 23.013,
+      "mean_pair_overlap": 0.79684,
+      "max_pair_overlap": 2.0957
+    },
+    "holdout_diversity_matched_random": {
+      "max_hits": 1.8369,
+      "any_2plus": 0.7126,
+      "any_3plus": 0.1189,
+      "any_4plus": 0.0059,
+      "any_5plus": 0.0001,
+      "any_6": 0.0,
+      "winning_union_coverage": 4.0001,
+      "ticket_union_size": 30.0,
+      "mean_pair_overlap": 0.0,
+      "max_pair_overlap": 0.0
+    },
+    "promotion_gate_pass": true
+  },
+  "integrity": {
+    "validator_1": "PASS",
+    "validator_2": "PASS",
+    "final_text_parse": "PASS",
+    "line_count": 5,
+    "numbers_per_line": 6,
+    "range_1_45": "PASS",
+    "within_line_unique": "PASS",
+    "duplicate_ticket": "PASS",
+    "cross_line_unique_30": "PASS"
+  },
+  "interpretation": "If the model-guided policy does not survive the untouched holdout against independent random bundles, the predeclared fallback is the 30-unique diversity baseline. Any advantage from that fallback is portfolio diversification, not evidence that particular numbers are more likely to be drawn.",
+  "freeze_payload_sha256": "0afd41599553dd4ed6edfa1806559bfaee7ed631af9de5d54e7136aa1d0a2b3e"
+}

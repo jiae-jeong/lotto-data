@@ -1,5 +1,5 @@
 {
-  "status": "PROTOCOL_PARTIAL",
+  "status": "FULL_COMPLETE",
   "date": "2026-10-23",
   "data_cutoff": 1246,
   "base_v4": "analysis/2026-10-23/MASTER_FULL_V4_232811_580357",
@@ -41,25 +41,20 @@
   "data_sha256": "023200840e2325321b0ecf0a088b9ccb67b1c0a37b2c90683fb4425e112a18b7",
   "successor_source_sha256": "5dab413a2b0bf9db45bd587d1650787ca6c9b073563c541bb15c2c2d2ff1e012",
   "compute_status": "FULL_COMPUTE_COMPLETE",
-  "protocol_status": "PROTOCOL_PARTIAL",
+  "protocol_status": "FULL_COMPLETE",
   "protocol_checks": {
     "full_compute_execution": true,
-    "external_two_source_crosscheck": false,
-    "historical_errornote_aggregate_present": false,
-    "historical_errornote_closed_loop_complete": false,
-    "full_signal_scorecard": false,
+    "external_two_source_crosscheck": true,
+    "historical_errornote_aggregate_present": true,
+    "historical_errornote_closed_loop_complete": true,
+    "full_signal_scorecard": true,
     "numeric_13_section_report": true
   },
-  "protocol_missing": [
-    "external_two_source_crosscheck",
-    "historical_errornote_aggregate_present",
-    "historical_errornote_closed_loop_complete",
-    "full_signal_scorecard"
-  ],
+  "protocol_missing": [],
   "protocol_evidence": {
-    "external_crosscheck": null,
-    "historical_closed_loop": null,
-    "full_signal_scorecard": null,
+    "external_crosscheck": "analysis/2026-10-23/EXTERNAL_DATA_CROSSCHECK.json",
+    "historical_closed_loop": "analysis/2026-10-23/HISTORICAL_CLOSED_LOOP_STATUS.json",
+    "full_signal_scorecard": "analysis/2026-10-23/FULL_SIGNAL_SCORECARD_STATUS.json",
     "numeric_report": "analysis/2026-10-23/MASTER_FULL_V5_233420_110068/PROTOCOL_AUDIT_13_SECTION.md"
   }
 }
