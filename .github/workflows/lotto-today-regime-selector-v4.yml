@@ -1,0 +1,45 @@
+name: lotto-today-regime-selector-v4
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/today_regime_selector_v4.py'
+      - '.github/workflows/lotto-today-regime-selector-v4.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run regime selector validation
+        run: python -B automation/today_regime_selector_v4.py | tee "$RUNNER_TEMP/regime-v4.log"
+      - name: Verify report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_REGIME_SELECTOR_1247_V4.json').read_text())
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(d['rules'])==24
+          print(json.dumps({'status':d['final_status'],'validated':d['validated_rules'],'best':d['best_rule'],'today_model':d['today_selected_model']},ensure_ascii=False))
+          PY
+      - name: Commit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_REGIME_SELECTOR_1247_V4.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: 1247 regime selector v4'
+          git pull --rebase origin main
+          git push origin HEAD:main
