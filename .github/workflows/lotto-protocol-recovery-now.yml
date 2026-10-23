@@ -1,0 +1,89 @@
+name: lotto-protocol-recovery-now
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-protocol-recovery-now.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lotto-protocol-recovery-now
+  cancel-in-progress: true
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  OPENBLAS_NUM_THREADS: '2'
+
+jobs:
+  recover-and-finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reuse today's already completed compute and close protocol evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
+          test -n "$RUN_DIR"
+          python - "$RUN_DIR" <<'PY'
+          import json,sys
+          from pathlib import Path
+          d=Path(sys.argv[1]); v=json.loads((d/'VERIFICATION.json').read_text())
+          assert v.get('compute_status')=='FULL_COMPUTE_COMPLETE'
+          assert int(v.get('data_cutoff',-1))>=1246
+          assert int(v.get('successor_leakage_failures',1))==0
+          PY
+          python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-recovery.log"
+          python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
+          echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
+          echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+      - name: Require FULL_COMPLETE
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - "$RUN_DIR" <<'PY'
+          import json,sys
+          from pathlib import Path
+          d=Path(sys.argv[1]); a=json.loads((d/'PROTOCOL_AUDIT.json').read_text()); v=json.loads((d/'VERIFICATION.json').read_text())
+          required={'full_compute_execution','external_two_source_crosscheck','historical_errornote_aggregate_present','historical_errornote_closed_loop_complete','full_signal_scorecard','numeric_13_section_report'}
+          assert a.get('protocol_status')=='FULL_COMPLETE', a
+          assert v.get('protocol_status')=='FULL_COMPLETE', v.get('protocol_missing')
+          assert required.issubset(a.get('protocol_checks',{})) and all(a['protocol_checks'][k] for k in required)
+          PY
+      - name: Generate and double-validate 1247 V2 purchase portfolio
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/weekly_purchase_final_v2.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/weekly-purchase.log"
+      - name: Preserve recovery evidence and V2 freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
+          git add -- "analysis/$RUN_DATE" research/weekly_purchase
+          git diff --cached --quiet && exit 0
+          git commit -m "research: protocol-full 1247 recovery and V2 freeze"
+          git push origin HEAD:main
+      - name: Preserve failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lotto-protocol-recovery-failure-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/protocol-recovery.log
+            ${{ runner.temp }}/protocol-audit.log
+            ${{ runner.temp }}/weekly-purchase.log
+          if-no-files-found: warn
