@@ -65,7 +65,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -B automation/weekly_purchase_final_v2.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/weekly-purchase.log"
+          python -B automation/weekly_purchase_final_v2_recovery.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/weekly-purchase.log"
       - name: Preserve recovery evidence and V2 freeze
         shell: bash
         run: |
