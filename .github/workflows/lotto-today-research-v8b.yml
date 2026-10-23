@@ -1,0 +1,67 @@
+name: lotto-today-research-v8b
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-research-v8b.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v8b:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build fixed strong-signal variant
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp automation/today_research_portfolio_v8.py /tmp/v8b.py
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/v8b.py'); s=p.read_text()
+          s=s.replace("OUT = ROOT / 'analysis/2026-10-23/TODAY_RESEARCH_PORTFOLIO_1247_V8.json'", "OUT = ROOT / 'analysis/2026-10-23/TODAY_RESEARCH_PORTFOLIO_1247_V8B.json'")
+          s=s.replace("key=lambda n:(-score[n],-gscore[n],n))[:16]", "key=lambda n:(-score[n],-gscore[n],n))[:12]")
+          s=s.replace("if prior_lines and tuple(t) in prior_lines:", "if prior_lines and tuple(sorted(t)) in prior_lines:")
+          s=s.replace("'policy':'FIXED_FIVE_ROLE_RESEARCH_PORTFOLIO_V8'", "'policy':'FIXED_FIVE_ROLE_STRONG_SIGNAL_V8B'")
+          p.write_text(s)
+          PY
+      - name: Run V8B
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE"
+          PYTHONPATH="$GITHUB_WORKSPACE" python -B /tmp/v8b.py | tee "$RUNNER_TEMP/v8b.log"
+      - name: Independently verify V8B output
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/2026-10-23/TODAY_RESEARCH_PORTFOLIO_1247_V8B.json')
+          d=json.loads(p.read_text()); lines=d['final_lines']
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert d['policy']=='FIXED_FIVE_ROLE_STRONG_SIGNAL_V8B'
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'lines':lines,'roles':[x['role'] for x in d['roles']]},ensure_ascii=False))
+          PY
+      - name: Commit V8B report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_RESEARCH_PORTFOLIO_1247_V8B.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: 1247 strong-signal five-role portfolio v8b'
+          git pull --rebase origin main
+          git push origin HEAD:main
