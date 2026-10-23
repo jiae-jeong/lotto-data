@@ -1,0 +1,47 @@
+name: lotto-today-online-ensemble-v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/today_online_ensemble_v2.py'
+      - '.github/workflows/lotto-today-online-ensemble-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run online ensemble validation
+        run: python -B automation/today_online_ensemble_v2.py | tee "$RUNNER_TEMP/online-v2.log"
+      - name: Verify report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/2026-10-23/TODAY_ONLINE_ENSEMBLE_1247_V2.json')
+          d=json.loads(p.read_text())
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(d['variants'])==9
+          assert len(d['current_five_candidates']['tickets'])==5
+          print(json.dumps({'final_status':d['final_status'],'validated_variants':d['validated_variants'],'portfolio_pass':d['portfolio_validation']['pass']},ensure_ascii=False))
+          PY
+      - name: Commit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_ONLINE_ENSEMBLE_1247_V2.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: 1247 online ensemble v2'
+          git pull --rebase origin main
+          git push origin HEAD:main
