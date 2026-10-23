@@ -12,8 +12,10 @@ on:
       - 'automation/daily_master_full_v4.py'
       - 'automation/daily_master_full_v5.py'
       - 'automation/protocol_completion_audit.py'
+      - 'automation/protocol_recovery_v1.py'
       - 'automation/recovered_models_v2.py'
       - 'automation/weekly_purchase_final_v1.py'
+      - 'automation/weekly_purchase_final_v2.py'
       - '.github/workflows/daily-lotto-master-v4.yml'
 
 permissions:
@@ -51,7 +53,7 @@ jobs:
             git commit -m "data: add verified latest round"
             git push origin HEAD:main
           fi
-      - name: Run strict gated daily MASTER and protocol audit
+      - name: Run strict gated daily MASTER and recover protocol evidence
         shell: bash
         run: |
           set -euo pipefail
@@ -59,28 +61,36 @@ jobs:
           python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
           RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
           test -n "$RUN_DIR"
+          python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-recovery.log"
           python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
           echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
-      - name: Verify compute gates
+      - name: Verify all protocol gates
         shell: bash
         run: |
           set -euo pipefail
           python - "$RUN_DIR" <<'PY'
           import json,sys
           from pathlib import Path
-          d=Path(sys.argv[1]);v=json.loads((d/'VERIFICATION.json').read_text())
-          required={'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward','fresh_random_baseline','historical_source_search','A_full_walkforward','C_full_walkforward','contrarian_full_walkforward','AC_contrarian_leakage','successor_scorecard_complete','successor_random_comparison','successor_block_stability','successor_signal_ablation','five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline','model_scorecard_complete','hypothesis_registry_written'}
+          d=Path(sys.argv[1])
+          v=json.loads((d/'VERIFICATION.json').read_text())
+          a=json.loads((d/'PROTOCOL_AUDIT.json').read_text())
+          required_compute={'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward','fresh_random_baseline','historical_source_search','A_full_walkforward','C_full_walkforward','contrarian_full_walkforward','AC_contrarian_leakage','successor_scorecard_complete','successor_random_comparison','successor_block_stability','successor_signal_ablation','five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline','model_scorecard_complete','hypothesis_registry_written'}
+          required_protocol={'full_compute_execution','external_two_source_crosscheck','historical_errornote_aggregate_present','historical_errornote_closed_loop_complete','full_signal_scorecard','numeric_13_section_report'}
           assert v['compute_status']=='FULL_COMPUTE_COMPLETE'
-          assert required.issubset(v['mandatory_checks']) and all(v['mandatory_checks'][k] for k in required)
+          assert required_compute.issubset(v['mandatory_checks']) and all(v['mandatory_checks'][k] for k in required_compute)
           assert v['data_cutoff']>=1246 and v['successor_leakage_failures']==0
+          assert a['protocol_status']=='FULL_COMPLETE', a
+          assert v['protocol_status']=='FULL_COMPLETE', v.get('protocol_missing')
+          assert required_protocol.issubset(a['protocol_checks']) and all(a['protocol_checks'][k] for k in required_protocol)
           PY
-      - name: Run Friday five-ticket purchase pipeline
+      - name: Run Friday five-ticket purchase pipeline V2
         shell: bash
         run: |
           set -euo pipefail
           DOW="$(TZ=Asia/Seoul date +%u)"
           if [ "$DOW" = "5" ]; then
-            python -B automation/weekly_purchase_final_v1.py | tee "$RUNNER_TEMP/weekly-purchase.log"
+            RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+            python -B automation/weekly_purchase_final_v2.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/weekly-purchase.log"
           fi
       - name: Preserve validated outputs
         run: |
@@ -91,7 +101,7 @@ jobs:
           git pull --rebase origin main
           git add -- "analysis/$RUN_DATE" research/weekly_purchase
           git diff --cached --quiet && exit 0
-          git commit -m "research: audited daily master and weekly purchase $RUN_DATE"
+          git commit -m "research: protocol-full daily master and weekly purchase $RUN_DATE"
           git push origin HEAD:main
       - name: Preserve failure evidence
         if: failure()
@@ -100,8 +110,13 @@ jobs:
           name: daily-master-v5-failure-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             ${{ runner.temp }}/master-full-v5.log
+            ${{ runner.temp }}/protocol-recovery.log
             ${{ runner.temp }}/protocol-audit.log
             ${{ runner.temp }}/weekly-purchase.log
             analysis/*/MASTER_FULL_V4_*/**
             analysis/*/MASTER_FULL_V5_*/**
+            analysis/*/EXTERNAL_DATA_CROSSCHECK.json
+            analysis/*/HISTORICAL_CLOSED_LOOP_STATUS.json
+            analysis/*/FULL_SIGNAL_SCORECARD.csv
+            analysis/*/FULL_SIGNAL_SCORECARD_STATUS.json
           if-no-files-found: warn
