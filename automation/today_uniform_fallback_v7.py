@@ -87,7 +87,7 @@ def main():
       'policy':POLICY,'classification':'PRIMARY_ACTUAL_PURCHASE_FALLBACK_AFTER_MODEL_REJECTION',
       'reason':'Strict model validation found no reproducible predictive edge; use the predeclared non-predictive 30-unique diversification fallback rather than force an unvalidated model.',
       'data_sha256':data_sha,'seed_sha256':seed_sha,'selection':'uniform sample of 30 distinct numbers from 1..45, then uniform deterministic partition into five disjoint six-number tickets',
-      'predictive_superiority_claim':false if False else False,
+      'predictive_superiority_claim':False,
       'mathematical_properties':{'ticket_count':5,'numbers_per_ticket':6,'unique_union_size':30,'cross_ticket_overlap':0,'expected_winning_union_coverage':exact_union_expected},
       'walkforward_targets':len(policy),'matched_random_bundles_per_target':MC_PER_TARGET,
       'scorecard':{'policy':ps,'matched_30_unique_random':rs,'diagnostic_delta':delta,'interpretation':'Same probability family by construction; deltas are finite-sample noise and are not used to claim an edge.'},
