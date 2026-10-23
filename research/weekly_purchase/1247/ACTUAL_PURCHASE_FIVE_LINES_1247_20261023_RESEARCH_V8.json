@@ -1,0 +1,24 @@
+{
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "source_report": "analysis/2026-10-23/TODAY_RESEARCH_PORTFOLIO_1247_V8.json",
+  "selection": "Five fixed research roles using only historical model predictions and trailing historical model reliability; no uniform/random fallback used for selection.",
+  "roles": [
+    {"role": "consensus", "line": [3, 13, 14, 37, 38, 45]},
+    {"role": "relation_pair_triple", "line": [2, 5, 8, 13, 28, 37]},
+    {"role": "frequency_gap", "line": [3, 12, 14, 17, 33, 45]},
+    {"role": "recent_structure", "line": [5, 9, 18, 28, 38, 45]},
+    {"role": "ac_crosscheck", "line": [3, 13, 27, 37, 38, 45]}
+  ],
+  "final_lines": [
+    [3, 13, 14, 37, 38, 45],
+    [2, 5, 8, 13, 28, 37],
+    [3, 12, 14, 17, 33, 45],
+    [5, 9, 18, 28, 38, 45],
+    [3, 13, 27, 37, 38, 45]
+  ],
+  "core_signal_note": "Repeated numbers are intentional where multiple studied models agree; cross-line overlap is not artificially removed.",
+  "crosscheck": "V8 top-16 and predeclared V8B top-12 strong-signal variants independently produced the same five current lines.",
+  "strict_portfolio_pass": false,
+  "classification": "RESEARCH_BASED_ACTUAL_PURCHASE_LINES"
+}
