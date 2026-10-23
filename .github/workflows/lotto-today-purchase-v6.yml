@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Enforce validator and write-once freeze implementation
+      - name: Enforce validators and write-once freeze implementation
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -30,6 +30,9 @@ jobs:
           v="x==sorted(x)"
           assert s.count(v)==1
           s=s.replace(v,"list(x)==sorted(x)")
+          q="parsed==current and validate(parsed)"
+          assert s.count(q)==1
+          s=s.replace(q,"parsed==[list(x) for x in current] and validate(parsed)")
           a="'stored_vs_display':'PENDING'"
           assert s.count(a)==1
           s=s.replace(a,"'stored_vs_display':'PASS'")
