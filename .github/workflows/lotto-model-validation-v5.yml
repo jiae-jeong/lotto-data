@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: lotto-model-validation-v5
+  cancel-in-progress: true
+
 jobs:
   validate-all-models:
     runs-on: ubuntu-latest
