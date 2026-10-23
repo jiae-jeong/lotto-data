@@ -1,0 +1,326 @@
+{
+  "created_kst": "2026-10-23T11:50:57.892311+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "ROLLING_META_MODEL_V1_NO_FUTURE_LEAKAGE",
+  "models": [
+    "long_frequency",
+    "current_gap",
+    "frequency_plus_gap",
+    "recent_momentum",
+    "structure_profile",
+    "pair_association",
+    "triple_association",
+    "combined_equal_rank",
+    "A_v2",
+    "C_v2",
+    "contrarian_v2"
+  ],
+  "audit": {
+    "test_targets": [
+      401,
+      1246
+    ],
+    "n_targets": 846,
+    "rolling_window": 200,
+    "multiple_testing_alpha": 0.01,
+    "single_champion": {
+      "observed": {
+        "mean_hits": 0.7943262411347518,
+        "ge2": 0.17494089834515367,
+        "ge3": 0.015366430260047281
+      },
+      "baseline": {
+        "mean_hits": 0.8,
+        "ge2": 0.17530810086113546,
+        "ge3": 0.023834078570323606
+      },
+      "delta": {
+        "mean_hits": -0.005673758865248235,
+        "ge2": -0.000367202515981796,
+        "ge3": -0.008467648310276325
+      },
+      "adjusted_block_bootstrap_ci_delta": {
+        "mean_hits": [
+          -0.06588235294117652,
+          0.05764705882352937
+        ],
+        "ge2": [
+          -0.03228209613300308,
+          0.030365658004112762
+        ]
+      },
+      "positive_50round_block_share_mean_hits": 0.47058823529411764,
+      "pass": false
+    },
+    "top5_portfolio": {
+      "observed": {
+        "max_hits": 1.6182033096926713,
+        "any2": 0.5626477541371159,
+        "any3": 0.08392434988179669,
+        "any4": 0.0035460992907801418
+      },
+      "baseline": {
+        "max_hits": 1.7289354902446274,
+        "any2": 0.6185315341296517,
+        "any3": 0.11362354670380292,
+        "any4": 0.0069480224769914445
+      },
+      "delta": {
+        "max_hits": -0.1107321805519561,
+        "any2": -0.0558837799925358,
+        "any3": -0.029699196822006238,
+        "any4": -0.0034019231862113027
+      },
+      "adjusted_block_bootstrap_ci_delta": {
+        "max_hits": [
+          -0.18775901965639216,
+          -0.03153596305786622
+        ],
+        "any2": [
+          -0.1066550495690816,
+          -0.006238389921613847
+        ],
+        "any3": [
+          -0.056885958051320656,
+          -0.0019845918344442545
+        ]
+      },
+      "positive_50round_block_share_any2": 0.23529411764705882,
+      "pass": false
+    }
+  },
+  "current_ranking": [
+    {
+      "model": "triple_association",
+      "shrunk_mean": 0.8233333333333334,
+      "ge2": 0.2,
+      "ge3": 0.01,
+      "recent50_mean": 0.9
+    },
+    {
+      "model": "long_frequency",
+      "shrunk_mean": 0.8033333333333333,
+      "ge2": 0.175,
+      "ge3": 0.04,
+      "recent50_mean": 0.84
+    },
+    {
+      "model": "structure_profile",
+      "shrunk_mean": 0.79,
+      "ge2": 0.175,
+      "ge3": 0.025,
+      "recent50_mean": 0.7
+    },
+    {
+      "model": "A_v2",
+      "shrunk_mean": 0.7833333333333333,
+      "ge2": 0.16,
+      "ge3": 0.03,
+      "recent50_mean": 0.74
+    },
+    {
+      "model": "C_v2",
+      "shrunk_mean": 0.78,
+      "ge2": 0.155,
+      "ge3": 0.025,
+      "recent50_mean": 0.7
+    },
+    {
+      "model": "frequency_plus_gap",
+      "shrunk_mean": 0.77,
+      "ge2": 0.175,
+      "ge3": 0.02,
+      "recent50_mean": 0.7
+    },
+    {
+      "model": "pair_association",
+      "shrunk_mean": 0.7666666666666667,
+      "ge2": 0.18,
+      "ge3": 0.005,
+      "recent50_mean": 0.62
+    },
+    {
+      "model": "recent_momentum",
+      "shrunk_mean": 0.7333333333333333,
+      "ge2": 0.15,
+      "ge3": 0.01,
+      "recent50_mean": 0.62
+    },
+    {
+      "model": "current_gap",
+      "shrunk_mean": 0.7333333333333333,
+      "ge2": 0.125,
+      "ge3": 0.015,
+      "recent50_mean": 0.92
+    },
+    {
+      "model": "contrarian_v2",
+      "shrunk_mean": 0.7266666666666667,
+      "ge2": 0.14,
+      "ge3": 0.01,
+      "recent50_mean": 0.74
+    },
+    {
+      "model": "combined_equal_rank",
+      "shrunk_mean": 0.7133333333333334,
+      "ge2": 0.12,
+      "ge3": 0.005,
+      "recent50_mean": 0.6
+    }
+  ],
+  "current_predictions": {
+    "long_frequency": [
+      12,
+      13,
+      18,
+      27,
+      33,
+      34
+    ],
+    "current_gap": [
+      3,
+      8,
+      14,
+      17,
+      30,
+      45
+    ],
+    "frequency_plus_gap": [
+      3,
+      12,
+      14,
+      17,
+      33,
+      45
+    ],
+    "recent_momentum": [
+      1,
+      2,
+      18,
+      31,
+      41,
+      44
+    ],
+    "structure_profile": [
+      5,
+      9,
+      15,
+      28,
+      38,
+      40
+    ],
+    "pair_association": [
+      5,
+      11,
+      14,
+      21,
+      26,
+      44
+    ],
+    "triple_association": [
+      2,
+      8,
+      13,
+      25,
+      28,
+      37
+    ],
+    "combined_equal_rank": [
+      13,
+      17,
+      18,
+      33,
+      34,
+      45
+    ],
+    "A_v2": [
+      3,
+      13,
+      27,
+      37,
+      38,
+      45
+    ],
+    "C_v2": [
+      3,
+      13,
+      27,
+      37,
+      38,
+      45
+    ],
+    "contrarian_v2": [
+      22,
+      23,
+      32,
+      42,
+      43,
+      44
+    ]
+  },
+  "current_single_champion": {
+    "model": "triple_association",
+    "ticket": [
+      2,
+      8,
+      13,
+      25,
+      28,
+      37
+    ]
+  },
+  "current_top5_distinct": {
+    "models": [
+      "triple_association",
+      "long_frequency",
+      "structure_profile",
+      "A_v2",
+      "frequency_plus_gap"
+    ],
+    "tickets": [
+      [
+        2,
+        8,
+        13,
+        25,
+        28,
+        37
+      ],
+      [
+        12,
+        13,
+        18,
+        27,
+        33,
+        34
+      ],
+      [
+        5,
+        9,
+        15,
+        28,
+        38,
+        40
+      ],
+      [
+        3,
+        13,
+        27,
+        37,
+        38,
+        45
+      ],
+      [
+        3,
+        12,
+        14,
+        17,
+        33,
+        45
+      ]
+    ]
+  },
+  "model_validated_for_1247": false,
+  "final_status": "NO_VALIDATED_FINAL"
+}
