@@ -53,17 +53,35 @@ jobs:
             git commit -m "data: add verified latest round"
             git push origin HEAD:main
           fi
-      - name: Run strict gated daily MASTER and recover protocol evidence
+      - name: Prepare verified compute base
         shell: bash
         run: |
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
-          python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
-          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
-          test -n "$RUN_DIR"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
+            test -n "$RUN_DIR"
+            python - "$RUN_DIR" <<'PY'
+          import json,sys
+          from pathlib import Path
+          d=Path(sys.argv[1]); v=json.loads((d/'VERIFICATION.json').read_text())
+          assert v.get('compute_status')=='FULL_COMPUTE_COMPLETE'
+          assert int(v.get('data_cutoff',-1))>=1246
+          assert int(v.get('successor_leakage_failures',1))==0
+          PY
+          else
+            python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
+            RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
+            test -n "$RUN_DIR"
+          fi
+          echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
+          echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+      - name: Recover protocol evidence and audit
+        shell: bash
+        run: |
+          set -euo pipefail
           python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-recovery.log"
           python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
-          echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
       - name: Verify all protocol gates
         shell: bash
         run: |
@@ -89,13 +107,11 @@ jobs:
           set -euo pipefail
           DOW="$(TZ=Asia/Seoul date +%u)"
           if [ "$DOW" = "5" ]; then
-            RUN_DATE="$(TZ=Asia/Seoul date +%F)"
             python -B automation/weekly_purchase_final_v2.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/weekly-purchase.log"
           fi
       - name: Preserve validated outputs
         run: |
           set -euo pipefail
-          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git pull --rebase origin main
