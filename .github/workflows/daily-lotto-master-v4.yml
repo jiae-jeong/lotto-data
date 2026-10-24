@@ -18,6 +18,7 @@ on:
       - 'automation/five_role_research_v9.py'
       - 'automation/weekly_purchase_final_v1.py'
       - 'automation/weekly_purchase_final_v2.py'
+      - 'analysis/**/EXTERNAL_DATA_CROSSCHECK.json'
       - '.github/workflows/daily-lotto-master-v4.yml'
 
 permissions:
