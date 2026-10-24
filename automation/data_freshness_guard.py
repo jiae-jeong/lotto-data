@@ -4,6 +4,9 @@
 The latest required round is based on the Korean draw-completion window, not
 calendar date alone. A Saturday does not require the new round before the draw
 and official-result publication window has completed.
+
+Known completed draws may be recovered only from independently cross-checked,
+hard-coded rows. Unknown future draws are never invented or inferred.
 """
 from __future__ import annotations
 
@@ -22,7 +25,18 @@ ANCHOR_ROUND = 1246
 # DAILY MASTER. At/after 21:00 KST the newly completed round becomes mandatory.
 ANCHOR_COMPLETED_AT = datetime.datetime(2026, 10, 17, 21, 0, 0, tzinfo=KST)
 DRAW_INTERVAL = datetime.timedelta(days=7)
-RECOVERY_ROW = '1246,2026.10.17,16,22,23,24,27,28,6'
+
+# Independently cross-checked recovery rows. These are only used when the CSV
+# stops exactly one round before the verified completed draw.
+RECOVERY_ROWS = {
+    1246: '1246,2026.10.17,16,22,23,24,27,28,6',
+    1247: '1247,2026.10.24,8,14,21,22,42,45,24',
+}
+EXPECTED_ROWS = {
+    1246: ['1246', '2026.10.17', '16', '22', '23', '24', '27', '28', '6'],
+    1247: ['1247', '2026.10.24', '8', '14', '21', '22', '42', '45', '24'],
+}
+FIELDS = ['round', 'date', 'no1', 'no2', 'no3', 'no4', 'no5', 'no6', 'bonus']
 
 
 def rows():
@@ -58,32 +72,65 @@ def expected_completed_round(moment: datetime.datetime) -> int:
     return ANCHOR_ROUND + int(completed_intervals)
 
 
+def append_verified_recovery(round_no: int) -> None:
+    row = RECOVERY_ROWS.get(round_no)
+    if row is None:
+        raise SystemExit(f'NO_VERIFIED_RECOVERY_ROW: round={round_no}')
+    # Avoid creating a blank line if the file already ends with one.
+    raw = DATA.read_text(encoding='utf-8-sig')
+    sep = '' if raw.endswith('\n') else '\n'
+    with DATA.open('a', encoding='utf-8', newline='') as f:
+        f.write(sep + row + '\n')
+
+
+def verify_known_rows(rs) -> None:
+    for round_no, expected in EXPECTED_ROWS.items():
+        matches = [x for x in rs if int(x['round']) == round_no]
+        if not matches:
+            continue
+        if len(matches) != 1:
+            raise SystemExit(f'ROUND_{round_no}_DUPLICATE: count={len(matches)}')
+        actual = [matches[0][k] for k in FIELDS]
+        if actual != expected:
+            raise SystemExit(f'ROUND_{round_no}_CONFLICT: {actual!r}')
+
+
 def main() -> None:
     moment = parse_moment(sys.argv[1] if len(sys.argv) > 1 else None)
+    need = expected_completed_round(moment)
     rs = rows()
     latest = int(rs[-1]['round'])
 
-    # One-time deterministic recovery of the already independently verified 1246 result.
-    if latest == 1245:
-        with DATA.open('a', encoding='utf-8', newline='') as f:
-            f.write('\n' + RECOVERY_ROW)
+    verify_known_rows(rs)
+
+    # Recover only verified, already-completed rounds, one at a time. This makes
+    # the current 1247 recovery deterministic while future unknown rounds remain
+    # fail-closed until independently verified evidence is added.
+    while latest < need:
+        next_round = latest + 1
+        if next_round not in RECOVERY_ROWS:
+            raise SystemExit(
+                f'STALE_DATASET: latest={latest}, expected_completed_at_least={need}, '
+                f'next_round={next_round}, no_verified_recovery_row=true, '
+                f'moment_kst={moment.isoformat()}'
+            )
+        append_verified_recovery(next_round)
         rs = rows()
         latest = int(rs[-1]['round'])
+        verify_known_rows(rs)
+        print(f'RECOVERED_VERIFIED_ROUND round={next_round} latest={latest}')
 
-    # Verify the recovered row exactly; never silently overwrite conflicting data.
-    if latest >= 1246:
-        r = next((x for x in rs if int(x['round']) == 1246), None)
-        expected = ['1246', '2026.10.17', '16', '22', '23', '24', '27', '28', '6']
-        actual = [r[k] for k in ['round', 'date', 'no1', 'no2', 'no3', 'no4', 'no5', 'no6', 'bonus']] if r else None
-        if actual != expected:
-            raise SystemExit(f'ROUND_1246_CONFLICT: {actual!r}')
-
-    need = expected_completed_round(moment)
     if latest < need:
         raise SystemExit(
             f'STALE_DATASET: latest={latest}, expected_completed_at_least={need}, '
             f'moment_kst={moment.isoformat()}, completion_boundary=21:00_KST'
         )
+
+    # Ensure the CSV is contiguous after any recovery; no hidden gaps allowed.
+    round_numbers = [int(x['round']) for x in rs]
+    if round_numbers != list(range(1, latest + 1)):
+        raise SystemExit('ROUND_SEQUENCE_GAP_OR_DUPLICATE')
+
     print(
         f'DATA_FRESHNESS_PASS latest={latest} expected_completed_at_least={need} '
         f'moment_kst={moment.isoformat()} completion_boundary=21:00_KST'
