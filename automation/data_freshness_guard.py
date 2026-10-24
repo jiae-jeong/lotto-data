@@ -17,9 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'lotto_data.csv'
 KST = ZoneInfo('Asia/Seoul')
 ANCHOR_ROUND = 1246
-# Use 21:00 KST as a conservative completion/publication boundary. Before this
-# time on Saturday, the previous Saturday's draw remains the latest completed
-# round required by DAILY MASTER.
+# Conservative completion/publication boundary. Before 21:00 KST on Saturday,
+# the previous Saturday's round is still the latest completed round required by
+# DAILY MASTER. At/after 21:00 KST the newly completed round becomes mandatory.
 ANCHOR_COMPLETED_AT = datetime.datetime(2026, 10, 17, 21, 0, 0, tzinfo=KST)
 DRAW_INTERVAL = datetime.timedelta(days=7)
 RECOVERY_ROW = '1246,2026.10.17,16,22,23,24,27,28,6'
@@ -31,12 +31,19 @@ def rows():
 
 
 def parse_moment(value: str | None) -> datetime.datetime:
+    now = datetime.datetime.now(KST)
     if not value:
-        return datetime.datetime.now(KST)
+        return now
     text = value.strip()
-    # Backward compatibility for older callers that passed only YYYY-MM-DD.
+    # The existing workflow passes YYYY-MM-DD. When that date is today in KST,
+    # use the live KST clock so Saturday pre-draw and post-draw are distinguished.
     if len(text) == 10:
-        return datetime.datetime.combine(datetime.date.fromisoformat(text), datetime.time.min, tzinfo=KST)
+        day = datetime.date.fromisoformat(text)
+        if day == now.date():
+            return now
+        # Historical/replay callers remain deterministic unless they pass an
+        # explicit ISO timestamp.
+        return datetime.datetime.combine(day, datetime.time.min, tzinfo=KST)
     moment = datetime.datetime.fromisoformat(text)
     if moment.tzinfo is None:
         moment = moment.replace(tzinfo=KST)
