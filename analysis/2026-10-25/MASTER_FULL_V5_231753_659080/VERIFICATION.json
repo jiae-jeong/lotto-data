@@ -1,0 +1,60 @@
+{
+  "status": "FULL_COMPLETE",
+  "date": "2026-10-25",
+  "data_cutoff": 1247,
+  "base_v4": "analysis/2026-10-25/MASTER_FULL_V4_231011_704730",
+  "targets_expected": 1047,
+  "successor_prediction_records": 3141,
+  "successor_counts": {
+    "A_v2": 1047,
+    "C_v2": 1047,
+    "contrarian_v2": 1047
+  },
+  "successor_leakage_failures": 0,
+  "successor_scorecard_rows": 3,
+  "successor_block_rows": 63,
+  "signal_ablation_rows": 12,
+  "historical_source_candidates": 24,
+  "portfolio_policy_version": "RESEARCH_ONLY_FIVE_TICKET_V1",
+  "portfolio_targets": 1047,
+  "portfolio_random_bundles_total": 1047000,
+  "portfolio_research_only": true,
+  "mandatory_checks": {
+    "latest_data_integrity": true,
+    "fresh_cumulative_stats": true,
+    "B_full_walkforward": true,
+    "fresh_random_baseline": true,
+    "historical_source_search": true,
+    "A_full_walkforward": true,
+    "C_full_walkforward": true,
+    "contrarian_full_walkforward": true,
+    "AC_contrarian_leakage": true,
+    "successor_scorecard_complete": true,
+    "successor_random_comparison": true,
+    "successor_block_stability": true,
+    "successor_signal_ablation": true,
+    "five_ticket_portfolio_walkforward": true,
+    "five_ticket_matched_random_baseline": true,
+    "model_scorecard_complete": true,
+    "hypothesis_registry_written": true
+  },
+  "data_sha256": "a209067bf068bcc7d85fe09f8a5d725cd1359ec48bf550f8af4aa0c9bc2ba951",
+  "successor_source_sha256": "5dab413a2b0bf9db45bd587d1650787ca6c9b073563c541bb15c2c2d2ff1e012",
+  "compute_status": "FULL_COMPUTE_COMPLETE",
+  "protocol_status": "FULL_COMPLETE",
+  "protocol_checks": {
+    "full_compute_execution": true,
+    "external_two_source_crosscheck": true,
+    "historical_errornote_aggregate_present": true,
+    "historical_errornote_closed_loop_complete": true,
+    "full_signal_scorecard": true,
+    "numeric_13_section_report": true
+  },
+  "protocol_missing": [],
+  "protocol_evidence": {
+    "external_crosscheck": "analysis/2026-10-25/EXTERNAL_DATA_CROSSCHECK.json",
+    "historical_closed_loop": "analysis/2026-10-25/HISTORICAL_CLOSED_LOOP_STATUS.json",
+    "full_signal_scorecard": "analysis/2026-10-25/FULL_SIGNAL_SCORECARD_STATUS.json",
+    "numeric_report": "analysis/2026-10-25/MASTER_FULL_V5_231753_659080/PROTOCOL_AUDIT_13_SECTION.md"
+  }
+}
