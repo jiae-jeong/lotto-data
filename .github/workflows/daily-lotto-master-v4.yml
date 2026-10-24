@@ -3,7 +3,7 @@ name: daily-lotto-master-v5
 on:
   schedule:
     - cron: '0 23 * * *'
-    - cron: '15 0 * * *'  # 09:15 KST fallback if primary scheduled event is missed
+    - cron: '15 0 * * *'
   workflow_dispatch:
   push:
     branches: [main]
@@ -39,10 +39,12 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Recover verified data and enforce freshness
+
+      - name: Enforce draw-time-aware data freshness
         shell: bash
         run: |
           set -euo pipefail
@@ -55,36 +57,26 @@ jobs:
             git commit -m "data: add verified latest round"
             git push origin HEAD:main
           fi
-      - name: Prepare verified compute base
+
+      - name: Run full DAILY MASTER compute
         shell: bash
         run: |
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
-          if [ "${{ github.event_name }}" = "push" ]; then
-            RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
-            test -n "$RUN_DIR"
-            python - "$RUN_DIR" <<'PY'
-          import json,sys
-          from pathlib import Path
-          d=Path(sys.argv[1]); v=json.loads((d/'VERIFICATION.json').read_text())
-          assert v.get('compute_status')=='FULL_COMPUTE_COMPLETE'
-          assert int(v.get('data_cutoff',-1))>=1246
-          assert int(v.get('successor_leakage_failures',1))==0
-          PY
-          else
-            python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
-            RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
-            test -n "$RUN_DIR"
-          fi
+          python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
+          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
+          test -n "$RUN_DIR"
           echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+
       - name: Recover protocol evidence and audit
         shell: bash
         run: |
           set -euo pipefail
           python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-recovery.log"
           python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
-      - name: Verify all protocol gates
+
+      - name: Verify all MASTER protocol gates
         shell: bash
         run: |
           set -euo pipefail
@@ -94,15 +86,31 @@ jobs:
           d=Path(sys.argv[1])
           v=json.loads((d/'VERIFICATION.json').read_text())
           a=json.loads((d/'PROTOCOL_AUDIT.json').read_text())
-          required_compute={'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward','fresh_random_baseline','historical_source_search','A_full_walkforward','C_full_walkforward','contrarian_full_walkforward','AC_contrarian_leakage','successor_scorecard_complete','successor_random_comparison','successor_block_stability','successor_signal_ablation','five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline','model_scorecard_complete','hypothesis_registry_written'}
-          required_protocol={'full_compute_execution','external_two_source_crosscheck','historical_errornote_aggregate_present','historical_errornote_closed_loop_complete','full_signal_scorecard','numeric_13_section_report'}
+          required_compute={
+              'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward',
+              'fresh_random_baseline','historical_source_search','A_full_walkforward',
+              'C_full_walkforward','contrarian_full_walkforward','AC_contrarian_leakage',
+              'successor_scorecard_complete','successor_random_comparison',
+              'successor_block_stability','successor_signal_ablation',
+              'five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline',
+              'model_scorecard_complete','hypothesis_registry_written'
+          }
+          required_protocol={
+              'full_compute_execution','external_two_source_crosscheck',
+              'historical_errornote_aggregate_present',
+              'historical_errornote_closed_loop_complete','full_signal_scorecard',
+              'numeric_13_section_report'
+          }
           assert v['compute_status']=='FULL_COMPUTE_COMPLETE'
-          assert required_compute.issubset(v['mandatory_checks']) and all(v['mandatory_checks'][k] for k in required_compute)
-          assert v['data_cutoff']>=1246 and v['successor_leakage_failures']==0
+          assert required_compute.issubset(v['mandatory_checks'])
+          assert all(v['mandatory_checks'][k] for k in required_compute)
+          assert v['successor_leakage_failures']==0
           assert a['protocol_status']=='FULL_COMPLETE', a
           assert v['protocol_status']=='FULL_COMPLETE', v.get('protocol_missing')
-          assert required_protocol.issubset(a['protocol_checks']) and all(a['protocol_checks'][k] for k in required_protocol)
+          assert required_protocol.issubset(a['protocol_checks'])
+          assert all(a['protocol_checks'][k] for k in required_protocol)
           PY
+
       - name: Run Friday validation and adaptive nonrandom research
         shell: bash
         run: |
@@ -121,7 +129,6 @@ jobs:
           cutoff=int(rows[-1]['round']); target=cutoff+1
           research_report=Path('analysis')/date/f'FIVE_ROLE_RESEARCH_{target}_V9.json'
           research=json.loads(research_report.read_text())
-
           assert research['data_cutoff']==cutoff
           assert research['target_round']==target
           assert research['no_future_leakage'] is True
@@ -130,13 +137,10 @@ jobs:
           assert integ['five_distinct_roles'] is True
           assert integ['selection_uses_randomness'] is False
           assert integ['random_fallback_allowed'] is False
-
           outdir=Path('research')/'weekly_purchase'/str(target)
           outdir.mkdir(parents=True,exist_ok=True)
           gate={
-            'target_round':target,
-            'date_kst':date,
-            'data_cutoff':cutoff,
+            'target_round':target,'date_kst':date,'data_cutoff':cutoff,
             'strict_model_validation_report':str(strict_report),
             'validated_models':strict['validated_models'],
             'model_verdict':strict['verdict'],
@@ -148,25 +152,39 @@ jobs:
           }
           if strict['validated_models']:
             gate['purchase_model_status']='STRICT_VALIDATED_MODELS_AVAILABLE_WITH_FIVE_ROLE_RESEARCH_OUTPUT'
-            gate['reason']='Strict validation found at least one model. Keep the five roles distinct and deterministic; random final selection remains prohibited.'
           else:
             gate['purchase_model_status']='NO_STRICT_EDGE_CONTINUE_NONRANDOM_RESEARCH'
-            gate['reason']='Strict edge was not proven. Do not block research and do not replace it with random numbers; retain the deterministic five-role result, record failed gates, and feed them into the next study cycle.'
           p=outdir/f"MODEL_GATE_{target}_{date.replace('-','')}.json"
           p.write_text(json.dumps(gate,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print(json.dumps(gate,ensure_ascii=False))
           PY
           fi
+
       - name: Preserve validated outputs
+        shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git pull --rebase origin main
           git add -- "analysis/$RUN_DATE" research/weekly_purchase
-          git diff --cached --quiet && exit 0
-          git commit -m "research: protocol-full daily master and adaptive nonrandom Friday research $RUN_DATE"
-          git push origin HEAD:main
+          if git diff --cached --quiet; then
+            echo 'No generated output changes to commit.'
+            exit 0
+          fi
+          git commit -m "research: protocol-full daily master $RUN_DATE"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+            fi
+            git rebase --abort || true
+            sleep $((attempt * 2))
+          done
+          echo 'Failed to preserve validated outputs after 3 rebase/push attempts.' >&2
+          exit 1
+
       - name: Preserve failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
