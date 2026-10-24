@@ -1,0 +1,30 @@
+{
+  "generated_kst": "2026-10-25T06:14:03.694484+09:00",
+  "full_signal_scorecard_complete": true,
+  "scope": "all signal families that directly affect the operational five-ticket selector, plus fresh A/C/contrarian ablations and B pair/triple model evidence",
+  "active_weekly_signal_families": [
+    "recent30",
+    "gap",
+    "momentum",
+    "balanced",
+    "contrarian"
+  ],
+  "active_weekly_signal_rows": 5,
+  "active_walkforward_targets_each": 1047,
+  "model_ablation_rows": 12,
+  "model_ablation_signals": [
+    "gap",
+    "long_frequency",
+    "pair",
+    "recent_100"
+  ],
+  "pair_triple_scorecard_present": true,
+  "successor_leakage_failures": 0,
+  "evidence": {
+    "active_scorecard": "analysis/2026-10-25/FULL_SIGNAL_SCORECARD.csv",
+    "successor_ablation": "analysis/2026-10-25/MASTER_FULL_V5_211403_199083/AC_CONTRARIAN_SIGNAL_ABLATION.csv",
+    "b_model_scorecard": "analysis/2026-10-25/MASTER_FULL_V4_210727_237567/B_MODEL_SCORECARD.csv"
+  },
+  "partially_covered_inside_structure_profile_but_not_isolated": [],
+  "integrity_note": "No target-1247 outcome is read. Every predictive signal row is evaluated only after constructing its ticket from prior draws."
+}
