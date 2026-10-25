@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-25",
+  "compute_status": "FULL_COMPUTE_COMPLETE",
+  "protocol_status": "FULL_COMPLETE",
+  "protocol_checks": {
+    "full_compute_execution": true,
+    "external_two_source_crosscheck": true,
+    "historical_errornote_aggregate_present": true,
+    "historical_errornote_closed_loop_complete": true,
+    "full_signal_scorecard": true,
+    "numeric_13_section_report": true
+  },
+  "missing_compute_keys": [],
+  "failed_compute_keys": [],
+  "protocol_missing": []
+}

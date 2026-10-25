@@ -1,0 +1,7 @@
+{
+  "study_id": "DAILY_MASTER_FULL_V5_STRICT",
+  "status": "FULL_COMPLETE",
+  "data_cutoff": 1247,
+  "executed": true,
+  "full_complete_requires_all_metric_gates": true
+}
