@@ -1,0 +1,80 @@
+{
+  "generated_kst": "2026-10-28T08:14:15.524951+09:00",
+  "scope": "all completed rounds with authentic preserved research/weekly_purchase FINAL_FIVE_LINES artifacts; missing older originals are not reconstructed",
+  "data_cutoff": 1247,
+  "completed_preserved_targets_found": 2,
+  "verified_round_count": 2,
+  "verified_purchase_lines": 10,
+  "aggregate_hit_distribution": {
+    "0": 1,
+    "1": 7,
+    "2": 1,
+    "3": 1,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "mean_main_hits_per_line": 1.2,
+  "rate_ge2": 0.2,
+  "rate_ge3": 0.1,
+  "rate_ge4": 0.0,
+  "closed_loop_complete": true,
+  "invalid_or_unreviewable_preserved_records": [],
+  "reviews": [
+    {
+      "target_round": 1246,
+      "source": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+      "training_cutoff": 1245,
+      "winning_numbers": [
+        16,
+        22,
+        23,
+        24,
+        27,
+        28
+      ],
+      "bonus": 6,
+      "line_hits": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "max_hits": 1,
+      "winning_union_coverage": 4,
+      "ticket_union_size": 21,
+      "duplicate_preserved_versions": 0
+    },
+    {
+      "target_round": 1247,
+      "source": "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023.json",
+      "training_cutoff": 1246,
+      "winning_numbers": [
+        8,
+        14,
+        21,
+        22,
+        42,
+        45
+      ],
+      "bonus": 24,
+      "line_hits": [
+        1,
+        3,
+        0,
+        1,
+        2
+      ],
+      "max_hits": 3,
+      "winning_union_coverage": 5,
+      "ticket_union_size": 20,
+      "duplicate_preserved_versions": 3
+    }
+  ],
+  "error_note": {
+    "latest_completed_review": 1247,
+    "finding": "No forced diagnosis beyond measured hit/coverage metrics.",
+    "action_for_next_policy": "Increase cross-line unique-number coverage and reduce redundant reuse; do not manually chase the missed winning numbers or change weights from one outcome alone."
+  }
+}
