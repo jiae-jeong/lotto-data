@@ -1,0 +1,58 @@
+{
+  "max_hits": {
+    "policy_mean": 1.6628462273161413,
+    "matched_random_mean": 1.7288404966571156,
+    "delta": -0.0659942693409743
+  },
+  "any_ge2": {
+    "policy_mean": 0.5749761222540593,
+    "matched_random_mean": 0.6181919770773638,
+    "delta": -0.04321585482330459
+  },
+  "any_ge3": {
+    "policy_mean": 0.0936007640878701,
+    "matched_random_mean": 0.11361127029608405,
+    "delta": -0.020010506208213943
+  },
+  "any_ge4": {
+    "policy_mean": 0.007640878701050621,
+    "matched_random_mean": 0.006964660936007641,
+    "delta": 0.0006762177650429793
+  },
+  "any_ge5": {
+    "policy_mean": 0.0,
+    "matched_random_mean": 0.00016523400191021967,
+    "delta": -0.00016523400191021967
+  },
+  "any_ge6": {
+    "policy_mean": 0.0,
+    "matched_random_mean": 9.551098376313277e-07,
+    "delta": -9.551098376313277e-07
+  },
+  "winning_union_coverage": {
+    "policy_mean": 2.848137535816619,
+    "matched_random_mean": 3.0660936007640878,
+    "delta": -0.21795606494746878
+  },
+  "ticket_union_size": {
+    "policy_mean": 21.69149952244508,
+    "matched_random_mean": 22.997605539637057,
+    "delta": -1.3061060171919756
+  },
+  "mean_pair_overlap": {
+    "policy_mean": 0.9060171919770774,
+    "matched_random_mean": 0.799966284622732,
+    "delta": 0.10605090735434541
+  },
+  "max_pair_overlap": {
+    "policy_mean": 3.927411652340019,
+    "matched_random_mean": 2.0945463228271253,
+    "delta": 1.8328653295128938
+  },
+  "policy_version": "RESEARCH_ONLY_FIVE_TICKET_V1",
+  "targets": 1047,
+  "random_bundles_per_target": 1000,
+  "random_bundles_total": 1047000,
+  "research_only": true,
+  "promotion_to_weekly_policy": false
+}
