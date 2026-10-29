@@ -1,28 +1,41 @@
 {
   "date_kst": "2026-10-30",
-  "data_cutoff": 1247,
+  "repo_data_cutoff": 1247,
+  "repo_round": {
+    "round": 1247,
+    "draw_date": "2026-10-24",
+    "main_numbers": [8, 14, 21, 22, 42, 45],
+    "bonus": 24,
+    "source": "lotto_data.csv"
+  },
   "official_source_attempt": {
-    "source": "동행복권",
-    "url": "https://www.dhlottery.co.kr/",
-    "status": "access_limited_from_automation_environment"
+    "name": "Donghaeng Lottery",
+    "url": "https://www.dhlottery.co.kr/lt645/winNumber",
+    "note": "Official results access was limited in the automation environment, so it is not counted as one of the two fallback confirmations."
   },
   "fallback_sources": [
     {
-      "source": "연합뉴스",
+      "name": "Yonhap News Agency",
       "url": "https://www.yna.co.kr/amp/view/AKR20261024052300002",
-      "published": "2026-10-24",
+      "published": "2026-10-24T20:49:00+09:00",
       "round": 1247,
-      "agreement": true
+      "draw_date": "2026-10-24",
+      "main_numbers": [8, 14, 21, 22, 42, 45],
+      "bonus": 24
     },
     {
-      "source": "뉴시스",
+      "name": "Newsis",
       "url": "https://nwww.newsis.com/view/NISX20261024_0003839705",
       "published": "2026-10-24",
       "round": 1247,
-      "agreement": true
+      "draw_date": "2026-10-24",
+      "main_numbers": [8, 14, 21, 22, 42, 45],
+      "bonus": 24
     }
   ],
-  "independent_sources_checked": 2,
-  "agreement": true,
-  "note": "Winning-number identities intentionally omitted from this evidence file; both sources independently report the same round result and bonus. This file records source/provenance evidence for the protocol gate."
+  "independent_fallback_sources_agree": true,
+  "repo_vs_fallback_round_and_date_match": true,
+  "repo_vs_fallback_numbers_match": true,
+  "status": "PASS",
+  "integrity_note": "Two separately published news records agree with each other and with the repository's completed-round record. No target-1248 outcome exists or was used."
 }
