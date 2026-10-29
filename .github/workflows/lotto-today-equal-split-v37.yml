@@ -1,0 +1,53 @@
+name: lotto-today-equal-split-v37
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-equal-split-v37.yml'
+      - 'automation/today_equal_split_ensemble_v37.py'
+permissions:
+  contents: write
+jobs:
+  validate-v37:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V37
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_equal_split_ensemble_v37.py | tee "$RUNNER_TEMP/v37.log"
+      - name: Verify V37 twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-30/TODAY_EQUAL_SPLIT_ENSEMBLE_1248_V37.json').read_text())
+          lines=d['current']['lines']
+          def validate(lines):
+              assert len(lines)==5
+              assert len({tuple(x) for x in lines})==5
+              assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(isinstance(n,int) and 1<=n<=45 for n in x) for x in lines)
+              return True
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert validate(lines) and validate(lines)
+          print(json.dumps({'validator_pass_1':True,'validator_pass_2':True,'strict_pass':d['inference']['strict_portfolio_pass'],'lines':lines,'old_template':d['current']['old_template'],'mw_template':d['current']['mw_template']},ensure_ascii=False))
+          PY
+      - name: Commit V37 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_EQUAL_SPLIT_ENSEMBLE_1248_V37.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: fixed equal-split ensemble v37 for 1248'
+          git pull --rebase origin main
+          git push origin HEAD:main
