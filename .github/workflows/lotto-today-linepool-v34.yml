@@ -1,0 +1,49 @@
+name: lotto-today-linepool-v34
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-linepool-v34.yml'
+      - 'automation/today_linepool_selector_v34.py'
+permissions:
+  contents: write
+jobs:
+  validate-v34:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V34
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_linepool_selector_v34.py | tee "$RUNNER_TEMP/v34.log"
+      - name: Verify V34
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-30/TODAY_LINEPOOL_SELECTOR_1248_V34.json').read_text())
+          lines=d['current']['lines']
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'lines':lines,'slots':d['current']['selected_tail_slots']},ensure_ascii=False))
+          PY
+      - name: Commit V34 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_LINEPOOL_SELECTOR_1248_V34.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: prequential line-pool selector v34 for 1248'
+          git pull --rebase origin main
+          git push origin HEAD:main
