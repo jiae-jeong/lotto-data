@@ -1,0 +1,49 @@
+name: lotto-today-dualtail-expert-v33
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-dualtail-expert-v33.yml'
+      - 'automation/today_dualtail_expert_v33.py'
+permissions:
+  contents: write
+jobs:
+  validate-v33:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V33
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_dualtail_expert_v33.py | tee "$RUNNER_TEMP/v33.log"
+      - name: Verify V33
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-30/TODAY_DUALTAIL_EXPERT_1248_V33.json').read_text())
+          lines=d['current']['lines']
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'lines':lines,'expert':d['current']['chosen_expert']},ensure_ascii=False))
+          PY
+      - name: Commit V33 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_DUALTAIL_EXPERT_1248_V33.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: prequential dual-tail expert v33 for 1248'
+          git pull --rebase origin main
+          git push origin HEAD:main
