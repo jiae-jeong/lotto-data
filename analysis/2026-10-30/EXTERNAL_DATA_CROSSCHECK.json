@@ -1,0 +1,28 @@
+{
+  "date_kst": "2026-10-30",
+  "data_cutoff": 1247,
+  "official_source_attempt": {
+    "source": "동행복권",
+    "url": "https://www.dhlottery.co.kr/",
+    "status": "access_limited_from_automation_environment"
+  },
+  "fallback_sources": [
+    {
+      "source": "연합뉴스",
+      "url": "https://www.yna.co.kr/amp/view/AKR20261024052300002",
+      "published": "2026-10-24",
+      "round": 1247,
+      "agreement": true
+    },
+    {
+      "source": "뉴시스",
+      "url": "https://nwww.newsis.com/view/NISX20261024_0003839705",
+      "published": "2026-10-24",
+      "round": 1247,
+      "agreement": true
+    }
+  ],
+  "independent_sources_checked": 2,
+  "agreement": true,
+  "note": "Winning-number identities intentionally omitted from this evidence file; both sources independently report the same round result and bonus. This file records source/provenance evidence for the protocol gate."
+}
