@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/lotto-today-twostage-overlap-v69.yml'
       - 'automation/today_twostage_overlap_v69.py'
+      - 'automation/today_twostage_overlap_v69fix.py'
 permissions:
   contents: read
 jobs:
@@ -29,7 +30,7 @@ jobs:
           MODE: ${{ matrix.mode }}
         run: |
           set -euo pipefail
-          V69_MODE="$MODE" python -B automation/today_twostage_overlap_v69.py
+          V69_MODE="$MODE" python -B automation/today_twostage_overlap_v69fix.py
       - name: Print strict result
         shell: bash
         env:
