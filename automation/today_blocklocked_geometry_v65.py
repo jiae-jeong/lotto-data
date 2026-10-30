@@ -56,7 +56,7 @@ newsel="""newsel=\"\"\"  if idx<400:
    if (idx-400)%50==0:
     def ds(n,k):return [float(q[k])-float(NULLS[n][k]) for q in list(hist[n])[-150:]]
     def blocks(v):return [statistics.mean(v[i:i+50]) for i in range(0,len(v),50) if len(v[i:i+50])>=40]
-    def share(v):
+    def pshare(v):
      b=blocks(v);return sum(x>0 for x in b)/len(b) if b else 0.
     def lb(v):
      if len(v)<40:return -999.
@@ -64,7 +64,7 @@ newsel="""newsel=\"\"\"  if idx<400:
     def key(n):
      vm,v2,v3=ds(n,'max_hits'),ds(n,'any2'),ds(n,'any3')
      if len(vm)<50:return (-999.,)*10
-     lm,l2,l3=lb(vm),lb(v2),lb(v3);pm,p2,p3=share(vm),share(v2),share(v3)
+     lm,l2,l3=lb(vm),lb(v2),lb(v3);pm,p2,p3=pshare(vm),pshare(v2),pshare(v3)
      mm,m2,m3=statistics.mean(vm),statistics.mean(v2),statistics.mean(v3)
      if mode=='protect23':return (l3>0,lm>0,p3>=2/3,pm>=2/3,p2>=2/3,l2,p2,l3,lm,n)
      if mode=='share23':return (p3>=2/3,pm>=2/3,p2,l2,l3,lm,m2,m3,mm,n)
