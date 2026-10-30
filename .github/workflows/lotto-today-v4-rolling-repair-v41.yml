@@ -1,0 +1,53 @@
+name: lotto-today-v4-rolling-repair-v41
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-v4-rolling-repair-v41.yml'
+      - 'automation/today_v4_rolling_repair_v41.py'
+      - 'automation/today_v4_repair_selector_v39.py'
+permissions:
+  contents: write
+jobs:
+  validate-v41:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V41
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_v4_rolling_repair_v41.py | tee "$RUNNER_TEMP/v41.log"
+      - name: Verify V41
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/2026-10-30/TODAY_V4_ROLLING_REPAIR_1248_V41.json')
+          d=json.loads(p.read_text())
+          L=d['current']['lines']
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert len(L)==5 and len({tuple(x) for x in L})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(isinstance(n,int) and 1<=n<=45 for n in x) for x in L)
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'policy':d['current']['chosen_policy'],'lines':L},ensure_ascii=False))
+          PY
+      - name: Commit V41 report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_V4_ROLLING_REPAIR_1248_V41.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: rolling frozen V4 repair v41 for 1248'
+          git pull --rebase origin main
+          git push origin HEAD:main
