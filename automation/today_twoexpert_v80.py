@@ -10,6 +10,8 @@ assert expanded in src
 src=src.replace(expanded,\"('top6x2','x2')\")
 assert \"SIGNALS=('H','M')\" in src
 src=src.replace(\"SIGNALS=('H','M')\",\"SIGNALS=('H',)\")
+src=src.replace(\"locked='H:repeat1'\",\"locked='H:top6x2'\")
+src=src.replace(\"chosen='H:repeat1'\",\"chosen='H:top6x2'\")
 oldline=\"     if mode=='any3guard':return (lbs[2],ps[2],lbs[1],ps[1],lbs[0],means[1],n)\"
 newline=\"     if mode=='any3guard':return (lbs[2]>0,ps[2]>=2/3,lbs[0]>0,ps[0]>=2/3,ps[1],lbs[1],means[1],means[2],means[0],n)\"
 assert oldline in src
