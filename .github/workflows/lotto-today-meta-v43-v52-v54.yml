@@ -1,0 +1,50 @@
+name: lotto-today-meta-v43-v52-v54
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-meta-v43-v52-v54.yml'
+      - 'automation/today_meta_v43_v52_v54.py'
+permissions:
+  contents: write
+jobs:
+  validate-v54:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V54
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_meta_v43_v52_v54.py | tee "$RUNNER_TEMP/v54.log"
+      - name: Verify strict result
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/2026-10-30/TODAY_META_V43_V52_1248_V54.json')
+          d=json.loads(p.read_text())
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'meta_current':d.get('meta_current'),'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy']},ensure_ascii=False))
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert len(d['current']['lines'])==5 and all(len(x)==6 and len(set(x))==6 and all(1<=n<=45 for n in x) for x in d['current']['lines'])
+          PY
+      - name: Commit V54 evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_META_V43_V52_1248_V54.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: store V54 strict meta result'
+          git pull --rebase origin main
+          git push origin HEAD:main
