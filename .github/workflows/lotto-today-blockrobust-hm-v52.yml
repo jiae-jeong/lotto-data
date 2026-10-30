@@ -5,13 +5,11 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/lotto-today-blockrobust-hm-v52.yml'
-      - 'automation/today_blockrobust_hm_v52.py'
-      - 'automation/today_blockrobust_hm_v53.py'
-      - 'automation/today_static_hm_v55.py'
+      - 'automation/today_distributed_hm_v56.py'
 permissions:
   contents: read
 jobs:
-  validate-v55:
+  validate-v56:
     strategy:
       fail-fast: false
       matrix:
@@ -25,13 +23,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run one V55 static policy
+      - name: Run one V56 distributed policy
         shell: bash
         env:
           POLICY: ${{ matrix.policy }}
         run: |
           set -euo pipefail
-          STATIC_POLICY="$POLICY" python -B automation/today_static_hm_v55.py
+          DIST_POLICY="$POLICY" python -B automation/today_distributed_hm_v56.py
       - name: Print strict result
         shell: bash
         env:
@@ -41,7 +39,7 @@ jobs:
           python - <<'PY'
           import json, os
           p=os.environ['POLICY']; tag=p.replace(':','_')
-          f=f'analysis/2026-10-30/TODAY_STATIC_HM_{tag}_1248_V55.json'
+          f=f'analysis/2026-10-30/TODAY_DISTRIBUTED_HM_{tag}_1248_V56.json'
           d=json.load(open(f))
           print(json.dumps({'policy':p,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines']},ensure_ascii=False))
           PY
