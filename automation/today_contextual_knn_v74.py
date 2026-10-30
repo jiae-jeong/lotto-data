@@ -50,7 +50,7 @@ new="""newsel=\"\"\"  top10={k:set(sorted(range(1,46),key=lambda n:(-scores[k][n
 assert old in src
 src=src.replace(old,new)
 oldhist="for n,Q in policies.items():hist[n].append(met(Q,actual))"
-newhist="ctxhist.append((feat,{n:met(Q,actual) for n,Q in policies.items()}))\n  for n,Q in policies.items():hist[n].append(met(Q,actual))"
+newhist="ctxhist.append((feat,{n:met(Q,actual) for n,Q in policies.items()}))\\n  for n,Q in policies.items():hist[n].append(met(Q,actual))"
 assert oldhist in src
 src=src.replace(oldhist,newhist)
 src=src.replace("'selection':'V63 {mode}: deterministic online expert selection among H/M x disjoint/top6/top10 geometries using only prior <=150 outcomes; exact geometry-specific null; strict gate unchanged.'","'selection':'V74 contextual kNN: current choice uses only model-state features available before draw (blend concentration and slow/medium/fast top10 agreement), 100 nearest prior contexts from <=300 history, and their realized geometry deltas. No current/future outcome enters selection; exact geometry null and strict gate unchanged.'")
