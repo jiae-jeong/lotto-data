@@ -8,43 +8,39 @@ on:
       - 'automation/today_blockrobust_hm_v52.py'
       - 'automation/today_blockrobust_hm_v53.py'
 permissions:
-  contents: write
+  contents: read
 jobs:
   validate-v53:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [maxfirst, any2first, jointmean, downside]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run V53 finite variants
+      - name: Run one V53 variant
         shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
         run: |
           set -euo pipefail
-          for mode in maxfirst any2first jointmean downside; do
-            ROBUST_MODE="$mode" ROBUST_TAG="$mode" python -B automation/today_blockrobust_hm_v53.py
-          done
-      - name: Summarize V53
+          ROBUST_MODE="$MODE" ROBUST_TAG="$MODE" python -B automation/today_blockrobust_hm_v53.py
+      - name: Print strict result
         shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json,glob
-          for f in sorted(glob.glob('analysis/2026-10-30/TODAY_BLOCKROBUST_HM_*_1248_V53.json')):
-              d=json.load(open(f))
-              print(f, json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy']},ensure_ascii=False))
+          import json, os
+          mode=os.environ['MODE']
+          f=f'analysis/2026-10-30/TODAY_BLOCKROBUST_HM_{mode}_1248_V53.json'
+          d=json.load(open(f))
+          print(json.dumps({'mode':mode,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy']},ensure_ascii=False))
           PY
-      - name: Commit research outputs
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add analysis/2026-10-30/TODAY_BLOCKROBUST_HM_*_1248_V53.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'research: store V53 finite robustness results'
-          git pull --rebase origin main
-          git push origin HEAD:main
