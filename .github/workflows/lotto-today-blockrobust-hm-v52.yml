@@ -1,0 +1,57 @@
+name: lotto-today-blockrobust-hm-v52
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-blockrobust-hm-v52.yml'
+      - 'automation/today_blockrobust_hm_v52.py'
+permissions:
+  contents: write
+jobs:
+  validate-v52:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V52 variants
+        shell: bash
+        run: |
+          set -euo pipefail
+          for mode in minblock balanced any3first positiveblocks; do
+            ROBUST_MODE="$mode" ROBUST_TAG="$mode" python -B automation/today_blockrobust_hm_v52.py
+          done
+      - name: Summarize V52
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,glob
+          for f in sorted(glob.glob('analysis/2026-10-30/TODAY_BLOCKROBUST_HM_*_1248_V52.json')):
+              d=json.load(open(f))
+              print(f, json.dumps({
+                'strict_pass':d['inference']['strict_portfolio_pass'],
+                'status':d['final_status'],
+                'delta':d['scorecard']['delta'],
+                'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},
+                'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},
+                'lines':d['current']['lines'],
+                'policy':d['current']['chosen_policy']
+              },ensure_ascii=False))
+          PY
+      - name: Commit research outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_BLOCKROBUST_HM_*_1248_V52.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: store V52 block-robust results'
+          git pull --rebase origin main
+          git push origin HEAD:main
