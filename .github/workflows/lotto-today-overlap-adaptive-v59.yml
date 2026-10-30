@@ -1,0 +1,43 @@
+name: lotto-today-overlap-adaptive-v59
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-overlap-adaptive-v59.yml'
+      - 'automation/today_overlap_adaptive_v59.py'
+permissions:
+  contents: read
+jobs:
+  validate-v59:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [jointlb, any2guard, any3guard, blockrobust]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run one V59 prequential overlap selector
+        shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
+        run: |
+          set -euo pipefail
+          OVERLAP_ADAPT_MODE="$MODE" python -B automation/today_overlap_adaptive_v59.py
+      - name: Print strict result
+        shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          m=os.environ['MODE'];d=json.load(open(f'analysis/2026-10-30/TODAY_OVERLAP_ADAPTIVE_{m}_1248_V59.json'))
+          print(json.dumps({'mode':m,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy'],'null':d['scorecard']['matched_exact_label_null']},ensure_ascii=False))
+          PY
