@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/lotto-today-any2-midrescue-v77.yml'
-      - 'automation/today_any2_midrescue_v77fix.py'
+      - 'automation/today_any2_midrescue_v77c.py'
       - 'automation/today_expanded_overlap_v76.py'
 permissions:
   contents: read
@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run V77 any2 rescue selector
-        run: python -B automation/today_any2_midrescue_v77fix.py
+        run: python -B automation/today_any2_midrescue_v77c.py
       - name: Print strict result
         run: |
           python - <<'PY'
