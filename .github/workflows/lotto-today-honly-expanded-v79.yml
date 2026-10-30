@@ -1,0 +1,31 @@
+name: lotto-today-honly-expanded-v79
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-honly-expanded-v79.yml'
+      - 'automation/today_honly_expanded_v79.py'
+      - 'automation/today_expanded_overlap_v76.py'
+permissions:
+  contents: read
+jobs:
+  validate-v79:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V79 H-only expanded selector
+        run: python -B automation/today_honly_expanded_v79.py
+      - name: Print strict result
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('analysis/2026-10-30/TODAY_HONLY_EXPANDED_1248_V79.json'))
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy'],'null':d['scorecard']['matched_exact_label_null']},ensure_ascii=False))
+          PY
