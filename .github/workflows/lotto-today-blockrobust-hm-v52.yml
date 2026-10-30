@@ -7,14 +7,15 @@ on:
       - '.github/workflows/lotto-today-blockrobust-hm-v52.yml'
       - 'automation/today_blockrobust_hm_v52.py'
       - 'automation/today_blockrobust_hm_v53.py'
+      - 'automation/today_static_hm_v55.py'
 permissions:
   contents: read
 jobs:
-  validate-v53:
+  validate-v55:
     strategy:
       fail-fast: false
       matrix:
-        mode: [maxfirst, any2first, jointmean, downside]
+        policy: ['H:rr','H:contig','H:snake','H:paired','M:rr','M:contig','M:snake','M:paired']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,23 +25,23 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run one V53 variant
+      - name: Run one V55 static policy
         shell: bash
         env:
-          MODE: ${{ matrix.mode }}
+          POLICY: ${{ matrix.policy }}
         run: |
           set -euo pipefail
-          ROBUST_MODE="$MODE" ROBUST_TAG="$MODE" python -B automation/today_blockrobust_hm_v53.py
+          STATIC_POLICY="$POLICY" python -B automation/today_static_hm_v55.py
       - name: Print strict result
         shell: bash
         env:
-          MODE: ${{ matrix.mode }}
+          POLICY: ${{ matrix.policy }}
         run: |
           set -euo pipefail
           python - <<'PY'
           import json, os
-          mode=os.environ['MODE']
-          f=f'analysis/2026-10-30/TODAY_BLOCKROBUST_HM_{mode}_1248_V53.json'
+          p=os.environ['POLICY']; tag=p.replace(':','_')
+          f=f'analysis/2026-10-30/TODAY_STATIC_HM_{tag}_1248_V55.json'
           d=json.load(open(f))
-          print(json.dumps({'mode':mode,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy']},ensure_ascii=False))
+          print(json.dumps({'policy':p,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines']},ensure_ascii=False))
           PY
