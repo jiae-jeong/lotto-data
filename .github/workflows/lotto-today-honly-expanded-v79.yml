@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/lotto-today-honly-expanded-v79.yml'
-      - 'automation/today_honly_expanded_v79.py'
+      - 'automation/today_honly_expanded_v79b.py'
       - 'automation/today_expanded_overlap_v76.py'
 permissions:
   contents: read
@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run V79 H-only expanded selector
-        run: python -B automation/today_honly_expanded_v79.py
+        run: python -B automation/today_honly_expanded_v79b.py
       - name: Print strict result
         run: |
           python - <<'PY'
