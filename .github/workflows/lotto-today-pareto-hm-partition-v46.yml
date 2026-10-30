@@ -1,0 +1,52 @@
+name: lotto-today-pareto-hm-partition-v46
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-pareto-hm-partition-v46.yml'
+      - 'automation/today_pareto_hm_partition_v46.py'
+      - 'automation/today_frozen_pair_partition_v44.py'
+permissions:
+  contents: write
+jobs:
+  validate-v46:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V46
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_pareto_hm_partition_v46.py | tee "$RUNNER_TEMP/v46.log"
+      - name: Verify V46
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-30/TODAY_PARETO_HM_PARTITION_1248_V46.json').read_text())
+          L=d['current']['lines']
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert len(L)==5 and len({tuple(x) for x in L})==5 and len(set().union(*map(set,L)))==30
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 for x in L)
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'policy':d['current']['chosen_policy'],'lines':L},ensure_ascii=False))
+          PY
+      - name: Commit V46 report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_PARETO_HM_PARTITION_1248_V46.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: Pareto H/M partition v46 for 1248'
+          git pull --rebase origin main
+          git push origin HEAD:main
