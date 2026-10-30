@@ -1,0 +1,43 @@
+name: lotto-today-blocklocked-geometry-v65
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-blocklocked-geometry-v65.yml'
+      - 'automation/today_blocklocked_geometry_v65.py'
+permissions:
+  contents: read
+jobs:
+  validate-v65:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [protect23, share23, minlb, any2protect]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V65 block-locked selector
+        shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
+        run: |
+          set -euo pipefail
+          V65_MODE="$MODE" python -B automation/today_blocklocked_geometry_v65.py
+      - name: Print strict result
+        shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          m=os.environ['MODE'];d=json.load(open(f'analysis/2026-10-30/TODAY_BLOCKLOCKED_GEOMETRY_{m}_1248_V65.json'))
+          print(json.dumps({'mode':m,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy'],'null':d['scorecard']['matched_exact_label_null']},ensure_ascii=False))
+          PY
