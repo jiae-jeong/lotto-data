@@ -71,6 +71,10 @@ def write_csv(path, rows):
         w.writerows(rows)
 
 
+def rate(arr, threshold):
+    return sum(x >= threshold for x in arr) / len(arr)
+
+
 def build_candidate_recall(rows, dated: Path):
     draws = [r["nums"] for r in rows]
     rounds = [r["round"] for r in rows]
@@ -110,6 +114,8 @@ def build_candidate_recall(rows, dated: Path):
             rnd = random_hits[k]
             mean_hits = statistics.mean(hs)
             random_mean_hits = statistics.mean(rnd)
+            s3, s4, s6 = rate(hs, 3), rate(hs, 4), rate(hs, 6)
+            r3, r4, r6 = rate(rnd, 3), rate(rnd, 4), rate(rnd, 6)
             score_rows.append({
                 "signal": s,
                 "k": k,
@@ -119,9 +125,15 @@ def build_candidate_recall(rows, dated: Path):
                 "random_mean_candidate_hits": random_mean_hits,
                 "random_mean_recall": random_mean_hits / 6,
                 "delta_recall_vs_random": (mean_hits - random_mean_hits) / 6,
-                "rate_capture_3plus_of_6": sum(h >= 3 for h in hs) / len(hs),
-                "rate_capture_4plus_of_6": sum(h >= 4 for h in hs) / len(hs),
-                "rate_capture_all_6": sum(h == 6 for h in hs) / len(hs),
+                "rate_capture_3plus_of_6": s3,
+                "random_rate_capture_3plus_of_6": r3,
+                "delta_3plus_vs_random": s3 - r3,
+                "rate_capture_4plus_of_6": s4,
+                "random_rate_capture_4plus_of_6": r4,
+                "delta_4plus_vs_random": s4 - r4,
+                "rate_capture_all_6": s6,
+                "random_rate_capture_all_6": r6,
+                "delta_all6_vs_random": s6 - r6,
                 "status": "MEASURED_CUTOFF_SAFE_NOT_AUTO_PROMOTED",
             })
 
