@@ -1,0 +1,81 @@
+name: candidate-recall-daily
+
+on:
+  schedule:
+    - cron: '20 23 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/candidate_recall_v1.py'
+      - 'lotto_data.csv'
+      - '.github/workflows/candidate-recall-daily.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: candidate-recall-daily
+  cancel-in-progress: true
+
+jobs:
+  candidate-recall:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compute cutoff-safe candidate recall at K
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python - "$RUN_DATE" <<'PY'
+          import csv,sys
+          from pathlib import Path
+          from automation.candidate_recall_v1 import build_candidate_recall
+          date=sys.argv[1]
+          rows=[]
+          with open('lotto_data.csv',encoding='utf-8-sig') as f:
+              for r in csv.DictReader(f):
+                  rows.append({
+                      'round':int(r['round']),
+                      'date':r['date'],
+                      'nums':[int(r[f'no{i}']) for i in range(1,7)],
+                      'bonus':int(r['bonus']),
+                  })
+          out=Path('analysis')/date
+          out.mkdir(parents=True,exist_ok=True)
+          result=build_candidate_recall(rows,out)
+          assert result['no_future_leakage'] is True
+          assert result['targets'] == len(rows)-200
+          print({'data_cutoff':result['data_cutoff'],'targets':result['targets'],'random_sets':result['matched_random_sets_total']})
+          PY
+
+      - name: Preserve candidate recall evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "analysis/$RUN_DATE/CANDIDATE_RECALL_SCORECARD.csv" "analysis/$RUN_DATE/CANDIDATE_RECALL_STATUS.json"
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "research: candidate recall diagnostics $RUN_DATE"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort || true
+            sleep $((attempt * 2))
+          done
+          exit 1
