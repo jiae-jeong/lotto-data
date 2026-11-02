@@ -1,14 +1,11 @@
 name: candidate-recall-daily
 
 on:
-  schedule:
-    - cron: '20 23 * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'automation/candidate_recall_v1.py'
-      - 'lotto_data.csv'
       - '.github/workflows/candidate-recall-daily.yml'
 
 permissions:
@@ -55,6 +52,8 @@ jobs:
           result=build_candidate_recall(rows,out)
           assert result['no_future_leakage'] is True
           assert result['targets'] == len(rows)-200
+          assert set(result['k_values']) == {10,15,20,25,30}
+          assert result['matched_random_sets_total'] > 0
           print({'data_cutoff':result['data_cutoff'],'targets':result['targets'],'random_sets':result['matched_random_sets_total']})
           PY
 
