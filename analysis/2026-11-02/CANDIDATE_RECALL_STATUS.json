@@ -1,0 +1,133 @@
+{
+  "generated_kst": "2026-11-02T17:23:00.855961+09:00",
+  "data_cutoff": 1248,
+  "walkforward_start_round": 201,
+  "targets": 1048,
+  "k_values": [
+    10,
+    15,
+    20,
+    25,
+    30
+  ],
+  "signals": [
+    "recent30",
+    "gap",
+    "momentum",
+    "balanced",
+    "contrarian",
+    "consensus"
+  ],
+  "matched_random_sets_per_target": 200,
+  "matched_random_sets_total": 209600,
+  "no_future_leakage": true,
+  "latest_completed_target_trace": {
+    "target_round": 1248,
+    "signals": {
+      "recent30": {
+        "winning_number_ranks": {
+          "16": 11,
+          "18": 2,
+          "27": 40,
+          "36": 33,
+          "38": 13,
+          "42": 5
+        },
+        "recall_at_k": {
+          "10": 0.3333333333333333,
+          "15": 0.6666666666666666,
+          "20": 0.6666666666666666,
+          "25": 0.6666666666666666,
+          "30": 0.6666666666666666
+        }
+      },
+      "gap": {
+        "winning_number_ranks": {
+          "16": 35,
+          "18": 27,
+          "27": 38,
+          "36": 13,
+          "38": 30,
+          "42": 44
+        },
+        "recall_at_k": {
+          "10": 0.0,
+          "15": 0.16666666666666666,
+          "20": 0.16666666666666666,
+          "25": 0.16666666666666666,
+          "30": 0.5
+        }
+      },
+      "momentum": {
+        "winning_number_ranks": {
+          "16": 2,
+          "18": 19,
+          "27": 17,
+          "36": 25,
+          "38": 4,
+          "42": 10
+        },
+        "recall_at_k": {
+          "10": 0.5,
+          "15": 0.5,
+          "20": 0.8333333333333334,
+          "25": 1.0,
+          "30": 1.0
+        }
+      },
+      "balanced": {
+        "winning_number_ranks": {
+          "16": 31,
+          "18": 3,
+          "27": 44,
+          "36": 26,
+          "38": 25,
+          "42": 13
+        },
+        "recall_at_k": {
+          "10": 0.16666666666666666,
+          "15": 0.3333333333333333,
+          "20": 0.3333333333333333,
+          "25": 0.5,
+          "30": 0.6666666666666666
+        }
+      },
+      "contrarian": {
+        "winning_number_ranks": {
+          "16": 37,
+          "18": 41,
+          "27": 21,
+          "36": 13,
+          "38": 33,
+          "42": 43
+        },
+        "recall_at_k": {
+          "10": 0.0,
+          "15": 0.16666666666666666,
+          "20": 0.16666666666666666,
+          "25": 0.3333333333333333,
+          "30": 0.3333333333333333
+        }
+      },
+      "consensus": {
+        "winning_number_ranks": {
+          "16": 13,
+          "18": 5,
+          "27": 41,
+          "36": 21,
+          "38": 7,
+          "42": 18
+        },
+        "recall_at_k": {
+          "10": 0.3333333333333333,
+          "15": 0.5,
+          "20": 0.6666666666666666,
+          "25": 0.8333333333333334,
+          "30": 0.8333333333333334
+        }
+      }
+    }
+  },
+  "interpretation_rule": "Candidate recall is evaluated before ticket construction. A portfolio failure must not be blamed on candidate ranking when the winning numbers were already inside the fixed candidate set.",
+  "scorecard": "CANDIDATE_RECALL_SCORECARD.csv"
+}
