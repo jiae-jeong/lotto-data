@@ -31,10 +31,12 @@ DRAW_INTERVAL = datetime.timedelta(days=7)
 RECOVERY_ROWS = {
     1246: '1246,2026.10.17,16,22,23,24,27,28,6',
     1247: '1247,2026.10.24,8,14,21,22,42,45,24',
+    1248: '1248,2026.10.31,16,18,27,36,38,42,22',
 }
 EXPECTED_ROWS = {
     1246: ['1246', '2026.10.17', '16', '22', '23', '24', '27', '28', '6'],
     1247: ['1247', '2026.10.24', '8', '14', '21', '22', '42', '45', '24'],
+    1248: ['1248', '2026.10.31', '16', '18', '27', '36', '38', '42', '22'],
 }
 FIELDS = ['round', 'date', 'no1', 'no2', 'no3', 'no4', 'no5', 'no6', 'bonus']
 
@@ -104,7 +106,7 @@ def main() -> None:
     verify_known_rows(rs)
 
     # Recover only verified, already-completed rounds, one at a time. This makes
-    # the current 1247 recovery deterministic while future unknown rounds remain
+    # the current recovery deterministic while future unknown rounds remain
     # fail-closed until independently verified evidence is added.
     while latest < need:
         next_round = latest + 1
