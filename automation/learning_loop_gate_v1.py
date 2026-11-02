@@ -63,6 +63,12 @@ def main():
             and "ticket_construction_gap" in latest
             and "source_role" in latest
         ),
+        "all_reviews_have_failure_decomposition": bool(reviews) and all(
+            "candidate_recall_failure" in r
+            and "ticket_construction_gap" in r
+            and "source_role" in r
+            for r in reviews
+        ),
         "candidate_recall_status_present": bool(recall),
         "candidate_recall_cutoff_matches_master": int(recall.get("data_cutoff", -2)) == cutoff,
         "candidate_recall_no_future_leakage": recall.get("no_future_leakage") is True,
@@ -73,17 +79,20 @@ def main():
         "whole_history_not_overstated": hist.get("whole_history_complete") is False,
     }
 
-    # Verify that if an ACTUAL_PURCHASE artifact exists for the latest completed
-    # round, the closed-loop source actually uses it rather than a later research artifact.
-    actual_purchase_source_ok = True
-    if latest:
-        target = int(latest["target_round"])
+    # If an ACTUAL_PURCHASE artifact exists for any completed round, that exact
+    # class must be the canonical closed-loop source for that round. A later
+    # FINAL/research artifact is never allowed to replace what the user received.
+    source_mismatches = []
+    for review in reviews:
+        target = int(review["target_round"])
         actuals = sorted((ROOT / "research" / "weekly_purchase" / str(target)).glob("ACTUAL_PURCHASE_FIVE_LINES*.json"))
         if actuals:
-            actual_purchase_source_ok = latest.get("source_role") == "ACTUAL_PURCHASE" and str(latest.get("source", "")).startswith(
+            ok = review.get("source_role") == "ACTUAL_PURCHASE" and str(review.get("source", "")).startswith(
                 f"research/weekly_purchase/{target}/ACTUAL_PURCHASE_FIVE_LINES"
             )
-    checks["actual_purchase_source_is_canonical"] = actual_purchase_source_ok
+            if not ok:
+                source_mismatches.append({"target_round": target, "source": review.get("source")})
+    checks["actual_purchase_source_is_canonical"] = not source_mismatches
 
     # Candidate recall summary contains no candidate identities.
     best_by_k = {}
@@ -96,6 +105,8 @@ def main():
                 "mean_recall": float(best["mean_recall"]),
                 "random_mean_recall": float(best["random_mean_recall"]),
                 "delta_recall_vs_random": float(best["delta_recall_vs_random"]),
+                "delta_3plus_vs_random": float(best.get("delta_3plus_vs_random", 0.0) or 0.0),
+                "delta_4plus_vs_random": float(best.get("delta_4plus_vs_random", 0.0) or 0.0),
             }
 
     gate_ok = all(checks.values())
@@ -104,6 +115,7 @@ def main():
         "status": "PASS" if gate_ok else "FAIL",
         "data_cutoff": cutoff,
         "checks": checks,
+        "actual_purchase_source_mismatches": source_mismatches,
         "historical_preserved_scope_complete": bool(hist.get("closed_loop_complete")),
         "whole_history_complete": bool(hist.get("whole_history_complete")),
         "latest_review": {
@@ -125,8 +137,6 @@ def main():
     gate_path = dated / "LEARNING_LOOP_GATE.json"
     gate_path.write_text(json.dumps(gate, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    # Strengthen the existing protocol audit without pretending missing legacy
-    # recommendation history has been recovered.
     audit.setdefault("protocol_checks", {}).update({
         "actual_purchase_learning_record": checks["actual_purchase_precedence"] and checks["actual_purchase_source_is_canonical"],
         "candidate_recall_separate_stage": all(
@@ -140,6 +150,7 @@ def main():
                 "candidate_recall_matched_random_run",
             )
         ),
+        "failure_decomposition_present": checks["all_reviews_have_failure_decomposition"],
         "whole_history_limitation_explicit": checks["whole_history_not_overstated"],
     })
     audit["learning_loop_gate"] = str(gate_path.relative_to(ROOT))
@@ -161,7 +172,7 @@ def main():
     )
     insert = (
         "\n### Learning-loop correction\n"
-        f"- Actual delivered/purchase artifact precedence: {checks['actual_purchase_source_is_canonical']}.\n"
+        f"- Actual delivered/purchase artifact precedence across completed targets: {checks['actual_purchase_source_is_canonical']}.\n"
         f"- Candidate recall is measured separately at K=10/15/20/25/30 over {recall.get('targets')} cutoff-safe targets, with {recall.get('matched_random_sets_total')} matched-random candidate sets.\n"
         f"- Latest preserved review failure split: candidate_recall_failure={latest.get('candidate_recall_failure')}; ticket_construction_gap={latest.get('ticket_construction_gap')}.\n"
         f"- Whole historical recommendation archive complete: {hist.get('whole_history_complete')} (legacy/missing originals are not reconstructed).\n"
