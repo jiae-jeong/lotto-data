@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """Recover protocol evidence from authentic preserved records and cutoff-safe tests.
 
-This script does not generate a purchase recommendation. It only closes two
-protocol evidence gaps:
-1) review every completed round that has an authentic preserved weekly-purchase
-   artifact, without reconstructing missing older recommendations;
-2) score every signal family used by the operational weekly selector with a
-   cutoff-safe walk-forward, and verify the existing model-level pair/triple and
-   ablation evidence from the fresh MASTER run.
+This script does not generate a purchase recommendation. It closes two evidence gaps:
+1) review completed rounds using the recommendation that was actually delivered/purchased
+   when such an artifact exists, otherwise the authentic pre-draw FINAL artifact;
+2) score operational signal families with a cutoff-safe walk-forward and verify the
+   existing model-level pair/triple and ablation evidence from the fresh MASTER run.
 """
 from __future__ import annotations
 
@@ -29,14 +27,12 @@ def load_rows():
     out = []
     with DATA.open(encoding="utf-8-sig") as f:
         for r in csv.DictReader(f):
-            out.append(
-                {
-                    "round": int(r["round"]),
-                    "date": r["date"],
-                    "nums": [int(r[f"no{i}"]) for i in range(1, 7)],
-                    "bonus": int(r["bonus"]),
-                }
-            )
+            out.append({
+                "round": int(r["round"]),
+                "date": r["date"],
+                "nums": [int(r[f"no{i}"]) for i in range(1, 7)],
+                "bonus": int(r["bonus"]),
+            })
     rounds = [r["round"] for r in out]
     assert rounds == list(range(1, max(rounds) + 1))
     return out
@@ -85,11 +81,27 @@ def write_csv(path, rows):
         w.writerows(rows)
 
 
+def _artifact_role(path: Path):
+    name = path.name
+    if name.startswith("ACTUAL_PURCHASE_FIVE_LINES"):
+        return "ACTUAL_PURCHASE"
+    if name.startswith("FINAL_FIVE_LINES"):
+        return "FINAL_PREDRAW"
+    return "OTHER"
+
+
+def _candidate_paths():
+    base = ROOT / "research" / "weekly_purchase"
+    found = set(base.glob("*/ACTUAL_PURCHASE_FIVE_LINES*.json"))
+    found.update(base.glob("*/FINAL_FIVE_LINES*.json"))
+    return sorted(found)
+
+
 def build_historical_closed_loop(rows, dated):
     by_round = {r["round"]: r for r in rows}
     cutoff = rows[-1]["round"]
     candidates = []
-    for p in sorted((ROOT / "research" / "weekly_purchase").glob("*/FINAL_FIVE_LINES*.json")):
+    for p in _candidate_paths():
         try:
             obj = json.loads(p.read_text(encoding="utf-8-sig"))
             target = int(obj.get("target_round", p.parent.name))
@@ -98,11 +110,14 @@ def build_historical_closed_loop(rows, dated):
             continue
         if target > cutoff:
             continue
-        candidates.append({"path": str(p.relative_to(ROOT)), "target": target, "obj": obj, "valid": True})
+        candidates.append({
+            "path": str(p.relative_to(ROOT)),
+            "target": target,
+            "obj": obj,
+            "valid": True,
+            "role": _artifact_role(p),
+        })
 
-    # One canonical pre-draw record per completed target. If multiple are preserved,
-    # use the lexicographically earliest path and report the duplicate rather than
-    # silently double-counting a round.
     grouped = {}
     invalid = []
     for c in candidates:
@@ -114,8 +129,18 @@ def build_historical_closed_loop(rows, dated):
     reviews = []
     all_hits = []
     for target in sorted(grouped):
-        entries = sorted(grouped[target], key=lambda x: x["path"])
-        c = entries[0]
+        entries = grouped[target]
+        actual_purchase = sorted(
+            (x for x in entries if x["role"] == "ACTUAL_PURCHASE"),
+            key=lambda x: (x["obj"].get("created_kst", "9999"), x["path"]),
+        )
+        final_predraw = sorted(
+            (x for x in entries if x["role"] == "FINAL_PREDRAW"),
+            key=lambda x: (x["obj"].get("created_kst", x["obj"].get("recommendation_date_kst", "9999")), x["path"]),
+        )
+        # The real delivered/purchase artifact is the canonical learning record.
+        # A later research/final artifact must never replace what the user actually received.
+        c = actual_purchase[0] if actual_purchase else final_predraw[0]
         obj = c["obj"]
         tickets = obj.get("final_lines")
         training_cutoff = obj.get("training_cutoff", obj.get("data_cutoff"))
@@ -123,7 +148,11 @@ def build_historical_closed_loop(rows, dated):
             target in by_round
             and isinstance(tickets, list)
             and len(tickets) == 5
-            and all(isinstance(t, list) and len(t) == 6 and len(set(t)) == 6 and all(isinstance(n, int) and 1 <= n <= 45 for n in t) for t in tickets)
+            and all(
+                isinstance(t, list) and len(t) == 6 and len(set(t)) == 6
+                and all(isinstance(n, int) and 1 <= n <= 45 for n in t)
+                for t in tickets
+            )
             and training_cutoff is not None
             and int(training_cutoff) < target
         )
@@ -134,28 +163,33 @@ def build_historical_closed_loop(rows, dated):
         hits = [len(set(t) & actual) for t in tickets]
         all_hits.extend(hits)
         union = set().union(*(set(t) for t in tickets))
-        reviews.append(
-            {
-                "target_round": target,
-                "source": c["path"],
-                "training_cutoff": int(training_cutoff),
-                "winning_numbers": by_round[target]["nums"],
-                "bonus": by_round[target]["bonus"],
-                "line_hits": hits,
-                "max_hits": max(hits),
-                "winning_union_coverage": len(union & actual),
-                "ticket_union_size": len(union),
-                "duplicate_preserved_versions": max(0, len(entries) - 1),
-            }
-        )
+        union_hits = len(union & actual)
+        max_hits = max(hits)
+        reviews.append({
+            "target_round": target,
+            "source": c["path"],
+            "source_role": c["role"],
+            "training_cutoff": int(training_cutoff),
+            "winning_numbers": by_round[target]["nums"],
+            "bonus": by_round[target]["bonus"],
+            "line_hits": hits,
+            "max_hits": max_hits,
+            "winning_union_coverage": union_hits,
+            "ticket_union_size": len(union),
+            "candidate_recall_failure": union_hits < 6,
+            "ticket_construction_gap": max(0, union_hits - max_hits),
+            "alternative_preserved_versions": max(0, len(entries) - 1),
+            "all_preserved_sources": sorted(x["path"] for x in entries),
+        })
 
     dist = {str(k): sum(h == k for h in all_hits) for k in range(7)}
     verified_lines = len(all_hits)
     completed_preserved_targets = len(grouped)
-    complete = bool(reviews) and not invalid and len(reviews) == completed_preserved_targets
+    scope_complete = bool(reviews) and not invalid and len(reviews) == completed_preserved_targets
+    latest = reviews[-1] if reviews else None
     payload = {
         "generated_kst": datetime.now(KST).isoformat(),
-        "scope": "all completed rounds with authentic preserved research/weekly_purchase FINAL_FIVE_LINES artifacts; missing older originals are not reconstructed",
+        "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present, otherwise authentic pre-draw FINAL_FIVE_LINES; missing legacy/older originals are not reconstructed",
         "data_cutoff": cutoff,
         "completed_preserved_targets_found": completed_preserved_targets,
         "verified_round_count": len(reviews),
@@ -165,23 +199,33 @@ def build_historical_closed_loop(rows, dated):
         "rate_ge2": sum(h >= 2 for h in all_hits) / verified_lines if verified_lines else None,
         "rate_ge3": sum(h >= 3 for h in all_hits) / verified_lines if verified_lines else None,
         "rate_ge4": sum(h >= 4 for h in all_hits) / verified_lines if verified_lines else None,
-        "closed_loop_complete": complete,
+        "closed_loop_complete": scope_complete,
+        "whole_history_complete": False,
+        "whole_history_note": "Legacy/older recommendation formats outside the discovered weekly_purchase artifacts are not proven complete and must not be described as the full historical closed loop.",
+        "actual_purchase_precedence": True,
         "invalid_or_unreviewable_preserved_records": invalid,
         "reviews": reviews,
         "error_note": {
-            "latest_completed_review": reviews[-1]["target_round"] if reviews else None,
-            "finding": "The latest preserved five-ticket set achieved broad union coverage but failed to combine winning numbers within any single line when max_hits remained below 2." if reviews and reviews[-1]["max_hits"] < 2 else "No forced diagnosis beyond measured hit/coverage metrics.",
-            "action_for_next_policy": "Increase cross-line unique-number coverage and reduce redundant reuse; do not manually chase the missed winning numbers or change weights from one outcome alone."
+            "latest_completed_review": latest["target_round"] if latest else None,
+            "candidate_recall_failure": latest["candidate_recall_failure"] if latest else None,
+            "ticket_construction_gap": latest["ticket_construction_gap"] if latest else None,
+            "finding": (
+                "Both candidate recall and ticket construction need separate diagnosis."
+                if latest and latest["candidate_recall_failure"] and latest["ticket_construction_gap"] > 0
+                else "Use the measured recall/construction fields; do not force a diagnosis beyond preserved evidence."
+            ),
+            "action_for_next_policy": "Evaluate candidate recall separately from allocator performance; never learn from a later artifact in place of the actual delivered/purchased lines."
         },
     }
-    (dated / "HISTORICAL_CLOSED_LOOP_STATUS.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (dated / "HISTORICAL_CLOSED_LOOP_STATUS.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     return payload
 
 
 def build_signal_scorecard(rows, dated, run_dir):
     draws = [r["nums"] for r in rows]
     per_signal = {s: [] for s in ACTIVE_SIGNALS}
-    # Full expanding cutoff-safe walk-forward from round 201 through the cutoff.
     for idx in range(200, len(draws)):
         hist = draws[:idx]
         actual = set(draws[idx])
@@ -193,19 +237,17 @@ def build_signal_scorecard(rows, dated, run_dir):
     signal_rows = []
     for s in ACTIVE_SIGNALS:
         hits = per_signal[s]
-        signal_rows.append(
-            {
-                "signal": s,
-                "targets": len(hits),
-                "mean_hits": statistics.mean(hits),
-                "random_exact_mean_hits": 0.8,
-                "delta_mean_vs_uniform_expectation": statistics.mean(hits) - 0.8,
-                "rate_ge2": sum(h >= 2 for h in hits) / len(hits),
-                "rate_ge3": sum(h >= 3 for h in hits) / len(hits),
-                "rate_ge4": sum(h >= 4 for h in hits) / len(hits),
-                "status": "MEASURED_CUTOFF_SAFE",
-            }
-        )
+        signal_rows.append({
+            "signal": s,
+            "targets": len(hits),
+            "mean_hits": statistics.mean(hits),
+            "random_exact_mean_hits": 0.8,
+            "delta_mean_vs_uniform_expectation": statistics.mean(hits) - 0.8,
+            "rate_ge2": sum(h >= 2 for h in hits) / len(hits),
+            "rate_ge3": sum(h >= 3 for h in hits) / len(hits),
+            "rate_ge4": sum(h >= 4 for h in hits) / len(hits),
+            "status": "MEASURED_CUTOFF_SAFE",
+        })
     write_csv(dated / "FULL_SIGNAL_SCORECARD.csv", signal_rows)
 
     v = json.loads((run_dir / "VERIFICATION.json").read_text(encoding="utf-8-sig"))
@@ -236,9 +278,11 @@ def build_signal_scorecard(rows, dated, run_dir):
             "b_model_scorecard": str((base / "B_MODEL_SCORECARD.csv").relative_to(ROOT)),
         },
         "partially_covered_inside_structure_profile_but_not_isolated": [],
-        "integrity_note": "No target-1247 outcome is read. Every predictive signal row is evaluated only after constructing its ticket from prior draws."
+        "integrity_note": "Every predictive signal row is evaluated only after constructing its ticket from prior draws."
     }
-    (dated / "FULL_SIGNAL_SCORECARD_STATUS.json").write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (dated / "FULL_SIGNAL_SCORECARD_STATUS.json").write_text(
+        json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     return status
 
 
@@ -255,6 +299,8 @@ def main():
     result = {
         "status": "PASS" if hist["closed_loop_complete"] and sig["full_signal_scorecard_complete"] else "PARTIAL",
         "historical_closed_loop_complete": hist["closed_loop_complete"],
+        "whole_history_complete": hist["whole_history_complete"],
+        "actual_purchase_precedence": hist["actual_purchase_precedence"],
         "verified_round_count": hist["verified_round_count"],
         "verified_purchase_lines": hist["verified_purchase_lines"],
         "full_signal_scorecard_complete": sig["full_signal_scorecard_complete"],
