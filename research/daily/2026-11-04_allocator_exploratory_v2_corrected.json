@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-04",
+  "study": "fixed candidate allocator validity-corrected exploratory",
+  "source": "lotto_data.csv 1..1248",
+  "target_range": "201..1248",
+  "targets": 1048,
+  "random_bundles_per_target": 40,
+  "invalid": 0,
+  "summary": {
+    "core3": {
+      "n": 1048,
+      "max_hit": 1.5486641221374047,
+      "any2": 0.48950381679389315,
+      "any3": 0.08587786259541985,
+      "any4": 0.004770992366412214,
+      "winning_union": 2.424618320610687,
+      "ticket_union": 18
+    },
+    "coverage": {
+      "n": 1048,
+      "max_hit": 1.6526717557251909,
+      "any2": 0.5772900763358778,
+      "any3": 0.08874045801526717,
+      "any4": 0.004770992366412214,
+      "winning_union": 2.6841603053435112,
+      "ticket_union": 20
+    },
+    "snake": {
+      "n": 1048,
+      "max_hit": 1.6202290076335877,
+      "any2": 0.5295801526717557,
+      "any3": 0.10209923664122138,
+      "any4": 0.006679389312977099,
+      "winning_union": 2.6841603053435112,
+      "ticket_union": 20
+    },
+    "matched_random20": {
+      "n": 41920,
+      "max_hit": 1.58912213740458,
+      "any2": 0.5295562977099236,
+      "any3": 0.10221851145038167,
+      "any4": 0.007108778625954199,
+      "winning_union": 2.229675572519084,
+      "ticket_union": 16.64372614503817
+    },
+    "global_random": {
+      "n": 41920,
+      "max_hit": 1.7315362595419848,
+      "any2": 0.6211354961832061,
+      "any3": 0.11424141221374046,
+      "any4": 0.006631679389312977,
+      "winning_union": 3.073282442748092,
+      "ticket_union": 22.992318702290078
+    }
+  },
+  "correction": "v1 snake allocator had invalid repeated numbers within lines; v1 is REJECTED, do not use its apparent uplift. v2 enforces six distinct numbers per line.",
+  "limitations": "Exploratory reused historical outcomes; NOT nested/fresh holdout; no block CI or multiplicity correction. 1244..1248 contaminated. Do not promote any allocator to Friday.",
+  "friday_policy": "NO CHANGE. Pre-register valid allocator definitions and nested comparison."
+}
