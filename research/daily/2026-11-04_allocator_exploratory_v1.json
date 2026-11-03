@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-04",
+  "type": "NEW_STUDY_EXPLORATORY_NON_NESTED",
+  "cutoff": 1248,
+  "integrity": true,
+  "targets": 1048,
+  "question": "Fixed top20 recent30 candidate pool: compare allocation alone under identical historical cutoff",
+  "methods": [
+    "ranked_core3",
+    "cyclic_coverage",
+    "snake",
+    "matched_random20",
+    "global_random"
+  ],
+  "summary": {
+    "ranked_core3": {
+      "n": 1048,
+      "max_hit": 1.5486641221374047,
+      "any2": 0.48950381679389315,
+      "any3": 0.08587786259541985,
+      "any4": 0.004770992366412214,
+      "union": 2.424618320610687,
+      "unique": 18
+    },
+    "cyclic_coverage": {
+      "n": 1048,
+      "max_hit": 1.6526717557251909,
+      "any2": 0.5772900763358778,
+      "any3": 0.08874045801526717,
+      "any4": 0.004770992366412214,
+      "union": 2.6841603053435112,
+      "unique": 20
+    },
+    "snake": {
+      "n": 1048,
+      "max_hit": 2.2519083969465647,
+      "any2": 0.8368320610687023,
+      "any3": 0.3349236641221374,
+      "any4": 0.08587786259541985,
+      "union": 2.6841603053435112,
+      "unique": 20
+    },
+    "matched_random20": {
+      "n": 41920,
+      "max_hit": 1.58912213740458,
+      "any2": 0.5295562977099236,
+      "any3": 0.10221851145038167,
+      "any4": 0.007108778625954199,
+      "union": 2.229675572519084,
+      "unique": 16.64372614503817
+    },
+    "global_random": {
+      "n": 41920,
+      "max_hit": 1.7315362595419848,
+      "any2": 0.6211354961832061,
+      "any3": 0.11424141221374046,
+      "any4": 0.006631679389312977,
+      "union": 3.073282442748092,
+      "unique": 22.992318702290078
+    }
+  },
+  "limitations": [
+    "This is a newly calculated diagnostic, NOT nested model selection or untouched holdout.",
+    "1244-1248 already contaminated; no promotion from this result.",
+    "Different algorithms can repeat numbers within a ticket in cyclic/snake construction; invalid tickets must be excluded or repaired before a policy comparison.",
+    "Random benchmark uses 40 samples per target and deterministic pseudo-random seed.",
+    "No claim of statistical superiority without block CI, multiplicity correction and valid ticket construction."
+  ],
+  "policy": "NO_PROMOTION; fix uniqueness validation and run predeclared nested/block CI comparison before Friday."
+}
