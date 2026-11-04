@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-05",
+  "type": "NEW_STUDY_exploratory_regime_stability",
+  "data_sha": "ce7333969c963fb16d8c43ff9cb131ae0d86388f",
+  "integrity": true,
+  "raw_blank_lines": 2,
+  "cutoff": 1248,
+  "targets": "201..1243",
+  "excluded_contaminated": "1244..1248",
+  "target_count": 1043,
+  "protocol": "Only prior draws used. Fixed recent30, gap, balanced; K=10/20/30. Random comparator is exact expectation K/45, NOT simulated matched random.",
+  "summary": {
+    "recent30_10": {
+      "targets": 1043,
+      "mean_recall": 0.223714,
+      "random_expectation": 0.222222,
+      "delta": 0.001491,
+      "block_count": 11,
+      "positive_blocks": 7,
+      "block_CI95_approx": [
+        -0.010395,
+        0.013378
+      ]
+    },
+    "recent30_20": {
+      "targets": 1043,
+      "mean_recall": 0.446948,
+      "random_expectation": 0.444444,
+      "delta": 0.002503,
+      "block_count": 11,
+      "positive_blocks": 7,
+      "block_CI95_approx": [
+        -0.015053,
+        0.02006
+      ]
+    },
+    "recent30_30": {
+      "targets": 1043,
+      "mean_recall": 0.670342,
+      "random_expectation": 0.666667,
+      "delta": 0.003675,
+      "block_count": 11,
+      "positive_blocks": 6,
+      "block_CI95_approx": [
+        -0.015775,
+        0.023126
+      ]
+    },
+    "gap_10": {
+      "targets": 1043,
+      "mean_recall": 0.223234,
+      "random_expectation": 0.222222,
+      "delta": 0.001012,
+      "block_count": 11,
+      "positive_blocks": 6,
+      "block_CI95_approx": [
+        -0.008272,
+        0.010296
+      ]
+    },
+    "gap_20": {
+      "targets": 1043,
+      "mean_recall": 0.442633,
+      "random_expectation": 0.444444,
+      "delta": -0.001811,
+      "block_count": 11,
+      "positive_blocks": 4,
+      "block_CI95_approx": [
+        -0.01469,
+        0.011068
+      ]
+    },
+    "gap_30": {
+      "targets": 1043,
+      "mean_recall": 0.661393,
+      "random_expectation": 0.666667,
+      "delta": -0.005273,
+      "block_count": 11,
+      "positive_blocks": 5,
+      "block_CI95_approx": [
+        -0.022317,
+        0.011771
+      ]
+    },
+    "balanced_10": {
+      "targets": 1043,
+      "mean_recall": 0.227229,
+      "random_expectation": 0.222222,
+      "delta": 0.005007,
+      "block_count": 11,
+      "positive_blocks": 7,
+      "block_CI95_approx": [
+        -0.006785,
+        0.016799
+      ]
+    },
+    "balanced_20": {
+      "targets": 1043,
+      "mean_recall": 0.443912,
+      "random_expectation": 0.444444,
+      "delta": -0.000533,
+      "block_count": 11,
+      "positive_blocks": 6,
+      "block_CI95_approx": [
+        -0.010906,
+        0.009841
+      ]
+    },
+    "balanced_30": {
+      "targets": 1043,
+      "mean_recall": 0.661074,
+      "random_expectation": 0.666667,
+      "delta": -0.005593,
+      "block_count": 11,
+      "positive_blocks": 5,
+      "block_CI95_approx": [
+        -0.017721,
+        0.006535
+      ]
+    }
+  },
+  "limitations": "Exploratory reused history; not nested fresh holdout. 11 nonoverlap block normal approximate CI, no multiplicity correction; no policy promotion. No new allocator computation.",
+  "policy": "NO_CHANGE",
+  "friday_readiness": "PARTIAL",
+  "correction": "v1 mistakenly counted an empty line in canonical CSV as a draw; v1 invalid. v2 filters blank lines and verifies exact rounds."
+}
