@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-04",
+  "status": "PASS",
+  "data_cutoff": 1248,
+  "checks": {
+    "actual_purchase_precedence": true,
+    "latest_review_has_failure_decomposition": true,
+    "all_reviews_have_failure_decomposition": true,
+    "candidate_recall_status_present": true,
+    "candidate_recall_cutoff_matches_master": true,
+    "candidate_recall_no_future_leakage": true,
+    "candidate_recall_required_k": true,
+    "candidate_recall_scorecard_complete": true,
+    "candidate_recall_targets_consistent": true,
+    "candidate_recall_matched_random_run": true,
+    "whole_history_not_overstated": true,
+    "actual_purchase_source_is_canonical": true
+  },
+  "actual_purchase_source_mismatches": [],
+  "historical_preserved_scope_complete": true,
+  "whole_history_complete": false,
+  "latest_review": {
+    "target_round": 1248,
+    "source": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+    "source_role": "ACTUAL_PURCHASE",
+    "candidate_recall_failure": true,
+    "ticket_construction_gap": 2,
+    "winning_union_coverage": 5,
+    "max_hits": 3
+  },
+  "candidate_recall": {
+    "targets": 1048,
+    "matched_random_sets_total": 209600,
+    "best_delta_by_k": {
+      "10": {
+        "signal": "balanced",
+        "mean_recall": 0.2274173027989822,
+        "random_mean_recall": 0.22184239821882953,
+        "delta_recall_vs_random": 0.005574904580152677,
+        "delta_3plus_vs_random": 0.011665076335877864,
+        "delta_4plus_vs_random": 0.00857824427480916
+      },
+      "15": {
+        "signal": "consensus",
+        "mean_recall": 0.33826335877862596,
+        "random_mean_recall": 0.3328832697201018,
+        "delta_recall_vs_random": 0.0053800890585242,
+        "delta_3plus_vs_random": 0.02818225190839696,
+        "delta_4plus_vs_random": -0.0008826335877862579
+      },
+      "20": {
+        "signal": "recent30",
+        "mean_recall": 0.4473600508905852,
+        "random_mean_recall": 0.44429548346055975,
+        "delta_recall_vs_random": 0.003064567430025441,
+        "delta_3plus_vs_random": 0.01407442748091603,
+        "delta_4plus_vs_random": 0.00031011450381679406
+      },
+      "25": {
+        "signal": "consensus",
+        "mean_recall": 0.5572519083969466,
+        "random_mean_recall": 0.5552798982188295,
+        "delta_recall_vs_random": 0.0019720101781170265,
+        "delta_3plus_vs_random": -0.0018511450381679673,
+        "delta_4plus_vs_random": 0.012633587786259504
+      },
+      "30": {
+        "signal": "recent30",
+        "mean_recall": 0.670324427480916,
+        "random_mean_recall": 0.6664392493638677,
+        "delta_recall_vs_random": 0.00388517811704836,
+        "delta_3plus_vs_random": -0.004675572519083904,
+        "delta_4plus_vs_random": 0.014174618320610621
+      }
+    }
+  },
+  "policy": "Candidate recall and ticket construction are separate learning stages. Actual delivered/purchased lines are canonical for post-draw learning."
+}
