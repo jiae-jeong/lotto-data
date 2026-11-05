@@ -141,7 +141,7 @@ jobs:
                           evidence['evidence_reuse_note'] = (
                               'Reused independently confirmed records from ' + candidate.parent.name
                               + ' for unchanged draw cutoff; no fresh external fetch is claimed.')
-                          target.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\\n')
+                          target.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n')
                           print('Crosscheck provenance reused:', candidate, 'cutoff:', cutoff)
                           break
                   except (KeyError, ValueError, TypeError, OSError):
