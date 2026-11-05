@@ -105,6 +105,48 @@ jobs:
         run: |
           set -euo pipefail
           python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-recovery.log"
+          # Reuse independently verified evidence only when the draw cutoff is unchanged.
+          # This does not claim a fresh external retrieval.
+          python - "$RUN_DATE" "$RUN_DIR" <<'PY'
+          import csv, json, sys
+          from pathlib import Path
+          date, run_dir = sys.argv[1], Path(sys.argv[2])
+          dated = Path('analysis') / date
+          target = dated / 'EXTERNAL_DATA_CROSSCHECK.json'
+          if not target.exists():
+              verification = json.loads((run_dir / 'VERIFICATION.json').read_text())
+              cutoff = int(verification['data_cutoff'])
+              rows = list(csv.DictReader(open('lotto_data.csv', encoding='utf-8-sig')))
+              last = rows[-1]
+              assert int(last['round']) == cutoff
+              for candidate in sorted(Path('analysis').glob('*/EXTERNAL_DATA_CROSSCHECK.json'), reverse=True):
+                  if candidate.parent.name >= date:
+                      continue
+                  try:
+                      evidence = json.loads(candidate.read_text())
+                      sources = evidence['fallback_sources']
+                      numbers = [int(last[f'no{i}']) for i in range(1, 7)]
+                      def agrees(s):
+                          return (int(s['round']) == cutoff and s['draw_date'] == last['date']
+                                  and sorted(s['main_numbers']) == sorted(numbers)
+                                  and int(s['bonus']) == int(last['bonus']))
+                      if (int(evidence['repo_data_cutoff']) == cutoff
+                          and evidence['independent_fallback_sources_agree'] is True
+                          and evidence['repo_vs_fallback_round_and_date_match'] is True
+                          and evidence.get('repo_vs_fallback_numbers_match') is True
+                          and len(sources) >= 2 and all(agrees(s) for s in sources)
+                          and agrees(evidence['official_source_attempt'])
+                          and evidence['official_source_attempt']['status'] == 'CONFIRMED'):
+                          evidence['date_kst'] = date
+                          evidence['evidence_reuse_note'] = (
+                              'Reused independently confirmed records from ' + candidate.parent.name
+                              + ' for unchanged draw cutoff; no fresh external fetch is claimed.')
+                          target.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\\n')
+                          print('Crosscheck provenance reused:', candidate, 'cutoff:', cutoff)
+                          break
+                  except (KeyError, ValueError, TypeError, OSError):
+                      continue
+          PY
           python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
           python -B automation/learning_loop_gate_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/learning-loop-gate.log"
 
