@@ -20,5 +20,10 @@ assert \"SEED=202610301154\" in s
 assert \"alpha=.05/4\" in s
 exec(compile(s,str(p),'exec'),globals(),globals())"""
 assert needle in outer
+pathfix="""old_path="analysis/2026-10-30/TODAY_META_V43_V52_1249_FROZEN_V54.json"
+assert old_path in s
+s=s.replace(old_path,"analysis/2026-11-06/TODAY_META_V43_V52_1249_FROZEN_V54.json")
+"""
+patch=patch.replace(needle,pathfix+needle)
 outer=outer.replace(needle,patch)
 exec(compile(outer,str(p),'exec'),globals(),globals())
