@@ -1,0 +1,76 @@
+name: lotto-1249-frozen-v54
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-1249-frozen-v54.yml'
+      - 'automation/weekly_1249_frozen_v54.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: lotto-1249-frozen-v54
+  cancel-in-progress: false
+jobs:
+  evaluate-and-seal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run unchanged V54 policy on 1248 cutoff
+        run: |
+          set -euo pipefail
+          python -B automation/weekly_1249_frozen_v54.py > "$RUNNER_TEMP/research_1249.log"
+      - name: Independent strict check and write-once seal
+        run: |
+          python - <<'PY'
+          import json,hashlib,pathlib
+          root=pathlib.Path('.')
+          result=root/'analysis/2026-11-06/TODAY_META_V43_V52_1249_FROZEN_V54.json'
+          d=json.loads(result.read_text(encoding='utf-8'))
+          inf=d['inference']
+          ok=(
+           d['target_round']==1249 and d['data_cutoff']==1248
+           and d['no_future_leakage'] is True
+           and inf['strict_portfolio_pass'] is True
+           and d['final_status']=='STRICT_PASS'
+           and all(inf[k]['adjusted_ci_delta'][0]>0 for k in ('max_hits','any2','any3'))
+           and inf['any2']['positive_50_round_block_share']>=.65
+          )
+          print('strict_check',ok,'gate',inf.get('strict_portfolio_pass'))
+          assert ok,'STRICT GATE FAIL: no tickets can be released'
+          L=d['current']['lines']
+          assert len(L)==5 and len(set(tuple(x) for x in L))==5
+          assert all(len(x)==6 and len(set(x))==6 and x==sorted(x) and all(isinstance(n,int) and 1<=n<=45 for n in x) for x in L)
+          assert len(set(n for row in L for n in row))==30
+          raw='\n'.join(' '.join(map(str,x)) for x in L)
+          assert [[int(s) for s in z.split()] for z in raw.splitlines()]==L
+          dest=root/'research/weekly_purchase/1249/FINAL_PURCHASE_FIVE_LINES_1249_20261106_FROZEN_V54.json'
+          dest.parent.mkdir(parents=True,exist_ok=True)
+          assert not dest.exists(),'WRITE ONCE VIOLATION'
+          filenames=['lotto_data.csv','automation/today_frozen_signal_partition_v42.py','automation/today_meta_v43_v52_v54.py','automation/weekly_1249_frozen_v54.py']
+          hashes={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in filenames}
+          payload={'status':'FINAL_PURCHASE_STRICT_PASS','target_round':1249,'data_cutoff':1248,'policy':'META_V43_V52_V54_FROZEN_REPLAY','strict_portfolio_pass':True,'no_future_leakage':True,'randomness':False,'source_result':str(result),'source_sha256':hashlib.sha256(result.read_bytes()).hexdigest(),'source_hashes':hashes,'walkforward_targets':d['walkforward_targets'],'adjusted_ci_delta':{k:inf[k]['adjusted_ci_delta'] for k in ('max_hits','any2','any3','winning_union_coverage')},'positive_50_round_block_share':{k:inf[k]['positive_50_round_block_share'] for k in ('max_hits','any2','any3','winning_union_coverage')},'final_lines':L,'integrity':{'double_validation':True,'five_distinct_tickets':True,'six_unique_numbers_per_ticket':True,'range_1_45':True,'union_size':30,'source_equals_sealed':True}}
+          canon=json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+          payload['sha256']=hashlib.sha256(canon).hexdigest()
+          dest.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          saved=json.loads(dest.read_text(encoding='utf-8'))
+          assert saved['final_lines']==L and saved['sha256']==hashlib.sha256(canon).hexdigest()
+          print('STRICT PASS | target=1249 | cutoff=1248 | sealed_sha256='+saved['sha256'])
+          print('FINAL PURCHASE 5 LINES')
+          print(raw)
+          PY
+      - name: Commit audit and sealed final artifact
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-11-06/TODAY_META_V43_V52_1249_FROZEN_V54.json research/weekly_purchase/1249/FINAL_PURCHASE_FIVE_LINES_1249_20261106_FROZEN_V54.json
+          git commit -m 'weekly: seal 1249 V54 strict-pass purchase 5 lines'
+          git pull --rebase origin main
+          git push origin HEAD:main
