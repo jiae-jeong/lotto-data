@@ -1,0 +1,121 @@
+{
+  "date": "2026-11-06",
+  "study": "NEW_STUDY pre-target trailing-performance dynamic candidate selector",
+  "data_cutoff": 1248,
+  "source_blob_sha": "ce7333969c963fb16d8c43ff9cb131ae0d86388f",
+  "integrity": true,
+  "history_targets": "201..1243",
+  "evaluation_targets": "400..1243",
+  "contaminated_rounds_excluded": "1244..1248",
+  "method": "For each target t, compute rankings using draws 1..t-1. Choose among fixed recent30/gap/balanced using preceding 100 targets' recall@K, never current target; evaluate on t. Deterministic tie recent30 then gap then balanced. K=10/15/20/25/30. No hyperparameter selection on evaluation outcomes.",
+  "result": {
+    "10": {
+      "n": 844,
+      "adaptive": 0.21998420221168996,
+      "recent": 0.21919431279620802,
+      "balanced": 0.22650078988941502,
+      "random_expectation": 0.2222222222222222,
+      "delta_adaptive_recent": 0.0007898894154819425,
+      "delta_adaptive_random": -0.002238020010532249,
+      "full_blocks": 16,
+      "block_CI95_approx": [
+        -0.012451615025889862,
+        0.009118281692556532
+      ],
+      "positive_blocks": 9,
+      "selection_counts": {
+        "recent30": 247,
+        "gap": 320,
+        "balanced": 277
+      }
+    },
+    "15": {
+      "n": 844,
+      "adaptive": 0.33471563981042646,
+      "recent": 0.32958135860979476,
+      "balanced": 0.33550552922590793,
+      "random_expectation": 0.3333333333333333,
+      "delta_adaptive_recent": 0.005134281200631696,
+      "delta_adaptive_random": 0.0013823064770931426,
+      "full_blocks": 16,
+      "block_CI95_approx": [
+        -0.014289573734560796,
+        0.016789573734560803
+      ],
+      "positive_blocks": 7,
+      "selection_counts": {
+        "recent30": 373,
+        "gap": 243,
+        "balanced": 228
+      }
+    },
+    "20": {
+      "n": 844,
+      "adaptive": 0.4462875197472353,
+      "recent": 0.4407582938388628,
+      "balanced": 0.4411532385466031,
+      "random_expectation": 0.4444444444444444,
+      "delta_adaptive_recent": 0.005529225908372515,
+      "delta_adaptive_random": 0.0018430753027908753,
+      "full_blocks": 16,
+      "block_CI95_approx": [
+        -0.017092347315875993,
+        0.017509013982542655
+      ],
+      "positive_blocks": 7,
+      "selection_counts": {
+        "recent30": 392,
+        "gap": 300,
+        "balanced": 152
+      }
+    },
+    "25": {
+      "n": 844,
+      "adaptive": 0.5606240126382309,
+      "recent": 0.5475908372827811,
+      "balanced": 0.5513428120063192,
+      "random_expectation": 0.5555555555555556,
+      "delta_adaptive_recent": 0.013033175355449789,
+      "delta_adaptive_random": 0.005068457082675337,
+      "full_blocks": 16,
+      "block_CI95_approx": [
+        -0.012451906903508173,
+        0.026618573570174827
+      ],
+      "positive_blocks": 8,
+      "selection_counts": {
+        "recent30": 245,
+        "gap": 265,
+        "balanced": 334
+      }
+    },
+    "30": {
+      "n": 844,
+      "adaptive": 0.6621248025276459,
+      "recent": 0.6629146919431278,
+      "balanced": 0.6565955766192735,
+      "random_expectation": 0.6666666666666666,
+      "delta_adaptive_recent": -0.0007898894154818592,
+      "delta_adaptive_random": -0.00454186413902069,
+      "full_blocks": 16,
+      "block_CI95_approx": [
+        -0.0221413813588407,
+        0.009224714692174032
+      ],
+      "positive_blocks": 4,
+      "selection_counts": {
+        "recent30": 471,
+        "gap": 269,
+        "balanced": 104
+      }
+    }
+  },
+  "limitations": "Historical exploratory, not pristine outer holdout because model family and 100-target window were chosen after earlier historical exploration. Random is exact K/45 expectation, not simulated matched random. Block CI uses full nonoverlap 50-target blocks, approximate and unadjusted for five K tests. Not a Friday policy promotion.",
+  "policy": "NO_CHANGE",
+  "friday_readiness": "PARTIAL",
+  "next_tests": [
+    "Freeze model family and trailing window before prospective evaluation",
+    "Matched random and nested rolling validation of dynamic selector",
+    "Fixed-candidate portfolio allocator block CI and multiplicity correction"
+  ]
+}
