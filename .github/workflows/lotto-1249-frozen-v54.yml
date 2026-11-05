@@ -26,6 +26,16 @@ jobs:
         run: |
           set -euo pipefail
           python -B automation/weekly_1249_frozen_v54.py > "$RUNNER_TEMP/research_1249.log"
+      - name: Preserve frozen V54 scorecard even on strict failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frozen-v54-1249-scorecard-${{ github.run_id }}
+          path: |
+            analysis/2026-11-06/TODAY_META_V43_V52_1249_FROZEN_V54.json
+            ${{ runner.temp }}/research_1249.log
+          if-no-files-found: warn
+          retention-days: 30
       - name: Independent strict check and write-once seal
         run: |
           python - <<'PY'
