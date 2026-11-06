@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-07",
+  "type": "NEW_STUDY_DIAGNOSTIC",
+  "study": "Prior-only recent30 candidate recall regime decomposition on two adjacent non-overlapping 48-target windows; independent of V54 allocator",
+  "data_sha": "ce7333969c963fb16d8c43ff9cb131ae0d86388f",
+  "data_cutoff": 1248,
+  "integrity": true,
+  "windows": [
+    {
+      "period": "previous48",
+      "targets": 48,
+      "recall": {
+        "10": {
+          "hits": 52,
+          "mean": 0.18055555555555555,
+          "matched_random_mean": 0.22338541666666675
+        },
+        "15": {
+          "hits": 79,
+          "mean": 0.2743055555555556,
+          "matched_random_mean": 0.3307118055555555
+        },
+        "20": {
+          "hits": 115,
+          "mean": 0.3993055555555556,
+          "matched_random_mean": 0.4448958333333333
+        },
+        "25": {
+          "hits": 152,
+          "mean": 0.5277777777777778,
+          "matched_random_mean": 0.5592187499999999
+        },
+        "30": {
+          "hits": 182,
+          "mean": 0.6319444444444444,
+          "matched_random_mean": 0.664861111111111
+        }
+      },
+      "top30_ceiling": {
+        "candidate_covers_at_least3": 41,
+        "candidate_covers_at_least4": 31,
+        "candidate_covers_all6": 3,
+        "mean_candidate_hits": 3.7916666666666665
+      }
+    },
+    {
+      "period": "last48",
+      "targets": 48,
+      "recall": {
+        "10": {
+          "hits": 61,
+          "mean": 0.21180555555555555,
+          "matched_random_mean": 0.22336805555555556
+        },
+        "15": {
+          "hits": 92,
+          "mean": 0.3194444444444444,
+          "matched_random_mean": 0.3325000000000001
+        },
+        "20": {
+          "hits": 115,
+          "mean": 0.3993055555555556,
+          "matched_random_mean": 0.4466666666666667
+        },
+        "25": {
+          "hits": 147,
+          "mean": 0.5104166666666666,
+          "matched_random_mean": 0.5561805555555559
+        },
+        "30": {
+          "hits": 177,
+          "mean": 0.6145833333333334,
+          "matched_random_mean": 0.6671527777777777
+        }
+      },
+      "top30_ceiling": {
+        "candidate_covers_at_least3": 38,
+        "candidate_covers_at_least4": 27,
+        "candidate_covers_all6": 3,
+        "mean_candidate_hits": 3.6875
+      }
+    }
+  ],
+  "delta_last_minus_previous": {
+    "10": 0.03125,
+    "15": 0.04513888888888884,
+    "20": 0,
+    "25": -0.01736111111111116,
+    "30": -0.01736111111111105
+  },
+  "random_seed": 1250007,
+  "random_draws_per_target_per_k": 200,
+  "random_total": 96000,
+  "contamination": "1244..1248 included for diagnosis only, not independent validation; 1249 not yet in canonical CSV",
+  "limitations": "No V54 candidate-bank or per-target allocator replay; cannot attribute V54 any2 loss. Last 48 windows are post-hoc and 1244..1248 contaminated. No strict gate or policy promotion.",
+  "policy": "NO_CHANGE",
+  "next": "Replay V54 preserved candidate-bank and tickets for same windows; separately test fixed bank allocators under pre-registered nested evaluation."
+}
