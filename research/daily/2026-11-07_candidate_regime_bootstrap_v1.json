@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-07",
+  "source_sha": "ce7333969c963fb16d8c43ff9cb131ae0d86388f",
+  "study": "Bootstrap uncertainty of adjacent 48-target recent30 recall deltas",
+  "seed": 7072026,
+  "bootstrap_reps": 10000,
+  "comparison_count": 5,
+  "bonferroni_alpha_per_test": 0.01,
+  "method": "Independent target bootstrap within each nonoverlapping 48-target window; approximate and ignores temporal dependence; diagnostic only",
+  "results": {
+    "10": {
+      "delta": 0.03125,
+      "ci95": [
+        -0.02430555555555562,
+        0.08680555555555554
+      ],
+      "bonferroni_familywise_95_ci": [
+        -0.045138888888888874,
+        0.10416666666666663
+      ]
+    },
+    "15": {
+      "delta": 0.04513888888888895,
+      "ci95": [
+        -0.02430555555555562,
+        0.11458333333333348
+      ],
+      "bonferroni_familywise_95_ci": [
+        -0.04861111111111105,
+        0.13541666666666685
+      ]
+    },
+    "20": {
+      "delta": 5.551115123125783e-17,
+      "ci95": [
+        -0.0833333333333331,
+        0.0833333333333331
+      ],
+      "bonferroni_familywise_95_ci": [
+        -0.10416666666666681,
+        0.11111111111111094
+      ]
+    },
+    "25": {
+      "delta": -0.01736111111111105,
+      "ci95": [
+        -0.10763888888888884,
+        0.07291666666666667
+      ],
+      "bonferroni_familywise_95_ci": [
+        -0.13541666666666674,
+        0.10069444444444457
+      ]
+    },
+    "30": {
+      "delta": -0.01736111111111127,
+      "ci95": [
+        -0.1006944444444442,
+        0.06250000000000015
+      ],
+      "bonferroni_familywise_95_ci": [
+        -0.125,
+        0.09375
+      ]
+    }
+  },
+  "conclusion": "All Bonferroni-adjusted intervals include zero; no validated regime improvement",
+  "limitations": "Windows selected after observing historical outcomes, so these are descriptive CIs not independent confirmatory tests. No V54 attribution.",
+  "policy": "NO_CHANGE"
+}
