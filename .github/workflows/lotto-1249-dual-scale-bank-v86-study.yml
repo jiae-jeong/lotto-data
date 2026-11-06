@@ -1,0 +1,60 @@
+name: lotto-1249-dual-scale-bank-v86-study
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/lotto-1249-dual-scale-bank-v86-study.yml"
+      - "automation/weekly_1249_dual_scale_bank_v86.py"
+permissions:
+  contents: write
+concurrency:
+  group: lotto-1249-v86
+  cancel-in-progress: false
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V86 model and original strict null and gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/weekly_1249_dual_scale_bank_v86.py > "$RUNNER_TEMP/v86.log"
+      - name: Show strict diagnostics (do not release candidate lines on FAIL)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('analysis/2026-11-06/TODAY_DUAL_SCALE_BANK_1249_V86.json'))
+          x=d['inference']
+          assert d['target_round']==1249 and d['data_cutoff']==1248 and d['no_future_leakage'] is True
+          print('V86_RESULT',json.dumps({'strict_portfolio_pass':x['strict_portfolio_pass'],'status':d['final_status'],'policy':d['policy'],'walkforward_targets':d['walkforward_targets'],'delta':{k:d['scorecard']['delta'][k] for k in ('max_hits','any2','any3','winning_union_coverage')},'ci_lower':{k:x[k]['adjusted_ci_delta'][0] for k in ('max_hits','any2','any3','winning_union_coverage')},'positive_share':{k:x[k]['positive_50_round_block_share'] for k in ('max_hits','any2','any3','winning_union_coverage')}},ensure_ascii=False))
+          PY
+      - name: Save complete diagnostics even if gate fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-1249-any2-guard-v86-${{ github.run_id }}
+          path: |
+            analysis/2026-11-06/TODAY_DUAL_SCALE_BANK_1249_V86.json
+            ${{ runner.temp }}/v86.log
+          if-no-files-found: warn
+          retention-days: 60
+      - name: Preserve V86 result as research only
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-11-06/TODAY_DUAL_SCALE_BANK_1249_V86.json
+          git commit -m 'research: save V86 any2-guard scorecard, exploratory'
+          git pull --rebase origin main
+          git push origin HEAD:main
