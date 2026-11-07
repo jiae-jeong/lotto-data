@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-08",
+  "study": "NEW_STUDY: exact combinatorial null audit for latest pre-draw recent30 candidate ranking, and cutoff-safe out-of-sample diagnostic",
+  "source_sha": "ce7333969c963fb16d8c43ff9cb131ae0d86388f",
+  "source_rounds": 1248,
+  "source_cutoff": 1248,
+  "target": 1249,
+  "draw_source_urls": [
+    "https://www.yna.co.kr/view/AKR20261107051900002",
+    "https://www.mt.co.kr/society/2026/11/07/2026110720254599946"
+  ],
+  "model": "recent30 count, tie numeric ascending; fixed prior to target; independent of V54",
+  "null": "exact hypergeometric P(X=x)=C(K,x)C(45-K,6-x)/C(45,6), no simulated random",
+  "contamination": "1244-1249 previously inspected; diagnostic only",
+  "k_results": [
+    {
+      "k": 10,
+      "hit_count": 3,
+      "recall": 0.5,
+      "null_expected": 0.2222222222222222,
+      "exact_one_sided_p": 0.1128757799205899,
+      "bonferroni_5_p": 0.5643788996029495
+    },
+    {
+      "k": 15,
+      "hit_count": 3,
+      "recall": 0.5,
+      "null_expected": 0.3333333333333333,
+      "exact_one_sided_p": 0.31137523848811427,
+      "bonferroni_5_p": 1
+    },
+    {
+      "k": 20,
+      "hit_count": 4,
+      "recall": 0.6666666666666666,
+      "null_expected": 0.4444444444444444,
+      "exact_one_sided_p": 0.2307975631855382,
+      "bonferroni_5_p": 1
+    },
+    {
+      "k": 25,
+      "hit_count": 5,
+      "recall": 0.8333333333333334,
+      "null_expected": 0.5555555555555556,
+      "exact_one_sided_p": 0.15220268481754584,
+      "bonferroni_5_p": 0.7610134240877292
+    },
+    {
+      "k": 30,
+      "hit_count": 5,
+      "recall": 0.8333333333333334,
+      "null_expected": 0.6666666666666666,
+      "exact_one_sided_p": 0.33534007115969683,
+      "bonferroni_5_p": 1
+    }
+  ],
+  "excluded_rank_only": {
+    "10": [
+      18,
+      22,
+      42
+    ],
+    "15": [
+      18,
+      22,
+      42
+    ],
+    "20": [
+      22,
+      42
+    ],
+    "25": [
+      42
+    ],
+    "30": [
+      42
+    ]
+  },
+  "limitations": [
+    "No original V54 candidate bank/allocator replay",
+    "Exact null on single draw is not predictive superiority",
+    "No prospective strict PASS",
+    "1249 missing from canonical CSV"
+  ],
+  "policy": "NO_CHANGE",
+  "integrity": {
+    "sequential": true,
+    "unique_valid": true
+  }
+}
