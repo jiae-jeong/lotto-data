@@ -20,7 +20,9 @@ Readiness checks are MAINTENANCE/RECHECK, not a new study. Research completion r
 
 ## Automatic workflow
 
-`daily-lotto-research-v2.yml` schedules a run at 09:00 Asia/Seoul (00:00 UTC); GitHub can delay a scheduled start. Ordinary pushes of execution code run validation only. Manual/scheduled events and an explicitly marked `[run-daily-research-v2]` validation push execute one new registered study, commit only its new result directory and push normally. There is no force push. Failed runs preserve recovery artifacts and do not commit a false completion.
+`daily-lotto-research-v2.yml` is intentionally `workflow_dispatch`-only (made manual-only on 2026-10-16). It has no schedule and no push trigger; do not describe it as a daily scheduled run or expect a marked push to start a study. A new generic study runs only after a manual GitHub Actions dispatch. The run preflights the queue, executes one unfinished registered study when one is runnable, validates it, and commits only its new result directory with a normal push. There is no force push. If every generic task is completed, blocked, or assigned to a dedicated workflow, the run records an intentional no-op. Failed runs preserve recovery artifacts and do not commit a false completion.
+
+The 2026-11-06 plan for round 1250 separately names H1250-A (fixed candidate bank, allocator/geometry comparison) and H1250-B (fixed allocator, candidate recall/ranking comparison). These plan-level axes are not generic queue entries; each must receive a frozen, fully specified preregistration and executable implementation before evaluation. Do not claim they will run automatically through the manual-only generic workflow.
 
 The old `daily-lotto-study.yml` and dated `daily_study_runner.py` are historical/manual paths and are not used by this new schedule. They remain unchanged to preserve the previous automation/version history; use v2 for new work. Do not edit the old trigger as a way to run a new v2 question.
 
