@@ -1061,11 +1061,12 @@
         "study_class": "empirical",
         "execution_mode": "dedicated_workflow",
         "execution_status": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH",
-        "execution_entrypoint": "automation/h1250_ab_research.py",
-        "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
-        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json",
-        "implementation_code_sha": "73ca5ad7107d80e3df05b0d4fa512a55d5437555",
-        "implementation_commit": "9ebaa3ecdb7695e1a978141ff96110db857a332c"
+        "execution_entrypoint": "automation/h1250_ab_research_v2.py",
+        "workflow_entrypoint": ".github/workflows/h1250-ab-research-v2.yml",
+        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
+        "implementation_code_sha": "4db8b47b4a6ba3533fe479483f6326964e2fc082",
+        "implementation_commit": "3946b6d9e10dacd3fcee71b41af1a1698ee081eb",
+        "workflow_blob_sha": "2ad1a0dad283972d04d8abf7c90e00c214fdcf69"
       }
     },
     {
@@ -1111,13 +1112,72 @@
         "novelty_signature": "fixed rr allocator; six frozen tail24 ranking signals; prior-only 150-target recall@30 selection locked for 50-target blocks; exact hypergeometric candidate recall null and matched random candidate-bank comparator.",
         "study_class": "empirical",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH",
+        "execution_status": "SUPERSEDED_BEFORE_EXECUTION_OBJECTIVE_DEGENERACY",
         "execution_entrypoint": "automation/h1250_ab_research.py",
         "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
         "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json",
         "implementation_code_sha": "73ca5ad7107d80e3df05b0d4fa512a55d5437555",
-        "implementation_commit": "9ebaa3ecdb7695e1a978141ff96110db857a332c"
-      }
+        "implementation_commit": "9ebaa3ecdb7695e1a978141ff96110db857a332c",
+        "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+      },
+      "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+    },
+    {
+      "id": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+      "kind": "h1250_candidate",
+      "question": "With allocator geometry fixed, does prior-only macro-recall tail24 ranking improve candidate recall across K=10/15/20/25/30 and downstream five-line portfolio metrics?",
+      "novelty": "Pre-evaluation amendment to avoid an invariant recall@30 selector: same fixed candidate top30 and rr allocator; six frozen H/G/C/M/P/T tail rankers; choose from prior 150 targets by equal-weight macro-average recall fraction across K=10,15,20,25,30; freeze for next 50-target block. All strict gates unchanged.",
+      "spec": {
+        "study_id": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+        "kind": "h1250_candidate",
+        "research_question": "With allocator geometry fixed, does prior-only macro-recall tail24 ranking improve candidate recall across K=10/15/20/25/30 and downstream five-line portfolio metrics?",
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "Each target t uses draws 1..t-1 only. Ranker selection for a 50-target block uses only the immediately preceding 150 completed targets.",
+        "primary_metric": "All four strict portfolio metrics must have Bonferroni-adjusted moving-block CI lower bounds >0 versus the exact disjoint30 null, with any2 positive 50-target block share >=0.65.",
+        "secondary_metrics": [
+          "candidate recall@10",
+          "candidate recall@15",
+          "candidate recall@20",
+          "candidate recall@25",
+          "candidate recall@30",
+          "matched random candidate-bank portfolio delta"
+        ],
+        "comparator": "Fixed rr allocator with slow-model core6 and one of six frozen H/G/C/M/P/T tail rankers; adaptive policy selects ranker from prior 150-target equal-weight macro recall fraction across K=10,15,20,25,30.",
+        "baseline": "Exact combinatorial uniform null for five disjoint six-number tickets with union30; exact hypergeometric expected recall 6*K/45; additionally 200 random 30-number candidate banks per target, rr-partitioned.",
+        "multiplicity_correction": "Adaptive prior-only policy uses unchanged alpha 0.05/4 for four primary metrics. Descriptive six-ranker portfolio intervals use Bonferroni 0.05/(6*4); six-ranker by five-K recall intervals use Bonferroni 0.05/(6*5).",
+        "block_stability": [
+          50
+        ],
+        "tie_break": "Ranker order H, G, C, M, P, T; number-score ties use lower number.",
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "RANKER_METRICS.csv",
+          "CANDIDATE_RECALL.csv",
+          "ADAPTIVE_SELECTION.csv",
+          "RANDOM_CANDIDATE_BANKS.csv",
+          "BLOCK_STABILITY.csv",
+          "STRICT_GATE.json",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "fixed rr allocator; six frozen tail24 ranking signals; prior-only 150-target selection by equal-weight macro recall@10/15/20/25/30 locked for 50-target blocks; exact hypergeometric recall null and matched random candidate-bank comparator.",
+        "study_class": "empirical",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH",
+        "execution_entrypoint": "automation/h1250_ab_research_v2.py",
+        "workflow_entrypoint": ".github/workflows/h1250-ab-research-v2.yml",
+        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
+        "implementation_code_sha": "4db8b47b4a6ba3533fe479483f6326964e2fc082",
+        "implementation_commit": "3946b6d9e10dacd3fcee71b41af1a1698ee081eb",
+        "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+        "workflow_blob_sha": "2ad1a0dad283972d04d8abf7c90e00c214fdcf69",
+        "adaptive_selection_objective": "Equal-weight macro-average candidate recall fraction across K=10,15,20,25,30 over prior 150 completed targets; tie-break H,G,C,M,P,T.",
+        "v1_supersedes_reason": "v1 selected by recall@30, which is invariant across rankers because all reorder the same fixed top30 bank; this amendment was made before any outer evaluation."
+      },
+      "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+      "supersedes": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
