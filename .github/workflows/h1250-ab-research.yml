@@ -2,12 +2,6 @@ name: h1250-ab-research
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/h1250-ab-research.yml'
-      - 'automation/h1250_ab_research.py'
-      - 'research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json'
 
 permissions:
   contents: write
@@ -18,7 +12,7 @@ concurrency:
 
 jobs:
   validate:
-    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run-h1250-ab]')
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
