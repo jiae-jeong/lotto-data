@@ -38,14 +38,24 @@ jobs:
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
           python - "$RUN_DATE" <<'PY'
-          import json,sys
+          import csv,hashlib,json,sys
           from pathlib import Path
-          p=Path('analysis')/sys.argv[1]/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json'
+          date=sys.argv[1]
+          data=Path('lotto_data.csv')
+          rows=list(csv.DictReader(data.open(encoding='utf-8-sig')))
+          rounds=[int(r['round']) for r in rows]
+          assert rounds and rounds==list(range(1,len(rounds)+1))
+          cutoff=rounds[-1]
+          data_sha=hashlib.sha256(data.read_bytes()).hexdigest()
+          p=Path('analysis')/date/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json'
           d=json.loads(p.read_text())
-          assert d['data_cutoff']==1246
+          assert d['data_cutoff']==cutoff
+          assert d['data_sha256']==data_sha
+          assert d['target_range']==[201,cutoff]
+          assert d['training_cutoff_rule']=='training_through_round = target_round - 1'
           assert len(d['models'])>=10
           assert d['portfolio_v3_audit']['corrected_model_promotion_status'] in ('FAIL','REQUIRES_FURTHER_TEST')
-          print(json.dumps({'verdict':d['verdict'],'validated_models':d['validated_models'],'portfolio_v3':d['portfolio_v3_audit']['corrected_model_promotion_status']},ensure_ascii=False))
+          print(json.dumps({'data_cutoff':cutoff,'verdict':d['verdict'],'validated_models':d['validated_models'],'portfolio_v3':d['portfolio_v3_audit']['corrected_model_promotion_status']},ensure_ascii=False))
           PY
       - name: Commit strict report
         shell: bash
