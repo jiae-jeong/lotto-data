@@ -1061,7 +1061,7 @@
         "expected_record_counts": {
           "PREDICTIONS.csv": 1698,
           "ADAPTIVE_SELECTION.csv": 1698,
-          "BLOCK_STABILITY.csv": 17,
+          "BLOCK_STABILITY.csv": 136,
           "GEOMETRY_METRICS.csv": 3396,
           "CONDITIONAL_RANDOM.csv": 849,
           "WINNER_TRACE_A.csv": 20376
@@ -1177,7 +1177,7 @@
         "expected_record_counts": {
           "PREDICTIONS.csv": 1698,
           "ADAPTIVE_SELECTION.csv": 1698,
-          "BLOCK_STABILITY.csv": 17,
+          "BLOCK_STABILITY.csv": 136,
           "RANKER_METRICS.csv": 5094,
           "CANDIDATE_RECALL.csv": 25470,
           "RANDOM_CANDIDATE_BANKS.csv": 849,
