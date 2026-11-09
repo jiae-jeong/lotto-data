@@ -354,7 +354,7 @@ jobs:
               existing=json.loads(ready_path.read_text())
               assert existing==ready_payload, f"write-once readiness collision: {ready_path}"
             else:
-              ready_path.write_text(json.dumps(ready_payload,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+              ready_path.write_text(json.dumps(ready_payload,ensure_ascii=False,indent=2),encoding='utf-8')
 
           stale_ready_files=sorted(str(p) for p in outdir.glob(f"STRICT_PASS_READY_{target}_*.json") if ready_path is None or p!=ready_path)
           status_payload={
@@ -378,7 +378,7 @@ jobs:
             'random_fallback_allowed':False
           }
           status_path=outdir/f"STRICT_PASS_STATUS_{target}_{date.replace('-','')}.json"
-          status_path.write_text(json.dumps(status_payload,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+          status_path.write_text(json.dumps(status_payload,ensure_ascii=False,indent=2),encoding='utf-8')
           gate={
             **status_payload,
             'strict_model_validation_report':str(strict_report),
@@ -390,7 +390,7 @@ jobs:
             )
           }
           gate_path=outdir/f"MODEL_GATE_{target}_{date.replace('-','')}.json"
-          gate_path.write_text(json.dumps(gate,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+          gate_path.write_text(json.dumps(gate,ensure_ascii=False,indent=2),encoding='utf-8')
           print(json.dumps(gate,ensure_ascii=False))
           PY
 
