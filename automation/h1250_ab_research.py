@@ -66,9 +66,17 @@ def load_and_validate_contract():
     assert prereg["scope"]["outer_target_count"] == 849
     gate = prereg["shared_protocol"]["strict_gate"]
     assert gate["threshold_changes"] == "PROHIBITED"
-    assert prereg["reporting"]["no_recommendation_numbers"] is True
-    assert prereg["reporting"]["no_final_purchase_lines"] is True
-    assert prereg["reporting"]["no_auto_promotion"] is True
+    reporting = prereg["shared_protocol"]["reporting"]
+    assert reporting["no_recommendation_numbers"] is True
+    assert reporting["no_final_purchase_lines"] is True
+    assert reporting["no_auto_promotion"] is True
+    plan = prereg["execution_plan"]
+    assert plan["workflow_mode"] == "workflow_dispatch_only; do not add or change schedules"
+    assert plan["implementation_entrypoint"] == "automation/h1250_ab_research.py"
+    assert plan["workflow_entrypoint"] == ".github/workflows/h1250-ab-research.yml"
+    implementation_hash = plan["implementation_code_hash"]
+    assert implementation_hash not in ("PENDING", "", None)
+    assert git_blob_sha(Path(__file__).resolve()) == implementation_hash
 
     queue = load_json(QUEUE)
     tasks = {task["id"]: task for task in queue["tasks"]}
