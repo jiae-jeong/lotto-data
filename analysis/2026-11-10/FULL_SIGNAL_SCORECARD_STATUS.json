@@ -1,5 +1,5 @@
 {
-  "generated_kst": "2026-11-10T01:36:33.013463+09:00",
+  "generated_kst": "2026-11-10T04:55:25.362246+09:00",
   "full_signal_scorecard_complete": true,
   "scope": "all signal families that directly affect the operational five-ticket selector, plus fresh A/C/contrarian ablations and B pair/triple model evidence",
   "active_weekly_signal_families": [
@@ -22,8 +22,8 @@
   "successor_leakage_failures": 0,
   "evidence": {
     "active_scorecard": "analysis/2026-11-10/FULL_SIGNAL_SCORECARD.csv",
-    "successor_ablation": "analysis/2026-11-10/MASTER_FULL_V5_163625_440876/AC_CONTRARIAN_SIGNAL_ABLATION.csv",
-    "b_model_scorecard": "analysis/2026-11-10/MASTER_FULL_V4_162846_657244/B_MODEL_SCORECARD.csv"
+    "successor_ablation": "analysis/2026-11-10/MASTER_FULL_V5_195520_978093/AC_CONTRARIAN_SIGNAL_ABLATION.csv",
+    "b_model_scorecard": "analysis/2026-11-10/MASTER_FULL_V4_195059_197730/B_MODEL_SCORECARD.csv"
   },
   "partially_covered_inside_structure_profile_but_not_isolated": [],
   "integrity_note": "Every predictive signal row is evaluated only after constructing its ticket from prior draws."

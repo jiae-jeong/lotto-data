@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-10",
+  "compute_status": "COMPUTE_PARTIAL",
+  "protocol_status": "PROTOCOL_PARTIAL",
+  "protocol_checks": {
+    "full_compute_execution": false,
+    "external_two_source_crosscheck": true,
+    "historical_errornote_aggregate_present": true,
+    "historical_errornote_closed_loop_complete": true,
+    "full_signal_scorecard": true,
+    "numeric_13_section_report": true,
+    "legacy_model_sources_recovered": false,
+    "actual_purchase_learning_record": true,
+    "candidate_recall_separate_stage": true,
+    "failure_decomposition_present": true,
+    "whole_history_limitation_explicit": true
+  },
+  "missing_compute_keys": [],
+  "failed_compute_keys": [
+    "A_full_walkforward",
+    "C_full_walkforward",
+    "contrarian_full_walkforward",
+    "legacy_model_sources_recovered"
+  ],
+  "protocol_missing": [
+    "full_compute_execution",
+    "legacy_model_sources_recovered"
+  ],
+  "learning_loop_gate": "analysis/2026-11-10/LEARNING_LOOP_GATE.json"
+}

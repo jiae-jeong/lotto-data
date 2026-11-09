@@ -1,5 +1,5 @@
 {
-  "generated_kst": "2026-11-10T01:36:32.573755+09:00",
+  "generated_kst": "2026-11-10T04:55:25.125488+09:00",
   "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present, otherwise authentic pre-draw FINAL_FIVE_LINES; missing legacy/older originals are not reconstructed",
   "data_cutoff": 1249,
   "completed_preserved_targets_found": 3,
