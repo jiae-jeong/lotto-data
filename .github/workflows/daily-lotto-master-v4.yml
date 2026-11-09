@@ -155,7 +155,7 @@ jobs:
         run: |
           set -euo pipefail
           python - "$RUN_DIR" "$RUN_DATE" <<'PY'
-          import json,sys
+          import csv,hashlib,json,sys
           from pathlib import Path
           d=Path(sys.argv[1]); date=sys.argv[2]
           v=json.loads((d/'VERIFICATION.json').read_text())
@@ -168,7 +168,7 @@ jobs:
               'successor_scorecard_complete','successor_random_comparison',
               'successor_block_stability','successor_signal_ablation',
               'five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline',
-              'model_scorecard_complete','hypothesis_registry_written'
+              'model_scorecard_complete','hypothesis_registry_written','artifact_hash_manifest'
           }
           required_protocol={
               'full_compute_execution','external_two_source_crosscheck',
@@ -189,6 +189,22 @@ jobs:
           assert v['protocol_status']=='FULL_COMPLETE', v.get('protocol_missing')
           assert required_protocol.issubset(a['protocol_checks'])
           assert all(a['protocol_checks'][k] for k in required_protocol)
+          assert v['mandatory_checks']['artifact_hash_manifest'] is True
+          assert v['artifact_manifest']['status']=='PASS'
+          manifest_path=d/'SHA256_MANIFEST.csv'
+          assert manifest_path.is_file()
+          with manifest_path.open('r',encoding='utf-8-sig',newline='') as f:
+              manifest_rows=list(csv.DictReader(f))
+          expected_files={p.name for p in d.iterdir() if p.is_file() and p.name != manifest_path.name}
+          manifest_names=[row['path'] for row in manifest_rows]
+          assert len(manifest_names)==len(set(manifest_names))
+          assert set(manifest_names)==expected_files
+          assert v['artifact_manifest']['entries']==len(manifest_rows)
+          for row in manifest_rows:
+              artifact=d/row['path']
+              assert artifact.is_file() and artifact.parent==d and not artifact.is_symlink()
+              assert artifact.stat().st_size==int(row['bytes'])
+              assert hashlib.sha256(artifact.read_bytes()).hexdigest()==row['sha256']
           PY
 
       - name: Run Friday validation and adaptive nonrandom research

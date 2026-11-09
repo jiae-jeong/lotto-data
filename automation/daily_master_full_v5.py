@@ -51,6 +51,35 @@ def write_csv(path, rows, fieldnames=None):
         w.writerows(rows)
 
 
+def write_and_verify_artifact_manifest(directory: Path):
+    """Hash every generated artifact except the manifest itself, then verify bytes and hashes."""
+    manifest = directory / "SHA256_MANIFEST.csv"
+    files = sorted(
+        (p for p in directory.iterdir() if p.is_file() and p.name != manifest.name),
+        key=lambda p: p.name,
+    )
+    rows = [
+        {"path": p.name, "sha256": sha(p), "bytes": p.stat().st_size}
+        for p in files
+    ]
+    write_csv(manifest, rows, ["path", "sha256", "bytes"])
+    with manifest.open("r", encoding="utf-8-sig", newline="") as stream:
+        checked = list(csv.DictReader(stream))
+    names = [row.get("path", "") for row in checked]
+    expected_names = {p.name for p in files}
+    if len(checked) != len(files) or len(names) != len(set(names)) or set(names) != expected_names:
+        return False, len(checked)
+    by_name = {p.name: p for p in files}
+    for row in checked:
+        name = row["path"]
+        if Path(name).name != name:
+            return False, len(checked)
+        path = by_name[name]
+        if path.is_symlink() or path.stat().st_size != int(row["bytes"]) or sha(path) != row["sha256"]:
+            return False, len(checked)
+    return True, len(checked)
+
+
 def population_variance(values):
     return statistics.pvariance(values) if values else float("nan")
 
@@ -454,7 +483,9 @@ def main():
         "hypothesis_registry_written": True,
     }
 
-    status = "FULL_COMPLETE" if all(mandatory.values()) else "PARTIAL"
+    # Completion is withheld until every output artifact has a verified SHA256 entry.
+    mandatory["artifact_hash_manifest"] = False
+    status = "PARTIAL"
     verification = {
         "status": status,
         "date": date,
@@ -536,6 +567,40 @@ Five-ticket random bundles generated: {len(portfolio_records) * PORTFOLIO_RANDOM
 No candidate/recommendation/final lines generated.
 """
     (out / "REPORT.md").write_text(report, encoding="utf-8")
+
+    manifest_ok, manifest_entries = write_and_verify_artifact_manifest(out)
+    mandatory["artifact_hash_manifest"] = manifest_ok
+    status = "FULL_COMPLETE" if all(mandatory.values()) else "PARTIAL"
+    verification["status"] = status
+    verification["mandatory_checks"] = mandatory
+    verification["artifact_manifest"] = {
+        "path": "SHA256_MANIFEST.csv",
+        "entries": manifest_entries,
+        "status": "PASS" if manifest_ok else "FAIL",
+    }
+    dump(out / "VERIFICATION.json", verification)
+    dump(
+        out / "COMPLETION.json",
+        {
+            "study_id": "DAILY_MASTER_FULL_V5_STRICT",
+            "status": status,
+            "data_cutoff": len(draws),
+            "executed": True,
+            "full_complete_requires_all_metric_gates": True,
+        },
+    )
+    report = report.replace("Status: **PARTIAL**", f"Status: **{status}**")
+    report = report.replace(
+        f"Successor leakage failures: {leak}.",
+        f"Output integrity: {'PASS' if manifest_ok else 'FAIL'} — SHA256 manifest verified for {manifest_entries} files.\\n\\n"
+        f"Successor leakage failures: {leak}.",
+    )
+    (out / "REPORT.md").write_text(report, encoding="utf-8")
+
+    # Rebuild after the final status/report update and independently verify the published bytes.
+    final_manifest_ok, final_manifest_entries = write_and_verify_artifact_manifest(out)
+    if not final_manifest_ok or final_manifest_entries != manifest_entries:
+        raise RuntimeError("Final SHA256 artifact manifest verification failed.")
     print(json.dumps(verification, ensure_ascii=False))
     if status != "FULL_COMPLETE":
         raise SystemExit(2)
