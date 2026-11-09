@@ -1064,8 +1064,8 @@
         "execution_entrypoint": "automation/h1250_ab_research_v2.py",
         "workflow_entrypoint": ".github/workflows/h1250-ab-research-v2.yml",
         "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
-        "implementation_code_sha": "4db8b47b4a6ba3533fe479483f6326964e2fc082",
-        "implementation_commit": "3946b6d9e10dacd3fcee71b41af1a1698ee081eb",
+        "implementation_code_sha": "f3fbd6d98d7551383a540744f0ec1b8db5211280",
+        "implementation_commit": "d74479d70fa65c29f04f2ae5f79994d88591401f",
         "workflow_blob_sha": "2ad1a0dad283972d04d8abf7c90e00c214fdcf69"
       }
     },
@@ -1169,8 +1169,8 @@
         "execution_entrypoint": "automation/h1250_ab_research_v2.py",
         "workflow_entrypoint": ".github/workflows/h1250-ab-research-v2.yml",
         "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
-        "implementation_code_sha": "4db8b47b4a6ba3533fe479483f6326964e2fc082",
-        "implementation_commit": "3946b6d9e10dacd3fcee71b41af1a1698ee081eb",
+        "implementation_code_sha": "f3fbd6d98d7551383a540744f0ec1b8db5211280",
+        "implementation_commit": "d74479d70fa65c29f04f2ae5f79994d88591401f",
         "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
         "workflow_blob_sha": "2ad1a0dad283972d04d8abf7c90e00c214fdcf69",
         "adaptive_selection_objective": "Equal-weight macro-average candidate recall fraction across K=10,15,20,25,30 over prior 150 completed targets; tie-break H,G,C,M,P,T.",
