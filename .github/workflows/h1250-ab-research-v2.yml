@@ -1,0 +1,143 @@
+name: h1250-ab-research-v2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: h1250-ab-research-v2
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile preregistered runner
+        run: python -m py_compile automation/h1250_ab_research_v2.py
+      - name: Validate frozen data, source blobs and preregistration
+        run: python -B automation/h1250_ab_research_v2.py --preflight
+
+  execute:
+    if: github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Revalidate immutable preregistration and cutoff
+        run: python -B automation/h1250_ab_research_v2.py --preflight
+      - name: Execute H1250-A and H1250-B
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/h1250_ab_research_v2.py | tee "$RUNNER_TEMP/h1250-ab-run.log"
+          python - "$RUNNER_TEMP/h1250-ab-run.log" <<'PY' >> "$GITHUB_ENV"
+          import json, sys
+          for line in reversed(open(sys.argv[1], encoding="utf-8").read().splitlines()):
+              try:
+                  result = json.loads(line)
+              except json.JSONDecodeError:
+                  continue
+              output = result.get("output_directory")
+              if output:
+                  print("H1250_OUTPUT_DIRECTORY=" + output)
+                  break
+          else:
+              raise SystemExit("H1250_OUTPUT_DIRECTORY_NOT_EMITTED")
+          PY
+      - name: Verify output hashes and preserve results plus queue status
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json, os, subprocess
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          root = Path.cwd()
+          run_date = datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat()
+          output_rel = os.environ.get('H1250_OUTPUT_DIRECTORY', '')
+          out = root / output_rel
+          assert output_rel.startswith('analysis/') and out.is_dir() and out.name.startswith('H1250_AB_20261110_V2_'), 'H1250-A/B output directory missing or invalid'
+          verification = json.loads((out / 'VERIFICATION.json').read_text(encoding='utf-8'))
+          gate = json.loads((out / 'STRICT_GATE.json').read_text(encoding='utf-8'))
+          assert verification['status'] == 'EXECUTION_VERIFIED'
+          assert verification['data_cutoff'] == 1249
+          assert verification['outer_target_count'] == 849
+          assert verification['future_leakage_failures'] == 0
+          assert verification['ranker_recall30_invariant'] is True
+          assert verification['H1250_B_adaptive_selection_objective'] == 'Highest equal-weight macro-average candidate recall fraction across K=10,15,20,25,30 over the prior 150 completed targets.'
+          assert verification['H1250_B_selector_degenerate_decision_count'] + verification['H1250_B_selector_non_degenerate_decision_count'] == 16
+          assert gate['H1250_B_selector_diagnostic']['no_posthoc_substitution'] is True
+
+          manifest_path = out / 'SHA256_MANIFEST.csv'
+          with manifest_path.open(encoding='utf-8-sig', newline='') as stream:
+              manifest = list(csv.DictReader(stream))
+          assert len(manifest) == 11
+          assert 'VERIFICATION.json' in {row['path'] for row in manifest}
+          for row in manifest:
+              path = out / row['path']
+              assert path.is_file()
+              assert path.stat().st_size == int(row['bytes'])
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == row['sha256']
+
+          queue_path = root / 'automation' / 'research_queue_v2.json'
+          queue = json.loads(queue_path.read_text(encoding='utf-8'))
+          tasks = {task['id']: task for task in queue['tasks']}
+          stamp = datetime.now(ZoneInfo('Asia/Seoul')).isoformat()
+          a_pass = gate['H1250_A']['strict_portfolio_pass'] is True
+          b_pass = gate['H1250_B']['strict_portfolio_pass'] is True
+          tasks['E043_H1250_A_FIXED_BANK_ALLOCATOR_v1']['spec']['execution_status'] = (
+              'EXECUTED_STRICT_PASS' if a_pass else 'EXECUTED_STRICT_FAIL'
+          )
+          tasks['E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2']['spec']['execution_status'] = (
+              'EXECUTED_MACRO_RECALL_SELECTOR_STRICT_PASS' if b_pass
+              else 'EXECUTED_MACRO_RECALL_SELECTOR_STRICT_FAIL'
+          )
+          tasks['E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2']['spec']['adaptive_selector_degenerate'] = verification['H1250_B_adaptive_selector_degenerate']
+          for task_id in ('E043_H1250_A_FIXED_BANK_ALLOCATOR_v1', 'E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2'):
+              tasks[task_id]['spec']['execution_result'] = str(out.relative_to(root))
+              tasks[task_id]['spec']['execution_verified_at_kst'] = stamp
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + chr(10), encoding='utf-8')
+
+          subprocess.run(['git', 'config', 'user.name', 'github-actions[bot]'], check=True)
+          subprocess.run(['git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          subprocess.run(['git', 'add', '--', str(out.relative_to(root)), 'automation/research_queue_v2.json'], check=True)
+          subprocess.run(['git', 'commit', '-m', 'research: execute preregistered H1250-A/B v2 studies'], check=True)
+          subprocess.run(['git', 'push', 'origin', 'HEAD:main'], check=True)
+          print(json.dumps({
+              'status': 'PUSHED',
+              'output_directory': str(out.relative_to(root)),
+              'H1250_A_strict_pass': a_pass,
+              'H1250_B_strict_pass': b_pass,
+              'H1250_B_selector_degenerate': True,
+          }))
+          PY
+      - name: Preserve run evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: h1250-ab-v2-evidence
+          path: |
+            ${{ env.H1250_OUTPUT_DIRECTORY }}
+            automation/research_queue_v2.json
+          if-no-files-found: warn
