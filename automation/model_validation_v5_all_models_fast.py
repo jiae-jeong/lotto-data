@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import math
 import random
@@ -51,10 +52,20 @@ def block_bootstrap_ci(values, baseline, alpha, seed):
 
 
 def read_hits(path, model_col='model', hit_col='hits'):
-    out=defaultdict(list); targets=defaultdict(list)
+    out=defaultdict(list); targets=defaultdict(list); seen=set()
     with path.open(encoding='utf-8-sig') as f:
         for r in csv.DictReader(f):
-            out[r[model_col]].append(int(r[hit_col])); targets[r[model_col]].append(int(r['target_round']))
+            model=r[model_col]
+            target=int(r['target_round'])
+            training=int(r['training_through_round'])
+            if training != target - 1:
+                raise ValueError(f'future-leakage cutoff mismatch in {path}: target={target}, training={training}')
+            key=(model,target)
+            if key in seen:
+                raise ValueError(f'duplicate model-target record in {path}: {key}')
+            seen.add(key)
+            out[model].append(int(r[hit_col]))
+            targets[model].append(target)
     return out,targets
 
 
@@ -91,10 +102,29 @@ def summarize_model(hits, base, alpha_adj, seed):
 def main():
     date=sys.argv[1] if len(sys.argv)>1 else datetime.now(KST).date().isoformat()
     day=ROOT/'analysis'/date
-    v5=max(day.glob('MASTER_FULL_V5_*'),key=lambda p:p.stat().st_mtime)
-    v4=max(day.glob('MASTER_FULL_V4_*'),key=lambda p:p.stat().st_mtime)
+    data_path=ROOT/'lotto_data.csv'
+    with data_path.open(encoding='utf-8-sig') as stream:
+        data_rows=list(csv.DictReader(stream))
+    rounds=[int(row['round']) for row in data_rows]
+    if not rounds or rounds != list(range(1,len(rounds)+1)):
+        raise ValueError('lotto_data.csv round sequence is empty, duplicated, or non-contiguous')
+    cutoff=rounds[-1]
+    data_sha256=hashlib.sha256(data_path.read_bytes()).hexdigest()
+
+    # Directory names contain the KST run timestamp. Do not rely on checkout mtimes,
+    # which are often identical for every file in a GitHub Actions workspace.
+    v5_dirs=sorted(day.glob('MASTER_FULL_V5_*'))
+    v4_dirs=sorted(day.glob('MASTER_FULL_V4_*'))
+    if not v5_dirs or not v4_dirs:
+        raise FileNotFoundError(f'missing same-day V4/V5 MASTER evidence under {day}')
+    v5=v5_dirs[-1]
+    v4=v4_dirs[-1]
     b_leak=json.loads((v4/'B_LEAKAGE_CHECK.json').read_text(encoding='utf-8-sig'))
     ver=json.loads((v5/'VERIFICATION.json').read_text(encoding='utf-8-sig'))
+    data_validation=json.loads((v4/'DATA_VALIDATION.json').read_text(encoding='utf-8-sig'))
+    assert int(ver.get('data_cutoff',-1))==cutoff
+    assert int(data_validation.get('latest_round',-1))==cutoff
+    assert data_validation.get('sha256')==data_sha256==ver.get('data_sha256')
     assert int(ver.get('successor_leakage_failures',1))==0
     assert int(b_leak.get('failures', b_leak.get('leakage_failures',0)))==0
 
@@ -102,6 +132,12 @@ def main():
     b_hits,b_targets=read_hits(v4/'B_PREDICTIONS_UNIQUE.csv')
     all_hits={**b_hits,**a_hits}
     all_targets={**b_targets,**a_targets}
+    expected_targets=list(range(201,cutoff+1))
+    if not expected_targets:
+        raise ValueError(f'no walk-forward targets available through cutoff {cutoff}')
+    for name, targets in all_targets.items():
+        if targets != expected_targets or len(all_hits[name]) != len(expected_targets):
+            raise ValueError(f'incomplete or misaligned walk-forward series for {name}: expected 201..{cutoff}, got {targets[:1]}..{targets[-1:]} ({len(targets)} rows)')
     model_count=len(all_hits)
     alpha_adj=0.05/(model_count*2)
     base=exact_baseline()
@@ -109,7 +145,7 @@ def main():
     for i,name in enumerate(sorted(all_hits)):
         ts=all_targets[name]
         assert len(ts)==len(all_hits[name]) and ts==sorted(ts)
-        assert ts[0]>=201 and ts[-1]==1246
+        assert ts==expected_targets
         models[name]=summarize_model(all_hits[name],base,alpha_adj,SEED+i*10000)
         models[name]['target_range']=[ts[0],ts[-1]]
 
@@ -133,7 +169,11 @@ def main():
 
     result={
         'date_kst':date,
-        'data_cutoff':1246,
+        'data_cutoff':cutoff,
+        'data_sha256':data_sha256,
+        'target_range':[201,cutoff],
+        'training_cutoff_rule':'training_through_round = target_round - 1',
+        'source_runs':{'v4':str(v4.relative_to(ROOT)),'v5':str(v5.relative_to(ROOT))},
         'leakage_checks':{'B':b_leak,'successor_leakage_failures':ver.get('successor_leakage_failures')},
         'exact_uniform_single_ticket_baseline':base,
         'multiple_testing':{'model_count':model_count,'primary_tests_per_model':2,'bonferroni_alpha':alpha_adj,'bootstrap_reps':BOOT_REPS,'bootstrap_unit':'non-overlapping 50-round blocks'},

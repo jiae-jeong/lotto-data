@@ -283,6 +283,7 @@ def main():
         inference['max_hits']['adjusted_ci_delta'][0] > 0
         and inference['any2']['adjusted_ci_delta'][0] > 0
         and inference['any3']['adjusted_ci_delta'][0] > 0
+        and inference['winning_union_coverage']['adjusted_ci_delta'][0] > 0
         and inference['any2']['positive_50_round_block_share'] >= 0.65
     )
 
@@ -304,7 +305,7 @@ def main():
     assert integrity['random_fallback_allowed'] is False
 
     failed_gates = [
-        k for k in ('max_hits', 'any2', 'any3')
+        k for k in ('max_hits', 'any2', 'any3', 'winning_union_coverage')
         if inference[k]['adjusted_ci_delta'][0] <= 0
     ]
     if inference['any2']['positive_50_round_block_share'] < 0.65:
@@ -316,6 +317,7 @@ def main():
         'target_round': target,
         'data_cutoff': cutoff,
         'policy': 'ADAPTIVE_FIVE_ROLE_NONRANDOM_PORTFOLIO_V9',
+        'strict_gate_version': 'V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY',
         'no_future_leakage': True,
         'selection_rule': 'Each role deterministically scores all candidate combinations from historical-only model predictions and trailing historical reliability. Randomness is prohibited in final selection and allowed only in the matched null comparator.',
         'roles': current_details,

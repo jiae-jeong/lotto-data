@@ -285,16 +285,14 @@ jobs:
               assert hashlib.sha256(artifact.read_bytes()).hexdigest()==row['sha256']
           PY
 
-      - name: Run Friday validation and adaptive nonrandom research
+      - name: Run daily strict model validation and portfolio readiness
         shell: bash
         run: |
           set -euo pipefail
-          DOW="$(TZ=Asia/Seoul date +%u)"
-          if [ "$DOW" = "5" ]; then
-            python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" | tee "$RUNNER_TEMP/model-validation-v5.log"
-            python -B automation/five_role_research_v9.py "$RUN_DATE" | tee "$RUNNER_TEMP/five-role-v9.log"
-            python - "$RUN_DATE" <<'PY'
-          import csv,json,sys
+          python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" | tee "$RUNNER_TEMP/model-validation-v5.log"
+          python -B automation/five_role_research_v9.py "$RUN_DATE" | tee "$RUNNER_TEMP/five-role-v9.log"
+          python - "$RUN_DATE" <<'PY'
+          import csv,hashlib,json,sys
           from pathlib import Path
           date=sys.argv[1]
           strict_report=Path('analysis')/date/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json'
@@ -303,6 +301,7 @@ jobs:
           cutoff=int(rows[-1]['round']); target=cutoff+1
           research_report=Path('analysis')/date/f'FIVE_ROLE_RESEARCH_{target}_V9.json'
           research=json.loads(research_report.read_text())
+          assert int(strict['data_cutoff'])==cutoff
           assert research['data_cutoff']==cutoff
           assert research['target_round']==target
           assert research['no_future_leakage'] is True
@@ -311,28 +310,89 @@ jobs:
           assert integ['five_distinct_roles'] is True
           assert integ['selection_uses_randomness'] is False
           assert integ['random_fallback_allowed'] is False
+
           outdir=Path('research')/'weekly_purchase'/str(target)
           outdir.mkdir(parents=True,exist_ok=True)
-          gate={
-            'target_round':target,'date_kst':date,'data_cutoff':cutoff,
-            'strict_model_validation_report':str(strict_report),
-            'validated_models':strict['validated_models'],
+          data_sha=hashlib.sha256(Path('lotto_data.csv').read_bytes()).hexdigest()
+          model_code_sha=hashlib.sha256(Path('automation/model_validation_v5_all_models_fast.py').read_bytes()).hexdigest()
+          portfolio_code_sha=hashlib.sha256(Path('automation/five_role_research_v9.py').read_bytes()).hexdigest()
+          validated_models=strict['validated_models']
+          model_pass=bool(validated_models)
+          portfolio_pass=bool(research['inference']['strict_portfolio_pass'])
+          ready=model_pass and portfolio_pass
+          failed_gates=list(research.get('failed_gates',[]))
+          if not model_pass:
+            failed_gates.append('no_individual_model_strict_edge')
+
+          ready_path=None
+          if ready:
+            ready_path=outdir/f"STRICT_PASS_READY_{target}_{date.replace('-','')}_{data_sha[:12]}_{portfolio_code_sha[:12]}.json"
+            ready_payload={
+              'status':'STRICT_PASS_READY',
+              'target_round':target,
+              'date_kst':date,
+              'data_cutoff':cutoff,
+              'data_sha256':data_sha,
+              'model_validation_report':str(strict_report),
+              'model_validation_sha256':hashlib.sha256(strict_report.read_bytes()).hexdigest(),
+              'five_role_research_report':str(research_report),
+              'five_role_research_sha256':hashlib.sha256(research_report.read_bytes()).hexdigest(),
+              'model_validation_code_sha256':model_code_sha,
+              'five_role_code_sha256':portfolio_code_sha,
+              'validated_models':validated_models,
+              'model_verdict':strict['verdict'],
+              'strict_portfolio_pass':portfolio_pass,
+              'strict_gate_version':research.get('strict_gate_version'),
+              'failed_gates':[],
+              'final_lines':research['final_lines'],
+              'inference':research['inference'],
+              'no_future_leakage':True,
+              'selection_uses_randomness':False,
+              'random_fallback_allowed':False
+            }
+            if ready_path.exists():
+              existing=json.loads(ready_path.read_text())
+              assert existing==ready_payload, f"write-once readiness collision: {ready_path}"
+            else:
+              ready_path.write_text(json.dumps(ready_payload,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+
+          stale_ready_files=sorted(str(p) for p in outdir.glob(f"STRICT_PASS_READY_{target}_*.json") if ready_path is None or p!=ready_path)
+          status_payload={
+            'status':'STRICT_PASS_READY' if ready else 'STRICT_PASS_NOT_READY',
+            'target_round':target,
+            'date_kst':date,
+            'data_cutoff':cutoff,
+            'data_sha256':data_sha,
+            'strict_model_validation_pass':model_pass,
+            'validated_models':validated_models,
             'model_verdict':strict['verdict'],
-            'five_role_research_report':str(research_report),
-            'five_role_strict_pass':research['inference']['strict_portfolio_pass'],
-            'five_role_failed_gates':research['failed_gates'],
+            'strict_portfolio_pass':portfolio_pass,
+            'strict_gate_version':research.get('strict_gate_version'),
+            'strict_pass_ready':ready,
+            'ready_file':str(ready_path) if ready_path else None,
+            'ready_file_exists':bool(ready_path and ready_path.is_file()),
+            'stale_ready_files':stale_ready_files,
+            'failed_gates':failed_gates,
+            'no_future_leakage':True,
             'final_selection_randomness':False,
-            'random_fallback_allowed':False,
+            'random_fallback_allowed':False
           }
-          if strict['validated_models']:
-            gate['purchase_model_status']='STRICT_VALIDATED_MODELS_AVAILABLE_WITH_FIVE_ROLE_RESEARCH_OUTPUT'
-          else:
-            gate['purchase_model_status']='NO_STRICT_EDGE_CONTINUE_NONRANDOM_RESEARCH'
-          p=outdir/f"MODEL_GATE_{target}_{date.replace('-','')}.json"
-          p.write_text(json.dumps(gate,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          status_path=outdir/f"STRICT_PASS_STATUS_{target}_{date.replace('-','')}.json"
+          status_path.write_text(json.dumps(status_payload,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+          gate={
+            **status_payload,
+            'strict_model_validation_report':str(strict_report),
+            'five_role_research_report':str(research_report),
+            'purchase_model_status':(
+              'STRICT_PASS_READY' if ready else
+              'MODEL_EDGE_ONLY_PORTFOLIO_FAIL' if model_pass else
+              'NO_STRICT_EDGE_CONTINUE_NONRANDOM_RESEARCH'
+            )
+          }
+          gate_path=outdir/f"MODEL_GATE_{target}_{date.replace('-','')}.json"
+          gate_path.write_text(json.dumps(gate,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
           print(json.dumps(gate,ensure_ascii=False))
           PY
-          fi
 
       - name: Preserve validated outputs
         shell: bash
@@ -382,4 +442,7 @@ jobs:
             analysis/*/LEARNING_LOOP_GATE.json
             analysis/*/MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json
             analysis/*/FIVE_ROLE_RESEARCH_*_V9.json
+            research/weekly_purchase/*/MODEL_GATE_*.json
+            research/weekly_purchase/*/STRICT_PASS_STATUS_*.json
+            research/weekly_purchase/*/STRICT_PASS_READY_*.json
           if-no-files-found: warn
