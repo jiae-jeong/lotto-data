@@ -379,7 +379,7 @@ jobs:
           validated_models=strict['validated_models']
           model_pass=bool(validated_models)
           portfolio_pass=bool(research['inference']['strict_portfolio_pass'])
-          ready=portfolio_pass
+          ready=model_pass and portfolio_pass
           failed_gates=list(research.get('failed_gates',[]))
 
           ready_path=None
