@@ -185,7 +185,7 @@
     "implementation_path": "automation/h1250_ab_research.py",
     "implementation_blob_sha": "73ca5ad7107d80e3df05b0d4fa512a55d5437555",
     "frozen_dependency_hashes_all_match": true,
-    "frozen_dependency_count": 7,
+    "frozen_dependency_count": 6,
     "research_queue_contains_E043_and_E044": true,
     "allocator_patterns": {
       "rr": "PASS: four rows of six; 24 unique tail positions exactly once",
@@ -317,7 +317,8 @@
       "schedule_added": false,
       "manifest_entries_expected": 13,
       "preflight_script_executed": false,
-      "py_compile_executed": false
+      "py_compile_executed": false,
+      "frozen_dependency_count": 6
     },
     "reason_for_amendment": "The v1 objective was mathematically non-identifiable for ranker selection. The v2 amendment uses the already registered recall@10/15/20/25/30 metrics and was made before reading any outer evaluation results. It does not change the strict gate or choose a model from outcome performance.",
     "macro_selector_unit_test": {
@@ -335,7 +336,11 @@
       "H1250_B_expected_rows": 30564,
       "total_expected_rows": 50940,
       "fields": "winning number, slow-core/hybrid-tail stage, rank positions, recall@K inclusion, missed K values, ticket index, ticket-line hit count, candidate-bank hash and portfolio hash",
-      "full_ticket_combinations_included": false
+      "full_ticket_combinations_included": false,
+      "expected_rows_by_study": {
+        "H1250_A": 20376,
+        "H1250_B": 30564
+      }
     }
   },
   "h1250_preregistration_v1_execution_status": "SUPERSEDED_BEFORE_OUTER_EVALUATION_OBJECTIVE_DEGENERACY"
