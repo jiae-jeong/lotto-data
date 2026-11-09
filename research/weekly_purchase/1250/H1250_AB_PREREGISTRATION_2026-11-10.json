@@ -305,7 +305,7 @@
     "freeze_date": "2026-11-12 only if an unchanged strict gate passes",
     "weekly_delivery_date": "2026-11-13 only if strict readiness is present",
     "implementation_entrypoint": "automation/h1250_ab_research.py",
-    "implementation_code_hash": "PENDING: executable wrapper must be committed and its blob SHA recorded before any H1250-A/B outcomes are evaluated",
+    "implementation_code_hash": "73ca5ad7107d80e3df05b0d4fa512a55d5437555",
     "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
     "workflow_mode": "workflow_dispatch_only; do not add or change schedules"
   },
