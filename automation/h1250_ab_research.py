@@ -465,6 +465,10 @@ def execute():
                 "target_round": target, "training_through_round": training_through,
                 "candidate_bank_sha256": bank_digest, "simulations": conditional_repeats,
                 **mean_metrics(conditional_samples, PRIMARY_METRICS),
+                **{
+                    f"delta_adaptive_vs_conditional_random_{metric}": float(selected_a[metric]) - statistics.mean(float(sample[metric]) for sample in conditional_samples)
+                    for metric in PRIMARY_METRICS
+                },
             })
 
             random_rng = random.Random(seed_b + target)
@@ -480,6 +484,10 @@ def execute():
                 "simulations": random_banks, "candidate_bank_size": random_bank_size,
                 "mean_random_bank_recall30": statistics.mean(random_recall30),
                 **mean_metrics(random_samples, PRIMARY_METRICS),
+                **{
+                    f"delta_adaptive_vs_random_bank_{metric}": float(selected_b[metric]) - statistics.mean(float(sample[metric]) for sample in random_samples)
+                    for metric in PRIMARY_METRICS
+                },
             })
 
             block_start = 401 + ((target - 401) // block_length) * block_length
@@ -656,10 +664,10 @@ def execute():
         "output_directory": str(out.relative_to(ROOT)),
     }
     # Manifest includes the final verification bytes; no circular self-hash is stored in VERIFICATION.json.
-    verification["artifact_manifest"] = {"status": "PASS", "entries": 9}
+    verification["artifact_manifest"] = {"status": "PASS", "entries": 11}
     write_json(out / "VERIFICATION.json", verification)
     manifest = write_manifest(out)
-    assert manifest["status"] == "PASS" and manifest["entries"] == 9
+    assert manifest["status"] == "PASS" and manifest["entries"] == 11
     print(json.dumps({
         "status": "EXECUTION_VERIFIED", "output_directory": str(out.relative_to(ROOT)),
         "data_cutoff": 1249, "outer_targets": 849, "future_leakage_failures": 0,
