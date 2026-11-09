@@ -136,6 +136,6 @@ jobs:
         with:
           name: h1250-ab-evidence
           path: |
-            analysis/2026-11-10/H1250_AB_20261110_*
+            ${{ env.H1250_OUTPUT_DIRECTORY }}
             automation/research_queue_v2.json
           if-no-files-found: warn
