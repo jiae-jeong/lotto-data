@@ -373,6 +373,7 @@ def execute():
     history, outer_a_rows, outer_b_rows = [], [], []
     outer_recall_rows, prediction_rows = [], []
     conditional_random_rows, random_bank_rows = [], []
+    winner_trace_a_rows, winner_trace_b_rows = [], []
     adaptive_rows, b_degenerate_decisions = [], []
     b_recall30_invariance_failures = 0
     warmup_candidate_count = 0
@@ -447,6 +448,76 @@ def execute():
         history.append({"target": target, "a_metrics": a_metrics, "b_metrics": b_metrics, "b_recall30": b_recall30, "b_recall_k": b_recall_k})
 
         if target >= 401:
+            core_set, tail_set = set(core), set(tail)
+            slow_order = sorted(range(1, 46), key=lambda number: (-scores["slow"][number], number))
+            slow_rank = {number: position + 1 for position, number in enumerate(slow_order)}
+            blend_tail_all = sorted((number for number in range(1, 46) if number not in core_set), key=lambda number: (-blend[number], number))
+            blend_tail_rank = {number: position + 1 for position, number in enumerate(blend_tail_all)}
+            for allocator, lines_for_allocator in a_lines.items():
+                candidate_order = core + tail
+                candidate_rank = {number: position + 1 for position, number in enumerate(candidate_order)}
+                ticket_index = {number: line_index + 1 for line_index, line in enumerate(lines_for_allocator) for number in line}
+                line_hits = {line_index + 1: len(set(line) & actual) for line_index, line in enumerate(lines_for_allocator)}
+                portfolio_max_hit = max(line_hits.values())
+                portfolio_sha = portfolio_hash(lines_for_allocator)
+                for winner in sorted(actual):
+                    rank = candidate_rank.get(winner)
+                    missed = [k for k in recall_ks if rank is None or rank > k]
+                    stage = "SLOW_CORE6" if winner in core_set else "HYBRID_TAIL24" if winner in tail_set else "HYBRID_TAIL_EXCLUDED"
+                    miss_stage = "FIXED_BANK_EXCLUSION" if rank is None else "RANKED_26_30" if rank > 25 else "RANKED_21_25" if rank > 20 else "RANKED_16_20" if rank > 15 else "RANKED_11_15" if rank > 10 else "RETAINED_TOP10"
+                    line_no = ticket_index.get(winner)
+                    winner_trace_a_rows.append({
+                        "study_id": a_spec["study_id"], "target_round": target, "training_through_round": training_through,
+                        "allocator": allocator, "winner_number": winner, "candidate_generator_stage": stage,
+                        "slow_rank_all45": slow_rank[winner], "hybrid_blend_tail_rank_all39": blend_tail_rank.get(winner),
+                        "candidate_rank_top30": rank, "candidate_bank_member": rank is not None,
+                        "included_at_K10": bool(rank is not None and rank <= 10),
+                        "included_at_K15": bool(rank is not None and rank <= 15),
+                        "included_at_K20": bool(rank is not None and rank <= 20),
+                        "included_at_K25": bool(rank is not None and rank <= 25),
+                        "included_at_K30": bool(rank is not None and rank <= 30),
+                        "missed_at_k_json": json.dumps(missed), "candidate_miss_stage": miss_stage,
+                        "ticket_index": line_no, "ticket_line_hit_count": line_hits.get(line_no),
+                        "portfolio_max_hit": portfolio_max_hit, "slow_score": scores["slow"][winner],
+                        "blend_score": blend[winner], "medium_score": scores["medium"][winner],
+                        "fast_score": scores["fast"][winner], "candidate_bank_sha256": bank_digest,
+                        "portfolio_sha256": portfolio_sha,
+                    })
+            for ranker, lines_for_ranker in b_lines.items():
+                candidate_order = core + tail_orders[ranker]
+                candidate_rank = {number: position + 1 for position, number in enumerate(candidate_order)}
+                tail_rank_variant = {number: position + 1 for position, number in enumerate(tail_orders[ranker])}
+                ticket_index = {number: line_index + 1 for line_index, line in enumerate(lines_for_ranker) for number in line}
+                line_hits = {line_index + 1: len(set(line) & actual) for line_index, line in enumerate(lines_for_ranker)}
+                portfolio_max_hit = max(line_hits.values())
+                portfolio_sha = portfolio_hash(lines_for_ranker)
+                signal_name = {"H": "HYBRID_BLEND", "G": "GAP", "C": "RECENT_FREQUENCY", "M": "MOMENTUM", "P": "PAIR_ASSOCIATION", "T": "TRIPLE_ASSOCIATION"}[ranker]
+                for winner in sorted(actual):
+                    rank = candidate_rank.get(winner)
+                    missed = [k for k in recall_ks if rank is None or rank > k]
+                    stage = "SLOW_CORE6" if winner in core_set else "HYBRID_TAIL24" if winner in tail_set else "HYBRID_TAIL_EXCLUDED"
+                    miss_stage = "FIXED_BANK_EXCLUSION" if rank is None else "RANKED_26_30" if rank > 25 else "RANKED_21_25" if rank > 20 else "RANKED_16_20" if rank > 15 else "RANKED_11_15" if rank > 10 else "RETAINED_TOP10"
+                    line_no = ticket_index.get(winner)
+                    ranker_score = blend[winner] if ranker == "H" else frozen[ranker][winner]
+                    winner_trace_b_rows.append({
+                        "study_id": b_spec["study_id"], "target_round": target, "training_through_round": training_through,
+                        "ranker": ranker, "ranker_signal": signal_name, "winner_number": winner,
+                        "candidate_generator_stage": stage, "slow_rank_all45": slow_rank[winner],
+                        "hybrid_blend_tail_rank_all39": blend_tail_rank.get(winner),
+                        "rank_within_tail24_under_ranker": tail_rank_variant.get(winner),
+                        "candidate_rank_top30": rank, "candidate_bank_member": rank is not None,
+                        "included_at_K10": bool(rank is not None and rank <= 10),
+                        "included_at_K15": bool(rank is not None and rank <= 15),
+                        "included_at_K20": bool(rank is not None and rank <= 20),
+                        "included_at_K25": bool(rank is not None and rank <= 25),
+                        "included_at_K30": bool(rank is not None and rank <= 30),
+                        "missed_at_k_json": json.dumps(missed), "candidate_miss_stage": miss_stage,
+                        "ticket_index": line_no, "ticket_line_hit_count": line_hits.get(line_no),
+                        "portfolio_max_hit": portfolio_max_hit, "ranker_score": ranker_score,
+                        "blend_score": blend[winner], "candidate_bank_sha256": bank_digest,
+                        "portfolio_sha256": portfolio_sha,
+                    })
+
             selected_a, selected_b = a_metrics[a_current], b_metrics[b_current]
             outer_a_rows.extend({
                 "target_round": target, "training_through_round": training_through,
@@ -592,6 +663,8 @@ def execute():
     write_csv(out / "CONDITIONAL_RANDOM.csv", conditional_random_rows)
     write_csv(out / "RANDOM_CANDIDATE_BANKS.csv", random_bank_rows)
     write_csv(out / "BLOCK_STABILITY.csv", block_rows)
+    write_csv(out / "WINNER_TRACE_A.csv", winner_trace_a_rows)
+    write_csv(out / "WINNER_TRACE_B.csv", winner_trace_b_rows)
 
     recall_summary = {}
     for k in recall_ks:
@@ -641,11 +714,13 @@ def execute():
         f"- Adaptive strict PASS: {gate_a['strict_portfolio_pass']}",
         f"- Failed gates: {', '.join(gate_a['failed_gates']) if gate_a['failed_gates'] else 'none'}",
         "- Four allocator variants use the identical target-specific core6+tail24 bank.",
+        "- WINNER_TRACE_A.csv records each winner's slow-core/blend-tail stage and ticket assignment under each allocator.",
         "- Conditional baseline: 200 random partitions of the same candidate bank per target.",
         "", "## H1250-B - fixed rr allocator, tail24 ranking only",
         f"- Adaptive strict PASS: {gate_b['strict_portfolio_pass']}",
         f"- Failed gates: {', '.join(gate_b['failed_gates']) if gate_b['failed_gates'] else 'none'}",
         "- Random baseline: 200 independent random 30-number candidate banks per target, rr allocated.",
+        "- WINNER_TRACE_B.csv records each winner's fixed-bank stage, rank under each tail signal, K retention and rr ticket assignment.",
         "- Candidate recall@K is evaluated at all five preregistered K values; exact uniform expected winning-number count is 6K/45.",
         "- The prior-only B selector uses the equal-weight macro-average recall fraction across K=10,15,20,25,30 from the immediately preceding 150 completed targets.",
         "- Recall@30 is invariant across rankers because the same top30 membership is preserved; it remains an audit metric and cannot select a ranker alone.",
@@ -673,6 +748,7 @@ def execute():
             "RANKER_METRICS.csv": len(outer_b_rows), "CANDIDATE_RECALL.csv": len(outer_recall_rows),
             "ADAPTIVE_SELECTION.csv": len(adaptive_rows), "CONDITIONAL_RANDOM.csv": len(conditional_random_rows),
             "RANDOM_CANDIDATE_BANKS.csv": len(random_bank_rows), "BLOCK_STABILITY.csv": len(block_rows),
+            "WINNER_TRACE_A.csv": len(winner_trace_a_rows), "WINNER_TRACE_B.csv": len(winner_trace_b_rows),
         },
         "random_simulations": {
             "H1250_A_conditional_partitions": len(conditional_random_rows) * conditional_repeats,
@@ -691,10 +767,10 @@ def execute():
         "output_directory": str(out.relative_to(ROOT)),
     }
     # Manifest includes the final verification bytes; no circular self-hash is stored in VERIFICATION.json.
-    verification["artifact_manifest"] = {"status": "PASS", "entries": 11}
+    verification["artifact_manifest"] = {"status": "PASS", "entries": 13}
     write_json(out / "VERIFICATION.json", verification)
     manifest = write_manifest(out)
-    assert manifest["status"] == "PASS" and manifest["entries"] == 11
+    assert manifest["status"] == "PASS" and manifest["entries"] == 13
     print(json.dumps({
         "status": "EXECUTION_VERIFIED", "output_directory": str(out.relative_to(ROOT)),
         "data_cutoff": 1249, "outer_targets": 849, "future_leakage_failures": 0,
