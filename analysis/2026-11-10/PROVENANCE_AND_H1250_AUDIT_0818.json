@@ -259,7 +259,8 @@
     "current_1250_five_role_research_policy_strict_pass": false
   },
   "next_steps": [
-    "2026-11-11: execute only preregistered H1250-A and H1250-B with the unchanged cutoff, source hashes, seeds, metrics, nulls and strict gate.",
+    "2026-11-11: execute only preregistered H1250-A and H1250-B v2 with the unchanged cutoff, source hashes, seeds, exact null, matched random design and strict gate.",
+    "2026-11-11: verify B prior-only selector uses macro recall@10/15/20/25/30 from the preceding 150 completed targets; report tie/degen counts without substitution.",
     "2026-11-11: reproduce nested/rolling outer results, include the final incomplete block, and audit matched random outputs.",
     "2026-11-12: independently reproduce result hashes and strict-gate calculations; freeze/seal only if every unchanged gate passes.",
     "Resolve the 1246 conflicting pre-draw sources before treating the 15-line historical aggregate as definitive.",
@@ -269,6 +270,55 @@
     "The 1249 actual purchase/recommendation original was not authenticated.",
     "The 1246 source precedence is ambiguous between two different preserved pre-draw five-line artifacts.",
     "Legacy integrated A/C/contrarian executable sources remain unrecovered.",
-    "The 1250 A/B runner was hash-audited but not executed on 2026-11-10; execution is scheduled for 2026-11-11."
-  ]
+    "The 1250 A/B runner was hash-audited but not executed on 2026-11-10; execution is scheduled for 2026-11-11.",
+    "H1250-B v1 was superseded before execution because recall@30 was invariant across rankers; the corrected v2 code and spec are hash-bound but py_compile and runner preflight remain to be executed by the manual workflow."
+  ],
+  "h1250_b_v1_degeneracy_and_v2_amendment": {
+    "discovery": "The v1 B selector chose by recall@30, but H/G/C/M/P/T only reorder the same fixed core6+tail24 bank. Therefore recall@30 is identical across all six rankers by construction, and the prior-only selector is guaranteed to tie and choose H.",
+    "timing": "Detected by code/spec audit before any H1250-A/B outer evaluation was executed.",
+    "v1_preserved": true,
+    "v1_status": "SUPERSEDED_BEFORE_EXECUTION_OBJECTIVE_DEGENERACY",
+    "v2_preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
+    "v2_preregistration_blob_sha": "c0b8c794cf57c07f81cf8148341a69aa89e4ff34",
+    "v2_runner": "automation/h1250_ab_research_v2.py",
+    "v2_runner_blob_sha": "f3fbd6d98d7551383a540744f0ec1b8db5211280",
+    "v2_runner_commit": "d74479d70fa65c29f04f2ae5f79994d88591401f",
+    "v2_workflow": ".github/workflows/h1250-ab-research-v2.yml",
+    "v2_workflow_blob_sha": "2ad1a0dad283972d04d8abf7c90e00c214fdcf69",
+    "v2_queue_commit": "4abfefdcc0624f0552179328b22272473b60bd68",
+    "v2_queue_content_sha": "0c3007e9536f604dfcaadafefefeabda64373f47",
+    "new_objective": "Equal-weight macro-average candidate recall fraction across K=10,15,20,25,30 over the prior 150 completed targets.",
+    "selection_rule": "For each of the prior 150 completed targets, calculate recall fraction at each of the five registered K values; average equally across K, then average across prior targets. Select the highest ranker, tie-break H,G,C,M,P,T, and freeze for the next 50-target block.",
+    "unchanged": {
+      "H1250_A": true,
+      "candidate_generator": true,
+      "six_rankers": true,
+      "rr_allocator": true,
+      "target_range": "401..1249",
+      "data_cutoff": 1249,
+      "warmup": "201..400",
+      "prior_targets": 150,
+      "block_length": 50,
+      "random_seeds": true,
+      "exact_null": true,
+      "matched_random_design": true,
+      "primary_metrics": true,
+      "bonferroni_alpha_per_metric": 0.0125,
+      "bootstrap_replicates": 7000,
+      "any2_positive_block_share_minimum": 0.65,
+      "strict_gate_thresholds": true
+    },
+    "preregistration_integrity": {
+      "runner_hash_matches_prereg": true,
+      "workflow_hash_matches_prereg": true,
+      "queue_task_hashes_match": true,
+      "both_tasks_awaiting_manual_dispatch": true,
+      "workflow_dispatch_only": true,
+      "schedule_added": false,
+      "preflight_script_executed": false,
+      "py_compile_executed": false
+    },
+    "reason_for_amendment": "The v1 objective was mathematically non-identifiable for ranker selection. The v2 amendment uses the already registered recall@10/15/20/25/30 metrics and was made before reading any outer evaluation results. It does not change the strict gate or choose a model from outcome performance."
+  },
+  "h1250_preregistration_v1_execution_status": "SUPERSEDED_BEFORE_OUTER_EVALUATION_OBJECTIVE_DEGENERACY"
 }
