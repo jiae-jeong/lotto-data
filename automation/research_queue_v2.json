@@ -1,7 +1,7 @@
 {
   "version": 2,
   "timezone": "Asia/Seoul",
-  "schedule_local": "09:00",
+  "schedule_local": null,
   "tasks": [
     {
       "id": "E010_FAMILY_DECORRELATION_v1",
@@ -1020,5 +1020,7 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       }
     }
-  ]
+  ],
+  "trigger_mode": "workflow_dispatch_only",
+  "trigger_note": "The repository workflow is manual-only; no scheduled trigger is configured. This metadata does not alter workflow cadence."
 }
