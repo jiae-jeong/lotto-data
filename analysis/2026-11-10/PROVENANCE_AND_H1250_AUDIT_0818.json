@@ -318,7 +318,14 @@
       "preflight_script_executed": false,
       "py_compile_executed": false
     },
-    "reason_for_amendment": "The v1 objective was mathematically non-identifiable for ranker selection. The v2 amendment uses the already registered recall@10/15/20/25/30 metrics and was made before reading any outer evaluation results. It does not change the strict gate or choose a model from outcome performance."
+    "reason_for_amendment": "The v1 objective was mathematically non-identifiable for ranker selection. The v2 amendment uses the already registered recall@10/15/20/25/30 metrics and was made before reading any outer evaluation results. It does not change the strict gate or choose a model from outcome performance.",
+    "macro_selector_unit_test": {
+      "test_type": "synthetic_logic_smoke_test_only; not a lottery performance test",
+      "prior_targets": 150,
+      "nondegenerate_case": "All rankers share recall@30, but ranker G has higher recall at K=10/15/20/25; macro selector chose G.",
+      "tie_case": "All five K values tied for every ranker; selector chose H by frozen tie-break and flagged degeneracy.",
+      "status": "PASS"
+    }
   },
   "h1250_preregistration_v1_execution_status": "SUPERSEDED_BEFORE_OUTER_EVALUATION_OBJECTIVE_DEGENERACY"
 }
