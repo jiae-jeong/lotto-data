@@ -343,6 +343,17 @@
         "H1250_A": 20376,
         "H1250_B": 30564
       }
+    },
+    "winner_trace_logic_smoke_test": {
+      "test_type": "synthetic logic check only; not lottery performance evidence",
+      "cases": "core6 member, tail24 member, and outside-fixed-bank winner",
+      "checks": [
+        "rank@K retention",
+        "fixed-bank exclusion stage",
+        "ticket index assignment",
+        "ticket-line hit count"
+      ],
+      "status": "PASS"
     }
   },
   "h1250_preregistration_v1_execution_status": "SUPERSEDED_BEFORE_OUTER_EVALUATION_OBJECTIVE_DEGENERACY"
