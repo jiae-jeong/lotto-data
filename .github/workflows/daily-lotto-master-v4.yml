@@ -324,7 +324,9 @@ jobs:
 
           ready_path=None
           if ready:
-            ready_path=outdir/f"STRICT_PASS_READY_{target}_{date.replace('-','')}_{data_sha[:12]}_{portfolio_code_sha[:12]}.json"
+            model_report_sha=hashlib.sha256(strict_report.read_bytes()).hexdigest()
+            research_report_sha=hashlib.sha256(research_report.read_bytes()).hexdigest()
+            ready_path=outdir/f"STRICT_PASS_READY_{target}_{date.replace('-','')}_{data_sha[:12]}_{model_code_sha[:8]}_{portfolio_code_sha[:8]}_{model_report_sha[:8]}_{research_report_sha[:8]}.json"
             ready_payload={
               'status':'STRICT_PASS_READY',
               'target_round':target,
@@ -332,9 +334,9 @@ jobs:
               'data_cutoff':cutoff,
               'data_sha256':data_sha,
               'model_validation_report':str(strict_report),
-              'model_validation_sha256':hashlib.sha256(strict_report.read_bytes()).hexdigest(),
+              'model_validation_sha256':model_report_sha,
               'five_role_research_report':str(research_report),
-              'five_role_research_sha256':hashlib.sha256(research_report.read_bytes()).hexdigest(),
+              'five_role_research_sha256':research_report_sha,
               'model_validation_code_sha256':model_code_sha,
               'five_role_code_sha256':portfolio_code_sha,
               'validated_models':validated_models,
