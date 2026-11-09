@@ -31,9 +31,12 @@ jobs:
           p=Path('.github/workflows/lotto-finalize-v3.yml')
           s=p.read_text(encoding='utf-8')
           assert 'automation/finalize_from_strict_ready_v1.py' in s
-          assert 'weekly_purchase_final_v3.py' not in s
-          assert 'weekly_purchase_final_v2_recovery.py' not in s
-          assert "1246" not in s and "1247" not in s
+          finalize_section=s.split('  finalize:',1)[1]
+          assert 'python -B automation/finalize_from_strict_ready_v1.py' in finalize_section
+          assert 'weekly_purchase_final_v3.py' not in finalize_section
+          assert 'weekly_purchase_final_v2_recovery.py' not in finalize_section
+          assert '1246' not in finalize_section and '1247' not in finalize_section
+          assert '--freeze-not-before 2026-11-12' in finalize_section
           print('strict-ready-only finalization workflow validation PASS')
           PY
 
