@@ -22,9 +22,13 @@ COMPUTE_REQUIRED = {
     "B_full_walkforward",
     "fresh_random_baseline",
     "historical_source_search",
+    "legacy_model_sources_recovered",
     "A_full_walkforward",
     "C_full_walkforward",
     "contrarian_full_walkforward",
+    "successor_A_v2_full_walkforward",
+    "successor_C_v2_full_walkforward",
+    "successor_contrarian_v2_full_walkforward",
     "AC_contrarian_leakage",
     "successor_scorecard_complete",
     "successor_random_comparison",
@@ -171,6 +175,7 @@ def main():
         "historical_errornote_closed_loop_complete": historical_closed_loop_ok,
         "full_signal_scorecard": full_signal_ok,
         "numeric_13_section_report": True,
+        "legacy_model_sources_recovered": v.get("mandatory_checks", {}).get("legacy_model_sources_recovered") is True,
     }
     protocol_complete = all(protocol_checks.values())
     compute_status = "FULL_COMPUTE_COMPLETE" if compute_ok else "COMPUTE_PARTIAL"
@@ -188,9 +193,9 @@ Compute status: **{compute_status}**
 - Official source attempt state is preserved separately in `EXTERNAL_DATA_CROSSCHECK.json` rather than silently replaced.
 
 ## 2. 오늘 실제 새로 계산한 핵심 발견 3~7개
-- A_v2 mean hits {fmt(a['mean_hits'])}; matched-random delta {fmt(a['delta_mean'])}.
-- C_v2 mean hits {fmt(c['mean_hits'])}; matched-random delta {fmt(c['delta_mean'])}.
-- Contrarian_v2 mean hits {fmt(contra['mean_hits'])}; matched-random delta {fmt(contra['delta_mean'])}.
+- Successor A_v2 diagnostic (not legacy A): mean hits {fmt(a['mean_hits'])}; matched-random delta {fmt(a['delta_mean'])}.
+- Successor C_v2 diagnostic (not legacy C): mean hits {fmt(c['mean_hits'])}; matched-random delta {fmt(c['delta_mean'])}.
+- Successor contrarian_v2 diagnostic (not legacy contrarian): mean hits {fmt(contra['mean_hits'])}; matched-random delta {fmt(contra['delta_mean'])}.
 - B combined mean hits {fmt(b_combined['mean_hits'])}; matched-random delta {fmt(b_combined['delta_mean'])}.
 - B pair mean delta {fmt(b_pair['delta_mean'])}; B triple mean delta {fmt(b_triple['delta_mean'])}; multiple-testing survivors remain pair={run_summary['pair']['q_lt_0_05']}, triple={run_summary['triple']['q_lt_0_05']}.
 - Research-only five-ticket policy any-2+ delta vs matched random: {fmt(portfolio['any_ge2']['delta'])}; union-coverage delta {fmt(portfolio['winning_union_coverage']['delta'])}; it is not promoted to weekly policy.
@@ -220,20 +225,23 @@ Compute status: **{compute_status}**
 - Mean previous-draw overlap: {fmt(full_struct['previous_overlap_mean'], 3)}.
 - Pair universe {run_summary['pair']['universe']}, q<.05 survivors {run_summary['pair']['q_lt_0_05']}; triple universe {run_summary['triple']['universe']}, survivors {run_summary['triple']['q_lt_0_05']}.
 
-## 7. A 모델
-- n={a['n']}; mean={fmt(a['mean_hits'])}; variance={fmt(a['variance'])}; random={fmt(a['random_mean_same_targets'])}; delta={fmt(a['delta_mean'])}.
+## 7. Legacy A model
+- Legacy status: NOT_EXECUTED_SOURCE_NOT_RECOVERED; this successor is not a reconstruction.
+- Separate A_v2 successor diagnostic: n={a['n']}; mean={fmt(a['mean_hits'])}; variance={fmt(a['variance'])}; random={fmt(a['random_mean_same_targets'])}; delta={fmt(a['delta_mean'])}.
 - 2+={pct(a['rate_ge2'])}, 3+={pct(a['rate_ge3'])}, 4+={pct(a['rate_ge4'])}, 5+={pct(a['rate_ge5'])}, 6={pct(a['rate_ge6'])}.
 
 ## 8. B 실제 백테스트 + 랜덤 기준
 - targets={run_summary['B']['targets']}; prediction records={run_summary['B']['prediction_records']}; random tickets={run_summary['B']['random_tickets']}; leakage failures={run_summary['B']['leakage_failures']}.
 - Combined delta vs random={fmt(b_combined['delta_mean'])}; pair delta={fmt(b_pair['delta_mean'])}; triple delta={fmt(b_triple['delta_mean'])}.
 
-## 9. C 모델
-- n={c['n']}; mean={fmt(c['mean_hits'])}; variance={fmt(c['variance'])}; random={fmt(c['random_mean_same_targets'])}; delta={fmt(c['delta_mean'])}.
+## 9. Legacy C model
+- Legacy status: NOT_EXECUTED_SOURCE_NOT_RECOVERED; this successor is not a reconstruction.
+- Separate C_v2 successor diagnostic: n={c['n']}; mean={fmt(c['mean_hits'])}; variance={fmt(c['variance'])}; random={fmt(c['random_mean_same_targets'])}; delta={fmt(c['delta_mean'])}.
 - 2+={pct(c['rate_ge2'])}, 3+={pct(c['rate_ge3'])}, 4+={pct(c['rate_ge4'])}, 5+={pct(c['rate_ge5'])}, 6={pct(c['rate_ge6'])}.
 
-## 10. 역발상
-- n={contra['n']}; mean={fmt(contra['mean_hits'])}; variance={fmt(contra['variance'])}; random={fmt(contra['random_mean_same_targets'])}; delta={fmt(contra['delta_mean'])}.
+## 10. Legacy contrarian model
+- Legacy status: NOT_EXECUTED_SOURCE_NOT_RECOVERED; this successor is not a reconstruction.
+- Separate contrarian_v2 successor diagnostic: n={contra['n']}; mean={fmt(contra['mean_hits'])}; variance={fmt(contra['variance'])}; random={fmt(contra['random_mean_same_targets'])}; delta={fmt(contra['delta_mean'])}.
 - 2+={pct(contra['rate_ge2'])}, 3+={pct(contra['rate_ge3'])}, 4+={pct(contra['rate_ge4'])}, 5+={pct(contra['rate_ge5'])}, 6={pct(contra['rate_ge6'])}.
 
 ## 11. 누적 추천·오답노트
@@ -251,6 +259,8 @@ Compute status: **{compute_status}**
 - External source cross-check complete: {external_ok}.
 - Historical closed-loop fully complete: {historical_closed_loop_ok}.
 - Full per-dimension signal scorecard complete: {full_signal_ok}.
+- Legacy A/C/contrarian source executables recovered: {v.get('mandatory_checks', {}).get('legacy_model_sources_recovered', False)}.
+- RECOVERED_SUCCESSOR_V2 outputs are separate exploratory diagnostics and do not satisfy the legacy model gates.
 - Structural dimensions still not individually isolated in cutoff-safe contribution tests: {', '.join(sig.get('partially_covered_inside_structure_profile_but_not_isolated', [])) or 'none'}.
 - Overall daily study status: **{protocol_status}**. FULL_COMPLETE is assigned only when every required protocol gate is true.
 
@@ -286,7 +296,7 @@ No candidate/recommendation/final lines were generated by this audit.
     )
     print(json.dumps(audit, ensure_ascii=False))
     if not compute_ok:
-        raise SystemExit(2)
+        print("Protocol audit retained as PROTOCOL_PARTIAL; continuing to integrity finalization and evidence preservation.")
 
 
 if __name__ == "__main__":

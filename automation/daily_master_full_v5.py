@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """Strict daily MASTER gate.
 
-Runs the v4 core, then reruns recovered successor A/C/contrarian models on every
-cutoff-safe target and measures them. FULL_COMPLETE is permitted only when the
-same invocation/date contains full successor scorecards, matched-random
-comparison, non-overlapping block stability, per-signal ablation, historical
-source-search evidence, and a research-only five-ticket portfolio validation
-with matched random bundles.
+Runs the v4 core and separately evaluates NEW RECOVERED_SUCCESSOR_V2 diagnostics.
+Those diagnostics are not the missing legacy A/C/contrarian executables and
+cannot satisfy their protocol gates. FULL_COMPLETE is withheld until every
+required legacy source is recovered and executed, all same-date compute gates
+pass, and the post-compute protocol audit also passes.
 
 No candidate/final weekly numbers are generated for the user by this script.
 """
@@ -469,9 +468,14 @@ def main():
         "B_full_walkforward": b.get("targets") == expected and b.get("leakage_failures") == 0,
         "fresh_random_baseline": len(random_by_target) == expected and (base / "RANDOM_EXACT_BASELINE.json").exists(),
         "historical_source_search": source_search_ok,
-        "A_full_walkforward": counts["A_v2"] == expected,
-        "C_full_walkforward": counts["C_v2"] == expected,
-        "contrarian_full_walkforward": counts["contrarian_v2"] == expected,
+        # The recovered v2 implementation explicitly says it is NEW, not the lost legacy source.
+        "legacy_model_sources_recovered": False,
+        "A_full_walkforward": False,
+        "C_full_walkforward": False,
+        "contrarian_full_walkforward": False,
+        "successor_A_v2_full_walkforward": counts["A_v2"] == expected,
+        "successor_C_v2_full_walkforward": counts["C_v2"] == expected,
+        "successor_contrarian_v2_full_walkforward": counts["contrarian_v2"] == expected,
         "AC_contrarian_leakage": leak == 0,
         "successor_scorecard_complete": scorecards_ok,
         "successor_random_comparison": scorecards_ok and all(math.isfinite(float(r["random_mean_same_targets"])) for r in successor_scorecards),
@@ -506,6 +510,8 @@ def main():
         "mandatory_checks": mandatory,
         "data_sha256": sha(DATA),
         "successor_source_sha256": sha(MODELS),
+        "successor_model_version": "RECOVERED_SUCCESSOR_V2",
+        "legacy_model_source_status": "NOT_FOUND_NOT_EXECUTED",
     }
     dump(out / "VERIFICATION.json", verification)
     dump(
@@ -541,17 +547,17 @@ Included in fresh NUMBER_FULL_STATS.csv.
 ## 6. 구조·관계
 Fresh STRUCTURE_WINDOWS.csv, PAIR_STATS.csv, TRIPLE_STATS.csv are gated.
 
-## 7. A 모델
-Fresh cutoff-safe targets: {counts['A_v2']}. Full hit/random scorecard, 50-target blocks, and four-signal leave-one-out ablation were computed.
+## 7. Legacy A model
+NOT_EXECUTED_SOURCE_NOT_RECOVERED. The separate A_v2 successor diagnostic covers {counts['A_v2']} cutoff-safe targets; it is not a reconstruction or substitute for legacy A.
 
 ## 8. B 실제 백테스트 + 랜덤 기준
 Targets: {b.get('targets')}; leakage failures: {b.get('leakage_failures')}. Fresh per-target random baseline is required by the strict gate.
 
-## 9. C 모델
-Fresh cutoff-safe targets: {counts['C_v2']}. Full hit/random scorecard, blocks, and signal ablation were computed.
+## 9. Legacy C model
+NOT_EXECUTED_SOURCE_NOT_RECOVERED. The separate C_v2 successor diagnostic covers {counts['C_v2']} cutoff-safe targets; it is not a reconstruction or substitute for legacy C.
 
-## 10. 역발상
-Fresh cutoff-safe targets: {counts['contrarian_v2']}. Full hit/random scorecard, blocks, and signal ablation were computed.
+## 10. Legacy contrarian model
+NOT_EXECUTED_SOURCE_NOT_RECOVERED. The separate contrarian_v2 successor diagnostic covers {counts['contrarian_v2']} cutoff-safe targets; it is not a reconstruction or substitute for the legacy contrarian model.
 
 ## 11. 누적 추천·오답노트
 Historical-source search inventory contains {len(source_inventory)} candidate files. Performance is not inferred without provenance.
@@ -560,7 +566,7 @@ Historical-source search inventory contains {len(source_inventory)} candidate fi
 Pair/triple remain MORE_TEST because multiple-testing survivors are not established. {PORTFOLIO_VERSION} is RESEARCH_ONLY and is not auto-promoted to the weekly purchase policy.
 
 ## 13. 데이터 한계/미계산 항목
-The new five-ticket policy is a frozen research diagnostic, not the weekly purchase policy. Any unresolved provenance remains explicit. FULL_COMPLETE requires every VERIFICATION mandatory check to be true.
+The new five-ticket policy is a frozen research diagnostic, not the weekly purchase policy. Legacy integrated A/C/contrarian sources remain NOT_FOUND/NOT_EXECUTED. RECOVERED_SUCCESSOR_V2 diagnostics do not satisfy those legacy gates, so this run must remain PARTIAL until the original sources are recovered and executed.
 
 Successor leakage failures: {leak}.
 Five-ticket random bundles generated: {len(portfolio_records) * PORTFOLIO_RANDOM_BUNDLES_PER_TARGET}.
@@ -570,7 +576,9 @@ No candidate/recommendation/final lines generated.
 
     manifest_ok, manifest_entries = write_and_verify_artifact_manifest(out)
     mandatory["artifact_hash_manifest"] = manifest_ok
-    status = "FULL_COMPLETE" if all(mandatory.values()) else "PARTIAL"
+    # The script alone cannot assign FULL_COMPLETE: the workflow still has to run
+    # the protocol and learning-loop audits. Final status is assigned after those gates.
+    status = "PARTIAL"
     verification["status"] = status
     verification["mandatory_checks"] = mandatory
     verification["artifact_manifest"] = {
@@ -602,8 +610,8 @@ No candidate/recommendation/final lines generated.
     if not final_manifest_ok or final_manifest_entries != manifest_entries:
         raise RuntimeError("Final SHA256 artifact manifest verification failed.")
     print(json.dumps(verification, ensure_ascii=False))
-    if status != "FULL_COMPLETE":
-        raise SystemExit(2)
+    # PARTIAL is a valid preserved execution outcome; continue to protocol audit
+    # and publish the evidence instead of aborting before the workflow can commit it.
 
 
 if __name__ == "__main__":
