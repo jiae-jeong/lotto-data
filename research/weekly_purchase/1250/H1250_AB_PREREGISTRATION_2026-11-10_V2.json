@@ -308,11 +308,12 @@
     "freeze_date": "2026-11-12 only if an unchanged strict gate passes",
     "weekly_delivery_date": "2026-11-13 only if strict readiness is present",
     "implementation_entrypoint": "automation/h1250_ab_research_v2.py",
-    "implementation_code_hash": "4db8b47b4a6ba3533fe479483f6326964e2fc082",
+    "implementation_code_hash": "f3fbd6d98d7551383a540744f0ec1b8db5211280",
     "workflow_entrypoint": ".github/workflows/h1250-ab-research-v2.yml",
     "workflow_mode": "workflow_dispatch_only; do not add or change schedules",
     "workflow_blob_sha": "2ad1a0dad283972d04d8abf7c90e00c214fdcf69",
-    "v1_execution_status": "SUPERSEDED_BEFORE_OUTER_EVALUATION_OBJECTIVE_DEGENERACY"
+    "v1_execution_status": "SUPERSEDED_BEFORE_OUTER_EVALUATION_OBJECTIVE_DEGENERACY",
+    "implementation_commit": "d74479d70fa65c29f04f2ae5f79994d88591401f"
   },
   "baseline_readiness_at_registration": {
     "data_cutoff": 1249,
