@@ -1060,10 +1060,12 @@
         "novelty_signature": "same target-specific candidate top30 across four allocator geometries; prior-only 150-target selection locked for 50-target blocks; exact disjoint30 strict null plus conditional same-bank random partition.",
         "study_class": "empirical",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "IMPLEMENTATION_PENDING",
+        "execution_status": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH",
         "execution_entrypoint": "automation/h1250_ab_research.py",
         "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
-        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json"
+        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json",
+        "implementation_code_sha": "73ca5ad7107d80e3df05b0d4fa512a55d5437555",
+        "implementation_commit": "9ebaa3ecdb7695e1a978141ff96110db857a332c"
       }
     },
     {
@@ -1109,10 +1111,12 @@
         "novelty_signature": "fixed rr allocator; six frozen tail24 ranking signals; prior-only 150-target recall@30 selection locked for 50-target blocks; exact hypergeometric candidate recall null and matched random candidate-bank comparator.",
         "study_class": "empirical",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "IMPLEMENTATION_PENDING",
+        "execution_status": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH",
         "execution_entrypoint": "automation/h1250_ab_research.py",
         "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
-        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json"
+        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json",
+        "implementation_code_sha": "73ca5ad7107d80e3df05b0d4fa512a55d5437555",
+        "implementation_commit": "9ebaa3ecdb7695e1a978141ff96110db857a332c"
       }
     }
   ],
