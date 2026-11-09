@@ -31,7 +31,7 @@ jobs:
           p=Path('.github/workflows/lotto-finalize-r3.yml')
           s=p.read_text(encoding='utf-8')
           assert 'automation/finalize_from_strict_ready_v1.py' in s
-          finalize_section=s.split("\\n  finalize:\\n",1)[1]
+          finalize_section=s[s.rfind("\n  finalize:\n"): ]
           assert 'python -B automation/finalize_from_strict_ready_v1.py' in finalize_section
           assert 'weekly_purchase_final_v3.py' not in finalize_section
           assert 'weekly_purchase_final_v2_recovery.py' not in finalize_section
