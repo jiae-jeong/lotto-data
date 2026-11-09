@@ -24,7 +24,7 @@ Readiness checks are MAINTENANCE/RECHECK, not a new study. Research completion r
 
 The 2026-11-06 plan for round 1250 separately names H1250-A (fixed candidate bank, allocator/geometry comparison) and H1250-B (fixed allocator, candidate recall/ranking comparison). These plan-level axes are not generic queue entries; each must receive a frozen, fully specified preregistration and executable implementation before evaluation. Do not claim they will run automatically through the manual-only generic workflow.
 
-The old `daily-lotto-study.yml` and dated `daily_study_runner.py` are historical/manual paths and are not used by this new schedule. They remain unchanged to preserve the previous automation/version history; use v2 for new work. Do not edit the old trigger as a way to run a new v2 question.
+The old `daily-lotto-study.yml` and dated `daily_study_runner.py` are historical/manual paths and are not used by the v2 workflow. They remain unchanged to preserve the previous automation/version history; use the manual v2 workflow for new generic studies. Do not edit the old trigger as a way to run a new v2 question.
 
 ## Backlog and research continuity
 
