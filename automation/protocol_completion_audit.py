@@ -79,12 +79,43 @@ def main():
     ext_path = dated / "EXTERNAL_DATA_CROSSCHECK.json"
     ext = load_json(ext_path) if ext_path.exists() else {}
     fallback_sources = ext.get("fallback_sources", [])
+    data_rows = load_csv(ROOT / "lotto_data.csv")
+    last_data = data_rows[-1] if data_rows else {}
+    current_cutoff = int(v.get("data_cutoff", -1))
+
+    def normalize_date(value):
+        raw = str(value).strip().replace("/", "-").replace(".", "-")
+        parts = raw.split("-")
+        if len(parts) == 3:
+            return f"{int(parts[0]):04d}-{int(parts[1]):02d}-{int(parts[2]):02d}"
+        return raw
+
+    def agrees_with_repository(source):
+        try:
+            return (
+                int(source["round"]) == current_cutoff == int(last_data["round"])
+                and normalize_date(source["draw_date"]) == normalize_date(last_data["date"])
+                and sorted(int(n) for n in source["main_numbers"])
+                    == sorted(int(last_data[f"no{i}"]) for i in range(1, 7))
+                and int(source["bonus"]) == int(last_data["bonus"])
+            )
+        except (KeyError, TypeError, ValueError):
+            return False
+
+    source_urls = {source.get("url") for source in fallback_sources if source.get("url")}
+    official_attempt = ext.get("official_source_attempt", {})
     external_ok = bool(
         ext
         and len(fallback_sources) >= 2
+        and len(source_urls) >= 2
         and ext.get("independent_fallback_sources_agree") is True
         and ext.get("repo_vs_fallback_round_and_date_match") is True
-        and int(ext.get("repo_data_cutoff", -1)) == int(v.get("data_cutoff", -2))
+        and ext.get("repo_vs_fallback_numbers_match") is True
+        and int(ext.get("repo_data_cutoff", -1)) == current_cutoff == int(last_data.get("round", -2))
+        and agrees_with_repository(ext.get("repo_round", {}))
+        and agrees_with_repository(official_attempt)
+        and official_attempt.get("status") == "CONFIRMED"
+        and all(agrees_with_repository(source) for source in fallback_sources)
     )
 
     hist_path = dated / "HISTORICAL_CLOSED_LOOP_STATUS.json"
