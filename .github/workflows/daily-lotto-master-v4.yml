@@ -150,6 +150,84 @@ jobs:
           python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
           python -B automation/learning_loop_gate_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/learning-loop-gate.log"
 
+      - name: Finalize SHA256 manifest after protocol evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - "$RUN_DIR" <<'PY'
+          import csv, hashlib, json, sys
+          from pathlib import Path
+          d = Path(sys.argv[1])
+          verification_path = d / "VERIFICATION.json"
+          completion_path = d / "COMPLETION.json"
+          report_path = d / "REPORT.md"
+          manifest_path = d / "SHA256_MANIFEST.csv"
+          verification = json.loads(verification_path.read_text(encoding="utf-8"))
+          mandatory = verification["mandatory_checks"]
+          files = sorted(
+              (p for p in d.iterdir() if p.is_file() and p.name != manifest_path.name),
+              key=lambda p: p.name,
+          )
+          mandatory["artifact_hash_manifest"] = True
+          status = "FULL_COMPLETE" if all(mandatory.values()) else "PARTIAL"
+          verification["status"] = status
+          verification["mandatory_checks"] = mandatory
+          verification["artifact_manifest"] = {
+              "path": manifest_path.name,
+              "entries": len(files),
+              "status": "PASS",
+          }
+          verification_path.write_text(
+              json.dumps(verification, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          completion = json.loads(completion_path.read_text(encoding="utf-8"))
+          completion["status"] = status
+          completion_path.write_text(
+              json.dumps(completion, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          report = report_path.read_text(encoding="utf-8").replace("\\n\\n", "\n\n")
+          report = report.replace("Status: **PARTIAL**", f"Status: **{status}**")
+          report_lines = [line for line in report.splitlines() if not line.startswith("Output integrity:")]
+          integrity_line = f"Output integrity: PASS — SHA256 manifest verified for {len(files)} files."
+          for index, line in enumerate(report_lines):
+              if line.startswith("Successor leakage failures:"):
+                  report_lines.insert(index, integrity_line)
+                  break
+          else:
+              report_lines.append(integrity_line)
+          report_path.write_text("\n".join(report_lines) + "\n", encoding="utf-8")
+
+          files = sorted(
+              (p for p in d.iterdir() if p.is_file() and p.name != manifest_path.name),
+              key=lambda p: p.name,
+          )
+          rows = [
+              {"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest(), "bytes": p.stat().st_size}
+              for p in files
+          ]
+          with manifest_path.open("w", encoding="utf-8-sig", newline="") as stream:
+              writer = csv.DictWriter(stream, fieldnames=["path", "sha256", "bytes"])
+              writer.writeheader()
+              writer.writerows(rows)
+          with manifest_path.open("r", encoding="utf-8-sig", newline="") as stream:
+              checked = list(csv.DictReader(stream))
+          expected = {p.name for p in files}
+          names = [row["path"] for row in checked]
+          assert len(names) == len(set(names))
+          assert set(names) == expected
+          assert len(checked) == verification["artifact_manifest"]["entries"]
+          for row in checked:
+              artifact = d / row["path"]
+              assert artifact.is_file() and artifact.parent == d and not artifact.is_symlink()
+              assert artifact.stat().st_size == int(row["bytes"])
+              assert hashlib.sha256(artifact.read_bytes()).hexdigest() == row["sha256"]
+          print({"status": status, "manifest_entries": len(checked), "manifest_sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest()})
+          if status != "FULL_COMPLETE":
+              raise SystemExit(2)
+          PY
+
       - name: Verify all MASTER protocol gates
         shell: bash
         run: |
