@@ -57,7 +57,8 @@ jobs:
           from zoneinfo import ZoneInfo
 
           root = Path.cwd()
-          candidates = sorted((root / 'analysis' / '2026-11-10').glob('H1250_AB_20261110_*'))
+          run_date = datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat()
+          candidates = sorted((root / 'analysis' / run_date).glob('H1250_AB_20261110_*'))
           assert candidates, 'H1250-A/B output directory missing'
           out = candidates[-1]
           verification = json.loads((out / 'VERIFICATION.json').read_text(encoding='utf-8'))
