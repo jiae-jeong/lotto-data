@@ -82,8 +82,8 @@ def load_and_validate_contract():
     tasks = {task["id"]: task for task in queue["tasks"]}
     for task_id in ("E043_H1250_A_FIXED_BANK_ALLOCATOR_v1", "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"):
         task = tasks[task_id]
-        assert task["spec"]["execution_entrypoint"] == "automation/h1250_ab_research.py"
-        assert task["spec"]["workflow_entrypoint"] == ".github/workflows/h1250-ab-research.yml"
+        assert task["spec"]["execution_entrypoint"] == "automation/h1250_ab_research_v2.py"
+        assert task["spec"]["workflow_entrypoint"] == ".github/workflows/h1250-ab-research-v2.yml"
         assert task["spec"]["data_cutoff"] == 1249
 
     draws = load_draws()
@@ -616,9 +616,12 @@ def execute():
         "H1250_A": gate_a, "H1250_B": gate_b,
         "H1250_B_selector_diagnostic": {
             "ranker_recall30_invariant_for_all_targets": True,
-            "adaptive_selection_degenerate": True,
-            "selected_ranker": "H",
-            "reason": "All six preregistered rankers reorder the same fixed core6+tail24 set; recall@30 is identical by construction. The frozen tie-break selects H. No metric or threshold was changed.",
+            "adaptive_selection_objective": b_spec["adaptive_policy"]["objective"],
+            "adaptive_selection_degenerate": b_selector_degenerate,
+            "degenerate_decision_count": b_selector_degenerate_decision_count,
+            "non_degenerate_decision_count": b_selector_non_degenerate_decision_count,
+            "selected_ranker_counts": b_selected_ranker_counts,
+            "reason": "Recall@30 is invariant because all rankers reorder the same fixed core6+tail24 set. The adaptive selector therefore uses the preregistered equal-weight macro recall fraction across K=10,15,20,25,30, calculated only on the prior 150 completed targets. If every prior score ties, the frozen H,G,C,M,P,T tie-break is retained and degeneracy is reported.",
             "no_posthoc_substitution": True,
         },
         "no_auto_promotion": True, "no_recommendation_numbers": True,
@@ -643,12 +646,10 @@ def execute():
         f"- Adaptive strict PASS: {gate_b['strict_portfolio_pass']}",
         f"- Failed gates: {', '.join(gate_b['failed_gates']) if gate_b['failed_gates'] else 'none'}",
         "- Random baseline: 200 independent random 30-number candidate banks per target, rr allocated.",
-        "- Candidate recall@K is descriptive; exact uniform expected winning-number count is 6K/45.",
-        "", "## Preregistration integrity issue",
-        "- The registered B adaptive selector chooses among H/G/C/M/P/T using recall@30.",
-        "- All six rankers permute the same fixed core6+tail24 set, so recall@30 is mathematically invariant.",
-        "- The frozen tie-break therefore selects H at every adaptive block boundary. This design degeneracy is recorded; recall@25 or another metric was not substituted.",
-        "- Fixed-ranker recall@10/15/20/25 and portfolio results remain descriptive only under the preregistered multiplicity rules.",
+        "- Candidate recall@K is evaluated at all five preregistered K values; exact uniform expected winning-number count is 6K/45.",
+        "- The prior-only B selector uses the equal-weight macro-average recall fraction across K=10,15,20,25,30 from the immediately preceding 150 completed targets.",
+        "- Recall@30 is invariant across rankers because the same top30 membership is preserved; it remains an audit metric and cannot select a ranker alone.",
+        "- Any remaining tied macro scores use the frozen H,G,C,M,P,T tie-break and are explicitly counted; no post-result substitution is permitted.",
         "", "## Interpretation",
         "- Execution success is not predictive-edge evidence.",
         "- No recommendation numbers or final purchase lines are included.",
