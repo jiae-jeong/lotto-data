@@ -1,0 +1,334 @@
+{
+  "study_id": "H1250_AB_PREREGISTRATION_2026-11-10",
+  "registered_kst": "2026-11-10T01:46:36+09:00",
+  "status": "SPEC_FROZEN_IMPLEMENTATION_PENDING",
+  "target_round": 1250,
+  "data_cutoff": 1249,
+  "data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "scope": {
+    "warmup_targets": "201..400 inclusive",
+    "outer_targets": "401..1249 inclusive",
+    "outer_target_count": 849,
+    "outer_blocking": "50-target non-overlapping blocks; final 49-target remainder is retained",
+    "historical_independence": "RETROSPECTIVE_NESTED_VALIDATION_NOT_UNTOUCHED. Rounds 1244..1249 and the wider historical sample have prior exposure to earlier studies.",
+    "prospective_confirmation": "Only target 1250 onward is genuinely prospective; one future draw is not sufficient to establish a strict edge."
+  },
+  "shared_protocol": {
+    "training_cutoff_rule": "For target t, all model inputs use draws 1..t-1 only. Adaptive selection at target t may use only completed target outcomes strictly before t.",
+    "candidate_generator": {
+      "source": "automation/today_frozen_signal_partition_v42.py",
+      "source_blob_sha": "a4d6bcfcfeea7e40b63bf42f3db1f98a0e4cbe92",
+      "core6": "Top six from the frozen slow score, descending score then lower-number tie-break.",
+      "tail24": "Top 24 among the remaining 39 by the frozen equal blend of z-scored slow, medium and fast scores, descending score then lower-number tie-break.",
+      "rolling_signal_window": 300,
+      "candidate_order": "core6 followed by tail24"
+    },
+    "frozen_dependency_blobs": {
+      "automation/today_meta_v43_v52_v54.py": "40cd75ffdba5736269978017a8811ec68fa3308c",
+      "research/1245_final_pipeline_v3/recovered_original_assets/b_model_backtest.py": "a3b18bdf703ba1ad5c8a6fb4fcbf606b7f4e0f09",
+      "automation/recovered_models_v2.py": "8e001e3b026f25a596eac15cf371c390e2a1345e",
+      "automation/today_raw_signal_meta_v12.py": "463d93f62916fca42201e3481008154e88a2f4a1",
+      "automation/today_interaction_adagrad_v18.py": "e58e13f3179a2eff67202bb10472dc8461cc7066"
+    },
+    "strict_gate": {
+      "version": "V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY",
+      "primary_metrics": [
+        "max_hits",
+        "any2",
+        "any3",
+        "winning_union_coverage"
+      ],
+      "pass_rule": "Each metric's Bonferroni-adjusted moving-block bootstrap CI lower bound versus the exact uniform five-disjoint-ticket/union30 null must be strictly greater than zero; additionally, the share of positive non-overlapping 50-target any2 blocks must be at least 0.65.",
+      "alpha_family": 0.05,
+      "metrics_per_confirmatory_policy": 4,
+      "alpha_per_metric": 0.0125,
+      "block_length": 50,
+      "bootstrap_replicates": 7000,
+      "residual_block": "Include the final incomplete block; do not drop it.",
+      "threshold_changes": "PROHIBITED"
+    },
+    "nulls": {
+      "primary": "Exact combinatorial uniform null for five disjoint six-number tickets with union size 30, using the frozen V42 exact_null_disjoint30 implementation.",
+      "conditional_allocator_null": "200 random partitions per target of the same 30-number candidate bank; diagnostic only, not a replacement for the primary strict null.",
+      "random_is_never_a_source_of_candidate_or_purchase_numbers": true
+    },
+    "reporting": {
+      "no_recommendation_numbers": true,
+      "no_final_purchase_lines": true,
+      "no_auto_promotion": true,
+      "strict_fail_must_remain_fail": true,
+      "distinguish_execution_success_from_predictive_edge": true
+    }
+  },
+  "H1250_A": {
+    "study_id": "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+    "question": "With the exact same cutoff-safe candidate top30 held fixed for each target, does allocator geometry change five-line max-hit, any2, any3 and union coverage?",
+    "changed_factor": "Allocator geometry only",
+    "fixed_factor": "Candidate bank and H tail order are identical across all four allocators for each target.",
+    "allocator_patterns": {
+      "rr": [
+        [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20
+        ],
+        [
+          1,
+          5,
+          9,
+          13,
+          17,
+          21
+        ],
+        [
+          2,
+          6,
+          10,
+          14,
+          18,
+          22
+        ],
+        [
+          3,
+          7,
+          11,
+          15,
+          19,
+          23
+        ]
+      ],
+      "contig": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "snake": [
+        [
+          0,
+          7,
+          8,
+          15,
+          16,
+          23
+        ],
+        [
+          1,
+          6,
+          9,
+          14,
+          17,
+          22
+        ],
+        [
+          2,
+          5,
+          10,
+          13,
+          18,
+          21
+        ],
+        [
+          3,
+          4,
+          11,
+          12,
+          19,
+          20
+        ]
+      ],
+      "paired": [
+        [
+          0,
+          1,
+          8,
+          9,
+          16,
+          17
+        ],
+        [
+          2,
+          3,
+          10,
+          11,
+          18,
+          19
+        ],
+        [
+          4,
+          5,
+          12,
+          13,
+          20,
+          21
+        ],
+        [
+          6,
+          7,
+          14,
+          15,
+          22,
+          23
+        ]
+      ]
+    },
+    "adaptive_policy": {
+      "selection_unit": "50-target outer blocks",
+      "first_outer_block": "Use rr for targets 401..450.",
+      "later_blocks": "At each block boundary, choose one geometry using only the immediately preceding 150 completed target rounds.",
+      "objective": "Mean(max_hits + 0.85*any2 + 1.35*any3 + 0.10*winning_union_coverage) over the prior 150 targets.",
+      "tie_break": [
+        "rr",
+        "contig",
+        "snake",
+        "paired"
+      ],
+      "selected_geometry_is_frozen_for_entire_next_50_target_block": true
+    },
+    "primary_metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "secondary_metrics": [
+      "candidate_bank_recall_at_30",
+      "mean_pair_overlap",
+      "ticket_union_size",
+      "conditional_same_bank_random_partition_delta"
+    ],
+    "random_seed": 2026111001250,
+    "conditional_random_partitions_per_target": 200,
+    "strict_gate_applies_to": "The single predeclared prior-only adaptive geometry policy only.",
+    "descriptive_variant_correction": "Individual fixed geometries are descriptive only; if their inferential intervals are shown, use Bonferroni alpha 0.05/(4 geometries * 4 metrics) = 0.003125 per interval. They are not eligible for post-hoc champion selection."
+  },
+  "H1250_B": {
+    "study_id": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
+    "question": "With allocator geometry fixed, does prior-only dynamic tail24 ranking improve candidate recall and downstream five-line portfolio metrics?",
+    "changed_factor": "Tail24 ranking signal only",
+    "fixed_factor": "Slow-model core6 and rr allocator geometry are fixed.",
+    "rankers": [
+      "H",
+      "G",
+      "C",
+      "M",
+      "P",
+      "T"
+    ],
+    "ranker_definitions": {
+      "H": "Original hybrid-blend tail order.",
+      "G": "Frozen rolling300 gap score order within the tail24.",
+      "C": "Frozen rolling300 recent-frequency score order within the tail24.",
+      "M": "Frozen rolling300 momentum score order within the tail24.",
+      "P": "Frozen rolling300 pair-association score order within the tail24.",
+      "T": "Frozen rolling300 triple-association score order within the tail24."
+    },
+    "adaptive_policy": {
+      "selection_unit": "50-target outer blocks",
+      "first_outer_block": "Use H for targets 401..450.",
+      "later_blocks": "At each block boundary, choose one ranker using only the immediately preceding 150 completed target rounds.",
+      "objective": "Highest mean candidate recall@30 over the prior 150 targets.",
+      "tie_break": [
+        "H",
+        "G",
+        "C",
+        "M",
+        "P",
+        "T"
+      ],
+      "selected_ranker_is_frozen_for_entire_next_50_target_block": true
+    },
+    "candidate_recall_k": [
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "candidate_recall_random_expectation": "Exact uniform K-subset expected winning-number count = 6*K/45.",
+    "primary_metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "secondary_metrics": [
+      "candidate_recall_at_10",
+      "candidate_recall_at_15",
+      "candidate_recall_at_20",
+      "candidate_recall_at_25",
+      "candidate_recall_at_30",
+      "random_candidate_bank_portfolio_delta"
+    ],
+    "random_seed": 2026111001251,
+    "random_candidate_banks_per_target": 200,
+    "random_candidate_bank_size": 30,
+    "random_candidate_allocator": "rr",
+    "strict_gate_applies_to": "The single predeclared prior-only adaptive ranker policy only.",
+    "descriptive_variant_correction": "Six rankers by four portfolio metrics use Bonferroni alpha 0.05/(6*4); six rankers by five recall K values use Bonferroni alpha 0.05/(6*5). Individual variants are descriptive only and cannot be promoted after observing outer results."
+  },
+  "execution_plan": {
+    "preregistration_date": "2026-11-10",
+    "intended_execution_date": "2026-11-11",
+    "independent_reproduction_and_review": "2026-11-11 to 2026-11-12",
+    "freeze_date": "2026-11-12 only if an unchanged strict gate passes",
+    "weekly_delivery_date": "2026-11-13 only if strict readiness is present",
+    "implementation_entrypoint": "automation/h1250_ab_research.py",
+    "implementation_code_hash": "PENDING: executable wrapper must be committed and its blob SHA recorded before any H1250-A/B outcomes are evaluated",
+    "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
+    "workflow_mode": "workflow_dispatch_only; do not add or change schedules"
+  },
+  "baseline_readiness_at_registration": {
+    "data_cutoff": 1249,
+    "strict_model_validation_pass": false,
+    "validated_models": [],
+    "model_verdict": "NO_MODEL_PASSES_STRICT_VALIDATION",
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_block_stability"
+    ]
+  },
+  "guardrails": [
+    "No threshold, alpha, block length, comparator, candidate family or metric change after inspecting H1250-A/B outer results.",
+    "No use of 1244..1249 as an untouched holdout.",
+    "No relabelling RECOVERED_SUCCESSOR_V2 as the missing legacy A/C/contrarian executables.",
+    "The studies cannot make DAILY MASTER FULL_COMPLETE while the original legacy executable sources remain unrecovered.",
+    "A code or source hash mismatch invalidates the run; it must not be repaired by silently changing the frozen specification."
+  ]
+}
