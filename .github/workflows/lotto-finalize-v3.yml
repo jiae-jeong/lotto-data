@@ -6,16 +6,40 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/lotto-finalize-v3.yml'
+      - 'automation/finalize_from_strict_ready_v1.py'
 
 permissions:
   contents: write
 
 jobs:
-  finalize-v3:
+  validate:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
-    env:
-      PYTHONDONTWRITEBYTECODE: '1'
-      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile strict-ready finalizer
+        run: python -m py_compile automation/finalize_from_strict_ready_v1.py
+      - name: Confirm legacy unconditional freeze path is absent
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/lotto-finalize-v3.yml')
+          s=p.read_text(encoding='utf-8')
+          assert 'automation/finalize_from_strict_ready_v1.py' in s
+          assert 'weekly_purchase_final_v3.py' not in s
+          assert 'weekly_purchase_final_v2_recovery.py' not in s
+          assert '1246' not in s and 'target_round']==1247' not in s
+          print('strict-ready-only finalization workflow validation PASS')
+          PY
+
+  finalize:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,61 +48,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Recover complete protocol evidence
+      - name: Freeze only from current STRICT_PASS_READY
         shell: bash
         run: |
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
-          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' | sort | tail -1)"
-          test -n "$RUN_DIR"
-          python - "$RUN_DIR" <<'PY'
-          import json,sys
-          from pathlib import Path
-          d=Path(sys.argv[1]); v=json.loads((d/'VERIFICATION.json').read_text())
-          assert v.get('compute_status')=='FULL_COMPUTE_COMPLETE'
-          assert int(v.get('data_cutoff',-1))==1246
-          assert int(v.get('successor_leakage_failures',1))==0
+          python -B automation/finalize_from_strict_ready_v1.py "$RUN_DATE" --freeze-not-before 2026-11-12
+          python -B automation/finalize_from_strict_ready_v1.py "$RUN_DATE" --verify-only --freeze-not-before 2026-11-12
+          TARGET_ROUND="$(python - <<'PY'
+          import csv
+          with open('lotto_data.csv',encoding='utf-8-sig',newline='') as f:
+              rows=list(csv.DictReader(f))
+          print(int(rows[-1]['round'])+1)
           PY
-          python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR"
-          python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR"
-          python - "$RUN_DIR" <<'PY'
-          import json,sys
-          from pathlib import Path
-          d=Path(sys.argv[1]); a=json.loads((d/'PROTOCOL_AUDIT.json').read_text()); v=json.loads((d/'VERIFICATION.json').read_text())
-          assert a.get('protocol_status')=='FULL_COMPLETE' and v.get('protocol_status')=='FULL_COMPLETE'
-          assert all(a.get('protocol_checks',{}).values())
-          PY
+          )"
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
-          echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
-      - name: Run V3 holdout-gated diversified portfolio
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -B automation/weekly_purchase_final_v3.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/v3.log"
-      - name: Independently verify V3 freeze
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import glob,json
-          p=sorted(glob.glob('research/weekly_purchase/1247/*PROTOCOL_FULL_V3.json'))[-1]
-          d=json.load(open(p,encoding='utf-8')); lines=d['final_lines']
-          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['protocol_status']=='FULL_COMPLETE'
-          assert d['walkforward_holdout']['promotion_gate_pass'] is True
-          assert len(lines)==5 and len({tuple(x) for x in lines})==5
-          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(isinstance(n,int) and 1<=n<=45 for n in x) for x in lines)
-          flat=[n for x in lines for n in x]; assert len(flat)==30 and len(set(flat))==30
-          text='\n'.join(' '.join(map(str,x)) for x in lines); assert [[int(n) for n in r.split()] for r in text.splitlines()]==lines
-          print(json.dumps({'status':'INDEPENDENT_PASS','file':p,'final_lines':lines,'selected_policy':d['selected_policy'],'portfolio':d['portfolio'],'holdout':d['walkforward_holdout']},ensure_ascii=False))
-          PY
-      - name: Commit protocol evidence and V3 freeze
+          echo "TARGET_ROUND=$TARGET_ROUND" >> "$GITHUB_ENV"
+      - name: Commit verified strict-ready freeze
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- "analysis/$RUN_DATE" research/weekly_purchase/1247
-          git diff --cached --quiet && exit 0
-          git commit -m "research: freeze protocol-full 1247 V3 final"
           git pull --rebase origin main
+          git add -- "research/weekly_purchase/$TARGET_ROUND"
+          git diff --cached --quiet && exit 0
+          git commit -m "purchase: freeze strict-pass-ready target $TARGET_ROUND"
           git push origin HEAD:main
