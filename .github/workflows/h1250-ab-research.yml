@@ -45,22 +45,39 @@ jobs:
       - name: Revalidate immutable preregistration and cutoff
         run: python -B automation/h1250_ab_research.py --preflight
       - name: Execute H1250-A and H1250-B
-        run: python -B automation/h1250_ab_research.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/h1250_ab_research.py | tee "$RUNNER_TEMP/h1250-ab-run.log"
+          python - "$RUNNER_TEMP/h1250-ab-run.log" <<'PY' >> "$GITHUB_ENV"
+          import json, sys
+          for line in reversed(open(sys.argv[1], encoding="utf-8").read().splitlines()):
+              try:
+                  result = json.loads(line)
+              except json.JSONDecodeError:
+                  continue
+              output = result.get("output_directory")
+              if output:
+                  print("H1250_OUTPUT_DIRECTORY=" + output)
+                  break
+          else:
+              raise SystemExit("H1250_OUTPUT_DIRECTORY_NOT_EMITTED")
+          PY
       - name: Verify output hashes and preserve results plus queue status
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import csv, hashlib, json, subprocess
+          import csv, hashlib, json, os, subprocess
           from datetime import datetime
           from pathlib import Path
           from zoneinfo import ZoneInfo
 
           root = Path.cwd()
           run_date = datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat()
-          candidates = sorted((root / 'analysis' / run_date).glob('H1250_AB_20261110_*'))
-          assert candidates, 'H1250-A/B output directory missing'
-          out = candidates[-1]
+          output_rel = os.environ.get('H1250_OUTPUT_DIRECTORY', '')
+          out = root / output_rel
+          assert output_rel.startswith('analysis/') and out.is_dir() and out.name.startswith('H1250_AB_20261110_'), 'H1250-A/B output directory missing or invalid'
           verification = json.loads((out / 'VERIFICATION.json').read_text(encoding='utf-8'))
           gate = json.loads((out / 'STRICT_GATE.json').read_text(encoding='utf-8'))
           assert verification['status'] == 'EXECUTION_VERIFIED'
