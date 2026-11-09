@@ -376,7 +376,8 @@
       "CONDITIONAL_RANDOM.csv": 849,
       "RANDOM_CANDIDATE_BANKS.csv": 849,
       "WINNER_TRACE_A.csv": 20376,
-      "WINNER_TRACE_B.csv": 30564
+      "WINNER_TRACE_B.csv": 30564,
+      "BLOCK_STABILITY.csv": 136
     },
     "trace_definition": "One row per target, per A allocator or B ranker, per actual winning number; includes fixed candidate-bank stage, ranks, K retention, ticket assignment, and line hit count. Does not contain full recommended ticket combinations."
   }
