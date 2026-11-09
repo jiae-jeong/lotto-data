@@ -1,0 +1,274 @@
+{
+  "audit_date_kst": "2026-11-10",
+  "audit_time_kst": "08:18",
+  "classification": "PROVENANCE_AND_PREREGISTRATION_AUDIT",
+  "repository": {
+    "full_name": "jiae-jeong/lotto-data",
+    "branch": "main",
+    "observed_head": "8afcfcbdd8538f6b189218d019dc2d5e0a6f221b",
+    "protocol_blob_sha": "2cd3abd3c5fb607b90c27b67b754786e40d774df",
+    "agents_blob_sha": "86ac0e1cbddb59d2a0cc6eb47f1e93ef8879753f",
+    "remediation_plan_blob_sha": "4017ba64479b6b0b132aae386ae453c583458937"
+  },
+  "data_integrity": {
+    "cutoff": 1249,
+    "rows": 1249,
+    "first_round": 1,
+    "latest_round_date": "2026-11-07",
+    "integrity": "PASS",
+    "sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "external_crosscheck": "TWO_INDEPENDENT_NEWS_SOURCES_AGREE",
+    "official_endpoint_direct_fetch": "NOT_DIRECTLY_RETRIEVED",
+    "sources": [
+      "https://www.yna.co.kr/view/AKR20261107051900002",
+      "https://mobile.newsis.com/view/NISX20261107_0003859041"
+    ],
+    "contaminated_history": "Rounds 1244..1249 are not untouched holdout data."
+  },
+  "historical_originals": {
+    "round_1245": {
+      "source": "research/prospective_v4/decisions/1245/PRIMARY_PURCHASE_LINES_1245_V4.csv",
+      "blob_sha": "bf8ebd9313573f4da09e32aa7d86f230ae982d00",
+      "decision_source": "research/prospective_v4/decisions/1245/PRIMARY_PURCHASE_DECISION_1245_V4.json",
+      "decision_blob_sha": "1c20549451924bc864c4cbf438c5b48a83082a1c",
+      "review_source": "analysis/2026-10-11/ROUND_1245_REVIEW.md",
+      "error_note_source": "analysis/2026-10-14/E020_TAIL_DISTRIBUTION_DECOMPOSITION_v1/ERROR_NOTE_1245_AGGREGATE.csv",
+      "classification": "AUTHENTIC_PRE_DRAW_RECOMMENDATION; PURCHASE_RECEIPT_NOT_LOCATED"
+    },
+    "round_1246": {
+      "sources": [
+        {
+          "path": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+          "blob_sha": "4d50304b7aa247317e23e122b4ac4747e7145c15",
+          "status": "V2 explicitly supersedes purchase-only V1; round review treats this as pre-draw purchase original."
+        },
+        {
+          "path": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+          "blob_sha": "4998f3239626de3f2c9c5939a3b2d88dbc1b7a2a",
+          "status": "Separate fallback portfolio; also used by current historical closed-loop aggregation."
+        }
+      ],
+      "review_source": "analysis/2026-10-18/ROUND_1246_REVIEW.md",
+      "classification": "CONFLICTING_PRE_DRAW_FIVE_LINE_SOURCES; NO_RECEIPT_PROOF; EXCLUDE_FROM_SINGLE_CANONICAL_AGGREGATE_UNTIL_RESOLVED",
+      "correction": "The two preserved five-line sources are different and produce different per-line hit distributions. Do not silently treat the weekly fallback file as identical to the V2 purchase-design artifact."
+    },
+    "round_1247": {
+      "canonical_source": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+      "blob_sha": "730bb97bf4602288a74be9480941bb0532e219d7",
+      "classification": "REPOSITORY_CANONICAL_ACTUAL_PURCHASE_ARTIFACT",
+      "alternatives_preserved": 4
+    },
+    "round_1248": {
+      "canonical_source": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+      "blob_sha": "d952c39886626140be8fbc70bf5397fe338da0c2",
+      "classification": "REPOSITORY_CANONICAL_ACTUAL_PURCHASE_FALLBACK_ARTIFACT; STRICT_PREDICTIVE_GATE_FAIL",
+      "alternative_v54_strict_artifact": "research/weekly_purchase/1248/FINAL_FIVE_LINES_1248_20261030_V54_STRICT_PASS.json",
+      "alternative_is_not_canonical_actual_purchase": true
+    },
+    "round_1249": {
+      "authenticated_predraw_or_actual_purchase_artifact": "NOT_FOUND",
+      "research_only_sources": [
+        "analysis/2026-11-06/TODAY_META_V43_V52_1249_FROZEN_V54.json",
+        "analysis/2026-11-06/TODAY_ANY2_GUARDED_1249_V83.json",
+        "analysis/2026-11-06/TODAY_ROBUST_ANY2_ANY3_1249_V84.json",
+        "analysis/2026-11-06/TODAY_PARETO_META_1249_V85.json",
+        "analysis/2026-11-06/TODAY_DUAL_SCALE_BANK_1249_V86.json"
+      ],
+      "classification": "RESEARCH_SCORECARDS_ONLY; NOT_AUTHENTICATED_AS_DELIVERED_OR_PURCHASED_LINES",
+      "rule": "Do not reconstruct or score prior conversation snippets as the actual delivered 1249 lines."
+    },
+    "archive_scope": {
+      "verified_canonical_actual_purchase_artifacts": "1247 and 1248",
+      "authenticated_predraw_recommendation_records": "1245; 1246 has conflicting sources",
+      "whole_history_complete": false,
+      "historical_closed_loop_status_file": "analysis/2026-11-10/HISTORICAL_CLOSED_LOOP_STATUS.json",
+      "warning": "Its three-round/15-line aggregate needs a 1246 provenance correction before being described as a definitive actual-purchase aggregate."
+    }
+  },
+  "v54_to_v86_failure_audit": {
+    "common_scope": "Target 1249, training cutoff 1248, 848 historical targets; these are exposed live-history diagnostics, not untouched validation.",
+    "models": [
+      {
+        "model": "V54",
+        "adjusted_ci_lower": {
+          "max_hits": 0.016058,
+          "any2": -0.000945,
+          "any3": 0.002497,
+          "winning_union_coverage": -8e-15
+        },
+        "last_partial_block_any2_delta": -0.105309,
+        "strict": "FAIL",
+        "cause": "any2 adjusted lower bound is below zero; union lower bound is not strictly positive."
+      },
+      {
+        "model": "V83",
+        "adjusted_ci_lower": {
+          "max_hits": 0.010134,
+          "any2": 0.001925,
+          "any3": -0.005204,
+          "winning_union_coverage": -8e-15
+        },
+        "last_partial_block_any2_delta": -0.105309,
+        "strict": "FAIL",
+        "cause": "any3 adjusted lower bound is below zero; union lower bound is not strictly positive."
+      },
+      {
+        "model": "V84",
+        "adjusted_ci_lower": {
+          "max_hits": 0.000655,
+          "any2": -0.012794,
+          "any3": 0.000706,
+          "winning_union_coverage": -8e-15
+        },
+        "last_partial_block_any2_delta": -0.105309,
+        "strict": "FAIL",
+        "cause": "any2 adjusted lower bound is below zero; union lower bound is not strictly positive."
+      },
+      {
+        "model": "V85",
+        "adjusted_ci_lower": {
+          "max_hits": -0.00251,
+          "any2": -0.014901,
+          "any3": 0.003674,
+          "winning_union_coverage": -8e-15
+        },
+        "last_partial_block_any2_delta": -0.105309,
+        "strict": "FAIL",
+        "cause": "max_hits and any2 adjusted lower bounds are below zero; union lower bound is not strictly positive."
+      },
+      {
+        "model": "V86",
+        "adjusted_ci_lower": {
+          "max_hits": -0.004866,
+          "any2": -0.004287,
+          "any3": -0.00783,
+          "winning_union_coverage": 0.001182
+        },
+        "last_partial_block_any2_delta": -0.021976,
+        "positive_50_block_share": {
+          "any2": 0.647059,
+          "any3": 0.529412
+        },
+        "strict": "FAIL",
+        "cause": "max_hits/any2/any3 adjusted lower bounds are below zero; any2 and any3 block stability also fail the unchanged 0.65 requirement."
+      }
+    ],
+    "note": "V86 has a smaller last-partial-block any2 deficit than V54/V83/V84/V85, but still fails the unchanged simultaneous strict gate. This is not a promotion or a proven improvement."
+  },
+  "exact_null_independent_rederivation": {
+    "method": "Independent count-state enumeration over k0..k5 with total six winners: C(15,k0)*product(C(6,ki))/C(45,6).",
+    "feasible_states": 462,
+    "independently_computed": {
+      "max_hits": 1.834653151726325,
+      "any2": 0.7094760505140548,
+      "any3": 0.11867929763562195,
+      "any4": 0.0069674133769425965,
+      "winning_union_coverage": 4.000000000000009
+    },
+    "frozen_v42_expected": {
+      "max_hits": 1.8346531517263276,
+      "any2": 0.7094760505140554,
+      "any3": 0.1186792976356222,
+      "any4": 0.006967413376942591,
+      "winning_union_coverage": 4.000000000000008
+    },
+    "max_absolute_difference": "<1e-14",
+    "status": "INDEPENDENT_REDERIVATION_MATCH"
+  },
+  "h1250_preregistration": {
+    "path": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json",
+    "blob_sha": "01a039f208a3870d857ab13aec7de57159847a23",
+    "registered_kst": "2026-11-10T01:46:36+09:00",
+    "target_round": 1250,
+    "data_cutoff": 1249,
+    "data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "implementation_path": "automation/h1250_ab_research.py",
+    "implementation_blob_sha": "73ca5ad7107d80e3df05b0d4fa512a55d5437555",
+    "frozen_dependency_hashes_all_match": true,
+    "frozen_dependency_count": 7,
+    "research_queue_contains_E043_and_E044": true,
+    "allocator_patterns": {
+      "rr": "PASS: four rows of six; 24 unique tail positions exactly once",
+      "contig": "PASS: four rows of six; 24 unique tail positions exactly once",
+      "snake": "PASS: four rows of six; 24 unique tail positions exactly once",
+      "paired": "PASS: four rows of six; 24 unique tail positions exactly once"
+    },
+    "H1250_A": "fixed candidate bank; allocator geometry only",
+    "H1250_B": "fixed rr allocator; six preregistered tail24 rankers; candidate recall@10/15/20/25/30",
+    "strict_gate": {
+      "metrics": [
+        "max_hits",
+        "any2",
+        "any3",
+        "winning_union_coverage"
+      ],
+      "bonferroni_alpha_per_metric": 0.0125,
+      "bootstrap_replicates": 7000,
+      "block_length": 50,
+      "final_incomplete_block_included": true,
+      "positive_any2_block_share_minimum": 0.65,
+      "threshold_changes": "PROHIBITED"
+    },
+    "intended_execution_date": "2026-11-11",
+    "freeze_date": "2026-11-12 only if unchanged strict gate passes",
+    "workflow_mode": "workflow_dispatch_only",
+    "workflow_has_schedule": false,
+    "runner_preflight_script_executed": false,
+    "execution_status": "PENDING_INTENDED_2026-11-11"
+  },
+  "daily_master_2026_11_10": {
+    "data_cutoff": 1249,
+    "compute_status": "COMPUTE_PARTIAL",
+    "protocol_status": "PROTOCOL_PARTIAL",
+    "candidate_recall": {
+      "targets": 1049,
+      "matched_random_sets": 209800,
+      "no_future_leakage": true,
+      "point_delta_vs_random_by_k": {
+        "10": 0.005518748013981556,
+        "15": 0.005529869717190938,
+        "20": 0.003270575150937427,
+        "25": 0.001920877025738843,
+        "30": 0.004046711153479506
+      },
+      "promotion": "NONE; point estimates only and selected signals are not confirmatory."
+    },
+    "research_only_five_ticket_portfolio": {
+      "targets": 1049,
+      "matched_random_bundles": 1049000,
+      "delta": {
+        "max_hits": -0.06537845567206868,
+        "any2": -0.043395614871306054,
+        "any3": -0.019221163012392753,
+        "any4": 0.0006587225929456627,
+        "winning_union_coverage": -0.21773879885605307
+      },
+      "mean_pair_overlap_delta": 0.10574356530028561,
+      "promotion": "NONE"
+    },
+    "successor_signal_ablation_recent100": {
+      "A_v2": 0.030505243088655876,
+      "C_v2": 0.019065776930410006,
+      "contrarian_v2": 0.014299332697807476,
+      "sign_consistent_across_three_successor_models": true,
+      "status": "MORE_TEST; not legacy A/C/contrarian; no promotion"
+    },
+    "legacy_A_C_contrarian_sources": "NOT_FOUND_NOT_EXECUTED",
+    "successor_leakage_failures": 0,
+    "pair_triple_multiple_testing_survivors": 0,
+    "current_1250_five_role_research_policy_strict_pass": false
+  },
+  "next_steps": [
+    "2026-11-11: execute only preregistered H1250-A and H1250-B with the unchanged cutoff, source hashes, seeds, metrics, nulls and strict gate.",
+    "2026-11-11: reproduce nested/rolling outer results, include the final incomplete block, and audit matched random outputs.",
+    "2026-11-12: independently reproduce result hashes and strict-gate calculations; freeze/seal only if every unchanged gate passes.",
+    "Resolve the 1246 conflicting pre-draw sources before treating the 15-line historical aggregate as definitive.",
+    "Do not treat any 1249 V54/V83/V84/V85/V86 research scorecard or remembered chat snippet as authenticated purchased lines."
+  ],
+  "limitations": [
+    "The 1249 actual purchase/recommendation original was not authenticated.",
+    "The 1246 source precedence is ambiguous between two different preserved pre-draw five-line artifacts.",
+    "Legacy integrated A/C/contrarian executable sources remain unrecovered.",
+    "The 1250 A/B runner was hash-audited but not executed on 2026-11-10; execution is scheduled for 2026-11-11."
+  ]
+}
