@@ -184,7 +184,10 @@ def main():
         'verdict':'MODEL_EDGE_VALIDATED' if validated else 'NO_MODEL_PASSES_STRICT_VALIDATION',
         'rule_for_future_final_numbers':'Do not label a model-guided portfolio as validated unless its untouched time-ordered performance beats a structure-matched random baseline, with positive adjusted confidence bounds and stable non-overlapping time blocks.',
     }
-    out=day/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json'
+    out=Path(sys.argv[2]) if len(sys.argv)>2 else day/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json'
+    if not out.is_absolute():
+        out=ROOT/out
+    out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'status':'PASS','verdict':result['verdict'],'models':model_count,'validated_models':validated,'top3':ranked[:3],'portfolio_v3_corrected_status':portfolio_audit['corrected_model_promotion_status'],'output':str(out)},ensure_ascii=False))
 

@@ -289,13 +289,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" | tee "$RUNNER_TEMP/model-validation-v5.log"
+          python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" "analysis/$RUN_DATE/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json" | tee "$RUNNER_TEMP/model-validation-v5.log"
           python -B automation/five_role_research_v9.py "$RUN_DATE" | tee "$RUNNER_TEMP/five-role-v9.log"
           python - "$RUN_DATE" <<'PY'
           import csv,hashlib,json,sys
           from pathlib import Path
           date=sys.argv[1]
-          strict_report=Path('analysis')/date/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json'
+          strict_report=Path('analysis')/date/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json'
           strict=json.loads(strict_report.read_text())
           rows=list(csv.DictReader(open('lotto_data.csv',encoding='utf-8-sig')))
           cutoff=int(rows[-1]['round']); target=cutoff+1
@@ -441,6 +441,7 @@ jobs:
             analysis/*/CANDIDATE_RECALL_STATUS.json
             analysis/*/LEARNING_LOOP_GATE.json
             analysis/*/MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json
+            analysis/*/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json
             analysis/*/FIVE_ROLE_RESEARCH_*_V9.json
             research/weekly_purchase/*/MODEL_GATE_*.json
             research/weekly_purchase/*/STRICT_PASS_STATUS_*.json
