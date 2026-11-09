@@ -28,7 +28,7 @@ jobs:
         run: python -B automation/h1250_ab_research.py --preflight
 
   execute:
-    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run-h1250-ab]')
+    if: github.event_name == 'workflow_dispatch'
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 90
