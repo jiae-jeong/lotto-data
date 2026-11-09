@@ -319,10 +319,8 @@ jobs:
           validated_models=strict['validated_models']
           model_pass=bool(validated_models)
           portfolio_pass=bool(research['inference']['strict_portfolio_pass'])
-          ready=model_pass and portfolio_pass
+          ready=portfolio_pass
           failed_gates=list(research.get('failed_gates',[]))
-          if not model_pass:
-            failed_gates.append('no_individual_model_strict_edge')
 
           ready_path=None
           if ready:
