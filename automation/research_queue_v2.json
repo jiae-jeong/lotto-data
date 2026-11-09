@@ -1019,6 +1019,101 @@
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
       }
+    },
+    {
+      "id": "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+      "kind": "h1250_allocator",
+      "question": "With the exact same cutoff-safe candidate top30 held fixed for each target, does allocator geometry change five-line max-hit, any2, any3 and union coverage?",
+      "novelty": "Orthogonal allocator-only study: fixed V38/V28 hybrid core6+tail24 candidate bank, four frozen disjoint30 geometries, prior-only 150-target block-locked allocator selection, exact disjoint30 null and conditional same-bank random partitions.",
+      "spec": {
+        "study_id": "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+        "kind": "h1250_allocator",
+        "research_question": "With the exact same cutoff-safe candidate top30 held fixed for each target, does allocator geometry change five-line max-hit, any2, any3 and union coverage?",
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "Each target t uses draws 1..t-1 only. Geometry selection for a 50-target block uses only the immediately preceding 150 completed targets.",
+        "primary_metric": "All four strict portfolio metrics must have Bonferroni-adjusted moving-block CI lower bounds >0 versus the exact disjoint30 null, with any2 positive 50-target block share >=0.65.",
+        "secondary_metrics": [
+          "candidate bank recall@30",
+          "mean pair overlap",
+          "ticket union size",
+          "conditional same-bank random partition delta"
+        ],
+        "comparator": "Same per-target V38/V28 hybrid top30 passed unchanged to rr, contig, snake and paired allocators; adaptive policy selects one geometry from the prior 150 targets.",
+        "baseline": "Exact combinatorial uniform null for five disjoint six-number tickets with union30; additionally 200 random partitions of the same candidate bank per target for conditional geometry diagnostics.",
+        "multiplicity_correction": "Adaptive prior-only policy uses unchanged alpha 0.05/4 for four primary metrics. Fixed-geometry descriptive intervals, if shown, use Bonferroni 0.05/(4*4)=0.003125 and cannot promote a fixed geometry.",
+        "block_stability": [
+          50
+        ],
+        "tie_break": "Geometry order rr, contig, snake, paired; number-score ties use lower number.",
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "GEOMETRY_METRICS.csv",
+          "ADAPTIVE_SELECTION.csv",
+          "CONDITIONAL_RANDOM.csv",
+          "BLOCK_STABILITY.csv",
+          "STRICT_GATE.json",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "same target-specific candidate top30 across four allocator geometries; prior-only 150-target selection locked for 50-target blocks; exact disjoint30 strict null plus conditional same-bank random partition.",
+        "study_class": "empirical",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "IMPLEMENTATION_PENDING",
+        "execution_entrypoint": "automation/h1250_ab_research.py",
+        "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
+        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json"
+      }
+    },
+    {
+      "id": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
+      "kind": "h1250_candidate",
+      "question": "With allocator geometry fixed, does prior-only dynamic tail24 ranking improve candidate recall and downstream five-line portfolio metrics?",
+      "novelty": "Orthogonal candidate-ranking-only study: fixed slow core6 and rr allocator, six frozen H/G/C/M/P/T tail rankers, prior-only 150-target block-locked ranking selection, exact hypergeometric recall null and matched random candidate-bank comparator.",
+      "spec": {
+        "study_id": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
+        "kind": "h1250_candidate",
+        "research_question": "With allocator geometry fixed, does prior-only dynamic tail24 ranking improve candidate recall and downstream five-line portfolio metrics?",
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "Each target t uses draws 1..t-1 only. Ranker selection for a 50-target block uses only the immediately preceding 150 completed targets.",
+        "primary_metric": "All four strict portfolio metrics must have Bonferroni-adjusted moving-block CI lower bounds >0 versus the exact disjoint30 null, with any2 positive 50-target block share >=0.65.",
+        "secondary_metrics": [
+          "candidate recall@10",
+          "candidate recall@15",
+          "candidate recall@20",
+          "candidate recall@25",
+          "candidate recall@30",
+          "matched random candidate-bank portfolio delta"
+        ],
+        "comparator": "Fixed rr allocator with slow-model core6 and one of six frozen H/G/C/M/P/T tail rankers; adaptive policy selects ranker from prior 150-target recall@30 only.",
+        "baseline": "Exact combinatorial uniform null for five disjoint six-number tickets with union30; exact hypergeometric expected recall 6*K/45; additionally 200 random 30-number candidate banks per target, rr-partitioned.",
+        "multiplicity_correction": "Adaptive prior-only policy uses unchanged alpha 0.05/4 for four primary metrics. Descriptive six-ranker portfolio intervals use Bonferroni 0.05/(6*4); six-ranker by five-K recall intervals use Bonferroni 0.05/(6*5).",
+        "block_stability": [
+          50
+        ],
+        "tie_break": "Ranker order H, G, C, M, P, T; number-score ties use lower number.",
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "RANKER_METRICS.csv",
+          "CANDIDATE_RECALL.csv",
+          "ADAPTIVE_SELECTION.csv",
+          "RANDOM_CANDIDATE_BANKS.csv",
+          "BLOCK_STABILITY.csv",
+          "STRICT_GATE.json",
+          "VERIFICATION.json",
+          "REPORT.md"
+        ],
+        "expected_record_counts": {},
+        "novelty_signature": "fixed rr allocator; six frozen tail24 ranking signals; prior-only 150-target recall@30 selection locked for 50-target blocks; exact hypergeometric candidate recall null and matched random candidate-bank comparator.",
+        "study_class": "empirical",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "IMPLEMENTATION_PENDING",
+        "execution_entrypoint": "automation/h1250_ab_research.py",
+        "workflow_entrypoint": ".github/workflows/h1250-ab-research.yml",
+        "preregistration": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10.json"
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
