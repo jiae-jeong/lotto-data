@@ -92,8 +92,10 @@ jobs:
           manifest_path = out / 'SHA256_MANIFEST.csv'
           with manifest_path.open(encoding='utf-8-sig', newline='') as stream:
               manifest = list(csv.DictReader(stream))
-          assert len(manifest) == 11
-          assert 'VERIFICATION.json' in {row['path'] for row in manifest}
+          assert len(manifest) == 13
+          assert {'VERIFICATION.json', 'WINNER_TRACE_A.csv', 'WINNER_TRACE_B.csv'} <= {row['path'] for row in manifest}
+          assert verification['record_counts']['WINNER_TRACE_A.csv'] == 20376
+          assert verification['record_counts']['WINNER_TRACE_B.csv'] == 30564
           for row in manifest:
               path = out / row['path']
               assert path.is_file()
