@@ -74,8 +74,11 @@ def build_freeze(root: Path, date_kst: str):
         raise ValueError("strict status target/cutoff does not match current source data")
     if status.get("data_sha256") != data_sha:
         raise ValueError("strict status data hash does not match lotto_data.csv")
+    status_models = status.get("validated_models")
+    if status.get("strict_model_validation_pass") is not True or not isinstance(status_models, list) or not status_models:
+        raise ValueError("strict status does not confirm at least one model passed strict validation")
     if status.get("strict_pass_ready") is not True or status.get("strict_portfolio_pass") is not True:
-        raise ValueError("strict status does not confirm a portfolio PASS")
+        raise ValueError("strict status does not confirm both model and portfolio PASS")
     if status.get("ready_file_exists") is not True or status.get("failed_gates") != []:
         raise ValueError("strict status is missing a current ready file or has failed gates")
     if not status.get("ready_file"):
@@ -91,6 +94,11 @@ def build_freeze(root: Path, date_kst: str):
         raise ValueError("ready artifact target/date mismatch")
     if ready.get("data_cutoff") != cutoff or ready.get("data_sha256") != data_sha:
         raise ValueError("ready artifact data cutoff/hash mismatch")
+    ready_models = ready.get("validated_models")
+    if not isinstance(ready_models, list) or not ready_models or set(ready_models) != set(status_models):
+        raise ValueError("ready artifact does not attest to the same non-empty strict-passing model set")
+    if ready.get("model_verdict") != status.get("model_verdict"):
+        raise ValueError("ready artifact model verdict differs from current strict status")
     if ready.get("strict_portfolio_pass") is not True or ready.get("failed_gates") != []:
         raise ValueError("ready artifact does not contain a clean strict portfolio PASS")
     if ready.get("strict_gate_version") != STRICT_GATE_VERSION:
@@ -115,6 +123,11 @@ def build_freeze(root: Path, date_kst: str):
         raise ValueError("five-role research report is missing or its hash changed")
 
     model = load_json(model_report)
+    model_models = model.get("validated_models")
+    if not isinstance(model_models, list) or not model_models or set(model_models) != set(status_models):
+        raise ValueError("model-validation report does not confirm the same non-empty strict-passing model set")
+    if model.get("verdict") != status.get("model_verdict"):
+        raise ValueError("model-validation report verdict differs from current strict status")
     if model.get("data_cutoff") != cutoff or model.get("data_sha256") != data_sha:
         raise ValueError("model-validation report cutoff/hash mismatch")
     if model.get("target_range") != [201, cutoff]:
