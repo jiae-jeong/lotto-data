@@ -131,7 +131,7 @@ jobs:
               'output_directory': str(out.relative_to(root)),
               'H1250_A_strict_pass': a_pass,
               'H1250_B_strict_pass': b_pass,
-              'H1250_B_selector_degenerate': True,
+              'H1250_B_selector_degenerate': verification['H1250_B_adaptive_selector_degenerate'],
           }))
           PY
       - name: Preserve run evidence
