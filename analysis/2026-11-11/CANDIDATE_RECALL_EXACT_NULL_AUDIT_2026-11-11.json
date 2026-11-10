@@ -60,7 +60,11 @@
           "mean_hits": 1.3641563393708294,
           "expected_hits": 1.3333333333333333,
           "delta_recall_pp": 0.5137167672916017,
-          "p_approx": 0.14887720525728487
+          "p_approx": 0.14887720525728487,
+          "ci95_pp_unadjusted_normal": [
+            -0.45326920891607336,
+            1.4807027434992768
+          ]
         },
         "capture_3plus_best": {
           "signal": "momentum",
@@ -84,7 +88,11 @@
           "mean_hits": 2.0305052430886557,
           "expected_hits": 2,
           "delta_recall_pp": 0.5084207181442608,
-          "p_approx": 0.18171759176392036
+          "p_approx": 0.18171759176392036,
+          "ci95_pp_unadjusted_normal": [
+            -0.5880383165696803,
+            1.604879752858202
+          ]
         },
         "capture_3plus_best": {
           "signal": "consensus",
@@ -108,7 +116,11 @@
           "mean_hits": 2.6854146806482366,
           "expected_hits": 2.6666666666666665,
           "delta_recall_pp": 0.31246689969283514,
-          "p_approx": 0.2980927185446191
+          "p_approx": 0.2980927185446191,
+          "ci95_pp_unadjusted_normal": [
+            -0.8433024038957254,
+            1.4682362032813958
+          ]
         },
         "capture_3plus_best": {
           "signal": "recent30",
@@ -132,7 +144,11 @@
           "mean_hits": 3.3431839847473785,
           "expected_hits": 3.3333333333333335,
           "delta_recall_pp": 0.16417752356741772,
-          "p_approx": 0.3903454457616919
+          "p_approx": 0.3903454457616919,
+          "ci95_pp_unadjusted_normal": [
+            -0.9915917800211429,
+            1.3199468271559782
+          ]
         },
         "capture_3plus_best": {
           "signal": "recent30",
@@ -156,7 +172,11 @@
           "mean_hits": 4.022878932316492,
           "expected_hits": 4,
           "delta_recall_pp": 0.38131553860819933,
-          "p_approx": 0.24773671699726496
+          "p_approx": 0.24773671699726496,
+          "ci95_pp_unadjusted_normal": [
+            -0.7151434961057418,
+            1.4777745733221406
+          ]
         },
         "capture_3plus_best": {
           "signal": "contrarian",
@@ -202,7 +222,11 @@
         "observed_4plus_count": 11,
         "expected_4plus_count": 17.255246738514018,
         "delta_4plus_percentage_points": -0.596305694805912,
-        "p_4plus_one_sided_exact_binomial": 0.957679116090023
+        "p_4plus_one_sided_exact_binomial": 0.957679116090023,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.7710321577562382,
+          1.1629397946591118
+        ]
       },
       {
         "signal": "recent30",
@@ -221,7 +245,11 @@
         "observed_4plus_count": 92,
         "expected_4plus_count": 88.71937468846062,
         "delta_4plus_percentage_points": 0.31273835191033134,
-        "p_4plus_one_sided_exact_binomial": 0.37357688872979233
+        "p_4plus_one_sided_exact_binomial": 0.37357688872979233,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.7786960858737725,
+          1.4142219835541097
+        ]
       },
       {
         "signal": "recent30",
@@ -240,7 +268,11 @@
         "observed_4plus_count": 243,
         "expected_4plus_count": 242.10664378162573,
         "delta_4plus_percentage_points": 0.08516265189459082,
-        "p_4plus_one_sided_exact_binomial": 0.48588232842954765
+        "p_4plus_one_sided_exact_binomial": 0.48588232842954765,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.8433024038957254,
+          1.4682362032813958
+        ]
       },
       {
         "signal": "recent30",
@@ -259,7 +291,11 @@
         "observed_4plus_count": 462,
         "expected_4plus_count": 469.2067093428348,
         "delta_4plus_percentage_points": -0.6870075636639494,
-        "p_4plus_one_sided_exact_binomial": 0.6835647464741605
+        "p_4plus_one_sided_exact_binomial": 0.6835647464741605,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.4682362032813958,
+          0.8433024038957254
+        ]
       },
       {
         "signal": "recent30",
@@ -278,7 +314,11 @@
         "observed_4plus_count": 737,
         "expected_4plus_count": 722.3673748259554,
         "delta_4plus_percentage_points": 1.3949118373731806,
-        "p_4plus_one_sided_exact_binomial": 0.17313007458054566
+        "p_4plus_one_sided_exact_binomial": 0.17313007458054566,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.7151434961057418,
+          1.4777745733221406
+        ]
       },
       {
         "signal": "gap",
@@ -297,7 +337,11 @@
         "observed_4plus_count": 11,
         "expected_4plus_count": 17.255246738514018,
         "delta_4plus_percentage_points": -0.596305694805912,
-        "p_4plus_one_sided_exact_binomial": 0.957679116090023
+        "p_4plus_one_sided_exact_binomial": 0.957679116090023,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.8504728949662803,
+          1.0834990574490697
+        ]
       },
       {
         "signal": "gap",
@@ -316,7 +360,11 @@
         "observed_4plus_count": 82,
         "expected_4plus_count": 88.71937468846062,
         "delta_4plus_percentage_points": -0.6405504946101634,
-        "p_4plus_one_sided_exact_binomial": 0.7868837148487446
+        "p_4plus_one_sided_exact_binomial": 0.7868837148487446,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.1600116244819756,
+          1.0329064449459067
+        ]
       },
       {
         "signal": "gap",
@@ -335,7 +383,11 @@
         "observed_4plus_count": 239,
         "expected_4plus_count": 242.10664378162573,
         "delta_4plus_percentage_points": -0.2961528867136076,
-        "p_4plus_one_sided_exact_binomial": 0.6018504841620458
+        "p_4plus_one_sided_exact_binomial": 0.6018504841620458,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.3199468271559782,
+          0.9915917800211429
+        ]
       },
       {
         "signal": "gap",
@@ -354,7 +406,11 @@
         "observed_4plus_count": 478,
         "expected_4plus_count": 469.2067093428348,
         "delta_4plus_percentage_points": 0.8382545907688443,
-        "p_4plus_one_sided_exact_binomial": 0.3030115535790482
+        "p_4plus_one_sided_exact_binomial": 0.3030115535790482,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.0869206646731964,
+          1.2246179425039248
+        ]
       },
       {
         "signal": "gap",
@@ -373,7 +429,11 @@
         "observed_4plus_count": 705,
         "expected_4plus_count": 722.3673748259554,
         "delta_4plus_percentage_points": -1.655612471492407,
-        "p_4plus_one_sided_exact_binomial": 0.8829147534540568
+        "p_4plus_one_sided_exact_binomial": 0.8829147534540568,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.6207679003002171,
+          0.5721501691276651
+        ]
       },
       {
         "signal": "momentum",
@@ -392,7 +452,11 @@
         "observed_4plus_count": 21,
         "expected_4plus_count": 17.255246738514018,
         "delta_4plus_percentage_points": 0.3569831517145839,
-        "p_4plus_one_sided_exact_binomial": 0.21091283654102763
+        "p_4plus_one_sided_exact_binomial": 0.21091283654102763,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.8504728949662803,
+          1.0834990574490697
+        ]
       },
       {
         "signal": "momentum",
@@ -411,7 +475,11 @@
         "observed_4plus_count": 83,
         "expected_4plus_count": 88.71937468846062,
         "delta_4plus_percentage_points": -0.5452216099581144,
-        "p_4plus_one_sided_exact_binomial": 0.7523980304510103
+        "p_4plus_one_sided_exact_binomial": 0.7523980304510103,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.4936627207641482,
+          0.6992553486637341
+        ]
       },
       {
         "signal": "momentum",
@@ -430,7 +498,11 @@
         "observed_4plus_count": 247,
         "expected_4plus_count": 242.10664378162573,
         "delta_4plus_percentage_points": 0.46647819050278927,
-        "p_4plus_one_sided_exact_binomial": 0.37153019813064947
+        "p_4plus_one_sided_exact_binomial": 0.37153019813064947,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.9704075834317942,
+          1.341131023745327
+        ]
       },
       {
         "signal": "momentum",
@@ -449,7 +521,11 @@
         "observed_4plus_count": 476,
         "expected_4plus_count": 469.2067093428348,
         "delta_4plus_percentage_points": 0.6475968214647465,
-        "p_4plus_one_sided_exact_binomial": 0.3476431424988162
+        "p_4plus_one_sided_exact_binomial": 0.3476431424988162,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.1345851069992194,
+          1.1769535001779017
+        ]
       },
       {
         "signal": "momentum",
@@ -468,7 +544,11 @@
         "observed_4plus_count": 711,
         "expected_4plus_count": 722.3673748259554,
         "delta_4plus_percentage_points": -1.083639163580108,
-        "p_4plus_one_sided_exact_binomial": 0.7860643554865947
+        "p_4plus_one_sided_exact_binomial": 0.7860643554865947,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.6207679003002171,
+          0.5721501691276651
+        ]
       },
       {
         "signal": "balanced",
@@ -487,7 +567,11 @@
         "observed_4plus_count": 26,
         "expected_4plus_count": 17.255246738514018,
         "delta_4plus_percentage_points": 0.8336275749748316,
-        "p_4plus_one_sided_exact_binomial": 0.028315478090447436
+        "p_4plus_one_sided_exact_binomial": 0.028315478090447436,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.45326920891607336,
+          1.4807027434992768
+        ]
       },
       {
         "signal": "balanced",
@@ -506,7 +590,11 @@
         "observed_4plus_count": 96,
         "expected_4plus_count": 88.71937468846062,
         "delta_4plus_percentage_points": 0.6940538905185298,
-        "p_4plus_one_sided_exact_binomial": 0.22388700380320775
+        "p_4plus_one_sided_exact_binomial": 0.22388700380320775,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.7469197909897571,
+          1.4459982784381251
+        ]
       },
       {
         "signal": "balanced",
@@ -525,7 +613,11 @@
         "observed_4plus_count": 244,
         "expected_4plus_count": 242.10664378162573,
         "delta_4plus_percentage_points": 0.18049153654663974,
-        "p_4plus_one_sided_exact_binomial": 0.45675919971099105
+        "p_4plus_one_sided_exact_binomial": 0.45675919971099105,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.161065352735894,
+          1.150473254441227
+        ]
       },
       {
         "signal": "balanced",
@@ -544,7 +636,11 @@
         "observed_4plus_count": 472,
         "expected_4plus_count": 469.2067093428348,
         "delta_4plus_percentage_points": 0.26628128285655084,
-        "p_4plus_one_sided_exact_binomial": 0.44296183249358395
+        "p_4plus_one_sided_exact_binomial": 0.44296183249358395,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.2458021390932732,
+          1.065736468083848
+        ]
       },
       {
         "signal": "balanced",
@@ -563,7 +659,11 @@
         "observed_4plus_count": 723,
         "expected_4plus_count": 722.3673748259554,
         "delta_4plus_percentage_points": 0.06030745224447909,
-        "p_4plus_one_sided_exact_binomial": 0.49814567307680396
+        "p_4plus_one_sided_exact_binomial": 0.49814567307680396,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.5889916054161943,
+          0.6039264640116879
+        ]
       },
       {
         "signal": "contrarian",
@@ -582,7 +682,11 @@
         "observed_4plus_count": 16,
         "expected_4plus_count": 17.255246738514018,
         "delta_4plus_percentage_points": -0.11966127154566415,
-        "p_4plus_one_sided_exact_binomial": 0.652965253135608
+        "p_4plus_one_sided_exact_binomial": 0.652965253135608,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.088795106596403,
+          0.8451768458189469
+        ]
       },
       {
         "signal": "contrarian",
@@ -601,7 +705,11 @@
         "observed_4plus_count": 88,
         "expected_4plus_count": 88.71937468846062,
         "delta_4plus_percentage_points": -0.06857718669786711,
-        "p_4plus_one_sided_exact_binomial": 0.5478209367059783
+        "p_4plus_one_sided_exact_binomial": 0.5478209367059783,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.2076760668079987,
+          0.9852420026198836
+        ]
       },
       {
         "signal": "contrarian",
@@ -620,7 +728,11 @@
         "observed_4plus_count": 233,
         "expected_4plus_count": 242.10664378162573,
         "delta_4plus_percentage_points": -0.8681261946259039,
-        "p_4plus_one_sided_exact_binomial": 0.758229279898704
+        "p_4plus_one_sided_exact_binomial": 0.758229279898704,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.8124793978582314,
+          0.4990592093188897
+        ]
       },
       {
         "signal": "contrarian",
@@ -639,7 +751,11 @@
         "observed_4plus_count": 442,
         "expected_4plus_count": 469.2067093428348,
         "delta_4plus_percentage_points": -2.593585256704939,
-        "p_4plus_one_sided_exact_binomial": 0.9575485534347803
+        "p_4plus_one_sided_exact_binomial": 0.9575485534347803,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -2.3897487549178713,
+          -0.07821014774075041
+        ]
       },
       {
         "signal": "contrarian",
@@ -658,7 +774,11 @@
         "observed_4plus_count": 728,
         "expected_4plus_count": 722.3673748259554,
         "delta_4plus_percentage_points": 0.536951875504732,
-        "p_4plus_one_sided_exact_binomial": 0.3674938081539331
+        "p_4plus_one_sided_exact_binomial": 0.3674938081539331,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.1600116244819718,
+          1.0329064449459104
+        ]
       },
       {
         "signal": "consensus",
@@ -677,7 +797,11 @@
         "observed_4plus_count": 14,
         "expected_4plus_count": 17.255246738514018,
         "delta_4plus_percentage_points": -0.3103190408497632,
-        "p_4plus_one_sided_exact_binomial": 0.8176147336737647
+        "p_4plus_one_sided_exact_binomial": 0.8176147336737647,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -1.2159002861324684,
+          0.7180716662828817
+        ]
       },
       {
         "signal": "consensus",
@@ -696,7 +820,11 @@
         "observed_4plus_count": 88,
         "expected_4plus_count": 88.71937468846062,
         "delta_4plus_percentage_points": -0.06857718669786711,
-        "p_4plus_one_sided_exact_binomial": 0.5478209367059783
+        "p_4plus_one_sided_exact_binomial": 0.5478209367059783,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.5880383165696803,
+          1.604879752858202
+        ]
       },
       {
         "signal": "consensus",
@@ -715,7 +843,11 @@
         "observed_4plus_count": 255,
         "expected_4plus_count": 242.10664378162573,
         "delta_4plus_percentage_points": 1.2291092677191862,
-        "p_4plus_one_sided_exact_binomial": 0.1815828808158614
+        "p_4plus_one_sided_exact_binomial": 0.1815828808158614,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.8750786987797482,
+          1.436459908397373
+        ]
       },
       {
         "signal": "consensus",
@@ -734,7 +866,11 @@
         "observed_4plus_count": 481,
         "expected_4plus_count": 469.2067093428348,
         "delta_4plus_percentage_points": 1.1242412447249939,
-        "p_4plus_one_sided_exact_binomial": 0.2414007991111683
+        "p_4plus_one_sided_exact_binomial": 0.2414007991111683,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.9915917800211429,
+          1.3199468271559782
+        ]
       },
       {
         "signal": "consensus",
@@ -753,7 +889,11 @@
         "observed_4plus_count": 730,
         "expected_4plus_count": 722.3673748259554,
         "delta_4plus_percentage_points": 0.7276096448088243,
-        "p_4plus_one_sided_exact_binomial": 0.3183542528454167
+        "p_4plus_one_sided_exact_binomial": 0.3183542528454167,
+        "mean_recall_delta_95_ci_pp_unadjusted_normal": [
+          -0.9058012654098488,
+          1.2871168040180334
+        ]
       }
     ]
   },
