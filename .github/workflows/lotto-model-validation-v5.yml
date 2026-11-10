@@ -31,7 +31,23 @@ jobs:
         run: |
           set -euo pipefail
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
-          python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" | tee "$RUNNER_TEMP/model-validation-v5.log"
+          RUN_DIR="$(python - "$RUN_DATE" <<'PY'
+          from pathlib import Path
+          import sys
+          day = Path("analysis") / sys.argv[1]
+          dirs = list(day.glob("MASTER_FULL_V5_*"))
+          if not dirs:
+              raise SystemExit(f"No V5 MASTER run directory under {day}")
+          def kst_order(path):
+              # Run-folder HHMMSS is runner UTC; the containing folder is KST date.
+              stamp = path.name.split("_")[3]
+              seconds = int(stamp[:2]) * 3600 + int(stamp[2:4]) * 60 + int(stamp[4:6])
+              return (seconds + (86400 if seconds < 15 * 3600 else 0), path.name)
+          print(max(dirs, key=kst_order).as_posix())
+          PY
+          )"
+          test -n "$RUN_DIR"
+          python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" "analysis/$RUN_DATE/MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json" "$RUN_DIR" | tee "$RUNNER_TEMP/model-validation-v5.log"
       - name: Verify strict report
         shell: bash
         run: |
