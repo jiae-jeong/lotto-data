@@ -1,0 +1,213 @@
+{
+  "generated_kst": "2026-11-11T06:30:43.559805+09:00",
+  "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present; otherwise a pre-draw FINAL is included only when no conflicting preserved purchase-design source exists. Unresolved conflicts are excluded from the single canonical aggregate.",
+  "data_cutoff": 1249,
+  "completed_preserved_targets_found": 3,
+  "verified_round_count": 2,
+  "verified_purchase_lines": 10,
+  "aggregate_hit_distribution": {
+    "0": 0,
+    "1": 6,
+    "2": 3,
+    "3": 1,
+    "4": 0,
+    "5": 0,
+    "6": 0
+  },
+  "mean_main_hits_per_line": 1.5,
+  "rate_ge2": 0.4,
+  "rate_ge3": 0.1,
+  "rate_ge4": 0.0,
+  "closed_loop_complete": false,
+  "closed_loop_status": "PARTIAL_UNRESOLVED_SOURCE_CONFLICTS",
+  "whole_history_complete": false,
+  "whole_history_note": "Legacy/older recommendation formats outside the discovered weekly_purchase artifacts are not proven complete and must not be described as the full historical closed loop.",
+  "actual_purchase_precedence": true,
+  "invalid_or_unreviewable_preserved_records": [],
+  "unresolved_source_conflicts": [
+    {
+      "target_round": 1246,
+      "status": "EXCLUDED_UNRESOLVED",
+      "reason": "Distinct pre-draw five-line sources are preserved for this target, and no receipt evidence establishes which set was delivered or purchased.",
+      "sources": [
+        {
+          "path": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+          "role": "FINAL_PREDRAW",
+          "line_set": [
+            [
+              13,
+              15,
+              18,
+              28,
+              31,
+              32
+            ],
+            [
+              3,
+              8,
+              17,
+              27,
+              30,
+              45
+            ],
+            [
+              5,
+              13,
+              18,
+              23,
+              34,
+              38
+            ],
+            [
+              13,
+              14,
+              15,
+              17,
+              22,
+              45
+            ],
+            [
+              5,
+              17,
+              21,
+              27,
+              35,
+              40
+            ]
+          ]
+        },
+        {
+          "path": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+          "role": "FIRST_PRIZE_PRE_DRAW_PURCHASE_DESIGN",
+          "line_set": [
+            [
+              5,
+              8,
+              19,
+              24,
+              29,
+              36
+            ],
+            [
+              2,
+              13,
+              18,
+              32,
+              34,
+              38
+            ],
+            [
+              6,
+              12,
+              15,
+              21,
+              22,
+              29
+            ],
+            [
+              1,
+              5,
+              7,
+              9,
+              12,
+              19
+            ],
+            [
+              1,
+              13,
+              18,
+              26,
+              34,
+              38
+            ]
+          ]
+        }
+      ],
+      "receipt_evidence": "NOT_FOUND",
+      "aggregate_action": "EXCLUDED_FROM_SINGLE_CANONICAL_AGGREGATE"
+    }
+  ],
+  "excluded_conflict_rounds": [
+    1246
+  ],
+  "reviews": [
+    {
+      "target_round": 1247,
+      "source": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+      "source_role": "ACTUAL_PURCHASE",
+      "training_cutoff": 1246,
+      "winning_numbers": [
+        8,
+        14,
+        21,
+        22,
+        42,
+        45
+      ],
+      "bonus": 24,
+      "line_hits": [
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "max_hits": 2,
+      "winning_union_coverage": 3,
+      "ticket_union_size": 16,
+      "candidate_recall_failure": true,
+      "ticket_construction_gap": 1,
+      "alternative_preserved_versions": 4,
+      "all_preserved_sources": [
+        "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023.json",
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_PROTOCOL_FULL_V3.json",
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V6.json",
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V7.json"
+      ]
+    },
+    {
+      "target_round": 1248,
+      "source": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+      "source_role": "ACTUAL_PURCHASE",
+      "training_cutoff": 1247,
+      "winning_numbers": [
+        16,
+        18,
+        27,
+        36,
+        38,
+        42
+      ],
+      "bonus": 22,
+      "line_hits": [
+        3,
+        1,
+        2,
+        1,
+        1
+      ],
+      "max_hits": 3,
+      "winning_union_coverage": 5,
+      "ticket_union_size": 18,
+      "candidate_recall_failure": true,
+      "ticket_construction_gap": 2,
+      "alternative_preserved_versions": 1,
+      "all_preserved_sources": [
+        "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+        "research/weekly_purchase/1248/FINAL_FIVE_LINES_1248_20261030_V54_STRICT_PASS.json"
+      ]
+    }
+  ],
+  "error_note": {
+    "latest_completed_review": 1248,
+    "candidate_recall_failure": true,
+    "ticket_construction_gap": 2,
+    "finding": "Both candidate recall and ticket construction need separate diagnosis.",
+    "action_for_next_policy": "Evaluate candidate recall separately from allocator performance; never learn from a later artifact in place of the actual delivered/purchased lines.",
+    "unresolved_source_conflict_rounds": [
+      1246
+    ],
+    "provenance_action": "Keep conflicted rounds out of the canonical aggregate until receipt evidence or an authoritative source resolution is available."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "STRICT_PASS_NOT_READY",
+  "target_round": 1250,
+  "date_kst": "2026-11-11",
+  "data_cutoff": 1249,
+  "data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "strict_model_validation_pass": false,
+  "validated_models": [],
+  "model_verdict": "NO_MODEL_PASSES_STRICT_VALIDATION",
+  "strict_portfolio_pass": false,
+  "strict_gate_version": "V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY",
+  "strict_pass_ready": false,
+  "ready_file": null,
+  "ready_file_exists": false,
+  "stale_ready_files": [],
+  "failed_gates": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_block_stability"
+  ],
+  "no_future_leakage": true,
+  "final_selection_randomness": false,
+  "random_fallback_allowed": false
+}
