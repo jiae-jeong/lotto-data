@@ -2,7 +2,7 @@
 
 ## 1. Research question
 
-Across the six frozen candidate-ranking signals and five candidate cut sizes, is the observed candidate-stage recall meaningfully above the exact uniform 6/45 null? This audit is separate from five-line allocation and does not promote a model.
+Across the six candidate-ranking signals in the current scorecard and five candidate cut sizes, is the observed candidate-stage recall meaningfully above the exact uniform 6/45 null? This audit is separate from five-line allocation and does not promote a model.
 
 ## 2. Data and provenance
 
