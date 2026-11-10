@@ -1107,15 +1107,18 @@
       {
         "name": "Yonhap News Agency",
         "url": "https://www.yna.co.kr/view/AKR20261107051500002",
-        "published": "2026-11-07T20:40:00+09:00"
+        "published": "2026-11-07T20:40:00+09:00",
+        "opened_in_this_run": true
       },
       {
         "name": "Newsis",
         "url": "https://files.newsis.com/view/NISX20261107_0003859041",
-        "published": "2026-11-07T21:09:41+09:00"
+        "published": "2026-11-07T21:09:41+09:00",
+        "opened_in_this_run": true
       }
     ],
+    "independent_sources_agree": true,
     "official_api_directly_retrieved": false,
-    "note": "Cross-check reused from 2026-11-10; no fresh external fetch claimed in this run."
+    "note": "Both independently published reports were freshly opened in this run and agree with the 1249 data row; the official API endpoint itself was not directly retrieved."
   }
 }
