@@ -989,7 +989,9 @@
     "workflow_hash_audited": "5bfac63506b9fc2d3f68350eafaa8676fa6a64d3",
     "h1250_v2_dispatch_run_found_as_of_audit": false,
     "workflow_mode": "workflow_dispatch_only; do not add or change schedules",
-    "execution_status": "NOT_EXECUTED_IN_THIS_RUN; no H1250 v2 Actions run found; this connection exposes GET/read and rerun tools but no workflow_dispatch action"
+    "execution_status": "NOT_EXECUTED_IN_THIS_RUN; no H1250 v2 dispatch run found in the Actions run list at 08:13 KST; available GitHub actions expose read/rerun operations but no workflow_dispatch action",
+    "h1250_v2_dispatch_run_found_at_run_check": false,
+    "actions_run_list_checked_at_kst": "2026-11-11T08:13:57+09:00"
   },
   "strict_gate": {
     "status": "STRICT_PASS_NOT_READY",
