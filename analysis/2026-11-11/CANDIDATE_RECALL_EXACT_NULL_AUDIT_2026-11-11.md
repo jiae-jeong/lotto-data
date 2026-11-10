@@ -30,7 +30,7 @@ For a fixed K-number candidate set and a fair 6/45 draw, the number of winning m
 The following are the *best descriptive signal per K after looking at the same 1,049 targets*; they are not eligible for champion selection.
 
 | K | Best mean-recall signal | Mean hits vs exact null | Recall delta | Unadjusted 95% CI for recall delta | One-sided p (normal approx) | Best 3+ signal | 3+ delta | Exact p |
-|---:|---|---:|---:|---:|---|---:|---:|
+|---:|---|---:|---:|---:|---:|---|---:|---:|
 | 10 | balanced | 1.3642 vs 1.3333 | 0.514 pp | [−0.453, +1.481] pp | 0.149 | momentum | 1.201 pp | 0.120 |
 | 15 | consensus | 2.0305 vs 2.0000 | 0.508 pp | [−0.588, +1.605] pp | 0.182 | consensus | 2.800 pp | 0.028 |
 | 20 | recent30 | 2.6854 vs 2.6667 | 0.312 pp | [−0.843, +1.468] pp | 0.298 | recent30 | 1.450 pp | 0.181 |
@@ -71,7 +71,7 @@ The 849-target V9 five-role policy is not a strict pass. Against its geometry-pr
 - any3 delta: **−0.00872**; adjusted CI [−0.03581, +0.02106].
 - winning-union-coverage delta: **−0.04381**; adjusted CI [−0.11507, +0.03282].
 - any4 delta is +0.00279, but it is supplementary and does not rescue the failed primary gates.
-- Positive 50-target block shares: max-hit 0.294, any2 0.471, any3 0.412, union coverage 0.412; each is below the required 0.65 where applicable.
+- Positive 50-target block shares: max-hit 0.294, any2 0.471, any3 0.412, union coverage 0.412; the any2 share is below the strict 0.65 threshold.
 
 ### Prior V54/V83/V84/V85/V86 failure audit
 
