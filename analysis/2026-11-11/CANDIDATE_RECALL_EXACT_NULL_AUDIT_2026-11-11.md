@@ -29,13 +29,13 @@ For a fixed K-number candidate set and a fair 6/45 draw, the number of winning m
 
 The following are the *best descriptive signal per K after looking at the same 1,049 targets*; they are not eligible for champion selection.
 
-| K | Best mean-recall signal | Mean hits vs exact null | Recall delta | One-sided p (normal approx) | Best 3+ signal | 3+ delta | Exact p |
+| K | Best mean-recall signal | Mean hits vs exact null | Recall delta | Unadjusted 95% CI for recall delta | One-sided p (normal approx) | Best 3+ signal | 3+ delta | Exact p |
 |---:|---|---:|---:|---:|---|---:|---:|
-| 10 | balanced | 1.3642 vs 1.3333 | 0.514 pp | 0.149 | momentum | 1.201 pp | 0.120 |
-| 15 | consensus | 2.0305 vs 2.0000 | 0.508 pp | 0.182 | consensus | 2.800 pp | 0.028 |
-| 20 | recent30 | 2.6854 vs 2.6667 | 0.312 pp | 0.298 | recent30 | 1.450 pp | 0.181 |
-| 25 | consensus | 3.3432 vs 3.3333 | 0.164 pp | 0.390 | recent30 | -0.276 pp | 0.601 |
-| 30 | recent30 | 4.0229 vs 4.0000 | 0.381 pp | 0.248 | contrarian | 0.069 pp | 0.496 |
+| 10 | balanced | 1.3642 vs 1.3333 | 0.514 pp | [−0.453, +1.481] pp | 0.149 | momentum | 1.201 pp | 0.120 |
+| 15 | consensus | 2.0305 vs 2.0000 | 0.508 pp | [−0.588, +1.605] pp | 0.182 | consensus | 2.800 pp | 0.028 |
+| 20 | recent30 | 2.6854 vs 2.6667 | 0.312 pp | [−0.843, +1.468] pp | 0.298 | recent30 | 1.450 pp | 0.181 |
+| 25 | consensus | 3.3432 vs 3.3333 | 0.164 pp | [−0.992, +1.320] pp | 0.390 | recent30 | −0.276 pp | 0.601 |
+| 30 | recent30 | 4.0229 vs 4.0000 | 0.381 pp | [−0.715, +1.478] pp | 0.248 | contrarian | 0.069 pp | 0.496 |
 
 Across all 30 signal/K pairs:
 - No mean-recall, 3+, or 4+ comparison survives the 90-test Bonferroni family.
