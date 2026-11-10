@@ -46,22 +46,26 @@ jobs:
           assert len(rows)==1245 and [int(r['round']) for r in rows]==list(range(1,1246))
           actual=hashlib.sha256((root/'analysis/2026-10-12/lotto_data_1_1245_snapshot.csv').read_bytes().replace(b'\r\n',b'\n')).hexdigest()
           assert actual=='e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4', actual
-          ids=[t['id'] for t in json.loads((root/'automation/research_queue_v2.json').read_text(encoding='utf-8'))['tasks']]
-          assert ids[-7:]==[
+          tasks=json.loads((root/'automation/research_queue_v2.json').read_text(encoding='utf-8'))['tasks']
+          ids=[t['id'] for t in tasks]
+          expected=[
               'E036_NULL_GATE_CALIBRATION_v2','E037_PREDICTABILITY_FALSIFICATION_v1',
               'E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3','E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2',
               'E040_SINGLE_EDGE_PROMOTION_GATE_v2','E041_FIVE_LINE_PORTFOLIO_REBUILD_v2',
               'E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1']
-          for old in ('E030_PROSPECTIVE_SIGNAL_FREEZE_v1','E035_FIVE_LINE_REBUILD_GATE_v1'):
-              assert ids.count(old)==1
+          assert all(ids.count(task_id)==1 for task_id in expected)
+          selected=[task for task in tasks if task['id'] in set(expected)]
+          assert [task['id'] for task in selected]==expected
+          for prior in ('E030_PROSPECTIVE_SIGNAL_FREEZE_v1','E035_FIVE_LINE_REBUILD_GATE_v1'):
+              assert ids.count(prior)==1, prior
           import sys
           sys.path.insert(0,str(root/'automation'))
           import daily_research_v2 as daily
-          for task in json.loads((root/'automation/research_queue_v2.json').read_text(encoding='utf-8'))['tasks'][-7:]:
+          for task in selected:
               daily._validate_task(task)
               assert task['spec'].get('execution_mode')=='dedicated_workflow'
           prereg=json.loads((root/'automation/e036_e042_preregistration.json').read_text(encoding='utf-8'))
-          assert [x['id'] for x in prereg['studies']]==ids[-7:]
+          assert [x['id'] for x in prereg['studies']]==expected
           print('E036-E042 preregistration queue, dispatch, and canonical data checks PASS')
           PY
 
