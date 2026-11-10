@@ -5,7 +5,7 @@
   "study_id": "H1250_AB_PREREGISTRATION_2026-11-10",
   "preregistration_path": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
   "original_preregistered_workflow_blob_sha": "06a06bfe6ff6875bd4fe2b10dcde3fb746f5b281",
-  "current_workflow_blob_sha": "16d567f412a019a1b55f45343ee26ad96c07fa15",
+  "current_workflow_blob_sha": "5bfac63506b9fc2d3f68350eafaa8676fa6a64d3",
   "workflow_change_commit": "48946fc6ce917af544f95ea9b433c6a6ae7aa4b4",
   "exact_change": {
     "path": ".github/workflows/h1250-ab-research-v2.yml",
@@ -41,9 +41,18 @@
     "frozen_dependency_count": 6,
     "frozen_dependency_blob_hashes_match": true
   },
-  "workflow_hash_status": "DOCUMENTED_NONFUNCTIONAL_POST_REGISTRATION_DELTA",
+  "workflow_hash_status": "CURRENT_WORKFLOW_HASH_MATCHES_APPEND_ONLY_AUDIT; ORIGINAL_PREREGISTERED_HASH_RETAINED_AS_BASELINE",
   "original_preregistration_preserved_unchanged": true,
   "h1250_v2_dispatch_run_found_as_of_audit": false,
   "latest_actions_run_created_at_utc": "2026-11-10T08:53:34Z",
-  "note": "The original preregistered workflow hash remains preserved as the baseline. The current workflow differs only by the exact one-line reporting correction above. This append-only audit does not amend the study design or strict gate. No H1250-A/B execution result is recorded in GitHub Actions as of this audit."
+  "note": "The original preregistered workflow hash remains preserved as the baseline. The current workflow differs only by the exact one-line reporting correction above. This append-only audit does not amend the study design or strict gate. No H1250-A/B execution result is recorded in GitHub Actions as of this audit.",
+  "workflow_integrity_gate": {
+    "enforced_in_workflow": true,
+    "check_step": "Verify workflow blob against append-only audit",
+    "workflow_change_commit": "d85395b17264584dba876be1d8bbb6e889cdc1fe",
+    "check": "git rev-parse HEAD:.github/workflows/h1250-ab-research-v2.yml must equal current_workflow_blob_sha in this audit file",
+    "failure_mode": "fail closed before preregistered runner compilation or execution",
+    "study_design_impact": "NONE",
+    "trigger_or_schedule_change": false
+  }
 }
