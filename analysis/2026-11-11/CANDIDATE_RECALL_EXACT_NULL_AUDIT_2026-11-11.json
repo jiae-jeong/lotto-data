@@ -1003,5 +1003,119 @@
     "strict_pass_ready": false,
     "validated_models": [],
     "verdict": "NO_MODEL_PASSES_STRICT_VALIDATION"
+  },
+  "latest_target_trace": {
+    "target_round": 1249,
+    "classification": "RETROSPECTIVE_LIVE_HISTORY_DIAGNOSTIC_NOT_HOLDOUT",
+    "per_signal": [
+      {
+        "signal": "recent30",
+        "top30_retained": 5,
+        "top30_missed_ranks": [
+          42
+        ],
+        "recall_at_k": {
+          "10": 0.5,
+          "15": 0.5,
+          "20": 0.6666666666666666,
+          "25": 0.8333333333333334,
+          "30": 0.8333333333333334
+        }
+      },
+      {
+        "signal": "gap",
+        "top30_retained": 5,
+        "top30_missed_ranks": [
+          40
+        ],
+        "recall_at_k": {
+          "10": 0.16666666666666666,
+          "15": 0.3333333333333333,
+          "20": 0.5,
+          "25": 0.5,
+          "30": 0.8333333333333334
+        }
+      },
+      {
+        "signal": "momentum",
+        "top30_retained": 3,
+        "top30_missed_ranks": [
+          34,
+          37,
+          42
+        ],
+        "recall_at_k": {
+          "10": 0.3333333333333333,
+          "15": 0.3333333333333333,
+          "20": 0.3333333333333333,
+          "25": 0.3333333333333333,
+          "30": 0.5
+        }
+      },
+      {
+        "signal": "balanced",
+        "top30_retained": 5,
+        "top30_missed_ranks": [
+          34
+        ],
+        "recall_at_k": {
+          "10": 0.16666666666666666,
+          "15": 0.3333333333333333,
+          "20": 0.5,
+          "25": 0.8333333333333334,
+          "30": 0.8333333333333334
+        }
+      },
+      {
+        "signal": "contrarian",
+        "top30_retained": 4,
+        "top30_missed_ranks": [
+          38,
+          39
+        ],
+        "recall_at_k": {
+          "10": 0.16666666666666666,
+          "15": 0.16666666666666666,
+          "20": 0.3333333333333333,
+          "25": 0.3333333333333333,
+          "30": 0.6666666666666666
+        }
+      },
+      {
+        "signal": "consensus",
+        "top30_retained": 4,
+        "top30_missed_ranks": [
+          35,
+          40
+        ],
+        "recall_at_k": {
+          "10": 0.5,
+          "15": 0.5,
+          "20": 0.5,
+          "25": 0.5,
+          "30": 0.6666666666666666
+        }
+      }
+    ],
+    "interpretation": "Ranks >30 are candidate-bank misses; ranks <=30 are retained by the candidate bank and any later absence from five lines belongs to the portfolio/allocator stage. This trace is only one round and does not change model weights."
+  },
+  "external_data_crosscheck": {
+    "status": "PASS",
+    "repo_round": 1249,
+    "draw_date": "2026-11-07",
+    "independent_sources": [
+      {
+        "name": "Yonhap News Agency",
+        "url": "https://www.yna.co.kr/view/AKR20261107051500002",
+        "published": "2026-11-07T20:40:00+09:00"
+      },
+      {
+        "name": "Newsis",
+        "url": "https://files.newsis.com/view/NISX20261107_0003859041",
+        "published": "2026-11-07T21:09:41+09:00"
+      }
+    ],
+    "official_api_directly_retrieved": false,
+    "note": "Cross-check reused from 2026-11-10; no fresh external fetch claimed in this run."
   }
 }
