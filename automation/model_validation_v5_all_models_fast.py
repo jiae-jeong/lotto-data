@@ -111,16 +111,30 @@ def main():
     cutoff=rounds[-1]
     data_sha256=hashlib.sha256(data_path.read_bytes()).hexdigest()
 
-    # Directory names contain the KST run timestamp. Do not rely on checkout mtimes,
-    # which are often identical for every file in a GitHub Actions workspace.
-    v5_dirs=sorted(day.glob('MASTER_FULL_V5_*'))
-    v4_dirs=sorted(day.glob('MASTER_FULL_V4_*'))
-    if not v5_dirs or not v4_dirs:
-        raise FileNotFoundError(f'missing same-day V4/V5 MASTER evidence under {day}')
-    v5=v5_dirs[-1]
-    v4=v4_dirs[-1]
-    b_leak=json.loads((v4/'B_LEAKAGE_CHECK.json').read_text(encoding='utf-8-sig'))
+    # Bind validation to the exact V5 run directory produced by this workflow.
+    # Directory names use runner-clock HHMMSS; lexical sorting can select a stale
+    # previous-day UTC run (for example 19:55 over the current 00:29 run).
+    if len(sys.argv) > 3:
+        v5=Path(sys.argv[3])
+        if not v5.is_absolute():
+            v5=ROOT/v5
+        v5=v5.resolve()
+        if not v5.is_dir() or v5.parent != day.resolve():
+            raise ValueError(f'V5 run directory is missing or outside {day}: {v5}')
+    else:
+        # Fail closed when multiple runs exist; never guess which evidence is newest.
+        v5_dirs=list(day.glob('MASTER_FULL_V5_*'))
+        if len(v5_dirs) != 1:
+            raise ValueError('pass the exact V5 run directory as the third argument')
+        v5=v5_dirs[0].resolve()
     ver=json.loads((v5/'VERIFICATION.json').read_text(encoding='utf-8-sig'))
+    v4_rel=ver.get('base_v4')
+    if not v4_rel:
+        raise ValueError(f'V5 verification does not identify its paired V4 run: {v5}')
+    v4=(ROOT/v4_rel).resolve()
+    if not v4.is_dir() or v4.parent != day.resolve():
+        raise ValueError(f'paired V4 run directory is missing or outside {day}: {v4}')
+    b_leak=json.loads((v4/'B_LEAKAGE_CHECK.json').read_text(encoding='utf-8-sig'))
     data_validation=json.loads((v4/'DATA_VALIDATION.json').read_text(encoding='utf-8-sig'))
     assert int(ver.get('data_cutoff',-1))==cutoff
     assert int(data_validation.get('latest_round',-1))==cutoff
