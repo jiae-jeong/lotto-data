@@ -44,6 +44,23 @@ Across all 30 signal/K pairs:
 
 **Candidate-stage verdict: no statistically supported recall champion.** The scorecard's small positive differences are not enough to promote a signal.
 
+
+
+## 4A. Latest target miss trace (round 1249; diagnostic only)
+
+The preserved target trace records winner ranks, not a reconstructed purchase set. Ranks above 30 were lost at the candidate-bank stage; ranks at or below 30 survived candidate selection and can only be lost later through ticket allocation. Counts below are retained/missed within the 30-number bank:
+
+| Signal | Retained in top30 | Candidate-bank misses (rank >30) |
+|---|---:|---|
+| recent30 | 5/6 | 1 (rank 42) |
+| gap | 5/6 | 1 (rank 40) |
+| momentum | 3/6 | 3 (ranks 34, 37, 42) |
+| balanced | 5/6 | 1 (rank 34) |
+| contrarian | 4/6 | 2 (ranks 38, 39) |
+| consensus | 4/6 | 2 (ranks 35, 40) |
+
+This is a single already-observed draw and is not a model-selection result. The exact target trace is retained in the source status file; no winning-number identities or final purchase lines are reproduced here.
+
 ## 5. Portfolio-stage separation
 
 The 849-target V9 five-role policy is not a strict pass. Against its geometry-preserving matched label-permutation comparator:
@@ -90,20 +107,4 @@ Round 1246 remains excluded: two distinct pre-draw five-line sets exist and no r
 ## 9. Reproducibility and limits
 
 Full machine-readable values for all 30 signal/K pairs, exact null probabilities, p-values, source hashes, V9 metrics, and V54–V86 failure summaries are in the adjacent JSON file. This is an analytical exact-null audit of the aggregate candidate-recall scorecard, not a replacement for the preregistered H1250-A/B nested experiment.
-
-
-## 4A. Latest target miss trace (round 1249; diagnostic only)
-
-The preserved target trace records winner ranks, not a reconstructed purchase set. Ranks above 30 were lost at the candidate-bank stage; ranks at or below 30 survived candidate selection and can only be lost later through ticket allocation. Counts below are retained/missed within the 30-number bank:
-
-| Signal | Retained in top30 | Candidate-bank misses (rank >30) |
-|---|---:|---|
-| recent30 | 5/6 | 1 (rank 42) |
-| gap | 5/6 | 1 (rank 40) |
-| momentum | 3/6 | 3 (ranks 34, 37, 42) |
-| balanced | 5/6 | 1 (rank 34) |
-| contrarian | 4/6 | 2 (ranks 38, 39) |
-| consensus | 4/6 | 2 (ranks 35, 40) |
-
-This is a single already-observed draw and is not a model-selection result. The exact target trace is retained in the source status file; no winning-number identities or final purchase lines are reproduced here.
 
