@@ -94,6 +94,31 @@ def main():
                 source_mismatches.append({"target_round": target, "source": review.get("source")})
     checks["actual_purchase_source_is_canonical"] = not source_mismatches
 
+    # Conflicts are acceptable only when explicitly disclosed and excluded from the aggregate.
+    source_conflicts = hist.get("unresolved_source_conflicts", [])
+    reviewed_targets = {int(r["target_round"]) for r in reviews}
+    conflict_targets = set()
+    conflict_records_valid = isinstance(source_conflicts, list)
+    for conflict in source_conflicts if isinstance(source_conflicts, list) else []:
+        try:
+            target = int(conflict["target_round"])
+            sources = conflict.get("sources", [])
+            valid_conflict = (
+                conflict.get("status") == "EXCLUDED_UNRESOLVED"
+                and target not in reviewed_targets
+                and len(sources) >= 2
+                and conflict.get("receipt_evidence") == "NOT_FOUND"
+                and conflict.get("aggregate_action") == "EXCLUDED_FROM_SINGLE_CANONICAL_AGGREGATE"
+            )
+            conflict_records_valid = conflict_records_valid and valid_conflict
+            conflict_targets.add(target)
+        except (KeyError, TypeError, ValueError):
+            conflict_records_valid = False
+    checks["historical_source_conflicts_disclosed_and_excluded"] = (
+        conflict_records_valid
+        and (not conflict_targets or hist.get("closed_loop_complete") is False)
+    )
+
     # Candidate recall summary contains no candidate identities.
     best_by_k = {}
     for k in sorted(KS):
@@ -117,6 +142,8 @@ def main():
         "checks": checks,
         "actual_purchase_source_mismatches": source_mismatches,
         "historical_preserved_scope_complete": bool(hist.get("closed_loop_complete")),
+        "unresolved_source_conflicts": source_conflicts,
+        "excluded_conflict_rounds": sorted(conflict_targets),
         "whole_history_complete": bool(hist.get("whole_history_complete")),
         "latest_review": {
             "target_round": latest.get("target_round"),
@@ -139,6 +166,7 @@ def main():
 
     audit.setdefault("protocol_checks", {}).update({
         "actual_purchase_learning_record": checks["actual_purchase_precedence"] and checks["actual_purchase_source_is_canonical"],
+        "historical_source_conflicts_disclosed_and_excluded": checks["historical_source_conflicts_disclosed_and_excluded"],
         "candidate_recall_separate_stage": all(
             checks[k] for k in (
                 "candidate_recall_status_present",
@@ -175,6 +203,8 @@ def main():
         f"- Actual delivered/purchase artifact precedence across completed targets: {checks['actual_purchase_source_is_canonical']}.\n"
         f"- Candidate recall is measured separately at K=10/15/20/25/30 over {recall.get('targets')} cutoff-safe targets, with {recall.get('matched_random_sets_total')} matched-random candidate sets.\n"
         f"- Latest preserved review failure split: candidate_recall_failure={latest.get('candidate_recall_failure')}; ticket_construction_gap={latest.get('ticket_construction_gap')}.\n"
+        f"- Conflicted pre-draw source rounds explicitly excluded from the canonical aggregate: {sorted(conflict_targets)}; no receipt evidence is inferred.\n"
+        f"- Verified aggregate scope: {hist.get('verified_round_count')} rounds / {hist.get('verified_purchase_lines')} lines; preserved targets found: {hist.get('completed_preserved_targets_found')}.\n"
         f"- Whole historical recommendation archive complete: {hist.get('whole_history_complete')} (legacy/missing originals are not reconstructed).\n"
     )
     report += insert

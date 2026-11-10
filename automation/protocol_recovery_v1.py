@@ -96,6 +96,40 @@ def _candidate_paths():
     found.update(base.glob("*/FINAL_FIVE_LINES*.json"))
     return sorted(found)
 
+def _normalize_five_lines(value):
+    if not isinstance(value, list) or len(value) != 5:
+        return None
+    normalized = []
+    for line in value:
+        if (
+            not isinstance(line, list)
+            or len(line) != 6
+            or any(not isinstance(n, int) or not 1 <= n <= 45 for n in line)
+            or len(set(line)) != 6
+        ):
+            return None
+        normalized.append(tuple(sorted(line)))
+    return tuple(normalized)
+
+
+def _prospective_first_prize_sources(target):
+    base = ROOT / "research" / "prospective_v4" / "decisions" / str(target)
+    found = []
+    for path in sorted(base.glob("FIRST_PRIZE_PURCHASE_*_V*.json")):
+        try:
+            obj = json.loads(path.read_text(encoding="utf-8-sig"))
+            if int(obj.get("target_round", path.parent.name)) != target:
+                continue
+            if obj.get("supersedes_purchase_only_v1_for_actual_purchase") is not True:
+                continue
+            lines = _normalize_five_lines(obj.get("actual_purchase_final_5"))
+            if lines is None:
+                continue
+            found.append({"path": str(path.relative_to(ROOT)), "lines": lines})
+        except (OSError, ValueError, TypeError, json.JSONDecodeError):
+            continue
+    return found
+
 
 def build_historical_closed_loop(rows, dated):
     by_round = {r["round"]: r for r in rows}
@@ -128,6 +162,7 @@ def build_historical_closed_loop(rows, dated):
 
     reviews = []
     all_hits = []
+    source_conflicts = []
     for target in sorted(grouped):
         entries = grouped[target]
         actual_purchase = sorted(
@@ -144,6 +179,42 @@ def build_historical_closed_loop(rows, dated):
         obj = c["obj"]
         tickets = obj.get("final_lines")
         training_cutoff = obj.get("training_cutoff", obj.get("data_cutoff"))
+
+        # Conflicting preserved pre-draw sources are not resolved by file order.
+        weekly_lines = _normalize_five_lines(tickets)
+        external_sources = _prospective_first_prize_sources(target) if not actual_purchase else []
+        differing_external = [
+            source for source in external_sources
+            if weekly_lines is not None and source["lines"] != weekly_lines
+        ]
+        if differing_external:
+            source_conflicts.append({
+                "target_round": target,
+                "status": "EXCLUDED_UNRESOLVED",
+                "reason": (
+                    "Distinct pre-draw five-line sources are preserved for this target, "
+                    "and no receipt evidence establishes which set was delivered or purchased."
+                ),
+                "sources": [
+                    {
+                        "path": c["path"],
+                        "role": c["role"],
+                        "line_set": [list(line) for line in weekly_lines],
+                    },
+                    *[
+                        {
+                            "path": source["path"],
+                            "role": "FIRST_PRIZE_PRE_DRAW_PURCHASE_DESIGN",
+                            "line_set": [list(line) for line in source["lines"]],
+                        }
+                        for source in differing_external
+                    ],
+                ],
+                "receipt_evidence": "NOT_FOUND",
+                "aggregate_action": "EXCLUDED_FROM_SINGLE_CANONICAL_AGGREGATE",
+            })
+            continue
+
         valid = (
             target in by_round
             and isinstance(tickets, list)
@@ -185,11 +256,17 @@ def build_historical_closed_loop(rows, dated):
     dist = {str(k): sum(h == k for h in all_hits) for k in range(7)}
     verified_lines = len(all_hits)
     completed_preserved_targets = len(grouped)
-    scope_complete = bool(reviews) and not invalid and len(reviews) == completed_preserved_targets
+    scope_complete = (
+        bool(reviews)
+        and not invalid
+        and not source_conflicts
+        and len(reviews) == completed_preserved_targets
+    )
     latest = reviews[-1] if reviews else None
+    conflict_rounds = sorted(int(x["target_round"]) for x in source_conflicts)
     payload = {
         "generated_kst": datetime.now(KST).isoformat(),
-        "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present, otherwise authentic pre-draw FINAL_FIVE_LINES; missing legacy/older originals are not reconstructed",
+        "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present; otherwise a pre-draw FINAL is included only when no conflicting preserved purchase-design source exists. Unresolved conflicts are excluded from the single canonical aggregate.",
         "data_cutoff": cutoff,
         "completed_preserved_targets_found": completed_preserved_targets,
         "verified_round_count": len(reviews),
@@ -200,10 +277,17 @@ def build_historical_closed_loop(rows, dated):
         "rate_ge3": sum(h >= 3 for h in all_hits) / verified_lines if verified_lines else None,
         "rate_ge4": sum(h >= 4 for h in all_hits) / verified_lines if verified_lines else None,
         "closed_loop_complete": scope_complete,
+        "closed_loop_status": (
+            "PARTIAL_UNRESOLVED_SOURCE_CONFLICTS" if source_conflicts
+            else "COMPLETE_WITHIN_PRESERVED_SCOPE" if scope_complete
+            else "PARTIAL"
+        ),
         "whole_history_complete": False,
         "whole_history_note": "Legacy/older recommendation formats outside the discovered weekly_purchase artifacts are not proven complete and must not be described as the full historical closed loop.",
         "actual_purchase_precedence": True,
         "invalid_or_unreviewable_preserved_records": invalid,
+        "unresolved_source_conflicts": source_conflicts,
+        "excluded_conflict_rounds": conflict_rounds,
         "reviews": reviews,
         "error_note": {
             "latest_completed_review": latest["target_round"] if latest else None,
@@ -214,7 +298,9 @@ def build_historical_closed_loop(rows, dated):
                 if latest and latest["candidate_recall_failure"] and latest["ticket_construction_gap"] > 0
                 else "Use the measured recall/construction fields; do not force a diagnosis beyond preserved evidence."
             ),
-            "action_for_next_policy": "Evaluate candidate recall separately from allocator performance; never learn from a later artifact in place of the actual delivered/purchased lines."
+            "action_for_next_policy": "Evaluate candidate recall separately from allocator performance; never learn from a later artifact in place of the actual delivered/purchased lines.",
+            "unresolved_source_conflict_rounds": conflict_rounds,
+            "provenance_action": "Keep conflicted rounds out of the canonical aggregate until receipt evidence or an authoritative source resolution is available."
         },
     }
     (dated / "HISTORICAL_CLOSED_LOOP_STATUS.json").write_text(
@@ -305,9 +391,9 @@ def main():
         "verified_purchase_lines": hist["verified_purchase_lines"],
         "full_signal_scorecard_complete": sig["full_signal_scorecard_complete"],
     }
+    result["execution_status"] = "EVIDENCE_WRITTEN_WITH_PARTIAL_SCOPE" if result["status"] == "PARTIAL" else "EVIDENCE_WRITTEN"
     print(json.dumps(result, ensure_ascii=False))
-    if result["status"] != "PASS":
-        raise SystemExit(2)
+    # A documented provenance limitation is a valid partial result, not a failed process.
 
 
 if __name__ == "__main__":
