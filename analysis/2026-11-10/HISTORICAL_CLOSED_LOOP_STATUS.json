@@ -1,60 +1,136 @@
 {
-  "generated_kst": "2026-11-10T04:55:25.125488+09:00",
-  "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present, otherwise authentic pre-draw FINAL_FIVE_LINES; missing legacy/older originals are not reconstructed",
+  "generated_kst": "2026-11-10T09:29:43.061160+09:00",
+  "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present; otherwise a pre-draw FINAL is included only when no conflicting preserved purchase-design source exists. Unresolved conflicts are excluded from the single canonical aggregate.",
   "data_cutoff": 1249,
   "completed_preserved_targets_found": 3,
-  "verified_round_count": 3,
-  "verified_purchase_lines": 15,
+  "verified_round_count": 2,
+  "verified_purchase_lines": 10,
   "aggregate_hit_distribution": {
     "0": 0,
-    "1": 11,
+    "1": 6,
     "2": 3,
     "3": 1,
     "4": 0,
     "5": 0,
     "6": 0
   },
-  "mean_main_hits_per_line": 1.3333333333333333,
-  "rate_ge2": 0.26666666666666666,
-  "rate_ge3": 0.06666666666666667,
+  "mean_main_hits_per_line": 1.5,
+  "rate_ge2": 0.4,
+  "rate_ge3": 0.1,
   "rate_ge4": 0.0,
-  "closed_loop_complete": true,
+  "closed_loop_complete": false,
+  "closed_loop_status": "PARTIAL_UNRESOLVED_SOURCE_CONFLICTS",
   "whole_history_complete": false,
   "whole_history_note": "Legacy/older recommendation formats outside the discovered weekly_purchase artifacts are not proven complete and must not be described as the full historical closed loop.",
   "actual_purchase_precedence": true,
   "invalid_or_unreviewable_preserved_records": [],
-  "reviews": [
+  "unresolved_source_conflicts": [
     {
       "target_round": 1246,
-      "source": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
-      "source_role": "FINAL_PREDRAW",
-      "training_cutoff": 1245,
-      "winning_numbers": [
-        16,
-        22,
-        23,
-        24,
-        27,
-        28
+      "status": "EXCLUDED_UNRESOLVED",
+      "reason": "Distinct pre-draw five-line sources are preserved for this target, and no receipt evidence establishes which set was delivered or purchased.",
+      "sources": [
+        {
+          "path": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+          "role": "FINAL_PREDRAW",
+          "line_set": [
+            [
+              13,
+              15,
+              18,
+              28,
+              31,
+              32
+            ],
+            [
+              3,
+              8,
+              17,
+              27,
+              30,
+              45
+            ],
+            [
+              5,
+              13,
+              18,
+              23,
+              34,
+              38
+            ],
+            [
+              13,
+              14,
+              15,
+              17,
+              22,
+              45
+            ],
+            [
+              5,
+              17,
+              21,
+              27,
+              35,
+              40
+            ]
+          ]
+        },
+        {
+          "path": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+          "role": "FIRST_PRIZE_PRE_DRAW_PURCHASE_DESIGN",
+          "line_set": [
+            [
+              5,
+              8,
+              19,
+              24,
+              29,
+              36
+            ],
+            [
+              2,
+              13,
+              18,
+              32,
+              34,
+              38
+            ],
+            [
+              6,
+              12,
+              15,
+              21,
+              22,
+              29
+            ],
+            [
+              1,
+              5,
+              7,
+              9,
+              12,
+              19
+            ],
+            [
+              1,
+              13,
+              18,
+              26,
+              34,
+              38
+            ]
+          ]
+        }
       ],
-      "bonus": 6,
-      "line_hits": [
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "max_hits": 1,
-      "winning_union_coverage": 4,
-      "ticket_union_size": 21,
-      "candidate_recall_failure": true,
-      "ticket_construction_gap": 3,
-      "alternative_preserved_versions": 0,
-      "all_preserved_sources": [
-        "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json"
-      ]
-    },
+      "receipt_evidence": "NOT_FOUND",
+      "aggregate_action": "EXCLUDED_FROM_SINGLE_CANONICAL_AGGREGATE"
+    }
+  ],
+  "excluded_conflict_rounds": [
+    1246
+  ],
+  "reviews": [
     {
       "target_round": 1247,
       "source": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
@@ -128,6 +204,10 @@
     "candidate_recall_failure": true,
     "ticket_construction_gap": 2,
     "finding": "Both candidate recall and ticket construction need separate diagnosis.",
-    "action_for_next_policy": "Evaluate candidate recall separately from allocator performance; never learn from a later artifact in place of the actual delivered/purchased lines."
+    "action_for_next_policy": "Evaluate candidate recall separately from allocator performance; never learn from a later artifact in place of the actual delivered/purchased lines.",
+    "unresolved_source_conflict_rounds": [
+      1246
+    ],
+    "provenance_action": "Keep conflicted rounds out of the canonical aggregate until receipt evidence or an authoritative source resolution is available."
   }
 }
