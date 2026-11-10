@@ -9,6 +9,7 @@ Across the six frozen candidate-ranking signals and five candidate cut sizes, is
 - Source: `lotto_data.csv`; SHA-256 **a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7**.
 - Independently parsed 1,249 nonblank draw rows, rounds 1–1,249. One blank CSV line after round 1,245 was ignored as a blank record; there is no round gap after parsing.
 - Validation: sequential round IDs; six unique main numbers in 1–45; bonus in 1–45 and not duplicated among the six main numbers. **PASS**.
+- Fresh external cross-check in this run: Yonhap (2026-11-07 20:40 KST) and Newsis (2026-11-07 21:09 KST) agree with round 1,249; the official API itself was not directly retrieved.
 - Candidate scorecard: `analysis/2026-11-11/CANDIDATE_RECALL_SCORECARD.csv` (Git blob `8f4dba490b783970bfa65ac270c66f2c442a9826`); 1,049 targets (201–1,249), K={10,15,20,25,30}, six signals, 200 matched random candidate sets per target (209,800 total); source status marks no future leakage.
 - All historical targets, including 1,244–1,249, are retrospective/live-history diagnostics. None is described as an untouched holdout.
 
