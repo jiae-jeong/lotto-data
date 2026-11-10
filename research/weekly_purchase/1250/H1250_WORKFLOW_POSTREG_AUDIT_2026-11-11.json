@@ -1,0 +1,49 @@
+{
+  "record_type": "APPEND_ONLY_NONFUNCTIONAL_WORKFLOW_AMENDMENT_AUDIT",
+  "recorded_at_kst": "2026-11-11T01:48:21+09:00",
+  "repository": "jiae-jeong/lotto-data",
+  "study_id": "H1250_AB_PREREGISTRATION_2026-11-10",
+  "preregistration_path": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
+  "original_preregistered_workflow_blob_sha": "06a06bfe6ff6875bd4fe2b10dcde3fb746f5b281",
+  "current_workflow_blob_sha": "16d567f412a019a1b55f45343ee26ad96c07fa15",
+  "workflow_change_commit": "48946fc6ce917af544f95ea9b433c6a6ae7aa4b4",
+  "exact_change": {
+    "path": ".github/workflows/h1250-ab-research-v2.yml",
+    "additions": 1,
+    "deletions": 1,
+    "old_summary_expression": "'H1250_B_selector_degenerate': True",
+    "new_summary_expression": "'H1250_B_selector_degenerate': verification['H1250_B_adaptive_selector_degenerate']",
+    "classification": "NON_FUNCTIONAL_REPORTING_ONLY"
+  },
+  "impact_assessment": {
+    "candidate_generation_changed": false,
+    "allocator_changed": false,
+    "rankers_changed": false,
+    "training_cutoff_changed": false,
+    "target_range_changed": false,
+    "random_seed_changed": false,
+    "null_model_changed": false,
+    "metrics_changed": false,
+    "multiplicity_correction_changed": false,
+    "bootstrap_or_block_design_changed": false,
+    "strict_thresholds_changed": false,
+    "workflow_trigger_or_schedule_changed": false,
+    "calculation_or_selection_logic_changed": false,
+    "reporting_output_changed": true
+  },
+  "immutable_inputs_rechecked": {
+    "data_cutoff": 1249,
+    "data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "data_sha_matches_preregistration": true,
+    "implementation_path": "automation/h1250_ab_research_v2.py",
+    "implementation_blob_sha": "a7a7d7792c7ba84a1c12699f53d8a3f4009d8a66",
+    "implementation_sha_matches_preregistration": true,
+    "frozen_dependency_count": 6,
+    "frozen_dependency_blob_hashes_match": true
+  },
+  "workflow_hash_status": "DOCUMENTED_NONFUNCTIONAL_POST_REGISTRATION_DELTA",
+  "original_preregistration_preserved_unchanged": true,
+  "h1250_v2_dispatch_run_found_as_of_audit": false,
+  "latest_actions_run_created_at_utc": "2026-11-10T08:53:34Z",
+  "note": "The original preregistered workflow hash remains preserved as the baseline. The current workflow differs only by the exact one-line reporting correction above. This append-only audit does not amend the study design or strict gate. No H1250-A/B execution result is recorded in GitHub Actions as of this audit."
+}
