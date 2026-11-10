@@ -344,6 +344,25 @@ jobs:
               assert artifact.is_file() and artifact.parent==d and not artifact.is_symlink()
               assert artifact.stat().st_size==int(row['bytes'])
               assert hashlib.sha256(artifact.read_bytes()).hexdigest()==row['sha256']
+
+          # Independently verify the V4 base artifacts consumed by V5.
+          base=Path(v['base_v4'])
+          expected_base_parent=Path('analysis')/date
+          assert base.parent==expected_base_parent and base.name.startswith('MASTER_FULL_V4_')
+          base_manifest_path=base/'SHA256_MANIFEST.csv'
+          assert base_manifest_path.is_file()
+          with base_manifest_path.open('r',encoding='utf-8-sig',newline='') as f:
+              base_rows=list(csv.DictReader(f))
+          assert base_rows
+          base_expected_files={p.name for p in base.iterdir() if p.is_file() and p.name!='SHA256_MANIFEST.csv'}
+          base_names=[row['file'] for row in base_rows]
+          assert len(base_names)==len(set(base_names))
+          assert set(base_names)==base_expected_files
+          for row in base_rows:
+              artifact=base/row['file']
+              assert artifact.is_file() and artifact.parent==base and not artifact.is_symlink()
+              assert artifact.stat().st_size==int(row['bytes'])
+              assert hashlib.sha256(artifact.read_bytes()).hexdigest()==row['sha256']
           print({
               'study_status':expected_status,
               'compute_status':v['compute_status'],
