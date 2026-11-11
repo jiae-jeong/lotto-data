@@ -1,0 +1,33 @@
+{
+  "status": "STRICT_PASS_NOT_READY_UNCHANGED",
+  "target_round": 1250,
+  "date_kst": "2026-11-12",
+  "data_cutoff": 1249,
+  "data_sha256_preregistered": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "current_data_git_blob": "d012ac7f2395e70466f0c50b71b949515dea1def",
+  "assessment_basis": "Carry-forward of the 2026-11-11 strict gate; no new H1250-A/B model execution was found or run on 2026-11-12. Today's exact conditional-null audit validates the null implementation only and does not evaluate a predictive model.",
+  "strict_model_validation_pass": false,
+  "validated_models": [],
+  "model_verdict": "NO_MODEL_PASSES_STRICT_VALIDATION_AS_OF_2026-11-11; H1250-A/B V2 OUTER RUN NOT EXECUTED AS OF 2026-11-12",
+  "strict_portfolio_pass": false,
+  "strict_gate_version": "V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY",
+  "strict_pass_ready": false,
+  "ready_file": null,
+  "ready_file_exists": false,
+  "failed_gates_carried_forward": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_block_stability"
+  ],
+  "no_future_leakage": true,
+  "h1250_ab_v2_preregistration_unchanged": true,
+  "h1250_ab_v2_runner_blob_matches_preregistration": true,
+  "h1250_ab_v2_frozen_dependencies_match": true,
+  "h1250_ab_v2_workflow_matches_postregistration_audit": true,
+  "h1250_ab_v2_workflow_dispatch_run_found": false,
+  "random_fallback_allowed": false,
+  "no_candidate_or_purchase_lines_emitted": true,
+  "supporting_audit": "analysis/2026-11-12/H1250_EXACT_CONDITIONAL_NULL_AUDIT_2026-11-12/REPORT.md"
+}
