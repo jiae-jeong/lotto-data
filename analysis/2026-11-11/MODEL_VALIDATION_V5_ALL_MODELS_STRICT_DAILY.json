@@ -8,8 +8,8 @@
   ],
   "training_cutoff_rule": "training_through_round = target_round - 1",
   "source_runs": {
-    "v4": "analysis/2026-11-11/MASTER_FULL_V4_212254_198732",
-    "v5": "analysis/2026-11-11/MASTER_FULL_V5_213036_393437"
+    "v4": "analysis/2026-11-11/MASTER_FULL_V4_022103_109414",
+    "v5": "analysis/2026-11-11/MASTER_FULL_V5_022848_158829"
   },
   "leakage_checks": {
     "B": {
