@@ -17,25 +17,37 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1", "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
             "E027_FIVE_LINE_CANDIDATE_BANK_v1", "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
             "E029_FIVE_LINE_PROMOTION_GATE_v2"])
-        self.assertEqual(ids[-18:-13], expected_prior)
-        self.assertEqual(ids[-13:-7], [
+        expected_e030_e035 = [
             "E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
             "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
             "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
             "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
             "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
             "E035_FIVE_LINE_REBUILD_GATE_v1",
-        ])
-        self.assertEqual(ids[-7:], [
+        ]
+        expected_e036_e042 = [
             "E036_NULL_GATE_CALIBRATION_v2", "E037_PREDICTABILITY_FALSIFICATION_v1",
             "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3", "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
             "E040_SINGLE_EDGE_PROMOTION_GATE_v2", "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
             "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+        ]
+        prior_start = ids.index(expected_prior[0])
+        e030_start = ids.index(expected_e030_e035[0])
+        e036_start = ids.index(expected_e036_e042[0])
+        self.assertEqual(ids[prior_start:prior_start + len(expected_prior)], expected_prior)
+        self.assertEqual(ids[e030_start:e030_start + len(expected_e030_e035)], expected_e030_e035)
+        self.assertEqual(ids[e036_start:e036_start + len(expected_e036_e042)], expected_e036_e042)
+        self.assertLess(prior_start, e030_start)
+        self.assertLess(e030_start, e036_start)
+        self.assertEqual(ids[-3:], [
+            "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+            "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
+            "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
         ])
         self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
                          "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
-        for task in queue["tasks"][-18:-13]: daily._validate_task(task)
-        for task in queue["tasks"][-7:]: daily._validate_task(task)
+        for task in queue["tasks"][prior_start:prior_start + len(expected_prior)]: daily._validate_task(task)
+        for task in queue["tasks"][e036_start:e036_start + len(expected_e036_e042)]: daily._validate_task(task)
 
     def test_season_and_fixed_sum_regimes_are_predefined(self):
         self.assertEqual([study._season(m) for m in (1, 4, 7, 10)], ["winter", "spring", "summer", "autumn"])
