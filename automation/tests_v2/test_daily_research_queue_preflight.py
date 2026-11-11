@@ -129,6 +129,23 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         self.assertEqual(result["skipped_blocked"], [blocked["id"]])
         self.assertEqual(result["skipped_dedicated_workflow"], [dedicated["id"]])
 
+    def test_superseded_studies_are_skipped_before_generic_execution(self):
+        superseded_link = self.valid_task("E104_SUPERSEDED_LINK")
+        superseded_link["superseded_by"] = "E105_REPLACEMENT"
+        superseded_status = self.valid_task("E106_SUPERSEDED_STATUS")
+        superseded_status["spec"]["execution_status"] = "SUPERSEDED_BEFORE_EXECUTION"
+        active = self.valid_task("E107_ACTIVE")
+        self.queue.write_text(json.dumps({"tasks": [superseded_link, superseded_status, active]}), encoding="utf-8")
+        with patch.object(preflight, "verified_completed_tasks", return_value={}):
+            result = preflight.prepare(self.root, self.queue, self.filtered, self.status)
+        self.assertTrue(result["has_work"])
+        self.assertEqual(
+            result["skipped_superseded"],
+            [superseded_link["id"], superseded_status["id"]],
+        )
+        filtered = json.loads(self.filtered.read_text(encoding="utf-8"))["tasks"]
+        self.assertEqual([task["id"] for task in filtered], [active["id"]])
+
     def test_unfinished_generic_task_still_uses_current_validator(self):
         unsafe = {"id": "E103_UNSAFE", "kind": "synthetic"}
         self.queue.write_text(json.dumps({"tasks": [unsafe]}), encoding="utf-8")
