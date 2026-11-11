@@ -1,0 +1,61 @@
+{
+  "study_id": "H1250_EXACT_CONDITIONAL_NULL_AUDIT_2026-11-12",
+  "candidate_m_distribution": {
+    "0": {"probability": 0.0006144828890149366, "fraction": "13/21156"},
+    "1": {"probability": 0.01106069200226886, "fraction": "39/3526"},
+    "2": {"probability": 0.0729000154694993, "fraction": "5655/77572"},
+    "3": {"probability": 0.22680004812733118, "fraction": "13195/58179"},
+    "4": {"probability": 0.35328469035218896, "fraction": "27405/77572"},
+    "5": {"probability": 0.2624400556901975, "fraction": "10179/38786"},
+    "6": {"probability": 0.0729000154694993, "fraction": "5655/77572"}
+  },
+  "candidate_stage": {
+    "expected_hits_in_random_top30": 4.0,
+    "expected_recall_at_30": 0.6666666666666666,
+    "P_hits_le_2": 0.0845751903607831,
+    "P_hits_ge_3": 0.9154248096392169,
+    "P_hits_ge_4": 0.6886247615118858
+  },
+  "conditional_allocator_null": {
+    "0": {"E_max_hits": {"value": 0.0, "fraction": "0"}, "P_any2": {"value": 0.0, "fraction": "0"}, "P_any3": {"value": 0.0, "fraction": "0"}, "P_any4": {"value": 0.0, "fraction": "0"}, "E_union_coverage": {"value": 0.0, "fraction": "0"}},
+    "1": {"E_max_hits": {"value": 1.0, "fraction": "1"}, "P_any2": {"value": 0.0, "fraction": "0"}, "P_any3": {"value": 0.0, "fraction": "0"}, "P_any4": {"value": 0.0, "fraction": "0"}, "E_union_coverage": {"value": 1.0, "fraction": "1"}},
+    "2": {"E_max_hits": {"value": 1.1724137931034482, "fraction": "34/29"}, "P_any2": {"value": 0.1724137931034483, "fraction": "5/29"}, "P_any3": {"value": 0.0, "fraction": "0"}, "P_any4": {"value": 0.0, "fraction": "0"}, "E_union_coverage": {"value": 2.0, "fraction": "2"}},
+    "3": {"E_max_hits": {"value": 1.4926108374384237, "fraction": "303/203"}, "P_any2": {"value": 0.46798029556650245, "fraction": "95/203"}, "P_any3": {"value": 0.024630541871921183, "fraction": "5/203"}, "P_any4": {"value": 0.0, "fraction": "0"}, "E_union_coverage": {"value": 3.0, "fraction": "3"}},
+    "4": {"E_max_hits": {"value": 1.8565955117679256, "fraction": "3392/1827"}, "P_any2": {"value": 0.7635467980295566, "fraction": "155/203"}, "P_any3": {"value": 0.090311986863711, "fraction": "55/609"}, "P_any4": {"value": 0.002736726874657909, "fraction": "5/1827"}, "E_union_coverage": {"value": 4.0, "fraction": "4"}},
+    "5": {"E_max_hits": {"value": 2.165003578796682, "fraction": "51421/23751"}, "P_any2": {"value": 0.9454338764683592, "fraction": "2495/2639"}, "P_any3": {"value": 0.20651762031072377, "fraction": "545/2639"}, "P_any4": {"value": 0.012841564565702497, "fraction": "305/23751"}, "E_union_coverage": {"value": 5.0, "fraction": "5"}},
+    "6": {"E_max_hits": {"value": 2.4075281040798284, "fraction": "95302/39585"}, "P_any2": {"value": 1.0, "fraction": "1"}, "P_any3": {"value": 0.37021599090564605, "fraction": "977/2639"}, "P_any4": {"value": 0.03608269125510505, "fraction": "857/23751"}, "E_union_coverage": {"value": 6.0, "fraction": "6"}}
+  },
+  "unconditional_exact_null": {
+    "E_max_hits": {"value": 1.8346531517263225, "fraction": "5792/3157"},
+    "P_any2": {"value": 0.7094760505140539, "fraction": "1155745/1629012"},
+    "P_any3": {"value": 0.11867929763562209, "fraction": "96665/814506"},
+    "P_any4": {"value": 0.006967413376942589, "fraction": "5675/814506"},
+    "E_union_coverage": {"value": 4.0, "fraction": "4"}
+  },
+  "frozen_v42_implementation_reproduction": {
+    "max_hits": {"value": 1.8346531517263225, "fraction": "5792/3157"},
+    "any2": {"value": 0.7094760505140539, "fraction": "1155745/1629012"},
+    "any3": {"value": 0.11867929763562209, "fraction": "96665/814506"},
+    "any4": {"value": 0.006967413376942589, "fraction": "5675/814506"},
+    "winning_union_coverage": {"value": 4.0, "fraction": "4"}
+  },
+  "max_abs_difference_v42_vs_independent": 0.0,
+  "conditional_monte_carlo_check": {
+    "0": {"replicates": 100000, "E_max_hits": 0.0, "P_any2": 0.0, "P_any3": 0.0, "P_any4": 0.0, "max_abs_error": 0.0},
+    "1": {"replicates": 100000, "E_max_hits": 1.0, "P_any2": 0.0, "P_any3": 0.0, "P_any4": 0.0, "max_abs_error": 0.0},
+    "2": {"replicates": 100000, "E_max_hits": 1.17242, "P_any2": 0.17242, "P_any3": 0.0, "P_any4": 0.0, "max_abs_error": 0.000006206896551841368},
+    "3": {"replicates": 100000, "E_max_hits": 1.49105, "P_any2": 0.46629, "P_any3": 0.02476, "P_any4": 0.0, "max_abs_error": 0.0016902955665024644},
+    "4": {"replicates": 100000, "E_max_hits": 1.85708, "P_any2": 0.76364, "P_any3": 0.09052, "P_any4": 0.00292, "max_abs_error": 0.0004844882320744759},
+    "5": {"replicates": 100000, "E_max_hits": 2.16602, "P_any2": 0.94557, "P_any3": 0.20735, "P_any4": 0.01289, "max_abs_error": 0.0010164212033179076},
+    "6": {"replicates": 100000, "E_max_hits": 2.40769, "P_any2": 1.0, "P_any3": 0.37121, "P_any4": 0.03539, "max_abs_error": 0.0009940090943539315}
+  },
+  "assertions": {
+    "candidate_m_distribution_sums_to_one": true,
+    "v42_matches_independent_composition_enumeration": true,
+    "conditional_random_partition_matches_exact_within_tolerance": true,
+    "union_coverage_equals_candidate_hits_m": true,
+    "allocator_geometry_does_not_change_union_when_bank_fixed": true,
+    "top30_reordering_does_not_change_recall30": true,
+    "no_candidate_or_purchase_numbers_emitted": true
+  }
+}
