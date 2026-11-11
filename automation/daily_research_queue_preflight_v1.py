@@ -133,6 +133,7 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
     skipped_completed = []
     skipped_blocked = []
     skipped_dedicated = []
+    skipped_superseded = []
     for task in tasks:
         task_id = task["id"]
         if task_id in completed:
@@ -140,6 +141,11 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
             continue
 
         spec = task.get("spec") if isinstance(task.get("spec"), dict) else {}
+        superseded_by = task.get("superseded_by") or spec.get("superseded_by")
+        execution_status = str(spec.get("execution_status", task.get("execution_status", ""))).upper()
+        if superseded_by or execution_status.startswith("SUPERSEDED"):
+            skipped_superseded.append(task_id)
+            continue
         if spec.get("execution_mode") == "dedicated_workflow":
             skipped_dedicated.append(task_id)
             continue
@@ -165,6 +171,7 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
         "skipped_completed": skipped_completed,
         "skipped_blocked": skipped_blocked,
         "skipped_dedicated_workflow": skipped_dedicated,
+        "skipped_superseded": skipped_superseded,
         "completed_evidence_count": len(completed),
         "filtered_queue": str(filtered_queue),
     }
