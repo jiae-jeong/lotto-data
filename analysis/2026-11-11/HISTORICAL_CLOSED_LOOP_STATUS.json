@@ -1,5 +1,5 @@
 {
-  "generated_kst": "2026-11-11T11:28:55.323123+09:00",
+  "generated_kst": "2026-11-11T15:12:07.073223+09:00",
   "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present; otherwise a pre-draw FINAL is included only when no conflicting preserved purchase-design source exists. Unresolved conflicts are excluded from the single canonical aggregate.",
   "data_cutoff": 1249,
   "completed_preserved_targets_found": 3,
