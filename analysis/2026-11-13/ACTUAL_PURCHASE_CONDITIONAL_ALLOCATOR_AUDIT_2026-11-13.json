@@ -1,0 +1,271 @@
+{
+  "study_id": "ACTUAL_PURCHASE_CONDITIONAL_ALLOCATOR_AUDIT_2026-11-13",
+  "created_kst": "2026-11-13T08:35:55+09:00",
+  "classification": "NEW_EXACT_CONDITIONAL_FAILURE_DECOMPOSITION; EXPOSED_LIVE_HISTORY_DIAGNOSTIC_ONLY",
+  "research_question": "For the two canonical actual-purchase five-line portfolios available in GitHub, how much of the observed portfolio miss is due to winners absent from the portfolio union versus failure to concentrate retained winners in a single line?",
+  "source_priority_audit": {
+    "prior_chat_search": "No authenticated pre-draw final purchase combinations or original post-draw error-note text were recovered from prior ChatGPT conversations; 1245 final lines were not generated in the retrieved conversation records.",
+    "github_canonical_actual_purchase_sources": [
+      {
+        "round": 1247,
+        "path": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+        "blob_sha": "730bb97bf4602288a74be9480941bb0532e219d7",
+        "classification": "canonical ACTUAL_PURCHASE source used"
+      },
+      {
+        "round": 1248,
+        "path": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+        "blob_sha": "d952c39886626140be8fbc70bf5397fe338da0c2",
+        "classification": "canonical ACTUAL_PURCHASE source used; explicitly marked fallback and strict predictive gate FAIL"
+      }
+    ],
+    "excluded_sources": [
+      {
+        "round": 1246,
+        "reason": "Two distinct pre-draw five-line sets; no receipt evidence identifies the purchased set. Excluded from canonical aggregate."
+      },
+      {
+        "round": 1248,
+        "path": "research/weekly_purchase/1248/FINAL_FIVE_LINES_1248_20261030_V54_STRICT_PASS.json",
+        "reason": "Alternative FINAL artifact, not the canonical ACTUAL_PURCHASE record; not substituted for actual purchase."
+      },
+      {
+        "round": 1247,
+        "reason": "Four alternative preserved FINAL versions exist; canonical ACTUAL_PURCHASE V8 source used, alternatives not substituted."
+      }
+    ],
+    "whole_history_actual_purchase_source": "INCOMPLETE; no authenticated whole-history recommendation/purchase archive recovered."
+  },
+  "data_integrity": {
+    "cutoff": 1249,
+    "latest_draw_date": "2026-11-07",
+    "row_count": 1249,
+    "rounds_contiguous_1_to_1249": true,
+    "main_numbers_six_unique_and_in_1_to_45": true,
+    "bonus_in_1_to_45": true,
+    "github_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def",
+    "raw_csv_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "preregistered_raw_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "raw_sha256_match": true,
+    "note": "Two blank lines are present in the CSV text; after filtering blank lines, all 1,249 draw records are contiguous and valid."
+  },
+  "external_draw_crosscheck": {
+    "target_round": 1249,
+    "repository_draw_matches": true,
+    "independent_sources": [
+      "https://jottto.com/lotto/1249",
+      "https://freetto.io/lotto/1249"
+    ],
+    "source_agreement": "Both public result aggregators report the same six main numbers and bonus as the repository row.",
+    "primary_source_note": "The Donghaeng Lottery portal was checked, but the dynamic round-specific result endpoint was not directly returned by the web lookup; this is not represented as a direct official-page confirmation."
+  },
+  "method": {
+    "candidate_stage": "Let U be the unique-number union of the five actual purchased lines and M the count of the six winning main numbers inside U. Evaluate M/6 and the fixed-U uniform-draw null X~Hypergeometric(N=45,K=U,n=6).",
+    "allocator_stage": "Conditional on the observed M and the exact five-line membership geometry, enumerate every C(U,M) equally likely winning subset. For each subset, calculate five line hit counts, max_hit, any2+, any3+, any4+, total winning-number appearances, and duplicate winning appearances.",
+    "interpretation_limit": "The conditional allocator null is a diagnostic conditioned on the observed portfolio union and M. It is not the primary H1250 strict null, does not test predictive edge, and does not turn two exposed historical rounds into an untouched holdout."
+  },
+  "results": [
+    {
+      "round": 1247,
+      "actual_purchase_source": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+      "portfolio_union_size": 16,
+      "retained_winners_M": 3,
+      "portfolio_union_recall": 0.5,
+      "missed_winners": 3,
+      "line_hit_distribution": [
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "max_hit": 2,
+      "any2plus": true,
+      "any3plus": false,
+      "any4plus": false,
+      "total_winning_number_appearances": 7,
+      "duplicate_winning_number_appearances": 4,
+      "within_portfolio_allocation_gap_M_minus_max_hit": 1,
+      "fixed_union_candidate_null": {
+        "expected_retained_winners": "32/15",
+        "observed_M": 3,
+        "p_M_at_least_observed": {
+          "numerator": 2919840,
+          "denominator": 8145060,
+          "reduced": "632/1763",
+          "value": 0.35847986386840613
+        }
+      },
+      "exact_conditional_allocator_null": {
+        "enumerated_subsets": 560,
+        "E_max_hit": {
+          "numerator": 1143,
+          "denominator": 560,
+          "value": 2.0410714285714286
+        },
+        "P_any2plus": {
+          "numerator": 494,
+          "denominator": 560,
+          "value": 0.8821428571428571
+        },
+        "P_any3plus": {
+          "numerator": 89,
+          "denominator": 560,
+          "value": 0.15892857142857142
+        },
+        "P_any4plus": {
+          "numerator": 0,
+          "denominator": 560,
+          "value": 0
+        },
+        "E_total_winning_appearances": {
+          "numerator": 45,
+          "denominator": 8,
+          "value": 5.625
+        },
+        "P_appearances_at_least_observed": {
+          "numerator": 159,
+          "denominator": 560,
+          "value": 0.2839285714285714
+        },
+        "max_hit_counts": {
+          "1": 66,
+          "2": 405,
+          "3": 89
+        },
+        "gap_counts": {
+          "0": 89,
+          "1": 405,
+          "2": 66
+        }
+      },
+      "diagnostic": "Observed max_hit=2 and gap=1 are ordinary under the exact conditional allocation distribution; the larger loss is that only 3 of 6 winners were present in a 16-number portfolio union."
+    },
+    {
+      "round": 1248,
+      "actual_purchase_source": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+      "portfolio_union_size": 18,
+      "retained_winners_M": 5,
+      "portfolio_union_recall": 0.8333333333333334,
+      "missed_winners": 1,
+      "line_hit_distribution": [
+        3,
+        1,
+        2,
+        1,
+        1
+      ],
+      "max_hit": 3,
+      "any2plus": true,
+      "any3plus": true,
+      "any4plus": false,
+      "total_winning_number_appearances": 8,
+      "duplicate_winning_number_appearances": 3,
+      "within_portfolio_allocation_gap_M_minus_max_hit": 2,
+      "fixed_union_candidate_null": {
+        "expected_retained_winners": "12/5",
+        "observed_M": 5,
+        "p_M_at_least_observed": {
+          "numerator": 249900,
+          "denominator": 8145060,
+          "reduced": "595/19393",
+          "value": 0.030681173619347187
+        }
+      },
+      "exact_conditional_allocator_null": {
+        "enumerated_subsets": 8568,
+        "E_max_hit": {
+          "numerator": 7961,
+          "denominator": 2856,
+          "value": 2.7874649859943976
+        },
+        "P_any2plus": {
+          "numerator": 8568,
+          "denominator": 8568,
+          "value": 1
+        },
+        "P_any3plus": {
+          "numerator": 5805,
+          "denominator": 8568,
+          "value": 0.6775210084033614
+        },
+        "P_any4plus": {
+          "numerator": 912,
+          "denominator": 8568,
+          "value": 0.10644257703081232
+        },
+        "E_total_winning_appearances": {
+          "numerator": 25,
+          "denominator": 3,
+          "value": 8.333333333333334
+        },
+        "P_appearances_at_least_observed": {
+          "numerator": 6244,
+          "denominator": 8568,
+          "value": 0.7287581699346405
+        },
+        "max_hit_counts": {
+          "2": 2763,
+          "3": 4893,
+          "4": 882,
+          "5": 30
+        },
+        "gap_counts": {
+          "0": 30,
+          "1": 882,
+          "2": 4893,
+          "3": 2763
+        }
+      },
+      "diagnostic": "Observed max_hit=3 and gap=2 are common under the exact conditional allocation distribution. Five of six winners were retained in the 18-number union, but the portfolio still had no 4+ line."
+    }
+  ],
+  "combined_two_round_summary": {
+    "rounds": 2,
+    "total_winning_numbers": 12,
+    "winners_retained_in_portfolio_unions": 8,
+    "winners_missed_by_portfolio_unions": 4,
+    "combined_union_recall": 0.6666666666666666,
+    "total_duplicate_winning_number_appearances": 7,
+    "interpretation": "The two actual portfolios had small unique unions (16 and 18 across 30 ticket slots). Conditional allocation outcomes were not unusual given the retained-winner counts. This is a two-round diagnostic, not evidence to select or reject an allocator."
+  },
+  "maintenance_context": {
+    "candidate_recall_scorecard_path": "analysis/2026-11-12/CANDIDATE_RECALL_SCORECARD.csv",
+    "candidate_recall_scorecard_blob_sha": "8f4dba490b783970bfa65ac270c66f2c442a9826",
+    "candidate_recall_status_path": "analysis/2026-11-12/CANDIDATE_RECALL_STATUS.json",
+    "candidate_recall_status_blob_sha": "ed7e63626c938a30f08e594ea0b4c380d30d8347",
+    "targets": 1049,
+    "matched_random_sets": 209800,
+    "no_future_leakage": true,
+    "best_delta_recall_vs_random_by_k": {
+      "10": 0.005518748013981556,
+      "15": 0.005529869717190938,
+      "20": 0.003270575150937427,
+      "25": 0.001920877025738843,
+      "30": 0.004046711153479506
+    },
+    "note": "These are previously recorded 2026-11-12 scorecard values, not recalculated today. They remain descriptive/exposed historical results and are not automatically promoted."
+  },
+  "strict_1250_status": {
+    "model_gate_path": "research/weekly_purchase/1250/MODEL_GATE_1250_20261112.json",
+    "model_gate_blob_sha": "43751f824451793469443a05a2704b0c9d9e63b1",
+    "status": "STRICT_PASS_NOT_READY",
+    "validated_models": [],
+    "ready_file_exists": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_block_stability"
+    ],
+    "H1250_AB_preregistered_runner_executed": false,
+    "outer_targets": "401..1249 inclusive (849 targets)",
+    "preregistered_bootstrap_replicates": 7000,
+    "reason": "The unchanged manual-dispatch-only H1250-A/B V2 workflow has no matching workflow run in the latest 100 Actions runs inspected; no available connected action can dispatch it.",
+    "fallback_promoted": false,
+    "final_purchase_lines_emitted": false
+  },
+  "no_future_leakage": "All historical draw evaluation uses the canonical actual-purchase records and draw results after their cutoff. Rounds 1244-1249 are exposed/live-history diagnostics, never called untouched holdouts.",
+  "files_preserved": "Append-only new study artifacts; no original recommendations, error notes, preregistration, model gates, or freeze/seal records overwritten."
+}
