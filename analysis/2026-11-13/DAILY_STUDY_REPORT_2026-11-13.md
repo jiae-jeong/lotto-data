@@ -78,3 +78,9 @@
 - [1250 strict status 2026-11-13](https://github.com/jiae-jeong/lotto-data/blob/main/research/weekly_purchase/1250/STRICT_PASS_STATUS_1250_20261113.json)
 
 원본 추천 기록·오답노트·기존 preregistration·freeze/seal 기록은 덮어쓰지 않았다. 오늘 보고서에는 후보번호와 최종 구매조합을 포함하지 않는다.
+
+## 9. Anti-repetition gate 및 연구 queue 연결
+
+오늘은 최근 완료된 연구를 주 연구로 반복하지 않았다. E010 family de-correlation, E011 nested 3+/4+ tail, E012 exact tail power, E013 component leave-one-out, E014 model agreement/disagreement, E015 two-component drop, E016 vote-depth calibration, E019 three-ticket coverage의 기존 완료·검증 기록을 확인했다. E010/E011의 보정 후 양의 비교는 각각 0건이었고, 10/12 nested regime selector D001~D003도 모두 WEAK로 남아 있어 해당 모델을 재선정하거나 임계값을 다시 탐색하지 않았다.
+
+기존 E018 실제 구매 실패 분해는 1245 sealed source만 확보되어 있었고, 회차별 component rank vector가 없어 blocked 상태였다. 오늘은 canonical ACTUAL_PURCHASE 1247·1248 원본을 추가로 찾아 정확 조건부 allocator 분해를 수행했으므로 E018의 portfolio-level 진단은 부분 진전했다. 다만 당시 번호별 component rank 및 제외 사유 trace는 여전히 없어 signal-level inclusion/exclusion attribution은 미완료다. 누락 원본을 추정하지 않았다.
