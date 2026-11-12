@@ -326,7 +326,16 @@
           "study_result": "analysis/2026-11-13/ACTUAL_PURCHASE_CONDITIONAL_ALLOCATOR_AUDIT_2026-11-13.json",
           "new_work": "Exact fixed-union hypergeometric candidate-stage null and exact conditional allocator enumeration for the actual overlapping five-line geometries.",
           "remaining_blocker": "Complete as-of-cutoff per-number component rank vectors and explicit inclusion/exclusion reason traces remain unavailable. Full signal-level attribution stays blocked.",
-          "provenance_rule": "1246 conflict remains excluded; do not reconstruct missing actual purchase rounds or substitute non-canonical FINAL artifacts."
+          "provenance_rule": "1246 conflict remains excluded; do not reconstruct missing actual purchase rounds or substitute non-canonical FINAL artifacts.",
+          "recovered_error_note_sources": [
+            "research/daily/2026-11-01_round1248_postdraw_audit.md",
+            "analysis/2026-11-12/HISTORICAL_CLOSED_LOOP_STATUS.json"
+          ],
+          "provenance_exclusions": [
+            "1244 POST_DRAW_QUOTATION is ineligible for closed-loop scoring.",
+            "1245 sealed model-source recommendations lack an actual-purchase receipt.",
+            "1246 has unresolved conflicting pre-draw five-line sources and no receipt."
+          ]
         }
       }
     },
