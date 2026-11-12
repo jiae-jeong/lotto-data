@@ -84,3 +84,11 @@
 오늘은 최근 완료된 연구를 주 연구로 반복하지 않았다. E010 family de-correlation, E011 nested 3+/4+ tail, E012 exact tail power, E013 component leave-one-out, E014 model agreement/disagreement, E015 two-component drop, E016 vote-depth calibration, E019 three-ticket coverage의 기존 완료·검증 기록을 확인했다. E010/E011의 보정 후 양의 비교는 각각 0건이었고, 10/12 nested regime selector D001~D003도 모두 WEAK로 남아 있어 해당 모델을 재선정하거나 임계값을 다시 탐색하지 않았다.
 
 기존 E018 실제 구매 실패 분해는 1245 sealed source만 확보되어 있었고, 회차별 component rank vector가 없어 blocked 상태였다. 오늘은 canonical ACTUAL_PURCHASE 1247·1248 원본을 추가로 찾아 정확 조건부 allocator 분해를 수행했으므로 E018의 portfolio-level 진단은 부분 진전했다. 다만 당시 번호별 component rank 및 제외 사유 trace는 여전히 없어 signal-level inclusion/exclusion attribution은 미완료다. 누락 원본을 추정하지 않았다.
+
+## 10. 과거 원본의 추가 구분
+
+- 1244에서 찾은 단일 티켓 인용은 `POST_DRAW_QUOTATION`이며, 추첨 전 원본·당시 cutoff·모델·선정/제외 이유가 없어 폐쇄루프 성적에 포함하지 않았다.
+- 1245는 봉인된 V4 모델 원본 3개와 error-note 집계가 있지만 실제 구매 영수증이 확인되지 않아 actual-purchase 표본으로 세지 않았다.
+- 1248의 11/01 사후 오답노트 원본을 확인했다. 당시 이미 후보 합집합 누락과 조합 간격을 구분했으며, 오늘 계산은 여기에 정확 조건부 기준을 추가했다. 관측된 (M-max\_hit) 간격은 고정된 티켓 구조의 조건부 분포에서 흔한 값이므로, 간격이 존재한다는 사실만으로 allocator가 열등했다고 판단하지 않는다.
+
+따라서 현재 확인 가능한 canonical actual-purchase 표본은 1247·1248 두 회차뿐이다. 1244 인용, 1245 모델 원본, 1246 충돌 기록을 실제 구매 결과로 합산하지 않았다.
