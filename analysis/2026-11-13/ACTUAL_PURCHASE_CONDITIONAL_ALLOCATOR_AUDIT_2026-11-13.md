@@ -101,3 +101,9 @@ No candidate numbers or purchase combinations are included in this report.
 - All six frozen dependency blobs plus the runner match the V2 preregistration (7/7).
 - Current workflow blob `5bfac63506b9fc2d3f68350eafaa8676fa6a64d3` matches the append-only workflow audit. Its trigger remains `workflow_dispatch` only.
 - No H1250-A/B run was found in the latest 100 Actions runs inspected. Integrity PASS is not execution PASS and does not alter the strict gate.
+
+## Additional historical source exclusions
+
+- 1244: the recovered single-ticket quotation is explicitly `POST_DRAW_QUOTATION`, with no contemporaneous pre-draw source, model, cutoff or selection/exclusion reason. It is not eligible for recommendation closed-loop scoring.
+- 1245: three sealed V4 source recommendations and an aggregate error-note CSV exist, but the actual purchase receipt was not located. These are preserved model-source outcomes, not canonical actual-purchase lines.
+- 1248: the original `research/daily/2026-11-01_round1248_postdraw_audit.md` is preserved. It correctly identified both union recall and a (M-max\_hit) construction gap. Today's exact conditional enumeration adds the missing benchmark: the observed gap is common under the fixed-geometry conditional distribution, so it is not by itself evidence of allocator underperformance.
