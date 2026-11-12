@@ -21,6 +21,16 @@
     ],
     "excluded_sources": [
       {
+        "round": 1244,
+        "path": "analysis/2026-10-10/A_SOURCE_RELATION_FOLLOWUP_v1/POSTDRAW_QUOTED_1244_ARITHMETIC.json",
+        "reason": "The quoted ticket is a post-draw quotation with no contemporaneous pre-draw source, model, cutoff or selection/exclusion reason; explicitly ineligible for closed-loop recommendation scoring."
+      },
+      {
+        "round": 1245,
+        "path": "analysis/2026-10-14/E020_TAIL_DISTRIBUTION_DECOMPOSITION_v1/ERROR_NOTE_1245_AGGREGATE.csv",
+        "reason": "Three sealed V4 source recommendations are preserved, but actual purchase receipt was not located; not counted as canonical actual purchase."
+      },
+      {
         "round": 1246,
         "reason": "Two distinct pre-draw five-line sets; no receipt evidence identifies the purchased set. Excluded from canonical aggregate."
       },
@@ -34,7 +44,24 @@
         "reason": "Four alternative preserved FINAL versions exist; canonical ACTUAL_PURCHASE V8 source used, alternatives not substituted."
       }
     ],
-    "whole_history_actual_purchase_source": "INCOMPLETE; no authenticated whole-history recommendation/purchase archive recovered."
+    "whole_history_actual_purchase_source": "INCOMPLETE; no authenticated whole-history recommendation/purchase archive recovered.",
+    "recovered_error_notes": [
+      {
+        "round": 1248,
+        "path": "research/daily/2026-11-01_round1248_postdraw_audit.md",
+        "role": "original post-draw error audit; its deterministic fallback failure decomposition is extended by today's exact conditional allocator calculation"
+      },
+      {
+        "round": 1247,
+        "path": "analysis/2026-11-12/HISTORICAL_CLOSED_LOOP_STATUS.json",
+        "role": "canonical actual-purchase review and line-hit decomposition"
+      },
+      {
+        "round": 1248,
+        "path": "analysis/2026-11-12/HISTORICAL_CLOSED_LOOP_STATUS.json",
+        "role": "canonical actual-purchase review and line-hit decomposition"
+      }
+    ]
   },
   "data_integrity": {
     "cutoff": 1249,
