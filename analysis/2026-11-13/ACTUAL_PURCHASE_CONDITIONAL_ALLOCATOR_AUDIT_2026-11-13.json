@@ -319,5 +319,61 @@
     "workflow_blob_matches_append_only_audit": true,
     "workflow_trigger": "workflow_dispatch_only",
     "h1250_dispatch_run_found_in_latest_100_actions_runs": false
+  },
+  "anti_repetition_review": {
+    "completed_prior_studies_not_repeated": [
+      {
+        "id": "E010_FAMILY_DECORRELATION_v1",
+        "path": "analysis/2026-10-12/E010_FAMILY_DECORRELATION_v1/COMPLETION.json",
+        "status": "COMPLETE",
+        "adjusted_positive_comparisons": 0
+      },
+      {
+        "id": "E011_NESTED_3_4_TAIL_v1",
+        "path": "analysis/2026-10-12/E011_NESTED_3_4_TAIL_v1/COMPLETION.json",
+        "status": "COMPLETE",
+        "adjusted_positive_comparisons": 0
+      },
+      {
+        "id": "E012_EXACT_TAIL_POWER_v1",
+        "path": "analysis/2026-10-13/E012_EXACT_TAIL_POWER_v1/COMPLETION.json",
+        "status": "COMPLETE"
+      },
+      {
+        "id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+        "path": "analysis/2026-10-13/E013_COMPONENT_LEAVE_ONE_OUT_v1/COMPLETION.json",
+        "status": "COMPLETE",
+        "leakage_failures": 0
+      },
+      {
+        "id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+        "path": "analysis/2026-10-13/E014_MODEL_AGREEMENT_DISAGREEMENT_v1/COMPLETION.json",
+        "status": "COMPLETE",
+        "leakage_failures": 0
+      },
+      {
+        "id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+        "path": "analysis/2026-10-14/E015_TWO_COMPONENT_DROP_INTERACTION_v1/COMPLETION.json",
+        "status": "COMPLETE",
+        "leakage_failures": 0
+      },
+      {
+        "id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+        "path": "analysis/2026-10-13/E016_VOTE_DEPTH_CALIBRATION_v1/COMPLETION.json",
+        "status": "COMPLETE"
+      },
+      {
+        "id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+        "path": "analysis/2026-10-14/E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1/COMPLETION.json",
+        "status": "COMPLETE"
+      }
+    ],
+    "prior_regime_selection_status": "D001/D002/D003 all WEAK; Holm-adjusted positive-edge family had zero passes; no regime or dynamic selector promoted.",
+    "E018_status": {
+      "original_queue_status": "BLOCKED_SOURCE_MISSING",
+      "new_evidence": "Canonical actual-purchase records for 1247 and 1248 are now available in addition to the 1245 sealed source.",
+      "progress_today": "Exact conditional allocator/portfolio-union failure decomposition executed for 1247 and 1248.",
+      "remaining_blocker": "Complete as-of-cutoff per-number component rank vectors and explicit inclusion/exclusion reason traces are still unavailable; full signal attribution remains blocked."
+    }
   }
 }
