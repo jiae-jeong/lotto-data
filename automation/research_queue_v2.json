@@ -316,7 +316,18 @@
         "novelty_signature": "one authenticated 1245 sealed purchase source is present, but complete as-of-cutoff per-number component rank vectors and multiple authentic purchased rounds are unavailable; block full decomposition pending evidence recovery.",
         "study_class": "blocked",
         "blocked_status": "BLOCKED_SOURCE_MISSING",
-        "blocked_reason": "The frozen 1245 purchase CSV and review were found, but only one round is available and the registered source lacks complete excluded-winning-number component rank vectors needed for requested attribution. No other round is reconstructed."
+        "blocked_reason": "The frozen 1245 purchase CSV and review were found, but only one round is available and the registered source lacks complete excluded-winning-number component rank vectors needed for requested attribution. No other round is reconstructed.",
+        "partial_progress_2026_11_13": {
+          "status": "PARTIAL_EXECUTED_CONDITIONAL_ALLOCATOR_ONLY",
+          "newly_recovered_canonical_actual_purchase_sources": [
+            "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+            "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json"
+          ],
+          "study_result": "analysis/2026-11-13/ACTUAL_PURCHASE_CONDITIONAL_ALLOCATOR_AUDIT_2026-11-13.json",
+          "new_work": "Exact fixed-union hypergeometric candidate-stage null and exact conditional allocator enumeration for the actual overlapping five-line geometries.",
+          "remaining_blocker": "Complete as-of-cutoff per-number component rank vectors and explicit inclusion/exclusion reason traces remain unavailable. Full signal-level attribution stays blocked.",
+          "provenance_rule": "1246 conflict remains excluded; do not reconstruct missing actual purchase rounds or substitute non-canonical FINAL artifacts."
+        }
       }
     },
     {
