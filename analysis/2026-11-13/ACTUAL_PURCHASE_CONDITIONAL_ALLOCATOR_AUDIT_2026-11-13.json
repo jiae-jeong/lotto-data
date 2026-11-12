@@ -402,5 +402,52 @@
       "progress_today": "Exact conditional allocator/portfolio-union failure decomposition executed for 1247 and 1248.",
       "remaining_blocker": "Complete as-of-cutoff per-number component rank vectors and explicit inclusion/exclusion reason traces are still unavailable; full signal attribution remains blocked."
     }
+  },
+  "prior_failure_context": {
+    "source": "research/weekly_purchase/1250/REMEDIATION_PLAN_2026-11-06.md and preserved 2026-11-06 version artifacts",
+    "cutoff": 1248,
+    "targets": 848,
+    "status": "ALL_V54_V83_V84_V85_V86_FAIL_SAME_STRICT_GATE",
+    "bonferroni_adjusted_ci_lower_bounds": {
+      "V54": {
+        "max_hit": 0.016057748747606057,
+        "any2": -0.0009452448268515871,
+        "any3": 0.0024971729526130923,
+        "last48_any2_delta": -0.10530938384738871,
+        "last48_any3_delta": -0.014512630968955534
+      },
+      "V83": {
+        "max_hit": 0.010133578131492313,
+        "any2": 0.0019253746640918899,
+        "any3": -0.005204120330657662
+      },
+      "V84": {
+        "max_hit": 0.0006549051457103224,
+        "any2": -0.012793586059079076,
+        "any3": 0.000706045153975907
+      },
+      "V85": {
+        "max_hit": -0.0025102945834704496,
+        "any2": -0.01490057881594217,
+        "any3": 0.0036736435408483863
+      },
+      "V86": {
+        "max_hit": -0.004865917683774401,
+        "any2": -0.004287371268772359,
+        "any3": -0.007830241031848616,
+        "any2_positive_50_block_share": 0.6470588235294118
+      }
+    },
+    "last48_proxy_decomposition": {
+      "candidate_recent30_recall_previous48": 0.6319444444444444,
+      "candidate_recent30_recall_last48": 0.6145833333333334,
+      "candidate_recent30_delta": -0.01736111111111105,
+      "coverage_allocator_any2_previous48": 0.7083333333333334,
+      "coverage_allocator_any2_last48": 0.5833333333333334,
+      "coverage_allocator_any2_delta": -0.125,
+      "snake_allocator_any2_previous48": 0.625,
+      "snake_allocator_any2_last48": 0.6458333333333334,
+      "limitation": "These are recent30/fixed-bank proxy diagnostics, not a target-wise replay of V54's original candidate banks and tickets. Exact V54 attribution remains unresolved."
+    }
   }
 }
