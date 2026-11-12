@@ -93,3 +93,11 @@ The latest 1250 model gate remains `STRICT_PASS_NOT_READY`: zero validated model
 3. For the next prospective target, freeze model, candidate ranking, allocator, thresholds, code/data hashes and final artifact before the draw. Evaluate the future result only after the freeze; do not tune on it.
 
 No candidate numbers or purchase combinations are included in this report.
+
+## H1250 preregistration integrity recheck
+
+- V2 preregistration blob: `bcac96aa1a7db5bfb0f4e973ba7fc14a35f2b417`; status remains `SPEC_FROZEN_IMPLEMENTATION_PENDING`.
+- The unchanged H1250 runner blob `a7a7d7792c7ba84a1c12699f53d8a3f4009d8a66` matches the preregistered implementation hash.
+- All six frozen dependency blobs plus the runner match the V2 preregistration (7/7).
+- Current workflow blob `5bfac63506b9fc2d3f68350eafaa8676fa6a64d3` matches the append-only workflow audit. Its trigger remains `workflow_dispatch` only.
+- No H1250-A/B run was found in the latest 100 Actions runs inspected. Integrity PASS is not execution PASS and does not alter the strict gate.
