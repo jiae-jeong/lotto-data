@@ -59,7 +59,7 @@
 
 ## 6. 1250회 strict gate / 금요일 준비 판정
 
-<badge color="danger">STRICT_PASS_NOT_READY</badge>
+**STRICT_PASS_NOT_READY**
 
 최신 저장된 1250 gate는 검증 모델 0개, ready file 없음, max_hits·any2·any3·winning_union_coverage·any2 block stability 다섯 항목 모두 미통과 상태다. H1250-A/B V2의 849-target outer runner와 7,000회 moving-block bootstrap은 아직 실행되지 않았다. 해당 workflow는 수동 dispatch 전용이며, 확인한 최근 100개 Actions run에서 해당 workflow run을 찾지 못했다. 연결된 GitHub 작업에는 workflow-dispatch 실행 기능이 노출되지 않았다.
 
