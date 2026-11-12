@@ -267,5 +267,57 @@
     "final_purchase_lines_emitted": false
   },
   "no_future_leakage": "All historical draw evaluation uses the canonical actual-purchase records and draw results after their cutoff. Rounds 1244-1249 are exposed/live-history diagnostics, never called untouched holdouts.",
-  "files_preserved": "Append-only new study artifacts; no original recommendations, error notes, preregistration, model gates, or freeze/seal records overwritten."
+  "files_preserved": "Append-only new study artifacts; no original recommendations, error notes, preregistration, model gates, or freeze/seal records overwritten.",
+  "preregistration_integrity": {
+    "repository_head": "210a05bb7cf1c0022d881b865e9a980e66baab85",
+    "preregistration_path": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
+    "preregistration_blob_sha": "bcac96aa1a7db5bfb0f4e973ba7fc14a35f2b417",
+    "preregistration_status": "SPEC_FROZEN_IMPLEMENTATION_PENDING",
+    "runner_path": "automation/h1250_ab_research_v2.py",
+    "runner_blob_sha": "a7a7d7792c7ba84a1c12699f53d8a3f4009d8a66",
+    "runner_blob_matches_preregistration": true,
+    "frozen_dependencies_match": 7,
+    "frozen_dependency_checks": [
+      {
+        "path": "automation/today_meta_v43_v52_v54.py",
+        "sha": "40cd75ffdba5736269978017a8811ec68fa3308c",
+        "match": true
+      },
+      {
+        "path": "research/1245_final_pipeline_v3/recovered_original_assets/b_model_backtest.py",
+        "sha": "a3b18bdf703ba1ad5c8a6fb4fcbf606b7f4e0f09",
+        "match": true
+      },
+      {
+        "path": "automation/recovered_models_v2.py",
+        "sha": "8e001e3b026f25a596eac15cf371c390e2a1345e",
+        "match": true
+      },
+      {
+        "path": "automation/today_raw_signal_meta_v12.py",
+        "sha": "463d93f62916fca42201e3481008154e88a2f4a1",
+        "match": true
+      },
+      {
+        "path": "automation/today_interaction_adagrad_v18.py",
+        "sha": "e58e13f3179a2eff67202bb10472dc8461cc7066",
+        "match": true
+      },
+      {
+        "path": "automation/today_frozen_signal_partition_v42.py",
+        "sha": "a4d6bcfcfeea7e40b63bf42f3db1f98a0e4cbe92",
+        "match": true
+      },
+      {
+        "path": "automation/h1250_ab_research_v2.py",
+        "sha": "a7a7d7792c7ba84a1c12699f53d8a3f4009d8a66",
+        "match": true
+      }
+    ],
+    "workflow_path": ".github/workflows/h1250-ab-research-v2.yml",
+    "workflow_blob_sha": "5bfac63506b9fc2d3f68350eafaa8676fa6a64d3",
+    "workflow_blob_matches_append_only_audit": true,
+    "workflow_trigger": "workflow_dispatch_only",
+    "h1250_dispatch_run_found_in_latest_100_actions_runs": false
+  }
 }
