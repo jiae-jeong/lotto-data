@@ -1,0 +1,30 @@
+{
+  "study_id": "DRAW_PROCESS_BIAS_PREFLIGHT_2026-11-13",
+  "classification": "EXPLORATORY_CONDITIONAL_PERMUTATION_DIAGNOSTIC",
+  "data": {
+    "github_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def",
+    "draw_count": 1249,
+    "number_observations": 7494
+  },
+  "split": {
+    "first": "rounds 1..624",
+    "second": "rounds 625..1249"
+  },
+  "observed_first_second_frequency_pearson_r": -0.299944944628198,
+  "permutation": {
+    "repetitions": 5000,
+    "seed": 2026111301,
+    "null_mean_r": -0.13125481335219957,
+    "null_sd_r": 0.10769150849793573,
+    "one_sided_p_for_positive_persistence": 0.9472105578884223
+  },
+  "method": "Permute whole draw rows, preserving each draw's six-number structure and full-history per-number totals; compare first-half and second-half frequency vectors.",
+  "conclusion": "No evidence of positive persistent number-frequency bias in this chronological split. The observed correlation is negative; the upper-tail permutation probability for positive persistence is 0.9472.",
+  "limitations": [
+    "Exploratory split chosen from available history, not preregistered.",
+    "One test only; does not establish absence of all possible biases.",
+    "Not a prospective validation and not strict PASS.",
+    "Cannot be used to claim a predictive model."
+  ],
+  "status": "RESEARCH_ONLY_NO_MODEL_PROMOTION"
+}
