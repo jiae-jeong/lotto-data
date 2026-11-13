@@ -18,6 +18,8 @@ on:
       - 'automation/recovered_models_v2.py'
       - 'automation/model_validation_v5_all_models_fast.py'
       - 'automation/five_role_research_v9.py'
+      - 'automation/three_line_readiness_guard_v1.py'
+      - 'automation/tests_v2/test_three_line_readiness_guard_v1.py'
       - 'automation/weekly_purchase_final_v1.py'
       - 'automation/weekly_purchase_final_v2.py'
       - 'analysis/**/EXTERNAL_DATA_CROSSCHECK.json'
@@ -47,8 +49,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Compile protocol recovery and learning-loop gates
-        run: python -m py_compile automation/protocol_recovery_v1.py automation/learning_loop_gate_v1.py
+      - name: Compile protocol and policy readiness guards
+        run: |
+          python -m py_compile automation/protocol_recovery_v1.py automation/learning_loop_gate_v1.py automation/three_line_readiness_guard_v1.py automation/tests_v2/test_three_line_readiness_guard_v1.py
+          python -B -m unittest automation.tests_v2.test_three_line_readiness_guard_v1 -v
 
       - name: Enforce draw-time-aware data freshness
         shell: bash
@@ -373,15 +377,27 @@ jobs:
           })
           PY
 
-      - name: Run daily strict model validation and portfolio readiness
+      - name: Run daily strict model validation and policy-specific portfolio readiness
         shell: bash
         run: |
           set -euo pipefail
           python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" "analysis/$RUN_DATE/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json" "$RUN_DIR" | tee "$RUNNER_TEMP/model-validation-v5.log"
-          export LOTTO_INTERNAL_PORTFOLIO_PATH="$RUNNER_TEMP/five-role-portfolio-internal.json"
-          rm -f "$LOTTO_INTERNAL_PORTFOLIO_PATH"
-          python -B automation/five_role_research_v9.py "$RUN_DATE" | tee "$RUNNER_TEMP/five-role-v9.log"
-          python - "$RUN_DATE" <<'PY'
+          TARGET_ROUND="$(python - <<'PY'
+          import csv
+          with open('lotto_data.csv', encoding='utf-8-sig', newline='') as f:
+              rows = list(csv.DictReader(f))
+          if not rows:
+              raise SystemExit('lotto_data.csv has no draw rows')
+          print(int(rows[-1]['round']) + 1)
+          PY
+          )"
+          if [ "$TARGET_ROUND" -ge 1251 ]; then
+            python -B automation/three_line_readiness_guard_v1.py "$RUN_DATE" | tee "$RUNNER_TEMP/three-line-readiness.log"
+          else
+            export LOTTO_INTERNAL_PORTFOLIO_PATH="$RUNNER_TEMP/five-role-portfolio-internal.json"
+            rm -f "$LOTTO_INTERNAL_PORTFOLIO_PATH"
+            python -B automation/five_role_research_v9.py "$RUN_DATE" | tee "$RUNNER_TEMP/five-role-v9.log"
+            python - "$RUN_DATE" <<'PY'
           import csv,hashlib,json,os,sys
           from pathlib import Path
           date=sys.argv[1]
@@ -493,6 +509,8 @@ jobs:
           print(json.dumps(gate,ensure_ascii=False))
           PY
 
+
+          fi
       - name: Preserve validated outputs
         shell: bash
         run: |
@@ -530,6 +548,7 @@ jobs:
             ${{ runner.temp }}/learning-loop-gate.log
             ${{ runner.temp }}/model-validation-v5.log
             ${{ runner.temp }}/five-role-v9.log
+            ${{ runner.temp }}/three-line-readiness.log
             analysis/*/MASTER_FULL_V4_*/**
             analysis/*/MASTER_FULL_V5_*/**
             analysis/*/EXTERNAL_DATA_CROSSCHECK.json
