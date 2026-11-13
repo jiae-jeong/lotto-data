@@ -1,0 +1,57 @@
+{
+  "study_id": "STRICT_GATE_EXCHANGEABILITY_AUDIT_2026-11-13",
+  "classification": "NEW_MATHEMATICAL_GATE_FEASIBILITY_AUDIT",
+  "executed_kst": "2026-11-13",
+  "method": "Exact composition enumeration using standard-library integer combinations and rational arithmetic",
+  "total_draws": 8145060,
+  "portfolio_geometry": "5 disjoint tickets x 6 numbers; union 30",
+  "exact_expectations": {
+    "mean_max_hit": {
+      "fraction": "5792/3157",
+      "value": 1.8346531517263225
+    },
+    "any2": {
+      "fraction": "1155745/1629012",
+      "value": 0.7094760505140539
+    },
+    "any3": {
+      "fraction": "96665/814506",
+      "value": 0.11867929763562209
+    },
+    "any4": {
+      "fraction": "5675/814506",
+      "value": 0.006967413376942589
+    },
+    "union_coverage": {
+      "fraction": "4",
+      "value": 4
+    }
+  },
+  "finding": "Under independent uniform draws, conditional on pre-draw history, any deterministic fixed portfolio has the same expected metrics as a random portfolio with identical overlap geometry. Number labels and deterministic allocator rearrangements cannot create expected edge.",
+  "v54_replay": {
+    "target1248_original_targets": 847,
+    "original_status": "STRICT_PASS",
+    "target1249_updated_targets": 848,
+    "updated_any2_adjusted_ci_lower": -0.0009452448268515871,
+    "updated_any3_adjusted_ci_lower": 0.0024971729526130923,
+    "updated_status": "FAIL"
+  },
+  "v83_replay": {
+    "target1249_any3_adjusted_ci_lower": -0.005204120330657662,
+    "status": "FAIL"
+  },
+  "current_1250_status": {
+    "status": "STRICT_PASS_NOT_READY",
+    "validated_models": 0,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_block_stability"
+    ]
+  },
+  "action": "Retire geometry-only changes as a predictive-edge strategy; prioritize independently preregistered tests for stable draw-process non-uniformity and prospective confirmation.",
+  "strict_gate_changed": false,
+  "pass_claimed": false
+}
