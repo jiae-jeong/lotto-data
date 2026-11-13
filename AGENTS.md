@@ -88,7 +88,7 @@ Unless already completed later in `main`, prioritize unresolved work in approxim
 6. **H005_FIX structure-to-number mapping:** design and freeze a corrected mapping before evaluating it; keep it separate from legacy S008.
 7. **Prospective untouched validation:** freeze rules for future rounds and preserve pre-draw artifacts for later evaluation.
 8. **Recommendation failure decomposition:** connect actual purchased-line misses to signal selection/exclusion and test whether those failure causes recur historically.
-9. **Candidate-bank / three-ticket portfolio research (research-only):** evaluate candidate-bank and three-ticket hypotheses without changing the user-approved weekly five-line purchase output.
+9. **Candidate-bank / three-line portfolio research:** for target 1251 onward, evaluate the active three-ticket purchase policy with target-specific exact geometry-matched nulls; keep five-line studies as historical or target-1250-only diagnostics and never use their PASS to qualify a three-line purchase.
 10. **Calibration and uncertainty:** quantify confidence intervals/bootstraps or exact tests where appropriate instead of relying only on point estimates.
 
 Do not repeat an item once its specific research question has been answered unless new data or a new pre-specified question justifies it. Move down the queue or create a new independent hypothesis from the failure registry.
@@ -136,6 +136,14 @@ Before saying the day's study is complete, all must be true:
 If this gate is not yet satisfied, continue working on another valid research task rather than ending with a failure/status-only report.
 
 
-## 9. Existing weekly purchase delivery policy — preserve
+## 9. Weekly purchase delivery policy — preserve
 
-The user-approved weekly final purchase output remains exactly **five lines**, each containing six main numbers, delivered on **Friday** through the existing Friday workflow. Daily research must not display the final purchase lines. Do not change the line count, delivery day/time, automation schedule, or freeze/seal policy without explicit user approval. Three-ticket or other portfolio-size experiments in the research queue are research-only and do not change the weekly purchase output.
+The user's explicit 2026-11-13 instruction changes the weekly purchase output to exactly **three lines from target round 1251 onward**, with six main numbers per line, delivered Friday through the existing Friday automation. Targets through 1250 remain historical five-line records; never rewrite them.
+
+- Complete data/cutoff/hash verification, cutoff-safe model and candidate/portfolio evaluation, the exact target-specific overlap-geometry null, matched-random comparison, walk-forward, strict gates, leakage checks, number validation, and freeze/seal by Thursday.
+- Friday's existing 08:00 KST delivery must revalidate Thursday's sealed three-line artifact and send exactly the same three lines. Do not begin model search or tune numbers on Friday.
+- Daily research and Thursday preparation must not display purchase lines.
+- For target 1251 onward, five-line STRICT_PASS_READY files, five-role diagnostics, and five-ticket backtests are not eligible for purchase readiness. A dedicated three-line runner and three-line geometry-matched strict gate are required.
+- Keep the strict gate unchanged: all four Bonferroni-adjusted moving-block CI lower bounds (max-hit, any2, any3, winning-union coverage) must be strictly above zero versus the correct exact geometry-matched null; family alpha 0.05, per-metric alpha 0.0125; positive non-overlapping 50-target any2 block share at least 0.65; retain the final remainder block; preserve cutoff-safe nested/rolling validation and prospective confirmation.
+- If any source, hash, computation, leakage, strict-gate, or freeze/seal condition is incomplete or fails, do not issue final purchase lines. Never use random or fallback candidates.
+- Preserve the existing Friday automation and schedule. Do not delete or disable the delivery task or create a separate Thursday automation without explicit user approval.

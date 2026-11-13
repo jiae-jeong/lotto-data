@@ -196,6 +196,14 @@ def main():
     draws = load_draws()
     cutoff = draws[-1]['round']
     target = cutoff + 1
+    policy_path = ROOT / 'research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json'
+    active_policy = json.loads(policy_path.read_text(encoding='utf-8')) if policy_path.is_file() else {}
+    policy_effective_from = int(active_policy.get('effective_from_target', 10**9))
+    active_purchase_line_count = (
+        int(active_policy.get('purchase_lines', 5))
+        if target >= policy_effective_from else 5
+    )
+    policy_compatible = active_purchase_line_count == 5
     seed = 202600000000 + target
     outdir = ROOT / 'analysis' / run_date
     outdir.mkdir(parents=True, exist_ok=True)
@@ -288,6 +296,9 @@ def main():
         and inference['winning_union_coverage']['adjusted_ci_delta'][0] > 0
         and inference['any2']['positive_50_round_block_share'] >= 0.65
     )
+    # The five-role engine is diagnostic only once the active purchase policy is three lines.
+    if not policy_compatible:
+        inference['strict_portfolio_pass'] = False
 
     final_lines = [list(x) for x in current]
     integrity = {
@@ -312,6 +323,8 @@ def main():
     ]
     if inference['any2']['positive_50_round_block_share'] < 0.65:
         failed_gates.append('any2_block_stability')
+    if not policy_compatible:
+        failed_gates.append('active_purchase_policy_requires_three_line_engine')
 
     private_payload = {'final_lines': final_lines}
     private_path_value = os.environ.get('LOTTO_INTERNAL_PORTFOLIO_PATH')
@@ -329,12 +342,24 @@ def main():
         'target_round': target,
         'data_cutoff': cutoff,
         'policy': 'ADAPTIVE_FIVE_ROLE_NONRANDOM_PORTFOLIO_V9',
+        'active_purchase_line_count': active_purchase_line_count,
+        'policy_compatibility': (
+            'ACTIVE_POLICY_MATCH'
+            if policy_compatible
+            else 'DIAGNOSTIC_ONLY_FIVE_LINE_ENGINE_BLOCKED_FOR_THREE_LINE_POLICY'
+        ),
         'strict_gate_version': 'V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY',
         'no_future_leakage': True,
         'selection_rule': 'Each role deterministically scores all candidate combinations from historical-only model predictions and trailing historical reliability. Randomness is prohibited in final selection and allowed only in the matched null comparator.',
         'roles': [{'role': x['role'], 'models': list(x['models'])} for x in current_details],
         'model_reliability': current_rel,
-        'line_level_output_status': 'PRIVATE_TEMP_ONLY_UNTIL_STRICT_GATE' if line_level_payload_sha256 else 'NOT_PERSISTED_NO_PRIVATE_PATH',
+        'line_level_output_status': (
+            'PRIVATE_TEMP_DIAGNOSTIC_ONLY_POLICY_MISMATCH'
+            if line_level_payload_sha256 and not policy_compatible
+            else 'PRIVATE_TEMP_ONLY_UNTIL_STRICT_GATE'
+            if line_level_payload_sha256
+            else 'NOT_PERSISTED_NO_PRIVATE_PATH'
+        ),
         'line_level_payload_sha256': line_level_payload_sha256,
         'walkforward_targets': len(observed),
         'random_comparator': 'Random permutation of labels 1..45 applied jointly to the five deterministic tickets; comparator only, never a source of purchase numbers.',
@@ -344,7 +369,13 @@ def main():
         'integrity': integrity,
         'learning_status': 'STRICT_PASS' if inference['strict_portfolio_pass'] else 'ITERATE_NEXT_CYCLE_WITH_FAILED_GATES_RECORDED',
         'failed_gates': failed_gates,
-        'classification': 'STRICTLY_VALIDATED_RESEARCH_PORTFOLIO' if inference['strict_portfolio_pass'] else 'RESEARCH_BASED_NONRANDOM_CANDIDATE_UNVALIDATED_EDGE',
+        'classification': (
+            'RESEARCH_ONLY_POLICY_MISMATCH_DIAGNOSTIC'
+            if not policy_compatible
+            else 'STRICTLY_VALIDATED_RESEARCH_PORTFOLIO'
+            if inference['strict_portfolio_pass']
+            else 'RESEARCH_BASED_NONRANDOM_CANDIDATE_UNVALIDATED_EDGE'
+        ),
     }
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({

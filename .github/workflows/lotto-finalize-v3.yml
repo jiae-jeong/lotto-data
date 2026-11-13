@@ -24,6 +24,8 @@ jobs:
           python-version: '3.12'
       - name: Compile strict-ready finalizer
         run: python -m py_compile automation/finalize_from_strict_ready_v1.py
+      - name: Test target-aware three-line policy guard
+        run: python -m unittest automation.tests_v2.test_three_line_policy_guard -v
       - name: Confirm legacy unconditional freeze path is absent
         run: |
           python - <<'PY'

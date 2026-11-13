@@ -58,6 +58,16 @@ def build_freeze(root: Path, date_kst: str):
         raise ValueError("lotto_data.csv is empty, duplicated, or non-contiguous")
     cutoff = rounds[-1]
     target = cutoff + 1
+    policy_path = root / "research" / "weekly_purchase" / "1251" / "THREE_LINE_POLICY_1251_PLUS.json"
+    if policy_path.is_file():
+        policy = load_json(policy_path)
+        effective_from = int(policy.get("effective_from_target", 10**9))
+        required_lines = int(policy.get("purchase_lines", 5))
+        if target >= effective_from and required_lines != 5:
+            raise ValueError(
+                f"active target {target} policy requires {required_lines} lines; "
+                "the legacy five-line STRICT_PASS_READY finalizer is blocked"
+            )
     data_sha = sha256(data_path)
     date_stamp = date_kst.replace("-", "")
     outdir = root / "research" / "weekly_purchase" / str(target)
