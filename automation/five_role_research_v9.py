@@ -319,7 +319,7 @@ def main():
     if private_path_value:
         private_path = Path(private_path_value)
         private_path.parent.mkdir(parents=True, exist_ok=True)
-        private_raw = (json.dumps(private_payload, ensure_ascii=False, separators=(',', ':')) + '\\n').encode('utf-8')
+        private_raw = (json.dumps(private_payload, ensure_ascii=False, separators=(',', ':')) + '\n').encode('utf-8')
         private_path.write_bytes(private_raw)
         line_level_payload_sha256 = hashlib.sha256(private_raw).hexdigest()
 
