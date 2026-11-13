@@ -35,18 +35,43 @@ def load_module(path: Path, name: str):
 def load_frozen_draw_prefix(cutoff: int, expected_prefix_sha256: str, expected_full_sha256: str):
     raw = DATA.read_bytes()
     full_sha256 = hashlib.sha256(raw).hexdigest()
-    if full_sha256 != expected_full_sha256:
-        raise ValueError(
-            f"Full source file hash mismatch: {full_sha256} != {expected_full_sha256}"
-        )
     physical_lines = raw.splitlines(keepends=True)
-    if len(physical_lines) < cutoff + 1:
-        raise ValueError(f"Data file has fewer than {cutoff} draw rows")
-    prefix = b"".join(physical_lines[: cutoff + 1])
+    if not physical_lines:
+        raise ValueError("Source data file is empty")
+    total_data_rows = sum(1 for line in physical_lines[1:] if line.strip())
+    if total_data_rows < cutoff:
+        raise ValueError(f"Data file has only {total_data_rows} non-empty draw records; need {cutoff}")
+
+    selected = []
+    header_seen = False
+    data_rows = 0
+    cutoff_reached = False
+    for line in physical_lines:
+        if not header_seen:
+            selected.append(line)
+            header_seen = True
+            continue
+        if line.strip():
+            if cutoff_reached:
+                break
+            data_rows += 1
+            selected.append(line)
+            if data_rows == cutoff:
+                cutoff_reached = True
+        else:
+            # Preserve internal and trailing blank lines, but stop before the next draw record.
+            selected.append(line)
+    if data_rows != cutoff or not cutoff_reached:
+        raise ValueError(f"Could not isolate exactly {cutoff} source draw records")
+    prefix = b"".join(selected)
     got_sha256 = hashlib.sha256(prefix).hexdigest()
     if got_sha256 != expected_prefix_sha256:
         raise ValueError(
             f"Frozen historical data prefix hash mismatch: {got_sha256} != {expected_prefix_sha256}"
+        )
+    if total_data_rows == cutoff and full_sha256 != expected_full_sha256:
+        raise ValueError(
+            f"Full source file hash mismatch at the preregistered cutoff: {full_sha256} != {expected_full_sha256}"
         )
     text = prefix.decode("utf-8-sig")
     rows = list(csv.DictReader(io.StringIO(text, newline="")))
@@ -64,8 +89,7 @@ def load_frozen_draw_prefix(cutoff: int, expected_prefix_sha256: str, expected_f
         if bonus < 1 or bonus > 45 or bonus in nums:
             raise ValueError(f"Invalid bonus at round {round_no}")
         draws.append({"round": round_no, "date": row["date"], "nums": nums})
-    return draws, got_sha256, full_sha256
-
+    return draws, got_sha256, full_sha256, total_data_rows
 
 def choose_disjoint_ticket(role_score: dict, global_score: dict, used: set[int]) -> tuple[int, ...]:
     available = [n for n in range(1, 46) if n not in used]
@@ -231,7 +255,7 @@ def run(date_kst: str, run_id: str):
             raise ValueError(f"Exact null changed for {key}")
 
     cutoff = int(prereg["historical_data_cutoff"])
-    draws, data_prefix_sha, data_sha = load_frozen_draw_prefix(
+    draws, data_prefix_sha, data_sha, current_data_rows = load_frozen_draw_prefix(
         cutoff,
         prereg["source_data_prefix_sha256"],
         prereg["source_data_full_file_sha256"],
@@ -542,6 +566,7 @@ def run(date_kst: str, run_id: str):
         "data_cutoff": cutoff,
         "data_sha256": data_sha,
         "data_prefix_sha256": data_prefix_sha,
+        "current_source_data_rows": current_data_rows,
         "target_range": [targets[0], targets[-1]],
         "target_count": len(targets),
         "prediction_records": len(prediction_rows),
