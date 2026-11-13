@@ -76,6 +76,11 @@ def validate_ready_artifact(path: Path, target: int, date_kst: str, cutoff: int,
         raise ValueError("ready artifact target/date mismatch")
     if int(ready.get("data_cutoff", -1)) != cutoff or ready.get("data_sha256") != data_sha:
         raise ValueError("ready artifact cutoff/hash mismatch")
+    if ready.get("strict_model_validation_pass") is not True:
+        raise ValueError("ready artifact does not attest to a validated three-line model")
+    models = ready.get("validated_models")
+    if not isinstance(models, list) or not models:
+        raise ValueError("ready artifact has no validated model identifiers")
     if ready.get("strict_portfolio_pass") is not True or ready.get("strict_pass_ready") is not True:
         raise ValueError("ready artifact does not attest to strict portfolio PASS")
     if ready.get("historical_strict_gate_pass") is not True:
