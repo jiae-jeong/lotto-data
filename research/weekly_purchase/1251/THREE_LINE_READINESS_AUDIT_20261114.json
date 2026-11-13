@@ -22,8 +22,8 @@
   "unevaluated_gates": [],
   "blocking_reasons": [
     "E045 completed the preregistered 401..1249 walk-forward. Historical strict gate failed: all four adjusted CI lower bounds were not greater than zero, and any2-positive 50-target block share was 8/17 (47.06%), below 65%.",
-    "Prospective confirmation is required, but the policy still has no minimum target count or completion rule.",
-    "The existing finalize_from_strict_ready_v1.py finalizer validates exactly five lines and blocks target 1251 under the three-line policy; no three-line-specific finalization/seal path is available.",
+    "Prospective confirmation is required, but the policy still has no minimum target count or completion rule; E046 provides design-only planning evidence and does not adopt a rule.",
+    "No target-specific three-line STRICT_PASS_READY artifact exists. The new three-line finalizer path is available, but it correctly refuses to seal without a fully validated ready artifact.",
     "E043 H1250-A and E044 H1250-B V2 are five-line H1250 studies and remain ineligible as target-1251 three-line evidence.",
     "E019 remains POST_HOC_EXPLORATORY and its original overlapping-ticket comparator is not geometry-matched; the separate correction document preserves that limitation."
   ],
@@ -36,10 +36,10 @@
   "final_selection_randomness": false,
   "random_fallback_allowed": false,
   "final_purchase_freeze_allowed": false,
-  "note": "E045 has now been executed and its historical strict gates evaluated. This audit synchronizes readiness with the immutable E045 result; no thresholds, alpha, block length, comparator, or model variants were changed. No purchase lines are released.",
+  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released.",
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
-    "registered_tasks": 32,
+    "registered_tasks": 33,
     "generic_task_completion_paths_found": 25,
     "blocked_generic_tasks": [
       "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
@@ -50,6 +50,10 @@
       "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
     ],
     "pending_dedicated_task_scope": "Both pending dedicated tasks are five-line H1250 studies and are ineligible for target-1251 three-line evidence.",
+    "completed_dedicated_tasks": {
+      "E045": "EXECUTED_HISTORICAL_STRICT_FAIL",
+      "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE"
+    },
     "superseded_tasks": [
       "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
     ],
@@ -57,6 +61,13 @@
     "target_1251_three_line_runner_found": true,
     "target_1251_three_line_task_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
     "target_1251_three_line_workflow_run_id": 43499702588,
+    "target_1251_three_line_finalizer_found": true,
+    "three_line_finalizer": "automation/finalize_three_line_from_strict_ready_v1.py",
+    "finalizer_workflows": [
+      ".github/workflows/lotto-finalize-r3.yml",
+      ".github/workflows/lotto-finalize-v3.yml"
+    ],
+    "queue_contract_validation": "PASS in orthogonal-research-v2 run 43526745320",
     "generic_queue_preflight_validation": "NOT_RUN_IN_THIS_AUDIT",
     "runnable_generic_task_count": "NOT_COMPUTED_WITHOUT_PREFLIGHT"
   },
@@ -101,7 +112,10 @@
     "minimum_target_count": null,
     "completion_rule": null,
     "status": "UNSPECIFIED_IN_POLICY",
-    "consequence": "Historical E045 failure already blocks readiness; the prospective rule must be specified before any future candidate can be promoted."
+    "design_analysis": "research/weekly_purchase/1251/THREE_LINE_PROSPECTIVE_POWER_PREREG_E046_20261114.json",
+    "design_analysis_result": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1/REPORT.md",
+    "minimum_count_adopted": false,
+    "consequence": "Historical E045 failure already blocks readiness; E046 is planning-only and the prospective rule must be formally predeclared before any future candidate can be promoted."
   },
   "e045_execution": {
     "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
@@ -136,5 +150,29 @@
     "strict_portfolio_pass": false,
     "strict_pass_ready": false
   },
-  "finalizer_status": "LEGACY_FIVE_LINE_FINALIZER_BLOCKED_FOR_TARGET_1251"
+  "finalizer_status": "THREE_LINE_FINALIZER_AVAILABLE_THURSDAY_FREEZE_FRIDAY_VERIFY_ONLY; STRICT_PASS_READY_ABSENT",
+  "e046_design_analysis": {
+    "study_id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+    "workflow_name": "three-line-prospective-power-planning-v1",
+    "workflow_run_id": 43526534917,
+    "workflow_run_number": 2,
+    "conclusion": "success",
+    "result_path": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+    "data_cutoff": 1249,
+    "source_targets": 849,
+    "source_manifest_entries_verified": 8,
+    "no_future_leakage": true,
+    "design_rows": 48,
+    "classification": "DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "purchase_lines_generated": false,
+    "planning_findings": {
+      "first_grid_point_with_at_least_80pct_joint_power_independence_approx_at_d_1_0": 1000,
+      "first_grid_point_with_at_least_80pct_conservative_union_lower_at_d_1_0": 1000,
+      "no_80pct_grid_point_at_effect_sizes_d_0_25_0_5_or_0_75": true
+    },
+    "policy_changed": false,
+    "prospective_minimum_count_adopted": false
+  }
 }
