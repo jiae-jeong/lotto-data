@@ -39,10 +39,11 @@ class IndependentFiveLineTests(unittest.TestCase):
         self.assertEqual(ids[e036_start:e036_start + len(expected_e036_e042)], expected_e036_e042)
         self.assertLess(prior_start, e030_start)
         self.assertLess(e030_start, e036_start)
-        self.assertEqual(ids[-3:], [
+        self.assertEqual(ids[-4:], [
             "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+            "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
         ])
         self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
                          "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
