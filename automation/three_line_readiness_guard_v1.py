@@ -65,6 +65,9 @@ def adjusted_lower(metric):
     delta = metric.get("adjusted_ci_delta")
     if isinstance(delta, list) and len(delta) == 2:
         return float(delta[0])
+    moving = metric.get("adjusted_moving_block_ci")
+    if isinstance(moving, list) and len(moving) == 2:
+        return float(moving[0])
     raise ValueError("strict metric has no adjusted CI lower bound")
 
 
@@ -97,11 +100,15 @@ def validate_ready_artifact(path: Path, target: int, date_kst: str, cutoff: int,
     inference = ready.get("inference")
     if not isinstance(inference, dict):
         raise ValueError("ready artifact has no inference block")
+    metric_block = inference.get("metrics", inference)
     for metric_name in ("max_hits", "any2", "any3", "winning_union_coverage"):
-        lower = adjusted_lower(inference.get(metric_name))
+        lower = adjusted_lower(metric_block.get(metric_name))
         if not lower > 0:
             raise ValueError(f"{metric_name} adjusted CI lower bound is not > 0")
-    block_share = float(inference.get("any2_positive_50_target_block_share", -1))
+    block_share = float(inference.get(
+        "any2_positive_50_target_block_share",
+        metric_block.get("any2_positive_50_target_block_share", -1),
+    ))
     if block_share < 0.65:
         raise ValueError("any2 positive 50-target block share is below 0.65")
     prospective = ready.get("prospective_confirmation")
