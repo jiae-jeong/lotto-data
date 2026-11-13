@@ -1225,7 +1225,7 @@
       "kind": "three_line_portfolio_walkforward",
       "question": "Does one frozen three-role allocator built from the existing 11-model B/AC signal set produce a strict edge for exactly three pairwise-disjoint six-number tickets with union18?",
       "novelty": "One preregistered 3-line disjoint portfolio allocator; exact geometry-matched 3x6 union18 null; cutoff-safe 401..1249 rolling evaluation; four fixed strict metrics; no candidate variants or post-result tuning.",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_RUN",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "spec": {
         "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
         "kind": "three_line_portfolio_walkforward",
@@ -1280,6 +1280,50 @@
         },
         "no_threshold_relaxation": true,
         "no_parameter_tuning": true
+      },
+      "execution_result": {
+        "workflow_name": "target-1251-three-line-research-v1",
+        "workflow_run_id": 43499702588,
+        "workflow_run_number": 5,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43499702588",
+        "started_at_utc": "2026-11-13T20:14:25Z",
+        "completed_at_utc": "2026-11-13T20:18:39Z",
+        "result_commit": "a45efcc8dfcac8335971d5f07ddd2610f7c981e8",
+        "result_path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+        "data_cutoff": 1249,
+        "target_range": [
+          401,
+          1249
+        ],
+        "target_count": 849,
+        "prediction_records": 849,
+        "random_bundles_per_target": 120,
+        "random_bundles_total": 101880,
+        "verification_status": "PASS",
+        "manifest_entries": 8,
+        "manifest_status": "PASS",
+        "training_cutoff_violations": 0,
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "portfolio_geometry_violations": 0,
+        "random_geometry_violations": 0,
+        "historical_strict_gate_pass": false,
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "failed_gates": {
+          "max_hit_adjusted_ci_lower": -0.08316084221233107,
+          "any2_adjusted_ci_lower": -0.04623654951156461,
+          "any3_adjusted_ci_lower": -0.036019218100235645,
+          "winning_union_coverage_adjusted_ci_lower": -0.12084805653710239,
+          "any2_positive_50_target_block_share": 0.47058823529411764,
+          "any2_positive_blocks": 8,
+          "total_50_target_blocks": 17,
+          "required_block_share": 0.65
+        },
+        "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
       }
     }
   ],

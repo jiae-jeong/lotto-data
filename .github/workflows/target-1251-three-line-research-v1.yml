@@ -24,7 +24,37 @@ env:
   OPENBLAS_NUM_THREADS: '2'
 
 jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Check whether E045 is still pending
+        id: check
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          queue = json.loads(Path('automation/research_queue_v2.json').read_text(encoding='utf-8'))
+          task = next((item for item in queue.get('tasks', []) if item.get('id') == 'E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1'), None)
+          if task is None:
+              raise SystemExit('E045 queue entry is missing')
+          event = os.environ['GITHUB_EVENT_NAME']
+          status = task.get('execution_status')
+          should_run = event == 'workflow_dispatch' or status == 'IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_RUN'
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write('should_run=' + ('true' if should_run else 'false') + '\n')
+          print({'event': event, 'task_status': status, 'should_run': should_run})
+          PY
+
   research:
+    needs: preflight
+    if: needs.preflight.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
