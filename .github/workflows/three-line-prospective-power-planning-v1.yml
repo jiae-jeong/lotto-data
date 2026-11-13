@@ -134,6 +134,9 @@ jobs:
           print({'study_id':study,'manifest_entries':len(manifest),'queue_status':task['execution_status']})
           PY
       - name: Publish E046 design evidence and terminal queue state
+        env:
+          RUN_DATE: ${{ steps.study.outputs.date }}
+          RUN_ID: ${{ steps.study.outputs.run_id }}
         shell: bash
         run: |
           set -euo pipefail
