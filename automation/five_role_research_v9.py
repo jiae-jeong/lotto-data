@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import importlib.util
 import itertools
 import json
 import random
 import statistics
+import os
 import sys
 from collections import Counter, deque
 from datetime import datetime, timedelta, timezone
@@ -311,6 +313,16 @@ def main():
     if inference['any2']['positive_50_round_block_share'] < 0.65:
         failed_gates.append('any2_block_stability')
 
+    private_payload = {'final_lines': final_lines}
+    private_path_value = os.environ.get('LOTTO_INTERNAL_PORTFOLIO_PATH')
+    line_level_payload_sha256 = None
+    if private_path_value:
+        private_path = Path(private_path_value)
+        private_path.parent.mkdir(parents=True, exist_ok=True)
+        private_raw = (json.dumps(private_payload, ensure_ascii=False, separators=(',', ':')) + '\\n').encode('utf-8')
+        private_path.write_bytes(private_raw)
+        line_level_payload_sha256 = hashlib.sha256(private_raw).hexdigest()
+
     payload = {
         'created_kst': datetime.now(KST).isoformat(),
         'run_date_kst': run_date,
@@ -320,11 +332,10 @@ def main():
         'strict_gate_version': 'V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY',
         'no_future_leakage': True,
         'selection_rule': 'Each role deterministically scores all candidate combinations from historical-only model predictions and trailing historical reliability. Randomness is prohibited in final selection and allowed only in the matched null comparator.',
-        'roles': current_details,
+        'roles': [{'role': x['role'], 'models': list(x['models'])} for x in current_details],
         'model_reliability': current_rel,
-        'current_model_predictions': {m: list(current_preds[m]) for m in MODELS},
-        'global_number_support': {str(n): current_g[n] for n in range(1, 46)},
-        'final_lines': final_lines,
+        'line_level_output_status': 'PRIVATE_TEMP_ONLY_UNTIL_STRICT_GATE' if line_level_payload_sha256 else 'NOT_PERSISTED_NO_PRIVATE_PATH',
+        'line_level_payload_sha256': line_level_payload_sha256,
         'walkforward_targets': len(observed),
         'random_comparator': 'Random permutation of labels 1..45 applied jointly to the five deterministic tickets; comparator only, never a source of purchase numbers.',
         'random_per_target': RANDOM_PER_TARGET,
@@ -342,8 +353,8 @@ def main():
         'data_cutoff': cutoff,
         'strict_pass': inference['strict_portfolio_pass'],
         'failed_gates': failed_gates,
-        'final_lines': final_lines,
         'roles': [x['role'] for x in current_details],
+        'line_level_output_status': payload['line_level_output_status'],
         'selection_uses_randomness': False,
         'output': str(out.relative_to(ROOT)),
     }, ensure_ascii=False))

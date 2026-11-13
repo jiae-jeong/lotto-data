@@ -22,83 +22,6 @@
         "A_v2",
         "C_v2",
         "contrarian_v2"
-      ],
-      "ticket": [
-        3,
-        12,
-        13,
-        25,
-        27,
-        37
-      ],
-      "numbers": [
-        {
-          "number": 3,
-          "role_score": 0.46429129121818236,
-          "global_support": 0.4642912912181823,
-          "supporting_models": [
-            "current_gap",
-            "frequency_plus_gap",
-            "structure_profile",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 12,
-          "role_score": 0.39183736892554144,
-          "global_support": 0.39183736892554144,
-          "supporting_models": [
-            "long_frequency",
-            "frequency_plus_gap",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 13,
-          "role_score": 0.481171511090559,
-          "global_support": 0.481171511090559,
-          "supporting_models": [
-            "long_frequency",
-            "triple_association",
-            "combined_equal_rank",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 25,
-          "role_score": 0.28532686267986007,
-          "global_support": 0.28532686267986007,
-          "supporting_models": [
-            "structure_profile",
-            "triple_association",
-            "contrarian_v2"
-          ]
-        },
-        {
-          "number": 27,
-          "role_score": 0.2979129915320707,
-          "global_support": 0.2979129915320707,
-          "supporting_models": [
-            "long_frequency",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 37,
-          "role_score": 0.4953864330883498,
-          "global_support": 0.4953864330883498,
-          "supporting_models": [
-            "frequency_plus_gap",
-            "structure_profile",
-            "triple_association",
-            "A_v2",
-            "C_v2"
-          ]
-        }
       ]
     },
     {
@@ -108,80 +31,6 @@
         "triple_association",
         "structure_profile",
         "combined_equal_rank"
-      ],
-      "ticket": [
-        3,
-        8,
-        13,
-        20,
-        25,
-        37
-      ],
-      "numbers": [
-        {
-          "number": 3,
-          "role_score": 0.3041437554601375,
-          "global_support": 0.4642912912181823,
-          "supporting_models": [
-            "current_gap",
-            "frequency_plus_gap",
-            "structure_profile",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 8,
-          "role_score": 0.4813579263860898,
-          "global_support": 0.207394272533904,
-          "supporting_models": [
-            "structure_profile",
-            "triple_association"
-          ]
-        },
-        {
-          "number": 13,
-          "role_score": 0.4908801883388475,
-          "global_support": 0.481171511090559,
-          "supporting_models": [
-            "long_frequency",
-            "triple_association",
-            "combined_equal_rank",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 20,
-          "role_score": 0.39028474854045214,
-          "global_support": 0.16815516493583552,
-          "supporting_models": [
-            "structure_profile",
-            "combined_equal_rank"
-          ]
-        },
-        {
-          "number": 25,
-          "role_score": 0.49850309621820016,
-          "global_support": 0.28532686267986007,
-          "supporting_models": [
-            "structure_profile",
-            "triple_association",
-            "contrarian_v2"
-          ]
-        },
-        {
-          "number": 37,
-          "role_score": 0.5447162017080679,
-          "global_support": 0.4953864330883498,
-          "supporting_models": [
-            "frequency_plus_gap",
-            "structure_profile",
-            "triple_association",
-            "A_v2",
-            "C_v2"
-          ]
-        }
       ]
     },
     {
@@ -190,82 +39,6 @@
         "long_frequency",
         "current_gap",
         "frequency_plus_gap"
-      ],
-      "ticket": [
-        3,
-        12,
-        13,
-        17,
-        34,
-        37
-      ],
-      "numbers": [
-        {
-          "number": 3,
-          "role_score": 0.5906993763957116,
-          "global_support": 0.4642912912181823,
-          "supporting_models": [
-            "current_gap",
-            "frequency_plus_gap",
-            "structure_profile",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 12,
-          "role_score": 0.6412505253093856,
-          "global_support": 0.39183736892554144,
-          "supporting_models": [
-            "long_frequency",
-            "frequency_plus_gap",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 13,
-          "role_score": 0.3973024401122115,
-          "global_support": 0.481171511090559,
-          "supporting_models": [
-            "long_frequency",
-            "triple_association",
-            "combined_equal_rank",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 17,
-          "role_score": 0.5426945984457057,
-          "global_support": 0.24608775508179156,
-          "supporting_models": [
-            "current_gap",
-            "frequency_plus_gap",
-            "combined_equal_rank"
-          ]
-        },
-        {
-          "number": 34,
-          "role_score": 0.33013278882957575,
-          "global_support": 0.17585491435130557,
-          "supporting_models": [
-            "long_frequency",
-            "combined_equal_rank"
-          ]
-        },
-        {
-          "number": 37,
-          "role_score": 0.37258661175291496,
-          "global_support": 0.4953864330883498,
-          "supporting_models": [
-            "frequency_plus_gap",
-            "structure_profile",
-            "triple_association",
-            "A_v2",
-            "C_v2"
-          ]
-        }
       ]
     },
     {
@@ -274,78 +47,6 @@
         "recent_momentum",
         "structure_profile",
         "combined_equal_rank"
-      ],
-      "ticket": [
-        3,
-        18,
-        20,
-        25,
-        37,
-        40
-      ],
-      "numbers": [
-        {
-          "number": 3,
-          "role_score": 0.4057905962348395,
-          "global_support": 0.4642912912181823,
-          "supporting_models": [
-            "current_gap",
-            "frequency_plus_gap",
-            "structure_profile",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 18,
-          "role_score": 0.5323821940000278,
-          "global_support": 0.25467593712212355,
-          "supporting_models": [
-            "long_frequency",
-            "recent_momentum",
-            "combined_equal_rank"
-          ]
-        },
-        {
-          "number": 20,
-          "role_score": 0.5680616447281895,
-          "global_support": 0.16815516493583552,
-          "supporting_models": [
-            "structure_profile",
-            "combined_equal_rank"
-          ]
-        },
-        {
-          "number": 25,
-          "role_score": 0.36641842195640856,
-          "global_support": 0.28532686267986007,
-          "supporting_models": [
-            "structure_profile",
-            "triple_association",
-            "contrarian_v2"
-          ]
-        },
-        {
-          "number": 37,
-          "role_score": 0.4126315274462763,
-          "global_support": 0.4953864330883498,
-          "supporting_models": [
-            "frequency_plus_gap",
-            "structure_profile",
-            "triple_association",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 40,
-          "role_score": 0.34546187616364055,
-          "global_support": 0.1900698363490964,
-          "supporting_models": [
-            "frequency_plus_gap",
-            "structure_profile"
-          ]
-        }
       ]
     },
     {
@@ -355,82 +56,6 @@
         "C_v2",
         "contrarian_v2",
         "long_frequency"
-      ],
-      "ticket": [
-        3,
-        12,
-        13,
-        27,
-        37,
-        38
-      ],
-      "numbers": [
-        {
-          "number": 3,
-          "role_score": 0.5048969119440936,
-          "global_support": 0.4642912912181823,
-          "supporting_models": [
-            "current_gap",
-            "frequency_plus_gap",
-            "structure_profile",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 12,
-          "role_score": 0.7044691276115015,
-          "global_support": 0.39183736892554144,
-          "supporting_models": [
-            "long_frequency",
-            "frequency_plus_gap",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 13,
-          "role_score": 0.7241226388878054,
-          "global_support": 0.481171511090559,
-          "supporting_models": [
-            "long_frequency",
-            "triple_association",
-            "combined_equal_rank",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 27,
-          "role_score": 0.6838057645849379,
-          "global_support": 0.2979129915320707,
-          "supporting_models": [
-            "long_frequency",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 37,
-          "role_score": 0.5117378431555304,
-          "global_support": 0.4953864330883498,
-          "supporting_models": [
-            "frequency_plus_gap",
-            "structure_profile",
-            "triple_association",
-            "A_v2",
-            "C_v2"
-          ]
-        },
-        {
-          "number": 38,
-          "role_score": 0.44544774017150796,
-          "global_support": 0.19406778316097503,
-          "supporting_models": [
-            "A_v2",
-            "C_v2"
-          ]
-        }
       ]
     }
   ],
@@ -447,185 +72,6 @@
     "C_v2": 0.9459129301575543,
     "contrarian_v2": 0.765549293793918
   },
-  "current_model_predictions": {
-    "long_frequency": [
-      12,
-      13,
-      18,
-      27,
-      34,
-      45
-    ],
-    "current_gap": [
-      3,
-      6,
-      15,
-      17,
-      30,
-      39
-    ],
-    "frequency_plus_gap": [
-      3,
-      12,
-      17,
-      33,
-      37,
-      40
-    ],
-    "recent_momentum": [
-      2,
-      18,
-      22,
-      31,
-      42,
-      44
-    ],
-    "structure_profile": [
-      3,
-      8,
-      20,
-      25,
-      37,
-      40
-    ],
-    "pair_association": [
-      5,
-      11,
-      14,
-      21,
-      26,
-      44
-    ],
-    "triple_association": [
-      2,
-      8,
-      13,
-      25,
-      28,
-      37
-    ],
-    "combined_equal_rank": [
-      1,
-      13,
-      17,
-      18,
-      20,
-      34
-    ],
-    "A_v2": [
-      3,
-      12,
-      13,
-      27,
-      37,
-      38
-    ],
-    "C_v2": [
-      3,
-      12,
-      13,
-      27,
-      37,
-      38
-    ],
-    "contrarian_v2": [
-      25,
-      26,
-      35,
-      36,
-      41,
-      43
-    ]
-  },
-  "global_number_support": {
-    "1": 0.07200970598020992,
-    "2": 0.1900698363490964,
-    "3": 0.4642912912181823,
-    "4": 0.0,
-    "5": 0.09185136793545964,
-    "6": 0.0801536717081109,
-    "7": 0.0,
-    "8": 0.207394272533904,
-    "9": 0.0,
-    "10": 0.0,
-    "11": 0.09185136793545964,
-    "12": 0.39183736892554144,
-    "13": 0.481171511090559,
-    "14": 0.09185136793545964,
-    "15": 0.0801536717081109,
-    "16": 0.0,
-    "17": 0.24608775508179156,
-    "18": 0.25467593712212355,
-    "19": 0.0,
-    "20": 0.16815516493583552,
-    "21": 0.09185136793545964,
-    "22": 0.07882102277081801,
-    "23": 0.0,
-    "24": 0.0,
-    "25": 0.28532686267986007,
-    "26": 0.16978395808141572,
-    "27": 0.2979129915320707,
-    "28": 0.11124881357827839,
-    "29": 0.0,
-    "30": 0.0801536717081109,
-    "31": 0.07882102277081801,
-    "32": 0.0,
-    "33": 0.09392437739347079,
-    "34": 0.17585491435130557,
-    "35": 0.07793259014595608,
-    "36": 0.07793259014595608,
-    "37": 0.4953864330883498,
-    "38": 0.19406778316097503,
-    "39": 0.0801536717081109,
-    "40": 0.1900698363490964,
-    "41": 0.07793259014595608,
-    "42": 0.07882102277081801,
-    "43": 0.07793259014595608,
-    "44": 0.17067239070627765,
-    "45": 0.10384520837109565
-  },
-  "final_lines": [
-    [
-      3,
-      12,
-      13,
-      25,
-      27,
-      37
-    ],
-    [
-      3,
-      8,
-      13,
-      20,
-      25,
-      37
-    ],
-    [
-      3,
-      12,
-      13,
-      17,
-      34,
-      37
-    ],
-    [
-      3,
-      18,
-      20,
-      25,
-      37,
-      40
-    ],
-    [
-      3,
-      12,
-      13,
-      27,
-      37,
-      38
-    ]
-  ],
   "walkforward_targets": 849,
   "random_comparator": "Random permutation of labels 1..45 applied jointly to the five deterministic tickets; comparator only, never a source of purchase numbers.",
   "random_per_target": 120,
@@ -635,8 +81,8 @@
       "any2": 0.41578327444051827,
       "any3": 0.0706713780918728,
       "any4": 0.008244994110718492,
-      "any5": 0.0,
-      "any6": 0.0,
+      "any5": 0,
+      "any6": 0,
       "winning_union_coverage": 1.7173144876325088,
       "union_size": 13.148409893992932,
       "mean_overlap": 3.328268551236749,
@@ -647,8 +93,8 @@
       "any2": 0.4170691009030232,
       "any3": 0.07938751472320377,
       "any4": 0.005457400863761288,
-      "any5": 8.833922261484099e-05,
-      "any6": 0.0,
+      "any5": 0.00008833922261484099,
+      "any6": 0,
       "winning_union_coverage": 1.7611209265802905,
       "union_size": 13.148409893992932,
       "mean_overlap": 3.328268551236749,
@@ -659,12 +105,12 @@
       "any2": -0.0012858264625049132,
       "any3": -0.008716136631330973,
       "any4": 0.0027875932469572044,
-      "any5": -8.833922261484099e-05,
-      "any6": 0.0,
+      "any5": -0.00008833922261484099,
+      "any6": 0,
       "winning_union_coverage": -0.04380643894778169,
-      "union_size": 0.0,
-      "mean_overlap": 0.0,
-      "max_overlap": 0.0
+      "union_size": 0,
+      "mean_overlap": 0,
+      "max_overlap": 0
     }
   },
   "inference": {
@@ -715,5 +161,8 @@
     "winning_union_coverage",
     "any2_block_stability"
   ],
-  "classification": "RESEARCH_BASED_NONRANDOM_CANDIDATE_UNVALIDATED_EDGE"
+  "classification": "RESEARCH_BASED_NONRANDOM_CANDIDATE_UNVALIDATED_EDGE",
+  "line_level_output_status": "REDACTED_AFTER_STRICT_PASS_NOT_READY",
+  "line_level_payload_sha256": null,
+  "line_level_output_note": "Line-level current portfolio data was removed from the published daily artifact because overall strict readiness was false; see the suppression audit."
 }

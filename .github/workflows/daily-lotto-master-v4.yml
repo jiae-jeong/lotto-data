@@ -378,9 +378,11 @@ jobs:
         run: |
           set -euo pipefail
           python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" "analysis/$RUN_DATE/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json" "$RUN_DIR" | tee "$RUNNER_TEMP/model-validation-v5.log"
+          export LOTTO_INTERNAL_PORTFOLIO_PATH="$RUNNER_TEMP/five-role-portfolio-internal.json"
+          rm -f "$LOTTO_INTERNAL_PORTFOLIO_PATH"
           python -B automation/five_role_research_v9.py "$RUN_DATE" | tee "$RUNNER_TEMP/five-role-v9.log"
           python - "$RUN_DATE" <<'PY'
-          import csv,hashlib,json,sys
+          import csv,hashlib,json,os,sys
           from pathlib import Path
           date=sys.argv[1]
           strict_report=Path('analysis')/date/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json'
@@ -389,6 +391,12 @@ jobs:
           cutoff=int(rows[-1]['round']); target=cutoff+1
           research_report=Path('analysis')/date/f'FIVE_ROLE_RESEARCH_{target}_V9.json'
           research=json.loads(research_report.read_text())
+          internal_path=Path(os.environ['LOTTO_INTERNAL_PORTFOLIO_PATH'])
+          internal_raw=internal_path.read_bytes()
+          assert hashlib.sha256(internal_raw).hexdigest()==research['line_level_payload_sha256']
+          internal_payload=json.loads(internal_raw)
+          final_lines=internal_payload['final_lines']
+          assert len(final_lines)==5 and all(len(row)==6 and len(set(row))==6 for row in final_lines)
           assert int(strict['data_cutoff'])==cutoff
           assert research['data_cutoff']==cutoff
           assert research['target_round']==target
@@ -432,7 +440,8 @@ jobs:
               'strict_portfolio_pass':portfolio_pass,
               'strict_gate_version':research.get('strict_gate_version'),
               'failed_gates':[],
-              'final_lines':research['final_lines'],
+              'line_level_payload_sha256':research['line_level_payload_sha256'],
+              'final_lines':final_lines,
               'inference':research['inference'],
               'no_future_leakage':True,
               'selection_uses_randomness':False,
@@ -459,6 +468,7 @@ jobs:
             'strict_pass_ready':ready,
             'ready_file':str(ready_path) if ready_path else None,
             'ready_file_exists':bool(ready_path and ready_path.is_file()),
+            'line_level_output_status':'PUBLISHED_IN_STRICT_PASS_READY' if ready else 'SUPPRESSED_NOT_READY',
             'stale_ready_files':stale_ready_files,
             'failed_gates':failed_gates,
             'no_future_leakage':True,
@@ -479,6 +489,7 @@ jobs:
           }
           gate_path=outdir/f"MODEL_GATE_{target}_{date.replace('-','')}.json"
           gate_path.write_text(json.dumps(gate,ensure_ascii=False,indent=2),encoding='utf-8')
+          internal_path.unlink(missing_ok=True)
           print(json.dumps(gate,ensure_ascii=False))
           PY
 

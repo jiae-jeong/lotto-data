@@ -63,7 +63,7 @@
 
 최신 저장된 1250 gate는 검증 모델 0개, ready file 없음, max_hits·any2·any3·winning_union_coverage·any2 block stability 다섯 항목 모두 미통과 상태다. H1250-A/B V2의 849-target outer runner와 7,000회 moving-block bootstrap은 아직 실행되지 않았다. 해당 workflow는 수동 dispatch 전용이며, 확인한 최근 100개 Actions run에서 해당 workflow run을 찾지 못했다. 연결된 GitHub 작업에는 workflow-dispatch 실행 기능이 노출되지 않았다.
 
-따라서 오늘은 임계값을 낮추거나 fallback을 strict PASS로 승격하지 않았다. **1250회 strict PASS 모델이 없으므로 strict PASS 최종 구매 5줄을 내지 않는다.** final/fallback 조합도 새로 만들거나 출력하지 않았다.
+따라서 오늘은 임계값을 낮추거나 fallback을 strict PASS로 승격하지 않았다. **1250회 strict PASS 모델이 없으므로 strict PASS 최종 구매 5줄을 내지 않는다.** 포트폴리오 gate 평가용 내부 테스트는 실행환경 임시파일에서만 처리하고, 모델·포트폴리오 strict gate가 모두 PASS가 아니면 번호별 조합을 폐기한다. 구매용 final/fallback 조합은 생성·출력하지 않았다.
 
 ## 7. 남은 미해결 문제와 다음 실험 1~3개
 
