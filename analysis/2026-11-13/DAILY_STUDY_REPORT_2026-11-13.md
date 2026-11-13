@@ -112,3 +112,26 @@
 - 이 두 진단은 recent30/고정-bank proxy이지 V54 원본 target별 candidate bank·5줄을 그대로 재생한 결과가 아니다. 따라서 V54의 마지막 48 any2 손실 −0.105309을 후보 recall과 실제 V54 조합 구성에 정확히 배분했다고 주장할 수 없다. 해당 per-target V54 trace가 없어 이 부분은 미해결이다.
 
 오늘 actual-purchase 1247·1248 조건부 audit는 이와 별개로, 실제 두 구매 포트폴리오에서 (M)을 고정했을 때 max-hit 배치가 비정상적으로 나빴는지 검정했다. 두 건 모두 조건부 분포에서 흔한 결과였다. 그러므로 두 실제 구매 사례의 관측 gap만으로 allocator 열등을 주장하지 않으며, V54 전체 48-target 원인도 proxy 수치로 단정하지 않는다. 사전등록된 H1250-A/B V2가 이 분리를 직접 검증하도록 설계됐지만 아직 실행되지 않았다.
+
+
+## 12. 추가 독립 진단 — 장기·후기 빈도 지속성 preflight
+
+기존 2026-11-13 preflight 코드를 실제 실행해, 1~624회와 625~1249회 사이의 번호별 출현빈도 벡터 Pearson 상관을 whole-draw row permutation 기준과 비교했다. 각 추첨의 6개 번호 구조와 전체 1,249회 번호별 총출현량은 보존하고 시간 배치만 무작위화했다.
+
+- 고정 구간: 1~624회 / 625~1249회
+- 반복: 5,000회; seed `2026111301`
+- 관측 상관: `-0.299945`
+- 조건부 null 평균 / 표준편차: `-0.131255` / `0.107692`
+- 사전 고정된 단측 양의 지속성 검정: `p=0.947211` (4736 exceedances)
+- 판정: 양의 빈도 지속성을 뒷받침하는 증거 없음. 이 단측 검정만으로 음의 지속성을 입증하지도 않는다.
+- 분류: exploratory retrospective diagnostic; predictive validation·prospective confirmation·strict gate 대체 아님.
+
+기계 판독 결과: [DRAW_PROCESS_BIAS_PREFLIGHT_2026-11-13.json](../research/strict_gate/DRAW_PROCESS_BIAS_PREFLIGHT_2026-11-13.json). 실행 코드는 `research/strict_gate/draw_process_bias_preflight_2026-11-13.py`이며, 코드 blob SHA는 `835f7d60cd47abfd77ca38ec45a16b3d3dcb2727`이다.
+
+## 13. 별도 사전등록 temporal-order 검증
+
+같은 cutoff 1249에서 lag 1~10 draw overlap을 9,999 whole-row permutations와 max-T family-wise 보정으로 검증했다. 최대 표준화 이탈은 1.8876, family-wise adjusted Monte Carlo `p=0.4572`였다. lag 2의 미보정 설명용 p=0.0632도 등록된 다중비교 기준을 통과하지 못했다.
+
+판정은 `NO_TEMPORAL_ORDER_SIGNAL_DETECTED`다. 최근 회차 반복/lag overlap을 예측 특성으로 승격하지 않는다. [사전등록](../research/strict_gate/ROUND_ORDER_DEPENDENCE_PREREGISTRATION_2026-11-13.md) · [재현 코드](../research/strict_gate/ROUND_ORDER_DEPENDENCE_AUDIT_2026-11-13.py) · [JSON 결과](../research/strict_gate/ROUND_ORDER_DEPENDENCE_AUDIT_2026-11-13.json).
+
+두 진단 모두 retrospective/exploratory이며 1250 strict PASS, candidate promotion 또는 구매번호 freeze/seal을 만들지 않는다. Strict gate와 alpha·블록 길이·비교대상은 변경하지 않았다.
