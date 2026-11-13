@@ -88,7 +88,7 @@ Unless already completed later in `main`, prioritize unresolved work in approxim
 6. **H005_FIX structure-to-number mapping:** design and freeze a corrected mapping before evaluating it; keep it separate from legacy S008.
 7. **Prospective untouched validation:** freeze rules for future rounds and preserve pre-draw artifacts for later evaluation.
 8. **Recommendation failure decomposition:** connect actual purchased-line misses to signal selection/exclusion and test whether those failure causes recur historically.
-9. **Candidate-bank / 3-line portfolio optimization:** evaluate whether three lines can improve joint 2+/3+/4+ coverage without merely increasing redundant overlap.
+9. **Candidate-bank / three-ticket portfolio research (research-only):** evaluate candidate-bank and three-ticket hypotheses without changing the user-approved weekly five-line purchase output.
 10. **Calibration and uncertainty:** quantify confidence intervals/bootstraps or exact tests where appropriate instead of relying only on point estimates.
 
 Do not repeat an item once its specific research question has been answered unless new data or a new pre-specified question justifies it. Move down the queue or create a new independent hypothesis from the failure registry.
@@ -136,12 +136,6 @@ Before saying the day's study is complete, all must be true:
 If this gate is not yet satisfied, continue working on another valid research task rather than ending with a failure/status-only report.
 
 
-## 9. Three-line purchase policy and Thursday deadline — 2026-11-13
+## 9. Existing weekly purchase delivery policy — preserve
 
-Effective for target round 1251 onward, the user's purchase output is exactly **three six-number lines**, not five. Preserve all earlier five-line records and preregistrations unchanged as historical evidence; do not retrofit old experiments.
-
-- Research and validation must evaluate exactly three tickets per target. Do not spend the active purchase-policy research queue on new five-ticket variants unless the user explicitly changes the requested line count again.
-- A three-ticket null must preserve the actual ticket-overlap geometry. For three disjoint six-number tickets (union18), exact uniform 6/45 references are: mean max-hit 1.514256248573; P(any line 2+)=0.474976243269; P(any line 3+)=0.071354907146; expected winning-union coverage=2.4. When ticket numbers overlap, compute the exact null for that specific incidence geometry; do not reuse union18 constants.
-- Keep the strict evidence requirements unchanged: all four Bonferroni-adjusted CI lower bounds (max-hit, any2, any3, winning-union coverage) above zero versus the target-specific exact geometry-matched null; family alpha 0.05 / per-metric alpha 0.0125; any2 positive 50-target block share >=0.65; retain final remainder blocks; preserve cutoff safety and prospective confirmation. A three-line change is not permission to weaken the gate.
-- Finish the week's data integrity, cutoff, model, exact-null, matched-random, walk-forward, leakage, number-validity, and strict-gate checks by Thursday. Freeze/seal exactly three lines only when every required condition passes.
-- Friday delivery reads and revalidates Thursday's frozen three-line record and sends those exact three lines at the existing Friday 08:00 KST run. Do not start new model search or tune lines on Friday. If Thursday verification is incomplete or strict gate fails, report that no verified final purchase lines are available; do not manufacture PASS or use random/fallback numbers.
+The user-approved weekly final purchase output remains exactly **five lines**, each containing six main numbers, delivered on **Friday** through the existing Friday workflow. Daily research must not display the final purchase lines. Do not change the line count, delivery day/time, automation schedule, or freeze/seal policy without explicit user approval. Three-ticket or other portfolio-size experiments in the research queue are research-only and do not change the weekly purchase output.
