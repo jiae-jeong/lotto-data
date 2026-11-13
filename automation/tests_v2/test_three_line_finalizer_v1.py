@@ -120,6 +120,18 @@ class ThreeLineFinalizerTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             FINALIZER.verify(root, "2026-11-20")
 
+    def test_policy_id_mismatch_blocks_friday_verification(self):
+        root = self.make_root()
+        self.write_ready(root)
+        FINALIZER.freeze(root, "2026-11-19")
+        seal = root / "research" / "weekly_purchase" / "1251" / "FINAL_THREE_LINES_1251_20261119.json"
+        payload = json.loads(seal.read_text(encoding="utf-8"))
+        payload["policy_id"] = "WRONG_POLICY"
+        payload["freeze_payload_sha256"] = FINALIZER.canonical_sha(payload)
+        seal.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "policy id mismatch"):
+            FINALIZER.verify(root, "2026-11-20")
+
 
 if __name__ == "__main__":
     unittest.main()
