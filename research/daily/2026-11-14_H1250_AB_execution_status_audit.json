@@ -1,0 +1,37 @@
+{
+  "audit_id": "H1250_AB_EXECUTION_STATUS_AUDIT_2026-11-14",
+  "date_kst": "2026-11-14",
+  "preregistration": {
+    "path": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
+    "blob_sha": "bcac96aa1a7db5bfb0f4e973ba7fc14a35f2b417",
+    "status": "SPEC_FROZEN_IMPLEMENTATION_PENDING",
+    "axes": [
+      "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+    ]
+  },
+  "post_registration_audit": {
+    "path": "research/weekly_purchase/1250/H1250_WORKFLOW_POSTREG_AUDIT_2026-11-11.json",
+    "blob_sha": "e4b74fb6453c41c662f32cd1ee0f31b282c1750b",
+    "h1250_v2_dispatch_run_found_as_of_audit": false,
+    "workflow_change_classification": "NON_FUNCTIONAL_REPORTING_ONLY",
+    "calculation_or_selection_logic_changed": false
+  },
+  "current_gate": {
+    "path": "research/weekly_purchase/1250/MODEL_GATE_1250_20261114.json",
+    "blob_sha": "456b5a9e627fb497e46e8ea577d7871a8eb9b137",
+    "status": "STRICT_PASS_NOT_READY",
+    "validated_models": [],
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_block_stability"
+    ],
+    "random_fallback_allowed": false,
+    "line_level_output_status": "SUPPRESSED_NOT_READY"
+  },
+  "conclusion": "E043/E044 remain implementation-pending in the preserved evidence. No H1250-A/B execution result is claimed. The daily run did not alter the frozen preregistration or strict thresholds. E047 was completed as a separate historical failure-decomposition diagnostic, not as a substitute for E043/E044.",
+  "next_action": "Keep E043/E044 marked pending until an authorized runner produces verifiable target-wise outputs, matched comparator, leakage audit, and unchanged strict-gate result. Do not infer PASS from the existence of preregistration or code."
+}
