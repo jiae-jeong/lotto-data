@@ -1,0 +1,130 @@
+{
+  "study_id": "ROUND_ORDER_DEPENDENCE_AUDIT_2026-11-13",
+  "classification": "RETROSPECTIVE_EXPLORATORY_CONDITIONAL_PERMUTATION",
+  "preregistration": {
+    "path": "research/strict_gate/ROUND_ORDER_DEPENDENCE_PREREGISTRATION_2026-11-13.md",
+    "frozen_before_evaluation": true,
+    "permutations": 9999,
+    "seed": 2026111302,
+    "lag_family": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "familywise_method": "two-sided max-T permutation"
+  },
+  "data": {
+    "source": "lotto_data.csv",
+    "rows": 1249,
+    "round_start": 1,
+    "round_end": 1249,
+    "validation": "PASS",
+    "sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "git_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def"
+  },
+  "reference": {
+    "independent_uniform_expected_overlap_per_lag_pair": 0.8,
+    "null": "uniform permutation of whole draw rows; each draw's six-number set and full-history number totals are preserved"
+  },
+  "lag_results": [
+    {
+      "lag": 1,
+      "observed_mean_overlap": 0.8269230769230769,
+      "conditional_null_mean": 0.7986329882988283,
+      "conditional_null_sd": 0.02217473232037495,
+      "absolute_standardized_departure": 1.2757803889364008,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.2113
+    },
+    {
+      "lag": 2,
+      "observed_mean_overlap": 0.8404170008019246,
+      "conditional_null_mean": 0.7983504846074149,
+      "conditional_null_sd": 0.0222859278845591,
+      "absolute_standardized_departure": 1.887581994001502,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.0632
+    },
+    {
+      "lag": 3,
+      "observed_mean_overlap": 0.7881219903691814,
+      "conditional_null_mean": 0.7987560393278494,
+      "conditional_null_sd": 0.022218630827052978,
+      "absolute_standardized_departure": 0.47860955256163795,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.6399
+    },
+    {
+      "lag": 4,
+      "observed_mean_overlap": 0.7678714859437751,
+      "conditional_null_mean": 0.7990664929946812,
+      "conditional_null_sd": 0.02213541221041504,
+      "absolute_standardized_departure": 1.4092806022482134,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.1577
+    },
+    {
+      "lag": 5,
+      "observed_mean_overlap": 0.8078778135048231,
+      "conditional_null_mean": 0.798736626074183,
+      "conditional_null_sd": 0.022364848142849454,
+      "absolute_standardized_departure": 0.40873013633954486,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.6999
+    },
+    {
+      "lag": 6,
+      "observed_mean_overlap": 0.7755430410297667,
+      "conditional_null_mean": 0.798858807843781,
+      "conditional_null_sd": 0.0224049907520186,
+      "absolute_standardized_departure": 1.0406505886154047,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.3018
+    },
+    {
+      "lag": 7,
+      "observed_mean_overlap": 0.8365539452495975,
+      "conditional_null_mean": 0.7989939090527376,
+      "conditional_null_sd": 0.022394008643737508,
+      "absolute_standardized_departure": 1.677235942636324,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.0973
+    },
+    {
+      "lag": 8,
+      "observed_mean_overlap": 0.814665592264303,
+      "conditional_null_mean": 0.7993031374047983,
+      "conditional_null_sd": 0.022265778692463795,
+      "absolute_standardized_departure": 0.6899581223586122,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.4929
+    },
+    {
+      "lag": 9,
+      "observed_mean_overlap": 0.8298387096774194,
+      "conditional_null_mean": 0.7990432107727015,
+      "conditional_null_sd": 0.022395907563977677,
+      "absolute_standardized_departure": 1.3750502772321256,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.1704
+    },
+    {
+      "lag": 10,
+      "observed_mean_overlap": 0.7610976594027441,
+      "conditional_null_mean": 0.7989659337200882,
+      "conditional_null_sd": 0.022335336039836614,
+      "absolute_standardized_departure": 1.695442336296324,
+      "unadjusted_two_sided_mc_p_descriptive_only": 0.094
+    }
+  ],
+  "max_t": {
+    "observed_max_absolute_standardized_departure": 1.887581994001502,
+    "exceedances": 4571,
+    "adjusted_familywise_mc_p": 0.4572
+  },
+  "decision": "NO_TEMPORAL_ORDER_SIGNAL_DETECTED",
+  "limitations": [
+    "Retrospective diagnostic; not an untouched prospective validation.",
+    "A non-significant result does not prove every possible dependence is absent.",
+    "This test does not evaluate or certify a five-line portfolio.",
+    "No strict PASS, candidate promotion, or ticket recommendation is produced."
+  ]
+}
