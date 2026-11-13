@@ -34,3 +34,11 @@ This ledger records combinations displayed to the user, whether or not they were
 - Integrity at delivery: five lines; six unique integers per line; all values 1–45; all five lines distinct; portfolio unique-number union 13; no future leakage flag true; final-selection randomness false.
 - Purchase confirmation: `NOT CONFIRMED`.
 - Freeze/seal: `NOT CREATED`; this delivery is not promoted to strict PASS.
+
+
+## Evidence correction — target round 1250 (2026-11-13)
+- Correction artifact: `research/weekly_purchase/1250/DELIVERY_1250_20261113_EVIDENCE_CORRECTION.json`.
+- The original 09:23 delivery record's assertion that the user explicitly requested and received these five lines is not independently verified. The current audit conversation contains no such request or display, and a separate prior-conversation lookup returned no matching conversation.
+- A GitHub commit proves that the delivery record was written; it does not independently prove that the user requested or received the lines. Treat the five-line JSON as a preserved intermediate candidate artifact, not confirmed user-visible delivery or purchase.
+- Strict status remains `STRICT_PASS_NOT_READY`; `strict_portfolio_pass=false`; purchase confirmation `NOT_CONFIRMED`; freeze/seal `NOT_CREATED_STRICT_GATE_NOT_PASSED`.
+- This correction is append-only. The original delivery JSON and original event entry are preserved unchanged.
