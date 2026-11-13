@@ -1,0 +1,33 @@
+{
+  "study_id": "DRAW_PROCESS_BIAS_PREFLIGHT_2026-11-13",
+  "classification": "EXPLORATORY_CONDITIONAL_PERMUTATION_DIAGNOSTIC",
+  "execution": {
+    "executed_in_this_audit": true,
+    "implementation_path": "research/strict_gate/draw_process_bias_preflight_2026-11-13.py",
+    "implementation_blob_sha": "835f7d60cd47abfd77ca38ec45a16b3d3dcb2727",
+    "repetitions": 5000,
+    "seed": 2026111301,
+    "split_first": "rounds 1..624",
+    "split_second": "rounds 625..1249"
+  },
+  "data": {
+    "source": "lotto_data.csv",
+    "rows": 1249,
+    "round_start": 1,
+    "round_end": 1249,
+    "validation": "PASS",
+    "git_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def",
+    "sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7"
+  },
+  "observed_first_second_frequency_pearson_r": -0.299944944628198,
+  "conditional_permutation": {
+    "null_mean_r": -0.13125481335219957,
+    "null_sd_r": 0.10769150849793573,
+    "one_sided_p_for_positive_persistence": 0.9472105578884223,
+    "exceedances": 4736,
+    "p_value_formula": "(exceedances + 1) / (repetitions + 1)"
+  },
+  "method": "Uniform Fisher-Yates permutations of whole draw rows, preserving each draw's six-number structure and full-history per-number totals.",
+  "interpretation": "No evidence of positive persistent number-frequency bias in this split. The one-sided test does not establish negative persistence. This is exploratory and retrospective, not a predictive validation, prospective confirmation, or strict-gate result.",
+  "decision": "NO_POSITIVE_FREQUENCY_PERSISTENCE_EVIDENCE; DO_NOT_PROMOTE"
+}
