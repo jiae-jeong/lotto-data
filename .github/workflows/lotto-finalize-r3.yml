@@ -7,6 +7,9 @@ on:
     paths:
       - '.github/workflows/lotto-finalize-r3.yml'
       - 'automation/finalize_from_strict_ready_v1.py'
+      - 'automation/finalize_three_line_from_strict_ready_v1.py'
+      - 'automation/tests_v2/test_three_line_readiness_guard_v1.py'
+      - 'automation/tests_v2/test_three_line_finalizer_v1.py'
 
 permissions:
   contents: write
@@ -22,22 +25,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Compile strict-ready finalizer
-        run: python -m py_compile automation/finalize_from_strict_ready_v1.py
-      - name: Confirm legacy unconditional freeze path is absent
+      - name: Compile target-aware strict-ready finalizers
+        run: python -m py_compile automation/finalize_from_strict_ready_v1.py automation/finalize_three_line_from_strict_ready_v1.py
+      - name: Test target-aware three-line policy and finalization
+        run: python -B -m unittest automation.tests_v2.test_three_line_policy_guard automation.tests_v2.test_three_line_readiness_guard_v1 automation.tests_v2.test_three_line_finalizer_v1 -v
+      - name: Confirm target-aware strict-ready finalization paths
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('.github/workflows/lotto-finalize-r3.yml')
           s=p.read_text(encoding='utf-8')
           assert 'automation/finalize_from_strict_ready_v1.py' in s
+          assert 'automation/finalize_three_line_from_strict_ready_v1.py' in s
           finalize_section=s[s.rfind("\n  finalize:\n"): ]
           assert 'python -B automation/finalize_from_strict_ready_v1.py' in finalize_section
+          assert 'python -B automation/finalize_three_line_from_strict_ready_v1.py' in finalize_section
+          assert 'TARGET_ROUND' in finalize_section and 'KST_WEEKDAY' in finalize_section
+          assert '--verify-only' in finalize_section
           assert 'weekly_purchase_final_v3.py' not in finalize_section
           assert 'weekly_purchase_final_v2_recovery.py' not in finalize_section
           assert '1246' not in finalize_section and '1247' not in finalize_section
           assert '--freeze-not-before 2026-11-12' in finalize_section
-          print('strict-ready-only finalization workflow validation PASS')
+          print('target-aware strict-ready finalization workflow validation PASS')
           PY
 
   finalize:
@@ -51,21 +60,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Freeze only from current STRICT_PASS_READY
+      - name: Freeze Thursday or verify the unchanged Thursday seal on Friday
         shell: bash
         run: |
           set -euo pipefail
           git pull --rebase origin main
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
-          python -B automation/finalize_from_strict_ready_v1.py "$RUN_DATE" --freeze-not-before 2026-11-12
-          python -B automation/finalize_from_strict_ready_v1.py "$RUN_DATE" --verify-only --freeze-not-before 2026-11-12
           TARGET_ROUND="$(python - <<'PY'
           import csv
           with open('lotto_data.csv',encoding='utf-8-sig',newline='') as f:
               rows=list(csv.DictReader(f))
+          if not rows:
+              raise SystemExit('lotto_data.csv has no draw rows')
           print(int(rows[-1]['round'])+1)
           PY
           )"
+          KST_WEEKDAY="$(TZ=Asia/Seoul date +%u)"
+          if [ "$TARGET_ROUND" -ge 1251 ]; then
+            if [ "$KST_WEEKDAY" = "4" ]; then
+              python -B automation/finalize_three_line_from_strict_ready_v1.py "$RUN_DATE"
+            elif [ "$KST_WEEKDAY" = "5" ]; then
+              python -B automation/finalize_three_line_from_strict_ready_v1.py "$RUN_DATE" --verify-only
+            else
+              echo "Three-line finalization is Thursday-only; Friday is verify-only." >&2
+              exit 1
+            fi
+          else
+            python -B automation/finalize_from_strict_ready_v1.py "$RUN_DATE" --freeze-not-before 2026-11-12
+            python -B automation/finalize_from_strict_ready_v1.py "$RUN_DATE" --verify-only --freeze-not-before 2026-11-12
+          fi
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
           echo "TARGET_ROUND=$TARGET_ROUND" >> "$GITHUB_ENV"
       - name: Commit verified strict-ready freeze
