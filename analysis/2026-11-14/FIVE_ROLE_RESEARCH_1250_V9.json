@@ -1,0 +1,169 @@
+{
+  "created_kst": "2026-11-14T00:55:35.888830+09:00",
+  "run_date_kst": "2026-11-14",
+  "target_round": 1250,
+  "data_cutoff": 1249,
+  "policy": "ADAPTIVE_FIVE_ROLE_NONRANDOM_PORTFOLIO_V9",
+  "active_purchase_line_count": 5,
+  "policy_compatibility": "ACTIVE_POLICY_MATCH",
+  "strict_gate_version": "V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY",
+  "no_future_leakage": true,
+  "selection_rule": "Each role deterministically scores all candidate combinations from historical-only model predictions and trailing historical reliability. Randomness is prohibited in final selection and allowed only in the matched null comparator.",
+  "roles": [
+    {
+      "role": "consensus",
+      "models": [
+        "long_frequency",
+        "current_gap",
+        "frequency_plus_gap",
+        "recent_momentum",
+        "structure_profile",
+        "pair_association",
+        "triple_association",
+        "combined_equal_rank",
+        "A_v2",
+        "C_v2",
+        "contrarian_v2"
+      ]
+    },
+    {
+      "role": "relation",
+      "models": [
+        "pair_association",
+        "triple_association",
+        "structure_profile",
+        "combined_equal_rank"
+      ]
+    },
+    {
+      "role": "frequency_gap",
+      "models": [
+        "long_frequency",
+        "current_gap",
+        "frequency_plus_gap"
+      ]
+    },
+    {
+      "role": "recent_structure",
+      "models": [
+        "recent_momentum",
+        "structure_profile",
+        "combined_equal_rank"
+      ]
+    },
+    {
+      "role": "ac_crosscheck",
+      "models": [
+        "A_v2",
+        "C_v2",
+        "contrarian_v2",
+        "long_frequency"
+      ]
+    }
+  ],
+  "model_reliability": {
+    "long_frequency": 1.0200947483393725,
+    "current_gap": 0.7873674756120997,
+    "frequency_plus_gap": 0.9226402028848271,
+    "recent_momentum": 0.7742765665211908,
+    "structure_profile": 0.944458384703009,
+    "pair_association": 0.9022765665211909,
+    "triple_association": 1.0928220210666453,
+    "combined_equal_rank": 0.7073674756121,
+    "A_v2": 0.9604583847030088,
+    "C_v2": 0.9459129301575543,
+    "contrarian_v2": 0.765549293793918
+  },
+  "line_level_output_status": "PRIVATE_TEMP_ONLY_UNTIL_STRICT_GATE",
+  "line_level_payload_sha256": "4857fb3592d8a48545bc1e50c1e56ea1df95fc2a2c7d4de99f35ebbf342b8edf",
+  "walkforward_targets": 849,
+  "random_comparator": "Random permutation of labels 1..45 applied jointly to the five deterministic tickets; comparator only, never a source of purchase numbers.",
+  "random_per_target": 120,
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.3780918727915195,
+      "any2": 0.41578327444051827,
+      "any3": 0.0706713780918728,
+      "any4": 0.008244994110718492,
+      "any5": 0.0,
+      "any6": 0.0,
+      "winning_union_coverage": 1.7173144876325088,
+      "union_size": 13.148409893992932,
+      "mean_overlap": 3.328268551236749,
+      "max_overlap": 4.798586572438163
+    },
+    "matched_label_permutation": {
+      "max_hits": 1.3902728700431881,
+      "any2": 0.4170691009030232,
+      "any3": 0.07938751472320377,
+      "any4": 0.005457400863761288,
+      "any5": 8.833922261484099e-05,
+      "any6": 0.0,
+      "winning_union_coverage": 1.7611209265802905,
+      "union_size": 13.148409893992932,
+      "mean_overlap": 3.328268551236749,
+      "max_overlap": 4.798586572438163
+    },
+    "delta": {
+      "max_hits": -0.012180997251668657,
+      "any2": -0.0012858264625049132,
+      "any3": -0.008716136631330973,
+      "any4": 0.0027875932469572044,
+      "any5": -8.833922261484099e-05,
+      "any6": 0.0,
+      "winning_union_coverage": -0.04380643894778169,
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    }
+  },
+  "inference": {
+    "max_hits": {
+      "adjusted_ci_delta": [
+        -0.07993137254901961,
+        0.06555882352941175
+      ],
+      "positive_50_round_block_share": 0.29411764705882354
+    },
+    "any2": {
+      "adjusted_ci_delta": [
+        -0.033303852201257866,
+        0.032225490196078434
+      ],
+      "positive_50_round_block_share": 0.47058823529411764
+    },
+    "any3": {
+      "adjusted_ci_delta": [
+        -0.03580683156654888,
+        0.02105935534591195
+      ],
+      "positive_50_round_block_share": 0.4117647058823529
+    },
+    "winning_union_coverage": {
+      "adjusted_ci_delta": [
+        -0.1150746855345912,
+        0.032822928936003144
+      ],
+      "positive_50_round_block_share": 0.4117647058823529
+    },
+    "strict_portfolio_pass": false
+  },
+  "integrity": {
+    "five_distinct_lines": true,
+    "six_numbers_each": true,
+    "range_unique_sorted": true,
+    "five_distinct_roles": true,
+    "selection_uses_randomness": false,
+    "random_fallback_allowed": false,
+    "union_size": 13
+  },
+  "learning_status": "ITERATE_NEXT_CYCLE_WITH_FAILED_GATES_RECORDED",
+  "failed_gates": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_block_stability"
+  ],
+  "classification": "RESEARCH_BASED_NONRANDOM_CANDIDATE_UNVALIDATED_EDGE"
+}
