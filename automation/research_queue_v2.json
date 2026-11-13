@@ -1332,7 +1332,7 @@
       "question": "How many untouched prospective target rounds are needed to have useful power under the fixed target-1251+ three-line strict gate, given the historical block-level variance?",
       "novelty": "Independent design-only axis: estimates prospective sample-size requirements from the frozen E045 paired-difference block variance using a predeclared standardized-effect grid, exact existing alpha/block-stability criteria, effective block count with final remainder, independence approximation and conservative union bound. No model search, ticket generation, gate changes, or strict-pass claim.",
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_RUN",
+      "execution_status": "EXECUTED_DESIGN_PLANNING_COMPLETE",
       "execution_entrypoint": "automation/three_line_prospective_power_planning_v1.py",
       "workflow_entrypoint": ".github/workflows/three-line-prospective-power-planning-v1.yml",
       "preregistration": "research/weekly_purchase/1251/THREE_LINE_PROSPECTIVE_POWER_PREREG_E046_20261114.json",
@@ -1390,6 +1390,21 @@
         "no_parameter_tuning": true,
         "no_model_or_number_search": true,
         "no_purchase_lines": true,
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false
+      },
+      "execution_result": {
+        "workflow_name": "three-line-prospective-power-planning-v1",
+        "run_id": 43526534917,
+        "run_attempt": 1,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43526534917",
+        "result_path": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+        "data_cutoff": 1249,
+        "target_count": 849,
+        "design_rows": 48,
+        "manifest_entries": 5,
+        "verification_status": "PASS",
+        "classification": "DESIGN_ONLY_NOT_MODEL_EVIDENCE",
         "strict_portfolio_pass": false,
         "strict_pass_ready": false
       }
