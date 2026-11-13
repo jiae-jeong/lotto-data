@@ -11,14 +11,19 @@ import hashlib
 import json
 from datetime import date, timedelta
 from pathlib import Path
+import importlib.util
 
-from three_line_readiness_guard_v1 import (
-    ROOT,
-    build_status,
-    read_source,
-    validate_lines,
-    validate_ready_artifact,
-)
+ROOT = Path(__file__).resolve().parents[1]
+_GUARD_PATH = ROOT / "automation/three_line_readiness_guard_v1.py"
+_GUARD_SPEC = importlib.util.spec_from_file_location("three_line_readiness_guard_v1", _GUARD_PATH)
+if _GUARD_SPEC is None or _GUARD_SPEC.loader is None:
+    raise RuntimeError("three-line readiness guard cannot be loaded")
+_GUARD = importlib.util.module_from_spec(_GUARD_SPEC)
+_GUARD_SPEC.loader.exec_module(_GUARD)
+build_status = _GUARD.build_status
+read_source = _GUARD.read_source
+validate_lines = _GUARD.validate_lines
+validate_ready_artifact = _GUARD.validate_ready_artifact
 
 
 def sha256(path: Path) -> str:
