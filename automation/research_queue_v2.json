@@ -1343,41 +1343,26 @@
       "implementation_commit": "a792c14da2856eb4378a7247ebaf1b1fa0198e53",
       "spec": {
         "study_id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
-        "study_class": "design_only_not_model_evidence",
-        "source_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+        "kind": "three_line_prospective_design",
+        "research_question": "How many untouched prospective target rounds are needed to have useful power under the fixed target-1251+ three-line strict gate, given the historical block-level variance?",
         "data_cutoff": 1249,
         "target_rounds": "401..1249 inclusive",
-        "primary_metrics": [
-          "max_hits",
-          "any2",
-          "any3",
-          "winning_union_coverage"
+        "training_cutoff_rule": "No model predictions are generated. Source E045 predictions use only draws 1..t-1; this study reads only the frozen 401..1249 historical result and does not use any later target outcome.",
+        "primary_metric": "Design-only estimate of prospective target counts required for the fixed three-line strict gate under hypothetical standardized effects, using historical 50-target block-level variance.",
+        "secondary_metrics": [
+          "per-metric adjusted lower-CI power approximation",
+          "any2-positive 50-target block-share gate probability",
+          "independence-product joint power approximation",
+          "conservative union-bound joint lower estimate",
+          "effective block count with retained final remainder"
         ],
-        "family_alpha": 0.05,
-        "alpha_per_metric": 0.0125,
-        "block_length": 50,
-        "any2_positive_block_share_min": 0.65,
-        "standardized_effect_sizes": [
-          0.25,
-          0.5,
-          0.75,
-          1
+        "comparator": "No model comparator or ticket candidate is evaluated. The variance reference is the frozen E045 exact geometry-matched 3x6 union18 random comparator.",
+        "baseline": "Normal-theory design approximation from E045 paired model-minus-exact-null 50-target block means after centering at zero; hypothetical positive shifts are expressed in historical block SD units.",
+        "multiplicity_correction": "Keep the frozen family alpha 0.05 and per-metric alpha 0.0125. No adjustment or threshold is changed.",
+        "block_stability": [
+          50
         ],
-        "prospective_target_counts": [
-          100,
-          125,
-          150,
-          175,
-          200,
-          250,
-          300,
-          400,
-          500,
-          600,
-          800,
-          1000
-        ],
-        "retain_final_remainder_block": true,
+        "tie_break": "No ranking, candidate selection, or ticket construction is performed.",
         "expected_output_files": [
           "REPORT.md",
           "DESIGN_GRID.csv",
@@ -1386,12 +1371,37 @@
           "COMPLETION.json",
           "SHA256_MANIFEST.csv"
         ],
-        "no_threshold_relaxation": true,
-        "no_parameter_tuning": true,
-        "no_model_or_number_search": true,
-        "no_purchase_lines": true,
-        "strict_portfolio_pass": false,
-        "strict_pass_ready": false
+        "expected_record_counts": {
+          "BLOCK_SUMMARIES.csv": 68,
+          "DESIGN_GRID.csv": 48
+        },
+        "novelty_signature": "three-line prospective sample-size design; frozen E045 849-target paired-difference block variance; standardized effect grid 0.25/0.5/0.75/1.0; target-count grid 100/125/150/175/200/250/300/400/500/600/800/1000; normal-theory adjusted CI power and exact binomial block-share probability; retain final remainder; design-only no model search or policy change.",
+        "study_class": "theory",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "EXECUTED_DESIGN_PLANNING_COMPLETE",
+        "execution_entrypoint": "automation/three_line_prospective_power_planning_v1.py",
+        "workflow_entrypoint": ".github/workflows/three-line-prospective-power-planning-v1.yml",
+        "preregistration": "research/weekly_purchase/1251/THREE_LINE_PROSPECTIVE_POWER_PREREG_E046_20261114.json",
+        "implementation_code_sha": "dcd1993889b9060e1b0661af219db3f3f11ebc39",
+        "test_code_sha": "2a870706f3ed61d10dfa8d4040302166124eb28b",
+        "workflow_blob_sha": "b33f9e85f84ff7df7a66d670c923d8beee547f8e",
+        "preregistration_blob_sha": "abb79d80e05ec5e9fb5f3c6c98f24e61bd1167f8",
+        "implementation_commit": "a792c14da2856eb4378a7247ebaf1b1fa0198e53",
+        "execution_result": {
+          "workflow_name": "three-line-prospective-power-planning-v1",
+          "run_id": 43526534917,
+          "run_attempt": 1,
+          "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43526534917",
+          "result_path": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+          "data_cutoff": 1249,
+          "target_count": 849,
+          "design_rows": 48,
+          "manifest_entries": 5,
+          "verification_status": "PASS",
+          "classification": "DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+          "strict_portfolio_pass": false,
+          "strict_pass_ready": false
+        }
       },
       "execution_result": {
         "workflow_name": "three-line-prospective-power-planning-v1",
