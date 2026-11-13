@@ -17,3 +17,20 @@ This ledger records combinations displayed to the user, whether or not they were
 - Purchase confirmation: `NOT CONFIRMED`; no receipt or user confirmation is recorded.
 - Post-draw comparison: 1249 winning main numbers were 2, 11, 16, 25, 34, 35 (bonus 14). Per-line main-number hits: 2, 1, 0, 0, 1. Portfolio unique-number union coverage: 4/6. Portfolio max-hit: 2. Any2+: yes. Any3+: no. These are descriptive post-draw results for the displayed candidate only, not evidence of predictive edge.
 - Provenance caveat: this event is reconstructed from the conversation record visible in the 2026-11-13 automation context; no original sealed delivery artifact or purchase receipt was found for this event.
+
+
+## Event 2026-11-13 — target round 1250
+- Delivery evidence: current conversation dated 2026-11-13; user explicitly requested five lines after verification and assistant displayed the five lines below.
+- Displayed status: `INTERMEDIATE_CANDIDATE_DISPLAYED_NOT_STRICT_PASS`.
+- Strict validation status at delivery: `STRICT_PASS_NOT_READY`; `strict_portfolio_pass=false`.
+- Candidate source/model: `ADAPTIVE_FIVE_ROLE_NONRANDOM_PORTFOLIO_V9`, created 2026-11-12, target 1250, data cutoff 1249.
+- Source artifact: `analysis/2026-11-12/FIVE_ROLE_RESEARCH_1250_V9.json`; blob SHA `3336e50b97188c7c644c52402a90eaf7c521fc0d`.
+- Exact displayed lines:
+  1. 3, 12, 13, 25, 27, 37
+  2. 3, 8, 13, 20, 25, 37
+  3. 3, 12, 13, 17, 34, 37
+  4. 3, 18, 20, 25, 37, 40
+  5. 3, 12, 13, 27, 37, 38
+- Integrity at delivery: five lines; six unique integers per line; all values 1–45; all five lines distinct; portfolio unique-number union 13; no future leakage flag true; final-selection randomness false.
+- Purchase confirmation: `NOT CONFIRMED`.
+- Freeze/seal: `NOT CREATED`; this delivery is not promoted to strict PASS.
