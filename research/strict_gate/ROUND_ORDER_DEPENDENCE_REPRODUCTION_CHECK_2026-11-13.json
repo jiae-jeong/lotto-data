@@ -1,0 +1,47 @@
+{
+  "study_id": "ROUND_ORDER_DEPENDENCE_AUDIT_2026-11-13",
+  "reproduction_id": "ROUND_ORDER_DEPENDENCE_REPRODUCTION_CHECK_2026-11-13",
+  "reproduced_at_kst": "2026-11-13T09:55:37+09:00",
+  "status": "REPRODUCED_MATCH",
+  "reproduction_method": "Independent in-memory ECMAScript implementation of the corrected main-branch runner algorithm; this is an independent reproduction, not a direct execution of the Python file.",
+  "source_data": {
+    "path": "lotto_data.csv",
+    "rows": 1249,
+    "cutoff": 1249,
+    "first_round": 1,
+    "last_round": 1249,
+    "last_draw_date": "2026.11.07",
+    "git_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def",
+    "sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "sha256_recomputed": true
+  },
+  "runner": {
+    "path": "research/strict_gate/ROUND_ORDER_DEPENDENCE_AUDIT_2026-11-13.py",
+    "current_main_blob_sha": "25018f3d54a57e6a4c38613648f14975a76b17de",
+    "escape_correction_commit": "90dd89d038ff0488489610e125824b9d5b10002b",
+    "corrected_nul_and_newline_escapes": true
+  },
+  "reproduction": {
+    "permutations": 9999,
+    "seed": 2026111302,
+    "lags": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "max_t_exceedances": 4571,
+    "max_t_adjusted_familywise_mc_p": 0.4572,
+    "observed_max_absolute_standardized_departure": 1.887581994001502,
+    "recorded_output_blob_sha": "8f184443c3bea561d5d0444fe10f9162a5fef803",
+    "recorded_output_matches_reproduction": true,
+    "lag_results_match_recorded_output": true
+  },
+  "interpretation": "The corrected runner independently reproduces the stored JSON output exactly. No temporal-order signal is detected under the preregistered max-T family-wise test. This remains a retrospective diagnostic, not a predictive model, strict PASS, or ticket recommendation."
+}
