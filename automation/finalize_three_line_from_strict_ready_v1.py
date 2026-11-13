@@ -120,6 +120,9 @@ def verify(root: Path, date_kst: str, seal_date_kst: str | None = None) -> dict:
     if not out.is_file():
         raise FileNotFoundError(f"Thursday three-line seal is missing: {out.relative_to(root)}")
     payload = json.loads(out.read_text(encoding="utf-8"))
+    policy = json.loads((root / "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json").read_text(encoding="utf-8"))
+    if int(policy.get("purchase_lines", -1)) != 3 or payload.get("policy_id") != policy.get("policy_id"):
+        raise ValueError("seal policy id mismatch")
     if payload.get("status") != "THURSDAY_VERIFIED_3_LINE_READY":
         raise ValueError("seal status is not THURSDAY_VERIFIED_3_LINE_READY")
     if int(payload.get("target_round", -1)) != target or payload.get("seal_date_kst") != seal_date_kst:
