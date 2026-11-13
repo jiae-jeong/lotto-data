@@ -6,7 +6,7 @@
   "study_class": "preregistered_three_line_portfolio_geometry_walkforward",
   "historical_data_cutoff": 1249,
   "target_rounds": "401..1249 inclusive",
-  "source_data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_data_prefix_sha256": "9d9bd49d30298c5e4b1d53751483b7faabb006833eb11dab66f24f17e41b828f",
   "training_cutoff_rule": "For each target t, use only draws 1..t-1. Pass a draw list truncated through the target row to the frozen B prediction function, and update model reliability only after scoring the target outcome. The fixed historical evaluation cutoff is 1249; later rows are excluded.",
   "source_models": {
     "reference_allocator": "automation/five_role_research_v9.py",
@@ -17,15 +17,36 @@
   "role_order": [
     {
       "role": "consensus",
-      "models": ["long_frequency", "current_gap", "frequency_plus_gap", "recent_momentum", "structure_profile", "pair_association", "triple_association", "combined_equal_rank", "A_v2", "C_v2", "contrarian_v2"]
+      "models": [
+        "long_frequency",
+        "current_gap",
+        "frequency_plus_gap",
+        "recent_momentum",
+        "structure_profile",
+        "pair_association",
+        "triple_association",
+        "combined_equal_rank",
+        "A_v2",
+        "C_v2",
+        "contrarian_v2"
+      ]
     },
     {
       "role": "relation",
-      "models": ["pair_association", "triple_association", "structure_profile", "combined_equal_rank"]
+      "models": [
+        "pair_association",
+        "triple_association",
+        "structure_profile",
+        "combined_equal_rank"
+      ]
     },
     {
       "role": "frequency_gap",
-      "models": ["long_frequency", "current_gap", "frequency_plus_gap"]
+      "models": [
+        "long_frequency",
+        "current_gap",
+        "frequency_plus_gap"
+      ]
     }
   ],
   "line_selection": {
@@ -37,11 +58,18 @@
       "prior_mean_hits": 0.8,
       "prior_any2_rate": 0.17530810086113546,
       "raw_formula": "1 + 2.8*(smoothed_mean_hits-0.8) + 1.2*(smoothed_any2_rate-0.17530810086113546)",
-      "clip": [0.35, 1.65]
+      "clip": [
+        0.35,
+        1.65
+      ]
     },
     "candidate_pool": "Among numbers not used by earlier lines, sort by descending role score, descending global support, then ascending number; retain the first 16.",
     "ticket_objective": "Enumerate all six-number combinations in the candidate pool and maximize sum(role_score) - 0.022*abs(odd_count-3) - 0.020*abs(count_at_most_22-3) - 0.010*max(0,consecutive_pairs-2) + 0.004*occupied_decade_bands.",
-    "line_order": ["consensus", "relation", "frequency_gap"],
+    "line_order": [
+      "consensus",
+      "relation",
+      "frequency_gap"
+    ],
     "cross_line_rule": "Numbers selected in an earlier line are unavailable to every later line. Exactly three pairwise-disjoint six-number lines and exactly 18 unique numbers are required.",
     "tie_break": "Lexicographically lower sorted ticket.",
     "randomness_in_selection": false,
@@ -61,7 +89,12 @@
     "randomness_used_for_final_selection": false
   },
   "inference": {
-    "metrics": ["max_hits", "any2", "any3", "winning_union_coverage"],
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
     "family_alpha": 0.05,
     "alpha_per_metric": 0.0125,
     "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched null; sample overlapping contiguous blocks, preserving the fixed final remainder-block length.",
@@ -95,5 +128,7 @@
     "REPORT.md",
     "SHA256_MANIFEST.csv"
   ],
-  "promotion_rule": "This single preregistered axis is evaluated once. No model variants or parameter search are allowed after observing its results. Any historical gate failure remains a failure; a historical gate pass cannot override the unresolved prospective confirmation rule."
+  "promotion_rule": "This single preregistered axis is evaluated once. No model variants or parameter search are allowed after observing its results. Any historical gate failure remains a failure; a historical gate pass cannot override the unresolved prospective confirmation rule.",
+  "source_data_full_file_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_data_hash_scope_note": "The prefix hash covers the CSV header plus exactly rounds 1..1249, excluding any bytes after the final round record. The full-file hash is the independently published DAILY MASTER V4/V5 data_sha256 for the same source file."
 }
