@@ -32,16 +32,21 @@ def load_module(path: Path, name: str):
     return module
 
 
-def load_frozen_draw_prefix(cutoff: int, expected_sha256: str):
+def load_frozen_draw_prefix(cutoff: int, expected_prefix_sha256: str, expected_full_sha256: str):
     raw = DATA.read_bytes()
+    full_sha256 = hashlib.sha256(raw).hexdigest()
+    if full_sha256 != expected_full_sha256:
+        raise ValueError(
+            f"Full source file hash mismatch: {full_sha256} != {expected_full_sha256}"
+        )
     physical_lines = raw.splitlines(keepends=True)
     if len(physical_lines) < cutoff + 1:
         raise ValueError(f"Data file has fewer than {cutoff} draw rows")
     prefix = b"".join(physical_lines[: cutoff + 1])
     got_sha256 = hashlib.sha256(prefix).hexdigest()
-    if got_sha256 != expected_sha256:
+    if got_sha256 != expected_prefix_sha256:
         raise ValueError(
-            f"Frozen historical data prefix hash mismatch: {got_sha256} != {expected_sha256}"
+            f"Frozen historical data prefix hash mismatch: {got_sha256} != {expected_prefix_sha256}"
         )
     text = prefix.decode("utf-8-sig")
     rows = list(csv.DictReader(io.StringIO(text, newline="")))
@@ -59,7 +64,7 @@ def load_frozen_draw_prefix(cutoff: int, expected_sha256: str):
         if bonus < 1 or bonus > 45 or bonus in nums:
             raise ValueError(f"Invalid bonus at round {round_no}")
         draws.append({"round": round_no, "date": row["date"], "nums": nums})
-    return draws, got_sha256
+    return draws, got_sha256, full_sha256
 
 
 def choose_disjoint_ticket(role_score: dict, global_score: dict, used: set[int]) -> tuple[int, ...]:
@@ -226,7 +231,11 @@ def run(date_kst: str, run_id: str):
             raise ValueError(f"Exact null changed for {key}")
 
     cutoff = int(prereg["historical_data_cutoff"])
-    draws, data_sha = load_frozen_draw_prefix(cutoff, prereg["source_data_prefix_sha256"])
+    draws, data_prefix_sha, data_sha = load_frozen_draw_prefix(
+        cutoff,
+        prereg["source_data_prefix_sha256"],
+        prereg["source_data_full_file_sha256"],
+    )
     if len(draws) != cutoff or [d["round"] for d in draws] != list(range(1, cutoff + 1)):
         raise ValueError("Frozen historical draw prefix is incomplete")
 
@@ -532,6 +541,7 @@ def run(date_kst: str, run_id: str):
         "status": "PASS",
         "data_cutoff": cutoff,
         "data_sha256": data_sha,
+        "data_prefix_sha256": data_prefix_sha,
         "target_range": [targets[0], targets[-1]],
         "target_count": len(targets),
         "prediction_records": len(prediction_rows),
