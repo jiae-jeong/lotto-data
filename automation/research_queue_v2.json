@@ -1325,6 +1325,74 @@
         },
         "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
       }
+    },
+    {
+      "id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+      "kind": "three_line_prospective_design",
+      "question": "How many untouched prospective target rounds are needed to have useful power under the fixed target-1251+ three-line strict gate, given the historical block-level variance?",
+      "novelty": "Independent design-only axis: estimates prospective sample-size requirements from the frozen E045 paired-difference block variance using a predeclared standardized-effect grid, exact existing alpha/block-stability criteria, effective block count with final remainder, independence approximation and conservative union bound. No model search, ticket generation, gate changes, or strict-pass claim.",
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_RUN",
+      "execution_entrypoint": "automation/three_line_prospective_power_planning_v1.py",
+      "workflow_entrypoint": ".github/workflows/three-line-prospective-power-planning-v1.yml",
+      "preregistration": "research/weekly_purchase/1251/THREE_LINE_PROSPECTIVE_POWER_PREREG_E046_20261114.json",
+      "implementation_code_sha": "dcd1993889b9060e1b0661af219db3f3f11ebc39",
+      "test_code_sha": "2a870706f3ed61d10dfa8d4040302166124eb28b",
+      "workflow_blob_sha": "572bd3c304e6f8ea432ae7b09350d0fb2da5e6cd",
+      "preregistration_blob_sha": "abb79d80e05ec5e9fb5f3c6c98f24e61bd1167f8",
+      "implementation_commit": "a792c14da2856eb4378a7247ebaf1b1fa0198e53",
+      "spec": {
+        "study_id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+        "study_class": "design_only_not_model_evidence",
+        "source_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "primary_metrics": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage"
+        ],
+        "family_alpha": 0.05,
+        "alpha_per_metric": 0.0125,
+        "block_length": 50,
+        "any2_positive_block_share_min": 0.65,
+        "standardized_effect_sizes": [
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "prospective_target_counts": [
+          100,
+          125,
+          150,
+          175,
+          200,
+          250,
+          300,
+          400,
+          500,
+          600,
+          800,
+          1000
+        ],
+        "retain_final_remainder_block": true,
+        "expected_output_files": [
+          "REPORT.md",
+          "DESIGN_GRID.csv",
+          "BLOCK_SUMMARIES.csv",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "SHA256_MANIFEST.csv"
+        ],
+        "no_threshold_relaxation": true,
+        "no_parameter_tuning": true,
+        "no_model_or_number_search": true,
+        "no_purchase_lines": true,
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
