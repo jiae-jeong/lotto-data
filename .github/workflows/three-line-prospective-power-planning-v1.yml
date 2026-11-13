@@ -145,6 +145,7 @@ jobs:
           git add -- "analysis/$RUN_DATE/$RUN_ID/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1" automation/research_queue_v2.json
           git diff --cached --quiet && exit 1
           git commit -m "research: complete E046 three-line prospective design planning"
+          git pull --rebase origin main
           git push origin HEAD:main
       - name: Preserve E046 failure evidence
         if: failure()
