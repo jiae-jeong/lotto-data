@@ -93,7 +93,7 @@ def verify_e045_source(root: Path):
     return folder, verification, prefix_sha, len(manifest)
 
 
-def load_paired_differences(folder: Path):
+def load_paired_differences(folder: Path, exact_null: dict):
     predictions = list(csv.DictReader((folder / "PREDICTIONS.csv").open(encoding="utf-8-sig", newline="")))
     random_rows = list(csv.DictReader((folder / "RANDOM_BASELINE.csv").open(encoding="utf-8-sig", newline="")))
     if len(predictions) != 849 or len(random_rows) != 849:
@@ -106,6 +106,15 @@ def load_paired_differences(folder: Path):
             raise ValueError(f"E045 target/cutoff join mismatch at {target}")
         if int(rand["random_bundles"]) != 120 or int(rand["geometry_violations"]) != 0:
             raise ValueError(f"E045 random comparator integrity failure at {target}")
+        expected_null = {
+            "exact_null_mean_max_hit": float(exact_null["mean_max_hit"]),
+            "exact_null_p_any2": float(exact_null["p_any2"]),
+            "exact_null_p_any3": float(exact_null["p_any3"]),
+            "exact_null_expected_union_coverage": float(exact_null["expected_union_coverage"]),
+        }
+        for key, expected_value in expected_null.items():
+            if not math.isclose(float(rand[key]), expected_value, rel_tol=0.0, abs_tol=1e-12):
+                raise ValueError(f"E045 exact null comparator mismatch for {key} at {target}")
         pairs = {
             "max_hits": (float(pred["max_hits"]), float(rand["exact_null_mean_max_hit"])),
             "any2": (float(pred["any2"]), float(rand["exact_null_p_any2"])),
@@ -202,7 +211,13 @@ def run(date_kst: str, run_id: str):
     if prereg.get("study_id") != "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1":
         raise ValueError("E046 preregistration ID mismatch")
     folder, source_verification, prefix_sha, manifest_entries = verify_e045_source(ROOT)
-    differences, block_records = load_paired_differences(folder)
+    policy = json.loads((ROOT / "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json").read_text(encoding="utf-8"))
+    exact_null = policy["exact_null"]
+    if source_verification["data_sha256"] != prereg["source"]["source_data_sha256"]:
+        raise ValueError("E045 source SHA256 differs from E046 preregistration")
+    if exact_null.get("geometry") != "three pairwise-disjoint six-number tickets, union18":
+        raise ValueError("three-line exact-null geometry mismatch")
+    differences, block_records = load_paired_differences(folder, exact_null)
     block_means, block_rows = block_summaries(block_records)
     block_sd = {metric: statistics.stdev(block_means[metric]) for metric in METRICS}
     if any(value <= 0 for value in block_sd.values()):
