@@ -12,6 +12,7 @@
   "strict_pass_ready": false,
   "ready_file": null,
   "ready_file_exists": false,
+  "line_level_output_status": "SUPPRESSED_NOT_READY",
   "stale_ready_files": [],
   "failed_gates": [
     "max_hits",

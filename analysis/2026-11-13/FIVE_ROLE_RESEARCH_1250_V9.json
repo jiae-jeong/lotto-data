@@ -1,5 +1,5 @@
 {
-  "created_kst": "2026-11-13T09:49:22.775193+09:00",
+  "created_kst": "2026-11-13T11:04:21.054204+09:00",
   "run_date_kst": "2026-11-13",
   "target_round": 1250,
   "data_cutoff": 1249,
@@ -72,6 +72,8 @@
     "C_v2": 0.9459129301575543,
     "contrarian_v2": 0.765549293793918
   },
+  "line_level_output_status": "PRIVATE_TEMP_ONLY_UNTIL_STRICT_GATE",
+  "line_level_payload_sha256": "4857fb3592d8a48545bc1e50c1e56ea1df95fc2a2c7d4de99f35ebbf342b8edf",
   "walkforward_targets": 849,
   "random_comparator": "Random permutation of labels 1..45 applied jointly to the five deterministic tickets; comparator only, never a source of purchase numbers.",
   "random_per_target": 120,
@@ -81,8 +83,8 @@
       "any2": 0.41578327444051827,
       "any3": 0.0706713780918728,
       "any4": 0.008244994110718492,
-      "any5": 0,
-      "any6": 0,
+      "any5": 0.0,
+      "any6": 0.0,
       "winning_union_coverage": 1.7173144876325088,
       "union_size": 13.148409893992932,
       "mean_overlap": 3.328268551236749,
@@ -93,8 +95,8 @@
       "any2": 0.4170691009030232,
       "any3": 0.07938751472320377,
       "any4": 0.005457400863761288,
-      "any5": 0.00008833922261484099,
-      "any6": 0,
+      "any5": 8.833922261484099e-05,
+      "any6": 0.0,
       "winning_union_coverage": 1.7611209265802905,
       "union_size": 13.148409893992932,
       "mean_overlap": 3.328268551236749,
@@ -105,12 +107,12 @@
       "any2": -0.0012858264625049132,
       "any3": -0.008716136631330973,
       "any4": 0.0027875932469572044,
-      "any5": -0.00008833922261484099,
-      "any6": 0,
+      "any5": -8.833922261484099e-05,
+      "any6": 0.0,
       "winning_union_coverage": -0.04380643894778169,
-      "union_size": 0,
-      "mean_overlap": 0,
-      "max_overlap": 0
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
     }
   },
   "inference": {
@@ -161,8 +163,5 @@
     "winning_union_coverage",
     "any2_block_stability"
   ],
-  "classification": "RESEARCH_BASED_NONRANDOM_CANDIDATE_UNVALIDATED_EDGE",
-  "line_level_output_status": "REDACTED_AFTER_STRICT_PASS_NOT_READY",
-  "line_level_payload_sha256": null,
-  "line_level_output_note": "Line-level current portfolio data was removed from the published daily artifact because overall strict readiness was false; see the suppression audit."
+  "classification": "RESEARCH_BASED_NONRANDOM_CANDIDATE_UNVALIDATED_EDGE"
 }
