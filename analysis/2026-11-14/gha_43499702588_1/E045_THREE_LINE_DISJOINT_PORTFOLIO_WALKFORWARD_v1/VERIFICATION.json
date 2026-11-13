@@ -1,0 +1,38 @@
+{
+  "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+  "status": "PASS",
+  "data_cutoff": 1249,
+  "data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "current_source_data_rows": 1249,
+  "target_range": [
+    401,
+    1249
+  ],
+  "target_count": 849,
+  "prediction_records": 849,
+  "random_bundles_per_target": 120,
+  "random_bundles_total": 101880,
+  "training_cutoff_rule": "training_through_round = target_round - 1",
+  "training_cutoff_violations": 0,
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "no_future_leakage": true,
+  "portfolio_geometry_violations": 0,
+  "random_geometry_violations": 0,
+  "all_portfolios_three_lines_six_numbers_union18": true,
+  "all_random_comparators_preserve_three_disjoint_lines_union18": true,
+  "selection_uses_randomness": false,
+  "randomness_used_only_for_comparator": true,
+  "source_sha256": {
+    "automation/five_role_research_v9.py": "e14964e2b1e2420cd40527a30b6eb5b9fe54f38f886f9bb6117190e0a210bbc3",
+    "research/1245_final_pipeline_v3/recovered_original_assets/b_model_backtest.py": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb",
+    "automation/recovered_models_v2.py": "5dab413a2b0bf9db45bd587d1650787ca6c9b073563c541bb15c2c2d2ff1e012",
+    "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json": "0e806768fb65a2f50ced37b1a93f681e5f96648bc6e3433c8366444398bee334",
+    "research/weekly_purchase/1251/THREE_LINE_RESEARCH_PREREG_E045_20261114.json": "3a497a40b89085c641b33182ae78802572db4f83ebe0ab928f7387b06b9510ad"
+  },
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "prospective_rule_status": "UNSPECIFIED_IN_POLICY"
+}

@@ -1,0 +1,16 @@
+{
+  "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+  "status": "COMPLETE",
+  "date_kst": "2026-11-14",
+  "run_id": "gha_43499702588_1",
+  "data_cutoff": 1249,
+  "target_range": [
+    401,
+    1249
+  ],
+  "executed": true,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL"
+}

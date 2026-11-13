@@ -1,0 +1,93 @@
+{
+  "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+  "data_cutoff": 1249,
+  "target_range": [
+    401,
+    1249
+  ],
+  "targets": 849,
+  "random_bundles_per_target": 120,
+  "random_bundles_total": 101880,
+  "exact_geometry_matched_null": {
+    "max_hits": 1.514256248572755,
+    "any2": 0.47497624326892623,
+    "any3": 0.07135490714617204,
+    "winning_union_coverage": 2.4
+  },
+  "simulated_same_target_random_means": {
+    "max_hits": 1.5104927365528071,
+    "any2": 0.4735571260306243,
+    "any3": 0.07033765213977228,
+    "winning_union_coverage": 2.3924420887318414
+  },
+  "metrics": {
+    "max_hits": {
+      "observed_mean": 1.492343934040047,
+      "exact_geometry_matched_null": 1.514256248572755,
+      "delta_mean": -0.021912314532707977,
+      "adjusted_moving_block_ci": [
+        -0.08316084221233107,
+        0.03226907533772783
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.46760895170789163,
+      "exact_geometry_matched_null": 0.47497624326892623,
+      "delta_mean": -0.007367291561034572,
+      "adjusted_moving_block_ci": [
+        -0.04623654951156461,
+        0.030324110087964252
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.05889281507656066,
+      "exact_geometry_matched_null": 0.07135490714617204,
+      "delta_mean": -0.012462092069611385,
+      "adjusted_moving_block_ci": [
+        -0.036019218100235645,
+        0.005205752453356811
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.3828032979976443,
+      "exact_geometry_matched_null": 2.4,
+      "delta_mean": -0.017196702002355624,
+      "adjusted_moving_block_ci": [
+        -0.12084805653710239,
+        0.07232037691401658
+      ],
+      "lower_bound_strictly_gt_zero": false
+    }
+  },
+  "block_size": 50,
+  "block_lengths": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    49
+  ],
+  "any2_positive_50_target_block_share": 0.47058823529411764,
+  "historical_strict_gate_pass": false,
+  "prospective_confirmation_required": true,
+  "prospective_minimum_target_count": null,
+  "prospective_completion_rule": null,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL"
+}
