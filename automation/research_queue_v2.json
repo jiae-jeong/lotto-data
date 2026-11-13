@@ -1219,6 +1219,68 @@
         "trace_definition": "Per-target, per-ranker, per-winning-number trace of fixed-bank stage, rank@K retention, ranker signal and rr ticket assignment."
       },
       "supersedes": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
+    },
+    {
+      "id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+      "kind": "three_line_portfolio_walkforward",
+      "question": "Does one frozen three-role allocator built from the existing 11-model B/AC signal set produce a strict edge for exactly three pairwise-disjoint six-number tickets with union18?",
+      "novelty": "One preregistered 3-line disjoint portfolio allocator; exact geometry-matched 3x6 union18 null; cutoff-safe 401..1249 rolling evaluation; four fixed strict metrics; no candidate variants or post-result tuning.",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_RUN",
+      "spec": {
+        "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+        "kind": "three_line_portfolio_walkforward",
+        "study_class": "empirical",
+        "execution_mode": "dedicated_workflow",
+        "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+        "target_round": 1251,
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "For target t, use only draws 1..t-1; the B predictor receives a list truncated at t-1; update reliability only after the target outcome.",
+        "primary_metric": "Mean max hits across three disjoint six-number tickets minus exact geometry-matched null.",
+        "secondary_metrics": [
+          "any2",
+          "any3",
+          "winning_union_coverage"
+        ],
+        "comparator": "Uniform label permutation of the three fixed disjoint tickets, preserving exactly three six-number lines and union18 for each target.",
+        "exact_null": {
+          "mean_max_hit": 1.514256248572755,
+          "p_any2": 0.47497624326892623,
+          "p_any3": 0.07135490714617204,
+          "expected_union_coverage": 2.4
+        },
+        "random_bundles_per_target": 120,
+        "random_seed": 2026111401,
+        "family_alpha": 0.05,
+        "alpha_per_metric": 0.0125,
+        "adjusted_ci": "Two-sided percentile moving-block bootstrap",
+        "bootstrap_replicates": 4000,
+        "block_length": 50,
+        "retain_final_remainder_block": true,
+        "any2_positive_block_share_min": 0.65,
+        "prospective_confirmation_required": true,
+        "prospective_minimum_target_count": null,
+        "prospective_completion_rule": null,
+        "strict_pass_ready_requires_prospective_rule": true,
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "RANDOM_BASELINE.csv",
+          "BLOCK_STABILITY.csv",
+          "INFERENCE.json",
+          "READINESS_UPDATE.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS.csv": 849,
+          "RANDOM_BASELINE.csv": 849,
+          "BLOCK_STABILITY.csv": 17
+        },
+        "no_threshold_relaxation": true,
+        "no_parameter_tuning": true
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
