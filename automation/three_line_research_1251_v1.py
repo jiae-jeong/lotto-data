@@ -144,6 +144,20 @@ def moving_block_ci(values: list[float], alpha: float, seed: int, replicates: in
     return [means[lower_index], means[upper_index]]
 
 
+def strict_portfolio_ready(
+    historical_gate_pass: bool,
+    minimum_target_count: int | None,
+    completion_rule: str | None,
+) -> bool:
+    return bool(
+        historical_gate_pass
+        and minimum_target_count is not None
+        and minimum_target_count > 0
+        and completion_rule is not None
+        and completion_rule.strip()
+    )
+
+
 def write_csv(path: Path, rows: list[dict], fields: list[str]):
     with path.open("w", encoding="utf-8-sig", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
@@ -382,11 +396,15 @@ def run(date_kst: str, run_id: str):
         all(inference[metric]["lower_bound_strictly_gt_zero"] for metric in metric_names)
         and any2_positive_share >= float(gate["any2_positive_nonoverlapping_50_target_block_share_min"])
     )
+    prospective_minimum = prereg["prospective_confirmation"]["minimum_target_count"]
+    prospective_completion_rule = prereg["prospective_confirmation"]["completion_rule"]
     prospective_rule_defined = (
-        prereg["prospective_confirmation"]["minimum_target_count"] is not None
-        and prereg["prospective_confirmation"]["completion_rule"] is not None
+        prospective_minimum is not None
+        and prospective_completion_rule is not None
     )
-    strict_portfolio_pass = bool(historical_gate_pass and prospective_rule_defined)
+    strict_portfolio_pass = strict_portfolio_ready(
+        historical_gate_pass, prospective_minimum, prospective_completion_rule
+    )
     if historical_gate_pass and not prospective_rule_defined:
         readiness_status = "HISTORICAL_GATE_PASS_BUT_NOT_READY_PROSPECTIVE_RULE_UNSPECIFIED"
     elif historical_gate_pass:
