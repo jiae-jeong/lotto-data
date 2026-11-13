@@ -258,6 +258,7 @@ def run(date_kst: str, run_id: str):
     random_count = int(prereg["random_comparator"]["random_bundles_per_target"])
     seed = int(prereg["random_comparator"]["seed"])
 
+    start_target = int(prereg["target_rounds"].split("..")[0])
     for idx in range(warmup, len(draws)):
         target_round = idx + 1
         training_through = idx
@@ -286,44 +287,45 @@ def run(date_kst: str, run_id: str):
             raise AssertionError(f"Invalid three-line geometry at target {target_round}")
 
         actual = set(draws[idx]["nums"])
-        observed = portfolio_metrics(lines, actual)
-        line_hits = [len(set(line) & actual) for line in lines]
-        observations.append(
-            {
-                "target_round": target_round,
-                "training_through_round": training_through,
-                "lines": lines,
-                "actual": tuple(sorted(actual)),
-                "line_hits": line_hits,
-                **observed,
-            }
-        )
+        if target_round >= start_target:
+            observed = portfolio_metrics(lines, actual)
+            line_hits = [len(set(line) & actual) for line in lines]
+            observations.append(
+                {
+                    "target_round": target_round,
+                    "training_through_round": training_through,
+                    "lines": lines,
+                    "actual": tuple(sorted(actual)),
+                    "line_hits": line_hits,
+                    **observed,
+                }
+            )
 
-        rng = random.Random(seed + target_round)
-        random_metrics = []
-        for _ in range(random_count):
-            random_lines = permute_portfolio_labels(lines, rng)
-            random_result = portfolio_metrics(random_lines, actual)
-            if len(set().union(*(set(line) for line in random_lines))) != 18:
-                random_geometry_violations += 1
-            random_metrics.append(random_result)
-        if random_geometry_violations:
-            raise AssertionError("Random comparator geometry violation")
-        random_rows.append(
-            {
-                "target_round": target_round,
-                "random_bundles": random_count,
-                "random_mean_max_hits": statistics.mean(x["max_hits"] for x in random_metrics),
-                "random_p_any2": statistics.mean(x["any2"] for x in random_metrics),
-                "random_p_any3": statistics.mean(x["any3"] for x in random_metrics),
-                "random_mean_union_coverage": statistics.mean(x["winning_union_coverage"] for x in random_metrics),
-                "exact_null_mean_max_hit": exact_by_metric["max_hits"],
-                "exact_null_p_any2": exact_by_metric["any2"],
-                "exact_null_p_any3": exact_by_metric["any3"],
-                "exact_null_expected_union_coverage": exact_by_metric["winning_union_coverage"],
-                "geometry_violations": 0,
-            }
-        )
+            rng = random.Random(seed + target_round)
+            random_metrics = []
+            for _ in range(random_count):
+                random_lines = permute_portfolio_labels(lines, rng)
+                random_result = portfolio_metrics(random_lines, actual)
+                if len(set().union(*(set(line) for line in random_lines))) != 18:
+                    random_geometry_violations += 1
+                random_metrics.append(random_result)
+            if random_geometry_violations:
+                raise AssertionError("Random comparator geometry violation")
+            random_rows.append(
+                {
+                    "target_round": target_round,
+                    "random_bundles": random_count,
+                    "random_mean_max_hits": statistics.mean(x["max_hits"] for x in random_metrics),
+                    "random_p_any2": statistics.mean(x["any2"] for x in random_metrics),
+                    "random_p_any3": statistics.mean(x["any3"] for x in random_metrics),
+                    "random_mean_union_coverage": statistics.mean(x["winning_union_coverage"] for x in random_metrics),
+                    "exact_null_mean_max_hit": exact_by_metric["max_hits"],
+                    "exact_null_p_any2": exact_by_metric["any2"],
+                    "exact_null_p_any3": exact_by_metric["any3"],
+                    "exact_null_expected_union_coverage": exact_by_metric["winning_union_coverage"],
+                    "geometry_violations": 0,
+                }
+            )
 
         for model in reference.MODELS:
             histories[model].append(len(set(predictions[model]) & actual))
@@ -521,6 +523,7 @@ def run(date_kst: str, run_id: str):
         "training_cutoff_violations": training_cutoff_violations,
         "leakage_failures": 0,
         "future_predictions": 0,
+        "no_future_leakage": True,
         "portfolio_geometry_violations": portfolio_geometry_violations,
         "random_geometry_violations": random_geometry_violations,
         "all_portfolios_three_lines_six_numbers_union18": all(
