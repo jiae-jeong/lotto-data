@@ -18,7 +18,7 @@ LAGS = tuple(range(1, 11))
 
 
 def git_blob_sha(data: bytes) -> str:
-    return hashlib.sha1(f"blob {len(data)}\\0".encode("ascii") + data).hexdigest()
+    return hashlib.sha1(f"blob {len(data)}\0".encode("ascii") + data).hexdigest()
 
 
 def main() -> dict:
@@ -149,7 +149,7 @@ def main() -> dict:
             "No strict PASS, candidate promotion, or ticket recommendation is produced.",
         ],
     }
-    OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({
         "status": "REPRODUCED",
         "output": str(OUTPUT.relative_to(ROOT)),
