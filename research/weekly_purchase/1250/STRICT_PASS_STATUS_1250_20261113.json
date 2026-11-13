@@ -3,17 +3,16 @@
   "target_round": 1250,
   "date_kst": "2026-11-13",
   "data_cutoff": 1249,
-  "data_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def",
   "data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
-  "data_sha_matches_preregistration": true,
-  "strict_gate_version": "V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY",
   "strict_model_validation_pass": false,
   "validated_models": [],
   "model_verdict": "NO_MODEL_PASSES_STRICT_VALIDATION",
   "strict_portfolio_pass": false,
+  "strict_gate_version": "V2_MAX_ANY2_ANY3_COVERAGE_ADJUSTED_CI_AND_ANY2_50_BLOCK_STABILITY",
   "strict_pass_ready": false,
   "ready_file": null,
   "ready_file_exists": false,
+  "stale_ready_files": [],
   "failed_gates": [
     "max_hits",
     "any2",
@@ -21,27 +20,7 @@
     "winning_union_coverage",
     "any2_block_stability"
   ],
-  "h1250_ab_v2_preregistration_integrity": {
-    "preregistration_blob_sha": "bcac96aa1a7db5bfb0f4e973ba7fc14a35f2b417",
-    "runner_blob_sha": "a7a7d7792c7ba84a1c12699f53d8a3f4009d8a66",
-    "runner_matches_preregistration": true,
-    "frozen_dependencies_matching": 7,
-    "workflow_blob_sha": "5bfac63506b9fc2d3f68350eafaa8676fa6a64d3",
-    "workflow_matches_append_only_audit": true,
-    "workflow_dispatch_only": true
-  },
-  "h1250_ab_v2_execution": {
-    "executed": false,
-    "workflow_run_found_in_latest_100_actions_runs": false,
-    "outer_targets": "401..1249 inclusive (849 targets)",
-    "moving_block_bootstrap_replicates": 7000,
-    "execution_reason": "Manual workflow-dispatch action is not exposed in the connected GitHub tools; no run artifact or verified 13-file output manifest exists."
-  },
   "no_future_leakage": true,
   "final_selection_randomness": false,
-  "random_fallback_allowed": false,
-  "fallback_promoted": false,
-  "final_purchase_lines_generated": false,
-  "freeze_seal": "NO_STRICT_PASS; no 1250 champion or purchase artifact frozen/sealed",
-  "note": "Hash integrity PASS is not a predictive PASS. No threshold was lowered, no model was promoted, and no fallback was relabeled as strict PASS."
+  "random_fallback_allowed": false
 }
