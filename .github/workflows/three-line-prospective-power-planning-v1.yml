@@ -1,0 +1,154 @@
+name: three-line-prospective-power-planning-v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/three_line_prospective_power_planning_v1.py'
+      - 'automation/tests_v2/test_three_line_prospective_power_planning_v1.py'
+      - 'research/weekly_purchase/1251/THREE_LINE_PROSPECTIVE_POWER_PREREG_E046_20261114.json'
+      - 'automation/research_queue_v2.json'
+      - '.github/workflows/three-line-prospective-power-planning-v1.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: three-line-prospective-power-planning-v1
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile E046 and run deterministic tests
+        run: |
+          python -m py_compile automation/three_line_prospective_power_planning_v1.py automation/tests_v2/test_three_line_prospective_power_planning_v1.py
+          python -B -m unittest automation.tests_v2.test_three_line_prospective_power_planning_v1 -v
+
+  preflight:
+    needs: validate
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Check append-only E046 queue state
+        id: check
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          queue=json.loads(Path('automation/research_queue_v2.json').read_text(encoding='utf-8'))
+          task=next((x for x in queue.get('tasks',[]) if x.get('id')=='E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1'),None)
+          status=task.get('execution_status') if task else None
+          should_run=status=='IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_RUN'
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
+              f.write('should_run='+('true' if should_run else 'false')+'\n')
+          print({'task_found':task is not None,'execution_status':status,'should_run':should_run})
+          PY
+
+  research:
+    needs: preflight
+    if: needs.preflight.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute preregistered E046 design analysis
+        id: study
+        shell: bash
+        run: |
+          set -euo pipefail
+          DATE="$(TZ=Asia/Seoul date +%F)"
+          RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          python -B automation/three_line_prospective_power_planning_v1.py "$DATE" "$RUN_ID" | tee "$RUNNER_TEMP/e046-result.json"
+      - name: Verify immutable E046 outputs and update queue status
+        env:
+          RUN_DATE: ${{ steps.study.outputs.date }}
+          RUN_ID: ${{ steps.study.outputs.run_id }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os
+          from pathlib import Path
+          root=Path.cwd()
+          study='E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1'
+          folder=root/'analysis'/os.environ['RUN_DATE']/os.environ['RUN_ID']/study
+          completion=json.loads((folder/'COMPLETION.json').read_text(encoding='utf-8'))
+          verification=json.loads((folder/'VERIFICATION.json').read_text(encoding='utf-8'))
+          assert completion['status']=='COMPLETE'
+          assert completion['study_classification']=='DESIGN_ONLY_NOT_MODEL_EVIDENCE'
+          assert completion['strict_portfolio_pass'] is False and completion['strict_pass_ready'] is False
+          assert verification['status']=='PASS' and verification['no_future_leakage'] is True
+          assert verification['data_cutoff' if 'data_cutoff' in verification else 'source_data_cutoff']==1249
+          assert verification['strict_gate_thresholds_changed'] is False
+          assert verification['purchase_lines_generated'] is False
+          manifest=list(csv.DictReader((folder/'SHA256_MANIFEST.csv').open(encoding='utf-8-sig',newline='')))
+          expected={p.name for p in folder.iterdir() if p.is_file() and p.name!='SHA256_MANIFEST.csv'}
+          assert len(manifest)==5 and {r['path'] for r in manifest}==expected
+          for row in manifest:
+              path=folder/row['path']; raw=path.read_bytes()
+              assert len(raw)==int(row['bytes'])
+              assert hashlib.sha256(raw).hexdigest()==row['sha256']
+          queue_path=root/'automation/research_queue_v2.json'
+          queue=json.loads(queue_path.read_text(encoding='utf-8'))
+          task=next(x for x in queue['tasks'] if x['id']==study)
+          assert task['execution_status']=='IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_RUN'
+          task['execution_status']='EXECUTED_DESIGN_PLANNING_COMPLETE'
+          task['execution_result']={
+              'workflow_name':'three-line-prospective-power-planning-v1',
+              'run_id':int(os.environ['GITHUB_RUN_ID']),
+              'run_attempt':int(os.environ['GITHUB_RUN_ATTEMPT']),
+              'run_url':f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+              'result_path':str(folder.relative_to(root)),
+              'data_cutoff':verification['source_data_cutoff'],
+              'target_count':verification['source_targets'],
+              'design_rows':sum(1 for _ in (folder/'DESIGN_GRID.csv').open(encoding='utf-8-sig'))-1,
+              'manifest_entries':len(manifest),
+              'verification_status':'PASS',
+              'classification':'DESIGN_ONLY_NOT_MODEL_EVIDENCE',
+              'strict_portfolio_pass':False,
+              'strict_pass_ready':False
+          }
+          queue_path.write_text(json.dumps(queue,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print({'study_id':study,'manifest_entries':len(manifest),'queue_status':task['execution_status']})
+          PY
+      - name: Publish E046 design evidence and terminal queue state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "analysis/$RUN_DATE/$RUN_ID/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1" automation/research_queue_v2.json
+          git diff --cached --quiet && exit 1
+          git commit -m "research: complete E046 three-line prospective design planning"
+          git push origin HEAD:main
+      - name: Preserve E046 failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e046-failed-attempt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            analysis/${{ steps.study.outputs.date }}/${{ steps.study.outputs.run_id }}/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1/**
+            ${{ runner.temp }}/e046-result.json
+          if-no-files-found: warn
