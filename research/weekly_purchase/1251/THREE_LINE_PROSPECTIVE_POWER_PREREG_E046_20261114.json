@@ -1,0 +1,80 @@
+{
+  "study_id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+  "registered_at_kst": "2026-11-14",
+  "study_classification": "DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+  "question": "Given the fixed target-1251+ three-line strict gate, how many untouched prospective target rounds would be needed to detect predeclared standardized effects under a block-variance planning approximation?",
+  "source": {
+    "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "data_cutoff": 1249,
+    "target_range": [
+      401,
+      1249
+    ],
+    "target_count": 849,
+    "source_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "source_prediction_file": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1/PREDICTIONS.csv",
+    "source_random_file": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1/RANDOM_BASELINE.csv",
+    "use": "Estimate block-level variance only; center historical paired differences at zero before applying hypothetical effects. Do not use the observed negative mean to tune any model."
+  },
+  "frozen_gate": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci": "two-sided normal approximation to the per-metric adjusted lower bound; planning approximation only, not the operational moving-block bootstrap",
+    "block_size": 50,
+    "any2_positive_block_share_min": 0.65,
+    "retain_final_remainder_block": true
+  },
+  "design": {
+    "standardized_effect_sizes_in_block_sd": [
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "prospective_target_counts": [
+      100,
+      150,
+      200,
+      250,
+      300,
+      400,
+      500,
+      600,
+      800,
+      1000
+    ],
+    "effect_definition": "A hypothetical positive mean shift equal to d times the historical standard deviation of non-overlapping 50-target paired-difference block means, separately for each metric.",
+    "effective_block_count": "n_eff = 1 / sum((block_length / target_count)^2), including the final remainder block.",
+    "block_stability_probability": "Binomial tail for at least ceil(0.65 * block_count) positive any2 blocks, with per-block positivity Phi(d).",
+    "joint_power_outputs": [
+      "independence_product_approximation",
+      "conservative_union_bound_lower"
+    ],
+    "planning_thresholds": [
+      0.8
+    ]
+  },
+  "exclusions": [
+    "No model, number, ticket, weight, threshold, alpha, block length, or comparator is selected or changed.",
+    "No target outcome after round 1249 is read or used.",
+    "No result from this design analysis can create STRICT_PASS_READY or purchase lines.",
+    "The normal approximation is not a substitute for the operational adjusted moving-block bootstrap."
+  ],
+  "completion": {
+    "required_outputs": [
+      "REPORT.md",
+      "DESIGN_GRID.csv",
+      "BLOCK_SUMMARIES.csv",
+      "VERIFICATION.json",
+      "COMPLETION.json",
+      "SHA256_MANIFEST.csv"
+    ],
+    "pass_means": "Source provenance, exact calculations, manifest, and no-future-data assertions pass; it does not mean predictive edge or strict portfolio PASS."
+  }
+}
