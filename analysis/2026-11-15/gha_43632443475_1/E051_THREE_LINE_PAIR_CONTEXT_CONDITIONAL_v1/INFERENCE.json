@@ -1,0 +1,96 @@
+{
+  "study_id": "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+  "evidence_class": "HISTORICAL_INDEPENDENT_AXIS_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "targets": 850,
+  "random_bundles_per_target": 120,
+  "random_bundles_total": 102000,
+  "block_size": 50,
+  "block_lengths": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50
+  ],
+  "family_alpha": 0.05,
+  "alpha_per_metric": 0.0125,
+  "bootstrap_replicates": 4000,
+  "metrics": {
+    "max_hits": {
+      "observed_mean": 1.4988235294117647,
+      "exact_geometry_matched_null": 1.514256248572755,
+      "delta_mean": -0.015432719160990385,
+      "adjusted_moving_block_ci": [
+        -0.07660918974922568,
+        0.056331986721362554
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.46588235294117647,
+      "exact_geometry_matched_null": 0.47497624326892623,
+      "delta_mean": -0.009093890327749739,
+      "adjusted_moving_block_ci": [
+        -0.04321153738657327,
+        0.03561199202519144
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.06941176470588235,
+      "exact_geometry_matched_null": 0.07135490714617204,
+      "delta_mean": -0.0019431424402896929,
+      "adjusted_moving_block_ci": [
+        -0.020766671852054396,
+        0.01570391638323972
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.3811764705882354,
+      "exact_geometry_matched_null": 2.4,
+      "delta_mean": -0.018823529411764617,
+      "adjusted_moving_block_ci": [
+        -0.13647058823529404,
+        0.10941176470588244
+      ],
+      "lower_bound_strictly_gt_zero": false
+    }
+  },
+  "any2_positive_50_target_block_share": 0.4117647058823529,
+  "simulated_random_means": {
+    "max_hits": 1.5145196078431373,
+    "any2": 0.4757549019607843,
+    "any3": 0.07079411764705883,
+    "winning_union_coverage": 2.401813725490196
+  },
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL",
+  "prospective_minimum_target_count": null,
+  "prospective_completion_rule": null,
+  "parameter_search": false,
+  "thresholds_changed": false,
+  "alpha_changed": false,
+  "block_length_changed": false,
+  "comparator_changed": false,
+  "purchase_recommendation_generated": false
+}
