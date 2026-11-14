@@ -19,7 +19,7 @@ DATA = ROOT / "lotto_data.csv"
 PREREG_PATH = ROOT / "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json"
 POLICY_PATH = ROOT / "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json"
 STUDY_ID = "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"
-PREREG_SHA256 = "f69eba9834511bc21314cfaed3a4bf77af728c9a19c86895a0b1239abcb8302f"
+PREREG_SHA256 = "a17160f17aa1c2c14498d2da151e382c56bd851aee402cb19e8fcb3eb5c6b0e3"
 METRICS = ("max_hits", "any2", "any3", "winning_union_coverage")
 
 
