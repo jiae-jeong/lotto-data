@@ -93,6 +93,46 @@ class ProspectiveLedgerTests(unittest.TestCase):
         crosscheck_path.write_text(json.dumps(crosscheck, indent=2) + "\n", encoding="utf-8")
         return data_path
 
+
+    def _write_repository_snapshot_through_1250(self, root: Path):
+        data_path = self._write_repository_snapshot(root)
+        rows = data_path.read_text(encoding="utf-8").splitlines()
+        later = [
+            (1247, "2026.10.24", [8, 14, 21, 22, 42, 45], 24),
+            (1248, "2026.10.31", [16, 18, 27, 36, 38, 42], 22),
+            (1249, "2026.11.07", [2, 11, 16, 25, 34, 35], 14),
+            (1250, "2026.11.14", [1, 5, 18, 23, 27, 28], 8),
+        ]
+        for round_no, draw_date, numbers, bonus in later:
+            rows.append(",".join(map(str, [round_no, draw_date, *numbers, bonus])))
+        raw = ("\n".join(rows) + "\n").encode()
+        data_path.write_bytes(raw)
+        full_sha = hashlib.sha256(raw).hexdigest()
+        crosscheck = {
+            "evidence_id": "E030_OUTCOME_SOURCE_CROSSCHECK_1250_v1",
+            "target_round": 1250,
+            "draw_date": "2026-11-14",
+            "main_numbers": [1, 5, 18, 23, 27, 28],
+            "bonus": 8,
+            "repository_snapshot": {
+                "path": "lotto_data.csv",
+                "data_cutoff": 1250,
+                "full_sha256": full_sha,
+                "prefix_through_target_sha256": full_sha,
+            },
+            "fallback_sources": [
+                {"domain": "source-a.example", "url": "https://source-a.example/1250",
+                 "round": 1250, "draw_date": "2026-11-14",
+                 "main_numbers": [1, 5, 18, 23, 27, 28], "bonus": 8},
+                {"domain": "source-b.example", "url": "https://source-b.example/1250",
+                 "round": 1250, "draw_date": "2026-11-14",
+                 "main_numbers": [1, 5, 18, 23, 27, 28], "bonus": 8},
+            ],
+        }
+        crosscheck_path = root / "research/prospective_v1/source_crosschecks/ROUND_1250.json"
+        crosscheck_path.write_text(json.dumps(crosscheck, indent=2) + "\n", encoding="utf-8")
+        return data_path
+
     def _write_base_snapshot(self, path: Path):
         lines = ["round,date,no1,no2,no3,no4,no5,no6,bonus"]
         for round_no in range(1, 1246):
@@ -168,6 +208,108 @@ class ProspectiveLedgerTests(unittest.TestCase):
             self.assertEqual(next_prediction["target_round"], 1247)
             self.assertEqual(next_prediction["training_through_round"], 1246)
             self.assertEqual(next_prediction["target_draw_date_assumption"], "2026-10-24")
+
+
+    def test_run_restarts_at_latest_verified_cutoff_without_backfilling_missed_targets(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._write_repository_snapshot_through_1250(root)
+            base = root / "snapshot_1_1245.csv"
+            self._write_base_snapshot(base)
+            frozen_path = self._write_frozen_1246(root)
+            original_frozen = frozen_path.read_bytes()
+            now = datetime(2026, 11, 15, 4, 10, tzinfo=timezone.utc)
+            with patch.object(ledger, "DATA", base), patch.object(ledger, "fetch_official", return_value=None):
+                result = ledger.run(root=root, now=now)
+
+            tracker = root / "analysis/prospective/E030"
+            next_path = tracker / "FROZEN_SIGNALS_1251.json"
+            next_prediction = json.loads(next_path.read_text(encoding="utf-8"))
+            resume = json.loads((tracker / "RESUME_STATUS_1251.json").read_text(encoding="utf-8"))
+            self.assertEqual(result["status"], "OUTCOME_RECORDED")
+            self.assertTrue(result["next_prediction_created"])
+            self.assertEqual(result["next_prediction_status"], "FROZEN_AFTER_GAP")
+            self.assertEqual(next_prediction["target_round"], 1251)
+            self.assertEqual(next_prediction["training_through_round"], 1250)
+            self.assertEqual(next_prediction["target_draw_date_assumption"], "2026-11-21")
+            self.assertEqual(next_prediction["prospective_horizon_status"], "GAP_ACKNOWLEDGED_RESTARTED")
+            self.assertEqual(next_prediction["historical_targets_without_pre_draw_freeze"], [1247, 1248, 1249, 1250])
+            self.assertEqual(next_prediction["training_data_source"]["cutoff"], 1250)
+            self.assertEqual(next_prediction["training_data_source"]["sha256"], next_prediction["canonical_snapshot_sha256"])
+            self.assertEqual(resume["historical_targets_without_pre_draw_freeze"], [1247, 1248, 1249, 1250])
+            self.assertEqual(resume["status"], "FROZEN_AFTER_HISTORICAL_GAP")
+            self.assertFalse(next_prediction["purchase_recommendation"])
+            for missed in range(1247, 1251):
+                self.assertFalse((tracker / f"FROZEN_SIGNALS_{missed}.json").exists())
+            self.assertEqual(frozen_path.read_bytes(), original_frozen)
+
+    def test_resumed_target_is_scored_and_next_target_uses_verified_training_prefix(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            data_path = self._write_repository_snapshot_through_1250(root)
+            base = root / "snapshot_1_1245.csv"
+            self._write_base_snapshot(base)
+            with patch.object(ledger, "DATA", base), patch.object(ledger, "fetch_official", return_value=None):
+                current_draws, current_sha, current_source, _ = ledger.load_current_draws(root)
+            tracker = root / "analysis/prospective/E030"
+            tracker.mkdir(parents=True, exist_ok=True)
+            frozen = ledger.make_frozen_prediction(
+                current_draws,
+                "2026-11-15T04:10:00+00:00",
+                canonical_snapshot_sha256=current_sha,
+                training_data_source=current_source,
+                sequence_metadata={
+                    "previous_frozen_target": 1246,
+                    "historical_targets_without_pre_draw_freeze": [1247, 1248, 1249, 1250],
+                    "prospective_horizon_status": "GAP_ACKNOWLEDGED_RESTARTED",
+                },
+            )
+            (tracker / "FROZEN_SIGNALS_1251.json").write_text(
+                json.dumps(frozen, indent=2) + "\n", encoding="utf-8"
+            )
+
+            lines = data_path.read_text(encoding="utf-8").splitlines()
+            lines.append(",".join(map(str, [1251, "2026.11.21", 3, 9, 12, 17, 31, 44, 5])))
+            raw = ("\n".join(lines) + "\n").encode()
+            data_path.write_bytes(raw)
+            full_sha = hashlib.sha256(raw).hexdigest()
+            crosscheck = {
+                "evidence_id": "E030_OUTCOME_SOURCE_CROSSCHECK_1251_v1",
+                "target_round": 1251,
+                "draw_date": "2026-11-21",
+                "main_numbers": [3, 9, 12, 17, 31, 44],
+                "bonus": 5,
+                "repository_snapshot": {
+                    "path": "lotto_data.csv",
+                    "data_cutoff": 1251,
+                    "full_sha256": full_sha,
+                    "prefix_through_target_sha256": full_sha,
+                },
+                "fallback_sources": [
+                    {"domain": "source-a.example", "url": "https://source-a.example/1251",
+                     "round": 1251, "draw_date": "2026-11-21",
+                     "main_numbers": [3, 9, 12, 17, 31, 44], "bonus": 5},
+                    {"domain": "source-b.example", "url": "https://source-b.example/1251",
+                     "round": 1251, "draw_date": "2026-11-21",
+                     "main_numbers": [3, 9, 12, 17, 31, 44], "bonus": 5},
+                ],
+            }
+            crosscheck_path = root / "research/prospective_v1/source_crosschecks/ROUND_1251.json"
+            crosscheck_path.write_text(json.dumps(crosscheck, indent=2) + "\n", encoding="utf-8")
+
+            now = datetime(2026, 11, 22, 0, 0, tzinfo=timezone.utc)
+            with patch.object(ledger, "DATA", base), patch.object(ledger, "fetch_official", return_value=None):
+                result = ledger.run(root=root, now=now)
+
+            next_path = tracker / "FROZEN_SIGNALS_1252.json"
+            next_prediction = json.loads(next_path.read_text(encoding="utf-8"))
+            self.assertEqual(result["target_round"], 1251)
+            self.assertEqual(result["status"], "OUTCOME_RECORDED")
+            self.assertEqual(result["next_prediction_path"], "analysis/prospective/E030/FROZEN_SIGNALS_1252.json")
+            self.assertEqual(next_prediction["target_round"], 1252)
+            self.assertEqual(next_prediction["training_through_round"], 1251)
+            self.assertEqual(next_prediction["canonical_snapshot_sha256"], full_sha)
+            self.assertFalse(next_prediction["purchase_recommendation"])
 
 
 if __name__ == "__main__":
