@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Recover protocol evidence from authentic preserved records and cutoff-safe tests.
+"""Recover protocol evidence from explicitly confirmed purchases and cutoff-safe tests.
 
-This script does not generate a purchase recommendation. It closes two evidence gaps:
-1) review completed rounds using the recommendation that was actually delivered/purchased
-   when such an artifact exists, otherwise the authentic pre-draw FINAL artifact;
-2) score operational signal families with a cutoff-safe walk-forward and verify the
-   existing model-level pair/triple and ablation evidence from the fresh MASTER run.
+This script does not generate a purchase recommendation. Preserved filenames, displayed
+recommendations, and pre-draw FINAL artifacts are not proof of purchase. Only sources
+listed in PURCHASE_CONFIRMATION_REGISTRY.json with a valid source hash and explicit
+receipt or user-confirmation evidence enter the actual-purchase aggregate.
 """
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import statistics
 import sys
@@ -84,9 +84,9 @@ def write_csv(path, rows):
 def _artifact_role(path: Path):
     name = path.name
     if name.startswith("ACTUAL_PURCHASE_FIVE_LINES"):
-        return "ACTUAL_PURCHASE"
+        return "PRESERVED_PURCHASE_NAMED_NOT_CONFIRMED"
     if name.startswith("FINAL_FIVE_LINES"):
-        return "FINAL_PREDRAW"
+        return "PRESERVED_FINAL_PREDRAW_NOT_CONFIRMED"
     return "OTHER"
 
 
@@ -95,6 +95,11 @@ def _candidate_paths():
     found = set(base.glob("*/ACTUAL_PURCHASE_FIVE_LINES*.json"))
     found.update(base.glob("*/FINAL_FIVE_LINES*.json"))
     return sorted(found)
+
+
+def _sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
 
 def _normalize_five_lines(value):
     if not isinstance(value, list) or len(value) != 5:
@@ -112,6 +117,16 @@ def _normalize_five_lines(value):
     return tuple(normalized)
 
 
+def _load_purchase_confirmation_registry():
+    path = ROOT / "research" / "PURCHASE_CONFIRMATION_REGISTRY.json"
+    if not path.is_file():
+        return {"schema_version": 1, "confirmed_purchases": []}, "MISSING"
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    if payload.get("schema_version") != 1 or not isinstance(payload.get("confirmed_purchases"), list):
+        raise ValueError("unsupported purchase confirmation registry schema")
+    return payload, ("PRESENT_WITH_ENTRIES" if payload["confirmed_purchases"] else "PRESENT_EMPTY")
+
+
 def _prospective_first_prize_sources(target):
     base = ROOT / "research" / "prospective_v4" / "decisions" / str(target)
     found = []
@@ -125,7 +140,12 @@ def _prospective_first_prize_sources(target):
             lines = _normalize_five_lines(obj.get("actual_purchase_final_5"))
             if lines is None:
                 continue
-            found.append({"path": str(path.relative_to(ROOT)), "lines": lines})
+            found.append({
+                "path": str(path.relative_to(ROOT)),
+                "role": "FIRST_PRIZE_PRE_DRAW_PURCHASE_DESIGN",
+                "line_set": [list(line) for line in lines],
+                "source_sha256": _sha256_file(path),
+            })
         except (OSError, ValueError, TypeError, json.JSONDecodeError):
             continue
     return found
@@ -135,111 +155,193 @@ def build_historical_closed_loop(rows, dated):
     by_round = {r["round"]: r for r in rows}
     cutoff = rows[-1]["round"]
     candidates = []
-    for p in _candidate_paths():
+    invalid = []
+    for path in _candidate_paths():
         try:
-            obj = json.loads(p.read_text(encoding="utf-8-sig"))
-            target = int(obj.get("target_round", p.parent.name))
-        except Exception as e:
-            candidates.append({"path": str(p.relative_to(ROOT)), "valid": False, "reason": f"parse:{e}"})
-            continue
-        if target > cutoff:
-            continue
-        candidates.append({
-            "path": str(p.relative_to(ROOT)),
-            "target": target,
-            "obj": obj,
-            "valid": True,
-            "role": _artifact_role(p),
-        })
+            obj = json.loads(path.read_text(encoding="utf-8-sig"))
+            target = int(obj.get("target_round", path.parent.name))
+            if target > cutoff:
+                continue
+            lines = _normalize_five_lines(obj.get("final_lines"))
+            if lines is None:
+                invalid.append({
+                    "path": str(path.relative_to(ROOT)),
+                    "target": target,
+                    "reason": "invalid_or_missing_five_line_payload",
+                })
+                continue
+            candidates.append({
+                "path": str(path.relative_to(ROOT)),
+                "path_abs": path,
+                "target": target,
+                "obj": obj,
+                "role": _artifact_role(path),
+                "lines": lines,
+                "source_sha256": _sha256_file(path),
+            })
+        except Exception as exc:
+            invalid.append({
+                "path": str(path.relative_to(ROOT)),
+                "valid": False,
+                "reason": f"parse:{exc}",
+            })
 
     grouped = {}
-    invalid = []
-    for c in candidates:
-        if not c.get("valid"):
-            invalid.append(c)
+    candidate_by_path = {}
+    for candidate in candidates:
+        grouped.setdefault(candidate["target"], []).append(candidate)
+        candidate_by_path[candidate["path"]] = candidate
+
+    registry_path = ROOT / "research" / "PURCHASE_CONFIRMATION_REGISTRY.json"
+    try:
+        registry, registry_status = _load_purchase_confirmation_registry()
+    except Exception as exc:
+        registry = {"schema_version": 1, "confirmed_purchases": []}
+        registry_status = "INVALID"
+        invalid.append({
+            "path": str(registry_path.relative_to(ROOT)),
+            "reason": f"purchase_confirmation_registry_invalid:{exc}",
+        })
+
+    confirmed_by_target = {}
+    ambiguous_registry_targets = set()
+    for index, entry in enumerate(registry.get("confirmed_purchases", [])):
+        if not isinstance(entry, dict):
+            invalid.append({"registry_entry": index, "reason": "entry_not_object"})
             continue
-        grouped.setdefault(c["target"], []).append(c)
+        if entry.get("confirmation_status") != "CONFIRMED":
+            continue
+        try:
+            target = int(entry["target_round"])
+            source_path = str(entry["source_path"])
+            source_sha256 = str(entry["source_sha256"]).lower()
+            evidence_type = str(entry["evidence_type"]).upper()
+            evidence_reference = str(entry["evidence_reference"]).strip()
+            if not evidence_reference:
+                raise ValueError("missing_evidence_reference")
+            if evidence_type == "EXPLICIT_USER_CONFIRMATION":
+                if entry.get("confirmed_by_user") is not True:
+                    raise ValueError("explicit_confirmation_not_user_confirmed")
+            elif evidence_type == "RECEIPT":
+                ref_path = Path(evidence_reference)
+                if ref_path.is_absolute() or ".." in ref_path.parts:
+                    raise ValueError("unsafe_receipt_reference")
+                receipt_path = ROOT / ref_path
+                if not receipt_path.is_file() or receipt_path.is_symlink():
+                    raise ValueError("receipt_evidence_file_missing")
+            else:
+                raise ValueError("unsupported_evidence_type")
+            candidate = candidate_by_path.get(source_path)
+            if candidate is None:
+                raise ValueError("confirmed_source_not_in_preserved_purchase_candidates")
+            if candidate["target"] != target:
+                raise ValueError("confirmed_source_target_mismatch")
+            if candidate["source_sha256"] != source_sha256:
+                raise ValueError("confirmed_source_sha256_mismatch")
+            if target > cutoff or target not in by_round:
+                raise ValueError("confirmed_target_outside_verified_draw_data")
+            if target in confirmed_by_target:
+                ambiguous_registry_targets.add(target)
+                confirmed_by_target.pop(target, None)
+                raise ValueError("multiple_confirmed_sources_for_target")
+            confirmed_by_target[target] = entry
+        except (KeyError, TypeError, ValueError) as exc:
+            try:
+                bad_target = int(entry.get("target_round", -1))
+                if bad_target >= 0:
+                    ambiguous_registry_targets.add(bad_target)
+                    confirmed_by_target.pop(bad_target, None)
+            except (TypeError, ValueError):
+                bad_target = None
+            invalid.append({
+                "registry_entry": index,
+                "target_round": bad_target,
+                "reason": str(exc),
+            })
 
     reviews = []
     all_hits = []
     source_conflicts = []
+    unconfirmed = []
+
     for target in sorted(grouped):
         entries = grouped[target]
-        actual_purchase = sorted(
-            (x for x in entries if x["role"] == "ACTUAL_PURCHASE"),
-            key=lambda x: (x["obj"].get("created_kst", "9999"), x["path"]),
-        )
-        final_predraw = sorted(
-            (x for x in entries if x["role"] == "FINAL_PREDRAW"),
-            key=lambda x: (x["obj"].get("created_kst", x["obj"].get("recommendation_date_kst", "9999")), x["path"]),
-        )
-        # The real delivered/purchase artifact is the canonical learning record.
-        # A later research/final artifact must never replace what the user actually received.
-        c = actual_purchase[0] if actual_purchase else final_predraw[0]
-        obj = c["obj"]
-        tickets = obj.get("final_lines")
-        training_cutoff = obj.get("training_cutoff", obj.get("data_cutoff"))
-
-        # Conflicting preserved pre-draw sources are not resolved by file order.
-        weekly_lines = _normalize_five_lines(tickets)
-        external_sources = _prospective_first_prize_sources(target) if not actual_purchase else []
-        differing_external = [
-            source for source in external_sources
-            if weekly_lines is not None and source["lines"] != weekly_lines
-        ]
-        if differing_external:
-            source_conflicts.append({
-                "target_round": target,
-                "status": "EXCLUDED_UNRESOLVED",
-                "reason": (
-                    "Distinct pre-draw five-line sources are preserved for this target, "
-                    "and no receipt evidence establishes which set was delivered or purchased."
-                ),
-                "sources": [
-                    {
-                        "path": c["path"],
-                        "role": c["role"],
-                        "line_set": [list(line) for line in weekly_lines],
-                    },
-                    *[
-                        {
-                            "path": source["path"],
-                            "role": "FIRST_PRIZE_PRE_DRAW_PURCHASE_DESIGN",
-                            "line_set": [list(line) for line in source["lines"]],
-                        }
-                        for source in differing_external
-                    ],
-                ],
-                "receipt_evidence": "NOT_FOUND",
-                "aggregate_action": "EXCLUDED_FROM_SINGLE_CANONICAL_AGGREGATE",
+        external_sources = _prospective_first_prize_sources(target)
+        line_sources = []
+        for candidate in entries:
+            line_sources.append({
+                "path": candidate["path"],
+                "role": candidate["role"],
+                "line_set": [list(line) for line in candidate["lines"]],
+                "source_sha256": candidate["source_sha256"],
             })
+        line_sources.extend(external_sources)
+
+        confirmation = confirmed_by_target.get(target)
+        if confirmation is None or target in ambiguous_registry_targets:
+            distinct_sets = {
+                tuple(tuple(line) for line in source["line_set"])
+                for source in line_sources
+            }
+            unconfirmed_record = {
+                "target_round": target,
+                "status": "PURCHASE_NOT_CONFIRMED",
+                "sources": line_sources,
+                "distinct_line_set_count": len(distinct_sets),
+                "purchase_confirmation_evidence": "NOT_FOUND",
+                "receipt_evidence": "NOT_FOUND",
+                "aggregate_action": "EXCLUDED_FROM_PURCHASE_AGGREGATE",
+            }
+            unconfirmed.append(unconfirmed_record)
+            if len(distinct_sets) > 1:
+                source_conflicts.append({
+                    "target_round": target,
+                    "status": "EXCLUDED_UNRESOLVED",
+                    "reason": (
+                        "Multiple preserved pre-draw line sets exist and no explicit user "
+                        "confirmation or receipt identifies which set was purchased."
+                    ),
+                    "sources": line_sources,
+                    "purchase_confirmation_evidence": "NOT_FOUND",
+                    "receipt_evidence": "NOT_FOUND",
+                    "aggregate_action": "EXCLUDED_FROM_SINGLE_CANONICAL_AGGREGATE",
+                })
             continue
 
+        source_path = str(confirmation["source_path"])
+        candidate = candidate_by_path[source_path]
+        obj = candidate["obj"]
+        tickets = obj.get("final_lines")
+        training_cutoff = obj.get("training_cutoff", obj.get("data_cutoff"))
         valid = (
-            target in by_round
-            and isinstance(tickets, list)
-            and len(tickets) == 5
-            and all(
-                isinstance(t, list) and len(t) == 6 and len(set(t)) == 6
-                and all(isinstance(n, int) and 1 <= n <= 45 for n in t)
-                for t in tickets
-            )
+            _normalize_five_lines(tickets) is not None
             and training_cutoff is not None
             and int(training_cutoff) < target
         )
         if not valid:
-            invalid.append({"path": c["path"], "target": target, "reason": "integrity_or_cutoff"})
+            invalid.append({
+                "path": source_path,
+                "target": target,
+                "reason": "confirmed_source_integrity_or_cutoff_failure",
+            })
             continue
+
         actual = set(by_round[target]["nums"])
-        hits = [len(set(t) & actual) for t in tickets]
+        hits = [len(set(ticket) & actual) for ticket in tickets]
         all_hits.extend(hits)
-        union = set().union(*(set(t) for t in tickets))
+        union = set().union(*(set(ticket) for ticket in tickets))
         union_hits = len(union & actual)
         max_hits = max(hits)
         reviews.append({
             "target_round": target,
-            "source": c["path"],
-            "source_role": c["role"],
+            "source": source_path,
+            "source_role": "ACTUAL_PURCHASE_CONFIRMED",
+            "source_sha256": candidate["source_sha256"],
+            "purchase_confirmation": {
+                "confirmation_status": confirmation["confirmation_status"],
+                "evidence_type": confirmation["evidence_type"],
+                "evidence_reference": confirmation["evidence_reference"],
+            },
             "training_cutoff": int(training_cutoff),
             "winning_numbers": by_round[target]["nums"],
             "bonus": by_round[target]["bonus"],
@@ -249,42 +351,89 @@ def build_historical_closed_loop(rows, dated):
             "ticket_union_size": len(union),
             "candidate_recall_failure": union_hits < 6,
             "ticket_construction_gap": max(0, union_hits - max_hits),
-            "alternative_preserved_versions": max(0, len(entries) - 1),
-            "all_preserved_sources": sorted(x["path"] for x in entries),
+            "alternative_preserved_versions": max(0, len(line_sources) - 1),
+            "all_preserved_sources": sorted(source["path"] for source in line_sources),
         })
 
-    dist = {str(k): sum(h == k for h in all_hits) for k in range(7)}
+    for target in sorted(set(confirmed_by_target) - set(grouped)):
+        invalid.append({
+            "target_round": target,
+            "reason": "confirmed_target_has_no_preserved_candidate_group",
+        })
+
+    dist = {str(k): sum(hit == k for hit in all_hits) for k in range(7)}
     verified_lines = len(all_hits)
     completed_preserved_targets = len(grouped)
     scope_complete = (
         bool(reviews)
         and not invalid
         and not source_conflicts
+        and not unconfirmed
         and len(reviews) == completed_preserved_targets
     )
     latest = reviews[-1] if reviews else None
-    conflict_rounds = sorted(int(x["target_round"]) for x in source_conflicts)
+    conflict_rounds = sorted(int(item["target_round"]) for item in source_conflicts)
+    if not reviews:
+        purchase_status = "NO_CONFIRMED_PURCHASES"
+    elif unconfirmed or source_conflicts or invalid:
+        purchase_status = "PARTIAL_CONFIRMED_PURCHASES"
+    else:
+        purchase_status = "CONFIRMED_PURCHASES_AVAILABLE"
+
+    if source_conflicts:
+        closed_loop_status = "PARTIAL_UNRESOLVED_SOURCE_CONFLICTS"
+    elif unconfirmed:
+        closed_loop_status = "PARTIAL_PURCHASE_NOT_CONFIRMED"
+    elif invalid:
+        closed_loop_status = "PARTIAL_INVALID_RECORDS"
+    elif scope_complete:
+        closed_loop_status = "COMPLETE_WITHIN_PRESERVED_SCOPE"
+    else:
+        closed_loop_status = "NO_CONFIRMED_PURCHASE_RECORDS"
+
+    confirmed_sources = [
+        {
+            "target_round": review["target_round"],
+            "source_path": review["source"],
+            "source_sha256": review["source_sha256"],
+            "evidence_type": review["purchase_confirmation"]["evidence_type"],
+            "evidence_reference": review["purchase_confirmation"]["evidence_reference"],
+        }
+        for review in reviews
+    ]
     payload = {
         "generated_kst": datetime.now(KST).isoformat(),
-        "scope": "completed rounds with preserved weekly_purchase artifacts; ACTUAL_PURCHASE is canonical when present; otherwise a pre-draw FINAL is included only when no conflicting preserved purchase-design source exists. Unresolved conflicts are excluded from the single canonical aggregate.",
+        "scope": (
+            "Only sources explicitly confirmed by the user or backed by a preserved receipt "
+            "in PURCHASE_CONFIRMATION_REGISTRY.json are included in the actual-purchase aggregate. "
+            "Filenames, displayed recommendations, and pre-draw FINAL artifacts alone do not prove purchase."
+        ),
         "data_cutoff": cutoff,
+        "purchase_confirmation_status": purchase_status,
+        "purchase_confirmation_registry": {
+            "path": str(registry_path.relative_to(ROOT)),
+            "status": registry_status,
+            "confirmed_entry_count": len(confirmed_sources),
+        },
         "completed_preserved_targets_found": completed_preserved_targets,
+        "unconfirmed_purchase_target_count": len(unconfirmed),
         "verified_round_count": len(reviews),
         "verified_purchase_lines": verified_lines,
         "aggregate_hit_distribution": dist,
         "mean_main_hits_per_line": statistics.mean(all_hits) if all_hits else None,
-        "rate_ge2": sum(h >= 2 for h in all_hits) / verified_lines if verified_lines else None,
-        "rate_ge3": sum(h >= 3 for h in all_hits) / verified_lines if verified_lines else None,
-        "rate_ge4": sum(h >= 4 for h in all_hits) / verified_lines if verified_lines else None,
+        "rate_ge2": sum(hit >= 2 for hit in all_hits) / verified_lines if verified_lines else None,
+        "rate_ge3": sum(hit >= 3 for hit in all_hits) / verified_lines if verified_lines else None,
+        "rate_ge4": sum(hit >= 4 for hit in all_hits) / verified_lines if verified_lines else None,
         "closed_loop_complete": scope_complete,
-        "closed_loop_status": (
-            "PARTIAL_UNRESOLVED_SOURCE_CONFLICTS" if source_conflicts
-            else "COMPLETE_WITHIN_PRESERVED_SCOPE" if scope_complete
-            else "PARTIAL"
-        ),
+        "closed_loop_status": closed_loop_status,
         "whole_history_complete": False,
-        "whole_history_note": "Legacy/older recommendation formats outside the discovered weekly_purchase artifacts are not proven complete and must not be described as the full historical closed loop.",
+        "whole_history_note": (
+            "Legacy/older recommendation formats outside the discovered weekly_purchase artifacts "
+            "are not proven complete and must not be described as the full historical closed loop."
+        ),
         "actual_purchase_precedence": True,
+        "confirmed_purchase_sources": confirmed_sources,
+        "unconfirmed_preserved_line_sources": unconfirmed,
         "invalid_or_unreviewable_preserved_records": invalid,
         "unresolved_source_conflicts": source_conflicts,
         "excluded_conflict_rounds": conflict_rounds,
@@ -294,13 +443,24 @@ def build_historical_closed_loop(rows, dated):
             "candidate_recall_failure": latest["candidate_recall_failure"] if latest else None,
             "ticket_construction_gap": latest["ticket_construction_gap"] if latest else None,
             "finding": (
-                "Both candidate recall and ticket construction need separate diagnosis."
-                if latest and latest["candidate_recall_failure"] and latest["ticket_construction_gap"] > 0
-                else "Use the measured recall/construction fields; do not force a diagnosis beyond preserved evidence."
+                "No purchase-confirmed records are available; preserved recommendation/fallback "
+                "line sets are excluded from actual-purchase learning."
+                if latest is None
+                else (
+                    "Both candidate recall and ticket construction need separate diagnosis."
+                    if latest["candidate_recall_failure"] and latest["ticket_construction_gap"] > 0
+                    else "Use the measured recall/construction fields; do not force a diagnosis beyond preserved evidence."
+                )
             ),
-            "action_for_next_policy": "Evaluate candidate recall separately from allocator performance; never learn from a later artifact in place of the actual delivered/purchased lines.",
+            "action_for_next_policy": (
+                "Learn only from source lines explicitly confirmed as purchased or backed by a receipt; "
+                "never infer purchase from filenames or pre-draw artifacts."
+            ),
             "unresolved_source_conflict_rounds": conflict_rounds,
-            "provenance_action": "Keep conflicted rounds out of the canonical aggregate until receipt evidence or an authoritative source resolution is available."
+            "provenance_action": (
+                "Keep unconfirmed and conflicting preserved line sets out of the canonical aggregate "
+                "until explicit purchase confirmation or receipt evidence resolves them."
+            ),
         },
     }
     (dated / "HISTORICAL_CLOSED_LOOP_STATUS.json").write_text(

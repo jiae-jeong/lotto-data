@@ -42,3 +42,12 @@ This ledger records combinations displayed to the user, whether or not they were
 - A GitHub commit proves that the delivery record was written; it does not independently prove that the user requested or received the lines. Treat the five-line JSON as a preserved intermediate candidate artifact, not confirmed user-visible delivery or purchase.
 - Strict status remains `STRICT_PASS_NOT_READY`; `strict_portfolio_pass=false`; purchase confirmation `NOT_CONFIRMED`; freeze/seal `NOT_CREATED_STRICT_GATE_NOT_PASSED`.
 - This correction is append-only. The original delivery JSON and original event entry are preserved unchanged.
+
+
+## Evidence correction — target rounds 1247 and 1248 — 2026-11-14
+- Audit finding: the preserved files named 'ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json' and 'ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json' do not, by filename or classification alone, establish that the lines were purchased.
+- No receipt or explicit user purchase confirmation is present in the evidence available to this audit for either target.
+- Target 1247 has multiple distinct preserved five-line sets; target 1248 has both a fallback line set and a distinct V54 strict-pass final artifact. Without confirmation, neither source can be selected as the actual purchase.
+- Both targets are reclassified as PRESERVED_LINESET_PURCHASE_NOT_CONFIRMED and excluded from the actual-purchase aggregate. The original source files remain unchanged.
+- The E047 calculations remain descriptive diagnostics for those preserved line sets only. They are not actual-purchase outcomes, do not establish an allocation failure in purchased tickets, and cannot support model promotion or strict PASS.
+- Future inclusion requires an entry in research/PURCHASE_CONFIRMATION_REGISTRY.json with the exact source SHA256 and either a preserved receipt or explicit user confirmation.

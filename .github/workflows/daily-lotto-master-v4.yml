@@ -23,6 +23,8 @@ on:
       - 'automation/weekly_purchase_final_v1.py'
       - 'automation/weekly_purchase_final_v2.py'
       - 'analysis/**/EXTERNAL_DATA_CROSSCHECK.json'
+      - 'research/PURCHASE_CONFIRMATION_REGISTRY.json'
+      - 'research/DELIVERY_LOG.md'
       - '.github/workflows/daily-lotto-master-v4.yml'
 
 permissions:
@@ -51,8 +53,8 @@ jobs:
 
       - name: Compile protocol and policy readiness guards
         run: |
-          python -m py_compile automation/protocol_recovery_v1.py automation/learning_loop_gate_v1.py automation/three_line_readiness_guard_v1.py automation/tests_v2/test_three_line_readiness_guard_v1.py
-          python -B -m unittest automation.tests_v2.test_three_line_readiness_guard_v1 -v
+          python -m py_compile automation/protocol_recovery_v1.py automation/learning_loop_gate_v1.py automation/three_line_readiness_guard_v1.py automation/tests_v2/test_three_line_readiness_guard_v1.py automation/tests_v2/test_actual_purchase_provenance_v1.py
+          python -B -m unittest automation.tests_v2.test_three_line_readiness_guard_v1 automation.tests_v2.test_actual_purchase_provenance_v1 -v
 
       - name: Enforce draw-time-aware data freshness
         shell: bash
@@ -312,12 +314,18 @@ jobs:
               'hypothesis_registry_written','artifact_hash_manifest'
           ))
           protocol_failed={k for k,value in a['protocol_checks'].items() if not value}
-          # Conflicted pre-draw sources are excluded until receipt evidence resolves precedence.
+          # Missing purchase confirmation is an explicit evidence gap, not a compute failure.
           known_protocol_gaps={
               'full_compute_execution',
               'legacy_model_sources_recovered',
               'historical_errornote_closed_loop_complete'
           }
+          if not l['checks']['actual_purchase_confirmation_evidence_available']:
+              known_protocol_gaps.update({
+                  'historical_errornote_aggregate_present',
+                  'actual_purchase_learning_record',
+                  'failure_decomposition_present'
+              })
           assert protocol_failed.issubset(known_protocol_gaps), protocol_failed
           protocol_ok=not protocol_failed
           expected_protocol_status='FULL_COMPLETE' if protocol_ok else 'PROTOCOL_PARTIAL'
@@ -329,6 +337,7 @@ jobs:
           assert v['successor_leakage_failures']==0
           assert l['status']=='PASS', l
           assert l['checks']['actual_purchase_source_is_canonical'] is True
+          assert l['checks']['unconfirmed_purchase_sources_excluded'] is True
           assert l['checks']['historical_source_conflicts_disclosed_and_excluded'] is True
           assert l['checks']['candidate_recall_no_future_leakage'] is True
           assert l['checks']['candidate_recall_scorecard_complete'] is True

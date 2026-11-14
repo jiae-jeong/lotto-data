@@ -75,3 +75,12 @@
 1. 실제 선택기의 당시 candidate-bank 및 단계별 selection trace 원본이 추가 확보되는지 추적해 인과적 탈락 원인을 검증한다.
 2. 1246회 구매 영수증 또는 권위 있는 전달 원본이 확보되기 전까지 canonical aggregate에서 제외한다.
 3. 1251+ prospective confirmation의 최소 표본 수와 완료 규칙은 정책 소유자의 사전 결정 없이는 채택하지 않는다.
+
+
+---
+
+## Provenance correction — 2026-11-14
+
+The original E047 preregistration and result files are preserved unchanged. A subsequent provenance audit found no receipt or explicit user confirmation establishing that either preserved line set was actually purchased. Round 1247 has multiple competing preserved five-line versions; round 1248 has both a fallback file and a distinct V54 final artifact.
+
+Accordingly, the metrics above must be interpreted only as descriptive diagnostics of the two preserved line sets, not as outcomes of actual purchased tickets. E047 is not an actual-purchase learning record, not confirmatory evidence, and not eligible for model promotion or STRICT_PASS. See E047_ACTUAL_PURCHASE_PROVENANCE_CORRECTION_20261114.json and the append-only research/DELIVERY_LOG.md correction.

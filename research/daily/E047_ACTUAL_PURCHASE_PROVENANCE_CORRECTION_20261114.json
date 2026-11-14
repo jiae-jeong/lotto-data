@@ -1,0 +1,42 @@
+{
+  "correction_id": "E047_ACTUAL_PURCHASE_PROVENANCE_CORRECTION_20261114",
+  "study_id": "E047_ACTUAL_PURCHASE_STAGE_DECOMPOSITION_v1",
+  "date_kst": "2026-11-14",
+  "correction_type": "SOURCE_PROVENANCE_SEMANTIC_CORRECTION",
+  "original_preregistration_preserved": true,
+  "original_result_preserved": true,
+  "finding": "No receipt or explicit user confirmation establishes that either source line set was actually purchased. The filename prefix ACTUAL_PURCHASE is not sufficient evidence.",
+  "affected_targets": [
+    {
+      "target_round": 1247,
+      "status": "PRESERVED_LINESET_PURCHASE_NOT_CONFIRMED",
+      "candidate_source": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+      "candidate_source_sha": "730bb97bf4602288a74be9480941bb0532e219d7",
+      "competing_preserved_sources": [
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023.json",
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_PROTOCOL_FULL_V3.json",
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V6.json",
+        "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V7.json"
+      ],
+      "purchase_confirmation": "NOT_FOUND",
+      "receipt_evidence": "NOT_FOUND"
+    },
+    {
+      "target_round": 1248,
+      "status": "PRESERVED_LINESET_PURCHASE_NOT_CONFIRMED",
+      "candidate_source": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+      "candidate_source_sha": "d952c39886626140be8fbc70bf5397fe338da0c2",
+      "competing_preserved_sources": [
+        "research/weekly_purchase/1248/FINAL_FIVE_LINES_1248_20261030_V54_STRICT_PASS.json"
+      ],
+      "purchase_confirmation": "NOT_FOUND",
+      "receipt_evidence": "NOT_FOUND"
+    }
+  ],
+  "corrected_interpretation": "E047 remains a descriptive diagnostic of preserved candidate/recommendation line sets only. Its hit and allocation metrics must not be interpreted as actual-purchase outcomes.",
+  "actual_purchase_learning_eligible": false,
+  "strict_pass_or_model_promotion_eligible": false,
+  "aggregate_action": "EXCLUDE_TARGETS_1247_AND_1248_UNTIL_EXPLICIT_CONFIRMATION_OR_RECEIPT",
+  "correction_authority": "research/DELIVERY_LOG.md",
+  "registry_authority": "research/PURCHASE_CONFIRMATION_REGISTRY.json"
+}
