@@ -19,6 +19,7 @@ DATA = ROOT / "lotto_data.csv"
 PREREG_PATH = ROOT / "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json"
 POLICY_PATH = ROOT / "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json"
 STUDY_ID = "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"
+PREREG_SHA256 = "f69eba9834511bc21314cfaed3a4bf77af728c9a19c86895a0b1239abcb8302f"
 METRICS = ("max_hits", "any2", "any3", "winning_union_coverage")
 
 
@@ -211,6 +212,16 @@ def write_and_verify_manifest(outdir: Path) -> int:
 def validate_preregistration(prereg: dict, policy: dict) -> None:
     if prereg.get("study_id") != STUDY_ID or prereg.get("policy_id") != policy.get("policy_id"):
         raise ValueError("study or policy identity mismatch")
+    if prereg.get("date_kst") != "2026-11-14" or int(prereg.get("target_round", -1)) != 1251:
+        raise ValueError("frozen E048 target/date changed")
+    if int(prereg.get("historical_data_cutoff", -1)) != 1249 or prereg.get("target_rounds") != "401..1249 inclusive":
+        raise ValueError("frozen E048 historical target range changed")
+    if int(prereg["random_comparator"]["seed"]) != 2026111402:
+        raise ValueError("frozen E048 random seed changed")
+    if int(prereg["inference"]["bootstrap_replicates"]) != 4000 or int(prereg["inference"]["bootstrap_seed"]) != 2026111402:
+        raise ValueError("frozen E048 bootstrap specification changed")
+    if prereg["portfolio"]["line_assignment"] != "Deterministic rank interleaving: line 1 uses ranks 1,4,7,10,13,16; line 2 uses ranks 2,5,8,11,14,17; line 3 uses ranks 3,6,9,12,15,18.":
+        raise ValueError("frozen E048 line assignment changed")
     if int(policy["effective_from_target"]) != 1251 or int(policy["purchase_lines"]) != 3:
         raise ValueError("active target-1251 three-line policy changed")
     if int(policy["numbers_per_line"]) != 6:
@@ -260,8 +271,13 @@ def validate_preregistration(prereg: dict, policy: dict) -> None:
 
 
 def run(date_kst: str, run_id: str, run_attempt: str) -> dict:
-    prereg = json.loads(PREREG_PATH.read_text(encoding="utf-8"))
+    prereg_raw = PREREG_PATH.read_bytes()
+    if hashlib.sha256(prereg_raw).hexdigest() != PREREG_SHA256:
+        raise ValueError("E048 preregistration SHA256 mismatch")
+    prereg = json.loads(prereg_raw.decode("utf-8"))
     policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
+    if date_kst != prereg["date_kst"]:
+        raise ValueError("run date differs from frozen preregistration")
     validate_preregistration(prereg, policy)
     cutoff = int(prereg["historical_data_cutoff"])
     draws, prefix_sha, data_sha, total_rows = read_frozen_prefix(
