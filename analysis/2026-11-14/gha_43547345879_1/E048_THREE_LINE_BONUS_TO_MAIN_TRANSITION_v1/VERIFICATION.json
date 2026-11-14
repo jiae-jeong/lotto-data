@@ -38,5 +38,11 @@
   "final_purchase_freeze_allowed": false,
   "prospective_minimum_count_adopted": false,
   "manifest_entries": 8,
-  "manifest_status": "PASS"
+  "manifest_status": "PASS",
+  "evidence_class": "DUPLICATE_REPRODUCTION_ONLY",
+  "duplicate_reproduction_only": true,
+  "duplicate_of_run_id": 43547128786,
+  "independent_evidence": false,
+  "counted_as_additional_research_axis": false,
+  "duplicate_reason": "The one-shot guard used grep -q under pipefail and did not reliably detect the prior completion artifact. This run used the same frozen preregistration, data cutoff, random seed, and model; its primary prediction, random-baseline, block-stability, and inference blobs are byte-identical to the first run."
 }
