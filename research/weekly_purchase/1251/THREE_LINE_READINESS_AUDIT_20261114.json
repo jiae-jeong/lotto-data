@@ -15,7 +15,7 @@
   "strict_model_validation_pass": false,
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
-  "strict_gate_evaluation": "EVALUATED_HISTORICAL_STRICT_FAIL_E045",
+  "strict_gate_evaluation": "EVALUATED_HISTORICAL_STRICT_FAIL_E045_AND_E048",
   "ready_file": null,
   "ready_file_exists": false,
   "line_level_output_status": "SUPPRESSED_NOT_READY",
@@ -25,7 +25,8 @@
     "Prospective confirmation is required, but the policy still has no minimum target count or completion rule; E046 provides design-only planning evidence and does not adopt a rule.",
     "No target-specific three-line STRICT_PASS_READY artifact exists. The new three-line finalizer path is available, but it correctly refuses to seal without a fully validated ready artifact.",
     "E043 H1250-A and E044 H1250-B V2 are five-line H1250 studies and remain ineligible as target-1251 three-line evidence.",
-    "E019 remains POST_HOC_EXPLORATORY and its original overlapping-ticket comparator is not geometry-matched; the separate correction document preserves that limitation."
+    "E019 remains POST_HOC_EXPLORATORY and its original overlapping-ticket comparator is not geometry-matched; the separate correction document preserves that limitation.",
+    "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -36,10 +37,10 @@
   "final_selection_randomness": false,
   "random_fallback_allowed": false,
   "final_purchase_freeze_allowed": false,
-  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released.",
+  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds.",
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
-    "registered_tasks": 33,
+    "registered_tasks": 34,
     "generic_task_completion_paths_found": 25,
     "blocked_generic_tasks": [
       "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
@@ -52,14 +53,15 @@
     "pending_dedicated_task_scope": "Both pending dedicated tasks are five-line H1250 studies and are ineligible for target-1251 three-line evidence.",
     "completed_dedicated_tasks": {
       "E045": "EXECUTED_HISTORICAL_STRICT_FAIL",
-      "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE"
+      "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+      "E048": "EXECUTED_HISTORICAL_STRICT_FAIL; OUTPUT_MANIFEST_REPAIRED"
     },
     "superseded_tasks": [
       "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
     ],
     "target_1251_three_line_task_registered": true,
     "target_1251_three_line_runner_found": true,
-    "target_1251_three_line_task_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
+    "target_1251_three_line_task_status": "E045_AND_E048_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY",
     "target_1251_three_line_workflow_run_id": 43499702588,
     "target_1251_three_line_finalizer_found": true,
     "three_line_finalizer": "automation/finalize_three_line_from_strict_ready_v1.py",
@@ -69,7 +71,11 @@
     ],
     "queue_contract_validation": "PASS in orthogonal-research-v2 run 43526745320",
     "generic_queue_preflight_validation": "NOT_RUN_IN_THIS_AUDIT",
-    "runnable_generic_task_count": "NOT_COMPUTED_WITHOUT_PREFLIGHT"
+    "runnable_generic_task_count": "NOT_COMPUTED_WITHOUT_PREFLIGHT",
+    "target_1251_three_line_e048_workflow_run_id": 43547128786,
+    "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
+    "target_1251_three_line_e048_runner": "automation/three_line_bonus_transition_e048.py",
+    "target_1251_three_line_e048_workflow": ".github/workflows/target-1251-e048-three-line-bonus-transition.yml"
   },
   "evaluated_gates": {
     "max_hit": {
@@ -178,5 +184,87 @@
   "previous_daily_master_run_id": 43525410558,
   "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43525410558",
   "daily_master_result_commit": "3ec66871f7b110072470a57c6181e3a356110e68",
-  "daily_master_completed_at_kst": "2026-11-14T11:04:26+09:00"
+  "daily_master_completed_at_kst": "2026-11-14T11:04:26+09:00",
+  "e048_execution": {
+    "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+    "workflow_name": "target-1251-e048-three-line-bonus-transition",
+    "workflow_run_id": 43547128786,
+    "run_attempt": 1,
+    "workflow_run_conclusion": "failure_due_to_git_diff_check; computation_complete; preservation_repaired",
+    "result_commit": "4c896ce0e5bc062fb216018a48de5038abb53439",
+    "preservation_repair_record": "analysis/2026-11-14/gha_43547128786_1/E048_PRESERVATION_REPAIR.json",
+    "preservation_repair_commit": "8f15a5ba16989f3c3ba6bd6da8d1677f0d4a8301",
+    "result_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+    "report_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/REPORT.md",
+    "verification_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/VERIFICATION.json",
+    "data_cutoff": 1249,
+    "source_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "target_range": [
+      401,
+      1249
+    ],
+    "target_count": 849,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 101880,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "verification_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "purchase_lines_generated": false,
+    "preservation_status": "REPAIRED"
+  },
+  "e048_evaluated_gates": {
+    "max_hits": {
+      "observed_mean": 1.5111896348645466,
+      "exact_null": 1.514256248572755,
+      "delta_mean": -0.0030666137082085666,
+      "adjusted_ci_lower": -0.06667085399089408,
+      "adjusted_ci_upper": 0.06760476438366422,
+      "passed": false
+    },
+    "any2": {
+      "observed_mean": 0.4840989399293286,
+      "exact_null": 0.47497624326892623,
+      "delta_mean": 0.009122696660402415,
+      "adjusted_ci_lower": -0.037991555400846116,
+      "adjusted_ci_upper": 0.05859266132471337,
+      "passed": false
+    },
+    "any3": {
+      "observed_mean": 0.0624263839811543,
+      "exact_null": 0.07135490714617204,
+      "delta_mean": -0.008928523165017747,
+      "adjusted_ci_lower": -0.026596367687985942,
+      "adjusted_ci_upper": 0.009917177659481665,
+      "passed": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.4275618374558303,
+      "exact_null": 2.4,
+      "delta_mean": 0.027561837455830476,
+      "adjusted_ci_lower": -0.05606595995288566,
+      "adjusted_ci_upper": 0.13003533568904602,
+      "passed": false
+    },
+    "any2_positive_50_target_block_share": {
+      "observed": 0.47058823529411764,
+      "positive_blocks": 8,
+      "total_blocks": 17,
+      "required_minimum": 0.65,
+      "passed": false
+    }
+  },
+  "e048_failed_gates": [
+    "max_hits_adjusted_ci",
+    "any2_adjusted_ci",
+    "any3_adjusted_ci",
+    "winning_union_coverage_adjusted_ci",
+    "any2_positive_50_target_block_share"
+  ]
 }
