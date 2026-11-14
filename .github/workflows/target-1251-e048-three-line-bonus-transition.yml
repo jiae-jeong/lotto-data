@@ -36,17 +36,19 @@ jobs:
         run: |
           if git ls-tree -r --name-only HEAD | grep -q '/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/COMPLETION.json$'; then
             echo "already_complete=true" >> "$GITHUB_OUTPUT"
-            echo "E048 already has a completed historical evaluation; refusing a duplicate run."
-            exit 1
+            echo "E048 historical evaluation is already complete; this trigger is a successful no-op."
+            exit 0
           fi
           echo "already_complete=false" >> "$GITHUB_OUTPUT"
 
       - name: Compile and run frozen contract tests
+        if: steps.one-shot.outputs.already_complete != 'true'
         run: |
           python -m py_compile automation/three_line_bonus_transition_e048.py automation/tests_v2/test_three_line_bonus_transition_e048.py
           python -B -m unittest automation.tests_v2.test_three_line_bonus_transition_e048 -v
 
       - name: Run E048 historical walk-forward
+        if: steps.one-shot.outputs.already_complete != 'true'
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
@@ -57,7 +59,7 @@ jobs:
             --run-attempt "$RUN_ATTEMPT"
 
       - name: Preserve validated E048 outputs
-        if: success()
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
