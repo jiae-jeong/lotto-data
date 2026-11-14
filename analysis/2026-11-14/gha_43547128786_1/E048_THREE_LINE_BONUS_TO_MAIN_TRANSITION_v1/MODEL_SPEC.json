@@ -1,0 +1,57 @@
+{
+  "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+  "signal": {
+    "feature": "Immediately preceding draw's bonus number, in the range 1..45.",
+    "outcome": "The six main numbers in the following draw.",
+    "conditional_sample": "For each target t, count prior transitions bonus(u-1)=bonus(t-1) -> main(u) for u=2..t-1.",
+    "global_shrinkage": "Use main-number inclusion frequency over draws 1..t-1 as the prior mean.",
+    "formula": "score_n(t) = (conditional_count[n | previous_bonus] + 60 * global_main_inclusion_rate[n]) / (conditional_transition_count[previous_bonus] + 60).",
+    "smoothing_alpha": 60,
+    "rank": "Score descending, then number ascending."
+  },
+  "portfolio": {
+    "selected_union": "Top 18 ranked numbers.",
+    "line_assignment": "Deterministic rank interleaving: line 1 uses ranks 1,4,7,10,13,16; line 2 uses ranks 2,5,8,11,14,17; line 3 uses ranks 3,6,9,12,15,18.",
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "randomness_in_selection": false,
+    "parameter_tuning": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "method": "For each target, apply a uniformly sampled permutation of labels 1..45 jointly to the three model lines. This preserves three six-number lines, pairwise disjointness, union18, and line incidence geometry.",
+    "random_bundles_per_target": 120,
+    "seed": 2026111402,
+    "exact_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    },
+    "randomness_used_for_final_selection": false
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null; sample overlapping contiguous blocks while preserving the fixed final remainder-block length.",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 2026111402,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "all_adjusted_ci_lower_bounds_strictly_gt_zero": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "selection_uses_randomness": false,
+  "parameter_tuning": false,
+  "variants_evaluated": 1
+}
