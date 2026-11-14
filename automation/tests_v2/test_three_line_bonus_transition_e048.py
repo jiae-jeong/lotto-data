@@ -39,7 +39,7 @@ class E048FrozenSpecificationTests(unittest.TestCase):
         global_counts = [1] * 45
         conditional_counts = [[0] * 45 for _ in range(46)]
         conditional_n = [0] * 46
-        conditional_n[7] = 2
+        conditional_n[8] = 2
         conditional_counts[8][0] = 2
         scores = MODULE.score_numbers(8, global_counts, 10, conditional_counts, conditional_n, 60.0)
         self.assertAlmostEqual(scores[0], (2 + 60 * 0.1) / 62)
