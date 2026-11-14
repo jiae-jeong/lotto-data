@@ -41,5 +41,6 @@
   "no_threshold_or_comparator_changes": true,
   "duplicate_reproduction_run_id": 43547345879,
   "duplicate_reproduction_classification": "DUPLICATE_REPRODUCTION_ONLY; primary prediction, random-baseline, block-stability, and inference blobs byte-identical; not independent evidence.",
-  "one_shot_guard_fix_commit": "b3c1346331275011f1119d7ad3064e9018bfb26f"
+  "one_shot_guard_fix_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
+  "one_shot_guard_fix_status": "PIPEFAIL_SAFE_FULL_STREAM_MATCH; DUPLICATE_COMPLETION_GUARD"
 }
