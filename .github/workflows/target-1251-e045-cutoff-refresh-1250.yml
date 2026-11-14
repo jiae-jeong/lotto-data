@@ -140,7 +140,7 @@ jobs:
         run: |
           set -euo pipefail
           DATE="$(TZ=Asia/Seoul date +%F)"
-          RUN_ID="gha_\${GITHUB_RUN_ID}_\${GITHUB_RUN_ATTEMPT}"
+          RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           python -B automation/three_line_research_1251_refresh_1250_v1.py --date "$DATE" --run-id "$RUN_ID"
@@ -148,12 +148,12 @@ jobs:
       - name: Verify evidence and reconcile readiness audit
         if: success() && steps.preflight.outputs.already_complete != 'true'
         env:
-          RUN_DATE: \${{ steps.study.outputs.date }}
-          RUN_ID: \${{ steps.study.outputs.run_id }}
-          RUN_NUMBER: \${{ github.run_number }}
-          GITHUB_RUN_ID: \${{ github.run_id }}
-          GITHUB_RUN_ATTEMPT: \${{ github.run_attempt }}
-          GITHUB_SHA: \${{ github.sha }}
+          RUN_DATE: ${{ steps.study.outputs.date }}
+          RUN_ID: ${{ steps.study.outputs.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          GITHUB_SHA: ${{ github.sha }}
         run: |
           python - <<'PY'
           import csv, hashlib, json, os
@@ -388,8 +388,8 @@ jobs:
         if: success() && steps.preflight.outputs.already_complete != 'true'
         shell: bash
         env:
-          RUN_DATE: \${{ steps.study.outputs.date }}
-          RUN_ID: \${{ steps.study.outputs.run_id }}
+          RUN_DATE: ${{ steps.study.outputs.date }}
+          RUN_ID: ${{ steps.study.outputs.run_id }}
         run: |
           set -euo pipefail
           OUTDIR="analysis/$RUN_DATE/$RUN_ID/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1"
@@ -415,6 +415,6 @@ jobs:
         if: failure() && steps.preflight.outputs.already_complete != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: e045-cutoff-refresh-failed-\${{ github.run_id }}-\${{ github.run_attempt }}
-          path: analysis/\${{ steps.study.outputs.date }}/gha_\${{ github.run_id }}_\${{ github.run_attempt }}/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/**
+          name: e045-cutoff-refresh-failed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: analysis/${{ steps.study.outputs.date }}/gha_${{ github.run_id }}_${{ github.run_attempt }}/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/**
           if-no-files-found: warn
