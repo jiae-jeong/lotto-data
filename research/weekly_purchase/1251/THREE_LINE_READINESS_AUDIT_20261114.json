@@ -69,13 +69,28 @@
       ".github/workflows/lotto-finalize-r3.yml",
       ".github/workflows/lotto-finalize-v3.yml"
     ],
-    "queue_contract_validation": "PASS in orthogonal-research-v2 run 43526745320",
+    "queue_contract_validation": "PASS in orthogonal-research-v2 run 43548444587 after updating the queue-order test to include E048; prior run 43548096755 failed only because the test still expected the previous five-item queue tail.",
     "generic_queue_preflight_validation": "NOT_RUN_IN_THIS_AUDIT",
     "runnable_generic_task_count": "NOT_COMPUTED_WITHOUT_PREFLIGHT",
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
     "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
     "target_1251_three_line_e048_runner": "automation/three_line_bonus_transition_e048.py",
-    "target_1251_three_line_e048_workflow": ".github/workflows/target-1251-e048-three-line-bonus-transition.yml"
+    "target_1251_three_line_e048_workflow": ".github/workflows/target-1251-e048-three-line-bonus-transition.yml",
+    "queue_contract_validation_run_id": 43548444587,
+    "queue_contract_validation_history": [
+      {
+        "run_id": 43548096755,
+        "conclusion": "FAILURE",
+        "cause": "stale expected queue tail omitted newly registered E048"
+      },
+      {
+        "run_id": 43548444587,
+        "conclusion": "SUCCESS",
+        "cause": "test expectation updated to include E048; validation and queue contract tests passed"
+      }
+    ],
+    "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
+    "target_1251_three_line_e048_one_shot_guard_validation_run_id": 43548096707
   },
   "evaluated_gates": {
     "max_hit": {
@@ -289,5 +304,12 @@
     "any3_adjusted_ci",
     "winning_union_coverage_adjusted_ci",
     "any2_positive_50_target_block_share"
-  ]
+  ],
+  "artifact_integrity_repairs": {
+    "malformed_placeholder_failure_artifact_removed": true,
+    "removed_path": "analysis/2026-11-14/gha_${RUN_ID}_${RUN_ATTEMPT}/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/FAILURE.json",
+    "reason": "The path literally contained shell placeholders and its run_id field was malformed; it was not valid run-scoped evidence.",
+    "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+    "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
+  }
 }
