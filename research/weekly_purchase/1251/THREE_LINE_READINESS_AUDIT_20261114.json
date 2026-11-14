@@ -493,8 +493,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-14T21:34:47.813399+09:00",
-  "reconciled_main_sha": "395016b0aafff0ff464e0d57d2c04c656c86b4cb",
+  "audit_reconciled_at_kst": "2026-11-15T00:15:22+09:00",
+  "reconciled_main_sha": "1bc0c0120637f44b6326a31bed3d0780411db68e",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
