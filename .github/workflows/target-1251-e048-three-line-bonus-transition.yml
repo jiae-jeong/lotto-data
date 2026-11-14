@@ -48,8 +48,8 @@ jobs:
 
       - name: Run E048 historical walk-forward
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |
           python -B automation/three_line_bonus_transition_e048.py \
             --date 2026-11-14 \
@@ -59,12 +59,12 @@ jobs:
       - name: Preserve validated E048 outputs
         if: success()
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         shell: bash
         run: |
           set -euo pipefail
-          OUTDIR="analysis/2026-11-14/gha_\${RUN_ID}_\${RUN_ATTEMPT}/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"
+          OUTDIR="analysis/2026-11-14/gha_${RUN_ID}_${RUN_ATTEMPT}/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"
           test -f "$OUTDIR/VERIFICATION.json"
           test -f "$OUTDIR/COMPLETION.json"
           git config user.name "github-actions[bot]"
@@ -85,12 +85,12 @@ jobs:
       - name: Preserve E048 failure evidence
         if: failure() && steps.one-shot.outputs.already_complete != 'true' && steps.one-shot.outcome == 'success'
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         shell: bash
         run: |
           set -euo pipefail
-          OUTDIR="analysis/2026-11-14/gha_\${RUN_ID}_\${RUN_ATTEMPT}/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"
+          OUTDIR="analysis/2026-11-14/gha_${RUN_ID}_${RUN_ATTEMPT}/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"
           export OUTDIR
           mkdir -p "$OUTDIR"
           python - <<'PY'
