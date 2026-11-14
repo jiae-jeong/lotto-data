@@ -58,7 +58,14 @@
       "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE",
       "E048": "EXECUTED_HISTORICAL_STRICT_FAIL; OUTPUT_MANIFEST_REPAIRED; DUPLICATE_REPRODUCTION_NOT_INDEPENDENT",
       "E049": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
-      "E050": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
+      "E050": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+      "E036": "EXECUTED_NULL_GATE_CALIBRATION_COMPLETE; POOLED_VERIFICATION_FPR_0.8_PERCENT",
+      "E037": "EXECUTED_HISTORICAL_FALSIFICATION_NO_SURVIVORS",
+      "E038": "EXECUTED_GATED_NO_CANDIDATES",
+      "E039": "EXECUTED_BLOCKED_BY_REGISTERED_GATE",
+      "E040": "EXECUTED_NO_VALIDATED_EDGE",
+      "E041": "EXECUTED_BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+      "E042": "EXECUTED_DO_NOT_PROMOTE"
     },
     "superseded_tasks": [
       "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
@@ -163,7 +170,41 @@
       "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
     ],
     "target_1251_three_line_e050_workflow_run_id": 43564631433,
-    "target_1251_three_line_e050_result_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"
+    "target_1251_three_line_e050_result_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+    "e036_e042_pipeline_execution": {
+      "workflow_run_id": 43565241831,
+      "workflow_run_number": 25,
+      "conclusion": "success",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+      "result_root": "analysis/2026-11-14/gha_43565241831_1",
+      "summary_path": "analysis/2026-11-14/gha_43565241831_1/E036_E042_RUN_SUMMARY.json",
+      "data_cutoff": 1245,
+      "target_range": [
+        601,
+        1245
+      ],
+      "target_count": 645,
+      "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+      "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+      "null_replicates": 8000,
+      "pooled_verification_fpr": 0.008,
+      "e037_survivors": [],
+      "e040": "NO_VALIDATED_EDGE",
+      "e041": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+      "e042": "DO_NOT_PROMOTE",
+      "leakage_failures": 0,
+      "future_predictions": 0,
+      "evidence_class": "HISTORICAL_SCREENING_NOT_UNTOUCHED_HOLDOUT",
+      "manifest_verification": "workflow verified per-study and root SHA256 manifests before publishing"
+    },
+    "latest_queue_validation": {
+      "workflow_run_id": 43565241804,
+      "workflow_run_number": 59,
+      "conclusion": "success",
+      "validation_job": "success",
+      "research_job": "skipped",
+      "prospective_ledger_job": "skipped"
+    }
   },
   "evaluated_gates": {
     "max_hit": {
@@ -450,8 +491,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-14T13:52:39+09:00",
-  "reconciled_main_sha": "22fd3e98391635be108f97642d6e4bfc4e2363c6",
+  "audit_reconciled_at_kst": "2026-11-14T15:19:16+09:00",
+  "reconciled_main_sha": "705a87295cbf9a05a6fde792b425644fb600df73",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -502,5 +543,22 @@
     "any3",
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
-  ]
+  ],
+  "research_cutoff_alignment": {
+    "daily_master_verified_data_cutoff": 1249,
+    "latest_primary_empirical_cutoff": 1249,
+    "latest_primary_empirical_study": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+    "historical_fixed_screen_cutoff": 1245,
+    "historical_fixed_screen_study_family": "E036-E042; fixed preregistered cutoff, not a freshness mismatch"
+  },
+  "latest_daily_master_attempt": {
+    "workflow_run_id": 43565123697,
+    "workflow_run_number": 102,
+    "status": "in_progress",
+    "conclusion": null,
+    "head_sha": "cfa78787db1b899b78b0d63f6c89334ef039c5b5",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565123697",
+    "last_observed_updated_at": "2026-11-14T06:11:41Z",
+    "note": "Core DAILY MASTER compute, candidate recall, protocol audit, manifest, and artifact integrity steps passed; strict model validation and output preservation were still in progress at the latest check."
+  }
 }
