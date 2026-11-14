@@ -156,6 +156,65 @@ def fetch_repository_verified(round_no: int, root: Path) -> dict | None:
     }
 
 
+
+def load_current_draws(root: Path, opener=urllib.request.urlopen):
+    """Load the append-only canonical CSV and verify its latest row before using it for a new freeze."""
+    import csv
+
+    data_path = root / "lotto_data.csv"
+    raw = data_path.read_bytes().replace(b"\r\n", b"\n")
+    with data_path.open(encoding="utf-8-sig", newline="") as stream:
+        rows = [row for row in csv.DictReader(stream) if row and row.get("round")]
+    rounds = [int(row["round"]) for row in rows]
+    if not rounds or rounds != list(range(1, rounds[-1] + 1)):
+        raise ValueError("current repository snapshot round sequence is not contiguous")
+
+    draws = []
+    for expected, row in enumerate(rows, 1):
+        numbers = tuple(sorted(int(row[f"no{i}"]) for i in range(1, 7)))
+        bonus = int(row["bonus"])
+        draw_date = datetime.strptime(row["date"], "%Y.%m.%d").date()
+        if (int(row["round"]) != expected or len(set(numbers)) != 6
+                or min(numbers) < 1 or max(numbers) > 45
+                or not 1 <= bonus <= 45 or bonus in numbers):
+            raise ValueError(f"invalid canonical repository draw row {expected}")
+        draws.append({"round": expected, "date": draw_date, "numbers": numbers, "bonus": bonus})
+
+    latest_round = rounds[-1]
+    verified = fetch_official(latest_round, opener=opener)
+    if verified is None:
+        verified = fetch_repository_verified(latest_round, root)
+    if verified is None:
+        raise ValueError(
+            f"latest repository round {latest_round} has no successful official payload "
+            "or pinned two-source crosscheck"
+        )
+    last = draws[-1]
+    if (last["date"] != verified["date"]
+            or last["numbers"] != tuple(sorted(verified["numbers"]))
+            or last["bonus"] != int(verified["bonus"])):
+        raise ValueError(f"latest repository row disagrees with verified round {latest_round}")
+
+    prefix_hashes = {}
+    prefix_hasher = hashlib.sha256()
+    for line in raw.splitlines(keepends=True):
+        prefix_hasher.update(line)
+        if line.strip():
+            first = line.split(b",", 1)[0].strip()
+            if first.isdigit():
+                prefix_hashes[int(first)] = prefix_hasher.hexdigest()
+
+    data_sha = hashlib.sha256(raw).hexdigest()
+    source = {
+        "path": "lotto_data.csv",
+        "cutoff": latest_round,
+        "sha256": data_sha,
+        "source_type": verified.get("source_type"),
+        "source_evidence": verified.get("source_evidence") or {},
+    }
+    return draws, data_sha, source, prefix_hashes
+
+
 def _season(month: int) -> int:
     return 0 if month in (12, 1, 2) else 1 if month in (3, 4, 5) else 2 if month in (6, 7, 8) else 3
 
@@ -164,7 +223,13 @@ def _sum_bin(total: int) -> int:
     return 0 if total < 120 else 1 if total < 145 else 2 if total < 170 else 3
 
 
-def make_frozen_prediction(draws: list[dict], generated_at: str) -> dict:
+def make_frozen_prediction(
+    draws: list[dict],
+    generated_at: str,
+    canonical_snapshot_sha256: str | None = None,
+    training_data_source: dict | None = None,
+    sequence_metadata: dict | None = None,
+) -> dict:
     """Exact E025 seasonal/sum-regime formulas, no tuning and train cutoff = target-1."""
     target = len(draws) + 1
     target_date = draws[-1]["date"] + timedelta(days=7)
@@ -185,15 +250,33 @@ def make_frozen_prediction(draws: list[dict], generated_at: str) -> dict:
         order = (np.argsort(-scores, kind="stable") + 1).tolist()
         return {"signal": signal, "model_version": "E025_FROZEN_v1",
                 "numbers": sorted(order[:6]), "score_order": order}
-    return {"status": "FROZEN_PROSPECTIVE_SHADOW_ONLY", "target_round": target,
-        "training_through_round": target - 1, "target_draw_date_assumption": target_date.isoformat(),
-        "canonical_snapshot_sha256": digest(DATA), "generated_at_utc": generated_at,
+
+    snapshot_sha = canonical_snapshot_sha256 or digest(DATA)
+    source = training_data_source or {
+        "path": DATA.as_posix(),
+        "cutoff": len(draws),
+        "sha256": snapshot_sha,
+        "source_type": "FROZEN_BASE_SNAPSHOT",
+    }
+    record = {
+        "status": "FROZEN_PROSPECTIVE_SHADOW_ONLY",
+        "target_round": target,
+        "training_through_round": target - 1,
+        "canonical_snapshot_sha256": snapshot_sha,
+        "canonical_data_sha256": snapshot_sha,
+        "training_data_cutoff": target - 1,
+        "training_data_source": source,
+        "generated_at_utc": generated_at,
+        "target_draw_date_assumption": target_date.isoformat(),
         "signals": [make("CALENDAR_SEASON_CONDITIONAL_v1", season_score),
                     make("PREVIOUS_SUM_REGIME_CONDITIONAL_v1", regime_score)],
         "formula_source": "automation/independent_signal_five_line_v1.py E025 frozen formulas",
         "purchase_recommendation": False,
-        "editing_policy": "immutable; corrections require a new artifact and documented reason"}
-
+        "editing_policy": "immutable; corrections require a new artifact and documented reason",
+    }
+    if sequence_metadata:
+        record.update(sequence_metadata)
+    return record
 
 def result_artifact(frozen: dict, prediction_path: Path, actual: dict, fetched_at: str,
                     repository_root: Path | None = None) -> dict:
@@ -247,7 +330,9 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen, now: datetime | None =
     root = root.resolve()
     now_utc = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
     tracker = root / "analysis/prospective/E030"
-    draws = _extend_from_result_events(load_draws(), tracker)
+
+    # Keep the original 1..1245 snapshot as the immutable provenance for the first freeze.
+    load_draws()
     frozen_files = _read_frozen_files(root)
     if not frozen_files:
         raise FileNotFoundError("No immutable E030 frozen prediction found")
@@ -257,6 +342,16 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen, now: datetime | None =
     target = int(frozen["target_round"])
     if int(frozen["training_through_round"]) != target - 1:
         raise ValueError(f"frozen prediction cutoff mismatch for target {target}")
+
+    current_draws, current_sha, current_source, prefix_hashes = load_current_draws(root, opener)
+    training_cutoff = frozen.get("training_data_cutoff")
+    if training_cutoff is not None:
+        training_cutoff = int(training_cutoff)
+        expected_training_sha = frozen.get("canonical_snapshot_sha256") or frozen.get("canonical_data_sha256")
+        if training_cutoff != target - 1 or prefix_hashes.get(training_cutoff) != expected_training_sha:
+            raise ValueError(f"immutable frozen training snapshot mismatch for target {target}")
+    elif frozen.get("canonical_data_sha256") and frozen["canonical_data_sha256"] != digest(DATA):
+        raise ValueError("legacy E030 frozen prediction no longer matches its pinned 1..1245 snapshot")
 
     result_path = tracker / f"RESULT_{target}.json"
     actual = fetch_official(target, opener=opener)
@@ -273,6 +368,13 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen, now: datetime | None =
             "source_type": prior.get("source_type", "RECORDED_RESULT_EVENT"),
             "source_evidence": prior.get("source_evidence", {}),
         }
+
+    if actual is not None and target <= len(current_draws):
+        canonical = current_draws[target - 1]
+        if (canonical["date"] != actual["date"]
+                or canonical["numbers"] != tuple(sorted(actual["numbers"]))
+                or canonical["bonus"] != int(actual["bonus"])):
+            raise ValueError(f"verified outcome conflicts with canonical row {target}")
 
     created_result = False
     if actual is not None and not result_path.exists():
@@ -302,62 +404,98 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen, now: datetime | None =
     next_prediction_status = "PENDING_OFFICIAL_DRAW"
     status_path = None
     if actual is not None:
-        if target == len(draws) + 1:
-            draws.append(actual)
-        elif target <= len(draws):
-            existing = draws[target - 1]
-            if (existing["date"] != actual["date"] or existing["numbers"] != tuple(sorted(actual["numbers"]))
-                    or existing["bonus"] != int(actual["bonus"])):
-                raise ValueError(f"recorded event conflicts with canonical event at round {target}")
+        latest_cutoff = int(current_draws[-1]["round"])
+        if target > latest_cutoff:
+            # The outcome may be known before the canonical append-only CSV is updated.
+            # Record the result, but do not train the next freeze from an uncommitted row.
+            next_prediction_status = "WAITING_FOR_CANONICAL_DATA_APPEND"
         else:
-            raise ValueError(f"cannot extend contiguous prospective rounds: target {target}, next {len(draws)+1}")
+            next_target = latest_cutoff + 1
+            next_date = current_draws[-1]["date"] + timedelta(days=7)
+            next_draw_at = datetime.combine(
+                next_date, dt_time(20, 35), tzinfo=ZoneInfo("Asia/Seoul")
+            ).astimezone(timezone.utc)
+            gap_targets = list(range(target + 1, latest_cutoff + 1))
 
-        next_target = target + 1
-        next_date = actual["date"] + timedelta(days=7)
-        next_draw_at = datetime.combine(next_date, dt_time(20, 35), tzinfo=ZoneInfo("Asia/Seoul")).astimezone(timezone.utc)
-        if now_utc < next_draw_at:
-            next_frozen = make_frozen_prediction(draws, now_utc.isoformat())
-            next_path = tracker / f"FROZEN_SIGNALS_{next_target}.json"
-            if next_path.exists():
-                prior_next = json.loads(next_path.read_text(encoding="utf-8"))
-                if (int(prior_next["target_round"]) != next_target
-                        or int(prior_next["training_through_round"]) != next_target - 1):
-                    raise ValueError(f"existing immutable prediction cutoff mismatch for target {next_target}")
-                generated_prediction = str(next_path.relative_to(root))
-                next_prediction_status = "EXISTING_IMMUTABLE_PREDICTION_PRESERVED"
+            if now_utc < next_draw_at:
+                next_path = tracker / f"FROZEN_SIGNALS_{next_target}.json"
+                sequence_status = "GAP_ACKNOWLEDGED_RESTARTED" if gap_targets else "CONTIGUOUS"
+                sequence_metadata = {
+                    "previous_frozen_target": target,
+                    "historical_targets_without_pre_draw_freeze": gap_targets,
+                    "prospective_horizon_status": sequence_status,
+                }
+                if next_path.exists():
+                    prior_next = json.loads(next_path.read_text(encoding="utf-8"))
+                    if (int(prior_next["target_round"]) != next_target
+                            or int(prior_next["training_through_round"]) != latest_cutoff
+                            or prior_next.get("canonical_snapshot_sha256") != current_sha):
+                        raise ValueError(f"existing immutable prediction provenance mismatch for {next_target}")
+                    generated_prediction = str(next_path.relative_to(root))
+                    next_prediction_status = "EXISTING_IMMUTABLE_PREDICTION_PRESERVED"
+                else:
+                    next_frozen = make_frozen_prediction(
+                        current_draws,
+                        now_utc.isoformat(),
+                        canonical_snapshot_sha256=current_sha,
+                        training_data_source=current_source,
+                        sequence_metadata=sequence_metadata,
+                    )
+                    tracker.mkdir(parents=True, exist_ok=True)
+                    with next_path.open("x", encoding="utf-8", newline="\n") as stream:
+                        json.dump(next_frozen, stream, ensure_ascii=False, indent=2)
+                        stream.write("\n")
+                    generated_prediction = str(next_path.relative_to(root))
+                    next_prediction_status = "FROZEN_AFTER_GAP" if gap_targets else "FROZEN_BEFORE_TARGET_DRAW"
+
+                if gap_targets:
+                    status_path = tracker / f"RESUME_STATUS_{next_target}.json"
+                    status_record = {
+                        "status": "FROZEN_AFTER_HISTORICAL_GAP",
+                        "previous_frozen_target": target,
+                        "target_round": next_target,
+                        "training_through_round": latest_cutoff,
+                        "target_draw_date": next_date.isoformat(),
+                        "historical_targets_without_pre_draw_freeze": gap_targets,
+                        "prospective_horizon_status": "GAP_ACKNOWLEDGED_RESTARTED_AT_LATEST_VERIFIED_CUTOFF",
+                        "prediction_path": str(next_path.relative_to(root)),
+                        "prediction_sha256": digest(next_path),
+                        "training_data_sha256": current_sha,
+                        "training_data_source": current_source,
+                        "purchase_recommendation": False,
+                    }
+                    if status_path.exists():
+                        prior_status = json.loads(status_path.read_text(encoding="utf-8"))
+                        if prior_status != status_record:
+                            raise ValueError(f"existing immutable resume status differs: {status_path}")
+                    else:
+                        with status_path.open("x", encoding="utf-8", newline="\n") as stream:
+                            json.dump(status_record, stream, ensure_ascii=False, indent=2)
+                            stream.write("\n")
             else:
-                tracker.mkdir(parents=True, exist_ok=True)
-                with next_path.open("x", encoding="utf-8", newline="\n") as stream:
-                    json.dump(next_frozen, stream, ensure_ascii=False, indent=2)
-                    stream.write("\n")
-                generated_prediction = str(next_path.relative_to(root))
-                next_prediction_status = "FROZEN_BEFORE_TARGET_DRAW"
-        else:
-            next_prediction_status = "NEXT_TARGET_DRAW_ALREADY_PASSED_NO_RETROSPECTIVE_FREEZE"
-            status_path = tracker / f"UPDATE_STATUS_{target}.json"
-            source_cutoff = (actual.get("source_evidence") or {}).get("repository_data_cutoff")
-            gap_targets = list(range(next_target, int(source_cutoff) + 1)) if source_cutoff and int(source_cutoff) >= next_target else []
-            status_record = {
-                "status": next_prediction_status,
-                "target_round": target,
-                "next_target_round": next_target,
-                "next_target_draw_date": next_date.isoformat(),
-                "next_target_draw_at_utc": next_draw_at.isoformat(),
-                "next_prediction_created": False,
-                "latest_verified_repository_cutoff": source_cutoff,
-                "historical_targets_without_pre_draw_freeze": gap_targets,
-                "prospective_horizon_status": "INCOMPLETE_GAP_AFTER_LAST_FROZEN_TARGET",
-                "reason": "The next target draw had already occurred before a pre-draw forecast could be frozen. No retrospective prediction was generated.",
-            }
-            if status_path.exists():
-                prior_status = json.loads(status_path.read_text(encoding="utf-8"))
-                if prior_status != status_record:
-                    raise ValueError(f"existing immutable update status differs: {status_path}")
-            else:
-                tracker.mkdir(parents=True, exist_ok=True)
-                with status_path.open("x", encoding="utf-8", newline="\n") as stream:
-                    json.dump(status_record, stream, ensure_ascii=False, indent=2)
-                    stream.write("\n")
+                next_prediction_status = "NEXT_TARGET_DRAW_ALREADY_PASSED_NO_RETROSPECTIVE_FREEZE"
+                status_path = tracker / f"UPDATE_STATUS_{latest_cutoff}.json"
+                status_record = {
+                    "status": next_prediction_status,
+                    "target_round": latest_cutoff,
+                    "next_target_round": next_target,
+                    "next_target_draw_date": next_date.isoformat(),
+                    "next_target_draw_at_utc": next_draw_at.isoformat(),
+                    "next_prediction_created": False,
+                    "latest_verified_repository_cutoff": latest_cutoff,
+                    "historical_targets_without_pre_draw_freeze": gap_targets,
+                    "prospective_horizon_status": "INCOMPLETE_GAP_AFTER_LAST_FROZEN_TARGET",
+                    "reason": "The next target draw had already occurred before a pre-draw forecast could be frozen. No retrospective prediction was generated.",
+                }
+                if status_path.exists():
+                    prior_status = json.loads(status_path.read_text(encoding="utf-8"))
+                    if prior_status != status_record:
+                        raise ValueError(f"existing immutable update status differs: {status_path}")
+                else:
+                    tracker.mkdir(parents=True, exist_ok=True)
+                    with status_path.open("x", encoding="utf-8", newline="\n") as stream:
+                        json.dump(status_record, stream, ensure_ascii=False, indent=2)
+                        stream.write("\n")
 
     status = "OUTCOME_RECORDED" if actual is not None else "PENDING_OFFICIAL_DRAW"
     return {
@@ -365,13 +503,12 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen, now: datetime | None =
         "target_round": target,
         "result_created": created_result,
         "result_path": str(result_path.relative_to(root)) if actual is not None else None,
-        "next_prediction_created": generated_prediction is not None and next_prediction_status == "FROZEN_BEFORE_TARGET_DRAW",
+        "next_prediction_created": generated_prediction is not None and next_prediction_status in ("FROZEN_BEFORE_TARGET_DRAW", "FROZEN_AFTER_GAP"),
         "next_prediction_path": generated_prediction,
         "next_prediction_status": next_prediction_status,
         "status_path": str(status_path.relative_to(root)) if status_path else None,
         "purchase_recommendation": False,
     }
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
