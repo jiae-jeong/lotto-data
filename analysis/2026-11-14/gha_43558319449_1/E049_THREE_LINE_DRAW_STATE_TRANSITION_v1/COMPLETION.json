@@ -1,0 +1,12 @@
+{
+  "study_id": "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+  "status": "COMPLETE",
+  "data_cutoff": 1249,
+  "target_count": 849,
+  "random_bundles_total": 101880,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "computation_complete": true,
+  "promotion_to_purchase_policy": false
+}
