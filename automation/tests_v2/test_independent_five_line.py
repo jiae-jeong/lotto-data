@@ -1,4 +1,4 @@
-"""Unit and registration guards for the independent five-line research path."""
+""""Unit and registration guards for the independent five-line research path."""
 import json
 import sys
 import unittest
@@ -39,16 +39,20 @@ class IndependentFiveLineTests(unittest.TestCase):
         self.assertEqual(ids[e036_start:e036_start + len(expected_e036_e042)], expected_e036_e042)
         self.assertLess(prior_start, e030_start)
         self.assertLess(e030_start, e036_start)
-        self.assertEqual(ids[-5:], [
+        self.assertEqual(ids[-6:], [
             "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
             "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
             "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+            "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
         ])
         e046 = next(task for task in queue["tasks"] if task["id"] == "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1")
         self.assertEqual(e046["execution_status"], "EXECUTED_DESIGN_PLANNING_COMPLETE")
         daily._validate_task(e046)
+        e048 = next(task for task in queue["tasks"] if task["id"] == "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1")
+        self.assertIn("bonus number", e048["question"].lower())
+        self.assertEqual(ids.count("E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"), 1)
         self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
                          "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
         for task in queue["tasks"][prior_start:prior_start + len(expected_prior)]: daily._validate_task(task)
@@ -66,9 +70,8 @@ class IndependentFiveLineTests(unittest.TestCase):
         candidates = []
         for i in range(12):
             candidates.append({"candidate_id": f"C{i:02}", "numbers": tuple(range(i + 1, i + 7)),
-                "source_model": f"M{i}", "source_models": f"M{i}",
-                "source_family": "INDEPENDENT" if i >= 8 else "B", "candidate_score": 1 - i / 100,
-                "candidate_score_rank": i + 1, "eligible_independent": i >= 8})
+                "source_model": f"M{i}", "source_models": f"M{i}", "source_family": "INDEPENDENT" if i >= 8 else "B",
+                "candidate_score": 1 - i / 100, "candidate_score_rank": i + 1, "eligible_independent": i >= 8})
         for strategy in study.FIXED_STRATEGIES:
             result = study._select_portfolio(strategy, candidates)
             self.assertEqual(len(result), 5, strategy)
