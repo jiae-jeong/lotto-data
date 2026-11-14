@@ -1,5 +1,7 @@
 # E048 — Bonus-to-next-main transition, three-line portfolio
 
+> DUPLICATE REPRODUCTION ONLY: this run reproduces E048 run 43547128786 byte-for-byte for primary outputs. It is not an independent research axis and is not counted toward readiness.
+
 - Study status: **STRICT_FAIL**
 - Data cutoff: **1249**; source rows: **1249**
 - Walk-forward targets: **849** (401..1249)
