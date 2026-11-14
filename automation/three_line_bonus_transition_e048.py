@@ -175,7 +175,7 @@ def moving_block_ci(values: list[float], alpha: float, seed: int,
 
 def write_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
     with path.open("w", encoding="utf-8-sig", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=fields, extrasaction="raise")
+        writer = csv.DictWriter(stream, fieldnames=fields, extrasaction="raise", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
