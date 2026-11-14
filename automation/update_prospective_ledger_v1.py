@@ -201,7 +201,7 @@ def result_artifact(frozen: dict, prediction_path: Path, actual: dict, fetched_a
     scored = []
     for signal in frozen["signals"]:
         hits = len(set(signal["numbers"]) & outcome)
-        scored.append({"signal": signal["signal"], "model_version": signal["model_version"],
+        scored.append({"signal": signal["signal"], "model_version": signal.get("model_version", signal.get("formula_version", "unknown")),
             "prediction_numbers": signal["numbers"], "main_hits": hits,
             "bonus_included": actual["bonus"] in signal["numbers"],
             "official_main_numbers": sorted(actual["numbers"]), "official_bonus": actual["bonus"]})
