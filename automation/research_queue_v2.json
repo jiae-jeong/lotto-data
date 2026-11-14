@@ -1418,8 +1418,12 @@
         "strict_portfolio_pass": false,
         "strict_pass_ready": false
       }
+    },
+    {
+      "id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+      "question": "Does the immediately preceding draw's bonus number provide an independent cutoff-safe signal for the next draw's exact three-disjoint-line portfolio versus the geometry-matched union18 null?"
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "The repository workflow is manual-only; no scheduled trigger is configured. This metadata does not alter workflow cadence."
+  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow. Existing cadence is unchanged."
 }
