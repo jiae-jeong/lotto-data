@@ -105,6 +105,7 @@ jobs:
           assert e050['workflow_entrypoint']=='.github/workflows/target-1251-e050-three-line-neighbor-transition.yml'
           assert e050['preregistration']=='research/weekly_purchase/1251/E050_THREE_LINE_NEIGHBOR_TRANSITION_PREREG_20261114.json'
           assert e050['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+          assert e050['spec']['execution_status']==e050['execution_status']
           if e050['execution_status'] != 'PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
               assert e050['execution_result']['verification_status']=='PASS'
               assert e050['execution_result']['strict_pass_ready'] is False

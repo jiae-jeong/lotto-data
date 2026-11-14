@@ -79,6 +79,7 @@ class IndependentFiveLineTests(unittest.TestCase):
             "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
             "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING",
         ))
+        self.assertEqual(e050["spec"]["execution_status"], e050["execution_status"])
         if e050["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
             self.assertEqual(e050["execution_result"]["verification_status"], "PASS")
             self.assertFalse(e050["execution_result"]["strict_pass_ready"])

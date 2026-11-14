@@ -1728,7 +1728,7 @@
         "study_id": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
         "study_class": "preregistered_independent_number_level_previous_main_neighborhood_transition",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
         "data_cutoff": 1249,
         "target_rounds": "401..1249 inclusive",
         "training_cutoff_rule": "For target t, use only draws 1..t-1. Historical transitions u=2..t-1 use previous main draw u-1 as the feature and main draw u as the outcome. Add target draw t only after scoring target t.",
