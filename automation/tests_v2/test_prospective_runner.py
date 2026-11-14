@@ -54,6 +54,29 @@ class ProspectiveRunnerTests(unittest.TestCase):
                 runner._ensure_outcome_event(root, actual)
 
 
+    def test_missing_pre_draw_target_records_gap_without_retrospective_forecast(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            data = root / "lotto_data.csv"
+            data.write_text("round,date,no1,no2,no3,no4,no5,no6,bonus\\n", encoding="utf-8")
+            separate = root / "analysis/prospective/E030/FROZEN_SIGNALS_1251.json"
+            separate.parent.mkdir(parents=True)
+            separate.write_text(json.dumps({"status": "FROZEN_PROSPECTIVE_SHADOW_ONLY"}), encoding="utf-8")
+            draws = [{"round": i, "date": "2026-11-14"} for i in range(1, 1251)]
+
+            path, record = runner._record_incomplete_gap(root, draws, 1251)
+            self.assertEqual(record["status"], "INCOMPLETE_GAP_NO_PRE_DRAW_FREEZE")
+            self.assertEqual(record["last_frozen_target"], 1246)
+            self.assertEqual(record["missing_pre_draw_frozen_targets"], [1247, 1248, 1249, 1250])
+            self.assertEqual(record["target_draw_date_assumption"], "2026-11-21")
+            self.assertFalse(record["separate_e030_shadow_anchor"]["eligible_for_this_protocol"])
+            self.assertTrue(record["no_retrospective_prediction_generated"])
+            self.assertFalse(record["recommendation_generated"])
+            self.assertTrue(path.is_file())
+            self.assertFalse((root / "analysis/prospective_v1/rounds/1251/FROZEN_SIGNALS_1251.json").exists())
+            self.assertEqual(runner._record_incomplete_gap(root, draws, 1251)[1], record)
+
+
 if __name__ == "__main__":
     unittest.main()
 
