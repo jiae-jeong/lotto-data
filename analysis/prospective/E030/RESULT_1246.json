@@ -1,0 +1,103 @@
+{
+  "status": "OUTCOME_RECORDED",
+  "target_round": 1246,
+  "official_draw_date": "2026-10-17",
+  "prediction_file": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/FROZEN_SIGNALS_1246.json",
+  "prediction_sha256": "719c4cc11174c80dd1ddef75e438a2de36ec76842869128bf17ecacf646cb931",
+  "official_source_url": null,
+  "source_type": "REPOSITORY_SNAPSHOT_CROSSCHECKED_BY_TWO_SECONDARY_SOURCES",
+  "source_evidence": {
+    "source_type": "REPOSITORY_SNAPSHOT_CROSSCHECKED_BY_TWO_SECONDARY_SOURCES",
+    "repository_data_path": "lotto_data.csv",
+    "repository_data_cutoff": 1250,
+    "repository_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "repository_data_prefix_sha256_through_target": "2964934d268745e8b8c8368f940354c23cb4c523ea22e9c08c12c23705d43978",
+    "crosscheck_path": "research/prospective_v1/source_crosschecks/ROUND_1246.json",
+    "crosscheck_sha256": "34d3b06a8c2c952332ca06746ee591da46a2879abaaee9c347f6866761afdc4d",
+    "fallback_sources": [
+      {
+        "domain": "toolmadang.com",
+        "url": "https://www.toolmadang.com/lotto/winning-numbers/1246",
+        "round": 1246,
+        "draw_date": "2026-10-17",
+        "main_numbers": [
+          16,
+          22,
+          23,
+          24,
+          27,
+          28
+        ],
+        "bonus": 6,
+        "source_class": "secondary_draw_results_page"
+      },
+      {
+        "domain": "lottobunseok.com",
+        "url": "https://lottobunseok.com/draws/1246/",
+        "round": 1246,
+        "draw_date": "2026-10-17",
+        "main_numbers": [
+          16,
+          22,
+          23,
+          24,
+          27,
+          28
+        ],
+        "bonus": 6,
+        "source_class": "secondary_draw_results_page"
+      }
+    ],
+    "official_api_attempt": "NO_SUCCESS_PAYLOAD; repository fallback used"
+  },
+  "fetched_at_utc": "2026-11-14T19:06:36.275585+00:00",
+  "signals": [
+    {
+      "signal": "CALENDAR_SEASON_CONDITIONAL_v1",
+      "model_version": "E025_FROZEN_v1",
+      "prediction_numbers": [
+        4,
+        12,
+        14,
+        19,
+        21,
+        45
+      ],
+      "main_hits": 0,
+      "bonus_included": false,
+      "official_main_numbers": [
+        16,
+        22,
+        23,
+        24,
+        27,
+        28
+      ],
+      "official_bonus": 6
+    },
+    {
+      "signal": "PREVIOUS_SUM_REGIME_CONDITIONAL_v1",
+      "model_version": "E025_FROZEN_v1",
+      "prediction_numbers": [
+        18,
+        21,
+        31,
+        33,
+        40,
+        44
+      ],
+      "main_hits": 0,
+      "bonus_included": false,
+      "official_main_numbers": [
+        16,
+        22,
+        23,
+        24,
+        27,
+        28
+      ],
+      "official_bonus": 6
+    }
+  ],
+  "purchase_recommendation": false
+}

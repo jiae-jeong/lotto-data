@@ -1,0 +1,17 @@
+{
+  "status": "NEXT_TARGET_DRAW_ALREADY_PASSED_NO_RETROSPECTIVE_FREEZE",
+  "target_round": 1246,
+  "next_target_round": 1247,
+  "next_target_draw_date": "2026-10-24",
+  "next_target_draw_at_utc": "2026-10-24T11:35:00+00:00",
+  "next_prediction_created": false,
+  "latest_verified_repository_cutoff": 1250,
+  "historical_targets_without_pre_draw_freeze": [
+    1247,
+    1248,
+    1249,
+    1250
+  ],
+  "prospective_horizon_status": "INCOMPLETE_GAP_AFTER_LAST_FROZEN_TARGET",
+  "reason": "The next target draw had already occurred before a pre-draw forecast could be frozen. No retrospective prediction was generated."
+}
