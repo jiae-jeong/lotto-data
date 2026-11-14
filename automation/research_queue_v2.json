@@ -1545,6 +1545,125 @@
         "final_one_shot_workflow_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
         "no_op_trigger_metadata_commit": "8803e98a89575523ce001be1e58b896c02e55557"
       }
+    },
+    {
+      "id": "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+      "kind": "three_line_draw_state_transition",
+      "question": "Does the immediately preceding main draw's four-component categorical state provide a cutoff-safe signal for next-draw main-number inclusion in a deterministic three-line disjoint union18 portfolio versus the exact geometry-matched null?",
+      "novelty": "Single preregistered previous-main-draw-state transition estimator with fixed Hamming kernel 0.5^distance, fixed smoothing alpha 60, deterministic top18 rank interleaving, and one historical walk-forward only; no variants or tuning.",
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_entrypoint": "automation/three_line_draw_state_transition_e049.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e049-three-line-draw-state-transition.yml",
+      "preregistration": "research/weekly_purchase/1251/E049_THREE_LINE_DRAW_STATE_TRANSITION_PREREG_20261114.json",
+      "preregistration_sha256": "0d76cda3951c3130bc11ed77e9d7cda94c898abe6e065f1557fb9359e2c9461d",
+      "preregistration_blob_sha": "df790269c098172be3898c92543cc6f32f62104e",
+      "spec": {
+        "study_id": "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+        "study_class": "preregistered_independent_previous_main_draw_state_to_next_main_signal_three_line_walkforward",
+        "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+        "target_round": 1251,
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "For target t, use only main draws 1..t-1. For each historical transition u=2..t-1, use state(draw u-1) as the feature and main(draw u) as the outcome. The target feature is state(draw t-1). Add the target outcome only after scoring target t.",
+        "state_definition": {
+          "sum_bin": [
+            "0 if sum<120",
+            "1 if 120<=sum<145",
+            "2 if 145<=sum<170",
+            "3 if sum>=170"
+          ],
+          "odd_count_bin": [
+            "0 if odd<=2",
+            "1 if 3<=odd<=4",
+            "2 if odd>=5"
+          ],
+          "low_count_bin": [
+            "0 if count(numbers<=22)<=2",
+            "1 if 3<=count<=4",
+            "2 if count>=5"
+          ],
+          "consecutive_pair_bin": [
+            "0 if no consecutive pair",
+            "1 if exactly one consecutive pair",
+            "2 if two or more consecutive pairs"
+          ],
+          "distance": "Hamming distance across the four categorical state components."
+        },
+        "estimator": {
+          "kernel_weight": "0.5 ** HammingDistance(previous_draw_state, target_previous_draw_state)",
+          "conditional_count": "Weighted count of each main number in historical transition outcomes.",
+          "global_rate": "Count of each main number in draws 1..t-1 divided by t-1.",
+          "smoothing_alpha": 60,
+          "score_formula": "(weighted_conditional_count[n] + 60 * global_main_inclusion_rate[n]) / (sum_transition_weights + 60)",
+          "ranking": "Score descending, then number ascending."
+        },
+        "portfolio": {
+          "selected_union": "Top 18 ranked numbers.",
+          "line_assignment": "Deterministic rank interleaving: line 1 uses ranks 1,4,7,10,13,16; line 2 uses ranks 2,5,8,11,14,17; line 3 uses ranks 3,6,9,12,15,18.",
+          "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+          "randomness_in_selection": false,
+          "parameter_tuning": false,
+          "variants": 1
+        },
+        "random_comparator": {
+          "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line incidence geometry.",
+          "random_bundles_per_target": 120,
+          "seed": 2026111404,
+          "exact_null": {
+            "mean_max_hit": 1.514256248572755,
+            "p_any2": 0.47497624326892623,
+            "p_any3": 0.07135490714617204,
+            "expected_union_coverage": 2.4
+          },
+          "randomness_used_for_final_selection": false
+        },
+        "inference": {
+          "metrics": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage"
+          ],
+          "family_alpha": 0.05,
+          "alpha_per_metric": 0.0125,
+          "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null.",
+          "bootstrap_replicates": 4000,
+          "bootstrap_seed": 2026111404,
+          "block_length_targets": 50,
+          "retain_final_remainder_block": true,
+          "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+          "no_threshold_relaxation": true,
+          "no_alpha_change": true,
+          "no_block_length_change": true,
+          "no_comparator_change": true,
+          "no_unbounded_microvariants": true
+        },
+        "prospective_confirmation": {
+          "required_by_policy": true,
+          "minimum_target_count": null,
+          "completion_rule": null,
+          "status": "UNSPECIFIED_IN_POLICY",
+          "readiness_rule": "Even if the historical gate passes, do not create STRICT_PASS_READY or release purchase lines until the policy owner formally predeclares the prospective minimum target count and completion rule."
+        },
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "RANDOM_BASELINE.csv",
+          "BLOCK_STABILITY.csv",
+          "INFERENCE.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS": 849,
+          "RANDOM_BASELINE": 849,
+          "BLOCK_STABILITY": 17
+        },
+        "source_data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+        "source_data_full_file_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7"
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",

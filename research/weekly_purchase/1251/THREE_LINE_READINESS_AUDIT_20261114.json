@@ -9,7 +9,7 @@
   "preparation_deadline_kst": "2026-11-19",
   "current_verified_data_cutoff": 1249,
   "current_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
-  "daily_master_run_id": 43543256641,
+  "daily_master_run_id": 43548174269,
   "daily_master_status": "PARTIAL",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
@@ -26,7 +26,8 @@
     "No target-specific three-line STRICT_PASS_READY artifact exists. The new three-line finalizer path is available, but it correctly refuses to seal without a fully validated ready artifact.",
     "E043 H1250-A and E044 H1250-B V2 are five-line H1250 studies and remain ineligible as target-1251 three-line evidence.",
     "E019 remains POST_HOC_EXPLORATORY and its original overlapping-ticket comparator is not geometry-matched; the separate correction document preserves that limitation.",
-    "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY."
+    "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY.",
+    "E049 was preregistered but absent from the execution queue; the dedicated runner and workflow are being connected before evaluation."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -40,7 +41,7 @@
   "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers.",
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
-    "registered_tasks": 34,
+    "registered_tasks": 35,
     "generic_task_completion_paths_found": 25,
     "blocked_generic_tasks": [
       "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
@@ -48,9 +49,10 @@
     ],
     "pending_dedicated_tasks": [
       "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
-      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+      "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"
     ],
-    "pending_dedicated_task_scope": "Both pending dedicated tasks are five-line H1250 studies and are ineligible for target-1251 three-line evidence.",
+    "pending_dedicated_task_scope": "E043 H1250-A and E044 H1250-B V2 are five-line studies; E049 is a preregistered target-1251 three-line study awaiting its dedicated workflow.",
     "completed_dedicated_tasks": {
       "E045": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE",
@@ -61,7 +63,7 @@
     ],
     "target_1251_three_line_task_registered": true,
     "target_1251_three_line_runner_found": true,
-    "target_1251_three_line_task_status": "E045_AND_E048_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY",
+    "target_1251_three_line_task_status": "E045_AND_E048_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY; E049_PREREGISTERED_PENDING_DEDICATED_EXECUTION",
     "target_1251_three_line_workflow_run_id": 43499702588,
     "target_1251_three_line_finalizer_found": true,
     "three_line_finalizer": "automation/finalize_three_line_from_strict_ready_v1.py",
@@ -90,7 +92,11 @@
       }
     ],
     "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
-    "target_1251_three_line_e048_one_shot_guard_validation_run_id": 43548096707
+    "target_1251_three_line_e048_one_shot_guard_validation_run_id": 43548096707,
+    "target_1251_three_line_e049_preregistration": "research/weekly_purchase/1251/E049_THREE_LINE_DRAW_STATE_TRANSITION_PREREG_20261114.json",
+    "target_1251_three_line_e049_runner": "automation/three_line_draw_state_transition_e049.py",
+    "target_1251_three_line_e049_workflow": ".github/workflows/target-1251-e049-three-line-draw-state-transition.yml",
+    "target_1251_three_line_e049_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
   },
   "evaluated_gates": {
     "max_hit": {
@@ -197,9 +203,9 @@
     "prospective_minimum_count_adopted": false
   },
   "previous_daily_master_run_id": 43525410558,
-  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43525410558",
-  "daily_master_result_commit": "3ec66871f7b110072470a57c6181e3a356110e68",
-  "daily_master_completed_at_kst": "2026-11-14T11:04:26+09:00",
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43548174269",
+  "daily_master_result_commit": "0992251672b25fa77d700e36f7288b86142811ae",
+  "daily_master_completed_at_kst": "2026-11-14T11:55:42+09:00",
   "e048_execution": {
     "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "workflow_name": "target-1251-e048-three-line-bonus-transition",
@@ -311,5 +317,18 @@
     "reason": "The path literally contained shell placeholders and its run_id field was malformed; it was not valid run-scoped evidence.",
     "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
+  },
+  "daily_master_verification_path": "analysis/2026-11-14/MASTER_FULL_V5_025102_256178/VERIFICATION.json",
+  "daily_master_report_path": "analysis/2026-11-14/MASTER_FULL_V5_025102_256178/REPORT.md",
+  "daily_master_model_validation_path": "analysis/2026-11-14/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
+  "e049_execution": {
+    "study_id": "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+    "status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+    "preregistration": "research/weekly_purchase/1251/E049_THREE_LINE_DRAW_STATE_TRANSITION_PREREG_20261114.json",
+    "source_data_cutoff": 1249,
+    "source_data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "workflow": ".github/workflows/target-1251-e049-three-line-draw-state-transition.yml",
+    "runner": "automation/three_line_draw_state_transition_e049.py",
+    "execution_started": false
   }
 }

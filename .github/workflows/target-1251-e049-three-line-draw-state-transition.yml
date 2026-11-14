@@ -1,0 +1,161 @@
+name: target-1251-e049-three-line-draw-state-transition
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/three_line_draw_state_transition_e049.py'
+      - 'automation/tests_v2/test_three_line_draw_state_transition_e049.py'
+      - 'research/weekly_purchase/1251/E049_THREE_LINE_DRAW_STATE_TRANSITION_PREREG_20261114.json'
+      - 'automation/research_queue_v2.json'
+      - '.github/workflows/target-1251-e049-three-line-draw-state-transition.yml'
+permissions:
+  contents: write
+concurrency:
+  group: target-1251-e049-three-line-draw-state-transition
+  cancel-in-progress: false
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refuse duplicate historical evaluation
+        id: one-shot
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os, subprocess
+          paths=subprocess.check_output(["git","ls-tree","-r","--name-only","HEAD"],text=True).splitlines()
+          complete=any(p.endswith("/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1/COMPLETION.json") for p in paths)
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
+              f.write("already_complete="+("true" if complete else "false")+"\n")
+          print("E049 already complete; successful no-op." if complete else "E049 pending; execute frozen study.")
+          PY
+      - name: Compile and run frozen E049 tests
+        if: steps.one-shot.outputs.already_complete != 'true'
+        run: |
+          python -m py_compile automation/three_line_draw_state_transition_e049.py automation/tests_v2/test_three_line_draw_state_transition_e049.py
+          python -B -m unittest automation.tests_v2.test_three_line_draw_state_transition_e049 -v
+      - name: Run E049 historical walk-forward
+        if: steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: \${{ github.run_id }}
+          RUN_ATTEMPT: \${{ github.run_attempt }}
+        run: |
+          python -B automation/three_line_draw_state_transition_e049.py --date 2026-11-14 --run-id "$RUN_ID" --run-attempt "$RUN_ATTEMPT"
+      - name: Verify evidence and update queue/readiness audit
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: \${{ github.run_id }}
+          RUN_ATTEMPT: \${{ github.run_attempt }}
+          RUN_NUMBER: \${{ github.run_number }}
+          EVENT_NAME: \${{ github.event_name }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os, subprocess
+          from datetime import datetime, timezone
+          from pathlib import Path
+          rid,attempt=os.environ["RUN_ID"],os.environ["RUN_ATTEMPT"]
+          out=Path("analysis/2026-11-14")/f"gha_{rid}_{attempt}"/"E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"
+          expected={"PREDICTIONS.csv","RANDOM_BASELINE.csv","BLOCK_STABILITY.csv","MODEL_SPEC.json","INFERENCE.json","VERIFICATION.json","COMPLETION.json","REPORT.md","SHA256_MANIFEST.csv"}
+          assert {p.name for p in out.iterdir() if p.is_file()}==expected
+          manifest=list(csv.DictReader((out/"SHA256_MANIFEST.csv").open(encoding="utf-8-sig",newline="")))
+          assert len(manifest)==8 and {r["path"] for r in manifest}==expected-{"SHA256_MANIFEST.csv"}
+          for r in manifest:
+              raw=(out/r["path"]).read_bytes()
+              assert len(raw)==int(r["bytes"]) and hashlib.sha256(raw).hexdigest()==r["sha256"],r["path"]
+          v=json.loads((out/"VERIFICATION.json").read_text()); inf=json.loads((out/"INFERENCE.json").read_text())
+          c=json.loads((out/"COMPLETION.json").read_text())
+          assert v["status"]=="PASS" and v["manifest_status"]=="PASS" and c["status"]=="COMPLETE"
+          assert v["data_cutoff"]==1249 and v["data_prefix_sha256"]=="a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7"
+          assert v["target_range"]==[401,1249] and v["target_count"]==849
+          assert v["random_bundles_per_target"]==120 and v["random_bundles_total"]==101880
+          assert v["leakage_failures"]==0 and v["future_predictions"]==0 and v["no_future_leakage"] is True
+          assert v["portfolio_geometry_violations"]==0 and v["random_geometry_violations"]==0
+          assert v["strict_portfolio_pass"] is False and v["strict_pass_ready"] is False
+          preds=list(csv.DictReader((out/"PREDICTIONS.csv").open(encoding="utf-8-sig",newline="")))
+          randoms=list(csv.DictReader((out/"RANDOM_BASELINE.csv").open(encoding="utf-8-sig",newline="")))
+          blocks=list(csv.DictReader((out/"BLOCK_STABILITY.csv").open(encoding="utf-8-sig",newline="")))
+          targets=list(range(401,1250))
+          assert [int(x["target_round"]) for x in preds]==targets and len(preds)==849
+          assert [int(x["target_round"]) for x in randoms]==targets and len(randoms)==849 and len(blocks)==17
+          for x in preds:
+              t=int(x["target_round"]); assert int(x["training_through_round"])==t-1
+              lines=[set(map(int,x[f"line{i}"].split())) for i in (1,2,3)]
+              assert all(len(z)==6 for z in lines) and len(set().union(*lines))==18
+          assert all(int(x["random_bundles"])==120 and int(x["geometry_violations"])==0 for x in randoms)
+          failed=[k for k,x in inf["metrics"].items() if not x["lower_bound_strictly_gt_zero"]]
+          if float(inf["block_stability"]["any2_positive_block_share"])<.65: failed.append("any2_positive_50_target_block_share")
+          hist=inf["historical_strict_gate_pass"] is True
+          status="EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED" if not hist else "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING"
+          qpath=Path("automation/research_queue_v2.json"); q=json.loads(qpath.read_text())
+          found=[x for x in q["tasks"] if x.get("id")=="E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"]; assert len(found)==1
+          task=found[0]; task["execution_status"]=status
+          for key,path in [("implementation_code_sha","automation/three_line_draw_state_transition_e049.py"),("test_code_sha","automation/tests_v2/test_three_line_draw_state_transition_e049.py"),("workflow_blob_sha",".github/workflows/target-1251-e049-three-line-draw-state-transition.yml")]:
+              task[key]=subprocess.check_output(["git","hash-object",path],text=True).strip()
+          result={"workflow_name":"target-1251-e049-three-line-draw-state-transition","workflow_run_id":int(rid),"workflow_run_number":int(os.environ["RUN_NUMBER"]),"run_attempt":int(attempt),"event":os.environ["EVENT_NAME"],"workflow_run_conclusion":"success","run_url":f"https://github.com/jiae-jeong/lotto-data/actions/runs/{rid}","completed_at_utc":datetime.now(timezone.utc).isoformat(),"result_path":str(out),"data_cutoff":1249,"data_prefix_sha256":v["data_prefix_sha256"],"target_range":[401,1249],"target_count":849,"prediction_records":len(preds),"random_bundles_per_target":120,"random_bundles_total":101880,"training_cutoff_violations":0,"leakage_failures":0,"future_predictions":0,"portfolio_geometry_violations":0,"random_geometry_violations":0,"verification_status":"PASS","manifest_entries":8,"manifest_status":"PASS","historical_strict_gate_pass":hist,"strict_portfolio_pass":False,"strict_pass_ready":False,"readiness_status":inf["readiness_status"],"failed_gates":failed,"prospective_confirmation_status":"UNSPECIFIED_IN_POLICY","purchase_lines_generated":False,"final_purchase_freeze_allowed":False}
+          task["execution_result"]=result; qpath.write_text(json.dumps(q,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          ap=Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json"); a=json.loads(ap.read_text())
+          a["daily_master_run_id"]=43548174269
+          a["daily_master_run_url"]="https://github.com/jiae-jeong/lotto-data/actions/runs/43548174269"
+          a["daily_master_result_commit"]="0992251672b25fa77d700e36f7288b86142811ae"
+          a["daily_master_completed_at_kst"]="2026-11-14T11:55:42+09:00"; a["daily_master_status"]="PARTIAL"
+          a["daily_master_verification_path"]="analysis/2026-11-14/MASTER_FULL_V5_025102_256178/VERIFICATION.json"
+          a["daily_master_report_path"]="analysis/2026-11-14/MASTER_FULL_V5_025102_256178/REPORT.md"
+          a["daily_master_model_validation_path"]="analysis/2026-11-14/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json"
+          a["current_verified_data_cutoff"]=1249; a["current_data_sha256"]="a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7"
+          qs=a["research_queue_status"]; qs["registered_tasks"]=len(q["tasks"]); qs["completed_dedicated_tasks"]["E049"]=status
+          qs["pending_dedicated_tasks"]=[x for x in qs.get("pending_dedicated_tasks",[]) if x!="E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"]
+          qs["pending_dedicated_task_scope"]="Remaining E043 H1250-A and E044 H1250-B V2 are five-line studies and ineligible for target-1251 three-line evidence."
+          qs["target_1251_three_line_task_status"]=("E045_AND_E048_AND_E049_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY" if not hist else "E049_HISTORICAL_GATE_PASS_BUT_PROSPECTIVE_RULE_UNSPECIFIED; E045_AND_E048_STRICT_FAIL; E046_DESIGN_ONLY")
+          qs["target_1251_three_line_e049_workflow_run_id"]=int(rid)
+          qs["target_1251_three_line_e049_preregistration"]="research/weekly_purchase/1251/E049_THREE_LINE_DRAW_STATE_TRANSITION_PREREG_20261114.json"
+          qs["target_1251_three_line_e049_runner"]="automation/three_line_draw_state_transition_e049.py"
+          qs["target_1251_three_line_e049_workflow"]=".github/workflows/target-1251-e049-three-line-draw-state-transition.yml"
+          qs["target_1251_three_line_e049_status"]=status; qs["target_1251_three_line_e049_result_path"]=str(out)
+          a["e049_execution"]=result; a["e049_historical_gate_pass"]=hist; a["e049_failed_gates"]=failed
+          a["readiness_status"]="STRICT_FAIL" if not hist else "NOT_READY_PROSPECTIVE_RULE_UNSPECIFIED"
+          a["strict_model_validation_pass"]=False; a["strict_portfolio_pass"]=False; a["strict_pass_ready"]=False
+          a["ready_file"]=None; a["ready_file_exists"]=False; a["line_level_output_status"]="SUPPRESSED_NOT_READY"
+          a["unevaluated_gates"]=[]; a["no_future_leakage"]=True; a["final_selection_randomness"]=False
+          a["random_fallback_allowed"]=False; a["final_purchase_freeze_allowed"]=False
+          a["blocking_reasons"]=[x for x in a.get("blocking_reasons",[]) if "E049" not in x]
+          a["blocking_reasons"].append("E049 historical strict gate failed: "+", ".join(failed)+"." if not hist else "E049 historical gate passed, but prospective confirmation minimum/completion rule remains unspecified; STRICT_PASS_READY is prohibited.")
+          ap.write_text(json.dumps(a,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps({"status":status,"historical_gate_pass":hist,"failed_gates":failed,"queue_tasks":len(q["tasks"])},ensure_ascii=False))
+          PY
+      - name: Preserve validated E049 outputs and updated audit
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/2026-11-14/gha_\${GITHUB_RUN_ID}_\${GITHUB_RUN_ATTEMPT}/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"
+          test -f "$OUTDIR/VERIFICATION.json"
+          test -f "$OUTDIR/COMPLETION.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OUTDIR" automation/research_queue_v2.json research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json
+          git diff --cached --check
+          git commit -m "research: execute E049 three-line draw-state transition [evidence]"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo "Failed to preserve E049 evidence after three push attempts." >&2
+          exit 1
+      - name: Preserve failed E049 attempt
+        if: failure() && steps.one-shot.outputs.already_complete != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: e049-failed-attempt-\${{ github.run_id }}-\${{ github.run_attempt }}
+          path: |
+            analysis/2026-11-14/gha_\${{ github.run_id }}_\${{ github.run_attempt }}/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1/**
+          if-no-files-found: warn
