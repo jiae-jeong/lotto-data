@@ -10,6 +10,7 @@ on:
       - 'automation/update_prospective_ledger_v1.py'
       - 'automation/research_queue_v2.json'
       - 'automation/tests_v2/**'
+      - 'research/prospective_v1/source_crosschecks/**'
       - '.github/workflows/orthogonal-research-v2.yml'
   schedule:
     - cron: '0 14 * * 6'
@@ -183,7 +184,7 @@ jobs:
           if-no-files-found: warn
 
   prospective-ledger:
-    if: github.event_name == 'schedule' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[update-prospective-ledger]'))
+    if: github.event_name == 'schedule' || (github.event_name == 'push' && (contains(github.event.head_commit.message, '[update-prospective-ledger]') || contains(toJSON(github.event.head_commit.added), 'research/prospective_v1/source_crosschecks/') || contains(toJSON(github.event.head_commit.modified), 'research/prospective_v1/source_crosschecks/')))
     needs: validate
     runs-on: ubuntu-latest
     steps:
