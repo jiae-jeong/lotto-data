@@ -1,0 +1,42 @@
+{
+  "evidence_id": "E030_OUTCOME_SOURCE_CROSSCHECK_1250_v1",
+  "target_round": 1250,
+  "draw_date": "2026-11-14",
+  "main_numbers": [1, 5, 18, 23, 27, 28],
+  "bonus": 8,
+  "repository_snapshot": {
+    "path": "lotto_data.csv",
+    "data_cutoff": 1250,
+    "full_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "prefix_through_target_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+  },
+  "fallback_sources": [
+    {
+      "domain": "lottodeck.kr",
+      "url": "https://lottodeck.kr/latest/",
+      "round": 1250,
+      "draw_date": "2026-11-14",
+      "main_numbers": [1, 5, 18, 23, 27, 28],
+      "bonus": 8,
+      "source_class": "secondary_draw_results_page"
+    },
+    {
+      "domain": "lottokok.weking.co.kr",
+      "url": "https://lottokok.weking.co.kr/round/1250",
+      "round": 1250,
+      "draw_date": "2026-11-14",
+      "main_numbers": [1, 5, 18, 23, 27, 28],
+      "bonus": 8,
+      "source_class": "secondary_draw_results_page"
+    }
+  ],
+  "corroborating_primary_report": {
+    "domain": "yna.co.kr",
+    "url": "https://www.yna.co.kr/view/AKR20261114047000002",
+    "reported_at": "2026-11-14T20:49:00+09:00",
+    "note": "Yonhap reports the result announced by lottery operator Donghaeng Lottery; this is not represented as a successful direct official API payload."
+  },
+  "official_api_attempt": "NO_SUCCESS_PAYLOAD; repository fallback used",
+  "verified_on_kst": "2026-11-15",
+  "note": "The 1250 row is pinned by the full normalized repository snapshot SHA256 and corroborated by two separately hosted result pages plus Yonhap's report of the operator announcement. No retrospective prediction is inferred from the later rounds."
+}
