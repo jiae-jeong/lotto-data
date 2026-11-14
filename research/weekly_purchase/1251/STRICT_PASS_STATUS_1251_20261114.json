@@ -1,0 +1,48 @@
+{
+  "status": "STRICT_FAIL",
+  "target_round": 1251,
+  "date_kst": "2026-11-14",
+  "data_cutoff": 1250,
+  "data_rows": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "purchase_lines_required": 3,
+  "numbers_per_line": 6,
+  "strict_model_validation_pass": false,
+  "validated_models": [],
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "strict_gate_version": null,
+  "strict_gate_evaluation": "NO_ELIGIBLE_THREE_LINE_READY_ARTIFACT",
+  "ready_file": null,
+  "ready_file_exists": false,
+  "line_level_output_status": "SUPPRESSED_NOT_READY",
+  "failed_gates": [
+    "no_eligible_three_line_portfolio_candidate"
+  ],
+  "unevaluated_gates": [
+    "max_hits_adjusted_ci",
+    "any2_adjusted_ci",
+    "any3_adjusted_ci",
+    "winning_union_coverage_adjusted_ci",
+    "any2_positive_50_target_block_share",
+    "prospective_confirmation"
+  ],
+  "no_future_leakage": true,
+  "final_selection_randomness": false,
+  "random_fallback_allowed": false,
+  "final_purchase_freeze_allowed": false,
+  "e045_historical_evidence": {
+    "status": "VERIFIED_HISTORICAL_STRICT_FAIL",
+    "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "data_cutoff": 1249,
+    "target_count": 849,
+    "random_bundles_total": 101880,
+    "prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "manifest_entries": 8,
+    "leakage_failures": 0,
+    "historical_strict_gate_pass": false,
+    "strict_pass_ready": false
+  },
+  "single_ticket_model_validation_is_not_three_line_evidence": true,
+  "note": "This guard never generates purchase lines. A three-line portfolio is eligible only through a separately validated, target-specific STRICT_PASS_READY artifact with exact disjoint union18 geometry, all frozen strict gates, and completed prospective confirmation."
+}

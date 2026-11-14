@@ -1,7 +1,7 @@
 {
-  "generated_kst": "2026-11-14T15:19:26.194872+09:00",
+  "generated_kst": "2026-11-14T21:00:11.145635+09:00",
   "scope": "Only sources explicitly confirmed by the user or backed by a preserved receipt in PURCHASE_CONFIRMATION_REGISTRY.json are included in the actual-purchase aggregate. Filenames, displayed recommendations, and pre-draw FINAL artifacts alone do not prove purchase.",
-  "data_cutoff": 1249,
+  "data_cutoff": 1250,
   "purchase_confirmation_status": "NO_CONFIRMED_PURCHASES",
   "purchase_confirmation_registry": {
     "path": "research/PURCHASE_CONFIRMATION_REGISTRY.json",
