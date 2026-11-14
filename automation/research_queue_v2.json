@@ -1710,6 +1710,79 @@
         "purchase_lines_generated": false,
         "final_purchase_freeze_allowed": false
       }
+    },
+    {
+      "id": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+      "kind": "three_line_neighbor_transition",
+      "question": "Does each candidate number's fixed absolute distance to the immediately preceding draw's six main numbers contain cutoff-safe information about its inclusion in the next draw, and can one frozen smoothed estimator improve a three-line disjoint union18 portfolio over the exact geometry-matched null?",
+      "novelty": "A separate number-level neighborhood-transition feature family: four frozen minimum-distance bins (0, 1, 2, 3+) from the previous draw's six main numbers, with per-number conditional inclusion shrinkage. Distinct from E048's previous bonus-number identity and E049's aggregate four-component draw-state Hamming kernel. One estimator, one portfolio, one historical evaluation; no variants or tuning.",
+      "date_kst": "2026-11-14",
+      "target_round": 1251,
+      "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_neighbor_transition_e050.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e050-three-line-neighbor-transition.yml",
+      "preregistration": "research/weekly_purchase/1251/E050_THREE_LINE_NEIGHBOR_TRANSITION_PREREG_20261114.json",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "spec": {
+        "study_id": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+        "study_class": "preregistered_independent_number_level_previous_main_neighborhood_transition",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "For target t, use only draws 1..t-1. Historical transitions u=2..t-1 use previous main draw u-1 as the feature and main draw u as the outcome. Add target draw t only after scoring target t.",
+        "feature_bins": [
+          "distance 0",
+          "distance 1",
+          "distance 2",
+          "distance 3+"
+        ],
+        "bonus_excluded": true,
+        "primary_metrics": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage"
+        ],
+        "comparator": "Exact geometry-matched three-line disjoint union18 null; 120 jointly label-permuted portfolios per target.",
+        "random_bundles_per_target": 120,
+        "random_seed": 2026111405,
+        "family_alpha": 0.05,
+        "alpha_per_metric": 0.0125,
+        "bootstrap_replicates": 4000,
+        "block_length_targets": 50,
+        "retain_final_remainder_block": true,
+        "any2_positive_block_share_min": 0.65,
+        "variants": 1,
+        "parameter_tuning": false,
+        "no_threshold_relaxation": true,
+        "no_alpha_change": true,
+        "no_block_length_change": true,
+        "no_comparator_change": true,
+        "no_unbounded_microvariants": true,
+        "prospective_confirmation_required": true,
+        "prospective_minimum_target_count": null,
+        "prospective_completion_rule": null,
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "RANDOM_BASELINE.csv",
+          "BLOCK_STABILITY.csv",
+          "MODEL_SPEC.json",
+          "INFERENCE.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS.csv": 849,
+          "RANDOM_BASELINE.csv": 849,
+          "BLOCK_STABILITY.csv": 17
+        },
+        "no_future_leakage": true,
+        "strict_pass_ready_requires_prospective_rule": true
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",

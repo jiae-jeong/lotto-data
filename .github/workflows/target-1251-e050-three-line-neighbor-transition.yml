@@ -1,0 +1,306 @@
+name: target-1251-e050-three-line-neighbor-transition
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/three_line_neighbor_transition_e050.py'
+      - 'automation/tests_v2/test_three_line_neighbor_transition_e050.py'
+      - 'research/weekly_purchase/1251/E050_THREE_LINE_NEIGHBOR_TRANSITION_PREREG_20261114.json'
+      - 'automation/research_queue_v2.json'
+      - '.github/workflows/target-1251-e050-three-line-neighbor-transition.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: target-1251-e050-three-line-neighbor-transition
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refuse duplicate historical evaluation
+        id: one-shot
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os, subprocess
+          paths = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
+          suffix = "/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1/COMPLETION.json"
+          complete = any(path.endswith(suffix) for path in paths)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
+              stream.write("already_complete=" + ("true" if complete else "false") + "\n")
+          print("E050 already complete; successful no-op." if complete else "E050 pending; execute frozen study.")
+          PY
+      - name: Install frozen numerical runtime
+        if: steps.one-shot.outputs.already_complete != 'true'
+        run: python -m pip install 'numpy==2.3.5'
+      - name: Verify frozen blobs and preregistration
+        if: steps.one-shot.outputs.already_complete != 'true'
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          prereg = json.loads(Path("research/weekly_purchase/1251/E050_THREE_LINE_NEIGHBOR_TRANSITION_PREREG_20261114.json").read_text(encoding="utf-8"))
+          paths = {
+              "runner_blob_sha": "automation/three_line_neighbor_transition_e050.py",
+              "test_blob_sha": "automation/tests_v2/test_three_line_neighbor_transition_e050.py",
+              "workflow_blob_sha": ".github/workflows/target-1251-e050-three-line-neighbor-transition.yml",
+              "shared_helper_blob_sha": "automation/three_line_bonus_transition_e048.py",
+              "policy_blob_sha": "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json",
+          }
+          for key, path in paths.items():
+              actual = subprocess.check_output(["git", "rev-parse", "HEAD:" + path], text=True).strip()
+              assert actual == prereg["frozen_blobs"][key], (path, actual, prereg["frozen_blobs"][key])
+              print("FROZEN_BLOB_PASS", path, actual)
+          PY
+          python -B automation/three_line_neighbor_transition_e050.py --preflight
+      - name: Compile and run frozen E050 tests
+        if: steps.one-shot.outputs.already_complete != 'true'
+        run: |
+          python -m py_compile automation/three_line_neighbor_transition_e050.py automation/tests_v2/test_three_line_neighbor_transition_e050.py
+          python -B -m unittest automation.tests_v2.test_three_line_neighbor_transition_e050 -v
+      - name: Audit generic daily queue preflight
+        if: steps.one-shot.outputs.already_complete != 'true'
+        run: |
+          python -B automation/daily_research_queue_preflight_v1.py \
+            --repository . \
+            --queue automation/research_queue_v2.json \
+            --filtered-queue "$RUNNER_TEMP/generic-queue-filtered.json" \
+            --status-file "$RUNNER_TEMP/generic-preflight.json"
+          cat "$RUNNER_TEMP/generic-preflight.json"
+      - name: Run E050 historical walk-forward
+        if: steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          python -B automation/three_line_neighbor_transition_e050.py \
+            --date 2026-11-14 --run-id "$RUN_ID" --run-attempt "$RUN_ATTEMPT"
+      - name: Verify evidence and preserve queue/readiness state
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          RUN_NUMBER: ${{ github.run_number }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os, subprocess
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          rid = os.environ["RUN_ID"]
+          attempt = os.environ["RUN_ATTEMPT"]
+          output = Path("analysis/2026-11-14") / f"gha_{rid}_{attempt}" / "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"
+          expected = {
+              "PREDICTIONS.csv", "RANDOM_BASELINE.csv", "BLOCK_STABILITY.csv",
+              "MODEL_SPEC.json", "INFERENCE.json", "VERIFICATION.json",
+              "COMPLETION.json", "REPORT.md", "SHA256_MANIFEST.csv",
+          }
+          assert {p.name for p in output.iterdir() if p.is_file()} == expected
+          manifest = list(csv.DictReader((output / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="")))
+          assert len(manifest) == 8
+          assert {row["path"] for row in manifest} == expected - {"SHA256_MANIFEST.csv"}
+          for row in manifest:
+              raw = (output / row["path"]).read_bytes()
+              assert len(raw) == int(row["bytes"])
+              assert hashlib.sha256(raw).hexdigest() == row["sha256"], row["path"]
+
+          verification = json.loads((output / "VERIFICATION.json").read_text(encoding="utf-8"))
+          inference = json.loads((output / "INFERENCE.json").read_text(encoding="utf-8"))
+          completion = json.loads((output / "COMPLETION.json").read_text(encoding="utf-8"))
+          assert verification["status"] == "PASS" and verification["manifest_status"] == "PASS"
+          assert completion["study_id"] == "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"
+          assert completion["status"] == "COMPLETE"
+          assert verification["data_cutoff"] == 1249
+          assert verification["data_prefix_sha256"] == "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7"
+          assert verification["target_range"] == [401, 1249] and verification["target_count"] == 849
+          assert verification["random_bundles_per_target"] == 120
+          assert verification["random_bundles_total"] == 101880
+          assert verification["leakage_failures"] == 0 and verification["future_predictions"] == 0
+          assert verification["no_future_leakage"] is True
+          assert verification["portfolio_geometry_violations"] == 0
+          assert verification["random_geometry_violations"] == 0
+          assert verification["strict_pass_ready"] is False
+          assert verification["purchase_lines_generated"] is False
+          assert verification["final_purchase_freeze_allowed"] is False
+
+          predictions = list(csv.DictReader((output / "PREDICTIONS.csv").open(encoding="utf-8-sig", newline="")))
+          randoms = list(csv.DictReader((output / "RANDOM_BASELINE.csv").open(encoding="utf-8-sig", newline="")))
+          blocks = list(csv.DictReader((output / "BLOCK_STABILITY.csv").open(encoding="utf-8-sig", newline="")))
+          targets = list(range(401, 1250))
+          assert [int(row["target_round"]) for row in predictions] == targets and len(predictions) == 849
+          assert [int(row["target_round"]) for row in randoms] == targets and len(randoms) == 849
+          assert len(blocks) == 17 and int(blocks[-1]["n"]) == 49
+          for row in predictions:
+              target = int(row["target_round"])
+              assert int(row["training_through_round"]) == target - 1
+              lines = [set(map(int, row[f"line{i}"].split())) for i in (1, 2, 3)]
+              assert all(len(line) == 6 for line in lines)
+              assert len(set().union(*lines)) == 18
+          assert all(int(row["random_bundles"]) == 120 and int(row["geometry_violations"]) == 0 for row in randoms)
+
+          failed = [key for key, value in inference["metrics"].items() if not value["lower_bound_strictly_gt_zero"]]
+          if float(inference["block_stability"]["any2_positive_block_share"]) < 0.65:
+              failed.append("any2_positive_50_target_block_share")
+          historical_pass = inference["historical_strict_gate_pass"] is True
+          prospective = inference["prospective_confirmation"]
+          prospective_defined = prospective["minimum_target_count"] is not None and prospective["completion_rule"] is not None
+          strict = bool(historical_pass and prospective_defined)
+          status = (
+              "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED" if not historical_pass else
+              "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING" if not strict else
+              "EXECUTED_STRICT_PASS_PROSPECTIVE_CONFIRMED"
+          )
+          result_path = str(output)
+          completed_at = datetime.now(timezone.utc).isoformat()
+          result = {
+              "workflow_name": "target-1251-e050-three-line-neighbor-transition",
+              "workflow_run_id": int(rid),
+              "workflow_run_number": int(os.environ["RUN_NUMBER"]),
+              "run_attempt": int(attempt),
+              "event": os.environ["EVENT_NAME"],
+              "workflow_run_conclusion": "success",
+              "run_url": f"https://github.com/jiae-jeong/lotto-data/actions/runs/{rid}",
+              "completed_at_utc": completed_at,
+              "result_path": result_path,
+              "data_cutoff": 1249,
+              "data_prefix_sha256": verification["data_prefix_sha256"],
+              "target_range": [401, 1249],
+              "target_count": 849,
+              "prediction_records": len(predictions),
+              "random_bundles_per_target": 120,
+              "random_bundles_total": 101880,
+              "training_cutoff_violations": 0,
+              "leakage_failures": 0,
+              "future_predictions": 0,
+              "portfolio_geometry_violations": 0,
+              "random_geometry_violations": 0,
+              "verification_status": "PASS",
+              "manifest_entries": 8,
+              "manifest_status": "PASS",
+              "historical_strict_gate_pass": historical_pass,
+              "strict_portfolio_pass": strict,
+              "strict_pass_ready": False,
+              "readiness_status": inference["readiness_status"],
+              "failed_gates": failed,
+              "prospective_confirmation_status": prospective["status"],
+              "purchase_lines_generated": False,
+              "final_purchase_freeze_allowed": False,
+          }
+
+          queue_path = Path("automation/research_queue_v2.json")
+          queue = json.loads(queue_path.read_text(encoding="utf-8"))
+          matches = [task for task in queue["tasks"] if task.get("id") == "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"]
+          assert len(matches) == 1
+          task = matches[0]
+          task["execution_status"] = status
+          task["execution_result"] = result
+          for key, path in (
+              ("implementation_code_sha", "automation/three_line_neighbor_transition_e050.py"),
+              ("test_code_sha", "automation/tests_v2/test_three_line_neighbor_transition_e050.py"),
+              ("workflow_blob_sha", ".github/workflows/target-1251-e050-three-line-neighbor-transition.yml"),
+          ):
+              task[key] = subprocess.check_output(["git", "hash-object", path], text=True).strip()
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          generic = json.loads((Path(os.environ["RUNNER_TEMP"]) / "generic-preflight.json").read_text(encoding="utf-8"))
+          audit_path = Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json")
+          audit = json.loads(audit_path.read_text(encoding="utf-8"))
+          qstatus = audit["research_queue_status"]
+          qstatus["registered_tasks"] = len(queue["tasks"])
+          qstatus["completed_dedicated_tasks"]["E050"] = status
+          qstatus["generic_queue_preflight_validation"] = generic["status"]
+          qstatus["runnable_generic_task_count"] = len(generic["generic_runnable_tasks"])
+          qstatus["generic_queue_preflight_run_id"] = int(rid)
+          qstatus["generic_queue_preflight_completed_evidence_count"] = generic["completed_evidence_count"]
+          qstatus["generic_queue_preflight_skipped_completed"] = generic["skipped_completed"]
+          qstatus["generic_queue_preflight_skipped_blocked"] = generic["skipped_blocked"]
+          qstatus["generic_queue_preflight_skipped_dedicated"] = generic["skipped_dedicated_workflow"]
+          qstatus["generic_queue_preflight_skipped_superseded"] = generic["skipped_superseded"]
+          qstatus["target_1251_three_line_task_status"] = (
+              "E045_AND_E048_AND_E049_AND_E050_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY"
+              if not historical_pass else
+              "E050_HISTORICAL_GATE_PASS_BUT_PROSPECTIVE_RULE_UNSPECIFIED; E045_E048_E049_STRICT_FAIL; E046_DESIGN_ONLY"
+          )
+          qstatus["target_1251_three_line_e050_workflow_run_id"] = int(rid)
+          qstatus["target_1251_three_line_e050_preregistration"] = "research/weekly_purchase/1251/E050_THREE_LINE_NEIGHBOR_TRANSITION_PREREG_20261114.json"
+          qstatus["target_1251_three_line_e050_runner"] = "automation/three_line_neighbor_transition_e050.py"
+          qstatus["target_1251_three_line_e050_workflow"] = ".github/workflows/target-1251-e050-three-line-neighbor-transition.yml"
+          qstatus["target_1251_three_line_e050_status"] = status
+          qstatus["target_1251_three_line_e050_result_path"] = result_path
+          audit["e050_execution"] = result
+          audit["e050_historical_gate_pass"] = historical_pass
+          audit["e050_failed_gates"] = failed
+          audit["strict_gate_evaluation"] = "EVALUATED_HISTORICAL_E045_E048_E049_E050; PROSPECTIVE_CONFIRMATION_REQUIRED"
+          audit["readiness_status"] = "STRICT_FAIL" if not historical_pass else "NOT_READY_PROSPECTIVE_RULE_UNSPECIFIED"
+          audit["strict_model_validation_pass"] = False
+          audit["strict_portfolio_pass"] = False
+          audit["strict_pass_ready"] = False
+          audit["ready_file"] = None
+          audit["ready_file_exists"] = False
+          audit["line_level_output_status"] = "SUPPRESSED_NOT_READY"
+          audit["unevaluated_gates"] = []
+          audit["no_future_leakage"] = True
+          audit["final_selection_randomness"] = False
+          audit["random_fallback_allowed"] = False
+          audit["final_purchase_freeze_allowed"] = False
+          audit["blocking_reasons"] = [reason for reason in audit.get("blocking_reasons", []) if "E050" not in reason]
+          if historical_pass:
+              audit["blocking_reasons"].append("E050 historical gate passed, but prospective confirmation minimum/completion rule remains unspecified; STRICT_PASS_READY is prohibited.")
+          else:
+              audit["blocking_reasons"].append("E050 historical strict gate failed: " + ", ".join(failed) + ".")
+          audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          print(json.dumps({
+              "status": status,
+              "historical_gate_pass": historical_pass,
+              "failed_gates": failed,
+              "generic_queue_status": generic["status"],
+              "generic_runnable_tasks": len(generic["generic_runnable_tasks"]),
+              "queue_tasks": len(queue["tasks"]),
+          }, ensure_ascii=False))
+          PY
+      - name: Preserve validated E050 outputs and audit
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/2026-11-14/gha_"$RUN_ID"_"$RUN_ATTEMPT"/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"
+          test -f "$OUTDIR/VERIFICATION.json"
+          test -f "$OUTDIR/COMPLETION.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$OUTDIR" automation/research_queue_v2.json research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json
+          git diff --cached --check
+          git commit -m "research: execute E050 previous-main neighbor transition [evidence]"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo "Failed to preserve E050 evidence after three push attempts." >&2
+          exit 1
+      - name: Preserve failed E050 attempt
+        if: failure() && steps.one-shot.outputs.already_complete != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: e050-failed-attempt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            analysis/2026-11-14/gha_${{ github.run_id }}_${{ github.run_attempt }}/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1/**
+          if-no-files-found: warn
