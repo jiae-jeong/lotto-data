@@ -1,0 +1,420 @@
+name: target-1251-e045-cutoff-refresh-1250
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/three_line_research_1251_refresh_1250_v1.py'
+      - 'research/weekly_purchase/1251/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1.json'
+      - '.github/workflows/target-1251-e045-cutoff-refresh-1250.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: target-1251-e045-cutoff-refresh-1250
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen numerical runtime
+        run: python -m pip install --disable-pip-version-check 'numpy==2.3.5'
+
+      - name: Validate append-only preregistration and source bytes
+        id: preflight
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os, subprocess, io
+          from pathlib import Path
+
+          study_id = "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1"
+          output_suffix = f"/{study_id}/COMPLETION.json"
+          tracked = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
+          already_complete = any(path.endswith(output_suffix) for path in tracked)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
+              stream.write("already_complete=" + ("true" if already_complete else "false") + "\n")
+          if already_complete:
+              print({"status": "ALREADY_COMPLETE_NOOP", "study_id": study_id})
+              raise SystemExit(0)
+
+          original_path = Path("research/weekly_purchase/1251/THREE_LINE_RESEARCH_PREREG_E045_20261114.json")
+          refresh_path = Path("research/weekly_purchase/1251/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1.json")
+          policy_path = Path("research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json")
+          base_runner_path = Path("automation/three_line_research_1251_v1.py")
+          runner_path = Path("automation/three_line_research_1251_refresh_1250_v1.py")
+          original = json.loads(original_path.read_text(encoding="utf-8"))
+          refresh = json.loads(refresh_path.read_text(encoding="utf-8"))
+          frozen = refresh["frozen_blobs"]
+
+          def blob(path):
+              return subprocess.check_output(["git", "rev-parse", "HEAD:" + path], text=True).strip()
+
+          assert blob(runner_path.as_posix()) == frozen["runner_blob_sha"]
+          assert blob(base_runner_path.as_posix()) == frozen["base_runner_blob_sha"]
+          assert blob(original_path.as_posix()) == frozen["base_prereg_blob_sha"]
+          assert blob(policy_path.as_posix()) == frozen["policy_blob_sha"]
+
+          for key in ("policy_id", "source_models", "role_order", "line_selection", "random_comparator", "inference", "prospective_confirmation", "outputs"):
+              assert refresh[key] == original[key], f"Frozen E045 field changed: {key}"
+          assert refresh["study_id"] == study_id
+          assert refresh["historical_data_cutoff"] == 1250
+          assert refresh["target_rounds"] == "401..1250 inclusive"
+          assert refresh["source_data_prefix_sha256"] == "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+          assert refresh["source_data_full_file_sha256"] == refresh["source_data_prefix_sha256"]
+          assert refresh["extension"]["base_study_id"] == original["study_id"]
+          assert refresh["extension"]["base_data_cutoff"] == 1249
+          assert refresh["extension"]["appended_target_round"] == 1250
+          assert refresh["extension"]["appended_target_training_cutoff"] == 1249
+          assert refresh["extension"]["independent_research_axis"] is False
+          assert refresh["extension"]["independent_confirmation"] is False
+          assert refresh["extension"]["parameter_search"] is False
+          assert refresh["extension"]["strict_thresholds_unchanged"] is True
+
+          base_code = base_runner_path.read_text(encoding="utf-8")
+          refresh_code = runner_path.read_text(encoding="utf-8")
+          expected_code = base_code.replace(
+              'PREREG_PATH = ROOT / "research/weekly_purchase/1251/THREE_LINE_RESEARCH_PREREG_E045_20261114.json"',
+              'PREREG_PATH = ROOT / "research/weekly_purchase/1251/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1.json"',
+          ).replace(
+              'STUDY_ID = "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1"',
+              'STUDY_ID = "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1"',
+          ).replace(
+              "# E045 — Target-1251 three-line disjoint portfolio walk-forward",
+              "# E045 cutoff refresh — target-1251 three-line disjoint portfolio walk-forward (append-only; not independent)",
+          )
+          assert refresh_code == expected_code, "Refresh runner differs from frozen E045 runner beyond the three declared identity/path labels"
+
+          raw = Path("lotto_data.csv").read_bytes()
+          data_sha = hashlib.sha256(raw).hexdigest()
+          assert data_sha == refresh["source_data_full_file_sha256"]
+          rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline="")))
+          assert len(rows) == 1250
+          assert [int(row["round"]) for row in rows] == list(range(1, 1251))
+          for row in rows:
+              nums = [int(row[f"no{i}"]) for i in range(1, 7)]
+              bonus = int(row["bonus"])
+              assert len(set(nums)) == 6 and all(1 <= n <= 45 for n in nums)
+              assert 1 <= bonus <= 45 and bonus not in nums
+          last = rows[-1]
+          assert last["date"] == "2026.11.14"
+          assert [int(last[f"no{i}"]) for i in range(1, 7)] == [1, 5, 18, 23, 27, 28]
+          assert int(last["bonus"]) == 8
+
+          print({
+              "status": "PREFLIGHT_PASS",
+              "data_cutoff": 1250,
+              "data_sha256": data_sha,
+              "target_range": refresh["target_rounds"],
+              "random_bundles_per_target": refresh["random_comparator"]["random_bundles_per_target"],
+              "seed": refresh["random_comparator"]["seed"],
+              "alpha": refresh["inference"]["alpha_per_metric"],
+              "block_length": refresh["inference"]["block_length_targets"],
+              "independent_research_axis": False,
+          })
+          PY
+
+      - name: Compile refresh runner and run original frozen E045 contract tests
+        if: steps.preflight.outputs.already_complete != 'true'
+        run: |
+          python -m py_compile automation/three_line_research_1251_refresh_1250_v1.py automation/three_line_research_1251_v1.py automation/tests_v2/test_three_line_research_1251.py
+          python -B -m unittest automation.tests_v2.test_three_line_research_1251 -v
+
+      - name: Execute append-only E045 cutoff refresh
+        if: steps.preflight.outputs.already_complete != 'true'
+        id: study
+        shell: bash
+        run: |
+          set -euo pipefail
+          DATE="$(TZ=Asia/Seoul date +%F)"
+          RUN_ID="gha_\${GITHUB_RUN_ID}_\${GITHUB_RUN_ATTEMPT}"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          python -B automation/three_line_research_1251_refresh_1250_v1.py --date "$DATE" --run-id "$RUN_ID"
+
+      - name: Verify evidence and reconcile readiness audit
+        if: success() && steps.preflight.outputs.already_complete != 'true'
+        env:
+          RUN_DATE: \${{ steps.study.outputs.date }}
+          RUN_ID: \${{ steps.study.outputs.run_id }}
+          RUN_NUMBER: \${{ github.run_number }}
+          GITHUB_RUN_ID: \${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: \${{ github.run_attempt }}
+          GITHUB_SHA: \${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os
+          from datetime import datetime, timezone, timedelta
+          from pathlib import Path
+
+          rid = int(os.environ["GITHUB_RUN_ID"])
+          attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          run_number = int(os.environ["RUN_NUMBER"])
+          run_id = os.environ["RUN_ID"]
+          date = os.environ["RUN_DATE"]
+          study_id = "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1"
+          out = Path("analysis") / date / run_id / study_id
+          expected_files = {
+              "PREDICTIONS.csv", "RANDOM_BASELINE.csv", "BLOCK_STABILITY.csv",
+              "INFERENCE.json", "READINESS_UPDATE.json", "VERIFICATION.json",
+              "COMPLETION.json", "REPORT.md", "SHA256_MANIFEST.csv",
+          }
+          assert {p.name for p in out.iterdir() if p.is_file()} == expected_files
+
+          manifest_path = out / "SHA256_MANIFEST.csv"
+          with manifest_path.open(encoding="utf-8-sig", newline="") as stream:
+              manifest = list(csv.DictReader(stream))
+          assert len(manifest) == 8
+          assert {row["path"] for row in manifest} == expected_files - {"SHA256_MANIFEST.csv"}
+          for row in manifest:
+              raw = (out / row["path"]).read_bytes()
+              assert len(raw) == int(row["bytes"])
+              assert hashlib.sha256(raw).hexdigest() == row["sha256"], row["path"]
+
+          verification = json.loads((out / "VERIFICATION.json").read_text(encoding="utf-8"))
+          completion = json.loads((out / "COMPLETION.json").read_text(encoding="utf-8"))
+          inference = json.loads((out / "INFERENCE.json").read_text(encoding="utf-8"))
+          prereg = json.loads(Path("research/weekly_purchase/1251/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1.json").read_text(encoding="utf-8"))
+          assert completion["study_id"] == study_id and completion["status"] == "COMPLETE"
+          assert completion["data_cutoff"] == 1250 and completion["target_range"] == [401, 1250]
+          assert completion["strict_portfolio_pass"] is False and completion["strict_pass_ready"] is False
+          assert verification["study_id"] == study_id and verification["status"] == "PASS"
+          assert verification["data_cutoff"] == 1250 and verification["current_source_data_rows"] == 1250
+          assert verification["data_sha256"] == "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+          assert verification["data_prefix_sha256"] == verification["data_sha256"]
+          assert verification["target_range"] == [401, 1250] and verification["target_count"] == 850
+          assert verification["prediction_records"] == 850
+          assert verification["random_bundles_per_target"] == 120 and verification["random_bundles_total"] == 102000
+          assert verification["training_cutoff_violations"] == 0
+          assert verification["leakage_failures"] == 0 and verification["future_predictions"] == 0
+          assert verification["no_future_leakage"] is True
+          assert verification["portfolio_geometry_violations"] == 0 and verification["random_geometry_violations"] == 0
+          assert verification["manifest_entries"] == 8 and verification["manifest_status"] == "PASS"
+          assert verification["strict_portfolio_pass"] is False and verification["strict_pass_ready"] is False
+          assert inference["study_id"] == study_id and inference["data_cutoff"] == 1250
+          assert inference["target_range"] == [401, 1250] and inference["targets"] == 850
+          assert inference["random_bundles_total"] == 102000
+          assert inference["block_size"] == 50 and len(inference["block_lengths"]) == 17
+          assert sum(inference["block_lengths"]) == 850
+          assert inference["prospective_minimum_target_count"] is None
+          assert inference["prospective_completion_rule"] is None
+          assert inference["strict_portfolio_pass"] is False and inference["strict_pass_ready"] is False
+          assert prereg["prospective_confirmation"]["required_by_policy"] is True
+          assert prereg["prospective_confirmation"]["minimum_target_count"] is None
+          assert prereg["prospective_confirmation"]["completion_rule"] is None
+
+          predictions = list(csv.DictReader((out / "PREDICTIONS.csv").open(encoding="utf-8-sig", newline="")))
+          randoms = list(csv.DictReader((out / "RANDOM_BASELINE.csv").open(encoding="utf-8-sig", newline="")))
+          blocks = list(csv.DictReader((out / "BLOCK_STABILITY.csv").open(encoding="utf-8-sig", newline="")))
+          targets = list(range(401, 1251))
+          assert [int(row["target_round"]) for row in predictions] == targets and len(predictions) == 850
+          assert [int(row["target_round"]) for row in randoms] == targets and len(randoms) == 850
+          assert len(blocks) == 17 and all(int(row["n"]) == 50 for row in blocks)
+          for row in predictions:
+              target = int(row["target_round"])
+              assert int(row["training_through_round"]) == target - 1
+              lines = [set(map(int, row[f"line{i}"].split())) for i in (1, 2, 3)]
+              assert all(len(line) == 6 for line in lines)
+              assert len(set().union(*lines)) == 18
+          assert all(int(row["random_bundles"]) == 120 and int(row["geometry_violations"]) == 0 for row in randoms)
+
+          failed_gates = [
+              name for name, item in inference["metrics"].items()
+              if not item["lower_bound_strictly_gt_zero"]
+          ]
+          block_share = float(inference["any2_positive_50_target_block_share"])
+          if block_share < 0.65:
+              failed_gates.append("any2_positive_50_target_block_share")
+          historical_pass = inference["historical_strict_gate_pass"] is True
+          readiness = inference["readiness_status"]
+          now_kst = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9))).isoformat()
+          completed_utc = datetime.now(timezone.utc).isoformat()
+          result = {
+              "study_id": study_id,
+              "base_study_id": prereg["extension"]["base_study_id"],
+              "evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT",
+              "independent_research_axis": False,
+              "workflow_name": "target-1251-e045-cutoff-refresh-1250",
+              "workflow_run_id": rid,
+              "workflow_run_number": run_number,
+              "run_attempt": attempt,
+              "workflow_run_conclusion": "success",
+              "run_url": f"https://github.com/jiae-jeong/lotto-data/actions/runs/{rid}",
+              "completed_at_utc": completed_utc,
+              "result_path": str(out),
+              "data_cutoff": 1250,
+              "data_sha256": verification["data_sha256"],
+              "data_prefix_sha256": verification["data_prefix_sha256"],
+              "target_range": [401, 1250],
+              "target_count": 850,
+              "prediction_records": 850,
+              "random_bundles_per_target": 120,
+              "random_bundles_total": 102000,
+              "block_length": 50,
+              "block_count": 17,
+              "training_cutoff_violations": 0,
+              "leakage_failures": 0,
+              "future_predictions": 0,
+              "portfolio_geometry_violations": 0,
+              "random_geometry_violations": 0,
+              "verification_status": "PASS",
+              "manifest_entries": 8,
+              "manifest_status": "PASS",
+              "historical_strict_gate_pass": historical_pass,
+              "failed_gates": failed_gates,
+              "strict_portfolio_pass": False,
+              "strict_pass_ready": False,
+              "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+              "prospective_minimum_target_count": None,
+              "prospective_completion_rule": None,
+              "parameter_search": False,
+              "thresholds_changed": False,
+              "alpha_changed": False,
+              "block_length_changed": False,
+              "comparator_changed": False,
+              "purchase_lines_generated": False,
+              "final_purchase_freeze_allowed": False,
+              "readiness_status": readiness,
+          }
+
+          audit_path = Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json")
+          audit = json.loads(audit_path.read_text(encoding="utf-8"))
+          audit["current_verified_data_cutoff"] = 1250
+          audit["current_data_sha256"] = verification["data_sha256"]
+          audit["daily_master_run_id"] = 43592087299
+          audit["daily_master_status"] = "PARTIAL"
+          audit["daily_master_run_number"] = 103
+          audit["daily_master_run_status"] = "completed_success"
+          audit["daily_master_commit_sha"] = "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06"
+          audit["daily_master_result_commit"] = "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06"
+          audit["daily_master_generated_kst"] = "2026-11-14T21:00:04+09:00"
+          audit["daily_master_completed_at_kst"] = "2026-11-14T21:00:27+09:00"
+          audit["daily_master_verification_status"] = "PARTIAL"
+          audit["daily_master_v4_path"] = "analysis/2026-11-14/MASTER_FULL_V4_115249_735913"
+          audit["daily_master_report_path"] = "analysis/2026-11-14/MASTER_FULL_V5_120004_714883/REPORT.md"
+          audit["daily_master_verification_path"] = "analysis/2026-11-14/MASTER_FULL_V5_120004_714883/VERIFICATION.json"
+          audit["daily_master_model_validation_path"] = "analysis/2026-11-14/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json"
+          audit["daily_master_run_url"] = "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299"
+          audit["latest_daily_master_attempt"] = {
+              "run_id": 43592087299,
+              "run_number": 103,
+              "run_attempt": 1,
+              "status": "completed",
+              "conclusion": "success",
+              "created_at_utc": "2026-11-14T11:52:41Z",
+              "last_observed_updated_at": "2026-11-14T12:00:27Z",
+              "head_sha": "2c1212653a590032d6b71c362544e0d669214970",
+              "result_commit_sha": "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06",
+              "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299",
+          }
+          audit["e045_cutoff_refresh"] = result
+          audit["research_cutoff_alignment"] = {
+              **audit.get("research_cutoff_alignment", {}),
+              "daily_master_verified_data_cutoff": 1250,
+              "latest_primary_empirical_cutoff": 1250,
+              "latest_primary_empirical_study": study_id,
+              "latest_primary_empirical_evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT",
+              "historical_fixed_screen_cutoff": 1245,
+              "historical_fixed_screen_study_family": "E036-E042; fixed preregistered cutoff, not a freshness mismatch",
+              "alignment_status": "ALIGNED_PRIMARY_CUTOFF_REFRESH_COMPLETE",
+              "cutoff_mismatch": False,
+          }
+          audit["readiness_status"] = "STRICT_FAIL" if not historical_pass else "NOT_READY_PROSPECTIVE_RULE_UNSPECIFIED"
+          audit["strict_model_validation_pass"] = False
+          audit["strict_portfolio_pass"] = False
+          audit["strict_pass_ready"] = False
+          audit["strict_gate_evaluation"] = "E045_APPEND_ONLY_CUTOFF_REFRESH_THROUGH_1250_EVALUATED; E048_E049_E050_REMAIN_FIXED_HISTORICAL_CUTOFF_1249; PROSPECTIVE_CONFIRMATION_REQUIRED"
+          audit["ready_file"] = None
+          audit["ready_file_exists"] = False
+          audit["line_level_output_status"] = "SUPPRESSED_NOT_READY"
+          audit["unevaluated_gates"] = ["prospective_confirmation_rule"]
+          audit["failed_gates"] = failed_gates
+          audit["e045_cutoff_refresh_evaluated_gates"] = {
+              **inference["metrics"],
+              "any2_positive_50_target_block_share": {
+                  "observed": block_share,
+                  "required_minimum": 0.65,
+                  "passed": block_share >= 0.65,
+              },
+          }
+          audit["no_future_leakage"] = True
+          audit["final_selection_randomness"] = False
+          audit["random_fallback_allowed"] = False
+          audit["final_purchase_freeze_allowed"] = False
+          reasons = [
+              reason for reason in audit.get("blocking_reasons", [])
+              if not reason.startswith("E045 completed the preregistered 401..1249 walk-forward.")
+              and "cutoff-1250 refresh is pending" not in reason
+              and "Latest verified source cutoff advanced to 1250; DAILY MASTER #103 and target-1251 primary refresh are in progress." not in reason
+          ]
+          reasons.append(
+              "E045 append-only cutoff refresh through 1250 is complete and is not an independent research axis. "
+              + ("Historical strict gate passed, but prospective confirmation remains unspecified."
+                 if historical_pass else
+                 "Historical strict gate failed: " + ", ".join(failed_gates) + ".")
+          )
+          audit["blocking_reasons"] = reasons
+          audit["audit_updated_kst"] = now_kst
+          audit["audit_reconciled_at_kst"] = now_kst
+          audit["reconciled_main_sha"] = os.environ["GITHUB_SHA"]
+          audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          print(json.dumps({
+              "status": "PASS",
+              "data_cutoff": 1250,
+              "target_count": 850,
+              "random_bundles": 102000,
+              "historical_strict_gate_pass": historical_pass,
+              "failed_gates": failed_gates,
+              "strict_pass_ready": False,
+              "alignment_status": "ALIGNED_PRIMARY_CUTOFF_REFRESH_COMPLETE",
+          }, ensure_ascii=False))
+          PY
+
+      - name: Publish immutable cutoff-refresh evidence and reconciled audit
+        if: success() && steps.preflight.outputs.already_complete != 'true'
+        shell: bash
+        env:
+          RUN_DATE: \${{ steps.study.outputs.date }}
+          RUN_ID: \${{ steps.study.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/$RUN_DATE/$RUN_ID/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1"
+          test -f "$OUTDIR/VERIFICATION.json"
+          test -f "$OUTDIR/COMPLETION.json"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$OUTDIR" research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json
+          git diff --cached --check
+          git diff --cached --quiet && { echo 'No cutoff-refresh evidence staged'; exit 1; }
+          git commit -m 'research: preserve E045 cutoff-1250 refresh and reconcile daily master audit'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo 'Failed to publish cutoff-refresh evidence after three push attempts.' >&2
+          exit 1
+
+      - name: Preserve failed cutoff-refresh evidence
+        if: failure() && steps.preflight.outputs.already_complete != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: e045-cutoff-refresh-failed-\${{ github.run_id }}-\${{ github.run_attempt }}
+          path: analysis/\${{ steps.study.outputs.date }}/gha_\${{ github.run_id }}_\${{ github.run_attempt }}/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/**
+          if-no-files-found: warn
