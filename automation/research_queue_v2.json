@@ -1421,7 +1421,130 @@
     },
     {
       "id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
-      "question": "Does the immediately preceding draw's bonus number provide an independent cutoff-safe signal for the next draw's exact three-disjoint-line portfolio versus the geometry-matched union18 null?"
+      "kind": "three_line_bonus_transition",
+      "question": "Does the immediately preceding draw's bonus number provide an independent cutoff-safe signal for the next draw's exact three-disjoint-line portfolio versus the geometry-matched union18 null?",
+      "novelty": "Single preregistered bonus-to-next-main transition signal; fixed shrinkage alpha 60; deterministic top18 rank interleaving into exactly three disjoint six-number lines; one historical walk-forward only, no variants or parameter tuning.",
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUT_PRESERVATION_REPAIRED",
+      "execution_entrypoint": "automation/three_line_bonus_transition_e048.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e048-three-line-bonus-transition.yml",
+      "preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
+      "implementation_code_sha": "aef1471b141a57984b9fb58ca02367ddf661dbc9",
+      "test_code_sha": "c4e807713b54c800425676e9aff9ede162c935ac",
+      "preregistration_blob_sha": "4d61113fc8641080d870d3bb89aee70cb925e20b",
+      "workflow_blob_sha": "0a55587cd9ab2ac47074987d56adf10bd6441ab3",
+      "spec": {
+        "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+        "study_class": "preregistered_independent_bonus_to_next_main_signal_three_line_walkforward",
+        "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+        "target_round": 1251,
+        "data_cutoff": 1249,
+        "target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "For target t, use only main draws 1..t-1 and transition examples u=2..t-1 where the feature is bonus(u-1) and the outcome is main(u). The target feature is bonus(t-1). Update counts with main(t) only after scoring target t.",
+        "primary_metrics": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage"
+        ],
+        "smoothing_alpha": 60,
+        "ranking_rule": "Score descending, then number ascending.",
+        "portfolio": {
+          "selected_union": "Top 18 ranked numbers.",
+          "line_assignment": "Deterministic rank interleaving: line 1 uses ranks 1,4,7,10,13,16; line 2 uses ranks 2,5,8,11,14,17; line 3 uses ranks 3,6,9,12,15,18.",
+          "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+          "randomness_in_selection": false,
+          "parameter_tuning": false,
+          "variants": 1
+        },
+        "random_comparator": {
+          "method": "For each target, uniformly permute labels 1..45 jointly over the three model lines, preserving exactly three six-number lines, pairwise disjointness, union18, and line incidence geometry.",
+          "random_bundles_per_target": 120,
+          "seed": 2026111402,
+          "exact_null": {
+            "mean_max_hit": 1.514256248572755,
+            "p_any2": 0.47497624326892623,
+            "p_any3": 0.07135490714617204,
+            "expected_union_coverage": 2.4
+          },
+          "randomness_used_for_final_selection": false
+        },
+        "inference": {
+          "family_alpha": 0.05,
+          "alpha_per_metric": 0.0125,
+          "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from exact geometry-matched union18 null.",
+          "bootstrap_replicates": 4000,
+          "bootstrap_seed": 2026111402,
+          "block_length_targets": 50,
+          "retain_final_remainder_block": true,
+          "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+          "no_threshold_relaxation": true,
+          "no_alpha_change": true,
+          "no_block_length_change": true,
+          "no_comparator_change": true,
+          "no_unbounded_microvariants": true
+        },
+        "prospective_confirmation": {
+          "required_by_policy": true,
+          "minimum_target_count": null,
+          "completion_rule": null,
+          "status": "UNSPECIFIED_IN_POLICY",
+          "minimum_count_adopted": false
+        },
+        "promotion_rule": "Evaluate this single preregistered axis once. No variants, threshold changes, or parameter search after observing results. Historical strict failure remains failure. Historical pass alone cannot create purchase readiness because prospective confirmation is required and currently unspecified."
+      },
+      "execution_result": {
+        "workflow_name": "target-1251-e048-three-line-bonus-transition",
+        "workflow_run_id": 43547128786,
+        "run_attempt": 1,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43547128786",
+        "workflow_run_conclusion": "failure",
+        "workflow_run_failure_stage": "Preserve validated E048 outputs",
+        "workflow_run_failure_reason": "git diff --cached --check flagged CRLF line endings in CSV artifacts as trailing whitespace",
+        "computation_status": "COMPLETE",
+        "preservation_status": "REPAIRED",
+        "output_commit": "4c896ce0e5bc062fb216018a48de5038abb53439",
+        "preservation_repair_commit": "8f15a5ba16989f3c3ba6bd6da8d1677f0d4a8301",
+        "result_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+        "data_cutoff": 1249,
+        "source_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+        "target_range": [
+          401,
+          1249
+        ],
+        "target_count": 849,
+        "random_bundles_per_target": 120,
+        "random_bundles_total": 101880,
+        "training_cutoff_violations": 0,
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "portfolio_geometry_violations": 0,
+        "random_geometry_violations": 0,
+        "verification_status": "PASS",
+        "manifest_entries": 8,
+        "manifest_status": "PASS",
+        "historical_strict_gate_pass": false,
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "purchase_lines_generated": false,
+        "failed_gates": [
+          "max_hits_adjusted_ci",
+          "any2_adjusted_ci",
+          "any3_adjusted_ci",
+          "winning_union_coverage_adjusted_ci",
+          "any2_positive_50_target_block_share"
+        ],
+        "duplicate_reproduction": {
+          "run_id": 43547345879,
+          "evidence_class": "DUPLICATE_REPRODUCTION_ONLY",
+          "independent_evidence": false,
+          "primary_outputs_byte_identical": true,
+          "counted_as_additional_research_axis": false
+        },
+        "one_shot_guard_fix_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
+        "final_one_shot_workflow_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
+        "no_op_trigger_metadata_commit": "8803e98a89575523ce001be1e58b896c02e55557"
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
