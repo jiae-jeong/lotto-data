@@ -677,5 +677,30 @@
       "required_minimum": 0.65,
       "passed": false
     }
+  },
+  "latest_daily_master_artifact": {
+    "artifact_kind": "ADDITIONAL_PROTOCOL_FULL_MASTER_ARTIFACT",
+    "artifact_commit_sha": "dc3c64573cf35c36ca46c946ee0da90ec84623c8",
+    "artifact_commit_url": "https://github.com/jiae-jeong/lotto-data/commit/dc3c64573cf35c36ca46c946ee0da90ec84623c8",
+    "commit_created_at_utc": "2026-11-14T15:02:07Z",
+    "commit_created_at_kst": "2026-11-15T00:02:07+09:00",
+    "result_path": "analysis/2026-11-14/MASTER_FULL_V5_150154_695967",
+    "completion_path": "analysis/2026-11-14/MASTER_FULL_V5_150154_695967/COMPLETION.json",
+    "verification_path": "analysis/2026-11-14/MASTER_FULL_V5_150154_695967/VERIFICATION.json",
+    "report_path": "analysis/2026-11-14/MASTER_FULL_V5_150154_695967/REPORT.md",
+    "data_cutoff": 1250,
+    "status": "PARTIAL",
+    "artifact_manifest_entries": 14,
+    "artifact_manifest_status": "PASS",
+    "base_v4_path": "analysis/2026-11-14/MASTER_FULL_V4_145421_512645",
+    "base_v4_verification": {
+      "status": "PASS",
+      "data_integrity": "PASS",
+      "b_prediction_records": 8400,
+      "random_tickets": 1050000,
+      "leakage_failures": 0
+    },
+    "workflow_run_id": null,
+    "workflow_run_id_status": "NOT_PRESENT_IN_COMMIT_METADATA; DO_NOT_INFER_FROM_ARTIFACT_DIRECTORY_SUFFIX"
   }
 }
