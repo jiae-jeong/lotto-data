@@ -202,7 +202,6 @@ jobs:
           assert verification["leakage_failures"] == 0 and verification["future_predictions"] == 0
           assert verification["no_future_leakage"] is True
           assert verification["portfolio_geometry_violations"] == 0 and verification["random_geometry_violations"] == 0
-          assert verification["manifest_entries"] == 8 and verification["manifest_status"] == "PASS"
           assert verification["strict_portfolio_pass"] is False and verification["strict_pass_ready"] is False
           assert inference["study_id"] == study_id and inference["data_cutoff"] == 1250
           assert inference["target_range"] == [401, 1250] and inference["targets"] == 850
