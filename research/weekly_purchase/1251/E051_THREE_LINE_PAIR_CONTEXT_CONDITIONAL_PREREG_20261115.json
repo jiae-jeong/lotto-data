@@ -104,8 +104,8 @@
   "strict_pass_ready_requires_prospective_rule": true,
   "purchase_recommendation_generated": false,
   "frozen_blobs": {
-    "runner_blob_sha": "dc27f1c5ade72ade9801dcf8931394f66621f00d",
-    "test_blob_sha": "5c51bb0c1b690f197504a9af8916cb241d08fd33",
+    "runner_blob_sha": "c70ef9340b635eef51ccba8e433ccb7994cede2d",
+    "test_blob_sha": "46a742d594652c24a54b29209564e779f974e518",
     "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
     "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513"
   }

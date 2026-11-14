@@ -58,7 +58,7 @@ jobs:
           assert prereg["study_id"] == "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1"
           assert prereg["preregistration_status"] == "FROZEN_BEFORE_EXECUTION"
           assert prereg["independent_research_axis"] is True
-          assert prereg["parameter_search"] is False
+          assert prereg["estimator"]["parameter_search"] is False
           assert prereg["historical_data_cutoff"] == 1250
           assert prereg["target_rounds"] == "401..1250 inclusive"
           assert prereg["source_data_prefix_sha256"] == "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
@@ -97,9 +97,17 @@ jobs:
           assert [int(last[f"no{i}"]) for i in range(1, 7)] == [1, 5, 18, 23, 27, 28]
           assert int(last["bonus"]) == 8
 
+          tracked = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
+          already_complete = any(path.endswith("/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1/COMPLETION.json") for path in tracked)
+          checkout_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
               stream.write("data_sha=" + data_sha + "\n")
               stream.write("prereg_blob=" + blob(prereg_path) + "\n")
+              stream.write("checkout_sha=" + checkout_sha + "\n")
+              stream.write("already_complete=" + ("true" if already_complete else "false") + "\n")
+          if already_complete:
+              print({"status": "ALREADY_COMPLETE_NOOP", "study_id": prereg["study_id"]})
+              raise SystemExit(0)
           print({
               "status": "PREFLIGHT_PASS",
               "study_id": prereg["study_id"],
@@ -114,11 +122,13 @@ jobs:
           PY
 
       - name: Compile and run E051 contract tests
+        if: steps.preflight.outputs.already_complete != 'true'
         run: |
           python -m py_compile automation/three_line_pair_context_transition_1251_v1.py automation/three_line_research_1251_v1.py automation/tests_v2/test_three_line_pair_context_transition_1251.py
           python -B -m unittest automation.tests_v2.test_three_line_pair_context_transition_1251 -v
 
       - name: Execute preregistered E051 walk-forward and matched random baseline
+        if: steps.preflight.outputs.already_complete != 'true'
         id: execute
         shell: bash
         run: |
@@ -130,6 +140,7 @@ jobs:
           python -B automation/three_line_pair_context_transition_1251_v1.py --date "$DATE" --run-id "$RUN_ID"
 
       - name: Verify immutable outputs, no leakage, strict gates, and update research queue
+        if: success() && steps.preflight.outputs.already_complete != 'true'
         env:
           RUN_DATE: ${{ steps.execute.outputs.date }}
           RUN_ID: ${{ steps.execute.outputs.run_id }}
@@ -137,6 +148,8 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
           GITHUB_SHA: ${{ github.sha }}
+          DATA_SHA: ${{ steps.preflight.outputs.data_sha }}
+          CHECKOUT_SHA: ${{ steps.preflight.outputs.checkout_sha }}
         run: |
           python - <<'PY'
           import csv, hashlib, json, os
@@ -176,7 +189,7 @@ jobs:
           assert completion["strict_pass_ready"] is False and completion["purchase_recommendation_generated"] is False
           assert verification["study_id"] == study_id and verification["status"] == "PASS"
           assert verification["data_cutoff"] == 1250 and verification["current_source_data_rows"] == 1250
-          assert verification["data_sha256"] == os.environ.get("DATA_SHA", verification["data_sha256"])
+          assert verification["data_sha256"] == os.environ["DATA_SHA"]
           assert verification["target_range"] == [401, 1250] and verification["target_count"] == 850
           assert verification["prediction_records"] == 850
           assert verification["random_bundles_per_target"] == 120 and verification["random_bundles_total"] == 102000
@@ -289,7 +302,7 @@ jobs:
           audit["purchase_lines_generated"] = False
           audit["audit_updated_kst"] = now_kst
           audit["audit_reconciled_at_kst"] = now_kst
-          audit["reconciled_main_sha"] = os.environ["GITHUB_SHA"]
+          audit["reconciled_main_sha"] = os.environ["CHECKOUT_SHA"]
           audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
           print(json.dumps({
@@ -302,7 +315,7 @@ jobs:
           PY
 
       - name: Publish immutable E051 evidence, queue state, and readiness audit
-        if: success()
+        if: success() && steps.preflight.outputs.already_complete != 'true'
         shell: bash
         env:
           RUN_DATE: ${{ steps.execute.outputs.date }}
@@ -329,7 +342,7 @@ jobs:
           exit 1
 
       - name: Preserve failed E051 evidence
-        if: failure()
+        if: failure() && steps.preflight.outputs.already_complete != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: e051-pair-context-failed-${{ github.run_id }}-${{ github.run_attempt }}

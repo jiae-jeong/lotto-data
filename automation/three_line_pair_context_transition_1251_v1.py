@@ -84,7 +84,7 @@ def _sha(path: Path) -> str:
 def _verify_preregistration(prereg: dict, policy: dict):
     if prereg.get("study_id") != STUDY_ID or prereg.get("policy_id") != policy.get("policy_id"):
         raise ValueError("E051 preregistration/policy identity mismatch")
-    if prereg.get("independent_research_axis") is not True or prereg.get("parameter_search") is not False:
+    if prereg.get("independent_research_axis") is not True or prereg.get("estimator", {}).get("parameter_search") is not False:
         raise ValueError("E051 must remain one fixed independent axis with no parameter search")
     if prereg.get("historical_data_cutoff") != 1250 or prereg.get("target_rounds") != "401..1250 inclusive":
         raise ValueError("E051 historical cutoff/target range changed")

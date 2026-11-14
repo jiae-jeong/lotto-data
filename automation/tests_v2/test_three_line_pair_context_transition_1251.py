@@ -1,3 +1,4 @@
+import json
 import sys
 import unittest
 from collections import Counter
@@ -55,6 +56,14 @@ class PairContextTransitionTests(unittest.TestCase):
         self.assertEqual(len(union), 18)
         self.assertTrue(all(len(line) == 6 for line in first))
         self.assertTrue(all(not (set(a) & set(b)) for i, a in enumerate(first) for b in first[i+1:]))
+
+
+    def test_preregistration_schema_matches_frozen_policy_without_top_level_aliases(self):
+        prereg = json.loads(study.PREREG_PATH.read_text(encoding="utf-8"))
+        policy = json.loads(study.POLICY_PATH.read_text(encoding="utf-8"))
+        self.assertNotIn("parameter_search", prereg)
+        self.assertIs(prereg["estimator"]["parameter_search"], False)
+        study._verify_preregistration(prereg, policy)
 
 
 if __name__ == "__main__":
