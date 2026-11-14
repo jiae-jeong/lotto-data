@@ -38,5 +38,22 @@
   "final_purchase_freeze_allowed": false,
   "prospective_minimum_count_adopted": false,
   "manifest_entries": 8,
-  "manifest_status": "PASS"
+  "manifest_status": "PASS",
+  "workflow_run_conclusion": "failure",
+  "workflow_run_failure_stage": "Preserve validated E048 outputs",
+  "workflow_run_failure_reason": "git diff --cached --check flagged CRLF line endings in CSV artifacts as trailing whitespace",
+  "computation_status": "COMPLETE",
+  "preservation_status": "REPAIRED",
+  "preservation_repair": {
+    "normalized_artifacts": [
+      "PREDICTIONS.csv",
+      "RANDOM_BASELINE.csv",
+      "BLOCK_STABILITY.csv"
+    ],
+    "regenerated_manifest": "SHA256_MANIFEST.csv",
+    "verified_study_artifacts": 8,
+    "output_commit": "4c896ce0e5bc062fb216018a48de5038abb53439",
+    "failure_evidence_relocated_to": "../E048_PRESERVATION_REPAIR.json"
+  },
+  "artifact_line_endings": "LF"
 }
