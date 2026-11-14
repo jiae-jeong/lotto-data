@@ -7,19 +7,21 @@
   "purchase_lines_required": 3,
   "first_delivery_kst": "2026-11-20T08:00:00+09:00",
   "preparation_deadline_kst": "2026-11-19",
-  "current_verified_data_cutoff": 1249,
-  "current_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
-  "daily_master_run_id": 43565123697,
-  "daily_master_status": "PARTIAL",
+  "current_verified_data_cutoff": 1250,
+  "current_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "daily_master_run_id": 43592087299,
+  "daily_master_status": "RUNNING",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
-  "strict_gate_evaluation": "EVALUATED_HISTORICAL_E045_E048_E049_E050; PROSPECTIVE_CONFIRMATION_REQUIRED",
+  "strict_gate_evaluation": "E045/E048/E049/E050 historical results at cutoff 1249 remain FAIL; cutoff-1250 refresh is pending. Prospective confirmation still required.",
   "ready_file": null,
   "ready_file_exists": false,
   "line_level_output_status": "SUPPRESSED_NOT_READY",
-  "unevaluated_gates": [],
+  "unevaluated_gates": [
+    "latest_primary_empirical_cutoff_1250_refresh"
+  ],
   "blocking_reasons": [
     "E045 completed the preregistered 401..1249 walk-forward. Historical strict gate failed: all four adjusted CI lower bounds were not greater than zero, and any2-positive 50-target block share was 8/17 (47.06%), below 65%.",
     "Prospective confirmation is required, but the policy still has no minimum target count or completion rule; E046 provides design-only planning evidence and does not adopt a rule.",
@@ -28,7 +30,8 @@
     "E019 remains POST_HOC_EXPLORATORY and its original overlapping-ticket comparator is not geometry-matched; the separate correction document preserves that limitation.",
     "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY.",
     "E049 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
-    "E050 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share."
+    "E050 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
+    "Latest verified source cutoff advanced to 1250; DAILY MASTER #103 and target-1251 primary refresh are in progress. Do not use the 1249 readiness record as current readiness."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -39,7 +42,7 @@
   "final_selection_randomness": false,
   "random_fallback_allowed": false,
   "final_purchase_freeze_allowed": false,
-  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.",
+  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.\n2026-11-14: Round 1250 (1,5,18,23,27,28 + bonus 8) was corroborated by 4th.kr and Topstarnews; source data appended and DAILY MASTER #103 started. Official API direct retrieval was not claimed.",
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
     "registered_tasks": 36,
@@ -310,10 +313,10 @@
     "policy_changed": false,
     "prospective_minimum_count_adopted": false
   },
-  "previous_daily_master_run_id": 43525410558,
-  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565123697",
-  "daily_master_result_commit": "0af354366d320d288ac9a821cf135ee3b01f533a",
-  "daily_master_completed_at_kst": "2026-11-14T15:28:05+09:00",
+  "previous_daily_master_run_id": 43565123697,
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299",
+  "daily_master_result_commit": null,
+  "daily_master_completed_at_kst": null,
   "e048_execution": {
     "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "workflow_name": "target-1251-e048-three-line-bonus-transition",
@@ -426,9 +429,9 @@
     "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
   },
-  "daily_master_verification_path": "analysis/2026-11-14/MASTER_FULL_V5_061919_373343/VERIFICATION.json",
-  "daily_master_report_path": "analysis/2026-11-14/MASTER_FULL_V5_061919_373343/REPORT.md",
-  "daily_master_model_validation_path": "analysis/2026-11-14/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
+  "daily_master_verification_path": null,
+  "daily_master_report_path": null,
+  "daily_master_model_validation_path": null,
   "e049_execution": {
     "workflow_name": "target-1251-e049-three-line-draw-state-transition",
     "workflow_run_id": 43558319449,
@@ -491,7 +494,7 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-14T15:19:16+09:00",
+  "audit_reconciled_at_kst": "2026-11-14T21:01:14.061+09:00",
   "reconciled_main_sha": "705a87295cbf9a05a6fde792b425644fb600df73",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
@@ -545,27 +548,29 @@
     "any2_positive_50_target_block_share"
   ],
   "research_cutoff_alignment": {
-    "daily_master_verified_data_cutoff": 1249,
+    "daily_master_verified_data_cutoff": 1250,
     "latest_primary_empirical_cutoff": 1249,
     "latest_primary_empirical_study": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
     "historical_fixed_screen_cutoff": 1245,
-    "historical_fixed_screen_study_family": "E036-E042; fixed preregistered cutoff, not a freshness mismatch"
+    "historical_fixed_screen_study_family": "E036-E042; fixed preregistered cutoff, not a freshness mismatch",
+    "alignment_status": "PRIMARY_REFRESH_PENDING",
+    "cutoff_mismatch": true
   },
   "latest_daily_master_attempt": {
-    "workflow_run_id": 43565123697,
-    "workflow_run_number": 102,
-    "status": "completed",
-    "conclusion": "success",
-    "head_sha": "cfa78787db1b899b78b0d63f6c89334ef039c5b5",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565123697",
-    "last_observed_updated_at": "2026-11-14T06:28:06Z",
-    "note": "DAILY MASTER run #102 completed successfully. The full-master job and all steps, including strict model validation and output preservation, passed. Overall DAILY MASTER remains PARTIAL because required protocol evidence and original legacy A/C/contrarian sources are still incomplete."
+    "run_id": 43592087299,
+    "run_number": 103,
+    "run_attempt": 1,
+    "status": "in_progress",
+    "conclusion": null,
+    "created_at_utc": "2026-11-14T11:52:41Z",
+    "last_observed_updated_at": "2026-11-14T11:52:44Z",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299"
   },
-  "daily_master_run_number": 102,
-  "daily_master_run_status": "SUCCESS",
-  "daily_master_commit_sha": "0af354366d320d288ac9a821cf135ee3b01f533a",
-  "daily_master_generated_kst": "2026-11-14T15:19:26.116767+09:00",
-  "daily_master_verification_status": "PARTIAL",
-  "daily_master_v4_path": "analysis/2026-11-14/MASTER_FULL_V4_061147_117548",
-  "audit_updated_kst": "2026-11-14T20:48:22.010+09:00"
+  "daily_master_run_number": 103,
+  "daily_master_run_status": "in_progress",
+  "daily_master_commit_sha": null,
+  "daily_master_generated_kst": null,
+  "daily_master_verification_status": "PENDING",
+  "daily_master_v4_path": null,
+  "audit_updated_kst": "2026-11-14T21:01:14.061+09:00"
 }
