@@ -1425,5 +1425,5 @@
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow. Existing cadence is unchanged."
+  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged."
 }
