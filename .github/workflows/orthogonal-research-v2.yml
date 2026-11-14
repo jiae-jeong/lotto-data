@@ -78,7 +78,7 @@ jobs:
               'E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1']
           assert all(ids.count(task_id)==1 for task_id in e043_e050)
           assert [task_id for task_id in ids if task_id in set(e043_e050)] == e043_e050
-          assert max(ids.index(task_id) for task_id in e036_e042) < min(ids.index(task_id) for task_id in e043_e049)
+          assert max(ids.index(task_id) for task_id in e036_e042) < min(ids.index(task_id) for task_id in e043_e050)
           e048=task_by_id['E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1']
           assert e048['kind']=='three_line_bonus_transition'
           assert e048['execution_status']=='EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUT_PRESERVATION_REPAIRED'
