@@ -71,7 +71,7 @@
       ".github/workflows/lotto-finalize-r3.yml",
       ".github/workflows/lotto-finalize-v3.yml"
     ],
-    "queue_contract_validation": "PASS in orthogonal-research-v2 run 43548444587 after updating the queue-order test to include E048; prior run 43548096755 failed only because the test still expected the previous five-item queue tail.",
+    "queue_contract_validation": "REPAIR_PENDING: orthogonal-research-v2 run 43558151453 failed because test_independent_five_line.py still expected E048 as the queue tail after E049 registration; assertion updated to include E049.",
     "generic_queue_preflight_validation": "NOT_RUN_IN_THIS_AUDIT",
     "runnable_generic_task_count": "NOT_COMPUTED_WITHOUT_PREFLIGHT",
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
@@ -89,6 +89,12 @@
         "run_id": 43548444587,
         "conclusion": "SUCCESS",
         "cause": "test expectation updated to include E048; validation and queue contract tests passed"
+      },
+      {
+        "run_id": 43558151453,
+        "conclusion": "FAILURE",
+        "cause": "test_independent_five_line.py expected the final six queue IDs to end at E048 after E049 was appended.",
+        "repair": "Updated the queue suffix and added E049 task assertions."
       }
     ],
     "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
@@ -330,5 +336,16 @@
     "workflow": ".github/workflows/target-1251-e049-three-line-draw-state-transition.yml",
     "runner": "automation/three_line_draw_state_transition_e049.py",
     "execution_started": false
-  }
+  },
+  "e049_failed_attempts": [
+    {
+      "workflow_run_id": 43558151440,
+      "run_attempt": 1,
+      "cause": "GitHub expression interpolation in the new workflow was escaped, so RUN_ID/RUN_ATTEMPT/RUN_NUMBER/EVENT_NAME arrived with a leading backslash.",
+      "computation_status": "COMPLETE",
+      "output_preservation_status": "FAILED_BEFORE_GIT_COMMIT",
+      "counted_as_independent_research": false,
+      "repair": "Remove the unintended backslashes from GitHub and shell variable expressions; rerun the same frozen E049 specification."
+    }
+  ]
 }

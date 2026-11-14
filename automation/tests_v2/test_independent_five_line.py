@@ -39,20 +39,35 @@ class IndependentFiveLineTests(unittest.TestCase):
         self.assertEqual(ids[e036_start:e036_start + len(expected_e036_e042)], expected_e036_e042)
         self.assertLess(prior_start, e030_start)
         self.assertLess(e030_start, e036_start)
-        self.assertEqual(ids[-6:], [
+        expected_e043_e049 = [
             "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
             "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
             "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
             "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
-        ])
+            "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+        ]
+        self.assertEqual(ids[-len(expected_e043_e049):], expected_e043_e049)
         e046 = next(task for task in queue["tasks"] if task["id"] == "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1")
         self.assertEqual(e046["execution_status"], "EXECUTED_DESIGN_PLANNING_COMPLETE")
         daily._validate_task(e046)
         e048 = next(task for task in queue["tasks"] if task["id"] == "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1")
         self.assertIn("bonus number", e048["question"].lower())
         self.assertEqual(ids.count("E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1"), 1)
+        e049 = next(task for task in queue["tasks"] if task["id"] == "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1")
+        self.assertEqual(e049["kind"], "three_line_draw_state_transition")
+        self.assertEqual(e049["execution_entrypoint"], "automation/three_line_draw_state_transition_e049.py")
+        self.assertEqual(e049["workflow_entrypoint"], ".github/workflows/target-1251-e049-three-line-draw-state-transition.yml")
+        self.assertEqual(e049["preregistration"], "research/weekly_purchase/1251/E049_THREE_LINE_DRAW_STATE_TRANSITION_PREREG_20261114.json")
+        self.assertIn(e049["execution_status"], (
+            "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+            "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+            "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING",
+        ))
+        if e049["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
+            self.assertEqual(e049["execution_result"]["verification_status"], "PASS")
+            self.assertFalse(e049["execution_result"]["strict_pass_ready"])
         self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
                          "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
         for task in queue["tasks"][prior_start:prior_start + len(expected_prior)]: daily._validate_task(task)

@@ -46,17 +46,17 @@ jobs:
       - name: Run E049 historical walk-forward
         if: steps.one-shot.outputs.already_complete != 'true'
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |
           python -B automation/three_line_draw_state_transition_e049.py --date 2026-11-14 --run-id "$RUN_ID" --run-attempt "$RUN_ATTEMPT"
       - name: Verify evidence and update queue/readiness audit
         if: success() && steps.one-shot.outputs.already_complete != 'true'
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
-          RUN_NUMBER: \${{ github.run_number }}
-          EVENT_NAME: \${{ github.event_name }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          RUN_NUMBER: ${{ github.run_number }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           python - <<'PY'
           import csv, hashlib, json, os, subprocess
@@ -136,7 +136,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          OUTDIR="analysis/2026-11-14/gha_\${GITHUB_RUN_ID}_\${GITHUB_RUN_ATTEMPT}/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"
+          OUTDIR="analysis/2026-11-14/gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"
           test -f "$OUTDIR/VERIFICATION.json"
           test -f "$OUTDIR/COMPLETION.json"
           git config user.name "github-actions[bot]"
@@ -155,7 +155,7 @@ jobs:
         if: failure() && steps.one-shot.outputs.already_complete != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: e049-failed-attempt-\${{ github.run_id }}-\${{ github.run_attempt }}
+          name: e049-failed-attempt-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            analysis/2026-11-14/gha_\${{ github.run_id }}_\${{ github.run_attempt }}/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1/**
+            analysis/2026-11-14/gha_${{ github.run_id }}_${{ github.run_attempt }}/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1/**
           if-no-files-found: warn
