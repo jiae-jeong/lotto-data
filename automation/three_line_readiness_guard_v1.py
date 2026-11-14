@@ -124,15 +124,31 @@ def validate_ready_artifact(path: Path, target: int, date_kst: str, cutoff: int,
     return ready, lines
 
 
-def load_e045_evidence(root: Path):
+def load_e045_evidence(root: Path, expected_cutoff: int, expected_data_sha: str):
     audit_path = root / "research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json"
     if not audit_path.is_file():
         return {"status": "NOT_AVAILABLE"}
     audit = json.loads(audit_path.read_text(encoding="utf-8"))
-    execution = audit.get("e045_execution") or {}
+
+    # Prefer the latest append-only cutoff refresh. The original E045 execution
+    # remains immutable historical provenance, but must not mask a newer cutoff.
+    refresh = audit.get("e045_cutoff_refresh")
+    if isinstance(refresh, dict):
+        execution = refresh
+        evidence_class = execution.get(
+            "evidence_class", "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT"
+        )
+        independent_research_axis = bool(execution.get("independent_research_axis", False))
+    else:
+        execution = audit.get("e045_execution") or {}
+        evidence_class = "ORIGINAL_HISTORICAL_EVIDENCE"
+        independent_research_axis = False
+
     rel = execution.get("result_path")
     if not rel:
         return {"status": "NOT_AVAILABLE", "reason": "E045 result path missing"}
+    if refresh and execution.get("workflow_run_conclusion") != "success":
+        raise ValueError("Latest E045 cutoff refresh workflow did not succeed")
     folder = (root / rel).resolve()
     if root.resolve() not in folder.parents:
         raise ValueError("E045 evidence path escapes repository")
@@ -142,6 +158,7 @@ def load_e045_evidence(root: Path):
     manifest_path = folder / "SHA256_MANIFEST.csv"
     if not all(p.is_file() for p in (verification_path, completion_path, inference_path, manifest_path)):
         raise ValueError("E045 immutable evidence is incomplete")
+
     verification = json.loads(verification_path.read_text(encoding="utf-8"))
     completion = json.loads(completion_path.read_text(encoding="utf-8"))
     inference = json.loads(inference_path.read_text(encoding="utf-8"))
@@ -149,10 +166,25 @@ def load_e045_evidence(root: Path):
         raise ValueError("E045 completion evidence is inconsistent")
     if verification.get("status") != "PASS" or verification.get("no_future_leakage") is not True:
         raise ValueError("E045 verification or leakage evidence failed")
-    if verification.get("historical_strict_gate_pass") is not False or inference.get("historical_strict_gate_pass") is not False:
-        raise ValueError("E045 historical strict-fail state is inconsistent")
+    cutoff = int(verification["data_cutoff"])
+    data_sha = verification["data_sha256"]
+    if int(completion.get("data_cutoff", -1)) != cutoff:
+        raise ValueError("E045 completion/verification cutoff mismatch")
+    if execution.get("data_cutoff") is not None and int(execution["data_cutoff"]) != cutoff:
+        raise ValueError("E045 audit/verification cutoff mismatch")
+    if execution.get("data_sha256") is not None and execution["data_sha256"] != data_sha:
+        raise ValueError("E045 audit/verification data hash mismatch")
+    if int(verification.get("leakage_failures", -1)) != 0:
+        raise ValueError("E045 leakage failures are nonzero")
+    if int(verification.get("training_cutoff_violations", -1)) != 0:
+        raise ValueError("E045 training cutoff violations are nonzero")
+    if verification.get("historical_strict_gate_pass") is not inference.get("historical_strict_gate_pass"):
+        raise ValueError("E045 inference/verification historical gate mismatch")
+    if verification.get("strict_portfolio_pass") is not False:
+        raise ValueError("E045 verification must not claim portfolio PASS")
     if verification.get("strict_pass_ready") is not False or inference.get("strict_pass_ready") is not False:
         raise ValueError("E045 must remain not ready")
+
     with manifest_path.open(encoding="utf-8-sig", newline="") as stream:
         manifest = list(csv.DictReader(stream))
     if len(manifest) != 8 or len({row["path"] for row in manifest}) != 8:
@@ -165,8 +197,8 @@ def load_e045_evidence(root: Path):
         raw = artifact.read_bytes()
         if len(raw) != int(row["bytes"]) or hashlib.sha256(raw).hexdigest() != row["sha256"]:
             raise ValueError(f"E045 artifact hash mismatch: {artifact.name}")
-    # Re-check the frozen 1249-record prefix against the current source, even after
-    # later official draws are appended. The runner preserves exact source bytes.
+
+    # Re-check the frozen data prefix against the current source bytes.
     import importlib.util
     runner_path = root / "automation/three_line_research_1251_v1.py"
     spec = importlib.util.spec_from_file_location("e045_frozen_runner", runner_path)
@@ -174,25 +206,78 @@ def load_e045_evidence(root: Path):
         raise ValueError("E045 frozen runner cannot be loaded")
     runner = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(runner)
-    cutoff = int(verification["data_cutoff"])
     _, prefix_sha, _, _ = runner.load_frozen_draw_prefix(
         cutoff,
         verification["data_prefix_sha256"],
         verification["data_sha256"],
     )
+    if prefix_sha != verification["data_prefix_sha256"]:
+        raise ValueError("E045 frozen source prefix hash mismatch")
+
+    metric_payload = inference.get("metrics")
+    if not isinstance(metric_payload, dict):
+        raise ValueError("E045 inference metrics are missing")
+    failed_gates = []
+    for metric_name in ("max_hits", "any2", "any3", "winning_union_coverage"):
+        metric = metric_payload.get(metric_name)
+        ci = metric.get("adjusted_moving_block_ci") if isinstance(metric, dict) else None
+        if not isinstance(ci, list) or len(ci) != 2:
+            raise ValueError(f"E045 adjusted CI is missing for {metric_name}")
+        if not float(ci[0]) > 0:
+            failed_gates.append(metric_name)
+    block_share = float(inference.get("any2_positive_50_target_block_share", -1))
+    if block_share < 0.65:
+        failed_gates.append("any2_positive_50_target_block_share")
+
+    historical_pass = inference.get("historical_strict_gate_pass") is True
+    if historical_pass and failed_gates:
+        raise ValueError("E045 historical PASS conflicts with failed strict gates")
+    if not historical_pass and not failed_gates:
+        raise ValueError("E045 historical FAIL has no failed strict gate")
+    if refresh and sorted(execution.get("failed_gates", [])) != sorted(failed_gates):
+        raise ValueError("E045 cutoff-refresh audit failed gates differ from inference")
+    if inference.get("strict_portfolio_pass") is not False:
+        raise ValueError("E045 historical evidence must not claim portfolio PASS")
+
+    prospective_status = (
+        "UNSPECIFIED_IN_POLICY"
+        if inference.get("prospective_minimum_target_count") is None
+        or not inference.get("prospective_completion_rule")
+        else "SPECIFIED"
+    )
+    current_cutoff_match = cutoff == int(expected_cutoff) and data_sha == expected_data_sha
+    status = (
+        "STALE_CUTOFF" if not current_cutoff_match else
+        "VERIFIED_HISTORICAL_STRICT_PASS" if historical_pass else
+        "VERIFIED_HISTORICAL_STRICT_FAIL"
+    )
     return {
-        "status": "VERIFIED_HISTORICAL_STRICT_FAIL",
+        "status": status,
         "study_id": verification["study_id"],
+        "base_study_id": execution.get("base_study_id"),
+        "evidence_class": evidence_class,
+        "independent_research_axis": independent_research_axis,
+        "workflow_run_id": execution.get("workflow_run_id"),
+        "run_url": execution.get("run_url"),
+        "result_path": rel,
         "data_cutoff": cutoff,
+        "data_sha256": data_sha,
         "target_count": int(verification["target_count"]),
         "random_bundles_total": int(verification["random_bundles_total"]),
         "prefix_sha256": prefix_sha,
         "manifest_entries": len(manifest),
+        "manifest_status": "PASS",
         "leakage_failures": int(verification["leakage_failures"]),
-        "historical_strict_gate_pass": False,
+        "historical_strict_gate_pass": historical_pass,
+        "failed_gates": failed_gates,
+        "metrics": metric_payload,
+        "any2_positive_50_target_block_share": block_share,
+        "prospective_confirmation_status": prospective_status,
+        "prospective_minimum_target_count": inference.get("prospective_minimum_target_count"),
+        "prospective_completion_rule": inference.get("prospective_completion_rule"),
+        "strict_portfolio_pass": False,
         "strict_pass_ready": False,
     }
-
 
 def build_status(root: Path, date_kst: str):
     cutoff_raw, data_sha, row_count = read_source(root)
@@ -206,7 +291,7 @@ def build_status(root: Path, date_kst: str):
     if int(policy["purchase_lines"]) != 3 or int(policy["numbers_per_line"]) != 6:
         raise ValueError("active three-line policy has unexpected geometry")
 
-    e045 = load_e045_evidence(root)
+    e045 = load_e045_evidence(root, cutoff, data_sha)
     outdir = root / "research" / "weekly_purchase" / str(target)
     outdir.mkdir(parents=True, exist_ok=True)
     ready_files = sorted(outdir.glob(f"STRICT_PASS_READY_{target}_*.json"))
@@ -221,9 +306,42 @@ def build_status(root: Path, date_kst: str):
         failed_gates = []
         unevaluated_gates = []
         ready_file = str(ready_files[0].relative_to(root))
+        strict_gate_evaluation = "VALIDATED_THREE_LINE_READY_ARTIFACT"
+    elif (
+        e045.get("status") == "VERIFIED_HISTORICAL_STRICT_FAIL"
+        and int(e045.get("data_cutoff", -1)) == cutoff
+    ):
+        # The current-cutoff historical gates were actually evaluated and failed.
+        # Do not label them "unevaluated" merely because no ready artifact exists.
+        readiness = "STRICT_FAIL"
+        failed_gates = list(e045["failed_gates"])
+        unevaluated_gates = (
+            ["prospective_confirmation"]
+            if e045.get("prospective_confirmation_status") == "UNSPECIFIED_IN_POLICY"
+            else []
+        )
+        ready_file = None
+        strict_gate_evaluation = f"E045_HISTORICAL_STRICT_FAIL_AT_CUTOFF_{cutoff}"
+    elif (
+        e045.get("status") == "VERIFIED_HISTORICAL_STRICT_PASS"
+        and int(e045.get("data_cutoff", -1)) == cutoff
+    ):
+        readiness = "NOT_READY"
+        failed_gates = []
+        unevaluated_gates = (
+            ["prospective_confirmation"]
+            if e045.get("prospective_confirmation_status") == "UNSPECIFIED_IN_POLICY"
+            else []
+        )
+        ready_file = None
+        strict_gate_evaluation = f"E045_HISTORICAL_PASS_PROSPECTIVE_PENDING_AT_CUTOFF_{cutoff}"
     else:
-        readiness = "STRICT_FAIL" if target == 1251 and e045.get("status") == "VERIFIED_HISTORICAL_STRICT_FAIL" else "NOT_READY"
-        failed_gates = ["no_eligible_three_line_portfolio_candidate"]
+        readiness = "NOT_READY"
+        failed_gates = (
+            ["latest_e045_evidence_cutoff_mismatch"]
+            if e045.get("status") == "STALE_CUTOFF"
+            else ["no_eligible_three_line_portfolio_candidate"]
+        )
         unevaluated_gates = [
             "max_hits_adjusted_ci",
             "any2_adjusted_ci",
@@ -233,6 +351,11 @@ def build_status(root: Path, date_kst: str):
             "prospective_confirmation",
         ]
         ready_file = None
+        strict_gate_evaluation = (
+            f"E045_EVIDENCE_STALE_CURRENT_CUTOFF_{cutoff}"
+            if e045.get("status") == "STALE_CUTOFF"
+            else "NO_ELIGIBLE_THREE_LINE_READY_ARTIFACT"
+        )
 
     status = {
         "status": readiness,
@@ -248,7 +371,7 @@ def build_status(root: Path, date_kst: str):
         "strict_portfolio_pass": bool(ready),
         "strict_pass_ready": bool(ready),
         "strict_gate_version": ready.get("strict_gate_version") if ready else None,
-        "strict_gate_evaluation": "VALIDATED_THREE_LINE_READY_ARTIFACT" if ready else "NO_ELIGIBLE_THREE_LINE_READY_ARTIFACT",
+        "strict_gate_evaluation": strict_gate_evaluation,
         "ready_file": ready_file,
         "ready_file_exists": bool(ready),
         "line_level_output_status": "PUBLISHED_IN_STRICT_PASS_READY" if ready else "SUPPRESSED_NOT_READY",
@@ -260,7 +383,7 @@ def build_status(root: Path, date_kst: str):
         "final_purchase_freeze_allowed": False,
         "e045_historical_evidence": e045,
         "single_ticket_model_validation_is_not_three_line_evidence": True,
-        "note": "This guard never generates purchase lines. A three-line portfolio is eligible only through a separately validated, target-specific STRICT_PASS_READY artifact with exact disjoint union18 geometry, all frozen strict gates, and completed prospective confirmation.",
+        "note": "This guard never generates purchase lines. It prefers the latest cutoff-matched E045 refresh, treats append-only refreshes as maintenance rather than independent research, and requires a separately validated target-specific STRICT_PASS_READY artifact with exact disjoint union18 geometry, all frozen strict gates, and completed prospective confirmation.",
     }
     status_path = outdir / f"STRICT_PASS_STATUS_{target}_{date_kst.replace('-', '')}.json"
     gate_path = outdir / f"MODEL_GATE_{target}_{date_kst.replace('-', '')}.json"
