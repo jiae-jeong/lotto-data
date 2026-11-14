@@ -238,7 +238,9 @@
       "manifest_status": "PASS",
       "note": "The rerun used the same preregistration, cutoff, model, and random seeds. It is a reproducibility check only, not a new independent research axis."
     },
-    "one_shot_guard_fix_commit": "b3c1346331275011f1119d7ad3064e9018bfb26f"
+    "one_shot_guard_fix_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
+    "final_one_shot_workflow_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
+    "no_op_trigger_metadata_commit": "8803e98a89575523ce001be1e58b896c02e55557"
   },
   "e048_evaluated_gates": {
     "max_hits": {
