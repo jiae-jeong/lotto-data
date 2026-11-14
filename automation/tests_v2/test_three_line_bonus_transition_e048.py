@@ -1,4 +1,5 @@
 import importlib.util
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -34,6 +35,14 @@ class E048FrozenSpecificationTests(unittest.TestCase):
         self.assertEqual(result["any2"], 1)
         self.assertEqual(result["any3"], 0)
         self.assertEqual(result["winning_union_coverage"], 5)
+
+    def test_csv_writer_uses_lf_line_endings(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "sample.csv"
+            MODULE.write_csv(path, [{"value": 1}], ["value"])
+            raw = path.read_bytes()
+            self.assertNotIn(b"\r", raw)
+            self.assertTrue(raw.endswith(b"\n"))
 
     def test_bonus_conditioned_score_uses_fixed_shrinkage(self):
         global_counts = [1] * 45
