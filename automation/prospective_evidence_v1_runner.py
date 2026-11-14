@@ -412,6 +412,42 @@ def _write_round_audit(root: Path, target: int, prediction_path: Path, predictio
     return verification_path
 
 
+
+def _record_incomplete_gap(root: Path, draws: list[dict], target: int) -> tuple[Path, dict]:
+    """Record an unrecoverable pre-draw gap without inventing forecasts or outcomes."""
+    last_frozen_target = 1246
+    missing = list(range(last_frozen_target + 1, target))
+    next_date = date.fromisoformat(draws[-1]["date"]) + timedelta(days=7)
+    separate_shadow_path = root / "analysis/prospective/E030" / f"FROZEN_SIGNALS_{target}.json"
+    record = {
+        "status": "INCOMPLETE_GAP_NO_PRE_DRAW_FREEZE",
+        "study_id": "E043_E049_PROSPECTIVE_EVIDENCE_v1",
+        "target_round": target,
+        "current_data_cutoff": len(draws),
+        "current_data_sha256": sha_file(root / "lotto_data.csv"),
+        "last_frozen_target": last_frozen_target,
+        "missing_pre_draw_frozen_targets": missing,
+        "target_draw_date_assumption": next_date.isoformat(),
+        "separate_e030_shadow_anchor": {
+            "path": separate_shadow_path.relative_to(root).as_posix() if separate_shadow_path.is_file() else None,
+            "eligible_for_this_protocol": False,
+            "reason": "E030 two-signal shadow output is not the frozen five-line prospective portfolio or its matched-random baseline seal."
+        },
+        "no_retrospective_prediction_generated": True,
+        "no_random_pool_generated": True,
+        "recommendation_generated": False,
+        "reason": "The original prospective horizon has no pre-draw prediction and sealed random pools for the missing targets. Historical outcomes cannot be backfilled as forecasts.",
+        "required_action": "If this five-line prospective branch is to continue, register a separate new horizon and freeze its protocol before a future draw; do not merge it into the original 1246-1445 confirmatory horizon."
+    }
+    path = root / "analysis/prospective_v1/gaps" / f"ROUND_{target}.json"
+    if path.exists():
+        prior = json.loads(path.read_text(encoding="utf-8"))
+        if prior != record:
+            raise ValueError(f"immutable prospective gap record differs: {path}")
+        return path, prior
+    _write_once_json(path, record)
+    return path, record
+
 def run(root: Path = ROOT, opener=urllib.request.urlopen) -> dict:
     root=root.resolve()
     data=root/"lotto_data.csv"
@@ -466,6 +502,18 @@ def run(root: Path = ROOT, opener=urllib.request.urlopen) -> dict:
                     "next_target":target, "next_prediction_path":recovered_path.relative_to(root).as_posix(),
                     "next_prediction_sha256":sha_file(recovered_path), "next_random5_pool_sha256":recovered_seal["random5_sha256"],
                     "next_single_pool_sha256":recovered_seal["single_sha256"], "recommendation_generated":False}
+        if target > 1246 and not prior_event.is_file():
+            gap_path, gap_record = _record_incomplete_gap(root, draws, target)
+            return {
+                "status": gap_record["status"],
+                "target_round": target,
+                "last_frozen_target": gap_record["last_frozen_target"],
+                "missing_pre_draw_targets": gap_record["missing_pre_draw_frozen_targets"],
+                "gap_status_path": gap_path.relative_to(root).as_posix(),
+                "data_changed": False,
+                "recommendation_generated": False,
+                "no_retrospective_prediction": True,
+            }
         raise FileNotFoundError(f"pre-draw frozen shadow prediction required for round {target}")
     prediction=json.loads(prediction_path.read_text(encoding="utf-8"))
     prediction_sha=sha_file(prediction_path)
