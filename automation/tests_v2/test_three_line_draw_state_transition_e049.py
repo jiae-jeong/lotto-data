@@ -28,9 +28,15 @@ class E049FrozenSpecificationTests(unittest.TestCase):
     def test_frozen_prereg_and_data_prefix(self):
         p=json.loads(MODULE.PREREG_PATH.read_text()); policy=json.loads(MODULE.POLICY_PATH.read_text())
         MODULE.validate_preregistration(p,policy)
-        draws,prefix,full,total=MODULE.shared.read_frozen_prefix(1249,p["source_data_prefix_sha256"],p["source_data_full_file_sha256"])
-        self.assertEqual(len(draws),1249); self.assertEqual(total,1249)
-        self.assertEqual(prefix,p["source_data_prefix_sha256"]); self.assertEqual(full,p["source_data_full_file_sha256"])
+        cutoff=int(p["historical_data_cutoff"])
+        draws,prefix,full,total=MODULE.shared.read_frozen_prefix(cutoff,p["source_data_prefix_sha256"],p["source_data_full_file_sha256"])
+        self.assertEqual(len(draws),cutoff)
+        self.assertGreaterEqual(total,cutoff)
+        self.assertEqual(prefix,p["source_data_prefix_sha256"])
+        # Once later draws are appended, the frozen prefix remains authoritative;
+        # the preregistered full-file hash applies only while the file ends at cutoff.
+        if total == cutoff:
+            self.assertEqual(full,p["source_data_full_file_sha256"])
     def test_shared_helper_is_pinned(self):
         self.assertEqual(MODULE.verify_shared_helper(),MODULE.SHARED_HELPER_GIT_BLOB_SHA)
     def test_bootstrap_deterministic(self):
