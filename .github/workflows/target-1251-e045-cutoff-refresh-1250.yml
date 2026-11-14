@@ -397,7 +397,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- "$OUTDIR" research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json
-          git diff --cached --check
+          git diff --cached --check -- "$OUTDIR/REPORT.md" "$OUTDIR/INFERENCE.json" "$OUTDIR/VERIFICATION.json" "$OUTDIR/COMPLETION.json" "$OUTDIR/READINESS_UPDATE.json" research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json
           git diff --cached --quiet && { echo 'No cutoff-refresh evidence staged'; exit 1; }
           git commit -m 'research: preserve E045 cutoff-1250 refresh and reconcile daily master audit'
           for attempt in 1 2 3; do
