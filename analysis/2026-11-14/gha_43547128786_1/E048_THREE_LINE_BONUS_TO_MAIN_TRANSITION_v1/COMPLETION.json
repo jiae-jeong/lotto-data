@@ -8,5 +8,8 @@
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
   "computation_complete": true,
-  "promotion_to_purchase_policy": false
+  "promotion_to_purchase_policy": false,
+  "preservation_status": "REPAIRED",
+  "workflow_run_conclusion": "failure_due_to_git_diff_check",
+  "output_artifacts_committed": true
 }
