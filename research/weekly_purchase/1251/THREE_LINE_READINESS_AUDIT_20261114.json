@@ -9,7 +9,7 @@
   "preparation_deadline_kst": "2026-11-19",
   "current_verified_data_cutoff": 1249,
   "current_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
-  "daily_master_run_id": 43454799208,
+  "daily_master_run_id": 43525410558,
   "daily_master_status": "PARTIAL",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
@@ -174,5 +174,9 @@
     },
     "policy_changed": false,
     "prospective_minimum_count_adopted": false
-  }
+  },
+  "previous_daily_master_run_id": 43454799208,
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43525410558",
+  "daily_master_result_commit": "6c256d9a306916ab743fda3c9ac15a535e4d00b9",
+  "daily_master_completed_at_kst": "2026-11-14T08:29:19+09:00"
 }
