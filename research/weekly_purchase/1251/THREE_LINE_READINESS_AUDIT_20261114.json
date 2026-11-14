@@ -15,7 +15,7 @@
   "strict_model_validation_pass": false,
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
-  "strict_gate_evaluation": "EVALUATED_HISTORICAL_STRICT_FAIL_E045_AND_E048",
+  "strict_gate_evaluation": "EVALUATED_HISTORICAL_E045_E048_E049_E050; PROSPECTIVE_CONFIRMATION_REQUIRED",
   "ready_file": null,
   "ready_file_exists": false,
   "line_level_output_status": "SUPPRESSED_NOT_READY",
@@ -28,7 +28,7 @@
     "E019 remains POST_HOC_EXPLORATORY and its original overlapping-ticket comparator is not geometry-matched; the separate correction document preserves that limitation.",
     "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY.",
     "E049 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
-    "E050 is preregistered as one additional number-level previous-main neighborhood transition axis; historical evaluation is pending and cannot create readiness without the unchanged prospective confirmation rule."
+    "E050 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -57,14 +57,15 @@
       "E045": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE",
       "E048": "EXECUTED_HISTORICAL_STRICT_FAIL; OUTPUT_MANIFEST_REPAIRED; DUPLICATE_REPRODUCTION_NOT_INDEPENDENT",
-      "E049": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
+      "E049": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+      "E050": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
     },
     "superseded_tasks": [
       "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
     ],
     "target_1251_three_line_task_registered": true,
     "target_1251_three_line_runner_found": true,
-    "target_1251_three_line_task_status": "E045_AND_E048_AND_E049_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY; E050_PREREGISTERED_PENDING",
+    "target_1251_three_line_task_status": "E045_AND_E048_AND_E049_AND_E050_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY",
     "target_1251_three_line_workflow_run_id": 43499702588,
     "target_1251_three_line_finalizer_found": true,
     "three_line_finalizer": "automation/finalize_three_line_from_strict_ready_v1.py",
@@ -73,8 +74,8 @@
       ".github/workflows/lotto-finalize-v3.yml"
     ],
     "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43558319426 (run #55); validation job passed 102 tests and printed E030-E049 queue contract PASS; prior IDs retained.",
-    "generic_queue_preflight_validation": "NOT_RUN_IN_THIS_AUDIT",
-    "runnable_generic_task_count": "NOT_COMPUTED_WITHOUT_PREFLIGHT",
+    "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING",
+    "runnable_generic_task_count": 0,
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
     "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
     "target_1251_three_line_e048_runner": "automation/three_line_bonus_transition_e048.py",
@@ -114,7 +115,55 @@
     "target_1251_three_line_e050_preregistration": "research/weekly_purchase/1251/E050_THREE_LINE_NEIGHBOR_TRANSITION_PREREG_20261114.json",
     "target_1251_three_line_e050_runner": "automation/three_line_neighbor_transition_e050.py",
     "target_1251_three_line_e050_workflow": ".github/workflows/target-1251-e050-three-line-neighbor-transition.yml",
-    "target_1251_three_line_e050_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+    "target_1251_three_line_e050_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+    "generic_queue_preflight_run_id": 43564631433,
+    "generic_queue_preflight_completed_evidence_count": 24,
+    "generic_queue_preflight_skipped_completed": [
+      "E010_FAMILY_DECORRELATION_v1",
+      "E011_NESTED_3_4_TAIL_v1",
+      "E012_EXACT_TAIL_POWER_v1",
+      "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+      "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+      "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+      "E016_VOTE_DEPTH_CALIBRATION_v1",
+      "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+      "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+      "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+      "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "E029_FIVE_LINE_PROMOTION_GATE_v2",
+      "E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
+      "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
+      "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
+      "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+      "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
+      "E035_FIVE_LINE_REBUILD_GATE_v1",
+      "E037_PREDICTABILITY_FALSIFICATION_v1",
+      "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+      "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+      "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+      "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"
+    ],
+    "generic_queue_preflight_skipped_blocked": [
+      "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
+      "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1"
+    ],
+    "generic_queue_preflight_skipped_dedicated": [
+      "E036_NULL_GATE_CALIBRATION_v2",
+      "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+      "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+      "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+      "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+      "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+      "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+      "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"
+    ],
+    "generic_queue_preflight_skipped_superseded": [
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
+    ],
+    "target_1251_three_line_e050_workflow_run_id": 43564631433,
+    "target_1251_three_line_e050_result_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"
   },
   "evaluated_gates": {
     "max_hit": {
@@ -402,5 +451,56 @@
     "any2_positive_50_target_block_share"
   ],
   "audit_reconciled_at_kst": "2026-11-14T13:52:39+09:00",
-  "reconciled_main_sha": "22fd3e98391635be108f97642d6e4bfc4e2363c6"
+  "reconciled_main_sha": "22fd3e98391635be108f97642d6e4bfc4e2363c6",
+  "e050_execution": {
+    "workflow_name": "target-1251-e050-three-line-neighbor-transition",
+    "workflow_run_id": 43564631433,
+    "workflow_run_number": 1,
+    "run_attempt": 1,
+    "event": "push",
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43564631433",
+    "completed_at_utc": "2026-11-14T06:05:56.974895+00:00",
+    "result_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+    "data_cutoff": 1249,
+    "data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "target_range": [
+      401,
+      1249
+    ],
+    "target_count": 849,
+    "prediction_records": 849,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 101880,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "readiness_status": "STRICT_FAIL",
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "purchase_lines_generated": false,
+    "final_purchase_freeze_allowed": false
+  },
+  "e050_historical_gate_pass": false,
+  "e050_failed_gates": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_positive_50_target_block_share"
+  ]
 }
