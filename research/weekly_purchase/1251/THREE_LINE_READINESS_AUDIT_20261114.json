@@ -9,7 +9,7 @@
   "preparation_deadline_kst": "2026-11-19",
   "current_verified_data_cutoff": 1250,
   "current_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
-  "daily_master_run_id": 43592087299,
+  "daily_master_run_id": 43607275874,
   "daily_master_status": "PARTIAL",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
@@ -312,10 +312,10 @@
     "policy_changed": false,
     "prospective_minimum_count_adopted": false
   },
-  "previous_daily_master_run_id": 43565123697,
-  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299",
-  "daily_master_result_commit": "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06",
-  "daily_master_completed_at_kst": "2026-11-14T21:00:27+09:00",
+  "previous_daily_master_run_id": 43592087299,
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43607275874",
+  "daily_master_result_commit": "dc3c64573cf35c36ca46c946ee0da90ec84623c8",
+  "daily_master_completed_at_kst": "2026-11-15T00:02:16+09:00",
   "e048_execution": {
     "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "workflow_name": "target-1251-e048-three-line-bonus-transition",
@@ -428,8 +428,8 @@
     "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
   },
-  "daily_master_verification_path": "analysis/2026-11-14/MASTER_FULL_V5_120004_714883/VERIFICATION.json",
-  "daily_master_report_path": "analysis/2026-11-14/MASTER_FULL_V5_120004_714883/REPORT.md",
+  "daily_master_verification_path": "analysis/2026-11-14/MASTER_FULL_V5_150154_695967/VERIFICATION.json",
+  "daily_master_report_path": "analysis/2026-11-14/MASTER_FULL_V5_150154_695967/REPORT.md",
   "daily_master_model_validation_path": "analysis/2026-11-14/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
   "e049_execution": {
     "workflow_name": "target-1251-e049-three-line-draw-state-transition",
@@ -557,23 +557,23 @@
     "latest_primary_empirical_evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT"
   },
   "latest_daily_master_attempt": {
-    "run_id": 43592087299,
-    "run_number": 103,
+    "run_id": 43607275874,
+    "run_number": 104,
     "run_attempt": 1,
     "status": "completed",
     "conclusion": "success",
-    "created_at_utc": "2026-11-14T11:52:41Z",
-    "last_observed_updated_at": "2026-11-14T12:00:27Z",
-    "head_sha": "2c1212653a590032d6b71c362544e0d669214970",
-    "result_commit_sha": "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299"
+    "created_at_utc": "2026-11-14T14:54:15Z",
+    "last_observed_updated_at": "2026-11-14T15:02:16Z",
+    "head_sha": "2d316e29f0b7bb31bd167877ef212dc46fb5941d",
+    "result_commit_sha": "dc3c64573cf35c36ca46c946ee0da90ec84623c8",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43607275874"
   },
-  "daily_master_run_number": 103,
+  "daily_master_run_number": 104,
   "daily_master_run_status": "completed_success",
-  "daily_master_commit_sha": "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06",
-  "daily_master_generated_kst": "2026-11-14T21:00:04+09:00",
+  "daily_master_commit_sha": "dc3c64573cf35c36ca46c946ee0da90ec84623c8",
+  "daily_master_generated_kst": "2026-11-15T00:01:54+09:00",
   "daily_master_verification_status": "PARTIAL",
-  "daily_master_v4_path": "analysis/2026-11-14/MASTER_FULL_V4_115249_735913",
+  "daily_master_v4_path": "analysis/2026-11-14/MASTER_FULL_V4_145421_512645",
   "audit_updated_kst": "2026-11-14T21:34:47.813399+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
@@ -679,7 +679,7 @@
     }
   },
   "latest_daily_master_artifact": {
-    "artifact_kind": "ADDITIONAL_PROTOCOL_FULL_MASTER_ARTIFACT",
+    "artifact_kind": "DAILY_MASTER_RUN_OUTPUT",
     "artifact_commit_sha": "dc3c64573cf35c36ca46c946ee0da90ec84623c8",
     "artifact_commit_url": "https://github.com/jiae-jeong/lotto-data/commit/dc3c64573cf35c36ca46c946ee0da90ec84623c8",
     "commit_created_at_utc": "2026-11-14T15:02:07Z",
@@ -700,7 +700,7 @@
       "random_tickets": 1050000,
       "leakage_failures": 0
     },
-    "workflow_run_id": null,
-    "workflow_run_id_status": "NOT_PRESENT_IN_COMMIT_METADATA; DO_NOT_INFER_FROM_ARTIFACT_DIRECTORY_SUFFIX"
+    "workflow_run_id": 43607275874,
+    "workflow_run_id_status": "CONFIRMED_BY_RUN_104_JOB_LOG_PATH_MATCH"
   }
 }
