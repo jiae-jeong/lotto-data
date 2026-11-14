@@ -311,8 +311,8 @@
     "prospective_minimum_count_adopted": false
   },
   "previous_daily_master_run_id": 43525410558,
-  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43548174269",
-  "daily_master_result_commit": "0992251672b25fa77d700e36f7288b86142811ae",
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565123697",
+  "daily_master_result_commit": "0af354366d320d288ac9a821cf135ee3b01f533a",
   "daily_master_completed_at_kst": "2026-11-14T15:28:05+09:00",
   "e048_execution": {
     "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
@@ -567,5 +567,5 @@
   "daily_master_generated_kst": "2026-11-14T15:19:26.116767+09:00",
   "daily_master_verification_status": "PARTIAL",
   "daily_master_v4_path": "analysis/2026-11-14/MASTER_FULL_V4_061147_117548",
-  "audit_updated_kst": "2026-11-14T17:19:28.832+09:00"
+  "audit_updated_kst": "2026-11-14T20:48:22.010+09:00"
 }
