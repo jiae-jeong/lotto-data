@@ -769,11 +769,38 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_status": "EXECUTED_NULL_GATE_CALIBRATION_COMPLETE",
       "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
       "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
       "preregistration": "automation/e036_e042_preregistration.json",
-      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00",
+      "execution_result": {
+        "workflow_name": "e036-e042-null-gate-research",
+        "workflow_run_id": 43565241831,
+        "workflow_run_number": 25,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+        "result_root": "analysis/2026-11-14/gha_43565241831_1",
+        "data_cutoff": 1245,
+        "target_range": [
+          601,
+          1245
+        ],
+        "target_count": 645,
+        "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+        "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "historical_evidence_class": "SCREENING_OOS_NOT_UNTOUCHED_HOLDOUT",
+        "status": "CALIBRATED",
+        "null_replicates_total": 8000,
+        "pooled_verification_fpr": 0.008,
+        "result_path": "analysis/2026-11-14/gha_43565241831_1/E036_NULL_GATE_CALIBRATION_v2",
+        "study_result_file": "analysis/2026-11-14/gha_43565241831_1/E036_NULL_GATE_CALIBRATION_v2/COMPLETION.json"
+      }
     },
     {
       "id": "E037_PREDICTABILITY_FALSIFICATION_v1",
@@ -821,11 +848,37 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_status": "EXECUTED_HISTORICAL_FALSIFICATION_NO_SURVIVORS",
       "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
       "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
       "preregistration": "automation/e036_e042_preregistration.json",
-      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00",
+      "execution_result": {
+        "workflow_name": "e036-e042-null-gate-research",
+        "workflow_run_id": 43565241831,
+        "workflow_run_number": 25,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+        "result_root": "analysis/2026-11-14/gha_43565241831_1",
+        "data_cutoff": 1245,
+        "target_range": [
+          601,
+          1245
+        ],
+        "target_count": 645,
+        "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+        "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "historical_evidence_class": "SCREENING_OOS_NOT_UNTOUCHED_HOLDOUT",
+        "status": "NO_FAMILIES_SURVIVED_REGISTERED_TESTS",
+        "survivors": [],
+        "result_path": "analysis/2026-11-14/gha_43565241831_1/E037_PREDICTABILITY_FALSIFICATION_v1",
+        "study_result_file": "analysis/2026-11-14/gha_43565241831_1/E037_PREDICTABILITY_FALSIFICATION_v1/COMPLETION.json"
+      }
     },
     {
       "id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
@@ -872,11 +925,37 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_status": "EXECUTED_GATED_NO_CANDIDATES",
       "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
       "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
       "preregistration": "automation/e036_e042_preregistration.json",
-      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00",
+      "execution_result": {
+        "workflow_name": "e036-e042-null-gate-research",
+        "workflow_run_id": 43565241831,
+        "workflow_run_number": 25,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+        "result_root": "analysis/2026-11-14/gha_43565241831_1",
+        "data_cutoff": 1245,
+        "target_range": [
+          601,
+          1245
+        ],
+        "target_count": 645,
+        "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+        "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "historical_evidence_class": "SCREENING_OOS_NOT_UNTOUCHED_HOLDOUT",
+        "status": "NO_POST_OUTCOME_CANDIDATES",
+        "gate": "E037_SURVIVORS_EMPTY",
+        "result_path": "analysis/2026-11-14/gha_43565241831_1/E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+        "study_result_file": "analysis/2026-11-14/gha_43565241831_1/E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3/COMPLETION.json"
+      }
     },
     {
       "id": "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
@@ -924,11 +1003,37 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_status": "EXECUTED_BLOCKED_BY_REGISTERED_GATE",
       "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
       "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
       "preregistration": "automation/e036_e042_preregistration.json",
-      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00",
+      "execution_result": {
+        "workflow_name": "e036-e042-null-gate-research",
+        "workflow_run_id": 43565241831,
+        "workflow_run_number": 25,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+        "result_root": "analysis/2026-11-14/gha_43565241831_1",
+        "data_cutoff": 1245,
+        "target_range": [
+          601,
+          1245
+        ],
+        "target_count": 645,
+        "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+        "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "historical_evidence_class": "SCREENING_OOS_NOT_UNTOUCHED_HOLDOUT",
+        "status": "BLOCKED_BY_PRIOR_REGISTERED_GATE",
+        "portfolio_or_prospective_predictions_generated": false,
+        "result_path": "analysis/2026-11-14/gha_43565241831_1/E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+        "study_result_file": "analysis/2026-11-14/gha_43565241831_1/E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2/COMPLETION.json"
+      }
     },
     {
       "id": "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
@@ -974,11 +1079,36 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_status": "EXECUTED_NO_VALIDATED_EDGE",
       "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
       "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
       "preregistration": "automation/e036_e042_preregistration.json",
-      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00",
+      "execution_result": {
+        "workflow_name": "e036-e042-null-gate-research",
+        "workflow_run_id": 43565241831,
+        "workflow_run_number": 25,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+        "result_root": "analysis/2026-11-14/gha_43565241831_1",
+        "data_cutoff": 1245,
+        "target_range": [
+          601,
+          1245
+        ],
+        "target_count": 645,
+        "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+        "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "historical_evidence_class": "SCREENING_OOS_NOT_UNTOUCHED_HOLDOUT",
+        "status": "NO_VALIDATED_EDGE",
+        "result_path": "analysis/2026-11-14/gha_43565241831_1/E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+        "study_result_file": "analysis/2026-11-14/gha_43565241831_1/E040_SINGLE_EDGE_PROMOTION_GATE_v2/COMPLETION.json"
+      }
     },
     {
       "id": "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
@@ -1026,11 +1156,37 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_status": "EXECUTED_BLOCKED_NO_VALIDATED_SINGLE_EDGE",
       "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
       "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
       "preregistration": "automation/e036_e042_preregistration.json",
-      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00",
+      "execution_result": {
+        "workflow_name": "e036-e042-null-gate-research",
+        "workflow_run_id": 43565241831,
+        "workflow_run_number": 25,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+        "result_root": "analysis/2026-11-14/gha_43565241831_1",
+        "data_cutoff": 1245,
+        "target_range": [
+          601,
+          1245
+        ],
+        "target_count": 645,
+        "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+        "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "historical_evidence_class": "SCREENING_OOS_NOT_UNTOUCHED_HOLDOUT",
+        "status": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+        "portfolio_generated": false,
+        "result_path": "analysis/2026-11-14/gha_43565241831_1/E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+        "study_result_file": "analysis/2026-11-14/gha_43565241831_1/E041_FIVE_LINE_PORTFOLIO_REBUILD_v2/COMPLETION.json"
+      }
     },
     {
       "id": "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
@@ -1076,11 +1232,37 @@
         "preregistration": "automation/e036_e042_preregistration.json"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_status": "EXECUTED_DO_NOT_PROMOTE",
       "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
       "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
       "preregistration": "automation/e036_e042_preregistration.json",
-      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00",
+      "execution_result": {
+        "workflow_name": "e036-e042-null-gate-research",
+        "workflow_run_id": 43565241831,
+        "workflow_run_number": 25,
+        "run_attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+        "result_root": "analysis/2026-11-14/gha_43565241831_1",
+        "data_cutoff": 1245,
+        "target_range": [
+          601,
+          1245
+        ],
+        "target_count": 645,
+        "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+        "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "historical_evidence_class": "SCREENING_OOS_NOT_UNTOUCHED_HOLDOUT",
+        "status": "DO_NOT_PROMOTE",
+        "prospective_freeze": false,
+        "result_path": "analysis/2026-11-14/gha_43565241831_1/E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+        "study_result_file": "analysis/2026-11-14/gha_43565241831_1/E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1/COMPLETION.json"
+      }
     },
     {
       "id": "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
