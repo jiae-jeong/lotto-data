@@ -1,0 +1,16 @@
+{
+  "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+  "status": "COMPLETE",
+  "date_kst": "2026-11-14",
+  "run_id": "gha_43595251776_1",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "executed": true,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL"
+}

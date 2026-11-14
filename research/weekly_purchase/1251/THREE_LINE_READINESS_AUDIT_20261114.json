@@ -10,20 +10,19 @@
   "current_verified_data_cutoff": 1250,
   "current_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
   "daily_master_run_id": 43592087299,
-  "daily_master_status": "RUNNING",
+  "daily_master_status": "PARTIAL",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
-  "strict_gate_evaluation": "E045/E048/E049/E050 historical results at cutoff 1249 remain FAIL; cutoff-1250 refresh is pending. Prospective confirmation still required.",
+  "strict_gate_evaluation": "E045_APPEND_ONLY_CUTOFF_REFRESH_THROUGH_1250_EVALUATED; E048_E049_E050_REMAIN_FIXED_HISTORICAL_CUTOFF_1249; PROSPECTIVE_CONFIRMATION_REQUIRED",
   "ready_file": null,
   "ready_file_exists": false,
   "line_level_output_status": "SUPPRESSED_NOT_READY",
   "unevaluated_gates": [
-    "latest_primary_empirical_cutoff_1250_refresh"
+    "prospective_confirmation_rule"
   ],
   "blocking_reasons": [
-    "E045 completed the preregistered 401..1249 walk-forward. Historical strict gate failed: all four adjusted CI lower bounds were not greater than zero, and any2-positive 50-target block share was 8/17 (47.06%), below 65%.",
     "Prospective confirmation is required, but the policy still has no minimum target count or completion rule; E046 provides design-only planning evidence and does not adopt a rule.",
     "No target-specific three-line STRICT_PASS_READY artifact exists. The new three-line finalizer path is available, but it correctly refuses to seal without a fully validated ready artifact.",
     "E043 H1250-A and E044 H1250-B V2 are five-line H1250 studies and remain ineligible as target-1251 three-line evidence.",
@@ -31,7 +30,7 @@
     "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY.",
     "E049 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
     "E050 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
-    "Latest verified source cutoff advanced to 1250; DAILY MASTER #103 and target-1251 primary refresh are in progress. Do not use the 1249 readiness record as current readiness."
+    "E045 append-only cutoff refresh through 1250 is complete and is not an independent research axis. Historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -239,7 +238,7 @@
     }
   },
   "failed_gates": [
-    "max_hit",
+    "max_hits",
     "any2",
     "any3",
     "winning_union_coverage",
@@ -315,8 +314,8 @@
   },
   "previous_daily_master_run_id": 43565123697,
   "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299",
-  "daily_master_result_commit": null,
-  "daily_master_completed_at_kst": null,
+  "daily_master_result_commit": "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06",
+  "daily_master_completed_at_kst": "2026-11-14T21:00:27+09:00",
   "e048_execution": {
     "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "workflow_name": "target-1251-e048-three-line-bonus-transition",
@@ -429,9 +428,9 @@
     "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
   },
-  "daily_master_verification_path": null,
-  "daily_master_report_path": null,
-  "daily_master_model_validation_path": null,
+  "daily_master_verification_path": "analysis/2026-11-14/MASTER_FULL_V5_120004_714883/VERIFICATION.json",
+  "daily_master_report_path": "analysis/2026-11-14/MASTER_FULL_V5_120004_714883/REPORT.md",
+  "daily_master_model_validation_path": "analysis/2026-11-14/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
   "e049_execution": {
     "workflow_name": "target-1251-e049-three-line-draw-state-transition",
     "workflow_run_id": 43558319449,
@@ -494,8 +493,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-14T21:01:14.061+09:00",
-  "reconciled_main_sha": "705a87295cbf9a05a6fde792b425644fb600df73",
+  "audit_reconciled_at_kst": "2026-11-14T21:34:47.813399+09:00",
+  "reconciled_main_sha": "395016b0aafff0ff464e0d57d2c04c656c86b4cb",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -549,28 +548,134 @@
   ],
   "research_cutoff_alignment": {
     "daily_master_verified_data_cutoff": 1250,
-    "latest_primary_empirical_cutoff": 1249,
-    "latest_primary_empirical_study": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+    "latest_primary_empirical_cutoff": 1250,
+    "latest_primary_empirical_study": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
     "historical_fixed_screen_cutoff": 1245,
     "historical_fixed_screen_study_family": "E036-E042; fixed preregistered cutoff, not a freshness mismatch",
-    "alignment_status": "PRIMARY_REFRESH_PENDING",
-    "cutoff_mismatch": true
+    "alignment_status": "ALIGNED_PRIMARY_CUTOFF_REFRESH_COMPLETE",
+    "cutoff_mismatch": false,
+    "latest_primary_empirical_evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT"
   },
   "latest_daily_master_attempt": {
     "run_id": 43592087299,
     "run_number": 103,
     "run_attempt": 1,
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "created_at_utc": "2026-11-14T11:52:41Z",
-    "last_observed_updated_at": "2026-11-14T11:52:44Z",
+    "last_observed_updated_at": "2026-11-14T12:00:27Z",
+    "head_sha": "2c1212653a590032d6b71c362544e0d669214970",
+    "result_commit_sha": "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06",
     "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43592087299"
   },
   "daily_master_run_number": 103,
-  "daily_master_run_status": "in_progress",
-  "daily_master_commit_sha": null,
-  "daily_master_generated_kst": null,
-  "daily_master_verification_status": "PENDING",
-  "daily_master_v4_path": null,
-  "audit_updated_kst": "2026-11-14T21:01:14.061+09:00"
+  "daily_master_run_status": "completed_success",
+  "daily_master_commit_sha": "d3ed7f0ac9c7ab79f89ec22015a47c85a7023f06",
+  "daily_master_generated_kst": "2026-11-14T21:00:04+09:00",
+  "daily_master_verification_status": "PARTIAL",
+  "daily_master_v4_path": "analysis/2026-11-14/MASTER_FULL_V4_115249_735913",
+  "audit_updated_kst": "2026-11-14T21:34:47.813399+09:00",
+  "e045_cutoff_refresh": {
+    "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+    "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT",
+    "independent_research_axis": false,
+    "workflow_name": "target-1251-e045-cutoff-refresh-1250",
+    "workflow_run_id": 43595251776,
+    "workflow_run_number": 4,
+    "run_attempt": 1,
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43595251776",
+    "completed_at_utc": "2026-11-14T12:34:47.813414+00:00",
+    "result_path": "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "data_prefix_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "prediction_records": 850,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 102000,
+    "block_length": 50,
+    "block_count": 17,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "prospective_minimum_target_count": null,
+    "prospective_completion_rule": null,
+    "parameter_search": false,
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "purchase_lines_generated": false,
+    "final_purchase_freeze_allowed": false,
+    "readiness_status": "STRICT_FAIL"
+  },
+  "e045_cutoff_refresh_evaluated_gates": {
+    "max_hits": {
+      "observed_mean": 1.4917647058823529,
+      "exact_geometry_matched_null": 1.514256248572755,
+      "delta_mean": -0.02249154269040215,
+      "adjusted_moving_block_ci": [
+        -0.08366801327863745,
+        0.03280257495665667
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.46705882352941175,
+      "exact_geometry_matched_null": 0.47497624326892623,
+      "delta_mean": -0.007917419739514445,
+      "adjusted_moving_block_ci": [
+        -0.04556447856304386,
+        0.028553168495779675
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.058823529411764705,
+      "exact_geometry_matched_null": 0.07135490714617204,
+      "delta_mean": -0.012531377734407339,
+      "adjusted_moving_block_ci": [
+        -0.03606078949911322,
+        0.006292151677357366
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.3835294117647057,
+      "exact_geometry_matched_null": 2.4,
+      "delta_mean": -0.01647058823529403,
+      "adjusted_moving_block_ci": [
+        -0.12352941176470579,
+        0.06941176470588244
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2_positive_50_target_block_share": {
+      "observed": 0.47058823529411764,
+      "required_minimum": 0.65,
+      "passed": false
+    }
+  }
 }

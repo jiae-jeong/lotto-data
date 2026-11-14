@@ -1,0 +1,21 @@
+{
+  "update_id": "E045_READINESS_UPDATE_1251_20261114",
+  "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+  "target_round": 1251,
+  "data_cutoff": 1250,
+  "task_registered": true,
+  "runner_present": true,
+  "historical_gate_evaluated": true,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "ready_file_exists": false,
+  "line_level_output_status": "SUPPRESSED_NOT_READY",
+  "prospective_confirmation_required": true,
+  "prospective_minimum_target_count": null,
+  "prospective_completion_rule": null,
+  "blocking_reason": "The policy requires prospective confirmation but has no minimum target count or completion rule. Historical gate results alone cannot create purchase readiness.",
+  "final_purchase_freeze_allowed": false,
+  "random_fallback_allowed": false,
+  "no_threshold_changes": true
+}
