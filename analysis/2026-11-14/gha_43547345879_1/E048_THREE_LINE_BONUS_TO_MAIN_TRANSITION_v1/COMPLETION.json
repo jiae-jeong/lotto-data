@@ -8,5 +8,9 @@
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
   "computation_complete": true,
-  "promotion_to_purchase_policy": false
+  "promotion_to_purchase_policy": false,
+  "evidence_class": "DUPLICATE_REPRODUCTION_ONLY",
+  "duplicate_of_run_id": 43547128786,
+  "independent_evidence": false,
+  "counted_as_additional_research_axis": false
 }
