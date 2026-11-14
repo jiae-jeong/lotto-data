@@ -65,9 +65,19 @@ jobs:
           assert [task_id for task_id in ids if task_id in set(e030_e035)] == e030_e035
           assert [task_id for task_id in ids if task_id in set(e036_e042)] == e036_e042
           assert max(ids.index(task_id) for task_id in e030_e035) < min(ids.index(task_id) for task_id in e036_e042)
+          e043_e048 = [
+              'E043_H1250_A_FIXED_BANK_ALLOCATOR_v1',
+              'E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1',
+              'E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2',
+              'E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1',
+              'E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1',
+              'E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1']
+          assert all(ids.count(task_id)==1 for task_id in e043_e048)
+          assert [task_id for task_id in ids if task_id in set(e043_e048)] == e043_e048
+          assert max(ids.index(task_id) for task_id in e036_e042) < min(ids.index(task_id) for task_id in e043_e048)
           for prior in ('E010_FAMILY_DECORRELATION_v1','E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1','E025_INDEPENDENT_SIGNAL_DISCOVERY_v1','E029_FIVE_LINE_PROMOTION_GATE_v2'):
               assert ids.count(prior)==1, prior
-          print('E030-E035 queue contract PASS; prior IDs retained')
+          print('E030-E048 queue contract PASS; prior IDs retained')
           PY
 
   research:
