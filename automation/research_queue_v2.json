@@ -767,7 +767,13 @@
         "execution_mode": "dedicated_workflow",
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
-      }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+      "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
+      "preregistration": "automation/e036_e042_preregistration.json",
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
     },
     {
       "id": "E037_PREDICTABILITY_FALSIFICATION_v1",
@@ -813,7 +819,13 @@
         "execution_mode": "dedicated_workflow",
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
-      }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+      "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
+      "preregistration": "automation/e036_e042_preregistration.json",
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
     },
     {
       "id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
@@ -858,7 +870,13 @@
         "execution_mode": "dedicated_workflow",
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
-      }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+      "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
+      "preregistration": "automation/e036_e042_preregistration.json",
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
     },
     {
       "id": "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
@@ -904,7 +922,13 @@
         "execution_mode": "dedicated_workflow",
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
-      }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+      "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
+      "preregistration": "automation/e036_e042_preregistration.json",
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
     },
     {
       "id": "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
@@ -948,7 +972,13 @@
         "execution_mode": "dedicated_workflow",
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
-      }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+      "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
+      "preregistration": "automation/e036_e042_preregistration.json",
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
     },
     {
       "id": "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
@@ -994,7 +1024,13 @@
         "execution_mode": "dedicated_workflow",
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
-      }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+      "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
+      "preregistration": "automation/e036_e042_preregistration.json",
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
     },
     {
       "id": "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
@@ -1038,7 +1074,13 @@
         "execution_mode": "dedicated_workflow",
         "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
         "preregistration": "automation/e036_e042_preregistration.json"
-      }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "IMPLEMENTED_AWAITING_DEDICATED_WORKFLOW_DISPATCH",
+      "execution_entrypoint": "automation/calibrate_and_research_e036_e042.py",
+      "workflow_entrypoint": ".github/workflows/e036-e042-null-gate-research.yml",
+      "preregistration": "automation/e036_e042_preregistration.json",
+      "dispatch_requested_at_kst": "2026-11-14T15:10:00+09:00"
     },
     {
       "id": "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
