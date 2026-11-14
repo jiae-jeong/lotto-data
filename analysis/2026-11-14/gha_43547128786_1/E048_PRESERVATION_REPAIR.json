@@ -38,5 +38,8 @@
   "strict_pass_ready": false,
   "purchase_lines_generated": false,
   "no_model_recalculation_during_repair": true,
-  "no_threshold_or_comparator_changes": true
+  "no_threshold_or_comparator_changes": true,
+  "duplicate_reproduction_run_id": 43547345879,
+  "duplicate_reproduction_classification": "DUPLICATE_REPRODUCTION_ONLY; primary prediction, random-baseline, block-stability, and inference blobs byte-identical; not independent evidence.",
+  "one_shot_guard_fix_commit": "b3c1346331275011f1119d7ad3064e9018bfb26f"
 }
