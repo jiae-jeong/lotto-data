@@ -1,0 +1,42 @@
+{
+  "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+  "status": "PRESERVATION_STEP_FAILED_REPAIRED",
+  "run_id": 43547128786,
+  "run_attempt": 1,
+  "failed_step": "Preserve validated E048 outputs",
+  "failure_reason": "git diff --cached --check interpreted CRLF terminators in the three CSV artifacts and manifest as trailing whitespace.",
+  "computation_status": "COMPLETE",
+  "output_commit": "4c896ce0e5bc062fb216018a48de5038abb53439",
+  "repaired_artifacts": [
+    "PREDICTIONS.csv",
+    "RANDOM_BASELINE.csv",
+    "BLOCK_STABILITY.csv",
+    "SHA256_MANIFEST.csv"
+  ],
+  "manifest_entries": 8,
+  "manifest_status": "PASS",
+  "independent_recheck": {
+    "target_count": 849,
+    "target_range": [
+      401,
+      1249
+    ],
+    "training_cutoff_violations": 0,
+    "portfolio_geometry_violations": 0,
+    "metric_recalculation_mismatches": 0,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 101880,
+    "random_geometry_violations": 0,
+    "block_count_including_remainder": 17,
+    "final_remainder_block": {
+      "start_target": 1201,
+      "end_target": 1249,
+      "n": 49
+    }
+  },
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "purchase_lines_generated": false,
+  "no_model_recalculation_during_repair": true,
+  "no_threshold_or_comparator_changes": true
+}
