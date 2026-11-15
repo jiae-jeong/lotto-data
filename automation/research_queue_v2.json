@@ -2864,5 +2864,37 @@
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged. E054 is a one-shot dedicated three-line workflow triggered by a frozen execution marker; existing schedules and trigger modes are unchanged. E055 is a dedicated one-shot historical triple-recent-strength falsification workflow; no schedule or existing delivery task changed."
+  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged. E054 is a one-shot dedicated three-line workflow triggered by a frozen execution marker; existing schedules and trigger modes are unchanged. E055 is a dedicated one-shot historical triple-recent-strength falsification workflow; no schedule or existing delivery task changed.",
+  "queue_contract_validation_history": [
+    {
+      "run_id": 43763359441,
+      "conclusion": "FAILURE",
+      "cause": "E056 append left the existing E043-E055 queue-suffix assertion stale; validation failed in test_independent_five_line.py."
+    },
+    {
+      "run_id": 43763373109,
+      "conclusion": "FAILURE",
+      "cause": "Same stale E043-E055 queue-suffix assertion; the new E056 queue assertions themselves passed."
+    },
+    {
+      "run_id": 43763579367,
+      "conclusion": "SUCCESS",
+      "tests": 145,
+      "queue_contract": "E030-E056 PASS",
+      "cause": "Updated suffix assertion and E056 queue contract validated."
+    },
+    {
+      "run_id": 43763587906,
+      "conclusion": "SUCCESS",
+      "queue_contract": "E030-E056 PASS",
+      "cause": "Post-fix full validation and queue contract passed."
+    }
+  ],
+  "latest_queue_validation": {
+    "run_id": 43763587906,
+    "run_number": 94,
+    "conclusion": "SUCCESS",
+    "queue_contract": "E030-E056 PASS",
+    "post_e056_execution_validation": false
+  }
 }
