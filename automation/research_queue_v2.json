@@ -2732,6 +2732,85 @@
         "purchase_recommendation_generated": false,
         "parameter_search": false
       }
+    },
+    {
+      "id": "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
+      "kind": "h005_fix_structure_mapping",
+      "question": "Does a one-vector, number-specific S005 structure membership mapping repair the rank-constant S008 structure family in cutoff-safe single-ticket walk-forward?",
+      "novelty": "One isolated algebraic mapping repair frozen before evaluation: replace the legacy 45-vector constant expansion with one 45-dimensional 45/0 membership vector appended once to six unchanged component rank vectors. One fixed 5000-ticket candidate bank, one model, exact 6/45 baseline, no variants or parameter search. Historical single-ticket diagnostic only.",
+      "spec": {
+        "study_id": "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
+        "kind": "h005_fix_structure_mapping",
+        "research_question": "Does replacing the legacy S008 rank-constant structure expansion with one number-specific S005 membership vector change the single-ticket ranking and improve mean hits over the exact 6/45 null in a frozen expanding walk-forward?",
+        "data_cutoff": 1250,
+        "target_rounds": "201..1250 inclusive",
+        "target_count": 1050,
+        "training_cutoff_rule": "For each target t, use only rounds 1..t-1; never include the target draw or any later draw in training or model selection.",
+        "primary_metric": "Overall mean main-number hits per single-ticket prediction minus the exact hypergeometric 6/45 expectation across targets 201..1250.",
+        "secondary_metrics": [
+          "0..6 hit distribution",
+          "2+/3+/4+/5+/6 rates",
+          "fixed recent100 and recent50 descriptive windows",
+          "four fixed chronological block windows",
+          "mapping_changed_targets",
+          "ticket overlap and hit/score correlations versus legacy S008 and S005 references"
+        ],
+        "comparator": "Frozen legacy S008 reconstruction from six unchanged component-rank vectors plus its 45 constant structure vectors; S005 structure-transition ticket retained as a reference only.",
+        "baseline": "Exact hypergeometric P(K=k)=C(6,k)C(39,6-k)/C(45,6); expected mean hits 0.8.",
+        "multiplicity_correction": "One corrected mapping and one model only; no parameter search or variants. Fixed recent/block windows are descriptive and are not separate confirmatory tests.",
+        "block_stability": [
+          "201..500",
+          "501..800",
+          "801..1100",
+          "1101..1250"
+        ],
+        "random_seed": 20261008,
+        "candidate_bank": {
+          "seed": 20261008,
+          "size": 5000,
+          "sha256": "134724abb3f8930fbb3cf24499e537aa00ed9e49239dbb79029163d76a412220"
+        },
+        "corrected_mapping": "One 45-dimensional family vector: 45 for each of the six numbers in the S005 structure ticket, 0 for the other 39; append this vector once to the six S001/S002/S003/S004/S006/S007 rank vectors and average seven families.",
+        "legacy_mapping_proof": "Legacy S008 appends 45 constant vectors (six [45]*45 and thirty-nine [0]*45) to six component-rank vectors, for 51 vectors total; the structure contribution is 270/51=5.2941176470588235 for every number and is therefore rank-constant.",
+        "parameter_search": false,
+        "variants_evaluated": 1,
+        "study_class": "empirical",
+        "evidence_class": "HISTORICAL_DIAGNOSTIC_ONLY_NOT_THREE_LINE_READINESS",
+        "prospective_confirmation_required": true,
+        "prospective_confirmation_status": "NOT_EVALUATED_BY_THIS_HISTORICAL_DIAGNOSTIC",
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "purchase_recommendation_generated": false,
+        "expected_output_files": [
+          "walkforward_predictions.csv",
+          "model_metrics.csv",
+          "model_correlation.csv",
+          "study_registry.csv",
+          "failure_registry.csv",
+          "surviving_models.csv",
+          "mapping_audit.json",
+          "random_baseline.json",
+          "MODEL_SPEC.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "walkforward_predictions_csv": 1050,
+          "model_metrics_csv": 24,
+          "model_correlation_csv": 3,
+          "study_registry_csv": 1,
+          "failure_registry_csv": 24,
+          "surviving_models_csv": 1
+        }
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_entrypoint": "automation/h005_fix_structure_to_number_mapping_e056_v1.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e056-h005-fix.yml",
+      "preregistration": "research/weekly_purchase/1251/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_PREREG_20261116.json",
+      "target_1251_three_line_readiness_eligible": false
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
