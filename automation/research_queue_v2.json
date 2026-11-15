@@ -2803,14 +2803,64 @@
           "study_registry_csv": 1,
           "failure_registry_csv": 24,
           "surviving_models_csv": 1
-        }
+        },
+        "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY"
       },
       "execution_mode": "dedicated_workflow",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
       "execution_entrypoint": "automation/h005_fix_structure_to_number_mapping_e056_v1.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e056-h005-fix.yml",
       "preregistration": "research/weekly_purchase/1251/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_PREREG_20261116.json",
-      "target_1251_three_line_readiness_eligible": false
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_attempt_history": [
+        {
+          "workflow_run_id": 43763437112,
+          "conclusion": "FAILURE",
+          "stage": "publish",
+          "study_execution": "SUCCESS",
+          "verification_status": "PASS",
+          "cause": "Non-fast-forward push because main advanced after the original checkout; no research output was persisted.",
+          "summary": {
+            "targets": 1050,
+            "metrics": 24,
+            "manifest_entries": 12,
+            "mapping_changed_targets": 932,
+            "historical_classification": "WEAK",
+            "strict_pass_ready": false
+          }
+        },
+        {
+          "workflow_run_id": 43763792271,
+          "conclusion": "SUCCESS",
+          "stage": "study_verify_publish",
+          "study_execution": "SUCCESS",
+          "verification_status": "PASS",
+          "manifest_entries": 12,
+          "mapping_changed_targets": 932,
+          "historical_classification": "WEAK",
+          "strict_pass_ready": false
+        }
+      ],
+      "execution_result": {
+        "workflow_run_id": 43763792271,
+        "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43763792271",
+        "result_path": "analysis/2026-11-16/43763792271/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
+        "data_cutoff": 1250,
+        "target_range": [
+          201,
+          1250
+        ],
+        "target_count": 1050,
+        "mapping_changed_targets": 932,
+        "legacy_mapping_algebra_checks": 1050,
+        "historical_classification": "WEAK",
+        "verification_status": "PASS",
+        "manifest_entries": 12,
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "purchase_recommendation_generated": false,
+        "evidence_class": "HISTORICAL_SINGLE_TICKET_DIAGNOSTIC_NOT_THREE_LINE_READINESS"
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
