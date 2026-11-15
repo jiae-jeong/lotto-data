@@ -101,6 +101,15 @@ def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def normalize_csv_outputs(outdir: Path):
+    """Use LF-only UTF-8 CSV bytes so git diff --check does not treat CR as trailing whitespace."""
+    for path in outdir.glob("*.csv"):
+        raw = path.read_bytes()
+        if raw.startswith(b"\xef\xbb\xbf"):
+            raw = raw[3:]
+        path.write_bytes(raw.replace(b"\r\n", b"\n"))
+
+
 def _verify_preregistration(prereg: dict, policy: dict):
     if prereg.get("study_id") != STUDY_ID or prereg.get("policy_id") != policy.get("policy_id"):
         raise ValueError("E053 preregistration/policy identity mismatch")
@@ -409,6 +418,7 @@ def run(date_kst: str, run_id: str):
          "mean_delta_any2", "mean_delta_any3", "mean_delta_winning_union_coverage",
          "any2_positive"],
     )
+    normalize_csv_outputs(outdir)
     source_paths = [PREREG_PATH, POLICY_PATH, BASE_RUNNER, Path(__file__).resolve()]
     source_hashes = {path.relative_to(ROOT).as_posix(): _sha(path) for path in source_paths}
     base.write_json(outdir / "MODEL_SPEC.json", {
@@ -537,6 +547,7 @@ def run(date_kst: str, run_id: str):
     ])
     (outdir / "REPORT.md").write_text("\n".join(report) + "\n", encoding="utf-8")
     manifest_entries = base.write_and_verify_manifest(outdir)
+    normalize_csv_outputs(outdir)
     if manifest_entries != 8:
         raise AssertionError(f"E053 manifest entries {manifest_entries} != 8")
     return {

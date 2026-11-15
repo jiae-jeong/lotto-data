@@ -1,5 +1,6 @@
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -64,6 +65,13 @@ class Lag2MembershipContextE053Tests(unittest.TestCase):
         self.assertEqual(len(union), 18)
         self.assertTrue(all(len(line) == 6 for line in first))
         self.assertTrue(all(not (set(a) & set(b)) for i, a in enumerate(first) for b in first[i+1:]))
+
+    def test_csv_normalization_removes_bom_and_crlf(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "sample.csv"
+            path.write_bytes(b"\xef\xbb\xbfpath,sha256,bytes\r\nA.csv,abc,3\r\n")
+            study.normalize_csv_outputs(Path(tmp))
+            self.assertEqual(path.read_bytes(), b"path,sha256,bytes\nA.csv,abc,3\n")
 
     def test_preregistration_matches_frozen_three_line_policy(self):
         prereg = json.loads(study.PREREG_PATH.read_text(encoding="utf-8"))

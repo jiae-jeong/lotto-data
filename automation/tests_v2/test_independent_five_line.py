@@ -39,7 +39,7 @@ class IndependentFiveLineTests(unittest.TestCase):
         self.assertEqual(ids[e036_start:e036_start + len(expected_e036_e042)], expected_e036_e042)
         self.assertLess(prior_start, e030_start)
         self.assertLess(e030_start, e036_start)
-        expected_e043_e052 = [
+        expected_e043_e053 = [
             "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
@@ -49,8 +49,9 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
             "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
             "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+            "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
         ]
-        self.assertEqual(ids[-len(expected_e043_e052):], expected_e043_e052)
+        self.assertEqual(ids[-len(expected_e043_e053):], expected_e043_e053)
         e046 = next(task for task in queue["tasks"] if task["id"] == "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1")
         self.assertEqual(e046["execution_status"], "EXECUTED_DESIGN_PLANNING_COMPLETE")
         daily._validate_task(e046)
@@ -98,6 +99,21 @@ class IndependentFiveLineTests(unittest.TestCase):
         if e052["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
             self.assertEqual(e052["execution_result"]["verification_status"], "PASS")
             self.assertFalse(e052["execution_result"]["strict_pass_ready"])
+
+        e053 = next(task for task in queue["tasks"] if task["id"] == "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1")
+        self.assertEqual(e053["kind"], "three_line_lag2_membership_context")
+        self.assertEqual(e053["execution_entrypoint"], "automation/three_line_lag2_membership_context_e053_v1.py")
+        self.assertEqual(e053["workflow_entrypoint"], ".github/workflows/target-1251-e053-lag2-membership-context.yml")
+        self.assertEqual(e053["preregistration"], "research/weekly_purchase/1251/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json")
+        self.assertEqual(e053["spec"]["execution_status"], e053["execution_status"])
+        self.assertIn(e053["execution_status"], (
+            "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+            "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+            "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING",
+        ))
+        if e053["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
+            self.assertEqual(e053["execution_result"]["verification_status"], "PASS")
+            self.assertFalse(e053["execution_result"]["strict_pass_ready"])
         self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
                          "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
         for task in queue["tasks"][prior_start:prior_start + len(expected_prior)]: daily._validate_task(task)
