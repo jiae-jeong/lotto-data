@@ -1,0 +1,143 @@
+{
+  "study_id": "E057_THREE_LINE_NULL_GATE_CALIBRATION_v1",
+  "evidence_class": "NULL_GATE_CALIBRATION_ONLY_NOT_PREDICTIVE_EVIDENCE_NOT_PROSPECTIVE_CONFIRMATION",
+  "preregistration": {
+    "path": "research/weekly_purchase/1251/E057_THREE_LINE_NULL_GATE_CALIBRATION_PREREG_20261116.json",
+    "blob_sha": "f4cb6d2756b16d7d8fc3019f1c02e6a80c9ef9f2",
+    "commit_sha": "aff7e6866537f666fc0faa82c099daa50471b49e"
+  },
+  "data": {
+    "path": "lotto_data.csv",
+    "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850
+  },
+  "exact_null": {
+    "method": "Hypergeometric count of winning labels in a uniform 18-subset, followed by conditional multivariate-hypergeometric allocation across three six-slot lines.",
+    "derived": {
+      "max_hits": 1.5142562485727549,
+      "any2": 0.4749762432689265,
+      "any3": 0.07135490714617208,
+      "winning_union_coverage": 2.4000000000000017
+    },
+    "frozen_E045": {
+      "max_hits": 1.514256248572755,
+      "any2": 0.47497624326892623,
+      "any3": 0.07135490714617204,
+      "winning_union_coverage": 2.4
+    },
+    "absolute_differences": {
+      "max_hits": 2.220446049250313e-16,
+      "any2": 2.7755575615628914e-16,
+      "any3": 4.163336342344337e-17,
+      "winning_union_coverage": 1.7763568394002505e-15
+    },
+    "variance": {
+      "max_hits": 0.48243519297932913,
+      "any2": 0.24937381159906405,
+      "any3": 0.06626338437233324,
+      "winning_union_coverage": 1.2763636363636275
+    }
+  },
+  "simulation": {
+    "null_trajectories": 1000,
+    "targets_per_trajectory": 850,
+    "random_portfolios_total": 850000,
+    "bootstrap_replicates_per_metric_per_trajectory": 4000,
+    "block_length": 50,
+    "blocks_per_trajectory": 17,
+    "remainder_targets": 0,
+    "seed": 20261116057,
+    "rng": "xorshift32",
+    "portfolio_generation": "Partial Fisher-Yates uniform 18-subset without replacement, then partition into three ordered groups of six.",
+    "geometry_violations": 0
+  },
+  "empirical_null": {
+    "max_hits": {
+      "mean": 1.513435294117647,
+      "exact_mean": 1.5142562485727549,
+      "delta": -0.0008209544551078807,
+      "mc_se": 0.0007533729589451688,
+      "z": -1.0897052321300937,
+      "individual_adjusted_ci_lower_positive_rate": 0.015
+    },
+    "any2": {
+      "mean": 0.4747235294117647,
+      "exact_mean": 0.4749762432689265,
+      "delta": -0.0002527138571618015,
+      "mc_se": 0.0005416465220255995,
+      "z": -0.46656601101531237,
+      "individual_adjusted_ci_lower_positive_rate": 0.015
+    },
+    "any3": {
+      "mean": 0.07086705882352941,
+      "exact_mean": 0.07135490714617208,
+      "delta": -0.0004878483226426755,
+      "mc_se": 0.0002792076696492779,
+      "z": -1.7472597484713732,
+      "individual_adjusted_ci_lower_positive_rate": 0.009
+    },
+    "winning_union_coverage": {
+      "mean": 2.3977823529411766,
+      "exact_mean": 2.4000000000000017,
+      "delta": -0.0022176470588251007,
+      "mc_se": 0.0012253996401480032,
+      "z": -1.8097337278124663,
+      "individual_adjusted_ci_lower_positive_rate": 0.012
+    }
+  },
+  "strict_gate_false_pass": {
+    "false_passes": 1,
+    "trajectories": 1000,
+    "rate": 0.001,
+    "rate_percent": 0.1,
+    "wilson_95": [
+      0.00017654637062607809,
+      0.0056425585979579355
+    ],
+    "wilson_95_percent": [
+      0.01765463706260781,
+      0.5642558597957936
+    ],
+    "rule": "All four adjusted moving-block CI lower bounds strictly > 0 AND at least 65% of 17 non-overlapping 50-target any2-delta blocks positive."
+  },
+  "any2_positive_block_share": {
+    "mean": 0.5268823529411754,
+    "threshold_share": 0.65,
+    "threshold_blocks_required": 12,
+    "trajectories_meeting_block_rule_alone": 118,
+    "rate_meeting_block_rule_alone": 0.118,
+    "distribution_counts_by_positive_blocks": [
+      0,
+      0,
+      2,
+      5,
+      11,
+      34,
+      73,
+      127,
+      160,
+      182,
+      165,
+      123,
+      74,
+      32,
+      8,
+      4,
+      0,
+      0
+    ],
+    "min_positive_blocks": 2,
+    "max_positive_blocks": 15
+  },
+  "interpretation": {
+    "gate_calibration": "PASS for this single exact-uniform disjoint-union18 null mechanism: 1/1000 null trajectories passed the full unchanged gate; the 95% Wilson upper bound is 0.5643%, below the 5% familywise ceiling.",
+    "limitations": "This is not a predictive model test. It does not calibrate persistent or adversarial non-predictive signal mechanisms, and does not establish any candidate or portfolio edge.",
+    "promotion": "No model promotion, no strict purchase readiness, no freeze/seal, no candidate or purchase lines generated."
+  }
+}
