@@ -14,7 +14,8 @@
   "predictive_edge_claimed": false,
   "purchase_readiness_changed": false,
   "strict_pass_ready": false,
-  "manifest_entries": 6,
-  "manifest_status": "PASS_AFTER_POSTWRITE_HASH_RECHECK",
-  "runner_reference_status": "STORED_FOR_REPRODUCTION_NOT_EXECUTED_IN_THIS_RUN"
+  "runner_reference_status": "STORED_FOR_REPRODUCTION_NOT_EXECUTED_IN_THIS_RUN",
+  "git_blob_manifest_path": "GIT_BLOB_MANIFEST.csv",
+  "git_blob_manifest_status": "PENDING_POSTWRITE_FETCH",
+  "output_sha256_manifest_status": "NOT_COMPUTED"
 }
