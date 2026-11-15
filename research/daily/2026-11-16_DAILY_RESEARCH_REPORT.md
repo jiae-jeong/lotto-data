@@ -73,3 +73,26 @@
 3. E043/E044는 전용 workflow dispatch가 가능한 실행 경로에서 원본 preregistration 그대로 수행하고, 결과는 5줄 역사 진단에만 보관하기.
 
 오늘은 gate의 무작위 오통과율을 실제 계산했을 뿐, 예측력이 있는 모델을 찾았다고 주장하지 않아. 구매용 최종 3줄은 생성·출력하지 않았고 freeze/seal도 만들지 않았어.
+
+
+## 2026-11-16 추가 실계산 — E058/E059
+
+### E058 persistent non-predictive null
+- 1,000 trajectories, 850,000 portfolios, 4,000 moving-block bootstrap replicates per metric/trajectory.
+- Null process: each of three lines retains 3/6 numbers per transition; union retention is 9/18; target outcomes are not used to generate portfolios.
+- Strict-gate false passes: 0/1,000 (0.00%); 95% Wilson interval 0.0000%-0.3827%.
+- Mean any2 lag-1 autocorrelation: -0.000733; all empirical null means were within 2 trajectory-level MCSE of exact expectations.
+- This is a single persistent-null calibration only, not predictive evidence and not a reason to change the gate.
+
+### E059 E054 candidate-stage decomposition
+- Reproduced frozen E054 regime/HHI/exposure and all score SHA-256 values on 850/850 targets.
+- Candidate recall TOP10/15/20/25/30: 21.667% / 32.569% / 43.059% / 54.902% / 66.039%.
+- Exact random expectations: 22.222% / 33.333% / 44.444% / 55.556% / 66.667%.
+- All five adjusted moving-block intervals include zero; no candidate-stage advantage is established over random or recent30.
+- Winner miss trace: 5,100 winner instances, with regime-specific success/exposure, E054 rank/score, recent30 rank, and cutoff margins preserved.
+
+The E058 parser preflight repair and E059 verification-summary repair were both technical-only; source data, cutoff, model scores, thresholds, and inference were unchanged. The original failure records remain preserved with separate addenda.
+
+Detailed supplement: [2026-11-16 E058/E059 daily research supplement](https://github.com/jiae-jeong/lotto-data/blob/main/research/daily/2026-11-16_E058_E059_SUPPLEMENT.md)
+
+1251 remains STRICT_FAIL / NOT READY. No candidate numbers or final purchase lines were generated; no fallback, freeze, or seal was created.
