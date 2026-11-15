@@ -8,6 +8,7 @@ on:
       - 'automation/three_line_lag2_membership_context_e053_v1.py'
       - 'automation/tests_v2/test_three_line_lag2_membership_context_e053.py'
       - 'research/weekly_purchase/1251/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json'
+      - 'research/weekly_purchase/1251/E053_TECHNICAL_REPAIR_AUDIT_20261115.json'
       - 'automation/research_queue_v2.json'
       - '.github/workflows/target-1251-e053-lag2-membership-context.yml'
 
@@ -47,12 +48,34 @@ jobs:
           policy = json.loads(policy_path.read_text(encoding="utf-8"))
           queue = json.loads(Path("automation/research_queue_v2.json").read_text(encoding="utf-8"))
           frozen = prereg["frozen_blobs"]
+          repair_path = Path("research/weekly_purchase/1251/E053_TECHNICAL_REPAIR_AUDIT_20261115.json")
+          repair = json.loads(repair_path.read_text(encoding="utf-8"))
+          original = repair["original_preregistration"]
+          technical = repair["technical_repair"]
+          successful = repair["successful_reexecution"]
           def blob(path):
               return subprocess.check_output(["git", "rev-parse", "HEAD:" + path.as_posix()], text=True).strip()
-          assert blob(runner_path) == frozen["runner_blob_sha"]
-          assert blob(test_path) == frozen["test_blob_sha"]
-          assert blob(base_path) == frozen["base_runner_blob_sha"]
-          assert blob(policy_path) == frozen["policy_blob_sha"]
+          original_ref = original["commit"] + ":" + prereg_path.as_posix()
+          assert subprocess.check_output(["git", "rev-parse", original_ref], text=True).strip() == original["blob_sha"]
+          assert frozen == original["frozen_blobs"]
+          assert blob(prereg_path) == repair["post_failure_preregistration_hash_update"]["current_blob_sha"]
+          assert hashlib.sha256(prereg_path.read_bytes()).hexdigest() == repair["post_failure_preregistration_hash_update"]["current_sha256"]
+          assert blob(runner_path) == technical["runner_blob_sha_after"]
+          assert blob(test_path) == technical["test_blob_sha_after"]
+          assert blob(base_path) == frozen["base_runner_blob_sha"] == technical["base_runner_blob_sha_unchanged"]
+          assert blob(policy_path) == frozen["policy_blob_sha"] == technical["policy_blob_sha_unchanged"]
+          assert technical["only_output_serialization_changed"] is True
+          for key in ("algorithm_changed", "feature_definition_changed", "estimator_changed",
+                      "portfolio_selection_changed", "target_range_changed", "data_cutoff_changed",
+                      "random_seed_changed", "random_comparator_changed",
+                      "bootstrap_method_or_replicates_changed", "alpha_or_threshold_changed",
+                      "block_length_changed", "prospective_rule_changed", "parameter_search_enabled"):
+              assert technical[key] is False, key
+          assert successful["workflow_run_id"] == 43694556989
+          assert successful["verification_status"] == "PASS"
+          assert successful["manifest_entries"] == 8
+          assert successful["strict_pass_ready"] is False
+          assert repair["audit_decision"]["original_preregistration_blob_preserved_in_git_history"] is True
           assert prereg["study_id"] == "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1"
           assert prereg["date_kst"] == "2026-11-15" and prereg["target_round"] == 1251
           assert prereg["registered_at_kst"] == "2026-11-15T17:09:13+09:00"

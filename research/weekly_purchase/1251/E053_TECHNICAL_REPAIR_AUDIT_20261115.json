@@ -1,0 +1,111 @@
+{
+  "audit_id": "E053_TECHNICAL_REPAIR_AUDIT_20261115",
+  "recorded_at_kst": "2026-11-15T20:00:40+09:00",
+  "study_id": "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+  "classification": "APPEND_ONLY_TECHNICAL_OUTPUT_REPAIR_NOT_A_NEW_RESEARCH_AXIS",
+  "source_data": {
+    "cutoff": 1250,
+    "rows": 1250,
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+  },
+  "original_preregistration": {
+    "registered_at_kst": "2026-11-15T17:09:13+09:00",
+    "commit": "2e01531f465990175d11af41d1a1204ac9c0cc85",
+    "blob_sha": "692c19448de5fafdbd0700075a6c93005a0b39e6",
+    "frozen_blobs": {
+      "runner_blob_sha": "b2b8985dd3ebc5d5374909323c5b7d7a15b4308e",
+      "test_blob_sha": "ffb64b1091259eb2b565f172305b1d7fb6664e1c",
+      "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+      "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+    }
+  },
+  "post_failure_preregistration_hash_update": {
+    "current_blob_sha": "0f3f98d7e835ca655e5f096ad4411e7837251ebf",
+    "current_sha256": "cbb44c8650dcf6b494eb572d2417e6e932ee3141b74ac3d063edff1ea33fe559",
+    "changed_fields": [
+      "frozen_blobs.runner_blob_sha",
+      "frozen_blobs.test_blob_sha"
+    ],
+    "reason": "The initial run completed the study and verification but could not publish CSV evidence because BOM/CRLF bytes were rejected by git diff --check. The preregistration's frozen implementation hashes were updated to identify the serialization-only repair used for the successful re-execution. The original preregistration blob and original code hashes remain recoverable at the recorded commit.",
+    "original_registered_at_timestamp_preserved": true
+  },
+  "first_attempt": {
+    "workflow_run_id": 43694329131,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43694329131",
+    "conclusion": "failure",
+    "artifact_id": 14153274067,
+    "artifact_preserved": true,
+    "computation_and_verification_completed": true,
+    "failed_step": "Publish immutable E053 evidence",
+    "failure_reason": "git diff --check reported trailing whitespace in CSV output because UTF-8 BOM and CRLF line endings were present.",
+    "initial_runner_blob_sha": "b2b8985dd3ebc5d5374909323c5b7d7a15b4308e",
+    "initial_test_blob_sha": "ffb64b1091259eb2b565f172305b1d7fb6664e1c"
+  },
+  "technical_repair": {
+    "commit": "3cb8a84540d557f213da9f062a4d92c8a6bdddfc",
+    "runner_blob_sha_before": "b2b8985dd3ebc5d5374909323c5b7d7a15b4308e",
+    "runner_blob_sha_after": "5044525ada7d6447056ef778884fbc4fb177e025",
+    "test_blob_sha_before": "ffb64b1091259eb2b565f172305b1d7fb6664e1c",
+    "test_blob_sha_after": "0b873bdf640af11b09067655b469bfea944e5c86",
+    "base_runner_blob_sha_unchanged": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha_unchanged": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+    "scope": "Added UTF-8 BOM removal and CRLF-to-LF normalization for generated CSV evidence, plus a focused serialization unit test.",
+    "only_output_serialization_changed": true,
+    "algorithm_changed": false,
+    "feature_definition_changed": false,
+    "estimator_changed": false,
+    "portfolio_selection_changed": false,
+    "target_range_changed": false,
+    "data_cutoff_changed": false,
+    "random_seed_changed": false,
+    "random_comparator_changed": false,
+    "bootstrap_method_or_replicates_changed": false,
+    "alpha_or_threshold_changed": false,
+    "block_length_changed": false,
+    "prospective_rule_changed": false,
+    "parameter_search_enabled": false,
+    "statistical_code_changes_outside_serialization": []
+  },
+  "successful_reexecution": {
+    "workflow_run_id": 43694556989,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43694556989",
+    "conclusion": "success",
+    "result_commit": "1352e920085d95d6ed37ce08e11fb3cc54af8741",
+    "verification_status": "PASS",
+    "data_cutoff": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 102000,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "manifest_entries": 8,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "purchase_recommendation_generated": false,
+    "accepted_result_path": "analysis/2026-11-15/gha_43694556989_1/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1"
+  },
+  "queue_contract_repair": {
+    "failed_validation_run_id": 43694329165,
+    "failed_validation_reason": "The legacy queue-order test expected E052 as the last item and did not yet include E053.",
+    "successful_validation_run_id": 43694556991,
+    "successful_validation_status": "PASS",
+    "scope": "Updated the queue contract test to include E053; the research queue task itself was not altered by this test-only correction."
+  },
+  "audit_decision": {
+    "original_preregistration_blob_preserved_in_git_history": true,
+    "post_failure_hash_update_explicitly_documented": true,
+    "successful_reexecution_is_canonical": true,
+    "first_attempt_is_preserved_but_not_canonical": true,
+    "historical_result": "STRICT_FAIL",
+    "strict_pass_ready": false,
+    "no_threshold_or_inference_relaxation": true,
+    "no_purchase_lines_or_freeze_created": true
+  }
+}
