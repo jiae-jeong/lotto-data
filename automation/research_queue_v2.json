@@ -2612,7 +2612,7 @@
       "execution_entrypoint": "automation/three_line_triple_recent_strength_e055_v1.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e055-triple-recent-strength.yml",
       "preregistration": "research/weekly_purchase/1251/E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_PREREG_20261116.json",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_TRIPLE_STRENGTH_NOT_SUPPORTED",
       "spec": {
         "study_id": "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
         "kind": "three_line_triple_recent_strength_falsification",
@@ -2689,7 +2689,48 @@
           "source_verification_blob_sha": "d033919199fcfee79b62bd1aa1e1cd365682148e",
           "source_prereg_blob_sha": "1b5c908024ab5efd5e832cbedc2ae399fa04cddb"
         },
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+        "execution_status": "EXECUTED_TRIPLE_STRENGTH_NOT_SUPPORTED"
+      },
+      "execution_result": {
+        "study_id": "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
+        "evidence_class": "HISTORICAL_PREDICTIVE_FALSIFICATION_NOT_PURCHASE_READINESS",
+        "workflow_run_id": 43739068778,
+        "workflow_run_number": 3,
+        "run_attempt": 1,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43739068778",
+        "completed_at_kst": "2026-11-16T02:05:06.933606+09:00",
+        "result_path": "analysis/2026-11-16/gha_43739068778_1/E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
+        "data_cutoff": 1250,
+        "target_range": [
+          401,
+          1250
+        ],
+        "target_count": 850,
+        "evaluation_blocks": 15,
+        "random_trajectory_count": 120,
+        "random_bundles_total": 102000,
+        "bootstrap_replicates": 4000,
+        "bootstrap_block_length_blocks": 3,
+        "training_cutoff_violations": 0,
+        "leakage_failures": 0,
+        "portfolio_geometry_violations": 0,
+        "random_geometry_violations": 0,
+        "verification_status": "PASS",
+        "manifest_entries": 8,
+        "manifest_status": "PASS",
+        "model_correlation": -0.3087423483252701,
+        "model_correlation_bootstrap_ci": [
+          -0.6123379597306222,
+          -0.01750877082754063
+        ],
+        "random_mean_correlation": -0.09100079619796207,
+        "random_95th_percentile": 0.2802685886364868,
+        "random_tail_probability": 0.8264462809917356,
+        "predictive_signal_supported": false,
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "purchase_recommendation_generated": false,
+        "parameter_search": false
       }
     }
   ],
