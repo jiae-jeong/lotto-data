@@ -192,7 +192,7 @@ def run(date,run_id):
     base.write_json(folder/"INFERENCE.json",inference)
     verification={"status":"PASS","study_id":STUDY,"data_cutoff":1250,"data_sha256":data_sha,
       "source_prediction_sha256":pr["source_prediction_sha256"],"source_prediction_records":len(source_rows),
-      "target_range":[401,1250],"target_count":850,"evaluation_blocks":len(specs),
+      "target_range":[401,1250],"target_count":850,"evaluation_blocks":len(specs),"block_count":len(specs),
       "random_trajectory_count":RANDOM_REPLICATES,"random_bundles_total":RANDOM_REPLICATES*850,
       "bootstrap_replicates":BOOTSTRAP_REPS,"bootstrap_block_length_blocks":BOOTSTRAP_BLOCKS,
       "training_cutoff_violations":cutoff_violations,"leakage_failures":0,
