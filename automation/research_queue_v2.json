@@ -2383,7 +2383,7 @@
       "execution_entrypoint": "automation/three_line_rolling_concentration_regime_e054_v1.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e054-rolling-concentration-regime.yml",
       "preregistration": "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
       "spec": {
         "study_id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
         "kind": "three_line_rolling_concentration_regime",
@@ -2503,7 +2503,104 @@
           "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
           "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
         },
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+        "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
+      },
+      "execution_result": {
+        "study_id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+        "evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+        "independent_research_axis": true,
+        "independent_signal_family": true,
+        "workflow_name": "target-1251-e054-rolling-concentration-regime",
+        "workflow_run_id": 43738196136,
+        "workflow_run_number": 1,
+        "run_attempt": 1,
+        "workflow_run_conclusion": "success",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43738196136",
+        "completed_at_kst": "2026-11-16T01:56:51.846904+09:00",
+        "result_path": "analysis/2026-11-16/gha_43738196136_1/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+        "data_cutoff": 1250,
+        "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+        "target_range": [
+          401,
+          1250
+        ],
+        "target_count": 850,
+        "random_bundles_per_target": 120,
+        "random_bundles_total": 102000,
+        "block_length": 50,
+        "block_count": 17,
+        "training_cutoff_violations": 0,
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "portfolio_geometry_violations": 0,
+        "random_geometry_violations": 0,
+        "verification_status": "PASS",
+        "manifest_entries": 9,
+        "manifest_status": "PASS",
+        "historical_strict_gate_pass": false,
+        "failed_gates": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage",
+          "any2_positive_50_target_block_share"
+        ],
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+        "parameter_search": false,
+        "thresholds_changed": false,
+        "alpha_changed": false,
+        "block_length_changed": false,
+        "comparator_changed": false,
+        "purchase_recommendation_generated": false,
+        "metrics": {
+          "max_hits": {
+            "observed_mean": 1.4776470588235293,
+            "exact_geometry_matched_null": 1.514256248572755,
+            "delta_mean": -0.03660918974922568,
+            "adjusted_moving_block_ci": [
+              -0.09072683680804922,
+              0.02339081025077432
+            ],
+            "lower_bound_strictly_gt_zero": false
+          },
+          "any2": {
+            "observed_mean": 0.4588235294117647,
+            "exact_geometry_matched_null": 0.47497624326892623,
+            "delta_mean": -0.016152713857161504,
+            "adjusted_moving_block_ci": [
+              -0.05497624326892621,
+              0.032082580260485556
+            ],
+            "lower_bound_strictly_gt_zero": false
+          },
+          "any3": {
+            "observed_mean": 0.06235294117647059,
+            "exact_geometry_matched_null": 0.07135490714617204,
+            "delta_mean": -0.009001965969701457,
+            "adjusted_moving_block_ci": [
+              -0.026649024793230867,
+              0.008645092853827953
+            ],
+            "lower_bound_strictly_gt_zero": false
+          },
+          "winning_union_coverage": {
+            "observed_mean": 2.3517647058823528,
+            "exact_geometry_matched_null": 2.4,
+            "delta_mean": -0.04823529411764697,
+            "adjusted_moving_block_ci": [
+              -0.14941176470588227,
+              0.04823529411764715
+            ],
+            "lower_bound_strictly_gt_zero": false
+          }
+        },
+        "any2_positive_50_target_block_share": 0.35294117647058826,
+        "regime_target_counts": {
+          "LOW": 394,
+          "HIGH": 456
+        }
       }
     }
   ],
