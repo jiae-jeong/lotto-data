@@ -1,0 +1,22 @@
+{
+  "correction_id": "E058_TECHNICAL_REPAIR_ADDENDUM_20261116",
+  "date_kst": "2026-11-16",
+  "classification": "PRE_EXECUTION_PARSER_REPAIR_ONLY",
+  "original_preregistration": "research/weekly_purchase/1251/E058_THREE_LINE_PERSISTENT_PORTFOLIO_NULL_CALIBRATION_PREREG_20261116.json",
+  "original_preregistration_blob_sha": "8a79a64f55f823b1880c3a2a5f3c98613afc30c0",
+  "original_runner": "automation/three_line_persistent_null_calibration_e058_v1.js",
+  "original_runner_blob_sha": "74ce6871a258250e6a7376d560587d59e6fc0179",
+  "preflight_failure": "The canonical CSV contains one internal blank physical line; the first parser treated it as a data row and rejected the physical line count.",
+  "correction": "Ignore blank physical CSV lines after the source bytes have been pinned; preserve the raw file and its SHA256 unchanged; validate exactly 1250 non-empty draw records.",
+  "replacement_runner": "automation/three_line_persistent_null_calibration_e058_v2.js",
+  "replacement_runner_blob_sha": "206df80b1952d37a98a942a101627ad61422e99d",
+  "scientific_specification_changed": false,
+  "data_or_source_changed": false,
+  "target_range_or_cutoff_changed": false,
+  "random_seed_changed": false,
+  "null_mechanism_changed": false,
+  "bootstrap_or_strict_gate_changed": false,
+  "parameters_or_variants_changed": false,
+  "research_execution_started_before_repair": false,
+  "correction_scope": "CSV parser only; no outcome, portfolio generation, metric, inference, or threshold logic changed."
+}
