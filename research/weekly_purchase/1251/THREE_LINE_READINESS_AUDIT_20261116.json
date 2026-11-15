@@ -43,16 +43,16 @@
     "E043": "Five-line allocator geometry study; IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH.",
     "E044_V2": "Five-line candidate-ranking study; IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH.",
     "E055": "Historical falsification diagnostic only; predictive triple-strength hypothesis not supported; not a purchase model or STRICT_PASS_READY candidate.",
-    "E056": "Implementation-only H005_FIX draft is present on main, but its referenced preregistration and dedicated workflow are absent; it has not been executed, is not registered in the three-line queue, and is not independent purchase-readiness evidence."
+    "E056": "Preregistered H005_FIX single-ticket structure-to-number mapping repair; historical diagnostic only; not a three-line portfolio axis, not prospective confirmation, and not eligible for STRICT_PASS_READY."
   },
   "no_future_leakage": true,
   "final_selection_randomness": false,
   "random_fallback_allowed": false,
   "final_purchase_freeze_allowed": false,
-  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.\n2026-11-14: Round 1250 (1,5,18,23,27,28 + bonus 8) was corroborated by 4th.kr and Topstarnews; source data appended and DAILY MASTER #103 started. Official API direct retrieval was not claimed.\n2026-11-15: E052 nested trailing-performance selector completed and was added to the target-1251 three-line evidence inventory. It failed the unchanged historical strict gates; no purchase lines or readiness artifact were created. DAILY MASTER RUN #107 was reconciled at cutoff 1250 and remains PARTIAL.\n2026-11-16: E054 rolling concentration regime was independently preregistered at cutoff 1250 before execution; strict gates, alpha, block length, comparator, and prospective rule remain unchanged. The dedicated one-shot workflow was pending at registration and later completed successfully in E054 RUN #1.\n2026-11-16: E054 completed successfully at 01:56:51 KST on cutoff 1250 (850 walk-forward targets, 102000 matched-random bundles, 4000 bootstrap replicates, zero leakage/cutoff/geometry violations, 9/9 manifest). Historical STRICT_FAIL; no STRICT_PASS_READY or purchase recommendation. Queue contract validation #84 passed 137 tests.\n2026-11-16: E055 triple-recent-strength falsification preregistered before execution using frozen E045 cutoff-1250 predictions. One fixed trailing-100/forward-50 statistic, 120 geometry-matched random trajectories, 4000 block-bootstrap replicates; no parameter search or purchase-model changes.\n2026-11-16: E055 triple-recent-strength falsification completed on frozen E045 cutoff-1250 predictions; this is a historical diagnostic, not a purchase model or STRICT_PASS_READY candidate.\n2026-11-16: E055 technical preflight/verification failures in RUN #1 and #2 were repaired; RUN #3 completed, verified, and pushed. The historical triple-strength predictive hypothesis was not supported; no purchase model or STRICT_PASS_READY was created. 2026-11-16 02:12 KST reconciliation: E054 and E055 results, manifests, cutoff and readiness were rechecked; E055 is not supported and no STRICT_PASS_READY exists. The latest completed DAILY MASTER remains RUN #107 from 2026-11-15 at cutoff 1250 and PARTIAL; the 2026-11-16 daily run is not yet present at this check time. E056 code/test files are implementation-only drafts with no preregistration or workflow and were not executed or counted in the queue.",
+  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.\n2026-11-14: Round 1250 (1,5,18,23,27,28 + bonus 8) was corroborated by 4th.kr and Topstarnews; source data appended and DAILY MASTER #103 started. Official API direct retrieval was not claimed.\n2026-11-15: E052 nested trailing-performance selector completed and was added to the target-1251 three-line evidence inventory. It failed the unchanged historical strict gates; no purchase lines or readiness artifact were created. DAILY MASTER RUN #107 was reconciled at cutoff 1250 and remains PARTIAL.\n2026-11-16: E054 rolling concentration regime was independently preregistered at cutoff 1250 before execution; strict gates, alpha, block length, comparator, and prospective rule remain unchanged. The dedicated one-shot workflow was pending at registration and later completed successfully in E054 RUN #1.\n2026-11-16: E054 completed successfully at 01:56:51 KST on cutoff 1250 (850 walk-forward targets, 102000 matched-random bundles, 4000 bootstrap replicates, zero leakage/cutoff/geometry violations, 9/9 manifest). Historical STRICT_FAIL; no STRICT_PASS_READY or purchase recommendation. Queue contract validation #84 passed 137 tests.\n2026-11-16: E055 triple-recent-strength falsification preregistered before execution using frozen E045 cutoff-1250 predictions. One fixed trailing-100/forward-50 statistic, 120 geometry-matched random trajectories, 4000 block-bootstrap replicates; no parameter search or purchase-model changes.\n2026-11-16: E055 triple-recent-strength falsification completed on frozen E045 cutoff-1250 predictions; this is a historical diagnostic, not a purchase model or STRICT_PASS_READY candidate.\n2026-11-16: E055 technical preflight/verification failures in RUN #1 and #2 were repaired; RUN #3 completed, verified, and pushed. The historical triple-strength predictive hypothesis was not supported; no purchase model or STRICT_PASS_READY was created. 2026-11-16 02:12 KST reconciliation: E054 and E055 results, manifests, cutoff and readiness were rechecked; E055 is not supported and no STRICT_PASS_READY exists. The latest completed DAILY MASTER remains RUN #107 from 2026-11-15 at cutoff 1250 and PARTIAL; the 2026-11-16 daily run is not yet present at this check time. E056 code/test files are implementation-only drafts with no preregistration or workflow and were not executed or counted in the queue.\n2026-11-16 06:20 KST: E056 H005_FIX was formally registered as a separate single-ticket historical diagnostic. The legacy S008 structure contribution is 270/51=5.2941176470588235 (six component ranks plus 45 constant vectors); the frozen repair appends one number-specific 45/0 membership vector. This is not a three-line portfolio axis or prospective confirmation and cannot create STRICT_PASS_READY.",
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
-    "registered_tasks": 41,
+    "registered_tasks": 42,
     "generic_task_completion_paths_found": 25,
     "blocked_generic_tasks": [
       "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
@@ -60,9 +60,10 @@
     ],
     "pending_dedicated_tasks": [
       "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
-      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+      "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1"
     ],
-    "pending_dedicated_task_scope": "Remaining E043 H1250-A and E044 H1250-B V2 are five-line studies and ineligible for target-1251 three-line readiness.",
+    "pending_dedicated_task_scope": "E043 H1250-A and E044 H1250-B V2 are five-line-only and ineligible for target-1251 three-line readiness; E056 H005_FIX is a dedicated single-ticket historical mapping diagnostic, not a three-line portfolio axis.",
     "completed_dedicated_tasks": {
       "E045": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE",
@@ -96,7 +97,7 @@
       ".github/workflows/lotto-finalize-v3.yml"
     ],
     "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43739056958 (run #88); E030-E055 queue contract and unit tests passed.",
-    "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING; E055 dedicated three-line triple-recent-strength falsification completed; E043/E044 remain five-line-only and ineligible for target-1251 three-line readiness.",
+    "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING; E056 is registered as a dedicated H005_FIX single-ticket historical diagnostic; it is not three-line readiness evidence; E043/E044 remain five-line-only.",
     "runnable_generic_task_count": 0,
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
     "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
@@ -247,7 +248,7 @@
     "target_1251_three_line_e052_workflow": ".github/workflows/target-1251-e052-three-line-dynamic-selector.yml",
     "target_1251_three_line_e052_result_path": "analysis/2026-11-15/gha-43674223135-1/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
     "three_line_preregistered_axes_remaining": [],
-    "three_line_axis_status": "E055_EXECUTED; NO_UNEXECUTED_PREREGISTERED_THREE_LINE_AXES",
+    "three_line_axis_status": "E055_EXECUTED; NO_UNEXECUTED_PREREGISTERED_THREE_LINE_AXES; E056_IS_SINGLE_TICKET_DIAGNOSTIC_ONLY",
     "target_1251_three_line_e053_workflow_run_id": 43694556989,
     "target_1251_three_line_e053_preregistration": "research/weekly_purchase/1251/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json",
     "target_1251_three_line_e053_runner": "automation/three_line_lag2_membership_context_e053_v1.py",
@@ -263,19 +264,11 @@
     "target_1251_three_line_e055_runner": "automation/three_line_triple_recent_strength_e055_v1.py",
     "target_1251_three_line_e055_workflow": ".github/workflows/target-1251-e055-triple-recent-strength.yml",
     "target_1251_three_line_e055_status": "EXECUTED_TRIPLE_STRENGTH_NOT_SUPPORTED",
-    "unregistered_code_artifacts": [
-      {
-        "study_id": "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
-        "runner": "automation/h005_fix_structure_to_number_mapping_e056_v1.py",
-        "test": "automation/tests_v2/test_h005_fix_structure_to_number_mapping_e056.py",
-        "expected_preregistration": "research/weekly_purchase/1251/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_PREREG_20261116.json",
-        "preregistration_present": false,
-        "dedicated_workflow_present": false,
-        "execution_performed": false,
-        "classification": "IMPLEMENTATION_ONLY_DRAFT_NOT_REGISTERED_NOT_AN_INDEPENDENT_THREE_LINE_AXIS",
-        "note": "The runner expects a preregistration file that is not on main. Do not dispatch or count as evidence until the design is formally frozen and registered."
-      }
-    ]
+    "unregistered_code_artifacts": [],
+    "target_1251_e056_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+    "target_1251_e056_preregistration": "research/weekly_purchase/1251/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_PREREG_20261116.json",
+    "target_1251_e056_runner": "automation/h005_fix_structure_to_number_mapping_e056_v1.py",
+    "target_1251_e056_workflow": ".github/workflows/target-1251-e056-h005-fix.yml"
   },
   "evaluated_gates": {
     "max_hit": {
@@ -650,7 +643,7 @@
   "daily_master_generated_kst": "2026-11-15T15:25:23.478758+09:00",
   "daily_master_verification_status": "PARTIAL",
   "daily_master_v4_path": "analysis/2026-11-15/MASTER_FULL_V4_061932_948530",
-  "audit_updated_kst": "2026-11-16T02:12:27+09:00",
+  "audit_updated_kst": "2026-11-16T06:20:00+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
     "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
