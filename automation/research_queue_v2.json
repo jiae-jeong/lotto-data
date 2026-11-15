@@ -2680,7 +2680,7 @@
         "frozen_blobs": {
           "runner_blob_sha": "847618c0387d28bcca4ed2c6ec5822a367a0ca62",
           "test_blob_sha": "781f416584c410e45e2d8f3ef05b6fc7580f6150",
-          "workflow_blob_sha": "6e2de90a9915252cd1413c82b74398fecc5eff8d",
+          "workflow_blob_sha": "bccc324c3936dfb63f17b651d2bfeb2acdc330e6",
           "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
           "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
           "source_predictions_blob_sha": "307d1aed4a576ba08d92226099083cbba3cd5647",
