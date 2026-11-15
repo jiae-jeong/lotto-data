@@ -1,0 +1,967 @@
+{
+  "audit_id": "THREE_LINE_READINESS_AUDIT_1251_20261115",
+  "date_kst": "2026-11-15",
+  "target_round": 1251,
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "policy_effective_from_target": 1251,
+  "purchase_lines_required": 3,
+  "first_delivery_kst": "2026-11-20T08:00:00+09:00",
+  "preparation_deadline_kst": "2026-11-19",
+  "current_verified_data_cutoff": 1250,
+  "current_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "daily_master_run_id": 43684901626,
+  "daily_master_status": "PARTIAL",
+  "readiness_status": "STRICT_FAIL",
+  "strict_model_validation_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "strict_gate_evaluation": "E045_PRIMARY_APPEND_ONLY_CUTOFF_REFRESH_THROUGH_1250_STRICT_FAIL; E048_E049_E050_REMAIN_FIXED_HISTORICAL_CUTOFF_1249_STRICT_FAIL; E051_PAIR_CONTEXT_HISTORICAL_CUTOFF_1250_STRICT_FAIL; E052_NESTED_TRAILING_100_SELECTOR_HISTORICAL_CUTOFF_1249_STRICT_FAIL; PROSPECTIVE_CONFIRMATION_RULE_UNSPECIFIED",
+  "ready_file": null,
+  "ready_file_exists": false,
+  "line_level_output_status": "SUPPRESSED_NOT_READY",
+  "unevaluated_gates": [
+    "prospective_confirmation_rule"
+  ],
+  "blocking_reasons": [
+    "Prospective confirmation is required, but the policy still has no minimum target count or completion rule; E046 provides design-only planning evidence and does not adopt a rule.",
+    "No target-specific three-line STRICT_PASS_READY artifact exists. The new three-line finalizer path is available, but it correctly refuses to seal without a fully validated ready artifact.",
+    "E043 H1250-A and E044 H1250-B V2 are five-line H1250 studies and remain ineligible as target-1251 three-line evidence.",
+    "E019 remains POST_HOC_EXPLORATORY and its original overlapping-ticket comparator is not geometry-matched; the separate correction document preserves that limitation.",
+    "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY.",
+    "E049 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
+    "E050 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
+    "E045 append-only cutoff refresh through 1250 is complete and is not an independent research axis. Historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
+    "Independent E051 pair-context axis completed 850 cutoff-safe targets with 102,000 geometry-matched random bundles and a 7/7 manifest. All four adjusted CI lower bounds were at or below zero; any2-positive 50-target block share was 7/17 (41.18%), below 65%. It did not qualify for STRICT_PASS_READY.",
+    "E052 nested trailing-100 selector completed 749 cutoff-safe historical targets (501..1249) with 89,880 geometry-matched random portfolios and a 10/10 manifest; all four adjusted CI lower bounds were at or below zero, and any2-positive 50-target block share was 5/15 (33.33%), below 65%. It remains STRICT_FAIL and is not prospective confirmation.",
+    "Prospective confirmation remains required, but the minimum untouched target count and completion rule are still unspecified; E046 is design-only and does not adopt a rule."
+  ],
+  "ineligible_research": {
+    "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
+    "E043": "Five-line allocator geometry study; IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH.",
+    "E044_V2": "Five-line candidate-ranking study; IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH."
+  },
+  "no_future_leakage": true,
+  "final_selection_randomness": false,
+  "random_fallback_allowed": false,
+  "final_purchase_freeze_allowed": false,
+  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.\n2026-11-14: Round 1250 (1,5,18,23,27,28 + bonus 8) was corroborated by 4th.kr and Topstarnews; source data appended and DAILY MASTER #103 started. Official API direct retrieval was not claimed.\n2026-11-15: E052 nested trailing-performance selector completed and was added to the target-1251 three-line evidence inventory. It failed the unchanged historical strict gates; no purchase lines or readiness artifact were created. DAILY MASTER RUN #107 was reconciled at cutoff 1250 and remains PARTIAL.",
+  "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
+  "research_queue_status": {
+    "registered_tasks": 38,
+    "generic_task_completion_paths_found": 25,
+    "blocked_generic_tasks": [
+      "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
+      "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1"
+    ],
+    "pending_dedicated_tasks": [
+      "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+    ],
+    "pending_dedicated_task_scope": "Remaining E043 H1250-A and E044 H1250-B V2 are five-line studies and ineligible for target-1251 three-line evidence.",
+    "completed_dedicated_tasks": {
+      "E045": "EXECUTED_HISTORICAL_STRICT_FAIL",
+      "E046": "EXECUTED_DESIGN_PLANNING_COMPLETE; DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+      "E048": "EXECUTED_HISTORICAL_STRICT_FAIL; OUTPUT_MANIFEST_REPAIRED; DUPLICATE_REPRODUCTION_NOT_INDEPENDENT",
+      "E049": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+      "E050": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+      "E036": "EXECUTED_NULL_GATE_CALIBRATION_COMPLETE; POOLED_VERIFICATION_FPR_0.8_PERCENT",
+      "E037": "EXECUTED_HISTORICAL_FALSIFICATION_NO_SURVIVORS",
+      "E038": "EXECUTED_GATED_NO_CANDIDATES",
+      "E039": "EXECUTED_BLOCKED_BY_REGISTERED_GATE",
+      "E040": "EXECUTED_NO_VALIDATED_EDGE",
+      "E041": "EXECUTED_BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+      "E042": "EXECUTED_DO_NOT_PROMOTE",
+      "E051": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED; RUN 43632443475; 850 CUTOFF-SAFE TARGETS; 102000 GEOMETRY-MATCHED RANDOM BUNDLES; MANIFEST 7/7 PASS; NO LEAKAGE",
+      "E052": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED; RUN 43674223135; 749 CUTOFF-SAFE TARGETS 501..1249; 89880 GEOMETRY-MATCHED RANDOM BUNDLES; MANIFEST 10/10 PASS; NO LEAKAGE"
+    },
+    "superseded_tasks": [
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
+    ],
+    "target_1251_three_line_task_registered": true,
+    "target_1251_three_line_runner_found": true,
+    "target_1251_three_line_task_status": "E045_AND_E048_AND_E049_AND_E050_AND_E051_AND_E052_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY",
+    "target_1251_three_line_workflow_run_id": 43499702588,
+    "target_1251_three_line_finalizer_found": true,
+    "three_line_finalizer": "automation/finalize_three_line_from_strict_ready_v1.py",
+    "finalizer_workflows": [
+      ".github/workflows/lotto-finalize-r3.yml",
+      ".github/workflows/lotto-finalize-v3.yml"
+    ],
+    "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43558319426 (run #55); validation job passed 102 tests and printed E030-E049 queue contract PASS; prior IDs retained.",
+    "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING; E052 dedicated three-line axis completed; E043/E044 remain five-line-only and are ineligible for target-1251 three-line readiness.",
+    "runnable_generic_task_count": 0,
+    "target_1251_three_line_e048_workflow_run_id": 43547128786,
+    "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
+    "target_1251_three_line_e048_runner": "automation/three_line_bonus_transition_e048.py",
+    "target_1251_three_line_e048_workflow": ".github/workflows/target-1251-e048-three-line-bonus-transition.yml",
+    "queue_contract_validation_run_id": 43558319426,
+    "queue_contract_validation_history": [
+      {
+        "run_id": 43548096755,
+        "conclusion": "FAILURE",
+        "cause": "stale expected queue tail omitted newly registered E048"
+      },
+      {
+        "run_id": 43548444587,
+        "conclusion": "SUCCESS",
+        "cause": "test expectation updated to include E048; validation and queue contract tests passed"
+      },
+      {
+        "run_id": 43558151453,
+        "conclusion": "FAILURE",
+        "cause": "test_independent_five_line.py expected the final six queue IDs to end at E048 after E049 was appended.",
+        "repair": "Updated the queue suffix and added E049 task assertions."
+      },
+      {
+        "run_id": 43558319426,
+        "conclusion": "SUCCESS",
+        "cause": "After E049 registration, the queue suffix and assertions were updated to include E049; orthogonal-research-v2 validation job completed 102 tests and printed E030-E049 queue contract PASS."
+      }
+    ],
+    "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
+    "target_1251_three_line_e048_one_shot_guard_validation_run_id": 43548096707,
+    "target_1251_three_line_e049_preregistration": "research/weekly_purchase/1251/E049_THREE_LINE_DRAW_STATE_TRANSITION_PREREG_20261114.json",
+    "target_1251_three_line_e049_runner": "automation/three_line_draw_state_transition_e049.py",
+    "target_1251_three_line_e049_workflow": ".github/workflows/target-1251-e049-three-line-draw-state-transition.yml",
+    "target_1251_three_line_e049_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+    "target_1251_three_line_e049_workflow_run_id": 43558319449,
+    "target_1251_three_line_e049_result_path": "analysis/2026-11-14/gha_43558319449_1/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+    "target_1251_three_line_e050_preregistration": "research/weekly_purchase/1251/E050_THREE_LINE_NEIGHBOR_TRANSITION_PREREG_20261114.json",
+    "target_1251_three_line_e050_runner": "automation/three_line_neighbor_transition_e050.py",
+    "target_1251_three_line_e050_workflow": ".github/workflows/target-1251-e050-three-line-neighbor-transition.yml",
+    "target_1251_three_line_e050_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED",
+    "generic_queue_preflight_run_id": 43564631433,
+    "generic_queue_preflight_completed_evidence_count": 24,
+    "generic_queue_preflight_skipped_completed": [
+      "E010_FAMILY_DECORRELATION_v1",
+      "E011_NESTED_3_4_TAIL_v1",
+      "E012_EXACT_TAIL_POWER_v1",
+      "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+      "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+      "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+      "E016_VOTE_DEPTH_CALIBRATION_v1",
+      "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+      "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+      "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+      "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "E029_FIVE_LINE_PROMOTION_GATE_v2",
+      "E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
+      "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
+      "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
+      "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+      "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
+      "E035_FIVE_LINE_REBUILD_GATE_v1",
+      "E037_PREDICTABILITY_FALSIFICATION_v1",
+      "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+      "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+      "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+      "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1"
+    ],
+    "generic_queue_preflight_skipped_blocked": [
+      "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
+      "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1"
+    ],
+    "generic_queue_preflight_skipped_dedicated": [
+      "E036_NULL_GATE_CALIBRATION_v2",
+      "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+      "E039_ORTHOGONAL_WALKFORWARD_CONFIRMATION_v2",
+      "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+      "E041_FIVE_LINE_PORTFOLIO_REBUILD_v2",
+      "E042_FIVE_LINE_PROMOTION_AND_PROSPECTIVE_FREEZE_v1",
+      "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+      "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1"
+    ],
+    "generic_queue_preflight_skipped_superseded": [
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
+    ],
+    "target_1251_three_line_e050_workflow_run_id": 43564631433,
+    "target_1251_three_line_e050_result_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+    "e036_e042_pipeline_execution": {
+      "workflow_run_id": 43565241831,
+      "workflow_run_number": 25,
+      "conclusion": "success",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43565241831",
+      "result_root": "analysis/2026-11-14/gha_43565241831_1",
+      "summary_path": "analysis/2026-11-14/gha_43565241831_1/E036_E042_RUN_SUMMARY.json",
+      "data_cutoff": 1245,
+      "target_range": [
+        601,
+        1245
+      ],
+      "target_count": 645,
+      "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+      "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+      "null_replicates": 8000,
+      "pooled_verification_fpr": 0.008,
+      "e037_survivors": [],
+      "e040": "NO_VALIDATED_EDGE",
+      "e041": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+      "e042": "DO_NOT_PROMOTE",
+      "leakage_failures": 0,
+      "future_predictions": 0,
+      "evidence_class": "HISTORICAL_SCREENING_NOT_UNTOUCHED_HOLDOUT",
+      "manifest_verification": "workflow verified per-study and root SHA256 manifests before publishing"
+    },
+    "latest_queue_validation": {
+      "workflow_run_id": 43673928694,
+      "workflow_run_number": 76,
+      "conclusion": "success",
+      "validation_job": "success",
+      "research_job": "skipped",
+      "prospective_ledger_job": "skipped"
+    },
+    "target_1251_three_line_e052_workflow_run_id": 43674223135,
+    "target_1251_three_line_e052_preregistration": "research/weekly_purchase/1251/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_PREREG_20261115.json",
+    "target_1251_three_line_e052_runner": "automation/three_line_dynamic_selector_e052_v1.py",
+    "target_1251_three_line_e052_workflow": ".github/workflows/target-1251-e052-three-line-dynamic-selector.yml",
+    "target_1251_three_line_e052_result_path": "analysis/2026-11-15/gha-43674223135-1/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+    "three_line_preregistered_axes_remaining": [],
+    "three_line_axis_status": "NO_UNEXECUTED_PREREGISTERED_THREE_LINE_AXES; E043/E044 ARE FIVE_LINE_ONLY"
+  },
+  "evaluated_gates": {
+    "max_hit": {
+      "adjusted_ci_lower": -0.08316084221233107,
+      "adjusted_ci_upper": 0.03226907533772783,
+      "passed": false
+    },
+    "any2": {
+      "adjusted_ci_lower": -0.04623654951156461,
+      "adjusted_ci_upper": 0.030324110087964252,
+      "passed": false
+    },
+    "any3": {
+      "adjusted_ci_lower": -0.036019218100235645,
+      "adjusted_ci_upper": 0.005205752453356811,
+      "passed": false
+    },
+    "winning_union_coverage": {
+      "adjusted_ci_lower": -0.12084805653710239,
+      "adjusted_ci_upper": 0.07232037691401658,
+      "passed": false
+    },
+    "any2_positive_50_target_block_share": {
+      "observed": 0.47058823529411764,
+      "positive_blocks": 8,
+      "total_blocks": 17,
+      "required_minimum": 0.65,
+      "passed": false
+    }
+  },
+  "failed_gates": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_positive_50_target_block_share"
+  ],
+  "prospective_confirmation": {
+    "required": true,
+    "minimum_target_count": null,
+    "completion_rule": null,
+    "status": "UNSPECIFIED_IN_POLICY",
+    "design_analysis": "research/weekly_purchase/1251/THREE_LINE_PROSPECTIVE_POWER_PREREG_E046_20261114.json",
+    "design_analysis_result": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1/REPORT.md",
+    "minimum_count_adopted": false,
+    "consequence": "Historical E045 failure already blocks readiness; E046 is planning-only and the prospective rule must be formally predeclared before any future candidate can be promoted."
+  },
+  "e045_execution": {
+    "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "workflow_name": "target-1251-three-line-research-v1",
+    "workflow_run_id": 43499702588,
+    "workflow_run_number": 5,
+    "run_attempt": 1,
+    "event": "push",
+    "conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43499702588",
+    "completed_at_utc": "2026-11-13T20:18:39Z",
+    "result_commit": "a45efcc8dfcac8335971d5f07ddd2610f7c981e8",
+    "result_path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "data_cutoff": 1249,
+    "target_range": [
+      401,
+      1249
+    ],
+    "target_count": 849,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 101880,
+    "source_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "verification_status": "PASS",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "historical_strict_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false
+  },
+  "finalizer_status": "THREE_LINE_FINALIZER_AVAILABLE_THURSDAY_FREEZE_FRIDAY_VERIFY_ONLY; STRICT_PASS_READY_ABSENT",
+  "e046_design_analysis": {
+    "study_id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+    "workflow_name": "three-line-prospective-power-planning-v1",
+    "workflow_run_id": 43526534917,
+    "workflow_run_number": 2,
+    "conclusion": "success",
+    "result_path": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+    "data_cutoff": 1249,
+    "source_targets": 849,
+    "source_manifest_entries_verified": 8,
+    "no_future_leakage": true,
+    "design_rows": 48,
+    "classification": "DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "purchase_lines_generated": false,
+    "planning_findings": {
+      "first_grid_point_with_at_least_80pct_joint_power_independence_approx_at_d_1_0": 1000,
+      "first_grid_point_with_at_least_80pct_conservative_union_lower_at_d_1_0": 1000,
+      "no_80pct_grid_point_at_effect_sizes_d_0_25_0_5_or_0_75": true
+    },
+    "policy_changed": false,
+    "prospective_minimum_count_adopted": false
+  },
+  "previous_daily_master_run_id": 43666836797,
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43684901626",
+  "daily_master_result_commit": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
+  "daily_master_completed_at_kst": "2026-11-15T15:25:32+09:00",
+  "e048_execution": {
+    "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+    "workflow_name": "target-1251-e048-three-line-bonus-transition",
+    "workflow_run_id": 43547128786,
+    "run_attempt": 1,
+    "workflow_run_conclusion": "failure_due_to_git_diff_check; computation_complete; preservation_repaired",
+    "result_commit": "4c896ce0e5bc062fb216018a48de5038abb53439",
+    "preservation_repair_record": "analysis/2026-11-14/gha_43547128786_1/E048_PRESERVATION_REPAIR.json",
+    "preservation_repair_commit": "8f15a5ba16989f3c3ba6bd6da8d1677f0d4a8301",
+    "result_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+    "report_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/REPORT.md",
+    "verification_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/VERIFICATION.json",
+    "data_cutoff": 1249,
+    "source_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "target_range": [
+      401,
+      1249
+    ],
+    "target_count": 849,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 101880,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "verification_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "purchase_lines_generated": false,
+    "preservation_status": "REPAIRED",
+    "reproducibility_check": {
+      "run_id": 43547345879,
+      "run_attempt": 1,
+      "workflow_run_conclusion": "success",
+      "evidence_class": "DUPLICATE_REPRODUCTION_ONLY",
+      "duplicate_of_run_id": 43547128786,
+      "independent_evidence": false,
+      "counted_as_additional_research_axis": false,
+      "primary_output_blobs_byte_identical": true,
+      "matching_blob_shas": {
+        "PREDICTIONS.csv": "59882d1af8ca087c8ab8e22d21f63eb09bcc2588",
+        "RANDOM_BASELINE.csv": "3012f5328e31e31c5a2f7dd03370ab1d6ab516fb",
+        "BLOCK_STABILITY.csv": "c6dfed58563d3678189b6a383c15eb6d1b20bbb7",
+        "INFERENCE.json": "e764ca40e907bc4ad88303b120ff4a7ebeb22d01"
+      },
+      "result_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+      "manifest_entries": 8,
+      "manifest_status": "PASS",
+      "note": "The rerun used the same preregistration, cutoff, model, and random seeds. It is a reproducibility check only, not a new independent research axis."
+    },
+    "one_shot_guard_fix_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
+    "final_one_shot_workflow_commit": "26f7f05ffee8c5859c42613bb4fe8b2f0b4e79c9",
+    "no_op_trigger_metadata_commit": "8803e98a89575523ce001be1e58b896c02e55557"
+  },
+  "e048_evaluated_gates": {
+    "max_hits": {
+      "observed_mean": 1.5111896348645466,
+      "exact_null": 1.514256248572755,
+      "delta_mean": -0.0030666137082085666,
+      "adjusted_ci_lower": -0.06667085399089408,
+      "adjusted_ci_upper": 0.06760476438366422,
+      "passed": false
+    },
+    "any2": {
+      "observed_mean": 0.4840989399293286,
+      "exact_null": 0.47497624326892623,
+      "delta_mean": 0.009122696660402415,
+      "adjusted_ci_lower": -0.037991555400846116,
+      "adjusted_ci_upper": 0.05859266132471337,
+      "passed": false
+    },
+    "any3": {
+      "observed_mean": 0.0624263839811543,
+      "exact_null": 0.07135490714617204,
+      "delta_mean": -0.008928523165017747,
+      "adjusted_ci_lower": -0.026596367687985942,
+      "adjusted_ci_upper": 0.009917177659481665,
+      "passed": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.4275618374558303,
+      "exact_null": 2.4,
+      "delta_mean": 0.027561837455830476,
+      "adjusted_ci_lower": -0.05606595995288566,
+      "adjusted_ci_upper": 0.13003533568904602,
+      "passed": false
+    },
+    "any2_positive_50_target_block_share": {
+      "observed": 0.47058823529411764,
+      "positive_blocks": 8,
+      "total_blocks": 17,
+      "required_minimum": 0.65,
+      "passed": false
+    }
+  },
+  "e048_failed_gates": [
+    "max_hits_adjusted_ci",
+    "any2_adjusted_ci",
+    "any3_adjusted_ci",
+    "winning_union_coverage_adjusted_ci",
+    "any2_positive_50_target_block_share"
+  ],
+  "artifact_integrity_repairs": {
+    "malformed_placeholder_failure_artifact_removed": true,
+    "removed_path": "analysis/2026-11-14/gha_${RUN_ID}_${RUN_ATTEMPT}/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/FAILURE.json",
+    "reason": "The path literally contained shell placeholders and its run_id field was malformed; it was not valid run-scoped evidence.",
+    "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+    "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
+  },
+  "daily_master_verification_path": "analysis/2026-11-15/MASTER_FULL_V5_062518_056622/VERIFICATION.json",
+  "daily_master_report_path": "analysis/2026-11-15/MASTER_FULL_V5_062518_056622/REPORT.md",
+  "daily_master_model_validation_path": "analysis/2026-11-15/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
+  "e049_execution": {
+    "workflow_name": "target-1251-e049-three-line-draw-state-transition",
+    "workflow_run_id": 43558319449,
+    "workflow_run_number": 2,
+    "run_attempt": 1,
+    "event": "push",
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43558319449",
+    "completed_at_utc": "2026-11-14T04:47:02.354898+00:00",
+    "result_path": "analysis/2026-11-14/gha_43558319449_1/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+    "data_cutoff": 1249,
+    "data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "target_range": [
+      401,
+      1249
+    ],
+    "target_count": 849,
+    "prediction_records": 849,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 101880,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "readiness_status": "STRICT_FAIL",
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "purchase_lines_generated": false,
+    "final_purchase_freeze_allowed": false
+  },
+  "e049_failed_attempts": [
+    {
+      "workflow_run_id": 43558151440,
+      "run_attempt": 1,
+      "cause": "GitHub expression interpolation in the new workflow was escaped, so RUN_ID/RUN_ATTEMPT/RUN_NUMBER/EVENT_NAME arrived with a leading backslash.",
+      "computation_status": "COMPLETE",
+      "output_preservation_status": "FAILED_BEFORE_GIT_COMMIT",
+      "counted_as_independent_research": false,
+      "repair": "Remove the unintended backslashes from GitHub and shell variable expressions; rerun the same frozen E049 specification."
+    }
+  ],
+  "e049_historical_gate_pass": false,
+  "e049_failed_gates": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_positive_50_target_block_share"
+  ],
+  "audit_reconciled_at_kst": "2026-11-15T16:18:38+09:00",
+  "reconciled_main_sha": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
+  "e050_execution": {
+    "workflow_name": "target-1251-e050-three-line-neighbor-transition",
+    "workflow_run_id": 43564631433,
+    "workflow_run_number": 1,
+    "run_attempt": 1,
+    "event": "push",
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43564631433",
+    "completed_at_utc": "2026-11-14T06:05:56.974895+00:00",
+    "result_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+    "data_cutoff": 1249,
+    "data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "target_range": [
+      401,
+      1249
+    ],
+    "target_count": 849,
+    "prediction_records": 849,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 101880,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "readiness_status": "STRICT_FAIL",
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "purchase_lines_generated": false,
+    "final_purchase_freeze_allowed": false
+  },
+  "e050_historical_gate_pass": false,
+  "e050_failed_gates": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_positive_50_target_block_share"
+  ],
+  "research_cutoff_alignment": {
+    "daily_master_verified_data_cutoff": 1250,
+    "latest_primary_empirical_cutoff": 1250,
+    "latest_primary_empirical_study": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+    "historical_fixed_screen_cutoff": 1245,
+    "historical_fixed_screen_study_family": "E036-E042; fixed preregistered cutoff, not a freshness mismatch",
+    "latest_primary_empirical_evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT",
+    "latest_additional_independent_axis": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+    "latest_additional_independent_axis_cutoff": 1249,
+    "alignment_status": "ALIGNED_PRIMARY_CUTOFF_REFRESH_COMPLETE",
+    "cutoff_mismatch": false
+  },
+  "latest_daily_master_attempt": {
+    "run_id": 43684901626,
+    "run_number": 107,
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at_utc": "2026-11-15T06:19:25Z",
+    "last_observed_updated_at": "2026-11-15T06:25:32Z",
+    "head_sha": "498fbc5a4b645d25b66fc406f41500a034a2934d",
+    "result_commit_sha": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43684901626"
+  },
+  "daily_master_run_number": 107,
+  "daily_master_run_status": "completed_success",
+  "daily_master_commit_sha": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
+  "daily_master_generated_kst": "2026-11-15T15:25:23.478758+09:00",
+  "daily_master_verification_status": "PARTIAL",
+  "daily_master_v4_path": "analysis/2026-11-15/MASTER_FULL_V4_061932_948530",
+  "audit_updated_kst": "2026-11-15T16:18:38+09:00",
+  "e045_cutoff_refresh": {
+    "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+    "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT",
+    "independent_research_axis": false,
+    "workflow_name": "target-1251-e045-cutoff-refresh-1250",
+    "workflow_run_id": 43595251776,
+    "workflow_run_number": 4,
+    "run_attempt": 1,
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43595251776",
+    "completed_at_utc": "2026-11-14T12:34:47.813414+00:00",
+    "result_path": "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "data_prefix_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "prediction_records": 850,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 102000,
+    "block_length": 50,
+    "block_count": 17,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "prospective_minimum_target_count": null,
+    "prospective_completion_rule": null,
+    "parameter_search": false,
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "purchase_lines_generated": false,
+    "final_purchase_freeze_allowed": false,
+    "readiness_status": "STRICT_FAIL"
+  },
+  "e045_cutoff_refresh_evaluated_gates": {
+    "max_hits": {
+      "observed_mean": 1.4917647058823529,
+      "exact_geometry_matched_null": 1.514256248572755,
+      "delta_mean": -0.02249154269040215,
+      "adjusted_moving_block_ci": [
+        -0.08366801327863745,
+        0.03280257495665667
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.46705882352941175,
+      "exact_geometry_matched_null": 0.47497624326892623,
+      "delta_mean": -0.007917419739514445,
+      "adjusted_moving_block_ci": [
+        -0.04556447856304386,
+        0.028553168495779675
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.058823529411764705,
+      "exact_geometry_matched_null": 0.07135490714617204,
+      "delta_mean": -0.012531377734407339,
+      "adjusted_moving_block_ci": [
+        -0.03606078949911322,
+        0.006292151677357366
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.3835294117647057,
+      "exact_geometry_matched_null": 2.4,
+      "delta_mean": -0.01647058823529403,
+      "adjusted_moving_block_ci": [
+        -0.12352941176470579,
+        0.06941176470588244
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2_positive_50_target_block_share": {
+      "observed": 0.47058823529411764,
+      "required_minimum": 0.65,
+      "passed": false
+    }
+  },
+  "latest_daily_master_artifact": {
+    "artifact_kind": "DAILY_MASTER_RUN_OUTPUT",
+    "artifact_commit_sha": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
+    "artifact_commit_url": "https://github.com/jiae-jeong/lotto-data/commit/3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
+    "commit_created_at_utc": "2026-11-15T06:25:28Z",
+    "commit_created_at_kst": "2026-11-15T15:25:28+09:00",
+    "result_path": "analysis/2026-11-15/MASTER_FULL_V5_062518_056622",
+    "completion_path": "analysis/2026-11-15/MASTER_FULL_V5_062518_056622/COMPLETION.json",
+    "verification_path": "analysis/2026-11-15/MASTER_FULL_V5_062518_056622/VERIFICATION.json",
+    "report_path": "analysis/2026-11-15/MASTER_FULL_V5_062518_056622/REPORT.md",
+    "data_cutoff": 1250,
+    "status": "PARTIAL",
+    "artifact_manifest_entries": 14,
+    "artifact_manifest_status": "PASS",
+    "base_v4_path": "analysis/2026-11-15/MASTER_FULL_V4_061932_948530",
+    "base_v4_verification": {
+      "status": "PASS",
+      "data_integrity": "PASS",
+      "b_prediction_records": 8400,
+      "random_tickets": 1050000,
+      "leakage_failures": 0
+    },
+    "workflow_run_id": 43684901626,
+    "workflow_run_id_status": "CONFIRMED_BY_RUN_107_JOB_LOG_PATH_MATCH"
+  },
+  "e051_pair_context_axis": {
+    "study_id": "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+    "evidence_class": "HISTORICAL_INDEPENDENT_AXIS_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+    "independent_research_axis": true,
+    "workflow_name": "target-1251-e051-pair-context-transition",
+    "workflow_run_id": 43632443475,
+    "workflow_run_number": 2,
+    "run_attempt": 1,
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43632443475",
+    "completed_at_utc": "2026-11-14T19:31:57.891227+00:00",
+    "result_path": "analysis/2026-11-15/gha_43632443475_1/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 102000,
+    "block_length": 50,
+    "block_count": 17,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 7,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "parameter_search": false,
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "purchase_recommendation_generated": false
+  },
+  "additional_independent_research_axes": [
+    {
+      "study_id": "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+      "evidence_class": "HISTORICAL_INDEPENDENT_AXIS_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+      "independent_research_axis": true,
+      "workflow_name": "target-1251-e051-pair-context-transition",
+      "workflow_run_id": 43632443475,
+      "workflow_run_number": 2,
+      "run_attempt": 1,
+      "workflow_run_conclusion": "success",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43632443475",
+      "completed_at_utc": "2026-11-14T19:31:57.891227+00:00",
+      "result_path": "analysis/2026-11-15/gha_43632443475_1/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+      "data_cutoff": 1250,
+      "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "target_range": [
+        401,
+        1250
+      ],
+      "target_count": 850,
+      "random_bundles_per_target": 120,
+      "random_bundles_total": 102000,
+      "block_length": 50,
+      "block_count": 17,
+      "training_cutoff_violations": 0,
+      "leakage_failures": 0,
+      "future_predictions": 0,
+      "portfolio_geometry_violations": 0,
+      "random_geometry_violations": 0,
+      "verification_status": "PASS",
+      "manifest_entries": 7,
+      "manifest_status": "PASS",
+      "historical_strict_gate_pass": false,
+      "failed_gates": [
+        "max_hits",
+        "any2",
+        "any3",
+        "winning_union_coverage",
+        "any2_positive_50_target_block_share"
+      ],
+      "strict_portfolio_pass": false,
+      "strict_pass_ready": false,
+      "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+      "parameter_search": false,
+      "thresholds_changed": false,
+      "alpha_changed": false,
+      "block_length_changed": false,
+      "comparator_changed": false,
+      "purchase_recommendation_generated": false
+    },
+    {
+      "study_id": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+      "evidence_class": "HISTORICAL_NESTED_SELECTOR_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+      "independent_research_axis": true,
+      "workflow_run_id": 43674223135,
+      "workflow_run_number": 3,
+      "workflow_run_conclusion": "success",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43674223135",
+      "result_path": "analysis/2026-11-15/gha-43674223135-1/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+      "data_cutoff": 1249,
+      "target_range": [
+        501,
+        1249
+      ],
+      "target_count": 749,
+      "random_bundles_total": 89880,
+      "training_cutoff_violations": 0,
+      "leakage_failures": 0,
+      "verification_status": "PASS",
+      "manifest_entries": 10,
+      "manifest_status": "PASS",
+      "historical_strict_gate_pass": false,
+      "strict_portfolio_pass": false,
+      "strict_pass_ready": false,
+      "failed_gates": [
+        "max_hits",
+        "any2",
+        "any3",
+        "winning_union_coverage",
+        "any2_positive_50_target_block_share"
+      ]
+    }
+  ],
+  "purchase_lines_generated": false,
+  "e052_execution": {
+    "study_id": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+    "evidence_class": "HISTORICAL_NESTED_SELECTOR_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+    "independent_research_axis": true,
+    "workflow_name": "target-1251-e052-three-line-dynamic-selector",
+    "workflow_run_id": 43674223135,
+    "workflow_run_number": 3,
+    "run_attempt": 1,
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43674223135",
+    "completed_at_utc": "2026-11-15T03:51:53.946997+00:00",
+    "result_path": "analysis/2026-11-15/gha-43674223135-1/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+    "data_cutoff": 1249,
+    "current_data_rows": 1250,
+    "data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "data_full_file_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "target_range": [
+      501,
+      1249
+    ],
+    "target_count": 749,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 89880,
+    "training_cutoff_violations": 0,
+    "selection_training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 10,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "parameter_search": false,
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "purchase_recommendation_generated": false
+  },
+  "e052_evaluated_gates": {
+    "max_hits": {
+      "observed_mean": 1.5020026702269693,
+      "exact_geometry_matched_null": 1.514256248572755,
+      "delta_mean": -0.0122535783457858,
+      "adjusted_moving_block_ci": [
+        -0.07900925257809555,
+        0.04248607452470819
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.4672897196261682,
+      "exact_geometry_matched_null": 0.47497624326892623,
+      "delta_mean": -0.007686523642757985,
+      "adjusted_moving_block_ci": [
+        -0.05308038212072862,
+        0.03503710786592026
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.06942590120160214,
+      "exact_geometry_matched_null": 0.07135490714617204,
+      "delta_mean": -0.0019290059445699096,
+      "adjusted_moving_block_ci": [
+        -0.021955708214262834,
+        0.010087015417245843
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.403204272363151,
+      "exact_geometry_matched_null": 2.4,
+      "delta_mean": 0.0032042723631509566,
+      "adjusted_moving_block_ci": [
+        -0.10761014686248323,
+        0.08598130841121504
+      ],
+      "lower_bound_strictly_gt_zero": false
+    }
+  },
+  "e052_any2_positive_50_target_block_share": 0.3333333333333333,
+  "e052_failed_gates": [
+    "max_hits",
+    "any2",
+    "any3",
+    "winning_union_coverage",
+    "any2_positive_50_target_block_share"
+  ],
+  "e052_readiness_update": {
+    "target_round": 1251,
+    "data_cutoff": 1249,
+    "primary_model": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "primary_status": "STRICT_FAIL",
+    "additional_axis": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+    "additional_axis_historical_gate_pass": false,
+    "additional_axis_readiness_status": "STRICT_FAIL",
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "ready_file_exists": false,
+    "line_level_output_status": "SUPPRESSED_NOT_READY",
+    "final_purchase_freeze_allowed": false,
+    "reason": "Historical nested selector evidence is not prospective confirmation; the prospective minimum target count and completion rule remain unspecified."
+  }
+}
