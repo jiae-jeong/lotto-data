@@ -165,7 +165,22 @@ jobs:
           if e055['execution_status'] != 'PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
               assert e055['execution_result']['verification_status']=='PASS'
               assert e055['execution_result']['strict_pass_ready'] is False
-          print('E030-E055 queue contract PASS; prior IDs retained')
+          e056=task_by_id['E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1']
+          assert e056['kind']=='h005_fix_structure_mapping'
+          assert e056['execution_mode']=='dedicated_workflow'
+          assert e056['execution_entrypoint']=='automation/h005_fix_structure_to_number_mapping_e056_v1.py'
+          assert e056['workflow_entrypoint']=='.github/workflows/target-1251-e056-h005-fix.yml'
+          assert e056['preregistration']=='research/weekly_purchase/1251/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_PREREG_20261116.json'
+          assert e056['spec']['study_id']=='E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1'
+          assert e056['spec']['candidate_bank']['size']==5000
+          assert e056['spec']['parameter_search'] is False and e056['spec']['variants_evaluated']==1
+          assert e056['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY')
+          if e056['execution_status']=='EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY':
+              assert e056['execution_result']['verification_status']=='PASS'
+              assert e056['execution_result']['strict_pass_ready'] is False
+              assert e056['execution_result']['purchase_recommendation_generated'] is False
+          assert ids.index('E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1') < ids.index('E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1')
+          print('E030-E056 queue contract PASS; prior IDs retained')
           PY
 
   research:
