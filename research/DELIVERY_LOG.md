@@ -51,3 +51,16 @@ This ledger records combinations displayed to the user, whether or not they were
 - Both targets are reclassified as PRESERVED_LINESET_PURCHASE_NOT_CONFIRMED and excluded from the actual-purchase aggregate. The original source files remain unchanged.
 - The E047 calculations remain descriptive diagnostics for those preserved line sets only. They are not actual-purchase outcomes, do not establish an allocation failure in purchased tickets, and cannot support model promotion or strict PASS.
 - Future inclusion requires an entry in research/PURCHASE_CONFIRMATION_REGISTRY.json with the exact source SHA256 and either a preserved receipt or explicit user confirmation.
+
+
+## Research run 2026-11-16 - target round 1251 (no purchase delivery)
+- Delivery status: `NO_FINAL_PURCHASE_LINES_DELIVERED`; this entry records research only, not a user purchase or a confirmed purchase.
+- Data cutoff: 1250; canonical source SHA-256: `7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2`.
+- E056 H005_FIX structure-to-number mapping repair: implementation verification passed, but the historical classification remains WEAK; it is a single-ticket diagnostic and is ineligible for the three-line target-1251 gate.
+- E057 independent exact-uniform disjoint-union18 null calibration: 1/1,000 false passes (0.10%); 95% Wilson interval 0.0177%-0.5643%. This calibrates only the registered independent null and is not predictive evidence.
+- E058 persistent non-predictive portfolio null calibration: 0/1,000 false passes (0.00%); 95% Wilson interval 0.0000%-0.3827%. The registered null retained 3/6 numbers per line and 9/18 in the union at each transition. This is one dependent-null stress test, not a universal calibration claim or model edge.
+- E059 E054 candidate-stage decomposition: E054 candidate_recall@10/15/20/25/30 point estimates were 21.667%, 32.569%, 43.059%, 54.902%, and 66.039%; all were below their exact random expectations, and all Bonferroni-adjusted moving-block intervals included zero. E054 score hashes and regime/HHI/exposure reproduction checks matched 850/850. No candidate threshold is specified by policy; none was invented.
+- E054 portfolio stage remains historical STRICT_FAIL; E055 triple-recent-strength predictive hypothesis remains unsupported. E056, E057, E058, and E059 do not create a purchase-ready model.
+- Rounds 1244-1249 remain previously inspected/live-history material, not clean holdout or prospective confirmation.
+- Target 1251 readiness remains STRICT_FAIL. No candidate list or final purchase lines were released; no fallback was promoted; no STRICT_PASS_READY artifact, freeze, seal, or purchase confirmation was created.
+- Research artifacts: `research/weekly_purchase/1251/E058_THREE_LINE_PERSISTENT_PORTFOLIO_NULL_CALIBRATION_PREREG_20261116.json`, `research/weekly_purchase/1251/E059_E054_CANDIDATE_RECALL_STAGE_DECOMPOSITION_PREREG_20261116.json`, and their linked analysis outputs under `analysis/2026-11-16/`.
