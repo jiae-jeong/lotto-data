@@ -1,0 +1,71 @@
+{
+  "audit_id": "E056_TECHNICAL_REPAIR_AUDIT_20261116",
+  "date_kst": "2026-11-16",
+  "registered_at_kst": "2026-11-16T06:27:00+09:00",
+  "original_preregistration": "research/weekly_purchase/1251/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_PREREG_20261116.json",
+  "original_prereg_blob_sha": "d594c127ae3e078316e1cf4fac9809cba15e332b",
+  "original_source_main_commit": "09ff6047a86f8d24db58456bd67b8cc357545dc9",
+  "original_frozen_workflow_blob_sha": "06595474277229d20f5f514dec2ef25b4c9e11cc",
+  "original_run_id": 43763437112,
+  "original_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43763437112",
+  "original_run_conclusion": "FAILURE",
+  "failure_stage": "PUBLISH",
+  "failure_cause": "The historical study and all verification steps succeeded, but the final push was rejected as non-fast-forward because main advanced after the original workflow checkout. The generated local result commit was not persisted to GitHub.",
+  "original_local_commit_short_sha": "7051af2",
+  "original_study_execution": "SUCCESS",
+  "original_verification": "PASS",
+  "original_result_summary": {
+    "targets": 1050,
+    "target_range": [
+      201,
+      1250
+    ],
+    "metrics": 24,
+    "manifest_entries": 12,
+    "mapping_changed_targets": 932,
+    "historical_classification": "WEAK",
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "purchase_recommendation_generated": false
+  },
+  "recovery_reason": "The verified output files were not persisted after the rejected push. Re-execute the exact same frozen deterministic study so its evidence can be committed on top of the latest main.",
+  "scientific_specification_changed": false,
+  "data_or_runner_changed": false,
+  "parameters_or_candidate_bank_changed": false,
+  "random_baseline_changed": false,
+  "strict_gate_or_threshold_changed": false,
+  "target_range_or_cutoff_changed": false,
+  "recovery_change_scope": "Execution wrapper only: validate the original workflow blob at the frozen source commit, pin the replacement wrapper in this addendum, rebase on latest main before updating the queue/audit, and retry the final push up to three times. The original preregistration remains unchanged.",
+  "replacement_execution_wrapper_blob_sha": "89f09914e45308d15beb19a3facc638c8c1590f2",
+  "rerun_identity": "Same study_id E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1, same original preregistration blob, same runner/test/source/policy/data hashes, same target range, same training cutoffs, same candidate bank seed/hash, same one-model mapping, same exact hypergeometric baseline. This is a technical publication recovery, not a new variant or a second research hypothesis.",
+  "queue_validation_repair": {
+    "failed_runs": [
+      {
+        "run_id": 43763359441,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43763359441",
+        "cause": "Existing five-line queue suffix regression test still ended at E055 after E056 was appended."
+      },
+      {
+        "run_id": 43763373109,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43763373109",
+        "cause": "Same stale E043-E055 suffix assertion; E056 queue contract assertions themselves passed."
+      }
+    ],
+    "repair": "Extended automation/tests_v2/test_independent_five_line.py expected queue suffix through E056 and aligned both variable declaration and assertion.",
+    "successful_runs": [
+      {
+        "run_id": 43763579367,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43763579367",
+        "conclusion": "SUCCESS",
+        "tests": 145,
+        "queue_contract": "E030-E056 PASS"
+      },
+      {
+        "run_id": 43763587906,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43763587906",
+        "conclusion": "SUCCESS",
+        "tests": "queue validation and full workflow checks PASS"
+      }
+    ]
+  }
+}
