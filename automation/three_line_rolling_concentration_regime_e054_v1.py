@@ -90,10 +90,10 @@ def verify_spec(pr,policy):
     assert pr["source_data_prefix_sha256"]=="7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
     assert pr["source_data_full_file_sha256"]==pr["source_data_prefix_sha256"]
     f=pr["feature_definition"]
-    assert f["rolling_window_draws"]==100 and f["reference_window_count"]==200
+    assert f["rolling_window_draws"]==100 and f["reference_window_count"]==200 and f["minimum_reference_window_count"]==100
     assert f["concentration_metric"]=="HHI=sum_n((count_n/600)^2) over all 45 main-number inclusion frequencies in the immediately preceding 100 draws."
-    assert f["classification"]=="HIGH when current HHI is greater than or equal to the median of the preceding 200 rolling-100-draw HHI values; otherwise LOW."
-    assert f["historical_outcome_regime"]=="For outcome u, classify using draws u-100..u-1 and HHI reference windows ending u-300..u-101; all inputs precede outcome u."
+    assert f["classification"]=="At target t, HIGH when current HHI is greater than or equal to the median of up to 200 earlier valid rolling-100-draw HHI values ending t-300..t-101 (minimum 100; exactly 200 when available); otherwise LOW."
+    assert f["historical_outcome_regime"]=="For outcome u, classify using draws u-100..u-1 and valid HHI reference windows ending max(100,u-300)..u-101; minimum 100, exactly 200 when available; all inputs precede outcome u."
     assert f["candidate_universe"]=="All integers 1..45 are scored for every target."
     assert f["training_outcome_start_round"]==HISTORY_START
     e=pr["estimator"]
