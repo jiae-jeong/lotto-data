@@ -1,0 +1,28 @@
+{
+  "audit_id": "E053_TECHNICAL_REPAIR_AUDIT_ADDENDUM_20261115",
+  "related_audit_id": "E053_TECHNICAL_REPAIR_AUDIT_20261115",
+  "recorded_at_kst": "2026-11-15T20:08:02+09:00",
+  "classification": "VALIDATION_GUARD_FIX_ONLY_NO_RESEARCH_REEXECUTION",
+  "preflight_validation_attempt": {
+    "workflow_run_id": 43707416128,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43707416128",
+    "conclusion": "failure",
+    "failed_step": "Validate frozen preregistration, implementation blobs, policy, queue, and canonical data",
+    "failure_reason": "The new provenance guard incorrectly compared the current preregistration's post-repair runner/test hashes to the original pre-repair hashes. The correct comparison is original hashes to the before fields and current hashes to the after fields.",
+    "research_execution_started": false,
+    "statistical_outputs_modified": false,
+    "queue_modified": false,
+    "data_modified": false,
+    "result_artifact_uploaded": false
+  },
+  "correction": {
+    "scope": "Corrected only the provenance guard's hash comparison. The original preregistration blob remains preserved in Git history; current preregistration hashes remain linked to the successful E053 run.",
+    "model_or_statistical_code_changed": false,
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "seed_changed": false,
+    "research_reexecuted": false
+  }
+}

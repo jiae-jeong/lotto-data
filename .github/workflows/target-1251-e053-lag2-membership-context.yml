@@ -9,6 +9,7 @@ on:
       - 'automation/tests_v2/test_three_line_lag2_membership_context_e053.py'
       - 'research/weekly_purchase/1251/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json'
       - 'research/weekly_purchase/1251/E053_TECHNICAL_REPAIR_AUDIT_20261115.json'
+      - 'research/weekly_purchase/1251/E053_TECHNICAL_REPAIR_AUDIT_ADDENDUM_20261115.json'
       - 'automation/research_queue_v2.json'
       - '.github/workflows/target-1251-e053-lag2-membership-context.yml'
 
@@ -57,13 +58,21 @@ jobs:
               return subprocess.check_output(["git", "rev-parse", "HEAD:" + path.as_posix()], text=True).strip()
           original_ref = original["commit"] + ":" + prereg_path.as_posix()
           assert subprocess.check_output(["git", "rev-parse", original_ref], text=True).strip() == original["blob_sha"]
-          assert frozen == original["frozen_blobs"]
+          assert original["frozen_blobs"]["runner_blob_sha"] == technical["runner_blob_sha_before"]
+          assert original["frozen_blobs"]["test_blob_sha"] == technical["test_blob_sha_before"]
+          assert frozen["runner_blob_sha"] == technical["runner_blob_sha_after"]
+          assert frozen["test_blob_sha"] == technical["test_blob_sha_after"]
+          assert frozen["base_runner_blob_sha"] == original["frozen_blobs"]["base_runner_blob_sha"] == technical["base_runner_blob_sha_unchanged"]
+          assert frozen["policy_blob_sha"] == original["frozen_blobs"]["policy_blob_sha"] == technical["policy_blob_sha_unchanged"]
           assert blob(prereg_path) == repair["post_failure_preregistration_hash_update"]["current_blob_sha"]
           assert hashlib.sha256(prereg_path.read_bytes()).hexdigest() == repair["post_failure_preregistration_hash_update"]["current_sha256"]
           assert blob(runner_path) == technical["runner_blob_sha_after"]
           assert blob(test_path) == technical["test_blob_sha_after"]
-          assert blob(base_path) == frozen["base_runner_blob_sha"] == technical["base_runner_blob_sha_unchanged"]
-          assert blob(policy_path) == frozen["policy_blob_sha"] == technical["policy_blob_sha_unchanged"]
+          addendum_path = Path("research/weekly_purchase/1251/E053_TECHNICAL_REPAIR_AUDIT_ADDENDUM_20261115.json")
+          addendum = json.loads(addendum_path.read_text(encoding="utf-8"))
+          assert addendum["related_audit_id"] == repair["audit_id"]
+          assert addendum["preflight_validation_attempt"]["workflow_run_id"] == 43707416128
+          assert addendum["preflight_validation_attempt"]["research_execution_started"] is False
           assert technical["only_output_serialization_changed"] is True
           for key in ("algorithm_changed", "feature_definition_changed", "estimator_changed",
                       "portfolio_selection_changed", "target_range_changed", "data_cutoff_changed",
