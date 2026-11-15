@@ -172,12 +172,12 @@ jobs:
       - name: Verify immutable outputs, no leakage, strict gates, and update research queue
         if: success() && steps.preflight.outputs.already_complete != 'true'
         env:
-          RUN_DATE: \${{ steps.execute.outputs.date }}
-          RUN_ID: \${{ steps.execute.outputs.run_id }}
-          RUN_NUMBER: \${{ github.run_number }}
-          GITHUB_RUN_ID: \${{ github.run_id }}
-          GITHUB_RUN_ATTEMPT: \${{ github.run_attempt }}
-          DATA_SHA: \${{ steps.preflight.outputs.data_sha }}
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          DATA_SHA: ${{ steps.preflight.outputs.data_sha }}
         shell: bash
         run: |
           python - <<'PY'
@@ -319,8 +319,8 @@ jobs:
       - name: Commit verified E052 outputs and queue status
         if: success() && steps.preflight.outputs.already_complete != 'true'
         env:
-          RUN_DATE: \${{ steps.execute.outputs.date }}
-          RUN_ID: \${{ steps.execute.outputs.run_id }}
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
         shell: bash
         run: |
           set -euo pipefail
