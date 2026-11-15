@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'research/weekly_purchase/1251/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_PREREG_20261116.json'
+      - 'research/weekly_purchase/1251/E056_TECHNICAL_REPAIR_AUDIT_20261116.json'
 
 permissions:
   contents: write
@@ -44,7 +45,6 @@ jobs:
           paths={
             'runner_blob_sha':'automation/h005_fix_structure_to_number_mapping_e056_v1.py',
             'test_blob_sha':'automation/tests_v2/test_h005_fix_structure_to_number_mapping_e056.py',
-            'workflow_blob_sha':'.github/workflows/target-1251-e056-h005-fix.yml',
             'source_run_batch_blob_sha':'research/expansion_framework_v1/studies/study_batch_001/run_batch.py',
             'walkforward_core_blob_sha':'research/expansion_framework_v1/walkforward_core.py',
             'research_registry_blob_sha':'research/expansion_framework_v1/research_registry.csv',
@@ -57,6 +57,17 @@ jobs:
           for key,path in paths.items():
               actual=subprocess.check_output(['git','rev-parse',f'HEAD:{path}'],text=True).strip()
               assert actual==frozen[key], f'Frozen blob mismatch for {path}: {actual} != {frozen[key]}'
+          original_workflow=subprocess.check_output(['git','rev-parse',f"{p['source_main_commit']}:.github/workflows/target-1251-e056-h005-fix.yml"],text=True).strip()
+          assert original_workflow==frozen['workflow_blob_sha'], 'Original preregistered workflow blob is not present at the frozen source commit'
+          addendum_path=Path('research/weekly_purchase/1251/E056_TECHNICAL_REPAIR_AUDIT_20261116.json')
+          addendum=json.loads(addendum_path.read_text(encoding='utf-8'))
+          current_workflow=subprocess.check_output(['git','rev-parse','HEAD:.github/workflows/target-1251-e056-h005-fix.yml'],text=True).strip()
+          current_prereg=subprocess.check_output(['git','rev-parse',f'HEAD:{prereg_path.as_posix()}'],text=True).strip()
+          assert current_workflow==addendum['replacement_execution_wrapper_blob_sha'], 'Recovery workflow wrapper blob differs from technical addendum'
+          assert current_prereg==addendum['original_prereg_blob_sha'], 'Original frozen preregistration blob changed'
+          assert addendum['original_frozen_workflow_blob_sha']==frozen['workflow_blob_sha']
+          assert addendum['original_run_id']==43763437112
+          assert addendum['scientific_specification_changed'] is False
           sha=lambda path:hashlib.sha256(Path(path).read_bytes()).hexdigest()
           for key,path in {
             'data_sha256':'lotto_data.csv',
@@ -142,6 +153,12 @@ jobs:
           assert 'No promotion' in report and 'no purchase numbers generated' in report
           print(json.dumps({'status':'PASS','targets':len(predictions),'metrics':len(metrics),'manifest_entries':len(manifest),'mapping_changed_targets':audit['mapping_changed_targets'],'historical_classification':completion['model_status'],'strict_pass_ready':False}))
           PY
+      - name: Rebase result workspace on latest main before registry update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git rebase origin/main
       - name: Update append-only research queue and readiness audit
         env:
           GITHUB_RUN_ID: ${{ github.run_id }}
@@ -162,6 +179,20 @@ jobs:
           task=matches[0]
           task['execution_status']='EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY'
           task['spec']['execution_status']='EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY'
+          task.setdefault('execution_attempt_history',[])
+          if not any(x.get('workflow_run_id')==43763437112 for x in task['execution_attempt_history']):
+              task['execution_attempt_history'].append({
+                'workflow_run_id':43763437112,'conclusion':'FAILURE','stage':'publish',
+                'study_execution':'SUCCESS','verification_status':'PASS',
+                'cause':'Non-fast-forward push because main advanced after the original checkout; no research output was persisted.',
+                'summary':{'targets':1050,'metrics':24,'manifest_entries':12,'mapping_changed_targets':932,'historical_classification':'WEAK','strict_pass_ready':False}
+              })
+          task['execution_attempt_history'].append({
+            'workflow_run_id':rid,'conclusion':'SUCCESS','stage':'study_verify_publish',
+            'study_execution':'SUCCESS','verification_status':'PASS','manifest_entries':12,
+            'mapping_changed_targets':audit_result['mapping_changed_targets'],
+            'historical_classification':completion['model_status'],'strict_pass_ready':False
+          })
           task['execution_result']={
             'workflow_run_id':rid,'workflow_run_url':os.environ['GITHUB_RUN_URL'],
             'result_path':out.as_posix(),'data_cutoff':1250,'target_range':[201,1250],
@@ -191,6 +222,24 @@ jobs:
           audit['research_queue_status']['three_line_preregistered_axes_remaining']=[]
           audit['research_queue_status']['three_line_axis_status']='E055_EXECUTED; NO_UNEXECUTED_PREREGISTERED_THREE_LINE_AXES; E056_IS_SINGLE_TICKET_DIAGNOSTIC_ONLY'
           audit['research_queue_status']['unregistered_code_artifacts']=[x for x in audit['research_queue_status'].get('unregistered_code_artifacts',[]) if x.get('study_id')!='E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1']
+          audit['e056_execution_attempt_history']=[
+            {
+              'workflow_run_id':43763437112,
+              'run_url':'https://github.com/jiae-jeong/lotto-data/actions/runs/43763437112',
+              'conclusion':'FAILURE','stage':'publish',
+              'study_execution':'SUCCESS','verification_status':'PASS',
+              'cause':'Non-fast-forward push because main advanced after the original checkout; the generated local commit was not persisted.',
+              'result_summary':{'targets':1050,'metrics':24,'manifest_entries':12,'mapping_changed_targets':932,'historical_classification':'WEAK','strict_pass_ready':False},
+              'recovery':'Re-executed the identical frozen study after rebasing on latest main; no model, data, parameter, baseline, or strict-gate change.'
+            },
+            {
+              'workflow_run_id':rid,'run_url':os.environ['GITHUB_RUN_URL'],
+              'conclusion':'SUCCESS','stage':'study_verify_publish',
+              'study_execution':'SUCCESS','verification_status':'PASS','manifest_entries':12,
+              'mapping_changed_targets':audit_result['mapping_changed_targets'],
+              'historical_classification':completion['model_status'],'strict_pass_ready':False
+            }
+          ]
           audit['e056_h005_fix_diagnostic']={
             'workflow_run_id':rid,'workflow_run_url':os.environ['GITHUB_RUN_URL'],
             'result_path':out.as_posix(),'data_cutoff':1250,'target_count':1050,
@@ -218,4 +267,12 @@ jobs:
           git add -- "analysis/$RUN_DATE/$GITHUB_RUN_ID/E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1" automation/research_queue_v2.json research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261116.json
           git diff --cached --quiet && { echo 'No E056 evidence staged' >&2; exit 1; }
           git commit -m "research: execute E056 H005_FIX mapping diagnostic"
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push retry $attempt after concurrent main update"
+          done
+          exit 1
