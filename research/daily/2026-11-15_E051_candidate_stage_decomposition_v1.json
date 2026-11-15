@@ -1299,50 +1299,14 @@
     "ranking_order_mismatches": [
       {
         "target_round": 472,
-        "computed_top18": [
-          42,
-          39,
-          36,
-          11,
-          16,
-          38,
-          2,
-          26,
-          18,
-          31,
-          40,
+        "order_positions_swapped": [
           12,
-          1,
-          20,
-          22,
-          45,
-          34,
-          37
-        ],
-        "saved_top18": [
-          42,
-          39,
-          36,
-          11,
-          16,
-          38,
-          2,
-          26,
-          18,
-          31,
-          40,
-          1,
-          12,
-          20,
-          22,
-          45,
-          34,
-          37
+          13
         ],
         "set_same": true
       }
     ],
-    "note": "One order-only discrepancy at target 472 swaps ranks 12 and 13 (numbers 1 and 12); top-18 set is unchanged. No candidate-set membership discrepancy was observed."
+    "note": "One order-only discrepancy at target 472 swaps two items at ranks 12 and 13; top-18 set is unchanged. No candidate-set membership discrepancy was observed."
   },
   "parent_portfolio_inference": {
     "study_id": "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
