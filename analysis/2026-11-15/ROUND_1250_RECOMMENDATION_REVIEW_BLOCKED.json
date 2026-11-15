@@ -1,0 +1,70 @@
+{
+  "review_id": "ROUND_1250_RECOMMENDATION_REVIEW_2026-11-15",
+  "created_kst": "2026-11-15T09:24:35+09:00",
+  "status": "BLOCKED_NO_VERIFIED_USER_VISIBLE_RECOMMENDATION",
+  "draw": {
+    "round": 1250,
+    "draw_date": "2026-11-14",
+    "main_numbers": [1, 5, 18, 23, 27, 28],
+    "bonus": 8,
+    "result_status": "CONFIRMED_BY_MULTIPLE_INDEPENDENT_REPORTS",
+    "official_api_direct_payload": "NOT_RETRIEVED",
+    "corroborating_sources": [
+      {
+        "name": "Yonhap",
+        "url": "https://www.yna.co.kr/view/AKR20261114047000002",
+        "published_kst": "2026-11-14T20:49:00+09:00",
+        "reports_operator_announcement": true
+      },
+      {
+        "name": "Kyunghyang",
+        "url": "https://www.khan.co.kr/article/202611142052001",
+        "published_kst": "2026-11-14T20:52:00+09:00",
+        "reports_operator_announcement": true
+      },
+      {
+        "name": "Newsis",
+        "url": "https://www.newsis.com/view/NISX20261114_0003868235",
+        "published_kst": "2026-11-14T20:53:01+09:00",
+        "reports_operator_announcement": true
+      }
+    ],
+    "repository_crosscheck": "research/prospective_v1/source_crosschecks/ROUND_1250.json",
+    "repository_snapshot_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+  },
+  "recommendation_provenance": {
+    "delivery_log": "research/DELIVERY_LOG.md",
+    "candidate_delivery_record": "research/weekly_purchase/1250/DELIVERY_1250_20261113.json",
+    "candidate_delivery_record_blob_sha": "98d277ac7042dc7aa9197e5ddf0339bbecdedb1c",
+    "candidate_delivery_evidence_correction": "research/weekly_purchase/1250/DELIVERY_1250_20261113_EVIDENCE_CORRECTION.json",
+    "candidate_delivery_evidence_correction_blob_sha": "670904b450ac6aee678f93f01610ce95b7399521",
+    "candidate_record_exact_lines_exist": true,
+    "candidate_record_user_visible_delivery_independently_verified": false,
+    "correction_finding": "The original claim that the user requested and received the five lines is not independently verified. The current audit conversation has no such request/display; prior conversation lookup returned no match. Preserve as an intermediate candidate artifact only.",
+    "purchase_confirmation_registry": "research/PURCHASE_CONFIRMATION_REGISTRY.json",
+    "purchase_confirmation_status": "EMPTY_NO_CONFIRMED_PURCHASES",
+    "strict_model_gate": "research/weekly_purchase/1250/MODEL_GATE_1250_20261114.json",
+    "strict_model_status": "STRICT_PASS_NOT_READY",
+    "validated_models": [],
+    "freeze_seal": "NOT_CREATED"
+  },
+  "scoring": {
+    "performed": false,
+    "reason": "The exact candidate lines in GitHub cannot be proven to be the combinations actually displayed to the user. The user's instruction requires scoring only actual delivered recommendations; substituting an unverified research candidate would fabricate provenance.",
+    "verified_delivered_line_count": null,
+    "verified_purchased_line_count": 0,
+    "per_line_hits": null,
+    "bonus_hits": null,
+    "portfolio_union_recall": null,
+    "any2_any3_any4": null
+  },
+  "model_and_signal_update": {
+    "round_1250_live_recommendation_score": "NOT_AVAILABLE_NO_VERIFIED_DELIVERY",
+    "V9_research_candidate_status": "STRICT_GATE_FAIL_NOT_PROMOTED",
+    "no_model_weight_changes": true,
+    "no_signal_performance_changes_from_round_1250": true,
+    "no_new_numbers_generated": true,
+    "no_posthoc_rules_promoted": true
+  },
+  "next_required_action": "Before any next round is scored, preserve the exact user-visible recommendation message or immutable delivery payload at the moment of display, and keep delivered, final-selected, and purchase-confirmed states separate."
+}
