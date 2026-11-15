@@ -112,7 +112,34 @@ jobs:
               assert e050['execution_result']['strict_pass_ready'] is False
           for prior in ('E010_FAMILY_DECORRELATION_v1','E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1','E025_INDEPENDENT_SIGNAL_DISCOVERY_v1','E029_FIVE_LINE_PROMOTION_GATE_v2'):
               assert ids.count(prior)==1, prior
-          print('E030-E050 queue contract PASS; prior IDs retained')
+          e051_e053 = [
+              'E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1',
+              'E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1',
+              'E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1']
+          assert all(ids.count(task_id)==1 for task_id in e051_e053)
+          assert [task_id for task_id in ids if task_id in set(e051_e053)] == e051_e053
+          e051=task_by_id['E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1']
+          assert e051['kind']=='three_line_pair_context_conditional'
+          assert e051['execution_mode']=='dedicated_workflow'
+          assert e051['execution_entrypoint']=='automation/three_line_pair_context_transition_1251_v1.py'
+          assert e051['execution_result']['verification_status']=='PASS'
+          e052=task_by_id['E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1']
+          assert e052['kind']=='three_line_dynamic_selector'
+          assert e052['execution_mode']=='dedicated_workflow'
+          assert e052['execution_result']['verification_status']=='PASS'
+          e053=task_by_id['E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1']
+          assert e053['kind']=='three_line_lag2_membership_context'
+          assert e053['execution_mode']=='dedicated_workflow'
+          assert e053['execution_entrypoint']=='automation/three_line_lag2_membership_context_e053_v1.py'
+          assert e053['workflow_entrypoint']=='.github/workflows/target-1251-e053-lag2-membership-context.yml'
+          assert e053['preregistration']=='research/weekly_purchase/1251/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json'
+          assert e053['spec']['study_id']=='E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1'
+          assert e053['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+          assert e053['spec']['execution_status']==e053['execution_status']
+          if e053['execution_status'] != 'PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+              assert e053['execution_result']['verification_status']=='PASS'
+              assert e053['execution_result']['strict_pass_ready'] is False
+          print('E030-E053 queue contract PASS; prior IDs retained')
           PY
 
   research:

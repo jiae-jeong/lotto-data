@@ -2258,6 +2258,71 @@
         "purchase_lines_generated": false,
         "final_purchase_freeze_allowed": false
       }
+    },
+    {
+      "id": "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+      "kind": "three_line_lag2_membership_context",
+      "question": "Does a candidate's membership pattern across the two immediately preceding main draws provide cutoff-safe conditional information for a three-line disjoint union18 portfolio versus the exact geometry-matched null?",
+      "novelty": "One preregistered four-state two-draw membership estimator with fixed Beta prior mean 6/45 and strength 45; all 45 candidates scored once per target; fixed E045 disjoint-ticket selector; 401..1250 historical walk-forward; exact geometry-matched null; no variants or tuning.",
+      "date_kst": "2026-11-15",
+      "target_round": 1251,
+      "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_lag2_membership_context_e053_v1.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e053-lag2-membership-context.yml",
+      "preregistration": "research/weekly_purchase/1251/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "spec": {
+        "study_id": "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+        "kind": "three_line_lag2_membership_context",
+        "research_question": "Does one frozen two-draw membership-state conditional inclusion estimator improve a three-line disjoint union18 portfolio on targets 401..1250 under the unchanged four-metric strict gate?",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "training_cutoff_rule": "For target t, use only draws 1..t-1. Historical transitions u=3..t-1 use draws u-2 and u-1 as the two-draw membership state and draw u as the outcome. Score target t from draws t-2 and t-1, then add target t only after scoring.",
+        "feature_family": "Two-draw candidate membership state: absent from both, present only at t-2, present only at t-1, or present in both; bonus excluded.",
+        "estimator": "One Beta-smoothed conditional inclusion estimate per candidate/state with prior mean 6/45 and fixed strength 45; score descending then lower-number tie-break.",
+        "primary_metric": "Four unchanged strict portfolio metrics versus exact geometry-matched union18 null.",
+        "secondary_metrics": [
+          "50-target block stability",
+          "top18 candidate recall"
+        ],
+        "comparator": "120 uniform label permutations per target preserving three disjoint six-number lines and union18.",
+        "baseline": "Exact disjoint union18 null: mean max-hit 1.514256248572755; any2 0.47497624326892623; any3 0.07135490714617204; expected union coverage 2.4.",
+        "multiplicity_correction": "Bonferroni family alpha 0.05; per-metric alpha 0.0125 across the four unchanged strict metrics.",
+        "block_stability": [
+          50
+        ],
+        "tie_break": "Score descending, then number ascending; E045 selector tie-breaks retained.",
+        "random_seed": 20261115053,
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "RANDOM_BASELINE.csv",
+          "BLOCK_STABILITY.csv",
+          "MODEL_SPEC.json",
+          "INFERENCE.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS.csv": 850,
+          "RANDOM_BASELINE.csv": 850,
+          "BLOCK_STABILITY.csv": 17
+        },
+        "novelty_signature": "one preregistered two-draw membership-state signal family; four fixed membership states; prior strength 45; 401..1250; exact union18 null; no variants",
+        "study_class": "preregistered_independent_signal_family_three_line_walkforward",
+        "independent_research_axis": true,
+        "independent_signal_family": true,
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "variants": 1,
+        "parameter_search": false,
+        "prospective_confirmation_required": true,
+        "prospective_minimum_target_count": null,
+        "prospective_completion_rule": null,
+        "strict_pass_ready_requires_prospective_rule": true
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
