@@ -2373,8 +2373,139 @@
         "comparator_changed": false,
         "purchase_recommendation_generated": false
       }
+    },
+    {
+      "id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+      "kind": "three_line_rolling_concentration_regime",
+      "question": "Does a pre-target rolling 100-draw main-number concentration regime (HHI versus the median of 200 earlier rolling HHI windows) provide conditional number-inclusion information for a three-line disjoint union18 portfolio versus the exact geometry-matched null?",
+      "novelty": "Global rolling draw-frequency concentration regime is distinct from previous-draw categorical state, lag-two membership, pair/neighbor/bonus transitions, B-ticket agreement geometry, and trailing model-performance selection. One fixed regime definition, one Beta-smoothed estimator, one frozen E045 selector; no variants or tuning.",
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_rolling_concentration_regime_e054_v1.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e054-rolling-concentration-regime.yml",
+      "preregistration": "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "spec": {
+        "study_id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+        "kind": "three_line_rolling_concentration_regime",
+        "research_question": "Does a pre-target rolling 100-draw main-number concentration regime (HHI versus the median of 200 earlier rolling HHI windows) provide conditional number-inclusion information for a three-line disjoint union18 portfolio versus the exact geometry-matched null?",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "training_cutoff_rule": "At target t, use only historical outcomes u=301..t-1. Each historical outcome u is assigned its regime from information through u-1, then contributes to that regime's number-inclusion counts.",
+        "primary_metric": "Mean max hits, any2, any3, and winning-union coverage versus the frozen exact geometry-matched null; all four frozen strict gates required.",
+        "secondary_metrics": [
+          "LOW/HIGH regime descriptive rates",
+          "50-target nonoverlapping block stability",
+          "training cutoff and portfolio geometry audit"
+        ],
+        "comparator": "Same target-round three-line portfolio geometry with uniform label permutation over the fixed model lines.",
+        "baseline": "Frozen exact null in WEEKLY_THREE_LINE_POLICY_1251_PLUS plus 120 same-target geometry-preserving random bundles per target.",
+        "multiplicity_correction": "Family alpha 0.05 with fixed Bonferroni alpha 0.0125 per four strict metrics.",
+        "block_stability": [
+          50
+        ],
+        "tie_break": "Descending posterior inclusion score, then lower number; unchanged E045 selector.",
+        "random_seed": 20261116054,
+        "feature_definition": {
+          "source": "For target t, calculate main-number inclusion concentration using only the six main numbers in draws t-100..t-1; exclude bonus numbers.",
+          "rolling_window_draws": 100,
+          "reference_window_count": 200,
+          "concentration_metric": "HHI=sum_n((count_n/600)^2) over all 45 main-number inclusion frequencies in the immediately preceding 100 draws.",
+          "classification": "HIGH when current HHI is greater than or equal to the median of the preceding 200 rolling-100-draw HHI values; otherwise LOW.",
+          "historical_outcome_regime": "For outcome u, classify using draws u-100..u-1 and HHI reference windows ending u-300..u-101; all inputs precede outcome u.",
+          "candidate_universe": "All integers 1..45 are scored for every target.",
+          "training_outcome_start_round": 301,
+          "training_rule": "At target t, use only historical outcomes u=301..t-1. Each historical outcome u is assigned its regime from information through u-1, then contributes to that regime's number-inclusion counts."
+        },
+        "estimator": {
+          "prior_mean": "6/45 main-number inclusion probability under the uniform 6-of-45 null",
+          "prior_strength": 45,
+          "posterior_probability": "(success[regime,n] + 45*(6/45))/(exposure[regime,n] + 45)",
+          "ranking": "Score descending, then number ascending.",
+          "variants": 1,
+          "parameter_search": false
+        },
+        "portfolio": {
+          "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+          "selection": "Three sequential calls to the unchanged E045 choose_disjoint_ticket selector, passing the E054 regime-conditional score as both role_score and global_score; remove selected numbers after each line.",
+          "randomness_in_selection": false,
+          "variants": 1
+        },
+        "random_comparator": {
+          "random_bundles_per_target": 120,
+          "seed": 20261116054,
+          "randomness_used_for_final_selection": false,
+          "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+          "exact_null": {
+            "draw_space": "C(45,6)=8145060",
+            "geometry": "three pairwise-disjoint six-number tickets, union18",
+            "mean_max_hit": 1.514256248572755,
+            "p_any2": 0.47497624326892623,
+            "p_any3": 0.07135490714617204,
+            "expected_union_coverage": 2.4,
+            "overlapping_ticket_rule": "Compute exact target-specific null preserving actual number-to-line incidence geometry; do not reuse union18 constants."
+          }
+        },
+        "inference": {
+          "metrics": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage"
+          ],
+          "family_alpha": 0.05,
+          "alpha_per_metric": 0.0125,
+          "bootstrap_replicates": 4000,
+          "bootstrap_seed": 20261116054,
+          "block_length_targets": 50,
+          "retain_final_remainder_block": true,
+          "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+          "no_threshold_relaxation": true,
+          "no_alpha_change": true,
+          "no_block_length_change": true,
+          "no_comparator_change": true,
+          "no_unbounded_microvariants": true
+        },
+        "prospective_confirmation": {
+          "required_by_policy": true,
+          "minimum_target_count": null,
+          "completion_rule": null,
+          "status": "UNSPECIFIED_IN_POLICY"
+        },
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "RANDOM_BASELINE.csv",
+          "BLOCK_STABILITY.csv",
+          "REGIME_SUMMARY.csv",
+          "MODEL_SPEC.json",
+          "INFERENCE.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS": 850,
+          "RANDOM_BASELINE": 850,
+          "BLOCK_STABILITY": 17,
+          "REGIME_SUMMARY": 2
+        },
+        "novelty_signature": "rolling 100-draw main-number HHI; median of 200 earlier rolling HHI windows; regime-conditional number inclusion; targets 401..1250; exact geometry-matched union18 null",
+        "study_class": "empirical",
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/three_line_rolling_concentration_regime_e054_v1.py",
+        "workflow_entrypoint": ".github/workflows/target-1251-e054-rolling-concentration-regime.yml",
+        "preregistration": "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json",
+        "frozen_blobs": {
+          "runner_blob_sha": "09df771f9b97686bcdc0b51a156472ae618d5b72",
+          "test_blob_sha": "669202609b4f508bb6e03160fba261d1480399ba",
+          "workflow_blob_sha": "2d80d28a98aaee5f82ecfce74d751abba33723c0",
+          "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+          "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+        },
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged."
+  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged. E054 is a one-shot dedicated three-line workflow triggered by a frozen execution marker; existing schedules and trigger modes are unchanged."
 }

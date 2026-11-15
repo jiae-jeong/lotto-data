@@ -39,7 +39,7 @@ class IndependentFiveLineTests(unittest.TestCase):
         self.assertEqual(ids[e036_start:e036_start + len(expected_e036_e042)], expected_e036_e042)
         self.assertLess(prior_start, e030_start)
         self.assertLess(e030_start, e036_start)
-        expected_e043_e053 = [
+        expected_e043_e054 = [
             "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
@@ -50,6 +50,7 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
             "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
             "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+            "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
         ]
         self.assertEqual(ids[-len(expected_e043_e053):], expected_e043_e053)
         e046 = next(task for task in queue["tasks"] if task["id"] == "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1")
@@ -114,6 +115,19 @@ class IndependentFiveLineTests(unittest.TestCase):
         if e053["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
             self.assertEqual(e053["execution_result"]["verification_status"], "PASS")
             self.assertFalse(e053["execution_result"]["strict_pass_ready"])
+        e054 = next(task for task in queue["tasks"] if task["id"] == "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1")
+        self.assertEqual(e054["kind"], "three_line_rolling_concentration_regime")
+        self.assertEqual(e054["execution_mode"], "dedicated_workflow")
+        self.assertEqual(e054["execution_entrypoint"], "automation/three_line_rolling_concentration_regime_e054_v1.py")
+        self.assertEqual(e054["workflow_entrypoint"], ".github/workflows/target-1251-e054-rolling-concentration-regime.yml")
+        self.assertEqual(e054["preregistration"], "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json")
+        self.assertEqual(e054["spec"]["study_id"], "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1")
+        self.assertEqual(e054["spec"]["execution_status"], e054["execution_status"])
+        self.assertIn(e054["execution_status"], ("PREREGISTERED_PENDING_DEDICATED_WORKFLOW", "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED", "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING"))
+        if e054["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
+            self.assertEqual(e054["execution_result"]["verification_status"], "PASS")
+            self.assertFalse(e054["execution_result"]["strict_pass_ready"])
+
         self.assertEqual(ids[ids.index("E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")],
                          "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1")
         for task in queue["tasks"][prior_start:prior_start + len(expected_prior)]: daily._validate_task(task)

@@ -1,0 +1,114 @@
+{
+  "study_id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "date_kst": "2026-11-16",
+  "registered_at_kst": "2026-11-16T01:45:05+09:00",
+  "target_round": 1251,
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "independent_research_axis": true,
+  "independent_signal_family": true,
+  "evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+  "research_question": "Does a pre-target rolling 100-draw main-number concentration regime (HHI versus the median of 200 earlier rolling HHI windows) provide conditional number-inclusion information for a three-line disjoint union18 portfolio versus the exact geometry-matched null?",
+  "novelty_statement": "Global rolling draw-frequency concentration regime is distinct from previous-draw categorical state, lag-two membership, pair/neighbor/bonus transitions, B-ticket agreement geometry, and trailing model-performance selection. One fixed regime definition, one Beta-smoothed estimator, one frozen E045 selector; no variants or tuning.",
+  "historical_data_cutoff": 1250,
+  "target_rounds": "401..1250 inclusive",
+  "source_data_path": "lotto_data.csv",
+  "source_data_prefix_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "source_data_full_file_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "feature_definition": {
+    "source": "For target t, calculate main-number inclusion concentration using only the six main numbers in draws t-100..t-1; exclude bonus numbers.",
+    "rolling_window_draws": 100,
+    "reference_window_count": 200,
+    "concentration_metric": "HHI=sum_n((count_n/600)^2) over all 45 main-number inclusion frequencies in the immediately preceding 100 draws.",
+    "classification": "HIGH when current HHI is greater than or equal to the median of the preceding 200 rolling-100-draw HHI values; otherwise LOW.",
+    "historical_outcome_regime": "For outcome u, classify using draws u-100..u-1 and HHI reference windows ending u-300..u-101; all inputs precede outcome u.",
+    "candidate_universe": "All integers 1..45 are scored for every target.",
+    "training_outcome_start_round": 301,
+    "training_rule": "At target t, use only historical outcomes u=301..t-1. Each historical outcome u is assigned its regime from information through u-1, then contributes to that regime's number-inclusion counts."
+  },
+  "estimator": {
+    "prior_mean": "6/45 main-number inclusion probability under the uniform 6-of-45 null",
+    "prior_strength": 45,
+    "posterior_probability": "(success[regime,n] + 45*(6/45))/(exposure[regime,n] + 45)",
+    "ranking": "Score descending, then number ascending.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "portfolio": {
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "selection": "Three sequential calls to the unchanged E045 choose_disjoint_ticket selector, passing the E054 regime-conditional score as both role_score and global_score; remove selected numbers after each line.",
+    "randomness_in_selection": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "random_bundles_per_target": 120,
+    "seed": 20261116054,
+    "randomness_used_for_final_selection": false,
+    "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+    "exact_null": {
+      "draw_space": "C(45,6)=8145060",
+      "geometry": "three pairwise-disjoint six-number tickets, union18",
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4,
+      "overlapping_ticket_rule": "Compute exact target-specific null preserving actual number-to-line incidence geometry; do not reuse union18 constants."
+    }
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261116054,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "prospective_confirmation": {
+    "required_by_policy": true,
+    "minimum_target_count": null,
+    "completion_rule": null,
+    "status": "UNSPECIFIED_IN_POLICY"
+  },
+  "expected_record_counts": {
+    "PREDICTIONS": 850,
+    "RANDOM_BASELINE": 850,
+    "BLOCK_STABILITY": 17,
+    "REGIME_SUMMARY": 2
+  },
+  "expected_output_files": [
+    "PREDICTIONS.csv",
+    "RANDOM_BASELINE.csv",
+    "BLOCK_STABILITY.csv",
+    "REGIME_SUMMARY.csv",
+    "MODEL_SPEC.json",
+    "INFERENCE.json",
+    "VERIFICATION.json",
+    "COMPLETION.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.csv"
+  ],
+  "no_future_leakage": true,
+  "strict_pass_ready_requires_prospective_rule": true,
+  "parameter_search": false,
+  "variants_evaluated": 1,
+  "purchase_recommendation_generated": false,
+  "frozen_blobs": {
+    "runner_blob_sha": "09df771f9b97686bcdc0b51a156472ae618d5b72",
+    "test_blob_sha": "669202609b4f508bb6e03160fba261d1480399ba",
+    "workflow_blob_sha": "2d80d28a98aaee5f82ecfce74d751abba33723c0",
+    "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  }
+}

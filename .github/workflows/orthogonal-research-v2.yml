@@ -115,7 +115,8 @@ jobs:
           e051_e053 = [
               'E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1',
               'E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1',
-              'E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1']
+              'E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1',
+              'E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1']
           assert all(ids.count(task_id)==1 for task_id in e051_e053)
           assert [task_id for task_id in ids if task_id in set(e051_e053)] == e051_e053
           e051=task_by_id['E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1']
@@ -139,7 +140,19 @@ jobs:
           if e053['execution_status'] != 'PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
               assert e053['execution_result']['verification_status']=='PASS'
               assert e053['execution_result']['strict_pass_ready'] is False
-          print('E030-E053 queue contract PASS; prior IDs retained')
+          e054=task_by_id['E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1']
+          assert e054['kind']=='three_line_rolling_concentration_regime'
+          assert e054['execution_mode']=='dedicated_workflow'
+          assert e054['execution_entrypoint']=='automation/three_line_rolling_concentration_regime_e054_v1.py'
+          assert e054['workflow_entrypoint']=='.github/workflows/target-1251-e054-rolling-concentration-regime.yml'
+          assert e054['preregistration']=='research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json'
+          assert e054['spec']['study_id']=='E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1'
+          assert e054['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+          assert e054['spec']['execution_status']==e054['execution_status']
+          if e054['execution_status'] != 'PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+              assert e054['execution_result']['verification_status']=='PASS'
+              assert e054['execution_result']['strict_pass_ready'] is False
+          print('E030-E054 queue contract PASS; prior IDs retained')
           PY
 
   research:
