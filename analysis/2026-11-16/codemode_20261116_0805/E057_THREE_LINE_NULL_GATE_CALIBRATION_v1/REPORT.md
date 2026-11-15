@@ -71,3 +71,8 @@ The 1244–1249 period remains exposed live-history material, not a clean holdou
 1. Keep the current strict gate unchanged; extend null calibration to a separately preregistered persistent/block-correlated null before making a broader calibration claim.
 2. Resolve the prospective confirmation minimum target count and completion rule before any future strict-pass readiness decision; do not invent these values.
 3. E043/E044 remain five-line-only H1250 diagnostics awaiting their dedicated workflow dispatch; they cannot qualify the target-1251 three-line purchase policy.
+
+
+## Integrity manifest
+
+The six output artifacts are covered by SHA256_MANIFEST.csv; the manifest was re-read after publication and every stored SHA-256 and byte count matched. The stored Node reference runner is a reproducibility artifact; the actual 1,000-trajectory calculation in this run was executed in Code Mode.
