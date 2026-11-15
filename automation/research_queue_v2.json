@@ -2888,13 +2888,27 @@
       "conclusion": "SUCCESS",
       "queue_contract": "E030-E056 PASS",
       "cause": "Post-fix full validation and queue contract passed."
+    },
+    {
+      "run_id": 43764040297,
+      "conclusion": "SUCCESS",
+      "tests": 145,
+      "queue_contract": "E030-E056 PASS",
+      "cause": "Post-E056 execution queue and non-promotion result fields validated."
+    },
+    {
+      "run_id": 43764065860,
+      "conclusion": "SUCCESS",
+      "tests": 145,
+      "queue_contract": "E030-E056 PASS",
+      "cause": "Post-execution E056 evidence assertions and full queue contract passed."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 43763587906,
-    "run_number": 94,
+    "run_id": 43764065860,
+    "run_number": 96,
     "conclusion": "SUCCESS",
     "queue_contract": "E030-E056 PASS",
-    "post_e056_execution_validation": false
+    "post_e056_execution_validation": true
   }
 }
