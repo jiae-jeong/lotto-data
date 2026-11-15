@@ -2410,11 +2410,12 @@
           "rolling_window_draws": 100,
           "reference_window_count": 200,
           "concentration_metric": "HHI=sum_n((count_n/600)^2) over all 45 main-number inclusion frequencies in the immediately preceding 100 draws.",
-          "classification": "HIGH when current HHI is greater than or equal to the median of the preceding 200 rolling-100-draw HHI values; otherwise LOW.",
-          "historical_outcome_regime": "For outcome u, classify using draws u-100..u-1 and HHI reference windows ending u-300..u-101; all inputs precede outcome u.",
+          "classification": "At target t, HIGH when current HHI is greater than or equal to the median of up to 200 earlier valid rolling-100-draw HHI values ending t-300..t-101 (minimum 100; exactly 200 when available); otherwise LOW.",
+          "historical_outcome_regime": "For outcome u, classify using draws u-100..u-1 and valid HHI reference windows ending max(100,u-300)..u-101; minimum 100, exactly 200 when available; all inputs precede outcome u.",
           "candidate_universe": "All integers 1..45 are scored for every target.",
           "training_outcome_start_round": 301,
-          "training_rule": "At target t, use only historical outcomes u=301..t-1. Each historical outcome u is assigned its regime from information through u-1, then contributes to that regime's number-inclusion counts."
+          "training_rule": "At target t, use only historical outcomes u=301..t-1. Each historical outcome u is assigned its regime from information through u-1, then contributes to that regime's number-inclusion counts.",
+          "minimum_reference_window_count": 100
         },
         "estimator": {
           "prior_mean": "6/45 main-number inclusion probability under the uniform 6-of-45 null",
@@ -2496,7 +2497,7 @@
         "workflow_entrypoint": ".github/workflows/target-1251-e054-rolling-concentration-regime.yml",
         "preregistration": "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json",
         "frozen_blobs": {
-          "runner_blob_sha": "514ff6621b504710d500253ae42f79d78516c69f",
+          "runner_blob_sha": "3a660b23fc7b74a474cfbc984e7231f33e16d595",
           "test_blob_sha": "669202609b4f508bb6e03160fba261d1480399ba",
           "workflow_blob_sha": "8c9d14b929d9163ab7fbe6f1885cd9b2a2f97837",
           "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
