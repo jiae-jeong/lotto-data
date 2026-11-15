@@ -15,7 +15,9 @@ class H005FixTests(unittest.TestCase):
         self.assertEqual(v[44],45)
 
     def test_legacy_mapping_constant_is_not_number_specific(self):
-        self.assertEqual(270.0/51.0,270.0/51.0)
+        legacy_constant=270.0/51.0
+        self.assertAlmostEqual(legacy_constant,5.2941176470588235)
+        self.assertNotAlmostEqual(legacy_constant,270.0/45.0)
         v=study.corrected_structure_vector((1,7,13,19,25,45))
         self.assertEqual(len(set(v)),2)
         self.assertNotEqual(len(set([270.0/51.0]*45)),2)
