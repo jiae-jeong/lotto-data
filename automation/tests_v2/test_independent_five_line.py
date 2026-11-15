@@ -39,7 +39,7 @@ class IndependentFiveLineTests(unittest.TestCase):
         self.assertEqual(ids[e036_start:e036_start + len(expected_e036_e042)], expected_e036_e042)
         self.assertLess(prior_start, e030_start)
         self.assertLess(e030_start, e036_start)
-        expected_e043_e055 = [
+        expected_e043_e056 = [
             "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
             "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
@@ -52,6 +52,7 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
             "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
             "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
+            "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
         ]
         self.assertEqual(ids[-len(expected_e043_e055):], expected_e043_e055)
         e046 = next(task for task in queue["tasks"] if task["id"] == "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1")
