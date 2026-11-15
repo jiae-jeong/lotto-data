@@ -1,0 +1,58 @@
+{
+  "data": {
+    "rows": 1250,
+    "first_round": 1,
+    "latest_round": 1250,
+    "latest_date": "2026.11.14",
+    "integrity": "PASS",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+  },
+  "long_recent_categories": [
+    {
+      "window": 10,
+      "long_strong_recent_weak": 4,
+      "long_weak_recent_strong": 6,
+      "recent_q25_count": 0,
+      "recent_q75_count": 2
+    },
+    {
+      "window": 30,
+      "long_strong_recent_weak": 6,
+      "long_weak_recent_strong": 3,
+      "recent_q25_count": 3,
+      "recent_q75_count": 5
+    },
+    {
+      "window": 50,
+      "long_strong_recent_weak": 5,
+      "long_weak_recent_strong": 2,
+      "recent_q25_count": 5,
+      "recent_q75_count": 8
+    },
+    {
+      "window": 100,
+      "long_strong_recent_weak": 5,
+      "long_weak_recent_strong": 4,
+      "recent_q25_count": 11,
+      "recent_q75_count": 15
+    }
+  ],
+  "pair": {
+    "universe": 990,
+    "q_lt_0_05": 0,
+    "min_q": 1.0
+  },
+  "triple": {
+    "universe": 14190,
+    "q_lt_0_05": 0,
+    "min_q": 1.0
+  },
+  "B": {
+    "prediction_records": 8400,
+    "targets": 1050,
+    "random_tickets": 1050000,
+    "leakage_failures": 0
+  },
+  "historical_source_candidates": 32,
+  "status": "MASTER_PARTIAL"
+}
