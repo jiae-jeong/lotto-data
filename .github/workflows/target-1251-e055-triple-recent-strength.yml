@@ -50,7 +50,7 @@ jobs:
           }
           for key,path in paths.items():
               blob=subprocess.check_output(["git","rev-parse","HEAD:"+path],text=True).strip()
-              assert blob==frozen[key], (key,blob,frozen[key])
+              assert blob==frozen[key+"_blob_sha"], (key,blob,frozen[key+"_blob_sha"])
           assert prereg["study_id"]=="E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1"
           assert prereg["date_kst"]=="2026-11-16" and prereg["historical_data_cutoff"]==1250
           assert prereg["target_range"]==[401,1250] and prereg["target_count"]==850
