@@ -2602,8 +2602,97 @@
           "HIGH": 456
         }
       }
+    },
+    {
+      "id": "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
+      "kind": "three_line_triple_recent_strength_falsification",
+      "question": "The E045 fixed three-line portfolio's trailing 100-target any3 rate contains ex-ante information about its next non-overlapping 50-target any3 rate, beyond the distribution observed in geometry-matched random trajectories.",
+      "novelty": "Tests whether the recent any3 hit rate of the frozen E045 three-line portfolio predicts its next non-overlapping 50-target any3 rate; this is a temporal persistence falsification, not a new ticket model and not E052's trailing-any2 model selector.",
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_triple_recent_strength_e055_v1.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e055-triple-recent-strength.yml",
+      "preregistration": "research/weekly_purchase/1251/E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_PREREG_20261116.json",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "spec": {
+        "study_id": "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
+        "kind": "three_line_triple_recent_strength_falsification",
+        "hypothesis": "The E045 fixed three-line portfolio's trailing 100-target any3 rate contains ex-ante information about its next non-overlapping 50-target any3 rate, beyond the distribution observed in geometry-matched random trajectories.",
+        "source_study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+        "source_data_cutoff": 1250,
+        "target_range": [
+          401,
+          1250
+        ],
+        "target_count": 850,
+        "trailing_window_targets": 100,
+        "forward_block_targets": 50,
+        "evaluation_block_starts": [
+          501,
+          551,
+          601,
+          651,
+          701,
+          751,
+          801,
+          851,
+          901,
+          951,
+          1001,
+          1051,
+          1101,
+          1151,
+          1201
+        ],
+        "statistic": "Pearson correlation across 15 block-pairs between trailing-100-target any3 rate and forward-50-target any3 rate.",
+        "random_trajectory_count": 120,
+        "random_bundles_total": 102000,
+        "random_seed_rule": "For replicate r=0..119 and target t, seed = 20261116055 + r*1000003 + t; uniformly label-permute the frozen E045 three-line portfolio and score against the actual target draw.",
+        "bootstrap_replicates": 4000,
+        "bootstrap_block_length_blocks": 3,
+        "alpha": 0.05,
+        "support_rule": "Pearson correlation > 0, 95% moving-block bootstrap lower bound > 0, and one-sided matched-random trajectory tail probability <= 0.05.",
+        "parameter_search": false,
+        "model_selection": false,
+        "ticket_generation": false,
+        "evidence_class": "HISTORICAL_PREDICTIVE_FALSIFICATION_NOT_PURCHASE_READINESS",
+        "source_prediction_path": "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/PREDICTIONS.csv",
+        "source_prediction_sha256": "585ec30a6d51f7bb02b00c8497e30ec47caac8527b7baf8d6781e7017d09ca04",
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "BLOCKS.csv",
+          "RANDOM_TRAJECTORY_CORRELATIONS.csv",
+          "MODEL_SPEC.json",
+          "INFERENCE.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS": 850,
+          "BLOCKS": 15,
+          "RANDOM_TRAJECTORY_CORRELATIONS": 120
+        },
+        "execution_mode": "dedicated_workflow",
+        "execution_entrypoint": "automation/three_line_triple_recent_strength_e055_v1.py",
+        "workflow_entrypoint": ".github/workflows/target-1251-e055-triple-recent-strength.yml",
+        "preregistration": "research/weekly_purchase/1251/E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_PREREG_20261116.json",
+        "frozen_blobs": {
+          "runner_blob_sha": "847618c0387d28bcca4ed2c6ec5822a367a0ca62",
+          "test_blob_sha": "781f416584c410e45e2d8f3ef05b6fc7580f6150",
+          "workflow_blob_sha": "6e2de90a9915252cd1413c82b74398fecc5eff8d",
+          "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+          "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+          "source_predictions_blob_sha": "307d1aed4a576ba08d92226099083cbba3cd5647",
+          "source_manifest_blob_sha": "ff07de995dd2f700f16ede92b69a53d8d7bbc333",
+          "source_completion_blob_sha": "55034b8926d05310691b918fde2a2097ca339c0a",
+          "source_verification_blob_sha": "d033919199fcfee79b62bd1aa1e1cd365682148e",
+          "source_prereg_blob_sha": "1b5c908024ab5efd5e832cbedc2ae399fa04cddb"
+        },
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged. E054 is a one-shot dedicated three-line workflow triggered by a frozen execution marker; existing schedules and trigger modes are unchanged."
+  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged. E054 is a one-shot dedicated three-line workflow triggered by a frozen execution marker; existing schedules and trigger modes are unchanged. E055 is a dedicated one-shot historical triple-recent-strength falsification workflow; no schedule or existing delivery task changed."
 }
