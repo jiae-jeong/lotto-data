@@ -46,7 +46,7 @@
   "final_selection_randomness": false,
   "random_fallback_allowed": false,
   "final_purchase_freeze_allowed": false,
-  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.\n2026-11-14: Round 1250 (1,5,18,23,27,28 + bonus 8) was corroborated by 4th.kr and Topstarnews; source data appended and DAILY MASTER #103 started. Official API direct retrieval was not claimed.\n2026-11-15: E052 nested trailing-performance selector completed and was added to the target-1251 three-line evidence inventory. It failed the unchanged historical strict gates; no purchase lines or readiness artifact were created. DAILY MASTER RUN #107 was reconciled at cutoff 1250 and remains PARTIAL.\n2026-11-16: E054 rolling concentration regime was independently preregistered at cutoff 1250 before execution; strict gates, alpha, block length, comparator, and prospective rule remain unchanged. The dedicated one-shot workflow is pending.",
+  "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.\n2026-11-14: Round 1250 (1,5,18,23,27,28 + bonus 8) was corroborated by 4th.kr and Topstarnews; source data appended and DAILY MASTER #103 started. Official API direct retrieval was not claimed.\n2026-11-15: E052 nested trailing-performance selector completed and was added to the target-1251 three-line evidence inventory. It failed the unchanged historical strict gates; no purchase lines or readiness artifact were created. DAILY MASTER RUN #107 was reconciled at cutoff 1250 and remains PARTIAL.\n2026-11-16: E054 rolling concentration regime was independently preregistered at cutoff 1250 before execution; strict gates, alpha, block length, comparator, and prospective rule remain unchanged. The dedicated one-shot workflow is pending.\n2026-11-16: E054 completed successfully at 01:56:51 KST on cutoff 1250 (850 walk-forward targets, 102000 matched-random bundles, 4000 bootstrap replicates, zero leakage/cutoff/geometry violations, 9/9 manifest). Historical STRICT_FAIL; no STRICT_PASS_READY or purchase recommendation. Queue contract validation #84 passed 137 tests.",
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
     "registered_tasks": 40,
@@ -91,14 +91,14 @@
       ".github/workflows/lotto-finalize-r3.yml",
       ".github/workflows/lotto-finalize-v3.yml"
     ],
-    "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43558319426 (run #55); validation job passed 102 tests and printed E030-E049 queue contract PASS; prior IDs retained.",
+    "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43738148398 (run #84); validation job passed 137 tests and printed E030-E054 queue contract PASS; prior IDs retained.",
     "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING; E054 dedicated three-line signal-family axis completed; E043/E044 remain five-line-only and ineligible for target-1251 three-line readiness.",
     "runnable_generic_task_count": 0,
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
     "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
     "target_1251_three_line_e048_runner": "automation/three_line_bonus_transition_e048.py",
     "target_1251_three_line_e048_workflow": ".github/workflows/target-1251-e048-three-line-bonus-transition.yml",
-    "queue_contract_validation_run_id": 43558319426,
+    "queue_contract_validation_run_id": 43738148398,
     "queue_contract_validation_history": [
       {
         "run_id": 43548096755,
@@ -120,6 +120,17 @@
         "run_id": 43558319426,
         "conclusion": "SUCCESS",
         "cause": "After E049 registration, the queue suffix and assertions were updated to include E049; orthogonal-research-v2 validation job completed 102 tests and printed E030-E049 queue contract PASS."
+      },
+      {
+        "run_id": 43737968352,
+        "conclusion": "FAILURE",
+        "cause": "Queue suffix test was renamed for E054 but one stale expected_e043_e053 reference remained, causing NameError.",
+        "repair": "Updated all remaining expected_e043_e053 references to expected_e043_e054 and reran the full validation."
+      },
+      {
+        "run_id": 43738148398,
+        "conclusion": "SUCCESS",
+        "cause": "E054 preregistered task and queue contract assertions validated; 137 tests passed and E030-E054 queue contract PASS."
       }
     ],
     "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
@@ -209,8 +220,8 @@
       "manifest_verification": "workflow verified per-study and root SHA256 manifests before publishing"
     },
     "latest_queue_validation": {
-      "workflow_run_id": 43673928694,
-      "workflow_run_number": 76,
+      "workflow_run_id": 43738148398,
+      "workflow_run_number": 84,
       "conclusion": "success",
       "validation_job": "success",
       "research_job": "skipped",
@@ -519,8 +530,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-16T01:56:51.846904+09:00",
-  "reconciled_main_sha": "06b7959696ada22b63ba0aca97da07765bd38b4f",
+  "audit_reconciled_at_kst": "2026-11-16T01:57:00+09:00",
+  "reconciled_main_sha": "6644afd04712ab826fff8975f8b8b7df10a43f29",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -587,7 +598,7 @@
     "latest_additional_independent_axis_run_id": 43738196136,
     "latest_registered_three_line_axis": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
     "latest_registered_three_line_axis_cutoff": 1250,
-    "latest_registered_three_line_axis_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+    "latest_registered_three_line_axis_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
   },
   "latest_daily_master_attempt": {
     "run_id": 43684901626,
@@ -607,7 +618,7 @@
   "daily_master_generated_kst": "2026-11-15T15:25:23.478758+09:00",
   "daily_master_verification_status": "PARTIAL",
   "daily_master_v4_path": "analysis/2026-11-15/MASTER_FULL_V4_061932_948530",
-  "audit_updated_kst": "2026-11-16T01:56:51.846904+09:00",
+  "audit_updated_kst": "2026-11-16T01:57:00+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
     "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
