@@ -5,11 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'automation/three_line_rolling_concentration_regime_e054_v1.py'
-      - 'automation/tests_v2/test_three_line_rolling_concentration_regime_e054.py'
-      - 'automation/tests_v2/test_independent_five_line.py'
-      - 'automation/research_queue_v2.json'
-      - 'research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json'
+      - 'research/weekly_purchase/1251/E054_EXECUTE_20261116.trigger'
 
 permissions:
   contents: write
