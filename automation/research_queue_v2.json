@@ -2142,6 +2142,75 @@
       "implementation_code_sha": "bccc39830b6be4512a97f0cdd43320204be9d07f",
       "test_code_sha": "fd57aa77d0ecc4bdcac064786f5194d3a5ebd9f5",
       "workflow_blob_sha": "f7a94dab06dcd11b807fcf63f3e192e51fe0fbb2"
+    },
+    {
+      "id": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+      "kind": "three_line_dynamic_selector",
+      "question": "Does one fixed nested selector that chooses among five frozen three-line portfolios by the preceding 100 target rounds' any2 rate improve next-target performance over the exact disjoint union18 null?",
+      "novelty": "A new target-1251 three-line model-selection axis. One frozen trailing-100 any2 selector chooses only among already verified E045/E048/E049/E050/E051 portfolios; each target uses outcomes through t-1 only. It tests online model selection rather than inventing another signal family or tuning any source model.",
+      "date_kst": "2026-11-15",
+      "target_round": 1251,
+      "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_dynamic_selector_e052_v1.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e052-three-line-dynamic-selector.yml",
+      "preregistration": "research/weekly_purchase/1251/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_PREREG_20261115.json",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "spec": {
+        "study_id": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+        "kind": "three_line_dynamic_selector",
+        "research_question": "Does nested trailing-100 any2-based selection among five frozen three-line portfolios improve the next-target three-line portfolio under the unchanged four-metric strict gate?",
+        "data_cutoff": 1249,
+        "target_rounds": "501..1249 inclusive",
+        "source_target_rounds": "401..1249 inclusive",
+        "training_cutoff_rule": "At target t, choose among the five frozen portfolios using only their recomputed any2 outcomes on targets t-100..t-1; every source prediction u must have training_through_round=u-1. Score target t only after selection.",
+        "primary_metric": "mean any2 rate versus exact geometry-matched disjoint union18 null",
+        "secondary_metrics": [
+          "max_hits",
+          "any3",
+          "winning_union_coverage",
+          "50-target block stability"
+        ],
+        "comparator": "Exact uniform random portfolio preserving three disjoint six-number lines and union18; five frozen source portfolios are candidates, not post-hoc comparators.",
+        "baseline": "Exact disjoint union18 null: mean max-hit 1.514256248572755; any2 0.47497624326892623; any3 0.07135490714617204; expected union coverage 2.4.",
+        "multiplicity_correction": "Bonferroni family alpha 0.05; per-metric alpha 0.0125 across the four unchanged strict metrics.",
+        "block_stability": [
+          50
+        ],
+        "tie_break": "First model in fixed candidate order E045,E048,E049,E050,E051.",
+        "random_seed": 202611151236,
+        "expected_output_files": [
+          "PREDICTIONS.csv",
+          "MODEL_SELECTION_LOG.csv",
+          "STATIC_MODEL_SCORECARD.csv",
+          "RANDOM_BASELINE.csv",
+          "BLOCK_STABILITY.csv",
+          "INFERENCE.json",
+          "VERIFICATION.json",
+          "COMPLETION.json",
+          "READINESS_UPDATE.json",
+          "REPORT.md",
+          "SHA256_MANIFEST.csv"
+        ],
+        "expected_record_counts": {
+          "PREDICTIONS.csv": 749,
+          "MODEL_SELECTION_LOG.csv": 749,
+          "STATIC_MODEL_SCORECARD.csv": 5,
+          "RANDOM_BASELINE.csv": 749,
+          "BLOCK_STABILITY.csv": 15
+        },
+        "novelty_signature": "one preregistered trailing-100 any2 selector across five frozen target-1251 three-line portfolios; nested t-1 model selection; exact union18 null; 501..1249; no variants",
+        "study_class": "preregistered_nested_model_selection",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "candidate_model_count": 5,
+        "selection_lookback_targets": 100,
+        "selection_metric": "any2",
+        "parameter_search": false,
+        "prospective_confirmation_required": true,
+        "prospective_minimum_target_count": null,
+        "prospective_completion_rule": null
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
