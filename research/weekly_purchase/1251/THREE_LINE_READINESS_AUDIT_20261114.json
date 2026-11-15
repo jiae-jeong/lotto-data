@@ -15,7 +15,7 @@
   "strict_model_validation_pass": false,
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
-  "strict_gate_evaluation": "E045_APPEND_ONLY_CUTOFF_REFRESH_THROUGH_1250_EVALUATED; E048_E049_E050_REMAIN_FIXED_HISTORICAL_CUTOFF_1249; PROSPECTIVE_CONFIRMATION_REQUIRED",
+  "strict_gate_evaluation": "E045_APPEND_ONLY_CUTOFF_REFRESH_THROUGH_1250_EVALUATED; E048_E049_E050_REMAIN_FIXED_HISTORICAL_CUTOFF_1249; E051_PAIR_CONTEXT_HISTORICAL_CUTOFF_1250_EVALUATED_AND_STRICT_FAIL; PROSPECTIVE_CONFIRMATION_REQUIRED",
   "ready_file": null,
   "ready_file_exists": false,
   "line_level_output_status": "SUPPRESSED_NOT_READY",
@@ -30,7 +30,8 @@
     "Independent E048 bonus-to-next-main transition axis completed 849 cutoff-safe targets with 101,880 geometry-matched random bundles. All four adjusted CI lower bounds remained at or below zero; any2-positive block share was 8/17 (47.06%), below 65%. It did not qualify for STRICT_PASS_READY.",
     "E049 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
     "E050 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
-    "E045 append-only cutoff refresh through 1250 is complete and is not an independent research axis. Historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share."
+    "E045 append-only cutoff refresh through 1250 is complete and is not an independent research axis. Historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
+    "Independent E051 pair-context axis completed 850 cutoff-safe targets with 102,000 geometry-matched random bundles and a 7/7 manifest. All four adjusted CI lower bounds were at or below zero; any2-positive 50-target block share was 7/17 (41.18%), below 65%. It did not qualify for STRICT_PASS_READY."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
