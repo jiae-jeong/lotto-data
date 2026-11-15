@@ -33,7 +33,8 @@
     "E045 append-only cutoff refresh through 1250 is complete and is not an independent research axis. Historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
     "Independent E051 pair-context axis completed 850 cutoff-safe targets with 102,000 geometry-matched random bundles and a 7/7 manifest. All four adjusted CI lower bounds were at or below zero; any2-positive 50-target block share was 7/17 (41.18%), below 65%. It did not qualify for STRICT_PASS_READY.",
     "E052 nested trailing-100 selector completed 749 cutoff-safe historical targets (501..1249) with 89,880 geometry-matched random portfolios and a 10/10 manifest; all four adjusted CI lower bounds were at or below zero, and any2-positive 50-target block share was 5/15 (33.33%), below 65%. It remains STRICT_FAIL and is not prospective confirmation.",
-    "Prospective confirmation remains required, but the minimum untouched target count and completion rule are still unspecified; E046 is design-only and does not adopt a rule."
+    "Prospective confirmation remains required, but the minimum untouched target count and completion rule are still unspecified; E046 is design-only and does not adopt a rule.",
+    "E053 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -47,7 +48,7 @@
   "note": "E045 historical strict failure remains immutable. E046 adds a separate design-only prospective sample-size analysis; it does not prove an edge, change any threshold, or create readiness. A target-aware three-line readiness guard and Thursday-freeze/Friday-verify-only finalizer now exist. No purchase lines are released. E048 is a separately preregistered bonus-to-next-main transition signal study; it also failed the unchanged historical strict gate. Its computation completed and its CRLF-only output-preservation issue was repaired without recalculating the model or changing thresholds. A second E048 workflow execution was triggered by a pipefail-sensitive one-shot guard; primary outputs were byte-identical to the first run and are classified as a duplicate reproducibility check, not additional evidence. The guard now reads the full git tree without grep -q and completed runs become no-op triggers. E050 adds one frozen number-level previous-main neighborhood transition axis; it is not a threshold change, model variant sweep, or purchase-ready artifact.\n2026-11-14: Round 1250 (1,5,18,23,27,28 + bonus 8) was corroborated by 4th.kr and Topstarnews; source data appended and DAILY MASTER #103 started. Official API direct retrieval was not claimed.\n2026-11-15: E052 nested trailing-performance selector completed and was added to the target-1251 three-line evidence inventory. It failed the unchanged historical strict gates; no purchase lines or readiness artifact were created. DAILY MASTER RUN #107 was reconciled at cutoff 1250 and remains PARTIAL.",
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
-    "registered_tasks": 38,
+    "registered_tasks": 39,
     "generic_task_completion_paths_found": 25,
     "blocked_generic_tasks": [
       "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
@@ -72,14 +73,15 @@
       "E041": "EXECUTED_BLOCKED_NO_VALIDATED_SINGLE_EDGE",
       "E042": "EXECUTED_DO_NOT_PROMOTE",
       "E051": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED; RUN 43632443475; 850 CUTOFF-SAFE TARGETS; 102000 GEOMETRY-MATCHED RANDOM BUNDLES; MANIFEST 7/7 PASS; NO LEAKAGE",
-      "E052": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED; RUN 43674223135; 749 CUTOFF-SAFE TARGETS 501..1249; 89880 GEOMETRY-MATCHED RANDOM BUNDLES; MANIFEST 10/10 PASS; NO LEAKAGE"
+      "E052": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED; RUN 43674223135; 749 CUTOFF-SAFE TARGETS 501..1249; 89880 GEOMETRY-MATCHED RANDOM BUNDLES; MANIFEST 10/10 PASS; NO LEAKAGE",
+      "E053": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
     },
     "superseded_tasks": [
       "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
     ],
     "target_1251_three_line_task_registered": true,
     "target_1251_three_line_runner_found": true,
-    "target_1251_three_line_task_status": "E045_AND_E048_AND_E049_AND_E050_AND_E051_AND_E052_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY",
+    "target_1251_three_line_task_status": "E045_E048_E049_E050_E051_E052_E053_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY",
     "target_1251_three_line_workflow_run_id": 43499702588,
     "target_1251_three_line_finalizer_found": true,
     "three_line_finalizer": "automation/finalize_three_line_from_strict_ready_v1.py",
@@ -88,7 +90,7 @@
       ".github/workflows/lotto-finalize-v3.yml"
     ],
     "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43558319426 (run #55); validation job passed 102 tests and printed E030-E049 queue contract PASS; prior IDs retained.",
-    "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING; E052 dedicated three-line axis completed; E043/E044 remain five-line-only and are ineligible for target-1251 three-line readiness.",
+    "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING; E053 dedicated three-line signal-family axis completed; E043/E044 remain five-line-only and ineligible for target-1251 three-line readiness.",
     "runnable_generic_task_count": 0,
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
     "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
@@ -218,7 +220,12 @@
     "target_1251_three_line_e052_workflow": ".github/workflows/target-1251-e052-three-line-dynamic-selector.yml",
     "target_1251_three_line_e052_result_path": "analysis/2026-11-15/gha-43674223135-1/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
     "three_line_preregistered_axes_remaining": [],
-    "three_line_axis_status": "NO_UNEXECUTED_PREREGISTERED_THREE_LINE_AXES; E043/E044 ARE FIVE_LINE_ONLY"
+    "three_line_axis_status": "E053_EXECUTED; NO_UNEXECUTED_PREREGISTERED_THREE_LINE_AXES",
+    "target_1251_three_line_e053_workflow_run_id": 43694556989,
+    "target_1251_three_line_e053_preregistration": "research/weekly_purchase/1251/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json",
+    "target_1251_three_line_e053_runner": "automation/three_line_lag2_membership_context_e053_v1.py",
+    "target_1251_three_line_e053_workflow": ".github/workflows/target-1251-e053-lag2-membership-context.yml",
+    "target_1251_three_line_e053_status": "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
   },
   "evaluated_gates": {
     "max_hit": {
@@ -505,8 +512,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-15T16:18:38+09:00",
-  "reconciled_main_sha": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
+  "audit_reconciled_at_kst": "2026-11-15T17:27:53.601643+09:00",
+  "reconciled_main_sha": "3cb8a84540d557f213da9f062a4d92c8a6bdddfc",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -588,7 +595,7 @@
   "daily_master_generated_kst": "2026-11-15T15:25:23.478758+09:00",
   "daily_master_verification_status": "PARTIAL",
   "daily_master_v4_path": "analysis/2026-11-15/MASTER_FULL_V4_061932_948530",
-  "audit_updated_kst": "2026-11-15T16:18:38+09:00",
+  "audit_updated_kst": "2026-11-15T17:27:53.601643+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
     "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
@@ -847,6 +854,56 @@
         "winning_union_coverage",
         "any2_positive_50_target_block_share"
       ]
+    },
+    {
+      "study_id": "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+      "evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+      "independent_research_axis": true,
+      "independent_signal_family": true,
+      "workflow_name": "target-1251-e053-lag2-membership-context",
+      "workflow_run_id": 43694556989,
+      "workflow_run_number": 2,
+      "run_attempt": 1,
+      "workflow_run_conclusion": "success",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43694556989",
+      "completed_at_kst": "2026-11-15T17:27:53.601643+09:00",
+      "result_path": "analysis/2026-11-15/gha_43694556989_1/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+      "data_cutoff": 1250,
+      "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "target_range": [
+        401,
+        1250
+      ],
+      "target_count": 850,
+      "random_bundles_per_target": 120,
+      "random_bundles_total": 102000,
+      "block_length": 50,
+      "block_count": 17,
+      "training_cutoff_violations": 0,
+      "leakage_failures": 0,
+      "future_predictions": 0,
+      "portfolio_geometry_violations": 0,
+      "random_geometry_violations": 0,
+      "verification_status": "PASS",
+      "manifest_entries": 8,
+      "manifest_status": "PASS",
+      "historical_strict_gate_pass": false,
+      "failed_gates": [
+        "max_hits",
+        "any2",
+        "any3",
+        "winning_union_coverage",
+        "any2_positive_50_target_block_share"
+      ],
+      "strict_portfolio_pass": false,
+      "strict_pass_ready": false,
+      "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+      "parameter_search": false,
+      "thresholds_changed": false,
+      "alpha_changed": false,
+      "block_length_changed": false,
+      "comparator_changed": false,
+      "purchase_recommendation_generated": false
     }
   ],
   "purchase_lines_generated": false,
@@ -963,5 +1020,55 @@
     "line_level_output_status": "SUPPRESSED_NOT_READY",
     "final_purchase_freeze_allowed": false,
     "reason": "Historical nested selector evidence is not prospective confirmation; the prospective minimum target count and completion rule remain unspecified."
+  },
+  "e053_lag2_membership_axis": {
+    "study_id": "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+    "evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+    "independent_research_axis": true,
+    "independent_signal_family": true,
+    "workflow_name": "target-1251-e053-lag2-membership-context",
+    "workflow_run_id": 43694556989,
+    "workflow_run_number": 2,
+    "run_attempt": 1,
+    "workflow_run_conclusion": "success",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43694556989",
+    "completed_at_kst": "2026-11-15T17:27:53.601643+09:00",
+    "result_path": "analysis/2026-11-15/gha_43694556989_1/E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "random_bundles_per_target": 120,
+    "random_bundles_total": 102000,
+    "block_length": 50,
+    "block_count": 17,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "portfolio_geometry_violations": 0,
+    "random_geometry_violations": 0,
+    "verification_status": "PASS",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "parameter_search": false,
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "purchase_recommendation_generated": false
   }
 }
