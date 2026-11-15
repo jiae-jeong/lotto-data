@@ -60,7 +60,8 @@
     "upper_quantile_index": 3974,
     "all_four_adjusted_ci_lower_bounds_must_be_strictly_positive": true,
     "any2_positive_nonoverlapping_50_target_block_share_minimum": 0.65,
-    "false_pass_definition": "A null trajectory is a false pass only if all four adjusted moving-block CI lower bounds are strictly > 0 and at least 65% of its 17 non-overlapping 50-target any2-delta blocks are positive."
+    "false_pass_definition": "A null trajectory is a false pass only if all four adjusted moving-block CI lower bounds are strictly > 0 and at least 65% of its 17 non-overlapping 50-target any2-delta blocks are positive.",
+    "bootstrap_quantile_indices_rule": "For 4000 sorted bootstrap means, lower index=floor((0.0125/2)*(4000-1))=24; upper index=floor((1-0.0125/2)*(4000-1))=3974, matching the frozen E045 percentile index rule."
   },
   "simulation": {
     "independent_null_trajectories": 1000,
@@ -74,7 +75,8 @@
     "no_block_length_change": true,
     "no_comparator_change": true,
     "no_model_selection": true,
-    "no_purchase_recommendation": true
+    "no_purchase_recommendation": true,
+    "bootstrap_seed_rule": "For trajectory index r=0..999 and metric index m=0..3, use xorshift32 seed (base_seed + 1000003*r + 9000 + m) mod 2^32; this varies the bootstrap stream by null trajectory while retaining deterministic reproducibility."
   },
   "reporting": {
     "primary_endpoint": "Empirical joint strict-gate false-pass rate across 1000 null trajectories with 95% Wilson interval.",
