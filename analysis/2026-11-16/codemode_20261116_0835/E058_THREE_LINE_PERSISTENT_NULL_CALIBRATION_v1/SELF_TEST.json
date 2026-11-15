@@ -1,0 +1,7 @@
+{
+  "seeds": 100,
+  "transitions": 10000,
+  "geometry_violations": 0,
+  "per_line_retention_violations": 0,
+  "union_retention_violations": 0
+}
