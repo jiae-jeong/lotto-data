@@ -79,8 +79,8 @@ def _sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def _normalize_csvs(folder):
     for path in folder.glob("*.csv"):
         raw=path.read_bytes()
-        if raw.startswith(b"\\xef\\xbb\\xbf"): raw=raw[3:]
-        path.write_bytes(raw.replace(b"\\r\\n",b"\\n"))
+        if raw.startswith(b"\xef\xbb\xbf"): raw=raw[3:]
+        path.write_bytes(raw.replace(b"\r\n",b"\n"))
 
 def verify_spec(pr,policy):
     assert pr["study_id"]==STUDY and pr["policy_id"]==policy["policy_id"]
@@ -125,7 +125,7 @@ def verify_spec(pr,policy):
         assert abs(float(policy["exact_null"][key])-float(r["exact_null"][key]))<1e-14
 
 def run(date,run_id):
-    if not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}",date) or not re.fullmatch(r"[A-Za-z0-9_-]+",run_id):
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}",date) or not re.fullmatch(r"[A-Za-z0-9_-]+",run_id):
         raise ValueError("Unsafe date/run id")
     pr=json.loads(PREREG.read_text(encoding="utf-8")); policy=json.loads(POLICY.read_text(encoding="utf-8"))
     if date!=pr["date_kst"]: raise ValueError("Run date differs from frozen E054 preregistration")
@@ -260,7 +260,7 @@ def run(date,run_id):
       "- Prospective minimum/completion rule: **unspecified and not adopted**",
       "- No final purchase lines, recommendation, or freeze/seal were generated.","",
       "Each target's current regime uses only draws through t-1. Each historical outcome enters its own pre-outcome regime count only after its prediction is frozen. The HHI reference windows end before the current 100-draw window. One frozen signal family, one estimator, no variants or tuning."])
-    (folder/"REPORT.md").write_text("\\n".join(report)+"\\n",encoding="utf-8")
+    (folder/"REPORT.md").write_text("\n".join(report)+"\n",encoding="utf-8")
     entries=base.write_and_verify_manifest(folder); _normalize_csvs(folder)
     if entries!=9: raise AssertionError(f"E054 manifest entries {entries} != 9")
     return {"status":"COMPLETE","study_id":STUDY,"result_path":folder.relative_to(ROOT).as_posix(),
