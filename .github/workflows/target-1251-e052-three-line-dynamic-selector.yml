@@ -122,12 +122,6 @@ jobs:
           assert [int(last[f"no{i}"]) for i in range(1, 7)] == [1, 5, 18, 23, 27, 28]
           assert int(last["bonus"]) == 8
 
-          queue = json.loads(Path("automation/research_queue_v2.json").read_text(encoding="utf-8"))
-          task = next(item for item in queue["tasks"] if item["id"] == prereg["study_id"])
-          assert task["execution_status"] == "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
-          assert task["spec"]["execution_mode"] == "dedicated_workflow"
-          assert task["preregistration"] == prereg_path.as_posix()
-
           tracked = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
           already_complete = any(path.endswith("/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1/COMPLETION.json") for path in tracked)
           checkout_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
@@ -138,6 +132,12 @@ jobs:
           if already_complete:
               print({"status": "ALREADY_COMPLETE_NOOP", "study_id": prereg["study_id"]})
               raise SystemExit(0)
+
+          queue = json.loads(Path("automation/research_queue_v2.json").read_text(encoding="utf-8"))
+          task = next(item for item in queue["tasks"] if item["id"] == prereg["study_id"])
+          assert task["execution_status"] == "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+          assert task["spec"]["execution_mode"] == "dedicated_workflow"
+          assert task["preregistration"] == prereg_path.as_posix()
           print({
               "status": "PREFLIGHT_PASS",
               "study_id": prereg["study_id"],
