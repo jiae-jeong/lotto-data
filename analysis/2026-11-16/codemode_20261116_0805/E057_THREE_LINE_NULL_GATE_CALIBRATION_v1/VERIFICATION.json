@@ -57,5 +57,9 @@
     "purchase_lines_generated": false,
     "strict_pass_ready_created": false,
     "freeze_or_seal_created": false
-  }
+  },
+  "manifest_path": "SHA256_MANIFEST.csv",
+  "manifest_entries": 6,
+  "manifest_status": "PASS_AFTER_POSTWRITE_HASH_RECHECK",
+  "runner_reference_status": "STORED_FOR_REPRODUCTION_NOT_EXECUTED_IN_THIS_RUN"
 }
