@@ -1,0 +1,17 @@
+{
+  "study_id": "E057_THREE_LINE_NULL_GATE_CALIBRATION_v1",
+  "status": "COMPLETE",
+  "date_kst": "2026-11-16",
+  "run_id": "codemode_20261116_0805",
+  "executed": true,
+  "result_path": "analysis/2026-11-16/codemode_20261116_0805/E057_THREE_LINE_NULL_GATE_CALIBRATION_v1",
+  "preregistered_before_execution": true,
+  "data_cutoff": 1250,
+  "targets": 850,
+  "null_trajectories": 1000,
+  "random_portfolios": 850000,
+  "strict_gate_false_pass_rate": 0.001,
+  "predictive_edge_claimed": false,
+  "purchase_readiness_changed": false,
+  "strict_pass_ready": false
+}
