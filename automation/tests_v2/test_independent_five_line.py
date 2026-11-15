@@ -54,7 +54,7 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
             "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
         ]
-        self.assertEqual(ids[-len(expected_e043_e055):], expected_e043_e055)
+        self.assertEqual(ids[-len(expected_e043_e056):], expected_e043_e056)
         e046 = next(task for task in queue["tasks"] if task["id"] == "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1")
         self.assertEqual(e046["execution_status"], "EXECUTED_DESIGN_PLANNING_COMPLETE")
         daily._validate_task(e046)
