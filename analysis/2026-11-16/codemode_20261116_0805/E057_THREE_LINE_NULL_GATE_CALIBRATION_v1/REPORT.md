@@ -75,4 +75,4 @@ The 1244–1249 period remains exposed live-history material, not a clean holdou
 
 ## Integrity manifest
 
-The six output artifacts are covered by SHA256_MANIFEST.csv; the manifest was re-read after publication and every stored SHA-256 and byte count matched. The stored Node reference runner is a reproducibility artifact; the actual 1,000-trajectory calculation in this run was executed in Code Mode.
+The output artifacts are covered by GIT_BLOB_MANIFEST.csv using the immutable Git blob IDs returned by GitHub after publication. The source data SHA-256 is inherited from the verified 1250-round data manifest. The stored Node reference runner is a reproducibility artifact; the actual 1,000-trajectory calculation in this run was executed in Code Mode.
