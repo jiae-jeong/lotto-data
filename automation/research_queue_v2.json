@@ -2678,7 +2678,7 @@
         "workflow_entrypoint": ".github/workflows/target-1251-e055-triple-recent-strength.yml",
         "preregistration": "research/weekly_purchase/1251/E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_PREREG_20261116.json",
         "frozen_blobs": {
-          "runner_blob_sha": "847618c0387d28bcca4ed2c6ec5822a367a0ca62",
+          "runner_blob_sha": "8c7d3bc808fb443d272a22aa60fa526995c44c39",
           "test_blob_sha": "781f416584c410e45e2d8f3ef05b6fc7580f6150",
           "workflow_blob_sha": "bccc324c3936dfb63f17b651d2bfeb2acdc330e6",
           "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
