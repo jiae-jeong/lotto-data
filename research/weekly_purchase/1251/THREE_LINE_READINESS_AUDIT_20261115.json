@@ -15,7 +15,7 @@
   "strict_model_validation_pass": false,
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
-  "strict_gate_evaluation": "E045_PRIMARY_APPEND_ONLY_CUTOFF_REFRESH_THROUGH_1250_STRICT_FAIL; E048_E049_E050_REMAIN_FIXED_HISTORICAL_CUTOFF_1249_STRICT_FAIL; E051_PAIR_CONTEXT_HISTORICAL_CUTOFF_1250_STRICT_FAIL; E052_NESTED_TRAILING_100_SELECTOR_HISTORICAL_CUTOFF_1249_STRICT_FAIL; PROSPECTIVE_CONFIRMATION_RULE_UNSPECIFIED",
+  "strict_gate_evaluation": "E045_PRIMARY_APPEND_ONLY_CUTOFF_REFRESH_THROUGH_1250_STRICT_FAIL; E048_E049_E050_REMAIN_FIXED_HISTORICAL_CUTOFF_1249_STRICT_FAIL; E051_PAIR_CONTEXT_HISTORICAL_CUTOFF_1250_STRICT_FAIL; E052_NESTED_TRAILING_100_SELECTOR_HISTORICAL_CUTOFF_1249_STRICT_FAIL; E053_LAG2_MEMBERSHIP_CONTEXT_HISTORICAL_CUTOFF_1250_STRICT_FAIL; PROSPECTIVE_CONFIRMATION_RULE_UNSPECIFIED",
   "ready_file": null,
   "ready_file_exists": false,
   "line_level_output_status": "SUPPRESSED_NOT_READY",
@@ -512,8 +512,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-15T17:27:53.601643+09:00",
-  "reconciled_main_sha": "3cb8a84540d557f213da9f062a4d92c8a6bdddfc",
+  "audit_reconciled_at_kst": "2026-11-15T23:52:00+09:00",
+  "reconciled_main_sha": "a5772bf295e40434a63d7c2ff13414332345eca8",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -572,10 +572,12 @@
     "historical_fixed_screen_cutoff": 1245,
     "historical_fixed_screen_study_family": "E036-E042; fixed preregistered cutoff, not a freshness mismatch",
     "latest_primary_empirical_evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT",
-    "latest_additional_independent_axis": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
-    "latest_additional_independent_axis_cutoff": 1249,
+    "latest_additional_independent_axis": "E053_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1",
+    "latest_additional_independent_axis_cutoff": 1250,
     "alignment_status": "ALIGNED_PRIMARY_CUTOFF_REFRESH_COMPLETE",
-    "cutoff_mismatch": false
+    "cutoff_mismatch": false,
+    "latest_additional_independent_axis_evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+    "latest_additional_independent_axis_run_id": 43694556989
   },
   "latest_daily_master_attempt": {
     "run_id": 43684901626,
@@ -595,7 +597,7 @@
   "daily_master_generated_kst": "2026-11-15T15:25:23.478758+09:00",
   "daily_master_verification_status": "PARTIAL",
   "daily_master_v4_path": "analysis/2026-11-15/MASTER_FULL_V4_061932_948530",
-  "audit_updated_kst": "2026-11-15T17:27:53.601643+09:00",
+  "audit_updated_kst": "2026-11-15T23:52:00+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
     "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
