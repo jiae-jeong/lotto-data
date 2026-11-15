@@ -55,6 +55,16 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
         ]
         self.assertEqual(ids[-len(expected_e043_e056):], expected_e043_e056)
+        e056 = next(task for task in queue["tasks"] if task["id"] == "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1")
+        self.assertEqual(e056["execution_status"], "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY")
+        self.assertEqual(e056["spec"]["execution_status"], "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY")
+        self.assertEqual(e056["execution_result"]["verification_status"], "PASS")
+        self.assertEqual(e056["execution_result"]["data_cutoff"], 1250)
+        self.assertEqual(e056["execution_result"]["target_range"], [201, 1250])
+        self.assertEqual(e056["execution_result"]["target_count"], 1050)
+        self.assertEqual(e056["execution_result"]["manifest_entries"], 12)
+        self.assertFalse(e056["execution_result"]["strict_pass_ready"])
+        self.assertFalse(e056["execution_result"]["purchase_recommendation_generated"])
         e046 = next(task for task in queue["tasks"] if task["id"] == "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1")
         self.assertEqual(e046["execution_status"], "EXECUTED_DESIGN_PLANNING_COMPLETE")
         daily._validate_task(e046)
