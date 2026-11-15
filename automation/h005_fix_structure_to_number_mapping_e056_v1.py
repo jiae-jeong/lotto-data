@@ -75,7 +75,7 @@ def run(date,run_id):
         raise ValueError("E056 candidate bank hash pin changed")
     if prereg["corrected_mapping"]!="One 45-dimensional family vector: 45 for each of the six numbers in the S005 structure ticket, 0 for the other 39; append this vector once to the six S001/S002/S003/S004/S006/S007 rank vectors and average seven families.":
         raise ValueError("E056 corrected mapping specification changed")
-    if prereg["legacy_mapping_proof"]!="Legacy S008 appends 45 constant vectors (six [45]*45 and thirty-nine [0]*45); their mean is 270/45=6 for every number, so the structure family is rank-constant and cancels.":
+    if prereg["legacy_mapping_proof"]!="Legacy S008 appends 45 constant vectors (six [45]*45 and thirty-nine [0]*45) to six component-rank vectors, for 51 vectors total; the structure contribution is 270/51=5.2941176470588235 for every number and is therefore rank-constant.":
         raise ValueError("E056 legacy mapping proof changed")
     if prereg["parameter_search"] is not False or prereg["variants_evaluated"]!=1:
         raise ValueError("E056 variants/parameter search are not allowed")
