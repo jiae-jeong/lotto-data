@@ -60,7 +60,10 @@
   },
   "runner_reference_status": "STORED_FOR_REPRODUCTION_NOT_EXECUTED_IN_THIS_RUN",
   "git_blob_manifest_path": "GIT_BLOB_MANIFEST.csv",
-  "git_blob_manifest_status": "PENDING_POSTWRITE_FETCH",
+  "git_blob_manifest_status": "PASS",
   "output_sha256_manifest_status": "NOT_COMPUTED",
-  "source_data_sha256_verified_from_existing_1250_manifest": true
+  "source_data_sha256_verified_from_existing_1250_manifest": true,
+  "git_blob_manifest_entries": 12,
+  "git_blob_manifest_blob_sha": "3d6fb6596702bf6412d1913da0927765f4760216",
+  "output_integrity_note": "GitHub Git blob SHA and UTF-8 byte counts were re-fetched and matched for all 12 manifest entries. Source lotto_data.csv SHA-256 is the value in the existing verified 1250-round data manifest."
 }
