@@ -20,7 +20,7 @@
       "event": "push",
       "conclusion": "success",
       "created_at_utc": "2026-11-15T23:49:16Z",
-      "completed_at_utc": "2026-11-15T23:55:20Z",
+      "completed_at_utc": "2026-11-15T23:55:19Z",
       "head_sha": "17c1ed48122dbc7b4c09c3aa0d5323e92572acd0",
       "result_commit_sha": "dd3061dd883d3720d6904c4317e9f76cedb8ed2a",
       "result_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902",
@@ -76,7 +76,8 @@
       "historical_errornote_closed_loop_complete",
       "actual_purchase_learning_record"
     ],
-    "no_candidate_or_final_purchase_lines_generated": true
+    "no_candidate_or_final_purchase_lines_generated": true,
+    "workflow_job_completed_at_utc": "2026-11-16T00:32:33Z"
   },
   "repair": {
     "action": "Updated the current readiness audit to point to run #109 and retained run #108 as the immediately preceding daily master execution.",
