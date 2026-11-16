@@ -3,7 +3,7 @@
   "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
   "date_kst": "2026-11-16",
   "registered_at_kst": "2026-11-16T09:17:57+09:00",
-  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION_FINAL_RUNNER_PINNED",
   "study_class": "HISTORICAL_ALLOCATOR_PARTITION_SENSITIVITY_DIAGNOSTIC_NOT_INDEPENDENT_PREDICTIVE_EVIDENCE",
   "research_question": "Holding the exact per-target E054 union18 candidate set fixed, does one deterministic numeric-order snake partition change line-level hit concentration metrics relative to the original E054 line assignment?",
   "novelty_vs_completed_work": [
@@ -30,8 +30,8 @@
   },
   "runner": {
     "path": "automation/e060_e054_union18_snake_allocator_diagnostic_v1.js",
-    "git_blob_sha": "535301b1937cfe6f8d90aaac25ce543fc6f1a648",
-    "source_main_commit": "b71863e1dd2b76092b4fee7078bbf699b94cfb11",
+    "git_blob_sha": "5ce9b79e8594800a0bf4591375e4be8fa7773b0f",
+    "source_main_commit": "6b137803913046abe8e04809e5f10a4e7adde74c",
     "runtime": "Node.js-compatible deterministic JavaScript; same algorithm executed in Code Mode V8",
     "no_external_dependencies": true
   },
@@ -117,5 +117,7 @@
   ],
   "purchase_recommendation_generated": false,
   "strict_pass_ready": false,
-  "freeze_or_seal_authorized": false
+  "freeze_or_seal_authorized": false,
+  "pre_execution_repair_addendum": "research/weekly_purchase/1251/E060_PREEXECUTION_REPAIR_ADDENDUM_20261116.json",
+  "pre_execution_repair_addendum_blob_sha": "370586396ea99eeee85f15e0be9ac46c2bf651f5"
 }
