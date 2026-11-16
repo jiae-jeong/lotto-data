@@ -126,7 +126,7 @@
   "strict_pass_ready": false,
   "freeze_or_seal_authorized": false,
   "frozen_blobs": {
-    "runner_blob_sha": "528375995072123ea5ab3c577d0cdd7c6337cf5f",
+    "runner_blob_sha": "1c4d8fdd08e24b212a683a5f5894ee04b2bd64b2",
     "test_blob_sha": "d5d3f10dbeb47a46b3154e346ea083601494af89",
     "workflow_blob_sha": "1ba6f9fe13739fb048405ddefc3edfe051a88d33",
     "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
