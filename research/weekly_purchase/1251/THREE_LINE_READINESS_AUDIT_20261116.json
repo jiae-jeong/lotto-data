@@ -331,9 +331,10 @@
       "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1"
     ],
     "pending_queue_contract_validation": {
-      "commit_sha": "87dbbc5d611481aa8ccc818c171f0954148c0b57",
+      "commit_sha": "fd4f05a8133c77fa9ee179b1f794010621734919",
       "status": "PUSHED_FOR_VALIDATION_ACTIONS_RUN_ID_UNRESOLVED",
-      "test_path": "automation/tests_v2/test_research_queue_replenishment_e061_e062.py"
+      "test_path": "automation/tests_v2/test_research_queue_replenishment_e061_e062.py",
+      "test_contract": "E061 completed diagnostic fields and E062 pending preregistration fields; corrected assertion checks completion.strict_pass_ready."
     },
     "next_research_task": "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1"
   },
@@ -623,7 +624,7 @@
     "any2_positive_50_target_block_share"
   ],
   "audit_reconciled_at_kst": "2026-11-16T12:10:53+09:00",
-  "reconciled_main_sha": "0e1423b8f2f4470973d5b875f355e6e74c00d7a8",
+  "reconciled_main_sha": "fd4f05a8133c77fa9ee179b1f794010621734919",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -1686,7 +1687,7 @@
       "purchase_recommendation_generated": false
     }
   },
-  "source_main_sha": "0e1423b8f2f4470973d5b875f355e6e74c00d7a8",
+  "source_main_sha": "fd4f05a8133c77fa9ee179b1f794010621734919",
   "e056_execution_attempt_history": [
     {
       "workflow_run_id": 43763437112,
