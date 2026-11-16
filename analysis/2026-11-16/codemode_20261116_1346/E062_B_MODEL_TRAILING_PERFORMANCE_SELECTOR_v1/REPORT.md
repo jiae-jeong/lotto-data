@@ -43,7 +43,7 @@ Selection ties occurred on 77 targets; the preregistered lexicographic tie-break
 
 - B cache: 8,400 rows, targets 201–1250, eight models per target.
 - All training cutoffs equal target_round−1; selection uses only previous 100 realized outcomes.
-- Canonical lotto_data.csv: 1–1250 continuous; SHA256 b7a52d0aede47b62ed9798827f706e9304a8598e8f7f88d97018745c22a8886a.
+- Canonical lotto_data.csv: 1–1250 continuous; SHA256 7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2.
 - B cache SHA256: 0d0295e5288043e414637f7a7eb542aac4a31e2ae1dc66e598e754f7f5ecc3e8.
 - Missing rows, duplicate rows, cutoff violations: zero.
 

@@ -7,7 +7,7 @@
   "source": {
     "path": "analysis/2026-11-16/MASTER_FULL_V4_022804_577202/B_PREDICTIONS_UNIQUE.csv",
     "git_blob_sha": "83e9772654466c092ccef7a7287d8106359a6c80",
-    "sha256": "0d0295e5288043e414637f7a7eb542aac4a31e2ae1dc66e598e754f7f5ecc3e8",
+    "sha256": "c1a342cab80b73703410dd4485427d2ce0cdd2aabfe199fccd6d556723e8ab40",
     "bytes": 272909,
     "rows": 8400,
     "targets": [
@@ -19,7 +19,7 @@
   "canonical_data": {
     "path": "lotto_data.csv",
     "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
-    "sha256": "b7a52d0aede47b62ed9798827f706e9304a8598e8f7f88d97018745c22a8886a",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
     "bytes": 43449,
     "rows": 1250,
     "rounds": [
@@ -121,7 +121,9 @@
     "block_length": 50,
     "block_count": 19,
     "manifest_entries": 2,
-    "manifest_status": "PASS"
+    "manifest_status": "PASS",
+    "source_sha256": "c1a342cab80b73703410dd4485427d2ce0cdd2aabfe199fccd6d556723e8ab40",
+    "canonical_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
   },
   "completion": {
     "status": "COMPLETE_DIAGNOSTIC_ONLY",
