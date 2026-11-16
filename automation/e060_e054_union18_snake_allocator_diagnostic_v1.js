@@ -95,15 +95,15 @@ function run(root, outdir) {
     if(t!==401+i || training!==t-1) {cutoffViolations++;throw new Error("Target/training cutoff mismatch at "+t);}
     const source=byRound.get(t);
     if(!source) throw new Error("Missing source target "+t);
-    const actualData=Array.from({length:6},(_,k)=>Number(source["no"+(k+1)]));
-    const actualPred=numbers(p.actual_numbers);
-    if(actualData.slice().sort((a,b)=>a-b).join(" ")!==actualPred.join(" ")) throw new Error("E054 target outcomes differ from canonical data at "+t);
-    const actual=new Set(actualData);
     const lines=[numbers(p.line1),numbers(p.line2),numbers(p.line3)];
     const union=[...new Set(lines.flat())];
     if(union.length!==18) {geometryViolations++;throw new Error("E054 geometry invalid at "+t);}
     const snake=snakePartition(lines);
-    if([...new Set(snake.flat())].sort((a,b)=>a-b).join(",")!==union.slice().sort((a,b)=>a-b).join(",")) {unionMismatch++;throw new Error("Snake changed candidate union at "+t);}
+    if([...new Set(snake.flat())].sort((a,b)=>a-b).join(",")!==union.slice().sort((a,b)=>b-a).join(",")) {unionMismatch++;throw new Error("Snake changed candidate union at "+t);}
+    const actualData=Array.from({length:6},(_,k)=>Number(source["no"+(k+1)]));
+    const actualPred=numbers(p.actual_numbers);
+    if(actualData.slice().sort((a,b)=>a-b).join(" ")!==actualPred.join(" ")) throw new Error("E054 target outcomes differ from canonical data at "+t);
+    const actual=new Set(actualData);
     const e=metrics(lines,actual), s=metrics(snake,actual);
     observed.E054.push(e); observed.NUMERIC_SNAKE.push(s);
     const seed=(20261116060 + t*1009)>>>0, rng=xorshift32(seed);
