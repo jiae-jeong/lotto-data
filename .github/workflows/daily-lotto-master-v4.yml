@@ -574,3 +574,4 @@ jobs:
             research/weekly_purchase/*/STRICT_PASS_STATUS_*.json
             research/weekly_purchase/*/STRICT_PASS_READY_*.json
           if-no-files-found: warn
+# Operational catch-up trigger 2026-11-17: no schedule or workflow behavior change.
