@@ -7,7 +7,7 @@ Status: **COMPLETE_DIAGNOSTIC_ONLY**
 - Targets 301–1250 (950); seven B component models.
 - At target t, choose the component with the highest mean cached OOS hit count over t−100..t−1; lexicographic ascending model ID breaks ties.
 - Compare with fixed combined_equal_rank and exact 6/45 random mean 0.8.
-- 19 nonoverlapping 50-target blocks; 4,000 paired block-bootstrap replicates; seed 20261117; nearest-rank quantiles 0.0125 and 0.9875.
+- 19 nonoverlapping 50-target blocks; 4,000 paired block-bootstrap replicates; family alpha 0.05 across two primary comparisons, giving 97.5% two-sided Bonferroni-adjusted intervals with nearest-rank quantiles 0.0125 and 0.9875.
 - No parameter search, variant sweep, ticket generation, or purchase recommendation.
 
 ## Results
@@ -18,9 +18,9 @@ Status: **COMPLETE_DIAGNOSTIC_ONLY**
 | Fixed combined mean hits | 0.764211 |
 | Exact random mean hits | 0.800000 |
 | Selector minus fixed | 0.036842 |
-| Adjusted CI vs fixed | [-0.016842, 0.094737] |
+| 97.5% Bonferroni-adjusted CI vs fixed | [-0.016842, 0.094737] |
 | Selector minus random | 0.001053 |
-| Adjusted CI vs random | [-0.062105, 0.072632] |
+| 97.5% Bonferroni-adjusted CI vs random | [-0.062105, 0.072632] |
 | Selector 2+ rate | 17.789% |
 | Selector 3+ rate | 1.474% |
 | Selector 4+ rate | 0.105% |

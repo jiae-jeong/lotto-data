@@ -2967,15 +2967,7 @@
         "fixed_combined_mean_hits": 0.7642105263157895,
         "exact_random_mean_hits": 0.8,
         "selector_minus_fixed": 0.0368421052631579,
-        "selector_minus_fixed_adjusted_ci_98_75": [
-          -0.016842105263157894,
-          0.09473684210526316
-        ],
         "selector_minus_random": 0.001052631578947305,
-        "selector_minus_random_adjusted_ci_98_75": [
-          -0.06210526315789468,
-          0.07263157894736842
-        ],
         "rate_ge2": 0.17789473684210527,
         "rate_ge3": 0.014736842105263158,
         "rate_ge4": 0.0010526315789473684,
@@ -2999,7 +2991,18 @@
         "strict_portfolio_pass": false,
         "strict_pass_ready": false,
         "purchase_recommendation_generated": false,
-        "target_1251_three_line_readiness_eligible": false
+        "target_1251_three_line_readiness_eligible": false,
+        "selector_minus_fixed_adjusted_ci_97_5": [
+          -0.016842105263157894,
+          0.09473684210526316
+        ],
+        "selector_minus_random_adjusted_ci_97_5": [
+          -0.06210526315789468,
+          0.07263157894736842
+        ],
+        "family_alpha": 0.05,
+        "primary_comparisons": 2,
+        "interval_coverage_per_comparison": 0.975
       }
     }
   ],

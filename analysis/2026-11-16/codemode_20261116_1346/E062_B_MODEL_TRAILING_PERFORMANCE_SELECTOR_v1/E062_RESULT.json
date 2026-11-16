@@ -76,22 +76,21 @@
       0.0125,
       0.9875
     ],
-    "quantile_method": "nearest-rank"
+    "quantile_method": "nearest-rank",
+    "family_alpha": 0.05,
+    "primary_comparisons": 2,
+    "bonferroni_two_sided_quantiles": [
+      0.0125,
+      0.9875
+    ],
+    "interval_coverage_per_comparison": 0.975
   },
   "metrics": {
     "selector_mean_hits": 0.8010526315789473,
     "fixed_combined_mean_hits": 0.7642105263157895,
     "exact_random_mean_hits": 0.8,
     "selector_minus_fixed": 0.0368421052631579,
-    "selector_minus_fixed_adjusted_ci_98_75": [
-      -0.016842105263157894,
-      0.09473684210526316
-    ],
     "selector_minus_random": 0.001052631578947305,
-    "selector_minus_random_adjusted_ci_98_75": [
-      -0.06210526315789468,
-      0.07263157894736842
-    ],
     "rate_ge2": 0.17789473684210527,
     "rate_ge3": 0.014736842105263158,
     "rate_ge4": 0.0010526315789473684,
@@ -104,7 +103,15 @@
       "current_gap": 200,
       "pair_association": 247
     },
-    "selection_tie_targets": 77
+    "selection_tie_targets": 77,
+    "selector_minus_fixed_adjusted_ci_97_5": [
+      -0.016842105263157894,
+      0.09473684210526316
+    ],
+    "selector_minus_random_adjusted_ci_97_5": [
+      -0.06210526315789468,
+      0.07263157894736842
+    ]
   },
   "verification": {
     "status": "PASS",
