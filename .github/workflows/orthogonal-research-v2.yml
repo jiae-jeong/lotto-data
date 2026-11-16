@@ -1,4 +1,5 @@
 name: orthogonal-research-v2
+# Queue contract extended through E063; preserve all prior task IDs and order.
 
 on:
   workflow_dispatch:

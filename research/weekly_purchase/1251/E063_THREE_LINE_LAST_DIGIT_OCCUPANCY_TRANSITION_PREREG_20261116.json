@@ -99,7 +99,7 @@
   "frozen_blobs": {
     "runner_blob_sha": "6180738ffeb9fa907521673e887f297e623fdf17",
     "test_blob_sha": "05c9a241f6ce1a94ddf29c10bf2ca985bfe57492",
-    "workflow_blob_sha": "9485e6ae2613ef21f8f64cfb625759a157fc24f7",
+    "workflow_blob_sha": "9776f20a4c2c6dad581ed1625ed58ae67c83ed7e",
     "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
     "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
   }

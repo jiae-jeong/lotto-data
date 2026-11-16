@@ -1,4 +1,5 @@
 name: target-1251-e063-three-line-last-digit-occupancy-transition
+# Frozen E063 workflow; second push ensures the newly registered workflow is activated.
 on:
   workflow_dispatch:
   push:
