@@ -47,8 +47,26 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
 
     def test_e063_is_preregistered_as_an_independent_three_line_axis_without_promotion(self):
         task = self.by_id["E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1"]
-        self.assertEqual(task["execution_status"], "PREREGISTERED_PENDING_DEDICATED_WORKFLOW")
+        self.assertIn(task["execution_status"], (
+            "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+            "EXECUTED_HISTORICAL_STRICT_FAIL",
+            "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING",
+        ))
         self.assertFalse(task["target_1251_three_line_readiness_eligible"])
+        if task["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
+            self.assertEqual(task["execution_result"]["verification_status"], "PASS")
+            self.assertFalse(task["execution_result"]["strict_pass_ready"])
+            self.assertFalse(task["execution_result"]["purchase_recommendation_generated"])
+            result_root = ROOT / task["execution_result"]["result_path"]
+            verification = json.loads((result_root / "VERIFICATION.json").read_text(encoding="utf-8"))
+            completion = json.loads((result_root / "COMPLETION.json").read_text(encoding="utf-8"))
+            self.assertEqual(verification["manifest_status"], "PASS")
+            self.assertEqual(completion["status"], "COMPLETE")
+            with (result_root / "SHA256_MANIFEST.csv").open(encoding="utf-8", newline="") as stream:
+                for row in csv.DictReader(stream):
+                    payload = (result_root / row["path"]).read_bytes()
+                    self.assertEqual(len(payload), int(row["bytes"]), row["path"])
+                    self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
         prereg = json.loads((ROOT / task["preregistration"]).read_text(encoding="utf-8"))
         self.assertTrue(prereg["independent_research_axis"])
         self.assertTrue(prereg["independent_signal_family"])

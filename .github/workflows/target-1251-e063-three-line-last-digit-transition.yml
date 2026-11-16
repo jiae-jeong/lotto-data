@@ -94,6 +94,27 @@ jobs:
           queue = json.loads(queue_path.read_text(encoding="utf-8"))
           task_id = "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1"
           task = next(x for x in queue["tasks"] if x["id"] == task_id)
+          attempts = task.setdefault("execution_attempt_history", [])
+          if not any(int(item.get("workflow_run_id", -1)) == 43854391947 for item in attempts):
+              attempts.append({
+                  "workflow_run_id": 43854391947,
+                  "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43854391947",
+                  "conclusion": "FAILURE",
+                  "stage": "publish",
+                  "study_execution": "SUCCESS",
+                  "verification_status": "PASS",
+                  "cause": "git diff --cached --check rejected CRLF and UTF-8 BOM in generated CSV and manifest as trailing whitespace.",
+                  "recovery": "Normalize CSV and manifest to UTF-8 without BOM and LF line endings, regenerate the SHA256 manifest, independently reverify, then rerun the identical frozen study."
+              })
+          attempts.append({
+              "workflow_run_id": int(run_id),
+              "run_attempt": int(attempt),
+              "conclusion": "COMPUTE_VERIFY_PASS_PENDING_PUBLISH",
+              "stage": "study_verify",
+              "study_execution": "SUCCESS",
+              "verification_status": "PASS",
+              "result_path": relative.as_posix()
+          })
           status = "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING" if inference["historical_strict_gate_pass"] else "EXECUTED_HISTORICAL_STRICT_FAIL"
           task["execution_status"] = status
           task["spec"]["execution_status"] = status
@@ -104,7 +125,8 @@ jobs:
               "leakage_failures": 0, "historical_strict_gate_pass": inference["historical_strict_gate_pass"],
               "strict_portfolio_pass": False, "strict_pass_ready": False,
               "target_1251_three_line_readiness_eligible": False, "purchase_recommendation_generated": False,
-              "any2_positive_block_share": inference["any2_positive_block_share"], "metrics": inference["metrics"]
+              "any2_positive_block_share": inference["any2_positive_block_share"], "metrics": inference["metrics"],
+              "technical_repair_audit": "research/weekly_purchase/1251/E063_TECHNICAL_REPAIR_AUDIT_20261116.json"
           }
           queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           audit_path = Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261116.json")
@@ -170,6 +192,98 @@ jobs:
           }
           audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           PY
+      - name: Normalize CSV bytes, regenerate manifest, and preserve first-attempt evidence
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: \${{ github.run_id }}
+          RUN_ATTEMPT: \${{ github.run_attempt }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os
+          from pathlib import Path
+          run_id = os.environ["RUN_ID"]
+          attempt = os.environ["RUN_ATTEMPT"]
+          output = Path("analysis/2026-11-16") / f"gha_{run_id}_{attempt}" / "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1"
+          for path in output.glob("*.csv"):
+              raw = path.read_bytes()
+              if raw.startswith(b"\xef\xbb\xbf"):
+                  raw = raw[3:]
+              raw = raw.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+              path.write_bytes(raw)
+          manifest_path = output / "SHA256_MANIFEST.csv"
+          files = sorted((p for p in output.iterdir() if p.is_file() and p.name != manifest_path.name), key=lambda p: p.name)
+          rows = [{"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest(), "bytes": p.stat().st_size} for p in files]
+          with manifest_path.open("w", encoding="utf-8", newline="") as stream:
+              writer = csv.DictWriter(stream, fieldnames=["path", "sha256", "bytes"], lineterminator="\n")
+              writer.writeheader()
+              writer.writerows(rows)
+          checked = list(csv.DictReader(manifest_path.open(encoding="utf-8", newline="")))
+          assert len(checked) == 8 and {x["path"] for x in checked} == {p.name for p in files}
+          for row in checked:
+              raw = (output / row["path"]).read_bytes()
+              assert len(raw) == int(row["bytes"])
+              assert hashlib.sha256(raw).hexdigest() == row["sha256"], row["path"]
+          assert all(not p.read_bytes().startswith(b"\xef\xbb\xbf") for p in output.glob("*.csv"))
+          assert all(b"\r" not in p.read_bytes() for p in output.glob("*.csv"))
+          repair = {
+              "audit_id": "E063_TECHNICAL_REPAIR_AUDIT_20261116",
+              "study_id": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+              "original_attempt": {
+                  "workflow_run_id": 43854391947,
+                  "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43854391947",
+                  "conclusion": "FAILURE",
+                  "stage": "publish",
+                  "study_execution": "SUCCESS",
+                  "verification_status": "PASS",
+                  "data_cutoff": 1250,
+                  "target_count": 850,
+                  "random_bundles_total": 102000,
+                  "historical_strict_gate_pass": False,
+                  "metrics": {
+                      "max_hits": {"observed_mean": 1.5505882352941176, "random_mean": 1.5125196078431373, "delta_mean": 0.03806862745098039, "adjusted_ci": [-0.012558823529411765, 0.07958823529411764]},
+                      "any2": {"observed_mean": 0.5, "random_mean": 0.47411764705882353, "delta_mean": 0.02588235294117647, "adjusted_ci": [-0.01038235294117647, 0.05094117647058823]},
+                      "any3": {"observed_mean": 0.07764705882352942, "random_mean": 0.07019607843137254, "delta_mean": 0.007450980392156864, "adjusted_ci": [-0.013254901960784313, 0.024607843137254903]},
+                      "winning_union_coverage": {"observed_mean": 2.4235294117647057, "random_mean": 2.4019901960784313, "delta_mean": 0.02153921568627451, "adjusted_ci": [-0.036931372549019605, 0.09433333333333334]}
+                  },
+                  "any2_positive_blocks": 11,
+                  "block_count": 17,
+                  "any2_positive_block_share": 0.6470588235294118,
+                  "cause": "git diff --cached --check treated CRLF and UTF-8 BOM in generated CSV and SHA256 manifest as trailing whitespace; computation and pre-publication manifest verification had passed."
+              },
+              "technical_repair": {
+                  "format_only": True,
+                  "csv_encoding": "UTF-8 without BOM",
+                  "line_endings": "LF",
+                  "manifest_regenerated_after_normalization": True,
+                  "manifest_entries": 8,
+                  "manifest_status": "PASS",
+                  "algorithm_changed": False,
+                  "feature_definition_changed": False,
+                  "data_changed": False,
+                  "data_cutoff_changed": False,
+                  "random_seed_changed": False,
+                  "random_comparator_changed": False,
+                  "bootstrap_changed": False,
+                  "alpha_or_threshold_changed": False,
+                  "block_length_changed": False,
+                  "prospective_rule_changed": False,
+                  "parameter_search_enabled": False
+              },
+              "reexecution": {
+                  "workflow_run_id": int(run_id),
+                  "run_attempt": int(attempt),
+                  "result_path": output.as_posix(),
+                  "study_execution": "SUCCESS",
+                  "verification_status": "PASS",
+                  "csv_normalization_status": "PASS",
+                  "manifest_entries": len(checked),
+                  "manifest_status": "PASS",
+                  "publish_status": "PENDING"
+              }
+          }
+          Path("research/weekly_purchase/1251/E063_TECHNICAL_REPAIR_AUDIT_20261116.json").write_text(json.dumps(repair, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print({"csv_files_normalized": len(list(output.glob("*.csv"))), "manifest_entries": len(checked), "status": "PASS"})
+          PY
       - name: Commit and push verified E063 evidence and reconciled state
         if: success() && steps.one-shot.outputs.already_complete != 'true'
         run: |
@@ -177,7 +291,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add analysis/2026-11-16 automation/research_queue_v2.json \
             research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261116.json \
-            research/weekly_purchase/1251/DAILY_MASTER_ARTIFACT_RECONCILIATION_20261116_RUN111.json
+            research/weekly_purchase/1251/DAILY_MASTER_ARTIFACT_RECONCILIATION_20261116_RUN111.json \
+            research/weekly_purchase/1251/E063_TECHNICAL_REPAIR_AUDIT_20261116.json
           git diff --cached --check
           if ! git diff --cached --quiet; then
             git commit -m "research: execute preregistered E063 last-digit transition"
