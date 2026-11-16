@@ -2861,10 +2861,89 @@
         "purchase_recommendation_generated": false,
         "evidence_class": "HISTORICAL_SINGLE_TICKET_DIAGNOSTIC_NOT_THREE_LINE_READINESS"
       }
+    },
+    {
+      "id": "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
+      "kind": "b_model_ensemble_error_correlation",
+      "question": "Do the seven frozen B component models make sufficiently different per-target hit errors to justify equal-rank aggregation, and does combined_equal_rank dilute component outcomes?",
+      "novelty": "One preregistered descriptive error-dependence study across 21 pairs of seven component models, plus eight predeclared block-bootstrap contrasts against combined_equal_rank; single-ticket B diagnostic only, not three-line purchase evidence.",
+      "date_kst": "2026-11-16",
+      "data_cutoff": 1250,
+      "execution_mode": "code_mode",
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "preregistration": "research/weekly_purchase/1251/E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_PREREG_20261116.json",
+      "result_path": "analysis/2026-11-16/codemode_20261116_1210/E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_v1",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "run_id": "codemode_20261116_1210",
+        "source_path": "analysis/2026-11-16/MASTER_FULL_V4_022804_577202/B_PREDICTIONS_UNIQUE.csv",
+        "source_git_blob_sha": "83e9772654466c092ccef7a7287d8106359a6c80",
+        "targets": 1050,
+        "source_rows": 8400,
+        "component_models": 7,
+        "pairwise_correlations": 21,
+        "mean_component_hit_correlation": 0.020110944635585954,
+        "combined_equal_rank_mean_hits": 0.7657142857142857,
+        "component_mean_hits": 0.7927891156462566,
+        "combined_minus_component_mean": -0.027074829931972865,
+        "bootstrap_replicates": 4000,
+        "block_length": 50,
+        "block_count": 21,
+        "cutoff_violations": 0,
+        "verification_status": "PASS",
+        "manifest_entries": 7,
+        "manifest_status": "PASS_ALL_7_REFETCHED_AND_REHASHED",
+        "strict_pass_ready": false,
+        "purchase_recommendation_generated": false
+      }
+    },
+    {
+      "id": "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
+      "kind": "b_model_trailing_performance_selector",
+      "question": "Can a single B component model be selected for each target using only the previous 100 target outcomes, and does this prequential selector outperform fixed combined_equal_rank and exact random?",
+      "novelty": "One fixed nested trailing-100 selector among seven frozen B single-ticket components, target-by-target using only t-100..t-1 outcomes; distinct from E052's three-line portfolio selector and no static winner selected on the full sample.",
+      "date_kst": "2026-11-16",
+      "data_cutoff": 1250,
+      "execution_mode": "code_mode_pre_registered",
+      "execution_status": "PREREGISTERED_PENDING_EXECUTION",
+      "preregistration": "research/weekly_purchase/1251/E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_PREREG_20261116.json",
+      "target_1251_three_line_readiness_eligible": false,
+      "spec": {
+        "study_id": "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
+        "candidate_models": [
+          "long_frequency",
+          "current_gap",
+          "frequency_plus_gap",
+          "recent_momentum",
+          "structure_profile",
+          "pair_association",
+          "triple_association"
+        ],
+        "lookback_targets": 100,
+        "evaluation_targets": "301..1250 inclusive",
+        "target_count": 950,
+        "selection_rule": "At target t choose the component with the highest mean cached OOS hit count on t-100..t-1; lexicographically ascending model ID breaks ties.",
+        "comparators": [
+          "fixed combined_equal_rank",
+          "exact random expected mean 0.8"
+        ],
+        "block_length": 50,
+        "blocks": 19,
+        "bootstrap_replicates": 4000,
+        "seed": 20261117,
+        "family_alpha": 0.05,
+        "bonferroni_two_sided_quantiles": [
+          0.0125,
+          0.9875
+        ],
+        "parameter_search": false,
+        "variant_sweep": false,
+        "three_line_readiness_eligible": false
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged. E054 is a one-shot dedicated three-line workflow triggered by a frozen execution marker; existing schedules and trigger modes are unchanged. E055 is a dedicated one-shot historical triple-recent-strength falsification workflow; no schedule or existing delivery task changed.",
+  "trigger_note": "The E030-E035 research job is workflow_dispatch-only (or an explicitly tagged push); the Saturday scheduled workflow runs the prospective-ledger job only, not queue research. E048 has a separate one-shot push-triggered workflow with a pipefail-safe completion guard; after completion, matching pushes are successful no-ops. Existing cadence is unchanged. E054 is a one-shot dedicated three-line workflow triggered by a frozen execution marker; existing schedules and trigger modes are unchanged. E055 is a dedicated one-shot historical triple-recent-strength falsification workflow; no schedule or existing delivery task changed. E061 is a completed Code Mode B single-ticket ensemble diagnostic; E062 is a separately preregistered Code Mode nested selector pending execution. Neither is target-1251 three-line purchase evidence. No workflow schedule or trigger cadence changed.",
   "queue_contract_validation_history": [
     {
       "run_id": 43763359441,
