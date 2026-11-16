@@ -3059,15 +3059,24 @@
       "tests": 148,
       "queue_contract": "E030-E062 PASS",
       "cause": "Post-repair full unit suite and E061/E062 queue assertions passed; research and prospective-ledger jobs skipped as intended."
+    },
+    {
+      "run_id": 43808228629,
+      "run_number": 104,
+      "conclusion": "SUCCESS",
+      "tests": 148,
+      "queue_contract": "E030-E062 PASS",
+      "cause": "Corrected 97.5% Bonferroni-adjusted interval labels and exact-byte manifest validated; research jobs skipped."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 43807829261,
-    "run_number": 102,
+    "run_id": 43808228629,
+    "run_number": 104,
     "conclusion": "SUCCESS",
     "tests": 148,
     "queue_contract": "E030-E062 PASS",
     "post_e062_execution_validation": true,
-    "source_commit_sha": "8c71e001d0b21cc9c59c7c19b2617a1ca5f20c4e"
+    "source_commit_sha": "e7be46be103675f757e41e7b7248421a9b3a7a37",
+    "interval_label_validation": "97.5% Bonferroni-adjusted intervals correctly labelled"
   }
 }

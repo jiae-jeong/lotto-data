@@ -104,7 +104,7 @@
       ".github/workflows/lotto-finalize-r3.yml",
       ".github/workflows/lotto-finalize-v3.yml"
     ],
-    "queue_contract_validation": "GitHub Actions run #102 (43807829261) completed successfully: 148 tests passed and the E030-E062 queue contract passed. Research and prospective-ledger jobs were skipped; no duplicate research was launched.",
+    "queue_contract_validation": "GitHub Actions run #104 (43808228629) SUCCESS: 148 tests PASS; E030-E062 queue contract PASS; E062 97.5% Bonferroni-adjusted interval labels and manifest verified.",
     "generic_queue_preflight_validation": "E061 and E062 completed as historical single-ticket diagnostics; E062 manifest 2/2 PASS. No generic runnable task remains; no three-line preregistered model axis remains.",
     "runnable_generic_task_count": 0,
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
@@ -225,6 +225,14 @@
         "tests": 148,
         "queue_contract": "E030-E062 PASS",
         "cause": "All unit tests and queue contract passed after correction; research and prospective-ledger jobs skipped."
+      },
+      {
+        "run_id": 43808228629,
+        "run_number": 104,
+        "conclusion": "success",
+        "tests": 148,
+        "queue_contract": "E030-E062 PASS",
+        "cause": "Corrected interval coverage labels and result manifest passed full test suite."
       }
     ],
     "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
@@ -314,12 +322,14 @@
       "manifest_verification": "workflow verified per-study and root SHA256 manifests before publishing"
     },
     "latest_queue_validation": {
-      "run_id": 43807829261,
-      "run_number": 102,
+      "run_id": 43808228629,
+      "run_number": 104,
       "conclusion": "SUCCESS",
       "tests": 148,
       "queue_contract": "E030-E062 PASS",
-      "post_e062_execution_validation": true
+      "post_e062_execution_validation": true,
+      "source_commit_sha": "e7be46be103675f757e41e7b7248421a9b3a7a37",
+      "interval_label_validation": "97.5% Bonferroni-adjusted intervals correctly labelled"
     },
     "target_1251_three_line_e052_workflow_run_id": 43674223135,
     "target_1251_three_line_e052_preregistration": "research/weekly_purchase/1251/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_PREREG_20261115.json",
@@ -369,18 +379,13 @@
     "pending_generic_tasks": [],
     "pending_queue_contract_validation": {
       "status": "RESOLVED",
-      "commit_sha": "8c71e001d0b21cc9c59c7c19b2617a1ca5f20c4e",
-      "workflow_run_id": 43807829261,
-      "run_number": 102,
+      "commit_sha": "e7be46be103675f757e41e7b7248421a9b3a7a37",
+      "workflow_run_id": 43808228629,
+      "run_number": 104,
       "conclusion": "success",
       "tests": 148,
       "queue_contract": "E030-E062 PASS",
-      "resolved_at_kst": "2026-11-16T13:50:00+09:00",
-      "test_paths": [
-        "automation/tests_v2/test_independent_five_line.py",
-        "automation/tests_v2/test_research_queue_replenishment_e061_e062.py",
-        ".github/workflows/orthogonal-research-v2.yml"
-      ]
+      "resolved_at_kst": "2026-11-16T13:54:00+09:00"
     },
     "next_research_task": "NONE_REGISTERED; a new independent hypothesis must be preregistered before another three-line model run."
   },
@@ -1814,5 +1819,5 @@
     "E062": "EXECUTED_HISTORICAL_B_SINGLE_TICKET_SELECTOR_DIAGNOSTIC_ONLY; 950 TARGETS; EXACT 6/45 BASELINE; 4,000 PAIRED 50-TARGET BLOCK BOOTSTRAPS; MANIFEST 2/2 PASS; BOTH ADJUSTED CIs INCLUDE ZERO; NO THREE-LINE PROMOTION"
   },
   "pending_additional_preregistered_research": {},
-  "notes": "\n2026-11-16 12:10 KST reconciliation: a newer bot-authored DAILY MASTER artifact commit a01eee917ac3c4a51037436a69da9f023cbbb7bb was found after the last confirmed Actions run #109. V4 verification reports 1050 targets, 8400 B predictions, 1,050,000 random tickets, zero leakage and 19/19 manifest; V5 reports PARTIAL, 3150 successor predictions, zero leakage, and 14/14 files independently rehashed. Its corresponding Actions run ID was not exposed by the available connector, so no #110 claim is made. E061 was preregistered, executed on 1050 targets and saved with 7/7 independent SHA256/byte checks; it is a B single-ticket diagnostic only and did not promote a model. The formal queue now contains 44 tasks: E061 complete and E062 preregistered pending, giving one generic runnable task. The target-1251 three-line model-axis queue remains empty; prospective confirmation policy is still unspecified. STRICT_PASS_READY remains absent and all purchase freeze/seal protections remain in force.\n\n2026-11-16 13:46 KST: DAILY MASTER scheduled run #110 (43792309190) succeeded and published a01eee917ac3c4a51037436a69da9f023cbbb7bb; prior unresolved run-ID statement is superseded. E062 completed on 950 targets using a fixed trailing-100 selector, exact 6/45 random baseline, and 4,000 paired 50-target block bootstraps. Selector mean 0.801053; fixed combined 0.764211; adjusted CIs versus fixed [-0.016842,0.094737] and versus random [-0.062105,0.072632], both including zero. E062 is single-ticket diagnostic only. Queue has 44 registered tasks, zero generic runnable tasks, and no remaining three-line preregistered model axis; no thresholds or policy were changed.\n2026-11-16 13:50 KST correction: E062 source and canonical-data SHA256 fields were recomputed with a SHA-256 implementation that passed the standard abc test vector and matched the pinned canonical digests. E062_RESULT.json and REPORT.md manifest hashes were regenerated from exact UTF-8 bytes; the earlier malformed digest fields were superseded.\n2026-11-16 13:50 KST: queue validation repair confirmed by GitHub Actions run #102 (43807829261): 148 tests PASS, E030-E062 queue contract PASS. Run #101's E062 manifest digest mismatch was corrected; final E062 result/report manifest rehashed against exact UTF-8 bytes and verified 2/2. No research job was relaunched by the validation commit."
+  "notes": "\n2026-11-16 12:10 KST reconciliation: a newer bot-authored DAILY MASTER artifact commit a01eee917ac3c4a51037436a69da9f023cbbb7bb was found after the last confirmed Actions run #109. V4 verification reports 1050 targets, 8400 B predictions, 1,050,000 random tickets, zero leakage and 19/19 manifest; V5 reports PARTIAL, 3150 successor predictions, zero leakage, and 14/14 files independently rehashed. Its corresponding Actions run ID was not exposed by the available connector, so no #110 claim is made. E061 was preregistered, executed on 1050 targets and saved with 7/7 independent SHA256/byte checks; it is a B single-ticket diagnostic only and did not promote a model. The formal queue now contains 44 tasks: E061 complete and E062 preregistered pending, giving one generic runnable task. The target-1251 three-line model-axis queue remains empty; prospective confirmation policy is still unspecified. STRICT_PASS_READY remains absent and all purchase freeze/seal protections remain in force.\n\n2026-11-16 13:46 KST: DAILY MASTER scheduled run #110 (43792309190) succeeded and published a01eee917ac3c4a51037436a69da9f023cbbb7bb; prior unresolved run-ID statement is superseded. E062 completed on 950 targets using a fixed trailing-100 selector, exact 6/45 random baseline, and 4,000 paired 50-target block bootstraps. Selector mean 0.801053; fixed combined 0.764211; adjusted CIs versus fixed [-0.016842,0.094737] and versus random [-0.062105,0.072632], both including zero. E062 is single-ticket diagnostic only. Queue has 44 registered tasks, zero generic runnable tasks, and no remaining three-line preregistered model axis; no thresholds or policy were changed.\n2026-11-16 13:50 KST correction: E062 source and canonical-data SHA256 fields were recomputed with a SHA-256 implementation that passed the standard abc test vector and matched the pinned canonical digests. E062_RESULT.json and REPORT.md manifest hashes were regenerated from exact UTF-8 bytes; the earlier malformed digest fields were superseded.\n2026-11-16 13:50 KST: queue validation repair confirmed by GitHub Actions run #102 (43807829261): 148 tests PASS, E030-E062 queue contract PASS. Run #101's E062 manifest digest mismatch was corrected; final E062 result/report manifest rehashed against exact UTF-8 bytes and verified 2/2. No research job was relaunched by the validation commit.\n2026-11-16 13:54 KST: latest queue contract validation advanced to run #104 (43808228629), 148 tests PASS, E030-E062 contract PASS. E062 interval coverage labels now correctly state 97.5% Bonferroni-adjusted two-sided intervals for two primary comparisons."
 }
