@@ -84,7 +84,9 @@
     "alpha_changed": false,
     "block_length_changed": false,
     "comparator_changed": false,
-    "no_unbounded_microvariants": true
+    "no_unbounded_microvariants": true,
+    "bootstrap_seed_rule": "(20261116060 + allocator_index*1000003 + metric_index*9001) mod 2^32; allocator_index 0=E054, 1=NUMERIC_SNAKE; metric_index follows the frozen metrics array order.",
+    "random_seed_rule": "(20261116060 + target_round*1009) mod 2^32."
   },
   "contamination": {
     "rounds_1244_1249": "Previously inspected/live-history material; not a clean holdout.",
