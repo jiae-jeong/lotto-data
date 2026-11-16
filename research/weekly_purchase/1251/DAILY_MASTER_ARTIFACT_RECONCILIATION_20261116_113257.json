@@ -121,7 +121,7 @@
     "note": "E061/E062 are single-ticket B diagnostics and are not three-line purchase evidence. No strict gate or purchase policy was changed."
   },
   "repairs": {
-    "readiness_audit_update_required": true,
+    "readiness_audit_update_required": false,
     "queue_file_updated": true,
     "queue_regression_test_added": true,
     "data_or_model_changed": false,
@@ -131,6 +131,11 @@
     "comparator_changed": false,
     "purchase_policy_changed": false,
     "workflow_schedule_changed": false,
-    "finalizer_changed": false
-  }
+    "finalizer_changed": false,
+    "readiness_audit_updated": true,
+    "queue_regression_test_corrected": true,
+    "queue_contract_test_path": "automation/tests_v2/test_research_queue_replenishment_e061_e062.py",
+    "queue_contract_test_validation": "Manual structural contract checks passed; GitHub Actions run ID/status not exposed by the available connector."
+  },
+  "final_main_before_reconciliation_record_update": "82dec6d5806cd63308fcc413ef30af2f73705820"
 }
