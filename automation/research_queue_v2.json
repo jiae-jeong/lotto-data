@@ -3004,6 +3004,89 @@
         "primary_comparisons": 2,
         "interval_coverage_per_comparison": 0.975
       }
+    },
+    {
+      "id": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+      "kind": "three_line_last_digit_occupancy_transition",
+      "question": "Does the previous draw's terminal-digit occupancy provide cutoff-safe conditional information for next-draw main-number inclusion and improve one frozen three-line disjoint union18 portfolio over the exact geometry-matched null?",
+      "novelty": "One fixed candidate-specific terminal-digit occupancy transition family; seven states (0..6) with a fixed 6/45 prior; one E045 disjoint-line selector; one historical walk-forward; no variants or parameter search. Distinct from bonus identity, four-component draw-state, nearest-number distance, pair context, lag-two membership, rolling concentration, and trailing portfolio/model selection.",
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_last_digit_transition_e063.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e063-three-line-last-digit-transition.yml",
+      "preregistration": "research/weekly_purchase/1251/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_PREREG_20261116.json",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "target_1251_three_line_readiness_eligible": false,
+      "spec": {
+        "study_id": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+        "study_class": "preregistered_independent_last_digit_occupancy_transition_three_line_walkforward",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "training_cutoff_rule": "For target t, use only draws 1..t-1. Historical transitions u=2..t-1 use the terminal-digit occupancy of draw u-1 and the main-number outcome in draw u. Score target t using draw t-1 and outcomes through t-1 only; add target draw t after scoring.",
+        "feature_definition": {
+          "source": "The immediately preceding draw's six main numbers only; bonus is excluded.",
+          "class": "For candidate n, terminal-digit class d=n mod 10; state k is the count of previous-draw main numbers with the same terminal digit.",
+          "state_range": "k is an integer from 0 through 6; terminal-digit classes are 0..9; class 0 contains four numbers and classes 1..9 contain five numbers.",
+          "candidate_universe": "All integers 1..45 are scored for every target.",
+          "transition_history": "For each historical outcome round u=2..t-1, use the terminal-digit occupancy of draw u-1 as the feature and main-number inclusion in draw u as the outcome. Score target t from draw t-1, then add target t only after scoring."
+        },
+        "estimator": {
+          "prior_mean": "6/45 main-number inclusion probability under the uniform 6-of-45 null",
+          "prior_strength": 45,
+          "posterior_probability": "(success[k,n] + 45*(6/45))/(exposure[k,n]+45)",
+          "ranking": "Score descending, then number ascending.",
+          "variants": 1,
+          "parameter_search": false
+        },
+        "portfolio": {
+          "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+          "selection": "Three sequential calls to the unchanged E045 choose_disjoint_ticket selector, passing the E063 score as both role_score and global_score; remove selected numbers after each line.",
+          "randomness_in_selection": false,
+          "variants": 1
+        },
+        "random_comparator": {
+          "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+          "random_bundles_per_target": 120,
+          "seed": 20261116063,
+          "exact_null": {
+            "mean_max_hit": 1.514256248572755,
+            "p_any2": 0.47497624326892623,
+            "p_any3": 0.07135490714617204,
+            "expected_union_coverage": 2.4
+          },
+          "randomness_used_for_final_selection": false
+        },
+        "inference": {
+          "metrics": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage"
+          ],
+          "family_alpha": 0.05,
+          "alpha_per_metric": 0.0125,
+          "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null.",
+          "bootstrap_replicates": 4000,
+          "bootstrap_seed": 20261116063,
+          "block_length_targets": 50,
+          "retain_final_remainder_block": true,
+          "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+          "no_threshold_relaxation": true,
+          "no_alpha_change": true,
+          "no_block_length_change": true,
+          "no_comparator_change": true,
+          "no_unbounded_microvariants": true
+        },
+        "prospective_confirmation": {
+          "required_by_policy": true,
+          "minimum_target_count": null,
+          "completion_rule": null,
+          "status": "UNSPECIFIED_IN_POLICY",
+          "readiness_rule": "Even if the historical gate passes, do not create STRICT_PASS_READY or release purchase lines until the policy owner formally predeclares the prospective minimum target count and completion rule."
+        },
+        "historical_exploration_only": true
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
