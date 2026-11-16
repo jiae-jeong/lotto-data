@@ -9,7 +9,7 @@
   "preparation_deadline_kst": "2026-11-19",
   "current_verified_data_cutoff": 1250,
   "current_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
-  "daily_master_run_id": 43684901626,
+  "daily_master_run_id": 43780487129,
   "daily_master_status": "PARTIAL",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
@@ -429,9 +429,9 @@
     "prospective_minimum_count_adopted": false
   },
   "previous_daily_master_run_id": 43666836797,
-  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43684901626",
-  "daily_master_result_commit": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
-  "daily_master_completed_at_kst": "2026-11-15T15:25:32+09:00",
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43780487129",
+  "daily_master_result_commit": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
+  "daily_master_completed_at_kst": "2026-11-16T09:32:33+09:00",
   "e048_execution": {
     "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "workflow_name": "target-1251-e048-three-line-bonus-transition",
@@ -544,8 +544,8 @@
     "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
   },
-  "daily_master_verification_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902/VERIFICATION.json",
-  "daily_master_report_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902/REPORT.md",
+  "daily_master_verification_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498/VERIFICATION.json",
+  "daily_master_report_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498/REPORT.md",
   "daily_master_model_validation_path": "analysis/2026-11-16/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
   "e049_execution": {
     "workflow_name": "target-1251-e049-three-line-draw-state-transition",
@@ -609,8 +609,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-16T09:17:57+09:00",
-  "reconciled_main_sha": "36bb4c09ff5b9a19f57aed9ac2f28fb9a451444f",
+  "audit_reconciled_at_kst": "2026-11-16T10:07:00+09:00",
+  "reconciled_main_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -682,24 +682,24 @@
     "latest_additional_diagnostic_cutoff": 1250
   },
   "latest_daily_master_attempt": {
-    "run_id": 43684901626,
-    "run_number": 107,
+    "run_id": 43780487129,
+    "run_number": 109,
     "run_attempt": 1,
     "status": "completed",
     "conclusion": "success",
-    "created_at_utc": "2026-11-15T06:19:25Z",
-    "last_observed_updated_at": "2026-11-15T06:25:32Z",
-    "head_sha": "498fbc5a4b645d25b66fc406f41500a034a2934d",
-    "result_commit_sha": "3cf4b31cdd0bdaee45e132fdf0872d3878c50285",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43684901626"
+    "created_at_utc": "2026-11-16T00:27:35Z",
+    "last_observed_updated_at": "2026-11-16T00:32:33Z",
+    "head_sha": "36bb4c09ff5b9a19f57aed9ac2f28fb9a451444f",
+    "result_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43780487129"
   },
-  "daily_master_run_number": 107,
+  "daily_master_run_number": 109,
   "daily_master_run_status": "completed_success",
-  "daily_master_commit_sha": "dd3061dd883d3720d6904c4317e9f76cedb8ed2a",
-  "daily_master_generated_kst": "2026-11-16T08:55:11.683877+09:00",
+  "daily_master_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
+  "daily_master_generated_kst": "2026-11-16T09:32:17.389498+09:00",
   "daily_master_verification_status": "PARTIAL",
-  "daily_master_v4_path": "analysis/2026-11-16/MASTER_FULL_V4_234922_120674",
-  "audit_updated_kst": "2026-11-16T09:17:57+09:00",
+  "daily_master_v4_path": "analysis/2026-11-16/MASTER_FULL_V4_002743_085265",
+  "audit_updated_kst": "2026-11-16T10:07:00+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
     "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
@@ -804,29 +804,31 @@
     }
   },
   "latest_daily_master_artifact": {
-    "artifact_kind": "DAILY_MASTER_ARTIFACT_COMMIT_NO_CONFIRMED_ACTION_RUN_ID",
-    "artifact_commit_sha": "dd3061dd883d3720d6904c4317e9f76cedb8ed2a",
-    "artifact_commit_url": "https://github.com/jiae-jeong/lotto-data/commit/dd3061dd883d3720d6904c4317e9f76cedb8ed2a",
-    "commit_created_at_utc": "2026-11-15T23:55:17Z",
-    "commit_created_at_kst": "2026-11-16T08:55:17+09:00",
-    "result_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902",
-    "completion_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902/COMPLETION.json",
-    "verification_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902/VERIFICATION.json",
-    "report_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902/REPORT.md",
+    "artifact_kind": "DAILY_MASTER_ARTIFACT_COMMIT_LINKED_TO_CONFIRMED_ACTION_RUN",
+    "artifact_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
+    "artifact_commit_url": "https://github.com/jiae-jeong/lotto-data/commit/d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
+    "commit_created_at_utc": "2026-11-16T00:32:25Z",
+    "commit_created_at_kst": "2026-11-16T09:32:25+09:00",
+    "result_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498",
+    "completion_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498/COMPLETION.json",
+    "verification_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498/VERIFICATION.json",
+    "report_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498/REPORT.md",
     "data_cutoff": 1250,
     "status": "PARTIAL",
     "artifact_manifest_entries": 14,
     "artifact_manifest_status": "PASS",
-    "base_v4_path": "analysis/2026-11-16/MASTER_FULL_V4_234922_120674",
+    "workflow_run_id": 43780487129,
+    "workflow_run_id_status": "CONFIRMED_BY_GITHUB_ACTIONS_API",
+    "base_v4_path": "analysis/2026-11-16/MASTER_FULL_V4_002743_085265",
     "base_v4_verification": {
       "status": "PASS",
       "data_integrity": "PASS",
       "b_prediction_records": 8400,
       "random_tickets": 1050000,
-      "leakage_failures": 0
-    },
-    "workflow_run_id": null,
-    "workflow_run_id_status": "NOT_CLAIMED_NO_ACTION_RUN_ID_IN_ARTIFACT"
+      "leakage_failures": 0,
+      "sha256_manifest_entries": 19,
+      "manifest_status": "PASS"
+    }
   },
   "e051_pair_context_axis": {
     "study_id": "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
@@ -1438,15 +1440,17 @@
     }
   ],
   "daily_master_latest_completed": {
-    "workflow_run_id": 43684901626,
-    "run_number": 107,
-    "date_kst": "2026-11-15",
+    "workflow_run_id": 43780487129,
+    "run_number": 109,
+    "date_kst": "2026-11-16",
     "data_cutoff": 1250,
-    "result_path": "analysis/2026-11-15/MASTER_FULL_V5_062518_056622",
-    "status": "PARTIAL"
+    "result_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498",
+    "status": "PARTIAL",
+    "workflow_conclusion": "success",
+    "result_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73"
   },
-  "daily_master_20261116_run_found": false,
-  "daily_master_check_as_of_kst": "2026-11-16T09:17:57+09:00",
+  "daily_master_20261116_run_found": true,
+  "daily_master_check_as_of_kst": "2026-11-16T10:06:54+09:00",
   "strict_status_snapshot": "research/weekly_purchase/1251/STRICT_PASS_STATUS_1251_20261116.json",
   "latest_research_evidence": {
     "E054": {
@@ -1634,7 +1638,7 @@
       "purchase_lines_generated": false
     }
   },
-  "source_main_sha": "36bb4c09ff5b9a19f57aed9ac2f28fb9a451444f",
+  "source_main_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
   "e056_execution_attempt_history": [
     {
       "workflow_run_id": 43763437112,
@@ -1682,5 +1686,15 @@
     "strict_pass_ready": false,
     "purchase_recommendation_generated": false
   },
-  "daily_master_20261116_artifact_found": true
+  "daily_master_20261116_artifact_found": true,
+  "daily_master_v5_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498",
+  "immediately_previous_daily_master_attempt": {
+    "run_id": 43776859887,
+    "run_number": 108,
+    "conclusion": "success",
+    "event": "push",
+    "result_commit_sha": "dd3061dd883d3720d6904c4317e9f76cedb8ed2a",
+    "result_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43776859887"
+  }
 }
