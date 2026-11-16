@@ -195,8 +195,8 @@ jobs:
       - name: Normalize CSV bytes, regenerate manifest, and preserve first-attempt evidence
         if: success() && steps.one-shot.outputs.already_complete != 'true'
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |
           python - <<'PY'
           import csv, hashlib, json, os
