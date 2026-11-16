@@ -1,0 +1,91 @@
+{
+  "reconciliation_id": "DAILY_MASTER_RUN_109_AUDIT_RECONCILIATION_20261116",
+  "date_kst": "2026-11-16",
+  "classification": "STALE_DAILY_MASTER_REFERENCE_RECONCILED_APPEND_ONLY",
+  "prior_audit": {
+    "path": "research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261116.json",
+    "blob_sha": "afba85804a8ce88ce46a441f95d333495084da8a",
+    "audit_as_of_kst": "2026-11-16T09:17:57+09:00",
+    "daily_master_run_id": 43684901626,
+    "daily_master_run_number": 107,
+    "daily_master_20261116_run_found": false,
+    "latest_artifact_commit": "dd3061dd883d3720d6904c4317e9f76cedb8ed2a",
+    "note": "At audit time the file had the 2026-11-16 artifact from run #108 but did not link it to its confirmed Actions run; it still pointed to run #107."
+  },
+  "confirmed_runs_today": [
+    {
+      "workflow": "daily-lotto-master-v5",
+      "run_id": 43776859887,
+      "run_number": 108,
+      "event": "push",
+      "conclusion": "success",
+      "created_at_utc": "2026-11-15T23:49:16Z",
+      "completed_at_utc": "2026-11-15T23:55:20Z",
+      "head_sha": "17c1ed48122dbc7b4c09c3aa0d5323e92572acd0",
+      "result_commit_sha": "dd3061dd883d3720d6904c4317e9f76cedb8ed2a",
+      "result_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902",
+      "data_cutoff": 1250,
+      "status": "PARTIAL",
+      "url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43776859887"
+    },
+    {
+      "workflow": "daily-lotto-master-v5",
+      "run_id": 43780487129,
+      "run_number": 109,
+      "event": "push",
+      "conclusion": "success",
+      "created_at_utc": "2026-11-16T00:27:35Z",
+      "completed_at_utc": "2026-11-16T00:32:33Z",
+      "head_sha": "36bb4c09ff5b9a19f57aed9ac2f28fb9a451444f",
+      "result_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
+      "result_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498",
+      "v4_path": "analysis/2026-11-16/MASTER_FULL_V4_002743_085265",
+      "data_cutoff": 1250,
+      "status": "PARTIAL",
+      "manifest_entries": 14,
+      "manifest_status": "PASS",
+      "url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43780487129"
+    }
+  ],
+  "latest_run_verification": {
+    "workflow_job": "full-master",
+    "job_conclusion": "success",
+    "all_steps_success_or_intentional_skip": true,
+    "data_rows": 1250,
+    "first_round": 1,
+    "latest_round": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "b_prediction_records": 8400,
+    "b_targets": 1050,
+    "random_tickets": 1050000,
+    "leakage_failures": 0,
+    "successor_prediction_records": 3150,
+    "successor_leakage_failures": 0,
+    "v4_manifest_entries": 19,
+    "v4_workflow_manifest_status": "PASS",
+    "v4_independent_retrieval": "18/19 files independently re-fetched and re-hashed; TRIPLE_STATS.csv is 1,210,063 bytes and the connector did not return its content, but the file exists in the Git tree and the workflow verification job passed.",
+    "v5_manifest_entries": 14,
+    "v5_independent_rehash": "14/14 SHA256 and byte counts match",
+    "completion_status": "PARTIAL",
+    "protocol_missing": [
+      "legacy_model_sources_recovered",
+      "A_full_walkforward",
+      "C_full_walkforward",
+      "contrarian_full_walkforward",
+      "historical_errornote_aggregate_present",
+      "historical_errornote_closed_loop_complete",
+      "actual_purchase_learning_record"
+    ],
+    "no_candidate_or_final_purchase_lines_generated": true
+  },
+  "repair": {
+    "action": "Updated the current readiness audit to point to run #109 and retained run #108 as the immediately preceding daily master execution.",
+    "data_or_model_changed": false,
+    "strict_thresholds_changed": false,
+    "purchase_policy_changed": false,
+    "automation_or_schedule_changed": false,
+    "strict_pass_ready_created": false
+  },
+  "reconciled_against_main": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
+  "reconciled_at_kst": "2026-11-16T10:07:00+09:00"
+}
