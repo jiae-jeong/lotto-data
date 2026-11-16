@@ -47,7 +47,7 @@ jobs:
           suffix = "/E064_BLOCK_PERSISTENT_NULL_CALIBRATION_v1/COMPLETION.json"
           complete = any(path.endswith(suffix) for path in paths)
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
-              stream.write("already_complete=" + ("true" if complete else "false") + "\\n")
+              stream.write("already_complete=" + ("true" if complete else "false") + "\n")
           print("E064 already complete; successful no-op." if complete else "E064 pending; execute frozen null calibration.")
           PY
 
@@ -167,7 +167,7 @@ jobs:
               "No target-1251 three-line predictive axis is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. "
               "Do not create post-hoc microvariants or infer purchase readiness from null calibration."
           )
-          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
           subprocess.run(["git", "config", "user.name", "github-actions[bot]"], check=True)
           subprocess.run(["git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"], check=True)
