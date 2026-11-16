@@ -9,7 +9,7 @@
   "preparation_deadline_kst": "2026-11-19",
   "current_verified_data_cutoff": 1250,
   "current_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
-  "daily_master_run_id": 43792309190,
+  "daily_master_run_id": 43815826760,
   "daily_master_status": "PARTIAL",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
@@ -39,7 +39,8 @@
     "E055 triple-recent-strength falsification completed on frozen E045 cutoff-1250 predictions: model Pearson correlation -0.308742, moving-block 95% CI [-0.612338,-0.017509], matched-random one-sided tail probability 0.8264. The preregistered predictive hypothesis was not supported; E055 is diagnostic only and does not create a purchase portfolio or STRICT_PASS_READY.",
     "E057 and E058 are null-gate calibration studies only, not predictive portfolios or purchase evidence; E059 is a historical candidate-stage decomposition with no demonstrated advantage. None can create STRICT_PASS_READY.",
     "E062 is a historical single-ticket diagnostic; both adjusted confidence intervals include zero and it is not three-line purchase evidence.",
-    "No generic runnable queue task or preregistered target-1251 three-line model axis remains."
+    "No generic runnable queue task or preregistered target-1251 three-line model axis remains.",
+    "E063 last-digit occupancy transition completed as a historical diagnostic; it cannot create STRICT_PASS_READY without the still-unspecified prospective confirmation rule."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -52,7 +53,8 @@
     "E059": "Frozen E054 candidate-stage decomposition; all five candidate-recall point estimates below exact random expectation and adjusted intervals include zero; historical diagnostic only, no candidate promotion.",
     "E060": "One-shot historical allocator-only sensitivity diagnostic on the frozen E054 union18; candidate set unchanged; numeric snake did not pass any strict gate; not an independent predictive signal family or prospective confirmation.",
     "E061": "Historical single-ticket B ensemble error-correlation diagnostic; all eight simultaneous intervals include zero; not three-line purchase evidence or prospective confirmation.",
-    "E062": "Historical single-ticket B trailing-100 selector diagnostic; both adjusted confidence intervals include zero; not three-line purchase evidence or prospective confirmation."
+    "E062": "Historical single-ticket B trailing-100 selector diagnostic; both adjusted confidence intervals include zero; not three-line purchase evidence or prospective confirmation.",
+    "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1": "Independent last-digit occupancy transition historical diagnostic; not prospective confirmation and not eligible for STRICT_PASS_READY."
   },
   "no_future_leakage": true,
   "final_selection_randomness": false,
@@ -496,7 +498,7 @@
     "prospective_minimum_count_adopted": false
   },
   "previous_daily_master_run_id": 43666836797,
-  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43792309190",
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43815826760",
   "daily_master_result_commit": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
   "daily_master_completed_at_kst": "2026-11-16T11:33:09+09:00",
   "e048_execution": {
@@ -762,7 +764,7 @@
     "result_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
     "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43792309190"
   },
-  "daily_master_run_number": 110,
+  "daily_master_run_number": 111,
   "daily_master_run_status": "completed_success",
   "daily_master_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
   "daily_master_generated_kst": "2026-11-16T11:32:57.314738+09:00",
@@ -1804,13 +1806,12 @@
     "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43780487129"
   },
   "daily_master_artifact_reconciliation": {
-    "path": "research/weekly_purchase/1251/DAILY_MASTER_ARTIFACT_RECONCILIATION_20261116_113257.json",
-    "classification": "MATCHED_TO_CONFIRMED_DAILY_MASTER_ACTIONS_RUN_110",
+    "path": "research/weekly_purchase/1251/DAILY_MASTER_ARTIFACT_RECONCILIATION_20261116_RUN111.json",
+    "classification": "LATEST_DAILY_MASTER_ACTIONS_RUN_111_VERIFIED",
     "actions_run_id_resolved": true,
-    "workflow_run_id": 43792309190,
-    "run_number": 110,
-    "result_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
-    "prior_unresolved_claim_superseded": true
+    "workflow_run_id": 43815826760,
+    "run_number": 111,
+    "result_commit_sha": "b8e4d0b3b23c2ff8a48d0ece71e4bf5e265544da"
   },
   "latest_daily_master_artifact_found": true,
   "latest_daily_master_report_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633/REPORT.md",
@@ -1821,8 +1822,8 @@
     "E062": "EXECUTED_HISTORICAL_B_SINGLE_TICKET_SELECTOR_DIAGNOSTIC_ONLY; 950 TARGETS; EXACT 6/45 BASELINE; 4,000 PAIRED 50-TARGET BLOCK BOOTSTRAPS; MANIFEST 2/2 PASS; BOTH ADJUSTED CIs INCLUDE ZERO; NO THREE-LINE PROMOTION"
   },
   "pending_additional_preregistered_research": {},
-  "notes": "\n2026-11-16 12:10 KST reconciliation: a newer bot-authored DAILY MASTER artifact commit a01eee917ac3c4a51037436a69da9f023cbbb7bb was found after the last confirmed Actions run #109. V4 verification reports 1050 targets, 8400 B predictions, 1,050,000 random tickets, zero leakage and 19/19 manifest; V5 reports PARTIAL, 3150 successor predictions, zero leakage, and 14/14 files independently rehashed. Its corresponding Actions run ID was not exposed by the available connector, so no #110 claim is made. E061 was preregistered, executed on 1050 targets and saved with 7/7 independent SHA256/byte checks; it is a B single-ticket diagnostic only and did not promote a model. The formal queue now contains 44 tasks: E061 complete and E062 preregistered pending, giving one generic runnable task. The target-1251 three-line model-axis queue remains empty; prospective confirmation policy is still unspecified. STRICT_PASS_READY remains absent and all purchase freeze/seal protections remain in force.\n\n2026-11-16 13:46 KST: DAILY MASTER scheduled run #110 (43792309190) succeeded and published a01eee917ac3c4a51037436a69da9f023cbbb7bb; prior unresolved run-ID statement is superseded. E062 completed on 950 targets using a fixed trailing-100 selector, exact 6/45 random baseline, and 4,000 paired 50-target block bootstraps. Selector mean 0.801053; fixed combined 0.764211; adjusted CIs versus fixed [-0.016842,0.094737] and versus random [-0.062105,0.072632], both including zero. E062 is single-ticket diagnostic only. Queue has 44 registered tasks, zero generic runnable tasks, and no remaining three-line preregistered model axis; no thresholds or policy were changed.\n2026-11-16 13:50 KST correction: E062 source and canonical-data SHA256 fields were recomputed with a SHA-256 implementation that passed the standard abc test vector and matched the pinned canonical digests. E062_RESULT.json and REPORT.md manifest hashes were regenerated from exact UTF-8 bytes; the earlier malformed digest fields were superseded.\n2026-11-16 13:50 KST: queue validation repair confirmed by GitHub Actions run #102 (43807829261): 148 tests PASS, E030-E062 queue contract PASS. Run #101's E062 manifest digest mismatch was corrected; final E062 result/report manifest rehashed against exact UTF-8 bytes and verified 2/2. No research job was relaunched by the validation commit.\n2026-11-16 13:54 KST: latest queue contract validation advanced to run #104 (43808228629), 148 tests PASS, E030-E062 contract PASS. E062 interval coverage labels now correctly state 97.5% Bonferroni-adjusted two-sided intervals for two primary comparisons.",
-  "daily_master_run_id_is_latest_verified": false,
+  "notes": "2026-11-16 12:10 KST reconciliation: a newer bot-authored DAILY MASTER artifact commit a01eee917ac3c4a51037436a69da9f023cbbb7bb was found after the last confirmed Actions run #109. V4 verification reports 1050 targets, 8400 B predictions, 1,050,000 random tickets, zero leakage and 19/19 manifest; V5 reports PARTIAL, 3150 successor predictions, zero leakage, and 14/14 files independently rehashed. Its corresponding Actions run ID was not exposed by the available connector, so no #110 claim is made. E061 was preregistered, executed on 1050 targets and saved with 7/7 independent SHA256/byte checks; it is a B single-ticket diagnostic only and did not promote a model. The formal queue now contains 44 tasks: E061 complete and E062 preregistered pending, giving one generic runnable task. The target-1251 three-line model-axis queue remains empty; prospective confirmation policy is still unspecified. STRICT_PASS_READY remains absent and all purchase freeze/seal protections remain in force.\n\n2026-11-16 13:46 KST: DAILY MASTER scheduled run #110 (43792309190) succeeded and published a01eee917ac3c4a51037436a69da9f023cbbb7bb; prior unresolved run-ID statement is superseded. E062 completed on 950 targets using a fixed trailing-100 selector, exact 6/45 random baseline, and 4,000 paired 50-target block bootstraps. Selector mean 0.801053; fixed combined 0.764211; adjusted CIs versus fixed [-0.016842,0.094737] and versus random [-0.062105,0.072632], both including zero. E062 is single-ticket diagnostic only. Queue has 44 registered tasks, zero generic runnable tasks, and no remaining three-line preregistered model axis; no thresholds or policy were changed.\n2026-11-16 13:50 KST correction: E062 source and canonical-data SHA256 fields were recomputed with a SHA-256 implementation that passed the standard abc test vector and matched the pinned canonical digests. E062_RESULT.json and REPORT.md manifest hashes were regenerated from exact UTF-8 bytes; the earlier malformed digest fields were superseded.\n2026-11-16 13:50 KST: queue validation repair confirmed by GitHub Actions run #102 (43807829261): 148 tests PASS, E030-E062 queue contract PASS. Run #101's E062 manifest digest mismatch was corrected; final E062 result/report manifest rehashed against exact UTF-8 bytes and verified 2/2. No research job was relaunched by the validation commit.\n2026-11-16 13:54 KST: latest queue contract validation advanced to run #104 (43808228629), 148 tests PASS, E030-E062 contract PASS. E062 interval coverage labels now correctly state 97.5% Bonferroni-adjusted two-sided intervals for two primary comparisons.\n2026-11-16 E063 completed: EXECUTED_HISTORICAL_STRICT_FAIL; 850 historical targets; 102000 geometry-matched random portfolios; 4000 moving-block bootstrap replicates; leakage 0; manifest 8/8; no strict readiness or purchase lines. DAILY MASTER Actions run #111 (43815826760) verified successful, cutoff 1250, PARTIAL.",
+  "daily_master_run_id_is_latest_verified": true,
   "daily_master_latest_artifact_commit": "b8e4d0b3b23c2ff8a48d0ece71e4bf5e265544da",
   "daily_master_latest_artifact_commit_created_at_utc": "2026-11-16T06:26:24Z",
   "daily_master_latest_artifact_created_at_kst": "2026-11-16T15:26:24+09:00",
@@ -1842,5 +1843,33 @@
     "manifest_status": "PASS",
     "compute_status": "COMPUTE_PARTIAL",
     "protocol_status": "PROTOCOL_PARTIAL"
-  }
+  },
+  "daily_master_run_conclusion": "success",
+  "daily_master_latest_verified_actions_run": {
+    "run_id": 43815826760,
+    "run_number": 111,
+    "conclusion": "success",
+    "result_path": "analysis/2026-11-16/MASTER_FULL_V5_062611_026797",
+    "data_cutoff": 1250,
+    "status": "PARTIAL",
+    "v4_targets": 1050,
+    "v4_b_predictions": 8400,
+    "v4_random_tickets": 1050000,
+    "v4_leakage_failures": 0,
+    "v5_successor_predictions": 3150,
+    "v5_successor_leakage_failures": 0,
+    "v5_manifest_entries": 14,
+    "v5_manifest_status": "PASS"
+  },
+  "latest_additional_research": {
+    "study_id": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+    "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+    "verification_status": "PASS",
+    "historical_strict_gate_pass": false,
+    "strict_pass_ready": false,
+    "purchase_recommendation_generated": false
+  },
+  "queue_registered_task_count": 45,
+  "queue_generic_runnable_task_count": 0,
+  "queue_latest_dedicated_task_status": "EXECUTED_HISTORICAL_STRICT_FAIL"
 }

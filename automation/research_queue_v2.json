@@ -3014,13 +3014,13 @@
       "execution_entrypoint": "automation/three_line_last_digit_transition_e063.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e063-three-line-last-digit-transition.yml",
       "preregistration": "research/weekly_purchase/1251/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_PREREG_20261116.json",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "target_1251_three_line_readiness_eligible": false,
       "spec": {
         "study_id": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
         "study_class": "preregistered_independent_last_digit_occupancy_transition_three_line_walkforward",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
         "data_cutoff": 1250,
         "target_rounds": "401..1250 inclusive",
         "training_cutoff_rule": "For target t, use only draws 1..t-1. Historical transitions u=2..t-1 use the terminal-digit occupancy of draw u-1 and the main-number outcome in draw u. Score target t using draw t-1 and outcomes through t-1 only; add target draw t after scoring.",
@@ -3086,6 +3086,87 @@
           "readiness_rule": "Even if the historical gate passes, do not create STRICT_PASS_READY or release purchase lines until the policy owner formally predeclares the prospective minimum target count and completion rule."
         },
         "historical_exploration_only": true
+      },
+      "execution_attempt_history": [
+        {
+          "workflow_run_id": 43854391947,
+          "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43854391947",
+          "conclusion": "FAILURE",
+          "stage": "publish",
+          "study_execution": "SUCCESS",
+          "verification_status": "PASS",
+          "cause": "git diff --cached --check rejected CRLF and UTF-8 BOM in generated CSV and manifest as trailing whitespace.",
+          "recovery": "Normalize CSV and manifest to UTF-8 without BOM and LF line endings, regenerate the SHA256 manifest, independently reverify, then rerun the identical frozen study."
+        },
+        {
+          "workflow_run_id": 43855070177,
+          "run_attempt": 1,
+          "conclusion": "COMPUTE_VERIFY_PASS_PENDING_PUBLISH",
+          "stage": "study_verify",
+          "study_execution": "SUCCESS",
+          "verification_status": "PASS",
+          "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1"
+        }
+      ],
+      "execution_result": {
+        "status": "COMPLETE_HISTORICAL_DIAGNOSTIC_ONLY",
+        "verification_status": "PASS",
+        "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+        "data_cutoff": 1250,
+        "targets": 850,
+        "random_bundles_total": 102000,
+        "manifest_entries": 8,
+        "manifest_status": "PASS",
+        "leakage_failures": 0,
+        "historical_strict_gate_pass": false,
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "target_1251_three_line_readiness_eligible": false,
+        "purchase_recommendation_generated": false,
+        "any2_positive_block_share": 0.6470588235294118,
+        "metrics": {
+          "max_hits": {
+            "observed_mean": 1.5505882352941176,
+            "random_mean": 1.5125196078431373,
+            "delta_mean": 0.03806862745098039,
+            "adjusted_moving_block_ci": [
+              -0.012558823529411765,
+              0.07958823529411764
+            ],
+            "lower_bound_strictly_gt_zero": false
+          },
+          "any2": {
+            "observed_mean": 0.5,
+            "random_mean": 0.47411764705882353,
+            "delta_mean": 0.02588235294117647,
+            "adjusted_moving_block_ci": [
+              -0.01038235294117647,
+              0.05094117647058823
+            ],
+            "lower_bound_strictly_gt_zero": false
+          },
+          "any3": {
+            "observed_mean": 0.07764705882352942,
+            "random_mean": 0.07019607843137254,
+            "delta_mean": 0.007450980392156864,
+            "adjusted_moving_block_ci": [
+              -0.013254901960784313,
+              0.024607843137254903
+            ],
+            "lower_bound_strictly_gt_zero": false
+          },
+          "winning_union_coverage": {
+            "observed_mean": 2.4235294117647057,
+            "random_mean": 2.4019901960784313,
+            "delta_mean": 0.02153921568627451,
+            "adjusted_moving_block_ci": [
+              -0.036931372549019605,
+              0.09433333333333334
+            ],
+            "lower_bound_strictly_gt_zero": false
+          }
+        },
+        "technical_repair_audit": "research/weekly_purchase/1251/E063_TECHNICAL_REPAIR_AUDIT_20261116.json"
       }
     }
   ],
