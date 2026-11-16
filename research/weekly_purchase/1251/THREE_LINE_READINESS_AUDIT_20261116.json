@@ -9,7 +9,7 @@
   "preparation_deadline_kst": "2026-11-19",
   "current_verified_data_cutoff": 1250,
   "current_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
-  "daily_master_run_id": 43780487129,
+  "daily_master_run_id": 43792309190,
   "daily_master_status": "PARTIAL",
   "readiness_status": "STRICT_FAIL",
   "strict_model_validation_pass": false,
@@ -37,7 +37,9 @@
     "E053 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
     "E054 historical strict gate failed: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share.",
     "E055 triple-recent-strength falsification completed on frozen E045 cutoff-1250 predictions: model Pearson correlation -0.308742, moving-block 95% CI [-0.612338,-0.017509], matched-random one-sided tail probability 0.8264. The preregistered predictive hypothesis was not supported; E055 is diagnostic only and does not create a purchase portfolio or STRICT_PASS_READY.",
-    "E057 and E058 are null-gate calibration studies only, not predictive portfolios or purchase evidence; E059 is a historical candidate-stage decomposition with no demonstrated advantage. None can create STRICT_PASS_READY."
+    "E057 and E058 are null-gate calibration studies only, not predictive portfolios or purchase evidence; E059 is a historical candidate-stage decomposition with no demonstrated advantage. None can create STRICT_PASS_READY.",
+    "E062 is a historical single-ticket diagnostic; both adjusted confidence intervals include zero and it is not three-line purchase evidence.",
+    "No generic runnable queue task or preregistered target-1251 three-line model axis remains."
   ],
   "ineligible_research": {
     "E019": "POST_HOC_EXPLORATORY; 645 targets; model mean unique coverage 16.0527 (not union18); comparator used three independent uniform tickets allowing overlap (mean unique coverage 15.7169), not the policy's disjoint-union18 geometry. Historical metrics remain unchanged; see baseline geometry correction.",
@@ -58,7 +60,7 @@
   "baseline_geometry_correction": "research/weekly_purchase/1251/E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114.json",
   "research_queue_status": {
     "registered_tasks": 44,
-    "generic_task_completion_paths_found": 26,
+    "generic_task_completion_paths_found": 27,
     "blocked_generic_tasks": [
       "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
       "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1"
@@ -102,9 +104,9 @@
       ".github/workflows/lotto-finalize-r3.yml",
       ".github/workflows/lotto-finalize-v3.yml"
     ],
-    "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43764065860 (#96); E030-E056 queue contract and 145 unit tests passed after E056 execution. E061/E062 appended to automation/research_queue_v2.json; a regression test was added. Previous confirmed Actions validation remains run #96 (E030-E056); current E061/E062 validation run ID not independently exposed.",
-    "generic_queue_preflight_validation": "E061 completed and rehashed; E062 preregistered and pending. E062 is a B single-ticket selector, not three-line purchase evidence. One generic task remains runnable; the target-1251 three-line preregistered model-axis queue remains empty.",
-    "runnable_generic_task_count": 1,
+    "queue_contract_validation": "Run #96 remains last confirmed successful validation before E061/E062. Runs #97, #99, and #100 exposed stale queue-test assumptions; this commit repairs them and requests fresh validation.",
+    "generic_queue_preflight_validation": "E061 and E062 completed as historical single-ticket diagnostics; E062 manifest 2/2 PASS. No generic runnable task remains; no three-line preregistered model axis remains.",
+    "runnable_generic_task_count": 0,
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
     "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
     "target_1251_three_line_e048_runner": "automation/three_line_bonus_transition_e048.py",
@@ -185,6 +187,30 @@
         "conclusion": "SUCCESS",
         "tests": 145,
         "cause": "Post-execution E056 evidence assertions and E030-E056 queue contract passed."
+      },
+      {
+        "run_id": 43797405582,
+        "run_number": 97,
+        "conclusion": "failure",
+        "cause": "stale E043-E056 suffix and E062 preregistration assertion mismatch"
+      },
+      {
+        "run_id": 43797419784,
+        "run_number": 98,
+        "conclusion": "cancelled",
+        "cause": "superseded by next queue update"
+      },
+      {
+        "run_id": 43797429471,
+        "run_number": 99,
+        "conclusion": "failure",
+        "cause": "stale E043-E056 suffix; E061 test read strict_pass_ready from VERIFICATION rather than COMPLETION; E062 exact exclusion phrase assertion"
+      },
+      {
+        "run_id": 43797653350,
+        "run_number": 100,
+        "conclusion": "failure",
+        "cause": "stale E043-E056 suffix and E062 exact exclusion phrase assertion"
       }
     ],
     "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
@@ -318,25 +344,28 @@
       "E059": "COMPLETE_FROZEN_E054_CANDIDATE_STAGE_DIAGNOSTIC_NO_ADVANTAGE",
       "E060": "COMPLETE_ONE_SHOT_ALLOCATOR_PARTITION_DIAGNOSTIC_BOTH_HISTORICAL_PARTITIONS_STRICT_FAIL"
     },
-    "queue_status_as_of_kst": "2026-11-16T09:17:57+09:00",
-    "queue_replenishment_required_for_next_research_cycle": false,
+    "queue_status_as_of_kst": "2026-11-16T13:46:04+09:00",
+    "queue_replenishment_required_for_next_research_cycle": true,
     "next_research_designs_from_daily_report_not_yet_preregistered": [
       "Prospective confirmation rule design audit; minimum untouched target count and completion rule require policy-owner approval before adoption",
-      "A genuinely independent three-line signal-family hypothesis must be preregistered before any next model run; do not create lag microvariants or allocator parameter sweeps"
+      "A genuinely independent three-line signal-family hypothesis must be preregistered before any next model run; do not create lag microvariants or allocator parameter sweeps",
+      "No remaining preregistered target-1251 three-line model axis. Do not create post-hoc variants; register a genuinely independent signal-family hypothesis before the next three-line model run."
     ],
     "completed_additional_tasks": {
-      "E061": "EXECUTED_HISTORICAL_B_SINGLE_TICKET_ENSEMBLE_DIAGNOSTIC_ONLY; MANIFEST 7/7 PASS"
+      "E061": "EXECUTED_HISTORICAL_B_SINGLE_TICKET_ENSEMBLE_DIAGNOSTIC_ONLY; MANIFEST 7/7 PASS",
+      "E062": "EXECUTED_HISTORICAL_B_SINGLE_TICKET_TRAILING_100_SELECTOR_DIAGNOSTIC_ONLY; MANIFEST 2/2 PASS; NO STRICT PASS"
     },
-    "pending_generic_tasks": [
-      "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1"
-    ],
+    "pending_generic_tasks": [],
     "pending_queue_contract_validation": {
-      "commit_sha": "fd4f05a8133c77fa9ee179b1f794010621734919",
-      "status": "PUSHED_FOR_VALIDATION_ACTIONS_RUN_ID_UNRESOLVED",
-      "test_path": "automation/tests_v2/test_research_queue_replenishment_e061_e062.py",
-      "test_contract": "E061 completed diagnostic fields and E062 pending preregistration fields; corrected assertion checks completion.strict_pass_ready."
+      "commit_sha": "PENDING_NEW_COMMIT",
+      "status": "PENDING_GITHUB_ACTIONS_VALIDATION",
+      "test_paths": [
+        "automation/tests_v2/test_independent_five_line.py",
+        "automation/tests_v2/test_research_queue_replenishment_e061_e062.py",
+        ".github/workflows/orthogonal-research-v2.yml"
+      ]
     },
-    "next_research_task": "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1"
+    "next_research_task": "NONE_REGISTERED; a new independent hypothesis must be preregistered before another three-line model run."
   },
   "evaluated_gates": {
     "max_hit": {
@@ -443,9 +472,9 @@
     "prospective_minimum_count_adopted": false
   },
   "previous_daily_master_run_id": 43666836797,
-  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43780487129",
-  "daily_master_result_commit": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
-  "daily_master_completed_at_kst": "2026-11-16T09:32:33+09:00",
+  "daily_master_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43792309190",
+  "daily_master_result_commit": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
+  "daily_master_completed_at_kst": "2026-11-16T11:33:09+09:00",
   "e048_execution": {
     "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "workflow_name": "target-1251-e048-three-line-bonus-transition",
@@ -558,8 +587,8 @@
     "valid_e048_evidence_path": "analysis/2026-11-14/gha_43547345879_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
     "valid_e048_evidence_class": "DUPLICATE_REPRODUCTION_ONLY"
   },
-  "daily_master_verification_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498/VERIFICATION.json",
-  "daily_master_report_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498/REPORT.md",
+  "daily_master_verification_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633/VERIFICATION.json",
+  "daily_master_report_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633/REPORT.md",
   "daily_master_model_validation_path": "analysis/2026-11-16/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
   "e049_execution": {
     "workflow_name": "target-1251-e049-three-line-draw-state-transition",
@@ -692,27 +721,29 @@
     "latest_registered_three_line_axis": "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
     "latest_registered_three_line_axis_cutoff": 1250,
     "latest_registered_three_line_axis_status": "EXECUTED_TRIPLE_STRENGTH_NOT_SUPPORTED",
-    "latest_additional_diagnostic_study": "E060_E054_UNION18_SNAKE_ALLOCATOR_DIAGNOSTIC_v1",
-    "latest_additional_diagnostic_cutoff": 1250
+    "latest_additional_diagnostic_study": "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
+    "latest_additional_diagnostic_cutoff": 1250,
+    "latest_additional_diagnostic_evidence_class": "HISTORICAL_NESTED_SINGLE_TICKET_DIAGNOSTIC_NOT_THREE_LINE_PURCHASE_EVIDENCE"
   },
   "latest_daily_master_attempt": {
-    "run_id": 43780487129,
-    "run_number": 109,
+    "run_id": 43792309190,
+    "run_number": 110,
     "run_attempt": 1,
     "status": "completed",
     "conclusion": "success",
-    "created_at_utc": "2026-11-16T00:27:35Z",
-    "last_observed_updated_at": "2026-11-16T00:32:33Z",
-    "head_sha": "36bb4c09ff5b9a19f57aed9ac2f28fb9a451444f",
-    "result_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43780487129"
+    "event": "schedule",
+    "created_at_utc": "2026-11-16T02:27:48Z",
+    "last_observed_updated_at": "2026-11-16T02:33:09Z",
+    "head_sha": "c4b55828d5b7848e99c06d04dab49609e79ca2d1",
+    "result_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43792309190"
   },
-  "daily_master_run_number": 109,
+  "daily_master_run_number": 110,
   "daily_master_run_status": "completed_success",
-  "daily_master_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73",
-  "daily_master_generated_kst": "2026-11-16T09:32:17.389498+09:00",
+  "daily_master_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
+  "daily_master_generated_kst": "2026-11-16T11:32:57.314738+09:00",
   "daily_master_verification_status": "PARTIAL",
-  "daily_master_v4_path": "analysis/2026-11-16/MASTER_FULL_V4_002743_085265",
+  "daily_master_v4_path": "analysis/2026-11-16/MASTER_FULL_V4_022804_577202",
   "audit_updated_kst": "2026-11-16T12:10:53+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
@@ -818,16 +849,15 @@
     }
   },
   "latest_daily_master_artifact": {
-    "artifact_kind": "NEW_DAILY_MASTER_ARTIFACT_COMMIT_ACTIONS_RUN_ID_UNRESOLVED",
+    "artifact_kind": "DAILY_MASTER_ARTIFACT_FROM_CONFIRMED_ACTIONS_RUN",
     "artifact_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
-    "artifact_commit_url": "https://github.com/jiae-jeong/lotto-data/commit/a01eee917ac3c4a51037436a69da9f023cbbb7bb",
-    "commit_created_at_utc": "2026-11-16T02:33:01Z",
-    "commit_created_at_kst": "2026-11-16T11:33:01+09:00",
     "generated_kst": "2026-11-16T11:32:57.314738+09:00",
     "data_cutoff": 1250,
     "status": "PARTIAL",
-    "workflow_run_id": null,
-    "workflow_run_id_status": "UNRESOLVED_NOT_INFERRED",
+    "workflow_run_id": 43792309190,
+    "workflow_run_number": 110,
+    "workflow_run_id_status": "RESOLVED_FROM_REPOSITORY_ACTIONS_RUN_LIST",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43792309190",
     "v4_path": "analysis/2026-11-16/MASTER_FULL_V4_022804_577202",
     "v5_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633",
     "v4_verification": {
@@ -836,21 +866,15 @@
       "b_prediction_records": 8400,
       "random_tickets": 1050000,
       "leakage_failures": 0,
-      "manifest_entries": 19,
-      "manifest_status": "PASS"
+      "manifest_entries": 19
     },
     "v5_verification": {
       "status": "PARTIAL",
       "successor_prediction_records": 3150,
       "successor_leakage_failures": 0,
       "manifest_entries": 14,
-      "workflow_manifest_status": "PASS",
       "independent_sha256_and_byte_rehash": "14/14 PASS"
     },
-    "report_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633/REPORT.md",
-    "verification_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633/VERIFICATION.json",
-    "model_validation_path": "analysis/2026-11-16/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
-    "protocol_status": "PARTIAL",
     "no_purchase_lines_generated": true
   },
   "e051_pair_context_axis": {
@@ -1463,17 +1487,18 @@
     }
   ],
   "daily_master_latest_completed": {
-    "workflow_run_id": 43780487129,
-    "run_number": 109,
+    "workflow_run_id": 43792309190,
+    "run_number": 110,
     "date_kst": "2026-11-16",
     "data_cutoff": 1250,
-    "result_path": "analysis/2026-11-16/MASTER_FULL_V5_003217_389498",
+    "result_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633",
     "status": "PARTIAL",
     "workflow_conclusion": "success",
-    "result_commit_sha": "d2ddb2ca89b0c4260b5316ffb6cfe46af27fac73"
+    "result_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43792309190"
   },
   "daily_master_20261116_run_found": true,
-  "daily_master_check_as_of_kst": "2026-11-16T12:10:53+09:00",
+  "daily_master_check_as_of_kst": "2026-11-16T13:46:04+09:00",
   "strict_status_snapshot": "research/weekly_purchase/1251/STRICT_PASS_STATUS_1251_20261116.json",
   "latest_research_evidence": {
     "E054": {
@@ -1746,7 +1771,7 @@
     "result_path": "analysis/2026-11-16/MASTER_FULL_V5_235506_173902",
     "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43776859887"
   },
-  "daily_master_run_id_semantics": "The numeric daily_master_run_id/run_number fields remain the last confirmed Actions run (#109); the newer bot-authored artifact commit is recorded separately because its Actions run ID could not be resolved. Do not infer run #110.",
+  "daily_master_run_id_semantics": "DAILY MASTER run #110 (Actions run 43792309190) was independently confirmed in the repository-wide Actions run list; its result commit is a01eee917ac3c4a51037436a69da9f023cbbb7bb.",
   "last_confirmed_daily_master_actions_run": {
     "run_id": 43780487129,
     "run_number": 109,
@@ -1756,26 +1781,21 @@
   },
   "daily_master_artifact_reconciliation": {
     "path": "research/weekly_purchase/1251/DAILY_MASTER_ARTIFACT_RECONCILIATION_20261116_113257.json",
-    "commit_sha": "0e1423b8f2f4470973d5b875f355e6e74c00d7a8",
-    "classification": "NEW_ARTIFACT_AFTER_LAST_CONFIRMED_ACTIONS_RUN",
-    "actions_run_id_resolved": false
+    "classification": "MATCHED_TO_CONFIRMED_DAILY_MASTER_ACTIONS_RUN_110",
+    "actions_run_id_resolved": true,
+    "workflow_run_id": 43792309190,
+    "run_number": 110,
+    "result_commit_sha": "a01eee917ac3c4a51037436a69da9f023cbbb7bb",
+    "prior_unresolved_claim_superseded": true
   },
   "latest_daily_master_artifact_found": true,
   "latest_daily_master_report_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633/REPORT.md",
   "latest_daily_master_verification_path": "analysis/2026-11-16/MASTER_FULL_V5_023252_873633/VERIFICATION.json",
   "latest_daily_master_model_validation_path": "analysis/2026-11-16/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
   "completed_additional_preregistered_research": {
-    "E061": "COMPLETE_B_MODEL_ENSEMBLE_ERROR_CORRELATION_DIAGNOSTIC; 21 PAIRS; 4,000 BLOCK BOOTSTRAPS; MANIFEST 7/7 INDEPENDENT SHA256 AND BYTE REHASH PASS; NO MODEL PROMOTED"
+    "E061": "COMPLETE_B_MODEL_ENSEMBLE_ERROR_CORRELATION_DIAGNOSTIC; 21 PAIRS; 4,000 BLOCK BOOTSTRAPS; MANIFEST 7/7 INDEPENDENT SHA256 AND BYTE REHASH PASS; NO MODEL PROMOTED",
+    "E062": "EXECUTED_HISTORICAL_B_SINGLE_TICKET_SELECTOR_DIAGNOSTIC_ONLY; 950 TARGETS; EXACT 6/45 BASELINE; 4,000 PAIRED 50-TARGET BLOCK BOOTSTRAPS; MANIFEST 2/2 PASS; BOTH ADJUSTED CIs INCLUDE ZERO; NO THREE-LINE PROMOTION"
   },
-  "pending_additional_preregistered_research": {
-    "E062": {
-      "status": "PREREGISTERED_PENDING_EXECUTION",
-      "preregistration": "research/weekly_purchase/1251/E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_PREREG_20261116.json",
-      "target_range": "301..1250",
-      "lookback_targets": 100,
-      "evidence_class": "HISTORICAL_NESTED_SINGLE_TICKET_DIAGNOSTIC_NOT_THREE_LINE_PURCHASE_EVIDENCE",
-      "target_1251_three_line_readiness_eligible": false
-    }
-  },
-  "notes": "\n2026-11-16 12:10 KST reconciliation: a newer bot-authored DAILY MASTER artifact commit a01eee917ac3c4a51037436a69da9f023cbbb7bb was found after the last confirmed Actions run #109. V4 verification reports 1050 targets, 8400 B predictions, 1,050,000 random tickets, zero leakage and 19/19 manifest; V5 reports PARTIAL, 3150 successor predictions, zero leakage, and 14/14 files independently rehashed. Its corresponding Actions run ID was not exposed by the available connector, so no #110 claim is made. E061 was preregistered, executed on 1050 targets and saved with 7/7 independent SHA256/byte checks; it is a B single-ticket diagnostic only and did not promote a model. The formal queue now contains 44 tasks: E061 complete and E062 preregistered pending, giving one generic runnable task. The target-1251 three-line model-axis queue remains empty; prospective confirmation policy is still unspecified. STRICT_PASS_READY remains absent and all purchase freeze/seal protections remain in force."
+  "pending_additional_preregistered_research": {},
+  "notes": "\n2026-11-16 12:10 KST reconciliation: a newer bot-authored DAILY MASTER artifact commit a01eee917ac3c4a51037436a69da9f023cbbb7bb was found after the last confirmed Actions run #109. V4 verification reports 1050 targets, 8400 B predictions, 1,050,000 random tickets, zero leakage and 19/19 manifest; V5 reports PARTIAL, 3150 successor predictions, zero leakage, and 14/14 files independently rehashed. Its corresponding Actions run ID was not exposed by the available connector, so no #110 claim is made. E061 was preregistered, executed on 1050 targets and saved with 7/7 independent SHA256/byte checks; it is a B single-ticket diagnostic only and did not promote a model. The formal queue now contains 44 tasks: E061 complete and E062 preregistered pending, giving one generic runnable task. The target-1251 three-line model-axis queue remains empty; prospective confirmation policy is still unspecified. STRICT_PASS_READY remains absent and all purchase freeze/seal protections remain in force.\n\n2026-11-16 13:46 KST: DAILY MASTER scheduled run #110 (43792309190) succeeded and published a01eee917ac3c4a51037436a69da9f023cbbb7bb; prior unresolved run-ID statement is superseded. E062 completed on 950 targets using a fixed trailing-100 selector, exact 6/45 random baseline, and 4,000 paired 50-target block bootstraps. Selector mean 0.801053; fixed combined 0.764211; adjusted CIs versus fixed [-0.016842,0.094737] and versus random [-0.062105,0.072632], both including zero. E062 is single-ticket diagnostic only. Queue has 44 registered tasks, zero generic runnable tasks, and no remaining three-line preregistered model axis; no thresholds or policy were changed."
 }

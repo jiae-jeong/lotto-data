@@ -2905,7 +2905,7 @@
       "date_kst": "2026-11-16",
       "data_cutoff": 1250,
       "execution_mode": "code_mode_pre_registered",
-      "execution_status": "PREREGISTERED_PENDING_EXECUTION",
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
       "preregistration": "research/weekly_purchase/1251/E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_PREREG_20261116.json",
       "target_1251_three_line_readiness_eligible": false,
       "spec": {
@@ -2938,7 +2938,68 @@
         ],
         "parameter_search": false,
         "variant_sweep": false,
-        "three_line_readiness_eligible": false
+        "three_line_readiness_eligible": false,
+        "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+        "result_path": "analysis/2026-11-16/codemode_20261116_1346/E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1"
+      },
+      "result_path": "analysis/2026-11-16/codemode_20261116_1346/E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
+      "execution_result": {
+        "execution_mode": "CODE_MODE_V8_ACTUAL_COMPUTATION",
+        "run_id": "codemode_20261116_1346",
+        "verification_status": "PASS",
+        "data_cutoff": 1250,
+        "target_range": [
+          301,
+          1250
+        ],
+        "target_count": 950,
+        "source_git_blob_sha": "83e9772654466c092ccef7a7287d8106359a6c80",
+        "source_sha256": "0d0295e5288043e414637f7a7eb542aac4a31e2ae1dc66e598e754f7f5ecc3e8",
+        "source_rows": 8400,
+        "data_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+        "data_sha256": "b7a52d0aede47b62ed9798827f706e9304a8598e8f7f88d97018745c22a8886a",
+        "data_rows": 1250,
+        "missing_rows": 0,
+        "duplicate_rows": 0,
+        "cutoff_violations": 0,
+        "future_outcomes_used": false,
+        "selector_mean_hits": 0.8010526315789473,
+        "fixed_combined_mean_hits": 0.7642105263157895,
+        "exact_random_mean_hits": 0.8,
+        "selector_minus_fixed": 0.0368421052631579,
+        "selector_minus_fixed_adjusted_ci_98_75": [
+          -0.016842105263157894,
+          0.09473684210526316
+        ],
+        "selector_minus_random": 0.001052631578947305,
+        "selector_minus_random_adjusted_ci_98_75": [
+          -0.06210526315789468,
+          0.07263157894736842
+        ],
+        "rate_ge2": 0.17789473684210527,
+        "rate_ge3": 0.014736842105263158,
+        "rate_ge4": 0.0010526315789473684,
+        "selected_model_frequency": {
+          "structure_profile": 126,
+          "long_frequency": 131,
+          "recent_momentum": 133,
+          "triple_association": 61,
+          "frequency_plus_gap": 52,
+          "current_gap": 200,
+          "pair_association": 247
+        },
+        "selection_tie_targets": 77,
+        "block_length": 50,
+        "block_count": 19,
+        "bootstrap_replicates": 4000,
+        "bootstrap_seed": 20261117,
+        "manifest_entries": 2,
+        "manifest_status": "PASS",
+        "result_path": "analysis/2026-11-16/codemode_20261116_1346/E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "purchase_recommendation_generated": false,
+        "target_1251_three_line_readiness_eligible": false
       }
     }
   ],

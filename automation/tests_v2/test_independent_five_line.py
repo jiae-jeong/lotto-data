@@ -54,7 +54,9 @@ class IndependentFiveLineTests(unittest.TestCase):
             "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
             "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
         ]
-        self.assertEqual(ids[-len(expected_e043_e056):], expected_e043_e056)
+        present_e043_e056 = [task_id for task_id in ids if task_id in set(expected_e043_e056)]
+        self.assertEqual(present_e043_e056, expected_e043_e056)
+        self.assertLess(ids.index(expected_e043_e056[-1]), ids.index("E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1"))
         e056 = next(task for task in queue["tasks"] if task["id"] == "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1")
         self.assertEqual(e056["execution_status"], "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY")
         self.assertEqual(e056["spec"]["execution_status"], "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY")
