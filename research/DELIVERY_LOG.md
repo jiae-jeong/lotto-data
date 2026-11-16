@@ -64,3 +64,14 @@ This ledger records combinations displayed to the user, whether or not they were
 - Rounds 1244-1249 remain previously inspected/live-history material, not clean holdout or prospective confirmation.
 - Target 1251 readiness remains STRICT_FAIL. No candidate list or final purchase lines were released; no fallback was promoted; no STRICT_PASS_READY artifact, freeze, seal, or purchase confirmation was created.
 - Research artifacts: `research/weekly_purchase/1251/E058_THREE_LINE_PERSISTENT_PORTFOLIO_NULL_CALIBRATION_PREREG_20261116.json`, `research/weekly_purchase/1251/E059_E054_CANDIDATE_RECALL_STAGE_DECOMPOSITION_PREREG_20261116.json`, and their linked analysis outputs under `analysis/2026-11-16/`.
+
+
+## Research diagnostic 2026-11-16 — E060 allocator partition sensitivity (no purchase delivery)
+- E060 was preregistered before execution as a one-shot historical allocator-only diagnostic on the frozen E054 union18 candidate sets.
+- Compared the original E054 line assignment with exactly one deterministic numeric-order snake partition; candidate union18, model scores, weights, thresholds, alpha, block length, and exact comparator were unchanged.
+- Evaluation: targets 401–1250 (850); 120 exact-geometry random portfolios per target (102,000 total); 4,000 moving-block bootstrap replicates; 50-target blocks.
+- Numeric snake changed mean max_hits by +0.004706, any2 by +0.003529, and any3 by +0.001176 versus E054; union coverage was identical by construction.
+- Both partitions remained historical STRICT_FAIL. All adjusted CI lower bounds remained below zero; numeric snake any2-positive block share was 9/17 (52.94%), below the unchanged 65% requirement.
+- SHA256 manifest 7/7 and Git blob manifest 8/8 were independently re-fetched and verified. No leakage, target mismatch, geometry violation, or candidate-union mismatch.
+- This is not independent predictive evidence or prospective confirmation. No candidate lines, STRICT_PASS_READY, freeze, seal, or purchase confirmation were created.
+- Detailed supplement: research/daily/2026-11-16_E060_SUPPLEMENT.md
