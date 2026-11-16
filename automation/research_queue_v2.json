@@ -3195,7 +3195,7 @@
       "execution_entrypoint": "automation/three_line_block_persistent_null_calibration_e064.js",
       "workflow_entrypoint": ".github/workflows/target-1251-e064-block-persistent-null-calibration.yml",
       "preregistration": "research/weekly_purchase/1251/E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_PREREG_20261116.json",
-      "preregistration_blob_sha": "f54fac3619f9918e5b2ebe32f39fcc5f3673b18b",
+      "preregistration_blob_sha": "49f9b5e49df2b1ece3ddbe3b7041696f6574e72c",
       "target_1251_three_line_readiness_eligible": false,
       "spec": {
         "study_id": "E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
