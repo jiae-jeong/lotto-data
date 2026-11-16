@@ -170,7 +170,7 @@ function validateContracts(prereg, policy) {
   if (prereg.policy_id!==policy.policy_id || policy.policy_id!=='WEEKLY_THREE_LINE_POLICY_1251_PLUS') throw new Error('E064 policy identity mismatch');
   if (prereg.data.cutoff!==1250 || prereg.data.target_range[0]!==401 || prereg.data.target_range[1]!==1250 || prereg.data.target_count!==850) throw new Error('E064 data scope mismatch');
   if (prereg.simulation.trajectories!==1000 || prereg.simulation.block_size!==50 || prereg.simulation.blocks!==17 ||
-      prereg.simulation.bootstrap_replicates!==4000 || prereg.simulation.portfolios_per_trajectory!==17) throw new Error('E064 simulation contract mismatch');
+      prereg.simulation.bootstrap_replicates_per_metric_per_trajectory!==4000 || prereg.simulation.portfolios_per_trajectory!==17) throw new Error('E064 simulation contract mismatch');
   if (prereg.null_process.classification!=='piecewise_constant_block_persistent_non_predictive_portfolio' ||
       prereg.null_process.portfolio_lifetime_targets!==50 || prereg.null_process.outcome_independence!==true) throw new Error('E064 null process mismatch');
   for (const key of METRICS) {
