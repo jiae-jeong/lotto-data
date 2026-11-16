@@ -3324,16 +3324,26 @@
       "tests": 148,
       "queue_contract": "E030-E062 PASS",
       "cause": "Corrected 97.5% Bonferroni-adjusted interval labels and exact-byte manifest validated; research jobs skipped."
+    },
+    {
+      "run_id": 43865941655,
+      "run_number": 115,
+      "conclusion": "SUCCESS",
+      "tests": 160,
+      "queue_contract": "E030-E064 PASS",
+      "cause": "E064 frozen preregistration, runner, and test contracts validated; all 160 unit tests passed; research and prospective-ledger jobs skipped because no pending task was eligible."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 43808228629,
-    "run_number": 104,
+    "run_id": 43865941655,
+    "run_number": 115,
     "conclusion": "SUCCESS",
-    "tests": 148,
-    "queue_contract": "E030-E062 PASS",
-    "post_e062_execution_validation": true,
-    "source_commit_sha": "e7be46be103675f757e41e7b7248421a9b3a7a37",
-    "interval_label_validation": "97.5% Bonferroni-adjusted intervals correctly labelled"
+    "tests": 160,
+    "queue_contract": "E030-E064 PASS",
+    "post_e064_execution_validation": true,
+    "source_commit_sha": "75e7cbbae98803c4afae1556f6b552f3ae854db8",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43865941655",
+    "validated_at_kst": "2026-11-16T21:22:26+09:00"
   }
 }
