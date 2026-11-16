@@ -36,7 +36,7 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
         self.assertEqual(prereg["study_id"], task_id)
         self.assertEqual(prereg["frozen_rule"]["lookback_targets"], 100)
         self.assertEqual(prereg["frozen_rule"]["evaluation_targets"], [301, 1250])
-        self.assertFalse(prereg["frozen_rule"]["no_parameter_search"] is False)
+        self.assertTrue(any("No parameter search" in item for item in prereg["exclusions"]))
 
     def test_queue_tail_is_append_only_e061_then_e062(self):
         self.assertEqual(
