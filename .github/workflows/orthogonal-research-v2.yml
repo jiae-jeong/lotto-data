@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract extended through E063; preserve all prior task IDs and order.
+# Queue contract extended through E064; preserve all prior task IDs and order.
 
 on:
   workflow_dispatch:
@@ -189,7 +189,7 @@ jobs:
           assert e062['execution_result']['verification_status']=='PASS'
           assert e062['execution_result']['manifest_entries']==2
           assert e062['execution_result']['strict_pass_ready'] is False
-          assert ids[-3:]==['E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1','E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1','E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
+          assert ids[-4:]==['E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1','E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1','E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1','E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1']
           e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
@@ -202,7 +202,20 @@ jobs:
               assert e063['execution_result']['verification_status']=='PASS'
               assert e063['execution_result']['strict_pass_ready'] is False
               assert e063['execution_result']['purchase_recommendation_generated'] is False
-          print('E030-E063 queue contract PASS; prior IDs retained')
+          e064=task_by_id['E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1']
+          assert e064['kind']=='three_line_block_persistent_null_calibration'
+          assert e064['execution_mode']=='dedicated_workflow'
+          assert e064['execution_entrypoint']=='automation/three_line_block_persistent_null_calibration_e064.js'
+          assert e064['workflow_entrypoint']=='.github/workflows/target-1251-e064-block-persistent-null-calibration.yml'
+          assert e064['preregistration']=='research/weekly_purchase/1251/E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_PREREG_20261116.json'
+          assert e064['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_NULL_CALIBRATION_ONLY')
+          assert e064['spec']['execution_status']==e064['execution_status']
+          assert e064['target_1251_three_line_readiness_eligible'] is False
+          if e064['execution_status']=='EXECUTED_NULL_CALIBRATION_ONLY':
+              assert e064['execution_result']['verification_status']=='PASS'
+              assert e064['execution_result']['strict_pass_ready'] is False
+              assert e064['execution_result']['purchase_recommendation_generated'] is False
+          print('E030-E064 queue contract PASS; prior IDs retained')
           PY
 
   research:
