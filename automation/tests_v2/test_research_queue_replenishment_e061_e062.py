@@ -24,7 +24,7 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
         completion = json.loads((result_root / "COMPLETION.json").read_text(encoding="utf-8"))
         self.assertEqual(verification["status"], "PASS")
         self.assertEqual(completion["status"], "COMPLETE_DIAGNOSTIC_ONLY")
-        self.assertFalse(verification["strict_pass_ready"])
+        self.assertFalse(completion["strict_pass_ready"])
 
     def test_e062_is_preregistered_and_pending_without_three_line_promotion(self):
         task_id = "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1"
