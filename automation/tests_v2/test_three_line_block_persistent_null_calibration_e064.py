@@ -61,7 +61,7 @@ class E064BlockPersistentNullCalibrationTests(unittest.TestCase):
         self.assertEqual(p["simulation"]["trajectories"], 1000)
         self.assertEqual(p["simulation"]["block_size"], 50)
         self.assertEqual(p["simulation"]["blocks"], 17)
-        self.assertEqual(p["simulation"]["bootstrap_replicates"], 4000)
+        self.assertEqual(p["simulation"]["bootstrap_replicates_per_metric_per_trajectory"], 4000)
         self.assertEqual(p["null_process"]["portfolio_lifetime_targets"], 50)
         self.assertTrue(p["null_process"]["outcome_independence"])
         self.assertFalse(p["purchase_recommendation_generated"])
