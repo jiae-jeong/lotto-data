@@ -3101,11 +3101,23 @@
         {
           "workflow_run_id": 43855070177,
           "run_attempt": 1,
-          "conclusion": "COMPUTE_VERIFY_PASS_PENDING_PUBLISH",
-          "stage": "study_verify",
+          "conclusion": "SUCCESS",
+          "stage": "study_verify_normalize_publish",
           "study_execution": "SUCCESS",
           "verification_status": "PASS",
-          "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1"
+          "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+          "publish_commit_sha": "bf3c06136f41fc833ba7890b3ce00d00b42a2edc",
+          "workflow_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43855070177"
+        },
+        {
+          "workflow_run_id": 43855011687,
+          "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43855011687",
+          "conclusion": "FAILURE",
+          "stage": "normalize",
+          "study_execution": "SUCCESS",
+          "verification_status": "PASS",
+          "cause": "The normalization step received literal backslashes in RUN_ID and RUN_ATTEMPT from escaped workflow expressions, producing a non-existent output path.",
+          "recovery": "Corrected the GitHub Actions expression and frozen workflow blob; the following identical execution completed normalization, manifest verification, commit, and push."
         }
       ],
       "execution_result": {
@@ -3166,8 +3178,12 @@
             "lower_bound_strictly_gt_zero": false
           }
         },
-        "technical_repair_audit": "research/weekly_purchase/1251/E063_TECHNICAL_REPAIR_AUDIT_20261116.json"
-      }
+        "technical_repair_audit": "research/weekly_purchase/1251/E063_TECHNICAL_REPAIR_AUDIT_20261116.json",
+        "workflow_run_id": 43855070177,
+        "publish_commit_sha": "bf3c06136f41fc833ba7890b3ce00d00b42a2edc",
+        "publish_status": "SUCCESS"
+      },
+      "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1"
     }
   ],
   "trigger_mode": "workflow_dispatch_only",

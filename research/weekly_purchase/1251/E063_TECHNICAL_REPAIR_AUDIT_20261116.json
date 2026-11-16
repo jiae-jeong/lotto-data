@@ -83,6 +83,19 @@
     "csv_normalization_status": "PASS",
     "manifest_entries": 8,
     "manifest_status": "PASS",
-    "publish_status": "PENDING"
+    "publish_status": "SUCCESS",
+    "publish_commit_sha": "bf3c06136f41fc833ba7890b3ce00d00b42a2edc",
+    "workflow_conclusion": "SUCCESS",
+    "workflow_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43855070177"
+  },
+  "intermediate_attempt": {
+    "workflow_run_id": 43855011687,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43855011687",
+    "conclusion": "FAILURE",
+    "stage": "normalize",
+    "study_execution": "SUCCESS",
+    "verification_status": "PASS",
+    "cause": "Escaped GitHub Actions expressions left literal backslashes in RUN_ID and RUN_ATTEMPT; normalization addressed a non-existent path.",
+    "recovery": "Removed the literal escapes and updated the preregistered frozen workflow blob hash; the next identical run passed."
   }
 }
