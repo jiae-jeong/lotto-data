@@ -50,7 +50,12 @@
     "latest_task": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
     "latest_task_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
     "generic_runnable_tasks": 0,
-    "three_line_ready_artifact": false
+    "three_line_ready_artifact": false,
+    "classification": "EXHAUSTED_AFTER_COMPLETING_LAST_PREDECLARED_INDEPENDENT_AXIS",
+    "technical_queue_failure": false,
+    "remaining_independent_three_line_axes": 0,
+    "microvariants_added": 0,
+    "no_post_hoc_threshold_relaxation": true
   },
   "e063": {
     "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
