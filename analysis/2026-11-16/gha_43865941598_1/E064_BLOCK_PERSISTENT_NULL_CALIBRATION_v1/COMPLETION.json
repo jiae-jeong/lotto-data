@@ -1,0 +1,13 @@
+{
+  "study_id": "E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
+  "status": "COMPLETE",
+  "evidence_class": "NULL_GATE_CALIBRATION_ONLY",
+  "data_cutoff": 1250,
+  "target_count": 850,
+  "trajectories": 1000,
+  "portfolios_generated": 17000,
+  "strict_gate_false_pass_rate": 0,
+  "predictive_model_evaluated": false,
+  "purchase_recommendation_generated": false,
+  "strict_pass_ready": false
+}

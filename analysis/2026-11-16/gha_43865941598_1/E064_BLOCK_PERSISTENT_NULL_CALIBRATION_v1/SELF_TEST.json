@@ -1,0 +1,8 @@
+{
+  "seeds": 100,
+  "blocks_per_seed": 17,
+  "portfolios_generated": 1700,
+  "target_assignments_checked": 85000,
+  "geometry_violations": 0,
+  "within_block_assignment_violations": 0
+}

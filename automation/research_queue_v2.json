@@ -3191,7 +3191,7 @@
       "question": "Under a non-predictive portfolio process that holds one random disjoint-union18 portfolio fixed for each 50-target block and independently redraws it at each block boundary, how often does the unchanged target-1251 three-line strict gate falsely pass?",
       "novelty": "One distinct null-calibration mechanism: piecewise-constant random three-line portfolios held for 50 targets and independently redrawn at block boundaries. This is not a predictive signal, model promotion, or purchase-evidence axis; it extends E057 independent-per-target and E058 per-target Markov-retention calibration without changing the strict gate.",
       "execution_mode": "dedicated_workflow",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_NULL_CALIBRATION_ONLY",
       "execution_entrypoint": "automation/three_line_block_persistent_null_calibration_e064.js",
       "workflow_entrypoint": ".github/workflows/target-1251-e064-block-persistent-null-calibration.yml",
       "preregistration": "research/weekly_purchase/1251/E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_PREREG_20261116.json",
@@ -3222,14 +3222,49 @@
           "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
           "thresholds_changed": false
         },
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "execution_status": "EXECUTED_NULL_CALIBRATION_ONLY",
         "purchase_recommendation_generated": false,
-        "strict_pass_ready": false
+        "strict_pass_ready": false,
+        "execution_result": {
+          "workflow_run_id": 43865941598,
+          "run_attempt": 1,
+          "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43865941598",
+          "result_path": "analysis/2026-11-16/gha_43865941598_1/E064_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
+          "verification_status": "PASS",
+          "manifest_entries": 7,
+          "data_cutoff": 1250,
+          "target_count": 850,
+          "trajectories": 1000,
+          "portfolios_generated": 17000,
+          "strict_gate_false_passes": 0,
+          "strict_gate_false_pass_rate": 0,
+          "strict_pass_ready": false,
+          "purchase_recommendation_generated": false,
+          "verified_at_kst": "2026-11-16T21:22:44.439111+09:00"
+        },
+        "execution_verified_at_kst": "2026-11-16T21:22:44.439111+09:00"
+      },
+      "execution_result": {
+        "workflow_run_id": 43865941598,
+        "run_attempt": 1,
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43865941598",
+        "result_path": "analysis/2026-11-16/gha_43865941598_1/E064_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
+        "verification_status": "PASS",
+        "manifest_entries": 7,
+        "data_cutoff": 1250,
+        "target_count": 850,
+        "trajectories": 1000,
+        "portfolios_generated": 17000,
+        "strict_gate_false_passes": 0,
+        "strict_gate_false_pass_rate": 0,
+        "strict_pass_ready": false,
+        "purchase_recommendation_generated": false,
+        "verified_at_kst": "2026-11-16T21:22:44.439111+09:00"
       }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "E064 is a preregistered block-persistent non-predictive null calibration only. No target-1251 three-line predictive model is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration.",
+  "trigger_note": "E064 completed one block-persistent non-predictive null calibration only. No target-1251 three-line predictive axis is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration.",
   "queue_contract_validation_history": [
     {
       "run_id": 43763359441,
