@@ -81,11 +81,12 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
         self.assertIsNone(prereg["prospective_confirmation"]["minimum_target_count"])
         self.assertIsNone(prereg["prospective_confirmation"]["completion_rule"])
 
-    def test_queue_tail_is_append_only_e061_e062_then_e063(self):
-        self.assertEqual([task["id"] for task in self.tasks[-3:]], [
+    def test_queue_tail_is_append_only_e061_e062_e063_then_e064(self):
+        self.assertEqual([task["id"] for task in self.tasks[-4:]], [
             "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
             "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
             "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+            "E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
         ])
 
 
