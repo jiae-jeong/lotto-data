@@ -1,0 +1,135 @@
+{
+  "study_id": "E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "date_kst": "2026-11-16",
+  "preregistered_at_kst": "2026-11-16T21:03:00+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "evidence_class": "NULL_GATE_CALIBRATION_ONLY_BLOCK_PERSISTENT_RANDOM_PORTFOLIO_MECHANISM",
+  "research_question": "Under a non-predictive portfolio process that holds one random disjoint-union18 portfolio fixed for each 50-target block and independently redraws it at each block boundary, how often does the unchanged target-1251 three-line strict gate falsely pass?",
+  "novelty_vs_E057_E058": [
+    "E057 independently redrew a uniform disjoint-union18 portfolio at every target.",
+    "E058 used a per-target Markov portfolio process retaining exactly 3 of 6 numbers within each corresponding line at every transition.",
+    "E064 instead holds one independently sampled uniform ordered partition fixed for a complete non-overlapping 50-target block, then redraws the entire partition independently at the next block boundary; there is no per-target transition or forced carryover.",
+    "This is a distinct block-persistence stress mechanism for gate calibration only; it is not a predictive model or purchase-evidence axis."
+  ],
+  "data": {
+    "path": "lotto_data.csv",
+    "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250,
+    "rows": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850
+  },
+  "source_policy": {
+    "path": "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json",
+    "git_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  },
+  "reference_calibrations": {
+    "E057": "research/weekly_purchase/1251/E057_THREE_LINE_NULL_GATE_CALIBRATION_PREREG_20261116.json",
+    "E058": "research/weekly_purchase/1251/E058_THREE_LINE_PERSISTENT_PORTFOLIO_NULL_CALIBRATION_PREREG_20261116_V2.json"
+  },
+  "null_process": {
+    "classification": "piecewise_constant_block_persistent_non_predictive_portfolio",
+    "initial_state": "For each 50-target block, uniformly sample an 18-subset from 1..45 and uniformly partition it into three labeled six-number lines.",
+    "block_refresh": "Independently generate a new uniform ordered disjoint-union18 partition at the start of every non-overlapping 50-target block; keep that exact three-line portfolio unchanged for all 50 targets in that block.",
+    "portfolio_lifetime_targets": 50,
+    "block_count": 17,
+    "transition_between_blocks": "No carryover constraint; independently redraw all 18 labels and line assignment from the same uniform ordered-partition distribution.",
+    "stationarity_argument": "Every block portfolio is an independent draw from the same uniform ordered-partition distribution; the process is stationary at the block level and piecewise constant within each block.",
+    "geometry": "Exactly three pairwise-disjoint six-number lines with union18 at every target.",
+    "outcome_independence": true,
+    "outcome_independence_rule": "Portfolio generation uses only the fixed seed and PRNG. Target outcomes are read only after the block portfolio has been generated and frozen, solely to score the null trajectory.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "simulation": {
+    "trajectories": 1000,
+    "portfolios_per_trajectory": 17,
+    "portfolios_total": 17000,
+    "target_evaluations_per_trajectory": 850,
+    "target_evaluations_total": 850000,
+    "seed": 20261116064,
+    "rng": "xorshift32",
+    "sampling": "partial Fisher-Yates without replacement",
+    "bootstrap_replicates_per_metric_per_trajectory": 4000,
+    "bootstrap_seed_rule": "(20261116064 + 1000003*trajectory_index + 9000 + metric_index) mod 2^32",
+    "block_size": 50,
+    "blocks": 17,
+    "remainder_targets": 0
+  },
+  "strict_gate": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "exact_null": {
+      "max_hits": 1.514256248572755,
+      "any2": 0.47497624326892623,
+      "any3": 0.07135490714617204,
+      "winning_union_coverage": 2.4
+    },
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "bootstrap": "Two-sided percentile moving-block bootstrap on per-target differences from the frozen exact geometry-matched union18 null; 17 blocks sampled independently with replacement, each block start uniform over every valid contiguous 50-target start.",
+    "bootstrap_quantile_indices": {
+      "lower": 24,
+      "upper": 3974
+    },
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "gate_rule": "All four adjusted moving-block CI lower bounds must be strictly greater than zero AND at least 65% of the 17 non-overlapping 50-target any2-delta blocks must be positive (at least 12/17).",
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false
+  },
+  "reporting": {
+    "primary_endpoint": "Joint false-pass rate across 1,000 block-persistent non-predictive trajectories with 95% Wilson interval.",
+    "secondary_endpoints": [
+      "Per-metric empirical means versus exact uniform disjoint-union18 expectations with trajectory-level Monte Carlo standard errors.",
+      "Distribution of positive any2 50-target blocks.",
+      "Mean lag-1 autocorrelation of any2 outcomes.",
+      "Mean adjacent-block union and corresponding-line overlaps.",
+      "Geometry, block-constancy, source-integrity, and outcome-independence checks."
+    ],
+    "promotion_effect": "None. No predictive model, candidate ranking, purchase lines, STRICT_PASS_READY, or prospective confirmation."
+  },
+  "historical_contamination": {
+    "rounds_1244_1249": "Previously inspected/live-history material; not a clean holdout and not prospective confirmation.",
+    "entire_evaluation": "Historical conditional null calibration only."
+  },
+  "expected_output_files": [
+    "INFERENCE.json",
+    "TRAJECTORY_SUMMARY.csv",
+    "BLOCK_SHARE_COUNTS.csv",
+    "SELF_TEST.json",
+    "VERIFICATION.json",
+    "COMPLETION.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.csv"
+  ],
+  "expected_record_counts": {
+    "TRAJECTORY_SUMMARY.csv": 1000,
+    "BLOCK_SHARE_COUNTS.csv": 18,
+    "portfolios_generated": 17000,
+    "portfolio_target_evaluations": 850000
+  },
+  "no_future_leakage": true,
+  "purchase_recommendation_generated": false,
+  "strict_pass_ready": false,
+  "freeze_or_seal_authorized": false,
+  "frozen_blobs": {
+    "runner_blob_sha": "528375995072123ea5ab3c577d0cdd7c6337cf5f",
+    "test_blob_sha": "c93e231587eac716dc49dc3827767c10c9e40d36",
+    "workflow_blob_sha": "9b108d8665b0f2955c230ef600b531da506933c4",
+    "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  }
+}
