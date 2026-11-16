@@ -3042,13 +3042,29 @@
       "tests": 145,
       "queue_contract": "E030-E056 PASS",
       "cause": "Post-execution E056 evidence assertions and full queue contract passed."
+    },
+    {
+      "run_id": 43807592154,
+      "run_number": 101,
+      "conclusion": "FAILURE",
+      "cause": "E062 result manifest used an incorrect SHA256 implementation; corrected exact-byte SHA256 fields were committed before final validation."
+    },
+    {
+      "run_id": 43807829261,
+      "run_number": 102,
+      "conclusion": "SUCCESS",
+      "tests": 148,
+      "queue_contract": "E030-E062 PASS",
+      "cause": "Post-repair full unit suite and E061/E062 queue assertions passed; research and prospective-ledger jobs skipped as intended."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 43764065860,
-    "run_number": 96,
+    "run_id": 43807829261,
+    "run_number": 102,
     "conclusion": "SUCCESS",
-    "queue_contract": "E030-E056 PASS",
-    "post_e056_execution_validation": true
+    "tests": 148,
+    "queue_contract": "E030-E062 PASS",
+    "post_e062_execution_validation": true,
+    "source_commit_sha": "8c71e001d0b21cc9c59c7c19b2617a1ca5f20c4e"
   }
 }
