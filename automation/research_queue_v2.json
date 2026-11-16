@@ -3184,10 +3184,52 @@
         "publish_status": "SUCCESS"
       },
       "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1"
+    },
+    {
+      "id": "E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
+      "kind": "three_line_block_persistent_null_calibration",
+      "question": "Under a non-predictive portfolio process that holds one random disjoint-union18 portfolio fixed for each 50-target block and independently redraws it at each block boundary, how often does the unchanged target-1251 three-line strict gate falsely pass?",
+      "novelty": "One distinct null-calibration mechanism: piecewise-constant random three-line portfolios held for 50 targets and independently redrawn at block boundaries. This is not a predictive signal, model promotion, or purchase-evidence axis; it extends E057 independent-per-target and E058 per-target Markov-retention calibration without changing the strict gate.",
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_entrypoint": "automation/three_line_block_persistent_null_calibration_e064.js",
+      "workflow_entrypoint": ".github/workflows/target-1251-e064-block-persistent-null-calibration.yml",
+      "preregistration": "research/weekly_purchase/1251/E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_PREREG_20261116.json",
+      "preregistration_blob_sha": "e1f43e224de5e958fdd64ae45c5e014e661baed3",
+      "target_1251_three_line_readiness_eligible": false,
+      "spec": {
+        "study_id": "E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
+        "evidence_class": "NULL_GATE_CALIBRATION_ONLY_BLOCK_PERSISTENT_RANDOM_PORTFOLIO_MECHANISM",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "target_count": 850,
+        "null_process": "Uniform ordered disjoint-union18 portfolio fixed for each 50-target block; independently redrawn at the next block boundary; target outcomes never affect generation.",
+        "trajectories": 1000,
+        "portfolios_per_trajectory": 17,
+        "portfolios_total": 17000,
+        "bootstrap_replicates": 4000,
+        "block_length": 50,
+        "seed": 20261116064,
+        "exact_null": {
+          "max_hits": 1.514256248572755,
+          "any2": 0.47497624326892623,
+          "any3": 0.07135490714617204,
+          "winning_union_coverage": 2.4
+        },
+        "strict_gate": {
+          "family_alpha": 0.05,
+          "alpha_per_metric": 0.0125,
+          "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+          "thresholds_changed": false
+        },
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "purchase_recommendation_generated": false,
+        "strict_pass_ready": false
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "E061 and E062 are completed historical single-ticket B diagnostics. E061 found weak error correlations but all eight simultaneous intervals include zero; E062's trailing-100 selector did not outperform exact random after the registered adjusted intervals. Neither is three-line purchase evidence. The generic research queue has no runnable task, and no preregistered target-1251 three-line predictive axis remains. E043/E044 are five-line-only and must not be repurposed. Do not create post-hoc microvariants or change strict gates; any new three-line work requires a genuinely independent hypothesis preregistered before computation or an approved prospective-confirmation policy. Existing schedules and trigger modes are unchanged.",
+  "trigger_note": "E064 is a preregistered block-persistent non-predictive null calibration only. No target-1251 three-line predictive model is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration.",
   "queue_contract_validation_history": [
     {
       "run_id": 43763359441,
