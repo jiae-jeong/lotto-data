@@ -1,3 +1,4 @@
+# E069 result evidence is checked after its dedicated workflow publishes the immutable manifest.
 import csv
 import hashlib
 import json
