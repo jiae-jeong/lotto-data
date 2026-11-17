@@ -19,7 +19,7 @@
   },
   "candidate_method": {
     "source_path": "automation/candidate_recall_v1.py",
-    "source_blob_sha": "7eaeba89f2378b0e049fe9eecd522b298dec1f36",
+    "source_blob_sha": "88bf52cb2918da8aeecdac60e3b63fc1f180a8de",
     "signals": [
       "recent30",
       "gap",
@@ -574,7 +574,6 @@
     "All historical targets are diagnostic; rounds 1244-1249 are previously inspected/live-history material and not clean holdout or prospective evidence.",
     "No model, signal, threshold, or purchase policy was promoted or changed.",
     "This audit evaluates candidate recall only; it does not measure three-line portfolio construction.",
-    "One momentum@10 reproduction mismatch remains unresolved; no inference is based on claiming exact full-scorecard reproduction.",
     "The v1 JavaScript audit and Python scorecard disagreed on momentum@10 because floating-point normalization could perturb mathematically equal momentum scores. The corrected implementation ranks the exact integer numerator 2*last10_count-previous20_count, then breaks exact ties by lower number. The original v1 output is retained unchanged."
   ],
   "supersedes": "E065_CANDIDATE_RECALL_UNCERTAINTY_AUDIT_v1; original retained as E065_CANDIDATE_RECALL_UNCERTAINTY_AUDIT_V1_FLOATING.json",
@@ -587,5 +586,11 @@
     "arithmetic": "exact integer",
     "tie_break": "lower number",
     "normalized_zscore_retained_for_consensus": true
+  },
+  "provenance_correction": {
+    "date_kst": "2026-11-17",
+    "verified_candidate_runner_blob_sha": "88bf52cb2918da8aeecdac60e3b63fc1f180a8de",
+    "previous_recorded_candidate_runner_blob_sha": "7eaeba89f2378b0e049fe9eecd522b298dec1f36",
+    "reason": "The exact-integer momentum runner was committed after the initial V2 audit file was first created. The preserved V2 results and current candidate scorecard independently reproduce all 30 signal/K rows; the obsolete unresolved-mismatch limitation and pre-fix source blob reference are corrected here."
   }
 }
