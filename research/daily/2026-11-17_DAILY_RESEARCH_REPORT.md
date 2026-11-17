@@ -65,3 +65,16 @@
 3. prospective confirmation 최소 target 수와 완료 규칙은 기존 strict gate를 바꾸지 않는 별도 정책 설계로만 검토한다. 승인·봉인 전에는 구매 readiness로 사용하지 않는다.
 
 **오늘 결론:** E065 후보 recall 불확실성 감사는 실제 계산 완료, 예측 신호 승격 없음. 전체 MASTER daily status는 legacy A/C/contrarian 원본 미확보 및 실제 구매 기록 미확보로 `PROTOCOL_PARTIAL` 유지. 1251 구매 준비는 `STRICT_FAIL`이며 구매번호·fallback·freeze/seal을 생성하지 않았다.
+
+
+## 2026-11-17 09:10 KST 재현성 정정 — E065 v2
+
+E065 v1에서 확인된 momentum TOP10 2-hit 재현 차이는 후보 신호의 성과가 아니라 **부동소수점 정규화가 수학적으로 같은 momentum 점수의 동률 순서를 흔든 구현 문제**였다. momentum 원점수는 정확한 정수 분자 `2*count(last10)-count(previous20)`로 순위를 정하고, 정확한 동률만 낮은 번호 우선으로 처리하도록 production runner와 독립 감사 runner를 수정했다. consensus 계산에는 기존 정규화 momentum을 그대로 유지했다.
+
+- 수정 후 candidate-recall 단계 재실행: 2026-11-17 09:10:40 KST, cutoff 1250, 1,050 targets, 동일 matched-random 210,000 sets, 미래 누수 없음
+- momentum TOP10: 1.338095 mean hits, recall 0.223015873, exact random 0.222222222, 차이 +0.079365 pp, 양의 50-target 블록 11/21, Bonferroni CI [-1.206349, +1.317460] pp — 0 포함
+- E065 v2: 30/30 scorecard 행 재현, 불일치 0, 후보 신호 strict 통과 0개. 어떤 신호도 승격하지 않음
+- 원본 보존: `CANDIDATE_RECALL_SCORECARD_V1_FLOATING_PRE_FIX.csv`, `E065_CANDIDATE_RECALL_UNCERTAINTY_AUDIT_V1_FLOATING.json`
+- 정정 결과: [E065 v2 JSON](../../analysis/2026-11-17/E065_CANDIDATE_RECALL_UNCERTAINTY_AUDIT_V2_EXACT_MOMENTUM.json), [v2 재현 runner](../../automation/candidate_recall_uncertainty_audit_e065_v2.js)
+
+이 정정은 후보선정 단계의 수치 재현성만 바로잡는다. target 1251의 3줄 포트폴리오 strict gate는 별도 평가이며, 기존 `STRICT_FAIL`과 구매번호 미생성 정책은 변경하지 않는다. 08:26 KST DAILY MASTER #112 이후의 전체 MASTER 재실행 여부는 별도 확인 대상으로 남긴다.
