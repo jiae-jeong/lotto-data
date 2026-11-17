@@ -112,7 +112,7 @@ def validate_preregistration(prereg, policy):
     if (
         comparator.get("method") != method
         or int(comparator.get("random_bundles_per_target", -1)) != 120
-        or int(comparator.get("seed", -1)) != 20261117067
+        or int(comparator.get("seed", -1)) != 20261117068
         or comparator.get("randomness_used_for_final_selection") is not False
     ):
         raise ValueError("E068 random comparator changed")
@@ -123,7 +123,7 @@ def validate_preregistration(prereg, policy):
         or float(inference.get("family_alpha", -1)) != 0.05
         or float(inference.get("alpha_per_metric", -1)) != 0.0125
         or int(inference.get("bootstrap_replicates", -1)) != 4000
-        or int(inference.get("bootstrap_seed", -1)) != 20261117067
+        or int(inference.get("bootstrap_seed", -1)) != 20261117068
         or int(inference.get("block_length_targets", -1)) != 50
         or inference.get("retain_final_remainder_block") is not True
         or float(inference.get("any2_positive_nonoverlapping_50_target_block_share_min", -1)) != 0.65

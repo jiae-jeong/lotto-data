@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract extended through E068; preserve all prior task IDs and order.
+# Queue contract extended through E068; frozen runner/preregistration IDs verified.
 
 on:
   workflow_dispatch:
