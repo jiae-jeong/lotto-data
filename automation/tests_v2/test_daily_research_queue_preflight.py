@@ -107,11 +107,11 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         }
         result_path = out / "RESULT.json"
         report_path = out / "REPORT.md"
-        result_path.write_text(json.dumps(result) + "\\n", encoding="utf-8")
-        report_path.write_text("verified code-mode diagnostic\\n", encoding="utf-8")
+        result_path.write_text(json.dumps(result) + "\n", encoding="utf-8")
+        report_path.write_text("verified code-mode diagnostic\n", encoding="utf-8")
         manifest_path = out / "SHA256_MANIFEST.csv"
         with manifest_path.open("w", encoding="utf-8", newline="") as stream:
-            writer = csv.DictWriter(stream, fieldnames=["file", "bytes", "sha256"], lineterminator="\\n")
+            writer = csv.DictWriter(stream, fieldnames=["file", "bytes", "sha256"], lineterminator="\n")
             writer.writeheader()
             for path in (result_path, report_path):
                 writer.writerow({
@@ -264,7 +264,7 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
 
     def test_tampered_registered_code_mode_evidence_fails_closed(self):
         task, out = self._write_registered_code_mode_task()
-        (out / "REPORT.md").write_text("tampered\\n", encoding="utf-8")
+        (out / "REPORT.md").write_text("tampered\n", encoding="utf-8")
         self.queue.write_text(json.dumps({"tasks": [task]}), encoding="utf-8")
         with patch.object(preflight, "verified_completed_tasks", return_value={}):
             with self.assertRaisesRegex(ValueError, "Evidence hash mismatch"):
