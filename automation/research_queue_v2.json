@@ -3330,7 +3330,7 @@
       "question": "Does the prime-count regime of the immediately preceding main-number draw contain cutoff-safe information about next-draw number inclusion, sufficient to improve a deterministic three-line disjoint union18 portfolio over the exact geometry-matched null?",
       "novelty": "One frozen three-bin prime-count transition signal family, distinct in feature definition from prior sum/odd/low/consecutive, last-digit occupancy, gap-shape, neighbor-distance, lag-two, bonus-transition, and B-model selector studies. One estimator, one selector, one evaluation; no variants or tuning; not a statistical-independence claim.",
       "execution_mode": "dedicated_workflow",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "execution_entrypoint": "automation/three_line_prime_count_transition_e067.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e067-prime-count-transition.yml",
       "preregistration": "research/weekly_purchase/1251/E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_PREREG_20261117.json",
@@ -3341,9 +3341,51 @@
         "data_cutoff": 1250,
         "target_rounds": "401..1250 inclusive",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
         "strict_pass_ready": false,
-        "target_1251_three_line_readiness_eligible": false
+        "target_1251_three_line_readiness_eligible": false,
+        "execution_result": {
+          "verification_status": "PASS",
+          "strict_portfolio_pass": false,
+          "strict_pass_ready": false,
+          "data_cutoff": 1250,
+          "targets": 850,
+          "random_bundles_total": 102000,
+          "manifest_entries": 8,
+          "workflow_run_id": 44065801841,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44065801841",
+          "result_path": "analysis/2026-11-17/gha_44065801841_1/E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
+          "failed_gates": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage",
+            "any2_positive_50_target_block_share"
+          ],
+          "any2_positive_50_target_block_share": 0.11764705882352941,
+          "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+        }
+      },
+      "execution_result": {
+        "verification_status": "PASS",
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "data_cutoff": 1250,
+        "targets": 850,
+        "random_bundles_total": 102000,
+        "manifest_entries": 8,
+        "workflow_run_id": 44065801841,
+        "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44065801841",
+        "result_path": "analysis/2026-11-17/gha_44065801841_1/E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
+        "failed_gates": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage",
+          "any2_positive_50_target_block_share"
+        ],
+        "any2_positive_50_target_block_share": 0.11764705882352941,
+        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
       }
     }
   ],
