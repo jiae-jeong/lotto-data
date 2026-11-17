@@ -120,5 +120,7 @@
     "workflow_blob_sha": "57f82df8e083c53597ed814e4b88f20a9ce78eb1",
     "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
     "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
-  }
+  },
+  "historical_data_cutoff": 1250,
+  "source_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
 }
