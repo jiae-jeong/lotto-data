@@ -1,0 +1,123 @@
+{
+  "study_id": "E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
+  "date_kst": "2026-11-17",
+  "registered_at_kst": "2026-11-17T19:18:56+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "target_round": 1251,
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "evidence_class": "PREREGISTERED_HISTORICAL_EXPLORATORY_THREE_LINE_PRIME_COUNT_SIGNAL_NOT_PROSPECTIVE_CONFIRMATION",
+  "independent_research_axis": true,
+  "independent_signal_family": true,
+  "historical_exploration_only": true,
+  "research_question": "Does the prime-count regime of the immediately preceding main-number draw contain cutoff-safe information about next-draw number inclusion, sufficient to improve a deterministic three-line disjoint union18 portfolio over the exact geometry-matched null?",
+  "novelty_statement": "One frozen three-bin prime-count transition signal family. It is distinct in feature definition from E049 sum/odd/low/consecutive draw state, E063 last-digit occupancy, E066 five-component gap shape, E050 neighbor distance, E053 lag-two membership, E048 bonus transition, and B-model selectors. It is not a claim of statistical independence. One estimator, one portfolio selector, one historical evaluation; no variants or tuning.",
+  "source": {
+    "path": "lotto_data.csv",
+    "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "historical_data_cutoff": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850
+  },
+  "target_rounds": "401..1250 inclusive",
+  "training_cutoff_rule": "For target t, use only draws 1..t-1. For each historical transition outcome u=2..t-1, use prime_count_state(draw u-1) as the feature and the six main numbers of draw u as the outcome. Score target t from draw t-1, then add target t only after scoring.",
+  "feature_definition": {
+    "source": "The immediately preceding draw's six main numbers only; bonus is excluded.",
+    "prime_set": "The fixed primes in 1..45: 2,3,5,7,11,13,17,19,23,29,31,37,41,43.",
+    "prime_count": "Count prime numbers among the previous draw's six main numbers.",
+    "state_components": {
+      "prime_count_bin": "0 if count<=1; 1 if count==2; 2 if count>=3"
+    },
+    "distance": "Hamming distance across the one frozen categorical prime-count component.",
+    "transition_history": "For each historical outcome round u=2..t-1, use the prime-count state of draw u-1 as the feature and the six main numbers of draw u as the outcome. Score target t from draw t-1, then add target t only after scoring.",
+    "candidate_universe": "All integers 1..45 are scored for every target."
+  },
+  "estimator": {
+    "kernel_weight": "0.5 ** HammingDistance(historical_previous_draw_prime_count_bin, target_previous_draw_prime_count_bin)",
+    "conditional_count": "Weighted count of each main number in historical transition outcomes.",
+    "global_rate": "Count of each main number in draws 1..t-1 divided by t-1.",
+    "smoothing_alpha": 60,
+    "score_formula": "(weighted_conditional_count[n] + 60 * global_main_inclusion_rate[n]) / (sum_transition_weights + 60)",
+    "ranking": "Score descending, then number ascending.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "portfolio": {
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "selection": "Three sequential calls to the unchanged E045 choose_disjoint_ticket selector, passing the E067 score as both role_score and global_score; remove selected numbers after each line.",
+    "randomness_in_selection": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+    "random_bundles_per_target": 120,
+    "seed": 20261117067,
+    "randomness_used_for_final_selection": false,
+    "exact_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    }
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null.",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261117067,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "prospective_confirmation": {
+    "required_by_policy": true,
+    "minimum_target_count": null,
+    "completion_rule": null,
+    "status": "UNSPECIFIED_IN_POLICY",
+    "readiness_rule": "Even if the historical gate passes, do not create STRICT_PASS_READY or release purchase lines until the policy owner formally predeclares the prospective minimum target count and completion rule."
+  },
+  "promotion_rule": "Evaluate this single preregistered axis once. No variants, threshold changes, alpha changes, block-length changes, comparator changes, or parameter search after observing results. Historical failure remains failure. Historical pass alone cannot create purchase readiness because prospective confirmation is required and currently unspecified.",
+  "expected_output_files": [
+    "PREDICTIONS.csv",
+    "RANDOM_BASELINE.csv",
+    "BLOCK_STABILITY.csv",
+    "MODEL_SPEC.json",
+    "INFERENCE.json",
+    "VERIFICATION.json",
+    "COMPLETION.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.csv"
+  ],
+  "expected_record_counts": {
+    "PREDICTIONS.csv": 850,
+    "RANDOM_BASELINE.csv": 850,
+    "BLOCK_STABILITY.csv": 17
+  },
+  "no_future_leakage": true,
+  "strict_pass_ready_requires_prospective_rule": true,
+  "preregistration_hashing": "This preregistration is committed before E067 outcome statistics are computed; the frozen runner, test, workflow, E045 base helper, and three-line policy blobs are checked before execution.",
+  "frozen_blobs": {
+    "runner_blob_sha": "67f4a9eaa9d79d9c24bdc96f34cb166a734156da",
+    "test_blob_sha": "a911efff619d6f28d84f217de4db65fec41e519e",
+    "workflow_blob_sha": "398075603678ab6b8bb79bb2ebd945a3e625492d",
+    "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  },
+  "historical_data_cutoff": 1250,
+  "source_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+}

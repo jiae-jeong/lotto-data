@@ -3323,10 +3323,32 @@
         },
         "strict_pass_ready": false
       }
+    },
+    {
+      "id": "E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
+      "kind": "three_line_prime_count_transition",
+      "question": "Does the prime-count regime of the immediately preceding main-number draw contain cutoff-safe information about next-draw number inclusion, sufficient to improve a deterministic three-line disjoint union18 portfolio over the exact geometry-matched null?",
+      "novelty": "One frozen three-bin prime-count transition signal family, distinct in feature definition from prior sum/odd/low/consecutive, last-digit occupancy, gap-shape, neighbor-distance, lag-two, bonus-transition, and B-model selector studies. One estimator, one selector, one evaluation; no variants or tuning; not a statistical-independence claim.",
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_entrypoint": "automation/three_line_prime_count_transition_e067.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e067-prime-count-transition.yml",
+      "preregistration": "research/weekly_purchase/1251/E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_PREREG_20261117.json",
+      "target_1251_three_line_readiness_eligible": false,
+      "spec": {
+        "study_id": "E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
+        "kind": "three_line_prime_count_transition",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "strict_pass_ready": false,
+        "target_1251_three_line_readiness_eligible": false
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "E064 completed one block-persistent non-predictive null calibration only. No target-1251 three-line predictive axis is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration.",
+  "trigger_note": "E064 is null calibration only. E066 gap-shape and E067 prime-count are historical exploratory axes, not prospective confirmation or purchase readiness. No target-1251 three-line model is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration.",
   "queue_contract_validation_history": [
     {
       "run_id": 43763359441,
