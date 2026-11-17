@@ -166,7 +166,9 @@ def validate_preregistration(prereg, policy):
         or float(gate["alpha_per_metric"]) != 0.0125
         or float(gate["any2_positive_nonoverlapping_50_target_block_share_min"]) != 0.65
         or gate.get("all_adjusted_moving_block_ci_lower_bounds_strictly_gt_zero") is not True
+        or gate.get("retain_final_remainder_block") is not True
         or gate.get("no_threshold_relaxation") is not True
+        or gate.get("cutoff_safe_nested_rolling_walkforward") is not True
         or gate.get("prospective_confirmation_required") is not True
     ):
         raise ValueError("E066 strict policy gate changed")
