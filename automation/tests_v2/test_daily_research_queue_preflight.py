@@ -291,7 +291,7 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         task["execution_result"] = {}
         self.queue.write_text(json.dumps({"tasks": [task]}), encoding="utf-8")
         with patch.object(preflight, "verified_completed_tasks", return_value={}):
-            with self.assertRaisesRegex(ValueError, "no registered execution_result"):
+            with self.assertRaisesRegex(ValueError, "no registered result_path"):
                 preflight.prepare(self.root, self.queue, self.filtered, self.status)
 
     def test_unfinished_generic_task_still_uses_current_validator(self):
