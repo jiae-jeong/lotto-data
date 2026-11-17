@@ -90,7 +90,7 @@ def validate_preregistration(prereg, policy):
         raise ValueError("E067 prime-count feature definition changed")
 
     estimator = {
-        "kernel_weight": "0.5 ** HammingDistance(historical_previous_draw_gap_state, target_previous_draw_gap_state)",
+        "kernel_weight": "0.5 ** HammingDistance(historical_previous_draw_prime_count_bin, target_previous_draw_prime_count_bin)",
         "conditional_count": "Weighted count of each main number in historical transition outcomes.",
         "global_rate": "Count of each main number in draws 1..t-1 divided by t-1.",
         "smoothing_alpha": 60,

@@ -16,7 +16,7 @@ def fake_draw(round_no, nums):
     return {"round": round_no, "nums": tuple(sorted(nums))}
 
 
-class GapShapeTransitionE067Tests(unittest.TestCase):
+class PrimeCountTransitionE067Tests(unittest.TestCase):
     def test_prime_count_state_uses_three_frozen_bins(self):
         six_primes = (2, 3, 5, 7, 11, 13)
         two_primes = (2, 3, 4, 6, 8, 9)
