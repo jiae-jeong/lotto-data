@@ -90,8 +90,8 @@ jobs:
       - name: Verify immutable corrective evidence and update conformance status
         if: success() && steps.one-shot.outputs.already_complete != 'true'
         env:
-          RUN_ID: __GITHUB_RUN_ID__
-          RUN_ATTEMPT: __GITHUB_RUN_ATTEMPT__
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         shell: bash
         run: |
           set -euo pipefail
@@ -158,8 +158,8 @@ jobs:
       - name: Preserve corrective evidence and invalidate original E069 estimator claim
         if: success() && steps.one-shot.outputs.already_complete != 'true'
         env:
-          RUN_ID: __GITHUB_RUN_ID__
-          RUN_ATTEMPT: __GITHUB_RUN_ATTEMPT__
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         shell: bash
         run: |
           set -euo pipefail
