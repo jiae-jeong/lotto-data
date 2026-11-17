@@ -129,11 +129,19 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
 
     completed = verified_completed_tasks(repository, archive)
 
+    data_path = repository / "lotto_data.csv"
+    data_rows = engine.readcsv(data_path)
+    rounds = [int(row["round"]) for row in data_rows]
+    if not rounds or rounds != list(range(1, len(rounds) + 1)):
+        raise ValueError("Canonical lotto_data.csv is missing, duplicated, or non-contiguous")
+    current_cutoff = rounds[-1]
+
     runnable = []
     skipped_completed = []
     skipped_blocked = []
     skipped_dedicated = []
     skipped_superseded = []
+    skipped_stale_cutoff = []
     for task in tasks:
         task_id = task["id"]
         if task_id in completed:
@@ -153,6 +161,20 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
             skipped_blocked.append(task_id)
             continue
 
+        raw_cutoff = spec.get("data_cutoff", task.get("data_cutoff"))
+        try:
+            task_cutoff = int(raw_cutoff) if raw_cutoff not in (None, "") else None
+        except (TypeError, ValueError):
+            task_cutoff = None
+        if task_cutoff != current_cutoff:
+            skipped_stale_cutoff.append({
+                "task_id": task_id,
+                "registered_cutoff": raw_cutoff,
+                "current_cutoff": current_cutoff,
+                "reason": "missing_or_stale_registered_data_cutoff",
+            })
+            continue
+
         daily._validate_task(task)
         runnable.append(task)
 
@@ -167,7 +189,9 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
         "status": "GENERIC_WORK_AVAILABLE" if runnable else "NO_GENERIC_RESEARCH_PENDING",
         "has_work": bool(runnable),
         "total_registered_tasks": len(tasks),
+        "current_data_cutoff": current_cutoff,
         "generic_runnable_tasks": [task["id"] for task in runnable],
+        "skipped_stale_cutoff": skipped_stale_cutoff,
         "skipped_completed": skipped_completed,
         "skipped_blocked": skipped_blocked,
         "skipped_dedicated_workflow": skipped_dedicated,
