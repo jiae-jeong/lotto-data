@@ -3535,7 +3535,7 @@
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
-  "trigger_note": "E064 is null calibration only. E066 gap-shape and E067 prime-count are historical exploratory axes, not prospective confirmation or purchase readiness. No target-1251 three-line model is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration.",
+  "trigger_note": "E064 is null calibration only. E066 gap-shape and E067 prime-count are historical exploratory axes, not prospective confirmation or purchase readiness. No target-1251 three-line model is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration. E069 implementation-conformance correction (2026-11-18): E070 found the original E069 runner used a number-specific historical-frequency prior instead of the frozen fixed 6/45 prior. Original E069 artifacts are preserved but invalid for the registered estimator; the separately versioned corrective re-execution is historical-only, not independent, not prospective confirmation, and never STRICT_PASS_READY.",
   "queue_contract_validation_history": [
     {
       "run_id": 43763359441,
