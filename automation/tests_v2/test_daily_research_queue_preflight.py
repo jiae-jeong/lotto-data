@@ -79,12 +79,19 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         relative = Path("analysis") / "2026-11-16" / "codemode_fixture" / task_id
         out = self.root / relative
         out.mkdir(parents=True)
-        data_sha = "a" * 64
-        source_sha = "b" * 64
+        data_sha = preflight.engine.raw_digest(self.root / "lotto_data.csv")
         source_blob = "c" * 40
+        source_file = self.root / "analysis" / "source.csv"
+        source_file.write_text("round,model\\n1,A\\n", encoding="utf-8")
+        source_sha = preflight.engine.raw_digest(source_file)
         result = {
             "study_id": task_id,
-            "source": {"git_blob_sha": source_blob, "sha256": source_sha},
+            "source": {
+                "path": "analysis/source.csv",
+                "git_blob_sha": source_blob,
+                "sha256": source_sha,
+                "bytes": preflight.engine.raw_size(source_file),
+            },
             "canonical_data": {"rows": cutoff, "rounds": [1, cutoff], "sha256": data_sha},
             "evaluation_targets": [601, 601],
             "target_count": 1,
@@ -261,6 +268,14 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         self.assertFalse(result["has_work"])
         self.assertEqual(result["skipped_registered_execution"], [task["id"]])
         self.assertEqual(json.loads(self.filtered.read_text(encoding="utf-8"))["tasks"], [])
+
+
+    def test_actual_e062_registered_code_mode_evidence_is_verified(self):
+        repository = Path(__file__).resolve().parents[2]
+        queue = json.loads((repository / "automation" / "research_queue_v2.json").read_text(encoding="utf-8"))
+        task = next(item for item in queue["tasks"] if item["id"] == "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1")
+        result_path = preflight._validate_registered_execution(repository, task, 1250)
+        self.assertEqual(result_path, str((repository / task["result_path"]).resolve()))
 
     def test_tampered_registered_code_mode_evidence_fails_closed(self):
         task, out = self._write_registered_code_mode_task()
