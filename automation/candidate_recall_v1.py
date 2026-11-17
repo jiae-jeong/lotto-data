@@ -43,6 +43,9 @@ def features(draws):
     recent30 = zscore({n: f30[n] for n in range(1, 46)})
     gap = zscore(gaps)
     momentum = zscore({n: f10[n] / 10 - fprev20[n] / 20 for n in range(1, 46)})
+    # Preserve the exact rational ranking score for the standalone momentum signal.
+    # (2*f10 - fprev20)/20 is mathematically identical but avoids float tie drift.
+    momentum_exact = {n: 2 * f10[n] - fprev20[n] for n in range(1, 46)}
     balanced = {n: (recent30[n] + gap[n]) / 2 for n in range(1, 46)}
     contrarian = {n: (-recent30[n] + gap[n]) / 2 for n in range(1, 46)}
     consensus = {
@@ -53,13 +56,16 @@ def features(draws):
         "recent30": recent30,
         "gap": gap,
         "momentum": momentum,
+        "momentum_exact": momentum_exact,
         "balanced": balanced,
         "contrarian": contrarian,
         "consensus": consensus,
     }
 
 
-def ranked(score):
+def ranked(score, exact_score=None):
+    if exact_score is not None:
+        return sorted(range(1, 46), key=lambda n: (-exact_score[n], n))
     return sorted(range(1, 46), key=lambda n: (-score[n], n))
 
 
@@ -89,7 +95,7 @@ def build_candidate_recall(rows, dated: Path):
         fs = features(hist)
         per_target_trace = {"target_round": rounds[idx], "signals": {}}
         for s in SIGNALS:
-            order = ranked(fs[s])
+            order = ranked(fs[s], fs["momentum_exact"] if s == "momentum" else None)
             rank_map = {n: j + 1 for j, n in enumerate(order)}
             per_target_trace["signals"][s] = {
                 "winning_number_ranks": {str(n): rank_map[n] for n in sorted(actual)},
@@ -148,6 +154,7 @@ def build_candidate_recall(rows, dated: Path):
         "matched_random_sets_per_target": RANDOM_REPS_PER_TARGET,
         "matched_random_sets_total": (len(draws) - start) * RANDOM_REPS_PER_TARGET,
         "no_future_leakage": True,
+        "momentum_rank_rule": "exact integer 2*count(last10)-count(previous20); lower number breaks exact ties; normalized momentum remains in consensus",
         "latest_completed_target_trace": latest_trace,
         "interpretation_rule": "Candidate recall is evaluated before ticket construction. A portfolio failure must not be blamed on candidate ranking when the winning numbers were already inside the fixed candidate set.",
         "scorecard": str((dated / "CANDIDATE_RECALL_SCORECARD.csv").name),
