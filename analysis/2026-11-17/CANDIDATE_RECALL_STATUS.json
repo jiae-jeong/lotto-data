@@ -1,5 +1,5 @@
 {
-  "generated_kst": "2026-11-17T08:34:17.208206+09:00",
+  "generated_kst": "2026-11-17T09:10:40.908156+09:00",
   "data_cutoff": 1250,
   "walkforward_start_round": 201,
   "targets": 1050,
@@ -21,6 +21,7 @@
   "matched_random_sets_per_target": 200,
   "matched_random_sets_total": 210000,
   "no_future_leakage": true,
+  "momentum_rank_rule": "exact integer 2*count(last10)-count(previous20); lower number breaks exact ties; normalized momentum remains in consensus",
   "latest_completed_target_trace": {
     "target_round": 1250,
     "signals": {
