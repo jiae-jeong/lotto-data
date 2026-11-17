@@ -1,0 +1,223 @@
+name: target-1251-e069-corrective-reexecution
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/three_line_previous_draw_membership_e069_corrected_v1.py'
+      - 'automation/tests_v2/test_three_line_previous_draw_membership_e069_corrected_v1.py'
+      - 'research/weekly_purchase/1251/E069_CORRECTIVE_REEXECUTION_PREREG_20261118.json'
+      - '.github/workflows/target-1251-e069-corrective-reexecution.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: target-1251-e069-corrective-reexecution
+  cancel-in-progress: false
+
+jobs:
+  corrective-reexecution:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Refuse duplicate corrective execution
+        id: one-shot
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os, subprocess
+          paths = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
+          suffix = "/E069_CORRECTIVE_REEXECUTION_v1/COMPLETION.json"
+          complete = any(path.endswith(suffix) for path in paths)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
+              stream.write("already_complete=" + ("true" if complete else "false") + "\n")
+          print("Corrective E069 already complete; successful no-op." if complete else "Corrective E069 pending; run frozen re-execution.")
+          PY
+
+      - name: Verify frozen preregistration and source blobs
+        if: steps.one-shot.outputs.already_complete != 'true'
+        env:
+          EXPECTED_CORRECTION_PREREG_BLOB: 9d32f03a67cdbce4a7c76daa92ef8daf384fc1d0
+        run: |
+          set -euo pipefail
+          python -B automation/three_line_previous_draw_membership_e069_corrected_v1.py --preflight
+          python -m py_compile \
+            automation/three_line_previous_draw_membership_e069_corrected_v1.py \
+            automation/three_line_previous_draw_membership_e069.py \
+            automation/three_line_research_1251_v1.py \
+            automation/tests_v2/test_three_line_previous_draw_membership_e069_corrected_v1.py
+          python -B -m unittest automation.tests_v2.test_three_line_previous_draw_membership_e069_corrected_v1 -v
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          prereg_path = "research/weekly_purchase/1251/E069_CORRECTIVE_REEXECUTION_PREREG_20261118.json"
+          actual = subprocess.check_output(["git", "rev-parse", f"HEAD:{prereg_path}"], text=True).strip()
+          expected = os.environ["EXPECTED_CORRECTION_PREREG_BLOB"]
+          assert actual == expected, (actual, expected)
+          prereg = json.loads(Path(prereg_path).read_text(encoding="utf-8"))
+          assert prereg["preregistration_status"] == "FROZEN_BEFORE_EXECUTION"
+          assert prereg["independent_research_axis"] is False
+          assert prereg["registered_estimator"]["algebraically_equivalent_implementation"] == "(success + 6) / (exposure + 45)"
+          print({"preregistration_blob": actual, "independent_research_axis": False})
+          PY
+
+      - name: Run corrected historical walk-forward and matched random baseline
+        if: steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/2026-11-18/gha_"$RUN_ID"_"$RUN_ATTEMPT"/E069_CORRECTIVE_REEXECUTION_v1"
+          python -B automation/three_line_previous_draw_membership_e069_corrected_v1.py \
+            --date 2026-11-18 \
+            --run-id "gha_"$RUN_ID"_"$RUN_ATTEMPT \
+            --outdir "$OUTDIR"
+          echo "Corrective E069 historical re-execution completed: $OUTDIR"
+
+      - name: Verify immutable corrective evidence and update conformance status
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: __GITHUB_RUN_ID__
+          RUN_ATTEMPT: __GITHUB_RUN_ATTEMPT__
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/2026-11-18/gha_"$RUN_ID"_"$RUN_ATTEMPT"/E069_CORRECTIVE_REEXECUTION_v1"
+          python - "$OUTDIR" <<'PY'
+          import csv, hashlib, json, sys
+          from pathlib import Path
+          out = Path(sys.argv[1])
+          expected = {
+              "PREDICTIONS.csv", "RANDOM_BASELINE.csv", "BLOCK_STABILITY.csv",
+              "MODEL_SPEC.json", "INFERENCE.json", "VERIFICATION.json",
+              "COMPLETION.json", "REPORT.md", "SHA256_MANIFEST.csv"
+          }
+          assert {p.name for p in out.iterdir() if p.is_file()} == expected
+          manifest = list(csv.DictReader((out / "SHA256_MANIFEST.csv").open(encoding="utf-8", newline="")))
+          assert len(manifest) == 8
+          assert {row["path"] for row in manifest} == expected - {"SHA256_MANIFEST.csv"}
+          for row in manifest:
+              raw = (out / row["path"]).read_bytes()
+              assert len(raw) == int(row["bytes"])
+              assert hashlib.sha256(raw).hexdigest() == row["sha256"], row["path"]
+          verification = json.loads((out / "VERIFICATION.json").read_text(encoding="utf-8"))
+          inference = json.loads((out / "INFERENCE.json").read_text(encoding="utf-8"))
+          completion = json.loads((out / "COMPLETION.json").read_text(encoding="utf-8"))
+          assert verification["status"] == "PASS"
+          assert verification["data_cutoff"] == 1250 and verification["data_rows"] == 1250
+          assert verification["target_count"] == 850
+          assert verification["random_bundles_total"] == 102000
+          assert verification["training_cutoff_violations"] == 0
+          assert verification["leakage_failures"] == 0 and verification["future_predictions"] == 0
+          assert verification["portfolio_geometry_violations"] == 0
+          assert verification["random_geometry_violations"] == 0
+          assert verification["corrected_prior_formula_asserted"] is True
+          assert verification["strict_pass_ready"] is False
+          assert verification["purchase_recommendation_generated"] is False
+          assert inference["independent_research_axis"] is False
+          assert inference["strict_pass_ready"] is False
+          assert inference["purchase_recommendation_generated"] is False
+          assert completion["status"].startswith("COMPLETE")
+          assert completion["strict_pass_ready"] is False
+          predictions = list(csv.DictReader((out / "PREDICTIONS.csv").open(encoding="utf-8", newline="")))
+          random_rows = list(csv.DictReader((out / "RANDOM_BASELINE.csv").open(encoding="utf-8", newline="")))
+          blocks = list(csv.DictReader((out / "BLOCK_STABILITY.csv").open(encoding="utf-8", newline="")))
+          assert len(predictions) == 850 and len(random_rows) == 850 and len(blocks) == 17
+          assert [int(row["target_round"]) for row in predictions] == list(range(401, 1251))
+          assert all(int(row["training_through_round"]) == int(row["target_round"]) - 1 for row in predictions)
+          assert sum(int(row["random_bundles"]) for row in random_rows) == 102000
+          for row in predictions:
+              lines = json.loads(row["model_lines"])
+              union = set().union(*(set(line) for line in lines))
+              assert len(lines) == 3 and all(len(line) == 6 and len(set(line)) == 6 for line in lines)
+              assert len(union) == 18
+              assert all(not (set(a) & set(b)) for i, a in enumerate(lines) for b in lines[i + 1:])
+          print({
+              "verification": "PASS",
+              "targets": len(predictions),
+              "random_bundles": 102000,
+              "blocks": len(blocks),
+              "historical_strict_gate_pass": inference["historical_strict_gate_pass"],
+              "strict_pass_ready": False
+          })
+          PY
+
+      - name: Preserve corrective evidence and invalidate original E069 estimator claim
+        if: success() && steps.one-shot.outputs.already_complete != 'true'
+        env:
+          RUN_ID: __GITHUB_RUN_ID__
+          RUN_ATTEMPT: __GITHUB_RUN_ATTEMPT__
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/2026-11-18/gha_"$RUN_ID"_"$RUN_ATTEMPT"/E069_CORRECTIVE_REEXECUTION_v1"
+          git fetch origin main
+          git pull --rebase origin main
+          python - "$OUTDIR" <<'PY'
+          import json, sys
+          from pathlib import Path
+          outdir = sys.argv[1]
+          out = Path(outdir)
+          inference = json.loads((out / "INFERENCE.json").read_text(encoding="utf-8"))
+          verification = json.loads((out / "VERIFICATION.json").read_text(encoding="utf-8"))
+          status = {
+              "date_kst": "2026-11-18",
+              "target_round": 1251,
+              "source_study_id": "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
+              "original_implementation_conformance": "NONCONFORMANT_TO_FROZEN_PREREGISTRATION",
+              "original_result_valid_for_registered_estimator": False,
+              "implementation_audit_path": "analysis/2026-11-18/E070_E069_IMPLEMENTATION_AND_CANDIDATE_STAGE_AUDIT_v1",
+              "corrective_reexecution_study_id": "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_CORRECTIVE_REEXECUTION_v1",
+              "corrective_reexecution_path": outdir,
+              "corrective_reexecution_verification": verification["status"],
+              "corrective_historical_gate": "PASS" if inference["historical_strict_gate_pass"] else "STRICT_FAIL",
+              "independent_research_axis": False,
+              "strict_portfolio_pass": False,
+              "strict_pass_ready": False,
+              "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+              "purchase_lines_generated": False,
+              "freeze_or_seal_created": False
+          }
+          Path("research/weekly_purchase/1251/E069_IMPLEMENTATION_CONFORMANCE_STATUS_20261118.json").write_text(
+              json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+          )
+          queue_path = Path("automation/research_queue_v2.json")
+          queue = json.loads(queue_path.read_text(encoding="utf-8"))
+          task_id = "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1"
+          task = next((item for item in queue["tasks"] if item.get("id") == task_id), None)
+          if task is None:
+              raise ValueError("Original E069 queue entry is missing")
+          task["implementation_conformance_status"] = "NONCONFORMANT_TO_FROZEN_PREREGISTRATION"
+          task["registered_hypothesis_valid"] = False
+          task["implementation_audit_path"] = status["implementation_audit_path"]
+          task["corrective_reexecution_path"] = outdir
+          result = task.get("execution_result") or {}
+          result["registered_estimator_conformance"] = False
+          result["valid_for_registered_estimator"] = False
+          result["original_outputs_preserved"] = True
+          result["implementation_audit_path"] = status["implementation_audit_path"]
+          result["corrective_reexecution_path"] = outdir
+          result["corrective_historical_gate_pass"] = inference["historical_strict_gate_pass"]
+          result["strict_pass_ready"] = False
+          task["execution_result"] = result
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OUTDIR" research/weekly_purchase/1251/E069_IMPLEMENTATION_CONFORMANCE_STATUS_20261118.json automation/research_queue_v2.json
+          git diff --cached --check
+          git commit -m "research: preserve corrected E069 fixed-prior reexecution"
+          git push origin HEAD:main
