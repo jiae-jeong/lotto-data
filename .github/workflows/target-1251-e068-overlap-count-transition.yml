@@ -7,7 +7,7 @@ on:
     paths:
       - 'automation/three_line_overlap_count_transition_e068.py'
       - 'automation/tests_v2/test_three_line_overlap_count_transition_e068.py'
-      - 'research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json'
+      - 'research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json'
 
 permissions:
   contents: write
@@ -39,7 +39,7 @@ jobs:
           paths = subprocess.check_output(
               ["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True
           ).splitlines()
-          suffix = "/E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_v1/COMPLETION.json"
+          suffix = "/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1/COMPLETION.json"
           complete = any(path.endswith(suffix) for path in paths)
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
               stream.write("already_complete=" + ("true" if complete else "false") + "\n")
@@ -77,7 +77,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          OUTDIR="analysis/2026-11-17/gha_$RUN_ID"_"$RUN_ATTEMPT/E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_v1"
+          OUTDIR="analysis/2026-11-17/gha_$RUN_ID"_"$RUN_ATTEMPT/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1"
           python - "$OUTDIR" <<'PY'
           import csv, hashlib, json, sys
           from pathlib import Path
@@ -103,7 +103,7 @@ jobs:
           assert verification["leakage_failures"] == 0 and verification["training_cutoff_violations"] == 0
           assert verification["portfolio_geometry_violations"] == 0 and verification["random_geometry_violations"] == 0
           assert verification["manifest_status"] == "PASS" and verification["manifest_entries"] == 8
-          assert completion["study_id"] == "E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_v1"
+          assert completion["study_id"] == "E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1"
           assert completion["status"] == "COMPLETE" and completion["strict_pass_ready"] is False
           assert inference["strict_pass_ready"] is False and inference["purchase_recommendation_generated"] is False
           print({"verification": "PASS", "manifest_entries": len(manifest), "strict_pass_ready": False})
@@ -141,7 +141,7 @@ jobs:
           queue_path = Path("automation/research_queue_v2.json")
           queue = json.loads(queue_path.read_text(encoding="utf-8"))
           tasks = queue["tasks"]
-          task_id = "E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_v1"
+          task_id = "E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1"
           task = next((item for item in tasks if item.get("id") == task_id), None)
           if task is None:
               task = {
@@ -157,7 +157,7 @@ jobs:
               "execution_status": status,
               "execution_entrypoint": "automation/three_line_overlap_count_transition_e068.py",
               "workflow_entrypoint": ".github/workflows/target-1251-e068-overlap-count-transition.yml",
-              "preregistration": "research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json",
+              "preregistration": "research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json",
               "execution_result": result
           })
           spec = task.get("spec") if isinstance(task.get("spec"), dict) else {}

@@ -13,8 +13,8 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-STUDY_ID = "E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_v1"
-PREREG_REL = "research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json"
+STUDY_ID = "E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1"
+PREREG_REL = "research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json"
 POLICY_REL = "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json"
 BASE_REL = "automation/three_line_research_1251_v1.py"
 RUNNER_REL = "automation/three_line_overlap_count_transition_e068.py"
@@ -86,7 +86,7 @@ def validate_preregistration(prereg, policy):
         raise ValueError("E068 overlap-count feature definition changed")
 
     estimator = {
-        "kernel_weight": "0.5 ** HammingDistance(historical_previous_draw_overlap_count_bin, target_previous_draw_overlap_count_bin)",
+        "kernel_weight": "0.5 ** HammingDistance(historical_previous_two_draw_overlap_count_bin, target_previous_two_draw_overlap_count_bin)",
         "conditional_count": "Weighted count of each main number in historical transition outcomes.",
         "global_rate": "Count of each main number in draws 1..t-1 divided by t-1.",
         "smoothing_alpha": 60,
@@ -351,7 +351,7 @@ def run(date_kst, run_id, run_attempt):
         predictions.append({
             "target_round": target_round,
             "training_through_round": training_through,
-            "previous_draw_overlap_count_state": str(target_state),
+            "previous_two_draw_overlap_state": str(target_state),
             "historical_transition_count": target_round - 3,
             "sum_transition_weights": f"{total_weight:.12f}",
             "line1": " ".join(map(str, lines[0])),

@@ -112,9 +112,9 @@
   "strict_pass_ready_requires_prospective_rule": true,
   "preregistration_hashing": "This preregistration is committed before E068 outcome statistics are computed; the frozen runner, test, workflow, E045 base helper, and three-line policy blobs are checked before execution.",
   "frozen_blobs": {
-    "runner_blob_sha": "6cd3a242e6834ea698d5bbea8bb429560f9d6a30",
+    "runner_blob_sha": "f76017ab7f9cbc81790e85370b2d5d3c6340f2e4",
     "test_blob_sha": "c4ac09934ca6b9ac6a0a3116502956742cc229d2",
-    "workflow_blob_sha": "f1305c85e37a047aea409b38b8005c7652b7a669",
+    "workflow_blob_sha": "c7738d46c2d1723b338617c1201ed6d7d63c1bdd",
     "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
     "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
   },
