@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract extended through E069; frozen runner/preregistration IDs verified.
+# Queue contract through E069 verifies both pending preregistration and completed evidence states.
 
 on:
   workflow_dispatch:
