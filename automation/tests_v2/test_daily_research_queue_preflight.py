@@ -74,6 +74,79 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
                 writer.writerow({"path": path.name, "bytes": preflight.engine.raw_size(path), "sha256": preflight.engine.raw_digest(path)})
         return out
 
+
+    def _write_registered_code_mode_task(self, task_id="E110_EXECUTED", cutoff=1250):
+        relative = Path("analysis") / "2026-11-16" / "codemode_fixture" / task_id
+        out = self.root / relative
+        out.mkdir(parents=True)
+        data_sha = "a" * 64
+        source_sha = "b" * 64
+        source_blob = "c" * 40
+        result = {
+            "study_id": task_id,
+            "source": {"git_blob_sha": source_blob, "sha256": source_sha},
+            "canonical_data": {"rows": cutoff, "rounds": [1, cutoff], "sha256": data_sha},
+            "evaluation_targets": [601, 601],
+            "target_count": 1,
+            "verification": {
+                "status": "PASS",
+                "training_cutoff_violations": 0,
+                "missing_rows": 0,
+                "duplicate_rows": 0,
+                "future_outcomes_used": False,
+                "random_baseline_executed": True,
+                "manifest_entries": 2,
+                "manifest_status": "PASS",
+            },
+            "completion": {
+                "status": "COMPLETE_DIAGNOSTIC_ONLY",
+                "strict_pass_ready": False,
+                "purchase_recommendation_generated": False,
+            },
+            "predictions": [{"target": 601, "training_through": 600, "window_end": 600}],
+        }
+        result_path = out / "RESULT.json"
+        report_path = out / "REPORT.md"
+        result_path.write_text(json.dumps(result) + "\\n", encoding="utf-8")
+        report_path.write_text("verified code-mode diagnostic\\n", encoding="utf-8")
+        manifest_path = out / "SHA256_MANIFEST.csv"
+        with manifest_path.open("w", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=["file", "bytes", "sha256"], lineterminator="\\n")
+            writer.writeheader()
+            for path in (result_path, report_path):
+                writer.writerow({
+                    "file": path.name,
+                    "bytes": preflight.engine.raw_size(path),
+                    "sha256": preflight.engine.raw_digest(path),
+                })
+        relative_text = relative.as_posix()
+        task = {
+            "id": task_id,
+            "kind": "code_mode_diagnostic",
+            "question": "Already executed registered code-mode diagnostic",
+            "novelty": "Frozen prior diagnostic; must not be repeated",
+            "data_cutoff": cutoff,
+            "result_path": relative_text,
+            "execution_mode": "code_mode_pre_registered",
+            "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+            "execution_result": {
+                "result_path": relative_text,
+                "data_cutoff": cutoff,
+                "data_sha256": data_sha,
+                "source_git_blob_sha": source_blob,
+                "source_sha256": source_sha,
+                "target_count": 1,
+                "verification_status": "PASS",
+                "manifest_entries": 2,
+                "manifest_status": "PASS",
+                "strict_pass_ready": False,
+                "purchase_recommendation_generated": False,
+            },
+            # Deliberately incomplete: terminal evidence must be checked before generic validation.
+            "spec": {"data_cutoff": cutoff},
+        }
+        return task, out
+
     def test_failed_attempt_completion_is_never_a_completion_candidate(self):
         attempt = self.root / "analysis" / "2026-10-14" / ".attempts" / "E025_BAD" / "study"
         attempt.mkdir(parents=True)
@@ -178,6 +251,33 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         self.assertEqual(result["status"], "NO_GENERIC_RESEARCH_PENDING")
         self.assertEqual(result["skipped_stale_cutoff"][0]["task_id"], legacy["id"])
         self.assertIsNone(result["skipped_stale_cutoff"][0]["registered_cutoff"])
+
+
+    def test_verified_registered_code_mode_execution_is_skipped_before_generic_validator(self):
+        task, out = self._write_registered_code_mode_task()
+        self.queue.write_text(json.dumps({"tasks": [task]}), encoding="utf-8")
+        with patch.object(preflight, "verified_completed_tasks", return_value={}):
+            result = preflight.prepare(self.root, self.queue, self.filtered, self.status)
+        self.assertFalse(result["has_work"])
+        self.assertEqual(result["skipped_registered_execution"], [task["id"]])
+        self.assertEqual(json.loads(self.filtered.read_text(encoding="utf-8"))["tasks"], [])
+
+    def test_tampered_registered_code_mode_evidence_fails_closed(self):
+        task, out = self._write_registered_code_mode_task()
+        (out / "REPORT.md").write_text("tampered\\n", encoding="utf-8")
+        self.queue.write_text(json.dumps({"tasks": [task]}), encoding="utf-8")
+        with patch.object(preflight, "verified_completed_tasks", return_value={}):
+            with self.assertRaisesRegex(ValueError, "Evidence hash mismatch"):
+                preflight.prepare(self.root, self.queue, self.filtered, self.status)
+
+    def test_executed_code_mode_task_without_verifiable_evidence_fails_closed(self):
+        task = self.valid_task("E111_UNVERIFIED_EXECUTION")
+        task["execution_status"] = "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY"
+        task["execution_result"] = {}
+        self.queue.write_text(json.dumps({"tasks": [task]}), encoding="utf-8")
+        with patch.object(preflight, "verified_completed_tasks", return_value={}):
+            with self.assertRaisesRegex(ValueError, "no registered execution_result"):
+                preflight.prepare(self.root, self.queue, self.filtered, self.status)
 
     def test_unfinished_generic_task_still_uses_current_validator(self):
         unsafe = {"id": "E103_UNSAFE", "kind": "synthetic", "spec": {"data_cutoff": 1250}}
