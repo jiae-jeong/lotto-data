@@ -181,6 +181,14 @@ def _validate_registered_execution(repository: Path, task: dict, current_cutoff:
     )
     if not expected_data_sha or canonical.get("sha256") != expected_data_sha:
         raise ValueError(f"Registered result data hash mismatch for {task_id}")
+    canonical_file = repository / "lotto_data.csv"
+    if canonical_file.is_symlink() or not canonical_file.is_file():
+        raise ValueError(f"Canonical data file is missing or unsafe for {task_id}")
+    if not (
+        engine.raw_digest(canonical_file) == expected_data_sha
+        or engine.digest(canonical_file) == expected_data_sha
+    ):
+        raise ValueError(f"Canonical data file hash does not match registered execution for {task_id}")
     if verification.get("status") != "PASS":
         raise ValueError(f"Registered result verification failed for {task_id}")
     for field in ("training_cutoff_violations", "missing_rows", "duplicate_rows"):
@@ -235,6 +243,30 @@ def _validate_registered_execution(repository: Path, task: dict, current_cutoff:
         raise ValueError(f"Registered source blob mismatch for {task_id}")
     if execution.get("source_sha256") and source.get("sha256") != execution["source_sha256"]:
         raise ValueError(f"Registered source hash mismatch for {task_id}")
+    source_value = source.get("path")
+    if not isinstance(source_value, str) or not source_value:
+        raise ValueError(f"Registered source path is missing for {task_id}")
+    source_relative = Path(source_value)
+    if source_relative.is_absolute() or ".." in source_relative.parts:
+        raise ValueError(f"Unsafe registered source path for {task_id}")
+    source_candidate = repository / source_relative
+    if source_candidate.is_symlink() or not source_candidate.is_file():
+        raise ValueError(f"Registered source file is missing or unsafe for {task_id}")
+    source_file = source_candidate.resolve()
+    if not source_file.is_relative_to(repository.resolve()):
+        raise ValueError(f"Registered source path is outside repository for {task_id}")
+    source_sha = source.get("sha256")
+    if not source_sha or not (
+        engine.raw_digest(source_file) == source_sha or engine.digest(source_file) == source_sha
+    ):
+        raise ValueError(f"Registered source file hash mismatch for {task_id}")
+    if source.get("bytes") is not None:
+        source_bytes = int(source["bytes"])
+        if not (
+            engine.raw_size(source_file) == source_bytes
+            or engine.portable_size(source_file) == source_bytes
+        ):
+            raise ValueError(f"Registered source file size mismatch for {task_id}")
     return str(output)
 
 
