@@ -16,6 +16,10 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
         (self.root / "analysis").mkdir()
+        with (self.root / "lotto_data.csv").open("w", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=["round"], lineterminator="\n")
+            writer.writeheader()
+            writer.writerows({"round": number} for number in range(1, 1251))
         self.queue = self.root / "queue.json"
         self.filtered = self.root / "filtered.json"
         self.status = self.root / "status.json"
@@ -34,8 +38,8 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
                 "study_id": task_id,
                 "kind": "synthetic",
                 "research_question": "Current generic task",
-                "data_cutoff": 1245,
-                "target_rounds": [601, 1245],
+                "data_cutoff": 1250,
+                "target_rounds": [601, 1250],
                 "training_cutoff_rule": "target-1",
                 "primary_metric": "mean_hits",
                 "secondary_metrics": ["rate_ge_2"],
@@ -146,8 +150,37 @@ class DailyResearchQueuePreflightTests(unittest.TestCase):
         filtered = json.loads(self.filtered.read_text(encoding="utf-8"))["tasks"]
         self.assertEqual([task["id"] for task in filtered], [active["id"]])
 
+    def test_stale_cutoff_tasks_are_skipped_before_generic_execution(self):
+        stale = self.valid_task("E108_STALE")
+        stale["spec"]["data_cutoff"] = 1245
+        stale["spec"]["target_rounds"] = [601, 1245]
+        active = self.valid_task("E109_CURRENT")
+        self.queue.write_text(json.dumps({"tasks": [stale, active]}), encoding="utf-8")
+        with patch.object(preflight, "verified_completed_tasks", return_value={}):
+            result = preflight.prepare(self.root, self.queue, self.filtered, self.status)
+        self.assertTrue(result["has_work"])
+        self.assertEqual(result["current_data_cutoff"], 1250)
+        self.assertEqual([item["task_id"] for item in result["skipped_stale_cutoff"]], [stale["id"]])
+        filtered = json.loads(self.filtered.read_text(encoding="utf-8"))["tasks"]
+        self.assertEqual([task["id"] for task in filtered], [active["id"]])
+
+    def test_missing_cutoff_legacy_tasks_are_skipped_as_stale(self):
+        legacy = {
+            "id": "E010_FAMILY_DECORRELATION_v1",
+            "kind": "family",
+            "question": "Legacy family task",
+            "novelty": "No frozen current-cutoff evidence",
+        }
+        self.queue.write_text(json.dumps({"tasks": [legacy]}), encoding="utf-8")
+        with patch.object(preflight, "verified_completed_tasks", return_value={}):
+            result = preflight.prepare(self.root, self.queue, self.filtered, self.status)
+        self.assertFalse(result["has_work"])
+        self.assertEqual(result["status"], "NO_GENERIC_RESEARCH_PENDING")
+        self.assertEqual(result["skipped_stale_cutoff"][0]["task_id"], legacy["id"])
+        self.assertIsNone(result["skipped_stale_cutoff"][0]["registered_cutoff"])
+
     def test_unfinished_generic_task_still_uses_current_validator(self):
-        unsafe = {"id": "E103_UNSAFE", "kind": "synthetic"}
+        unsafe = {"id": "E103_UNSAFE", "kind": "synthetic", "spec": {"data_cutoff": 1250}}
         self.queue.write_text(json.dumps({"tasks": [unsafe]}), encoding="utf-8")
         with patch.object(preflight, "verified_completed_tasks", return_value={}):
             with self.assertRaises(ValueError):
