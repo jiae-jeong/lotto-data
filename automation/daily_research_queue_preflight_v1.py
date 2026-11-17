@@ -81,6 +81,163 @@ def _validate_dedicated_completion(output: Path, task_id: str, record: dict) -> 
     return record
 
 
+def _validate_registered_execution(repository: Path, task: dict, current_cutoff: int) -> str:
+    """Verify queue-recorded code-mode evidence before treating an EXECUTED task as terminal.
+
+    Some code-mode studies preserve a compact result JSON + report + SHA256 manifest rather
+    than the generic COMPLETION/VERIFICATION pair. Their queue status must never cause a
+    blind rerun: validate the immutable evidence and cutoff, or fail closed.
+    """
+    task_id = task["id"]
+    spec = task.get("spec") if isinstance(task.get("spec"), dict) else {}
+    execution = task.get("execution_result")
+    if not isinstance(execution, dict):
+        raise ValueError(f"Executed task has no registered execution_result: {task_id}")
+
+    raw_cutoff = execution.get("data_cutoff", task.get("data_cutoff", spec.get("data_cutoff")))
+    try:
+        recorded_cutoff = int(raw_cutoff)
+    except (TypeError, ValueError):
+        raise ValueError(f"Executed task has no valid registered data cutoff: {task_id}")
+    if recorded_cutoff != current_cutoff:
+        raise ValueError(
+            f"Executed task cutoff mismatch for {task_id}: {recorded_cutoff} != {current_cutoff}"
+        )
+
+    result_value = task.get("result_path") or execution.get("result_path")
+    if not isinstance(result_value, str) or not result_value:
+        raise ValueError(f"Executed task has no registered result_path: {task_id}")
+    relative = Path(result_value)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(f"Unsafe registered result path for {task_id}: {result_value}")
+    candidate = repository / relative
+    if candidate.is_symlink() or not candidate.is_dir():
+        raise ValueError(f"Missing or unsafe registered result directory for {task_id}: {result_value}")
+    output = candidate.resolve()
+    analysis_root = (repository / "analysis").resolve()
+    if not output.is_relative_to(analysis_root):
+        raise ValueError(f"Registered result path is outside analysis/: {task_id}")
+
+    if execution.get("verification_status") != "PASS" or execution.get("manifest_status") != "PASS":
+        raise ValueError(f"Registered execution is not verified: {task_id}")
+    manifest_path = output / "SHA256_MANIFEST.csv"
+    if manifest_path.is_symlink() or not manifest_path.is_file():
+        raise ValueError(f"Missing or unsafe registered manifest for {task_id}")
+    rows = engine.readcsv(manifest_path)
+    if not rows:
+        raise ValueError(f"Empty registered manifest for {task_id}")
+    name_field = "path" if "path" in rows[0] else "file" if "file" in rows[0] else None
+    if not name_field or "sha256" not in rows[0]:
+        raise ValueError(f"Unsupported registered manifest schema for {task_id}")
+
+    seen = set()
+    for row in rows:
+        name = row[name_field]
+        if name in seen:
+            raise ValueError(f"Duplicate registered manifest entry for {task_id}: {name}")
+        seen.add(name)
+        path = _safe_manifest_path(output, name)
+        expected_hash = row["sha256"]
+        expected_bytes = row.get("bytes")
+        raw_ok = engine.raw_digest(path) == expected_hash
+        portable_ok = engine.digest(path) == expected_hash
+        if expected_bytes not in (None, ""):
+            size = int(expected_bytes)
+            raw_ok = raw_ok and engine.raw_size(path) == size
+            portable_ok = portable_ok and engine.portable_size(path) == size
+        if not (raw_ok or portable_ok):
+            raise ValueError(f"Evidence hash mismatch for registered execution: {path}")
+
+    if "REPORT.md" not in seen:
+        raise ValueError(f"Registered execution report is not covered by manifest: {task_id}")
+    if int(execution.get("manifest_entries", -1)) != len(rows):
+        raise ValueError(f"Registered manifest entry count mismatch for {task_id}")
+
+    result_record = None
+    for name in sorted(seen):
+        if not name.lower().endswith(".json"):
+            continue
+        payload = json.loads(_safe_manifest_path(output, name).read_text(encoding="utf-8"))
+        if payload.get("study_id") == task_id:
+            result_record = payload
+            break
+    if result_record is None:
+        raise ValueError(f"Registered result JSON is missing or has the wrong study_id: {task_id}")
+
+    canonical = result_record.get("canonical_data") or {}
+    verification = result_record.get("verification") or {}
+    completion = result_record.get("completion") or {}
+    rounds = canonical.get("rounds")
+    if (
+        int(canonical.get("rows", -1)) != current_cutoff
+        or rounds != [1, current_cutoff]
+    ):
+        raise ValueError(f"Registered result canonical cutoff mismatch for {task_id}")
+    expected_data_sha = (
+        execution.get("data_sha256")
+        or execution.get("canonical_data_sha256")
+        or task.get("data_sha256")
+        or spec.get("data_sha256")
+    )
+    if not expected_data_sha or canonical.get("sha256") != expected_data_sha:
+        raise ValueError(f"Registered result data hash mismatch for {task_id}")
+    if verification.get("status") != "PASS":
+        raise ValueError(f"Registered result verification failed for {task_id}")
+    for field in ("training_cutoff_violations", "missing_rows", "duplicate_rows"):
+        if int(verification.get(field, -1)) != 0:
+            raise ValueError(f"Registered result {field} is not zero for {task_id}")
+    if verification.get("future_outcomes_used") is not False:
+        raise ValueError(f"Registered result does not prove future-outcome exclusion: {task_id}")
+    if verification.get("random_baseline_executed") is not True:
+        raise ValueError(f"Registered result has no executed random baseline: {task_id}")
+    if (
+        verification.get("manifest_status") != "PASS"
+        or int(verification.get("manifest_entries", -1)) != len(rows)
+    ):
+        raise ValueError(f"Registered result manifest metadata mismatch for {task_id}")
+
+    target_count = int(result_record.get("target_count", 0))
+    targets = result_record.get("evaluation_targets")
+    if not isinstance(targets, list) or len(targets) != 2:
+        raise ValueError(f"Registered result target range is missing for {task_id}")
+    start, end = map(int, targets)
+    if target_count < 1 or end - start + 1 != target_count:
+        raise ValueError(f"Registered result target count mismatch for {task_id}")
+    if int(execution.get("target_count", -1)) != target_count:
+        raise ValueError(f"Queue/result target count mismatch for {task_id}")
+    predictions = result_record.get("predictions")
+    if not isinstance(predictions, list) or len(predictions) != target_count:
+        raise ValueError(f"Registered result predictions are incomplete for {task_id}")
+    observed_targets = []
+    for prediction in predictions:
+        target = int(prediction["target"])
+        training_through = int(prediction["training_through"])
+        window_end = int(prediction.get("window_end", training_through))
+        if training_through != target - 1 or window_end > training_through:
+            raise ValueError(f"Future-data leakage in registered result for {task_id}, target {target}")
+        observed_targets.append(target)
+    if observed_targets != list(range(start, end + 1)):
+        raise ValueError(f"Registered result target sequence is incomplete for {task_id}")
+
+    if not str(completion.get("status", "")).startswith("COMPLETE"):
+        raise ValueError(f"Registered result is not terminal for {task_id}")
+    if completion.get("purchase_recommendation_generated") is not False:
+        raise ValueError(f"Registered daily research generated a purchase recommendation: {task_id}")
+    if completion.get("strict_pass_ready") is not False:
+        raise ValueError(f"Registered diagnostic unexpectedly claims strict readiness: {task_id}")
+    if execution.get("purchase_recommendation_generated", False) is not False:
+        raise ValueError(f"Queue metadata claims a purchase recommendation for {task_id}")
+    if execution.get("strict_pass_ready", False) is not False:
+        raise ValueError(f"Queue metadata claims strict readiness for {task_id}")
+
+    source = result_record.get("source") or {}
+    if execution.get("source_git_blob_sha") and source.get("git_blob_sha") != execution["source_git_blob_sha"]:
+        raise ValueError(f"Registered source blob mismatch for {task_id}")
+    if execution.get("source_sha256") and source.get("sha256") != execution["source_sha256"]:
+        raise ValueError(f"Registered source hash mismatch for {task_id}")
+    return str(output)
+
+
 def verified_completed_tasks(root: Path, archive: Path | None = None) -> dict[str, str]:
     """Return terminal study IDs while preserving strict evidence checks.
 
@@ -142,6 +299,7 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
     skipped_dedicated = []
     skipped_superseded = []
     skipped_stale_cutoff = []
+    skipped_registered_execution = []
     for task in tasks:
         task_id = task["id"]
         if task_id in completed:
@@ -175,6 +333,11 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
             })
             continue
 
+        if execution_status.startswith("EXECUTED_"):
+            _validate_registered_execution(repository, task, current_cutoff)
+            skipped_registered_execution.append(task_id)
+            continue
+
         daily._validate_task(task)
         runnable.append(task)
 
@@ -192,6 +355,7 @@ def prepare(repository: Path, queue: Path, filtered_queue: Path, status_file: Pa
         "current_data_cutoff": current_cutoff,
         "generic_runnable_tasks": [task["id"] for task in runnable],
         "skipped_stale_cutoff": skipped_stale_cutoff,
+        "skipped_registered_execution": skipped_registered_execution,
         "skipped_completed": skipped_completed,
         "skipped_blocked": skipped_blocked,
         "skipped_dedicated_workflow": skipped_dedicated,
