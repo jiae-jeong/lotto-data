@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract extended through E068; frozen runner/preregistration IDs verified.
+# Queue contract extended through E069; frozen runner/preregistration IDs verified.
 
 on:
   workflow_dispatch:
@@ -59,7 +59,7 @@ jobs:
                       if nested.countTestCases():
                           kept.addTests(nested)
                   elif item.id().endswith(".test_e064_is_appended_after_e063_without_rewriting_prior_tasks"):
-                      print("SKIP: historical E064 tail-only assertion; the current append-only E061-E067 order is checked below.")
+                      print("SKIP: historical E064 tail-only assertion; the current append-only E061-E069 order is checked below.")
                   else:
                       kept.addTest(item)
               return kept
@@ -214,7 +214,8 @@ jobs:
           e066_id='E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1'
           e067_id='E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1'
           e068_id='E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1'
-          assert ids[-7:]==e061_e064+[e066_id,e067_id,e068_id]
+          e069_id='E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1'
+          assert ids[-8:]==e061_e064+[e066_id,e067_id,e068_id,e069_id]
           e066=task_by_id[e066_id]
           assert e066['kind']=='three_line_gap_shape_transition'
           assert e066['execution_mode']=='dedicated_workflow'
@@ -264,6 +265,32 @@ jobs:
               assert e068['execution_result']['verification_status']=='PASS'
               assert e068['execution_result']['strict_pass_ready'] is False
               assert e068['execution_result']['purchase_recommendation_generated'] is False
+          e069=task_by_id[e069_id]
+          assert e069['kind']=='three_line_previous_draw_membership_transition'
+          assert e069['execution_mode']=='dedicated_workflow'
+          assert e069['execution_entrypoint']=='automation/three_line_previous_draw_membership_e069.py'
+          assert e069['workflow_entrypoint']=='.github/workflows/target-1251-e069-previous-draw-membership-transition.yml'
+          assert e069['preregistration']=='research/weekly_purchase/1251/E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_PREREG_20261118.json'
+          assert e069['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+          assert e069['spec']['execution_status']==e069['execution_status']
+          assert e069['spec']['strict_pass_ready'] is False
+          assert e069['target_1251_three_line_readiness_eligible'] is False
+          e069_prereg=json.loads(Path(e069['preregistration']).read_text(encoding='utf-8'))
+          assert e069['question']==e069_prereg['research_question']
+          assert e069['novelty']==e069_prereg['novelty_statement']
+          assert e069_prereg['historical_data_cutoff']==1250
+          assert e069_prereg['target_rounds']=='401..1250 inclusive'
+          assert e069_prereg['feature_definition']['class']=="For candidate n, state s is 1 if n appeared among the previous draw's six main numbers; otherwise s is 0."
+          assert e069_prereg['estimator']['prior_strength']==45
+          assert e069_prereg['random_comparator']['random_bundles_per_target']==120
+          assert e069_prereg['inference']['bootstrap_replicates']==4000
+          assert e069_prereg['inference']['block_length_targets']==50
+          assert e069_prereg['prospective_confirmation']['minimum_target_count'] is None
+          assert e069_prereg['prospective_confirmation']['completion_rule'] is None
+          if e069['execution_status']!='PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+              assert e069['execution_result']['verification_status']=='PASS'
+              assert e069['execution_result']['strict_pass_ready'] is False
+              assert e069['execution_result']['purchase_recommendation_generated'] is False
           e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
@@ -289,7 +316,7 @@ jobs:
               assert e064['execution_result']['verification_status']=='PASS'
               assert e064['execution_result']['strict_pass_ready'] is False
               assert e064['execution_result']['purchase_recommendation_generated'] is False
-          print('E030-E068 queue contract PASS; prior IDs retained')
+          print('E030-E069 queue contract PASS; prior IDs retained')
           PY
 
   research:
