@@ -72,7 +72,7 @@
   },
   "summary": {
     "all_30_bonferroni_adjusted_ci_lower_bounds_not_above_zero": true,
-    "no_candidate_signal_passes": false,
+    "no_candidate_signal_passes": true,
     "largest_positive_point_delta": {
       "signal": "balanced",
       "k": 10,
@@ -85,7 +85,8 @@
       "delta_pp": -1.2380952380952381,
       "positive_blocks": "5/21"
     },
-    "scorecard_mean_reproduction": "29/30 within floating tolerance; momentum@10 differs by two total winner-candidate hits (0.031746 pp), unresolved"
+    "scorecard_mean_reproduction": "29/30 within floating tolerance; momentum@10 differs by two total winner-candidate hits (0.031746 pp), unresolved",
+    "candidate_signal_strict_pass_count": 0
   },
   "results": [
     {
