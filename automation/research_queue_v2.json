@@ -3396,7 +3396,7 @@
       "question": "Does the aggregate overlap count between the two immediately preceding main-number draws provide cutoff-safe context for next-draw number inclusion, sufficient to improve a deterministic three-line disjoint union18 portfolio over the exact geometry-matched null?",
       "novelty": "One frozen three-state aggregate previous-two-draw overlap transition family. Unlike E053's candidate-specific two-draw membership state, E068 uses only the scalar intersection size of the two immediately preceding draws to condition the next-draw inclusion distribution. It is not a claim of statistical independence. It is distinct in feature definition from E049 sum/odd/low/consecutive draw state, E063 last-digit occupancy, E066 gap shape, E067 prime count, E050 neighbor distance, E048 bonus transition, and B-model selectors. One estimator, one portfolio selector, one historical evaluation; no variants or tuning.",
       "execution_mode": "dedicated_workflow",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "execution_entrypoint": "automation/three_line_overlap_count_transition_e068.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e068-overlap-count-transition.yml",
       "preregistration": "research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json",
@@ -3407,9 +3407,51 @@
         "data_cutoff": 1250,
         "target_rounds": "401..1250 inclusive",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
         "strict_pass_ready": false,
-        "target_1251_three_line_readiness_eligible": false
+        "target_1251_three_line_readiness_eligible": false,
+        "execution_result": {
+          "verification_status": "PASS",
+          "strict_portfolio_pass": false,
+          "strict_pass_ready": false,
+          "data_cutoff": 1250,
+          "targets": 850,
+          "random_bundles_total": 102000,
+          "manifest_entries": 8,
+          "workflow_run_id": 44096482766,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44096482766",
+          "result_path": "analysis/2026-11-17/gha_44096482766_1/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1",
+          "failed_gates": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage",
+            "any2_positive_50_target_block_share"
+          ],
+          "any2_positive_50_target_block_share": 0.5294117647058824,
+          "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+        }
+      },
+      "execution_result": {
+        "verification_status": "PASS",
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "data_cutoff": 1250,
+        "targets": 850,
+        "random_bundles_total": 102000,
+        "manifest_entries": 8,
+        "workflow_run_id": 44096482766,
+        "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44096482766",
+        "result_path": "analysis/2026-11-17/gha_44096482766_1/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1",
+        "failed_gates": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage",
+          "any2_positive_50_target_block_share"
+        ],
+        "any2_positive_50_target_block_share": 0.5294117647058824,
+        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
       }
     }
   ],
