@@ -3462,7 +3462,7 @@
       "question": "Does a candidate number's membership in the immediately preceding draw provide cutoff-safe information about its inclusion in the next draw, sufficient to improve one frozen three-line disjoint union18 portfolio over the exact geometry-matched null?",
       "novelty": "One frozen first-order candidate-membership transition family. It is distinct in lag definition from E053's lag-two candidate membership and from E068's aggregate overlap count across two previous draws; it is not a claim of statistical independence. One fixed estimator, one E045 selector, one historical evaluation; no variants or parameter search.",
       "execution_mode": "dedicated_workflow",
-      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
       "execution_entrypoint": "automation/three_line_previous_draw_membership_e069.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e069-previous-draw-membership-transition.yml",
       "preregistration": "research/weekly_purchase/1251/E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_PREREG_20261118.json",
@@ -3473,9 +3473,54 @@
         "data_cutoff": 1250,
         "target_rounds": "401..1250 inclusive",
         "execution_mode": "dedicated_workflow",
-        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
         "strict_pass_ready": false,
-        "target_1251_three_line_readiness_eligible": false
+        "target_1251_three_line_readiness_eligible": false,
+        "execution_result": {
+          "verification_status": "PASS",
+          "strict_portfolio_pass": false,
+          "strict_pass_ready": false,
+          "purchase_recommendation_generated": false,
+          "data_cutoff": 1250,
+          "targets": 850,
+          "random_bundles_total": 102000,
+          "manifest_entries": 8,
+          "workflow_run_id": 44131681250,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44131681250",
+          "result_path": "analysis/2026-11-18/gha_44131681250_1/E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
+          "failed_gates": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage",
+            "any2_positive_50_target_block_share"
+          ],
+          "any2_positive_50_target_block_share": 0.4117647058823529,
+          "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+        }
+      },
+      "result_path": "analysis/2026-11-18/gha_44131681250_1/E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
+      "execution_result": {
+        "verification_status": "PASS",
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "purchase_recommendation_generated": false,
+        "data_cutoff": 1250,
+        "targets": 850,
+        "random_bundles_total": 102000,
+        "manifest_entries": 8,
+        "workflow_run_id": 44131681250,
+        "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44131681250",
+        "result_path": "analysis/2026-11-18/gha_44131681250_1/E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
+        "failed_gates": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage",
+          "any2_positive_50_target_block_share"
+        ],
+        "any2_positive_50_target_block_share": 0.4117647058823529,
+        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
       }
     }
   ],
