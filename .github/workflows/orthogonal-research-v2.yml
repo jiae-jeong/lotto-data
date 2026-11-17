@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract extended through E064; preserve all prior task IDs and order.
+# Queue contract extended through E066; preserve all prior task IDs and order.
 
 on:
   workflow_dispatch:
@@ -189,7 +189,22 @@ jobs:
           assert e062['execution_result']['verification_status']=='PASS'
           assert e062['execution_result']['manifest_entries']==2
           assert e062['execution_result']['strict_pass_ready'] is False
-          assert ids[-4:]==['E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1','E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1','E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1','E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1']
+          e061_e064=['E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1','E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1','E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1','E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1']
+          e066_id='E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1'
+          if e066_id in task_by_id:
+              assert ids[-5:]==e061_e064+[e066_id]
+              e066=task_by_id[e066_id]
+              assert e066['kind']=='three_line_gap_shape_transition'
+              assert e066['execution_mode']=='dedicated_workflow'
+              assert e066['execution_entrypoint']=='automation/three_line_gap_shape_transition_e066.py'
+              assert e066['workflow_entrypoint']=='.github/workflows/target-1251-e066-gap-shape-transition.yml'
+              assert e066['preregistration']=='research/weekly_purchase/1251/E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_PREREG_20261117.json'
+              assert e066['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+              if e066['execution_status']!='PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+                  assert e066['execution_result']['verification_status']=='PASS'
+                  assert e066['execution_result']['strict_pass_ready'] is False
+          else:
+              assert ids[-4:]==e061_e064
           e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
