@@ -38,7 +38,7 @@
 
 - 1245: V4 pre-draw seal과 최종 3줄 원본이 확인됨: [MODE_SELECTION_SEAL](../prospective_v4/decisions/1245/MODE_SELECTION_SEAL_1245_V4.json), [PRIMARY_PURCHASE_DECISION](../prospective_v4/decisions/1245/PRIMARY_PURCHASE_DECISION_1245_V4.json). 원본 복습은 [ROUND_1245_REVIEW.md](../../analysis/2026-10-11/ROUND_1245_REVIEW.md). 추첨 결과 대비 줄별 0, 0, 1 hit; 보존된 추천 원본 진단이며 영수증 기반 구매 확정과는 구분한다.
 - 1246: [FINAL_FIVE_LINES_1246](../weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json)와 [FIRST_PRIZE_PURCHASE_1246_V2](../prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json)가 서로 다른 사전 원본이다. [ROUND_1246_REVIEW.md](../../analysis/2026-10-18/ROUND_1246_REVIEW.md)는 V2 purchase-design 원본을 기록하지만 구매 영수증은 없어 실제 구매본을 확정하지 않는다.
-- 1247: [ACTUAL_PURCHASE_FIVE_LINES_RESEARCH_V8](../weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json), [FINAL_V3](../weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_PROTOCOL_FULL_V3.json), [V6](../weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V6.json), [V7](../weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V7.json) 등 5개의 서로 다른 보존 line set이 있어 어느 하나도 실제 구매본으로 선택하지 않는다. [검증 리뷰](../weekly_purchase/1247/MODEL_VALIDATION_REVIEW_20261023.json)도 모델 strict 통과 0개를 기록한다.
+- 1247: [ACTUAL_PURCHASE_FIVE_LINES_RESEARCH_V8](../weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json), [FINAL](../weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023.json), [FINAL_V3](../weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_PROTOCOL_FULL_V3.json), [V6](../weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V6.json), [V7](../weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V7.json) 등 5개의 서로 다른 보존 line set이 있어 어느 하나도 실제 구매본으로 선택하지 않는다. [검증 리뷰](../weekly_purchase/1247/MODEL_VALIDATION_REVIEW_20261023.json)도 모델 strict 통과 0개를 기록한다.
 - 1248: [fallback 5줄](../weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json)과 [V54 strict-pass final 5줄](../weekly_purchase/1248/FINAL_FIVE_LINES_1248_20261030_V54_STRICT_PASS.json)이 서로 다르며, 구매 확인은 없다.
 - 1249: 추첨 전 sealed original recommendation artifact는 현재 검색 범위에서 확인되지 않았다. 대화 기반 전달 로그를 원본으로 복원하지 않는다.
 - 1250: [delivery evidence correction](../weekly_purchase/1250/DELIVERY_1250_20261113_EVIDENCE_CORRECTION.json)은 요청/전달 증빙을 미확정으로 정정했다. 중간 후보 기록으로만 보존한다.
@@ -54,8 +54,8 @@
 ## 1250 remediation 및 1251 readiness
 
 - V54/V83/V84/V85/V86은 모두 기존 strict gate FAIL. any2/any3 동시 robust gain champion은 확보되지 않았다.
-- H1250-A/B는 target 1250용 5줄 연구 축이며 1251부터 적용하는 3줄 정책 증거로 전용하지 않는다.
-- target 1251 status: `STRICT_FAIL`; validated three-line model 0, ready artifact 없음, prospective confirmation 미평가. prospective 최소 target 수와 completion rule도 정책에 아직 명시되지 않았다.
+- [1250 remediation plan](../weekly_purchase/1250/REMEDIATION_PLAN_2026-11-06.md)의 H1250-A/B는 target 1250용 5줄 연구 축이며 1251부터 적용하는 3줄 정책 증거로 전용하지 않는다.
+- target 1251 [status](../weekly_purchase/1251/STRICT_PASS_STATUS_1251_20261117.json): `STRICT_FAIL`; validated three-line model 0, ready artifact 없음, prospective confirmation 미평가. prospective 최소 target 수와 completion rule도 정책에 아직 명시되지 않았다.
 - fallback/random 승격, final lines 생성, freeze/seal은 모두 금지 상태다.
 
 ## 남은 과제
