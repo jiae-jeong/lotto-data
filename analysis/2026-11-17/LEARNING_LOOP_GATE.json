@@ -522,12 +522,12 @@
         "delta_4plus_vs_random": 0.0008714285714285785
       },
       "25": {
-        "signal": "consensus",
+        "signal": "momentum",
         "mean_recall": 0.5571428571428572,
         "random_mean_recall": 0.5552603174603175,
         "delta_recall_vs_random": 0.0018825396825397078,
-        "delta_3plus_vs_random": -0.0014095238095238605,
-        "delta_4plus_vs_random": 0.0118571428571429
+        "delta_3plus_vs_random": 0.004304761904761922,
+        "delta_4plus_vs_random": 0.00995238095238099
       },
       "30": {
         "signal": "recent30",
