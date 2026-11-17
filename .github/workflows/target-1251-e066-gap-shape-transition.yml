@@ -66,18 +66,18 @@ jobs:
           set -euo pipefail
           python -B automation/three_line_gap_shape_transition_e066.py \
             --date 2026-11-17 --run-id "$RUN_ID" --run-attempt "$RUN_ATTEMPT"
-          echo "OUTDIR=analysis/2026-11-17/gha_$RUN_ID_$RUN_ATTEMPT/E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1" >> "$GITHUB_ENV"
+          echo "E066 walk-forward completed."
 
       - name: Verify immutable evidence, update queue, and push results
         if: success() && steps.one-shot.outputs.already_complete != 'true'
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
-          OUTDIR: ${{ env.OUTDIR }}
           REPOSITORY: ${{ github.repository }}
         shell: bash
         run: |
           set -euo pipefail
+          OUTDIR="analysis/2026-11-17/gha_$RUN_ID"_"$RUN_ATTEMPT/E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1"
           python - "$OUTDIR" <<'PY'
           import csv, hashlib, json, sys
           from pathlib import Path
@@ -109,10 +109,9 @@ jobs:
           print({"verification": "PASS", "manifest_entries": len(manifest), "strict_pass_ready": False})
           PY
 
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git reset --hard origin/main
-            python - "$OUTDIR" "$RUN_ID" "$RUN_ATTEMPT" "$REPOSITORY" <<'PY'
+          git fetch origin main
+          git pull --rebase origin main
+          python - "$OUTDIR" "$RUN_ID" "$RUN_ATTEMPT" "$REPOSITORY" <<'PY'
           import json, sys
           from pathlib import Path
           outdir, run_id, run_attempt, repository = sys.argv[1:]
@@ -175,12 +174,14 @@ jobs:
           task["spec"] = spec
           queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           PY
-            git add "$OUTDIR" automation/research_queue_v2.json
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "research: preserve E066 gap-shape transition evidence"
+          git add "$OUTDIR" automation/research_queue_v2.json
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "research: preserve E066 gap-shape transition evidence"
+          for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               echo "E066 evidence and queue status pushed."
               exit 0
             fi
+            git pull --rebase origin main
           done
           echo "Failed to preserve E066 evidence and queue status after three push attempts." >&2
           exit 1
