@@ -22,8 +22,8 @@
 
 이 결과로 어떤 신호도 승격하지 않는다. 1244~1249회는 이미 노출된 live-history 진단 자료이고 clean holdout이나 prospective confirmation이 아니다.
 
-상세 계산 결과: [E065 JSON](../analysis/2026-11-17/E065_CANDIDATE_RECALL_UNCERTAINTY_AUDIT.json)  
-재현 코드: [E065 runner](../automation/candidate_recall_uncertainty_audit_e065_v1.js)
+상세 계산 결과: [E065 JSON](../../analysis/2026-11-17/E065_CANDIDATE_RECALL_UNCERTAINTY_AUDIT.json)  
+재현 코드: [E065 runner](../../automation/candidate_recall_uncertainty_audit_e065_v1.js)
 
 ## 후보선정 단계와 포트폴리오 단계 분리
 
@@ -36,8 +36,8 @@
 
 현재 대화/첨부에는 별도 원본 첨부가 없다. GitHub에서 다음을 확인했다.
 
-- 1245: V4 pre-draw seal/최종 3줄 원본과 1245 오답노트가 확인됨. 원본 복습은 [ROUND_1245_REVIEW.md](../analysis/2026-10-11/ROUND_1245_REVIEW.md). 추첨 결과 대비 줄별 0, 0, 1 hit; 이 기록은 해당 회차의 보존된 추천 원본 진단이다.
-- 1246: [FINAL_FIVE_LINES_1246](../research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json)와 [FIRST_PRIZE_PURCHASE_1246_V2](../research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json)가 서로 다른 사전 원본이다. [ROUND_1246_REVIEW.md](../analysis/2026-10-18/ROUND_1246_REVIEW.md)는 V2 purchase-design 원본을 기록하지만 구매 영수증은 없어 실제 구매본을 확정하지 않는다.
+- 1245: V4 pre-draw seal/최종 3줄 원본과 1245 오답노트가 확인됨. 원본 복습은 [ROUND_1245_REVIEW.md](../../analysis/2026-10-11/ROUND_1245_REVIEW.md). 추첨 결과 대비 줄별 0, 0, 1 hit; 이 기록은 해당 회차의 보존된 추천 원본 진단이다.
+- 1246: [FINAL_FIVE_LINES_1246](../weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json)와 [FIRST_PRIZE_PURCHASE_1246_V2](../research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json)가 서로 다른 사전 원본이다. [ROUND_1246_REVIEW.md](../../analysis/2026-10-18/ROUND_1246_REVIEW.md)는 V2 purchase-design 원본을 기록하지만 구매 영수증은 없어 실제 구매본을 확정하지 않는다.
 - 1247: 5개의 서로 다른 보존 line set이 있어 어느 하나도 실제 구매본으로 선택하지 않는다.
 - 1248: fallback 5줄과 V54 strict-pass final 5줄이 서로 다르며, 구매 확인은 없다.
 - 1249: 추첨 전 sealed original recommendation artifact는 현재 검색 범위에서 확인되지 않았다. 대화 기반 전달 로그를 원본으로 복원하지 않는다.
