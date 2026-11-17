@@ -264,7 +264,7 @@ jobs:
               assert e068['execution_result']['verification_status']=='PASS'
               assert e068['execution_result']['strict_pass_ready'] is False
               assert e068['execution_result']['purchase_recommendation_generated'] is False
-                    e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
+          e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
           assert e063['execution_entrypoint']=='automation/three_line_last_digit_transition_e063.py'
