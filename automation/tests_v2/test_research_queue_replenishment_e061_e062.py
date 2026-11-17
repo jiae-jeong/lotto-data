@@ -86,6 +86,8 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
         self.assertEqual(task["kind"], "three_line_prime_count_transition")
         self.assertEqual(task["execution_mode"], "dedicated_workflow")
         self.assertFalse(task["target_1251_three_line_readiness_eligible"])
+        self.assertEqual(task["question"], prereg_question := json.loads((ROOT / task["preregistration"]).read_text(encoding="utf-8"))["research_question"])
+        self.assertEqual(task["novelty"], json.loads((ROOT / task["preregistration"]).read_text(encoding="utf-8"))["novelty_statement"])
         self.assertIn(task["execution_status"], (
             "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
             "EXECUTED_HISTORICAL_STRICT_FAIL",

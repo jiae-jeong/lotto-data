@@ -233,6 +233,11 @@ jobs:
           assert e067['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
           assert e067['spec']['execution_status']==e067['execution_status']
           assert e067['spec']['strict_pass_ready'] is False
+          assert e067['execution_result']['purchase_recommendation_generated'] is False
+          assert e067['spec']['execution_result']['purchase_recommendation_generated'] is False
+          e067_prereg=json.loads(Path(e067['preregistration']).read_text(encoding='utf-8'))
+          assert e067['question']==e067_prereg['research_question']
+          assert e067['novelty']==e067_prereg['novelty_statement']
           assert e067['target_1251_three_line_readiness_eligible'] is False
           if e067['execution_status']!='PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
               assert e067['execution_result']['verification_status']=='PASS'
