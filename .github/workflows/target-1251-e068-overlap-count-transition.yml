@@ -127,6 +127,7 @@ jobs:
               "verification_status": "PASS",
               "strict_portfolio_pass": bool(inference["historical_strict_portfolio_pass"]),
               "strict_pass_ready": False,
+              "purchase_recommendation_generated": False,
               "data_cutoff": 1250,
               "targets": 850,
               "random_bundles_total": 102000,

@@ -3429,7 +3429,8 @@
             "any2_positive_50_target_block_share"
           ],
           "any2_positive_50_target_block_share": 0.5294117647058824,
-          "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+          "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+          "purchase_recommendation_generated": false
         }
       },
       "execution_result": {
@@ -3451,7 +3452,8 @@
           "any2_positive_50_target_block_share"
         ],
         "any2_positive_50_target_block_share": 0.5294117647058824,
-        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+        "purchase_recommendation_generated": false
       }
     }
   ],
