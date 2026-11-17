@@ -58,25 +58,25 @@ jobs:
       - name: Run E069 historical walk-forward
         if: steps.one-shot.outputs.already_complete != 'true'
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         shell: bash
         run: |
           set -euo pipefail
           python -B automation/three_line_previous_draw_membership_e069.py \
-            --date 2026-11-18 --run-id "gha_\${RUN_ID}_\${RUN_ATTEMPT}"
+            --date 2026-11-18 --run-id "gha_${RUN_ID}_${RUN_ATTEMPT}"
           echo "E069 walk-forward completed."
 
       - name: Verify immutable evidence, update queue, and push results
         if: success() && steps.one-shot.outputs.already_complete != 'true'
         env:
-          RUN_ID: \${{ github.run_id }}
-          RUN_ATTEMPT: \${{ github.run_attempt }}
-          REPOSITORY: \${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          REPOSITORY: ${{ github.repository }}
         shell: bash
         run: |
           set -euo pipefail
-          OUTDIR="analysis/2026-11-18/gha_\${RUN_ID}_\${RUN_ATTEMPT}/E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1"
+          OUTDIR="analysis/2026-11-18/gha_${RUN_ID}_${RUN_ATTEMPT}/E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1"
           python - "$OUTDIR" <<'PY'
           import csv, hashlib, json, sys
           from pathlib import Path
