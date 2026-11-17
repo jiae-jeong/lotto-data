@@ -3261,6 +3261,68 @@
         "purchase_recommendation_generated": false,
         "verified_at_kst": "2026-11-16T21:22:44.439111+09:00"
       }
+    },
+    {
+      "id": "E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1",
+      "kind": "three_line_gap_shape_transition",
+      "question": "Does the five-component gap-shape state of the immediately preceding main-number draw contain cutoff-safe information about next-draw number inclusion for a deterministic three-line disjoint union18 portfolio?",
+      "novelty": "One frozen gap-shape transition signal family, distinct from sum/odd/low/consecutive draw state, rolling HHI concentration, last-digit occupancy, lag-two membership, pair/bonus/neighbor transitions, and B-model selectors. One estimator, one portfolio selector, one evaluation; no variants or tuning.",
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
+      "execution_entrypoint": "automation/three_line_gap_shape_transition_e066.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e066-gap-shape-transition.yml",
+      "preregistration": "research/weekly_purchase/1251/E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_PREREG_20261117.json",
+      "execution_result": {
+        "verification_status": "PASS",
+        "strict_portfolio_pass": false,
+        "strict_pass_ready": false,
+        "data_cutoff": 1250,
+        "targets": 850,
+        "random_bundles_total": 102000,
+        "manifest_entries": 8,
+        "workflow_run_id": 44058636761,
+        "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44058636761",
+        "result_path": "analysis/2026-11-17/gha_44058636761_1/E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1",
+        "failed_gates": [
+          "max_hits",
+          "any2",
+          "any3",
+          "winning_union_coverage",
+          "any2_positive_50_target_block_share"
+        ],
+        "any2_positive_50_target_block_share": 0.23529411764705882,
+        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+      },
+      "spec": {
+        "study_id": "E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1",
+        "kind": "three_line_gap_shape_transition",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
+        "execution_result": {
+          "verification_status": "PASS",
+          "strict_portfolio_pass": false,
+          "strict_pass_ready": false,
+          "data_cutoff": 1250,
+          "targets": 850,
+          "random_bundles_total": 102000,
+          "manifest_entries": 8,
+          "workflow_run_id": 44058636761,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44058636761",
+          "result_path": "analysis/2026-11-17/gha_44058636761_1/E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1",
+          "failed_gates": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage",
+            "any2_positive_50_target_block_share"
+          ],
+          "any2_positive_50_target_block_share": 0.23529411764705882,
+          "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+        },
+        "strict_pass_ready": false
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
