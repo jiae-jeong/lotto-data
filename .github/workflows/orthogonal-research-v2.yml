@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract extended through E067; preserve all prior task IDs and order.
+# Queue contract extended through E068; preserve all prior task IDs and order.
 
 on:
   workflow_dispatch:
@@ -213,7 +213,8 @@ jobs:
           e061_e064=['E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1','E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1','E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1','E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1']
           e066_id='E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1'
           e067_id='E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1'
-          assert ids[-6:]==e061_e064+[e066_id,e067_id]
+          e068_id='E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1'
+          assert ids[-7:]==e061_e064+[e066_id,e067_id,e068_id]
           e066=task_by_id[e066_id]
           assert e066['kind']=='three_line_gap_shape_transition'
           assert e066['execution_mode']=='dedicated_workflow'
@@ -243,7 +244,27 @@ jobs:
               assert e067['execution_result']['verification_status']=='PASS'
               assert e067['execution_result']['strict_pass_ready'] is False
               assert e067['execution_result']['purchase_recommendation_generated'] is False
-          e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
+          e068=task_by_id[e068_id]
+          assert e068['kind']=='three_line_overlap_count_transition'
+          assert e068['execution_mode']=='dedicated_workflow'
+          assert e068['execution_entrypoint']=='automation/three_line_overlap_count_transition_e068.py'
+          assert e068['workflow_entrypoint']=='.github/workflows/target-1251-e068-overlap-count-transition.yml'
+          assert e068['preregistration']=='research/weekly_purchase/1251/E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_PREREG_20261117.json'
+          assert e068['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+          assert e068['spec']['execution_status']==e068['execution_status']
+          assert e068['spec']['strict_pass_ready'] is False
+          assert e068['target_1251_three_line_readiness_eligible'] is False
+          e068_prereg=json.loads(Path(e068['preregistration']).read_text(encoding='utf-8'))
+          assert e068['question']==e068_prereg['research_question']
+          assert e068['novelty']==e068_prereg['novelty_statement']
+          assert e068_prereg['feature_definition']['state_components']['overlap_count_bin']=='0 if overlap_count==0; 1 if overlap_count==1; 2 if overlap_count>=2'
+          assert e068_prereg['historical_data_cutoff']==1250
+          assert e068_prereg['target_rounds']=='401..1250 inclusive'
+          if e068['execution_status']!='PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+              assert e068['execution_result']['verification_status']=='PASS'
+              assert e068['execution_result']['strict_pass_ready'] is False
+              assert e068['execution_result']['purchase_recommendation_generated'] is False
+                    e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
           assert e063['execution_entrypoint']=='automation/three_line_last_digit_transition_e063.py'
@@ -268,7 +289,7 @@ jobs:
               assert e064['execution_result']['verification_status']=='PASS'
               assert e064['execution_result']['strict_pass_ready'] is False
               assert e064['execution_result']['purchase_recommendation_generated'] is False
-          print('E030-E067 queue contract PASS; prior IDs retained')
+          print('E030-E068 queue contract PASS; prior IDs retained')
           PY
 
   research:

@@ -122,14 +122,52 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
                     self.assertEqual(len(payload), int(row["bytes"]), row["path"])
                     self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
 
-    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067(self):
-        self.assertEqual([task["id"] for task in self.tasks[-6:]], [
+    def test_e068_is_preregistered_as_one_historical_exploratory_axis(self):
+        task = self.by_id["E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1"]
+        self.assertEqual(task["kind"], "three_line_overlap_count_transition")
+        self.assertEqual(task["execution_mode"], "dedicated_workflow")
+        self.assertFalse(task["target_1251_three_line_readiness_eligible"])
+        self.assertIn(task["execution_status"], ("PREREGISTERED_PENDING_DEDICATED_WORKFLOW", "EXECUTED_HISTORICAL_STRICT_FAIL", "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING"))
+        prereg = json.loads((ROOT / task["preregistration"]).read_text(encoding="utf-8"))
+        self.assertEqual(task["question"], prereg["research_question"])
+        self.assertEqual(task["novelty"], prereg["novelty_statement"])
+        self.assertTrue(prereg["independent_research_axis"])
+        self.assertTrue(prereg["independent_signal_family"])
+        self.assertTrue(prereg["historical_exploration_only"])
+        self.assertEqual(prereg["historical_data_cutoff"], 1250)
+        self.assertEqual(prereg["target_rounds"], "401..1250 inclusive")
+        self.assertEqual(prereg["feature_definition"]["state_components"]["overlap_count_bin"], "0 if overlap_count==0; 1 if overlap_count==1; 2 if overlap_count>=2")
+        self.assertFalse(prereg["estimator"]["parameter_search"])
+        self.assertEqual(prereg["random_comparator"]["random_bundles_per_target"], 120)
+        self.assertEqual(prereg["inference"]["bootstrap_replicates"], 4000)
+        self.assertEqual(prereg["inference"]["block_length_targets"], 50)
+        self.assertIsNone(prereg["prospective_confirmation"]["minimum_target_count"])
+        self.assertIsNone(prereg["prospective_confirmation"]["completion_rule"])
+        if task["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
+            result = task["execution_result"]
+            self.assertEqual(result["verification_status"], "PASS")
+            self.assertFalse(result["strict_pass_ready"])
+            self.assertFalse(result["purchase_recommendation_generated"])
+            root = ROOT / result["result_path"]
+            verification = json.loads((root / "VERIFICATION.json").read_text(encoding="utf-8"))
+            completion = json.loads((root / "COMPLETION.json").read_text(encoding="utf-8"))
+            self.assertEqual(verification["manifest_status"], "PASS")
+            self.assertEqual(completion["status"], "COMPLETE")
+            with (root / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="") as stream:
+                for row in csv.DictReader(stream):
+                    payload = (root / row["path"]).read_bytes()
+                    self.assertEqual(len(payload), int(row["bytes"]), row["path"])
+                    self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
+
+    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068(self):
+        self.assertEqual([task["id"] for task in self.tasks[-7:]], [
             "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
             "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
             "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
             "E064_THREE_LINE_BLOCK_PERSISTENT_NULL_CALIBRATION_v1",
             "E066_THREE_LINE_PREVIOUS_DRAW_GAP_SHAPE_TRANSITION_v1",
             "E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
+            "E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1",
         ])
 
 
