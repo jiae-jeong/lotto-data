@@ -1,0 +1,73 @@
+{
+  "study_id": "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_CORRECTIVE_REEXECUTION_v1",
+  "evidence_class": "HISTORICAL_CORRECTIVE_REEXECUTION_NOT_INDEPENDENT_NOT_PROSPECTIVE_CONFIRMATION",
+  "independent_research_axis": false,
+  "original_e069_registered_formula_conformance": false,
+  "corrected_estimator": "(success + 45*(6/45)) / (exposure + 45)",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "random_bundles_per_target": 120,
+  "random_bundles_total": 102000,
+  "bootstrap_replicates": 4000,
+  "block_length_targets": 50,
+  "alpha_per_metric": 0.0125,
+  "metrics": {
+    "max_hits": {
+      "observed_mean": 1.4964705882352942,
+      "random_mean": 1.515078431372549,
+      "delta_mean": -0.0186078431372549,
+      "adjusted_moving_block_ci": [
+        -0.0753235294117647,
+        0.046941176470588236
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.46,
+      "random_mean": 0.4758235294117647,
+      "delta_mean": -0.015823529411764705,
+      "adjusted_moving_block_ci": [
+        -0.06169607843137255,
+        0.03559803921568627
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.07294117647058823,
+      "random_mean": 0.07202941176470588,
+      "delta_mean": 0.0009117647058823528,
+      "adjusted_moving_block_ci": [
+        -0.017029411764705883,
+        0.017480392156862746
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.363529411764706,
+      "random_mean": 2.3938823529411764,
+      "delta_mean": -0.03035294117647059,
+      "adjusted_moving_block_ci": [
+        -0.12191176470588234,
+        0.06546078431372548
+      ],
+      "lower_bound_strictly_gt_zero": false
+    }
+  },
+  "any2_positive_nonoverlapping_50_target_blocks": 4,
+  "nonoverlapping_50_target_block_count": 17,
+  "any2_positive_block_share": 0.23529411764705882,
+  "all_adjusted_ci_lower_bounds_strictly_gt_zero": false,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "prospective_confirmation_required": true,
+  "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+  "purchase_recommendation_generated": false,
+  "thresholds_or_policy_changed": false,
+  "parameter_search": false,
+  "model_variants": 1
+}

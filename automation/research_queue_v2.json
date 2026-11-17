@@ -3520,8 +3520,18 @@
           "any2_positive_50_target_block_share"
         ],
         "any2_positive_50_target_block_share": 0.4117647058823529,
-        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
-      }
+        "verified_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+        "registered_estimator_conformance": false,
+        "valid_for_registered_estimator": false,
+        "original_outputs_preserved": true,
+        "implementation_audit_path": "analysis/2026-11-18/E070_E069_IMPLEMENTATION_AND_CANDIDATE_STAGE_AUDIT_v1",
+        "corrective_reexecution_path": "analysis/2026-11-18/gha_44200988606_1/E069_CORRECTIVE_REEXECUTION_v1",
+        "corrective_historical_gate_pass": false
+      },
+      "implementation_conformance_status": "NONCONFORMANT_TO_FROZEN_PREREGISTRATION",
+      "registered_hypothesis_valid": false,
+      "implementation_audit_path": "analysis/2026-11-18/E070_E069_IMPLEMENTATION_AND_CANDIDATE_STAGE_AUDIT_v1",
+      "corrective_reexecution_path": "analysis/2026-11-18/gha_44200988606_1/E069_CORRECTIVE_REEXECUTION_v1"
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
