@@ -3968,7 +3968,7 @@
       "execution_entrypoint": "automation/three_line_three_draw_membership_count_e073.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e073-three-draw-membership-count.yml",
       "preregistration": "research/weekly_purchase/1251/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_PREREG_20261118.json",
-      "preregistration_blob_sha": "916a954f3d01b3c1797421482e9eef362e754d85",
+      "preregistration_blob_sha": "a3d6a15ef5872c675b177af351c814eb08559059",
       "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
       "spec": {
         "study_id": "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
