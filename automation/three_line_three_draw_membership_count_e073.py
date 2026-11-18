@@ -14,8 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RUNNER = ROOT / "automation/three_line_research_1251_v1.py"
 POLICY_PATH = ROOT / "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json"
-PREREG_PATH = ROOT / "research/weekly_purchase/1251/E073_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_PREREG_20261115.json"
-STUDY_ID = "E073_THREE_LINE_LAG2_MEMBERSHIP_CONTEXT_v1"
+PREREG_PATH = ROOT / "research/weekly_purchase/1251/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_PREREG_20261118.json"
+STUDY_ID = "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1"
 BASE_RATE = 6.0 / 45.0
 PRIOR_STRENGTH = 45.0
 METRICS = ("max_hits", "any2", "any3", "winning_union_coverage")
