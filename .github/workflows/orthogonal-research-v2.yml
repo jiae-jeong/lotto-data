@@ -216,7 +216,11 @@ jobs:
           e068_id='E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1'
           e069_id='E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1'
           e071_id='E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1'
-          assert ids[-9:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id]
+          e072_id='E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1'
+          if e072_id in task_by_id:
+              assert ids[-10:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id,e072_id]
+          else:
+              assert ids[-9:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id]
           e066=task_by_id[e066_id]
           assert e066['kind']=='three_line_gap_shape_transition'
           assert e066['execution_mode']=='dedicated_workflow'
@@ -323,6 +327,35 @@ jobs:
               assert e071['execution_result']['verification_status']=='PASS'
               assert e071['execution_result']['strict_pass_ready'] is False
               assert e071['execution_result']['purchase_recommendation_generated'] is False
+          if e072_id in task_by_id:
+              e072=task_by_id[e072_id]
+              assert e072['kind']=='three_line_rank_probability_calibration'
+              assert e072['execution_mode']=='dedicated_workflow'
+              assert e072['execution_entrypoint']=='automation/three_line_rank_probability_calibration_e072.py'
+              assert e072['workflow_entrypoint']=='.github/workflows/target-1251-e072-rank-probability-calibration.yml'
+              assert e072['preregistration']=='research/weekly_purchase/1251/E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_PREREG_20261118.json'
+              assert e072['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_CALIBRATION_PASS','EXECUTED_HISTORICAL_CALIBRATION_NO_EDGE')
+              assert e072['spec']['execution_status']==e072['execution_status']
+              assert e072['spec']['strict_pass_ready'] is False
+              assert e072['target_1251_three_line_readiness_eligible'] is False
+              e072_prereg=json.loads(Path(e072['preregistration']).read_text(encoding='utf-8'))
+              assert e072['question']==e072_prereg['research_question']
+              assert e072['novelty']==e072_prereg['novelty_statement']
+              assert e072_prereg['independent_research_axis'] is True
+              assert e072_prereg['independent_sample'] is False
+              assert e072_prereg['training_targets']==[201,600]
+              assert e072_prereg['evaluation_targets']==[601,1250]
+              assert e072_prereg['calibration']['bins']==5
+              assert e072_prereg['calibration']['prior_strength']==45
+              assert e072_prereg['random_comparator']['permutations_per_target']==120
+              assert e072_prereg['inference']['alpha_per_metric']==0.025
+              assert e072_prereg['inference']['bootstrap_replicates']==4000
+              assert e072_prereg['inference']['block_length_targets']==50
+              assert e072_prereg['strict_portfolio_policy']['strict_pass_ready'] is False
+              if e072['execution_status']!='PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+                  assert e072['execution_result']['verification_status']=='PASS'
+                  assert e072['execution_result']['strict_pass_ready'] is False
+                  assert e072['execution_result']['purchase_recommendation_generated'] is False
           e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
@@ -348,7 +381,7 @@ jobs:
               assert e064['execution_result']['verification_status']=='PASS'
               assert e064['execution_result']['strict_pass_ready'] is False
               assert e064['execution_result']['purchase_recommendation_generated'] is False
-          print('E030-E071 queue contract PASS; prior IDs retained')
+          print('E030-E072 queue contract PASS; prior IDs retained' if e072_id in task_by_id else 'E030-E071 queue contract PASS; prior IDs retained')
           PY
 
   research:
