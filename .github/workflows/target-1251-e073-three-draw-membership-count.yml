@@ -253,6 +253,10 @@ jobs:
           task["execution_status"] = "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING" if historical_pass else "EXECUTED_HISTORICAL_STRICT_FAIL"
           task["execution_result"] = result
           task["spec"]["execution_status"] = task["execution_status"]
+          task["spec"]["execution_result"] = result
+          task["spec"]["strict_pass_ready"] = False
+          task["spec"]["target_1251_three_line_readiness_eligible"] = False
+          task["execution_completed_at_kst"] = now_kst
           task["result_path"] = str(out)
           audit = json.loads(Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261115.json").read_text(encoding="utf-8"))
           audit["audit_id"] = "THREE_LINE_READINESS_AUDIT_1251_20261118"
@@ -270,9 +274,20 @@ jobs:
           audit["purchase_lines_generated"] = False
           audit["strict_gate_evaluation"] = audit.get("strict_gate_evaluation", "") + "; E073_THREE_DRAW_MEMBERSHIP_COUNT_HISTORICAL_" + ("GATE_PASS_PROSPECTIVE_PENDING" if historical_pass else "STRICT_FAIL")
           axes = audit.get("additional_independent_research_axes", [])
+          for axis_id in ("E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1", "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1"):
+              prior_task = next(x for x in queue["tasks"] if x.get("id") == axis_id)
+              prior_result = dict(prior_task.get("execution_result", {}))
+              prior_result.setdefault("study_id", axis_id)
+              if prior_result and not any(x.get("study_id") == axis_id for x in axes):
+                  axes.append(prior_result)
+              qs_existing = audit.setdefault("research_queue_status", {}).setdefault("completed_dedicated_tasks", {})
+              qs_existing[axis_id.split("_")[0]] = prior_task["execution_status"]
           if not any(x.get("study_id") == study_id for x in axes):
               axes.append(result)
           audit["additional_independent_research_axes"] = axes
+          audit["e071_previous_bonus_distance_axis"] = next((x for x in axes if x.get("study_id") == "E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1"), None)
+          audit["e072_rank_probability_calibration_axis"] = next((x for x in axes if x.get("study_id") == "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1"), None)
+          audit["e073_three_draw_membership_count_axis"] = result
           reason = ("E073 historical four-metric gate passed, but it is not an independent sample and STRICT_PASS_READY remains blocked by the unspecified prospective confirmation rule."
                     if historical_pass else "E073 historical strict gate failed: " + ", ".join(failed) + ".")
           reasons = audit.get("blocking_reasons", [])
@@ -284,9 +299,13 @@ jobs:
           qs.setdefault("completed_dedicated_tasks", {})["E073"] = task["execution_status"]
           qs["three_line_preregistered_axes_remaining"] = []
           qs["three_line_axis_status"] = "E073_EXECUTED_HISTORICAL_ONLY; NO_UNEXECUTED_CURRENT_CUTOFF_PREREGISTERED_THREE_LINE_AXES"
-          qs["target_1251_three_line_task_status"] = qs.get("target_1251_three_line_task_status", "") + "; E073_EXECUTED_HISTORICAL_ONLY"
-          qs["generic_queue_preflight_validation"] = "NO_GENERIC_RESEARCH_PENDING; E073 dedicated three-line signal-family axis completed; no unexecuted current-cutoff preregistered three-line axis remains."
+          qs["target_1251_three_line_task_status"] = "E045_PRIMARY_STRICT_FAIL; E071_E072_E073_EXECUTED_HISTORICAL_ONLY; PROSPECTIVE_CONFIRMATION_RULE_UNSPECIFIED"
+          qs["generic_queue_preflight_validation"] = "NO_GENERIC_RESEARCH_PENDING; E073 dedicated three-draw membership-count axis completed; no unexecuted current-cutoff preregistered three-line axis remains."
           qs["runnable_generic_task_count"] = 0
+          audit["audit_updated_kst"] = now_kst
+          audit["audit_reconciled_at_kst"] = now_kst
+          audit["reconciled_main_sha"] = os.environ["CHECKOUT_SHA"]
+          audit["note"] = audit.get("note", "") + "\\n2026-11-18: E073 three-draw membership-count signal-family screen completed at cutoff 1250; historical only, not an independent sample or prospective confirmation; strict gates and readiness remain unchanged."
           audit_path = Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261118.json")
           audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           daily_path = Path("research/weekly_purchase/1251/DAILY_MASTER_STATUS_1251_20261118.json")
