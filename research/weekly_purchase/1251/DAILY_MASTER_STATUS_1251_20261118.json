@@ -14,7 +14,8 @@
     "E071 preregistered previous-bonus-distance feature-family study completed; historical_gate_pass=False; result=analysis/2026-11-18/gha_44219073207_1/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1.",
     "E072 frozen consensus-rank probability calibration completed; calibration_gate_pass=False; historical candidate-level only; no STRICT_PASS_READY. Result: analysis/2026-11-18/gha_44230929833_1/E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1.",
     "DAILY MASTER #119 (workflow run 44257737102) actually recalculated cumulative statistics through verified cutoff 1250; result commit 215fa1576fb428b09f0d34815bf53169d71878c1. V4 B walk-forward: 1,050 targets/8,400 predictions/1,050,000 random tickets/leakage 0; V5 successor and research-only five-ticket matched-random validation completed; V5 manifest 14/14 PASS. Status remains PARTIAL because legacy A/C/contrarian source implementations and historical purchase/error-note evidence are unavailable.",
-    "E073 preregistered three-draw membership-count signal-family study completed at cutoff 1250; historical_gate_pass=False; strict_pass_ready=false; result=analysis/2026-11-18/gha_44322687962_1/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1."
+    "E073 preregistered three-draw membership-count signal-family study completed at cutoff 1250; historical_gate_pass=False; strict_pass_ready=false; result=analysis/2026-11-18/gha_44322687962_1/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1.",
+    "E074 calendar-month conditional-frequency axis completed at cutoff 1250; historical_gate_pass=False; strict_pass_ready=false; result=analysis/2026-11-18/gha_44336729151_1/E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1."
   ],
   "not_recomputed_today": [
     "Legacy A/C/contrarian original-model walk-forward: original source implementations remain unavailable; successor_v2 outputs are not substitutes.",
@@ -33,7 +34,7 @@
   "strict_pass_ready": false,
   "final_purchase_lines_generated": false,
   "freeze_or_seal_created": false,
-  "next_start": "E073 completed as a historical signal-family screen only. Preserve all strict gates; prospective confirmation minimum and completion rule remain unspecified, and no historical screen can create STRICT_PASS_READY.",
+  "next_start": "E074 completed as historical-only. Preserve strict gates; prospective confirmation minimum and completion rule remain unspecified.",
   "daily_master_run": {
     "workflow_run_id": 44257737102,
     "workflow_run_number": 119,
@@ -56,8 +57,8 @@
   "master_data_cutoff": 1250,
   "cutoff_match": true,
   "latest_historical_axis": {
-    "study_id": "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
-    "evidence_class": "HISTORICAL_NEW_SIGNAL_FAMILY_SCREEN_NOT_INDEPENDENT_SAMPLE_OR_PROSPECTIVE_CONFIRMATION",
+    "study_id": "E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+    "evidence_class": "HISTORICAL_NEW_CALENDAR_FEATURE_SCREEN_NOT_INDEPENDENT_SAMPLE_OR_PROSPECTIVE_CONFIRMATION",
     "historical_gate_pass": false,
     "strict_portfolio_pass": false,
     "strict_pass_ready": false,
@@ -70,42 +71,42 @@
     ],
     "metrics": {
       "max_hits": {
-        "observed_mean": 1.5082352941176471,
+        "observed_mean": 1.5070588235294118,
         "exact_geometry_matched_null": 1.514256248572755,
-        "delta_mean": -0.006020954455108033,
+        "delta_mean": -0.007197425043343326,
         "adjusted_moving_block_ci": [
-          -0.0730797779845198,
-          0.06339081025077432
+          -0.06366801327863744,
+          0.05750845730959785
         ],
         "lower_bound_strictly_gt_zero": false
       },
       "any2": {
-        "observed_mean": 0.47294117647058825,
+        "observed_mean": 0.4541176470588235,
         "exact_geometry_matched_null": 0.47497624326892623,
-        "delta_mean": -0.0020350667983379733,
+        "delta_mean": -0.020858596210102682,
         "adjusted_moving_block_ci": [
-          -0.04909389032774974,
-          0.04972963908401497
+          -0.06791741973951444,
+          0.026200227319309086
         ],
         "lower_bound_strictly_gt_zero": false
       },
       "any3": {
-        "observed_mean": 0.07176470588235294,
+        "observed_mean": 0.07411764705882352,
         "exact_geometry_matched_null": 0.07135490714617204,
-        "delta_mean": 0.0004097987361808953,
+        "delta_mean": 0.002762739912651483,
         "adjusted_moving_block_ci": [
-          -0.020766671852054396,
-          0.0192333281479456
+          -0.014884318910877927,
+          0.022762739912651483
         ],
         "lower_bound_strictly_gt_zero": false
       },
       "winning_union_coverage": {
-        "observed_mean": 2.4105882352941177,
+        "observed_mean": 2.387058823529412,
         "exact_geometry_matched_null": 2.4,
-        "delta_mean": 0.010588235294117735,
+        "delta_mean": -0.012941176470588147,
         "adjusted_moving_block_ci": [
-          -0.08117647058823521,
-          0.1164705882352942
+          -0.09529411764705874,
+          0.07176470588235304
         ],
         "lower_bound_strictly_gt_zero": false
       }
@@ -114,9 +115,9 @@
     "target_count": 850,
     "random_bundles_total": 102000,
     "manifest_entries": 8,
-    "workflow_run_id": 44322687962,
-    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44322687962",
-    "result_path": "analysis/2026-11-18/gha_44322687962_1/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
+    "workflow_run_id": 44336729151,
+    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44336729151",
+    "result_path": "analysis/2026-11-18/gha_44336729151_1/E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
     "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
     "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
   },
