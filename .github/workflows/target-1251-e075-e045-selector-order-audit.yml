@@ -35,10 +35,10 @@ jobs:
           import csv, hashlib, json, os, subprocess
           from pathlib import Path
 
-          prereg_path = Path("research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119.json")
-          runner_path = Path("automation/three_line_research_1251_e075_corrected_v1.py")
-          test_path = Path("automation/tests_v2/test_three_line_e075_selector_order_audit.py")
-          queue_test_path = Path("automation/tests_v2/test_e075_queue_contract.py")
+          prereg_path = Path("research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119_V2.json")
+          runner_path = Path("automation/three_line_research_1251_e075_corrected_v2.py")
+          test_path = Path("automation/tests_v2/test_three_line_e075_selector_order_audit_v2.py")
+          queue_test_path = Path("automation/tests_v2/test_e075_queue_contract_v2.py")
           workflow_path = Path(".github/workflows/target-1251-e075-e045-selector-order-audit.yml")
           base_runner_path = Path("automation/three_line_research_1251_v1.py")
           reference_path = Path("automation/five_role_research_v9.py")
@@ -47,6 +47,8 @@ jobs:
           policy_path = Path("research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json")
           base_prereg_path = Path("research/weekly_purchase/1251/THREE_LINE_RESEARCH_PREREG_E045_20261114.json")
           refresh_path = Path("research/weekly_purchase/1251/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1.json")
+          v1_prereg_path = Path("research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119.json")
+          addendum_path = Path("research/weekly_purchase/1251/E075_EXECUTION_ATTEMPT_1_REPAIR_ADDENDUM_20261119.json")
           data_path = Path("lotto_data.csv")
           queue_path = Path("automation/research_queue_v2.json")
 
@@ -54,6 +56,7 @@ jobs:
           policy = json.loads(policy_path.read_text(encoding="utf-8"))
           base_prereg = json.loads(base_prereg_path.read_text(encoding="utf-8"))
           refresh = json.loads(refresh_path.read_text(encoding="utf-8"))
+          v1_prereg = json.loads(v1_prereg_path.read_text(encoding="utf-8"))
           queue = json.loads(queue_path.read_text(encoding="utf-8"))
 
           def blob(path):
@@ -73,6 +76,8 @@ jobs:
               "data_blob_sha": data_path,
               "base_prereg_blob_sha": base_prereg_path,
               "cutoff_refresh_prereg_blob_sha": refresh_path,
+              "v1_prereg_blob_sha": v1_prereg_path,
+              "attempt_1_addendum_blob_sha": addendum_path,
           }
           for key, path in expected.items():
               assert frozen[key] == blob(path), (key, frozen[key], blob(path))
@@ -87,7 +92,10 @@ jobs:
           assert prereg["random_comparator"] == refresh["random_comparator"]
           assert prereg["inference"] == base_prereg["inference"]
           assert prereg["implementation_correction"]["only_change"] is True
-          assert prereg["implementation_correction"]["candidate_pool_unchanged"] is True
+          assert prereg["implementation_correction"]["candidate_pool_ranking_rule_unchanged"] is True
+          assert prereg["repair_of_attempt_1"]["failed_workflow_run_id"] == 44424313742
+          assert prereg["repair_of_attempt_1"]["separate_used_sets"] is True
+          assert prereg["repair_of_attempt_1"]["no_historical_metrics_were_generated"] is True
           assert prereg["implementation_correction"]["model_weights_unchanged"] is True
           assert prereg["implementation_correction"]["strict_gate_unchanged"] is True
           assert prereg["prospective_confirmation"]["minimum_target_count"] is None
@@ -130,7 +138,7 @@ jobs:
       - name: Compile and run frozen E075 tests
         run: |
           python -m py_compile automation/three_line_research_1251_e075_corrected_v1.py automation/tests_v2/test_three_line_e075_selector_order_audit.py automation/tests_v2/test_e075_queue_contract.py
-          python -B -m unittest automation.tests_v2.test_three_line_e075_selector_order_audit automation.tests_v2.test_e075_queue_contract -v
+          python -B -m unittest automation.tests_v2.test_three_line_e075_selector_order_audit_v2 automation.tests_v2.test_e075_queue_contract_v2 -v
       - name: Execute paired legacy-versus-corrected walk-forward
         id: execute
         shell: bash
@@ -140,7 +148,7 @@ jobs:
           RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
-          python -B automation/three_line_research_1251_e075_corrected_v1.py --date "$DATE" --run-id "$RUN_ID"
+          python -B automation/three_line_research_1251_e075_corrected_v2.py --date "$DATE" --run-id "$RUN_ID"
       - name: Verify manifests, cutoff, leakage, and non-promotion
         env:
           RUN_DATE: ${{ steps.execute.outputs.date }}
@@ -168,7 +176,9 @@ jobs:
           assert verification["training_cutoff_violations"] == 0 and verification["leakage_failures"] == 0
           assert verification["future_predictions"] == 0 and verification["no_future_leakage"] is True
           assert verification["portfolio_geometry_violations"] == 0 and verification["random_geometry_violations"] == 0
-          assert verification["candidate_pool_comparisons"] == 2550 and verification["candidate_pool_mismatches"] == 0
+          assert verification["candidate_pool_comparisons"] == 2550
+          assert verification["candidate_pool_rule_identical"] is True
+          assert verification["first_role_pool_mismatches"] == 0
           assert verification["strict_pass_ready"] is False and verification["purchase_recommendation_generated"] is False
           assert inference["targets"] == 850 and inference["random_bundles_total_per_version"] == 102000
           assert inference["block_count"] == 17
@@ -222,7 +232,9 @@ jobs:
               "random_bundles_per_target_per_version": 120,
               "random_bundles_total_per_version": 102000,
               "candidate_pool_comparisons": verification["candidate_pool_comparisons"],
-              "candidate_pool_mismatches": verification["candidate_pool_mismatches"],
+              "candidate_pool_rule_identical": verification["candidate_pool_rule_identical"],
+              "first_role_pool_mismatches": verification["first_role_pool_mismatches"],
+              "downstream_pool_content_differences": verification["downstream_pool_content_differences"],
               "legacy_order_consecutive_mismatches": verification["legacy_order_consecutive_mismatches"],
               "targets_with_changed_lines": verification["targets_with_changed_lines"],
               "changed_line_count": verification["changed_line_count"],
@@ -261,7 +273,9 @@ jobs:
 
           - Source cutoff: 1250; rows: 1250; SHA-256: {os.environ["DATA_SHA"]}
           - Walk-forward targets: 401–1250 (850); every target used training through t-1
-          - Candidate-pool comparisons: {verification["candidate_pool_comparisons"]}; mismatches: {verification["candidate_pool_mismatches"]}
+          - Candidate-pool ranking rule comparisons: {verification["candidate_pool_comparisons"]}; rule unchanged: {verification["candidate_pool_rule_identical"]}
+          - First-role candidate-pool mismatches: {verification["first_role_pool_mismatches"]}
+          - Downstream pool-content differences caused by prior line selections: {verification["downstream_pool_content_differences"]}
           - Legacy score-order adjacency mismatches: {verification["legacy_order_consecutive_mismatches"]}
           - Targets with changed line assignments: {verification["targets_with_changed_lines"]}/850; changed role-lines: {verification["changed_line_count"]}
           - Matched random bundles: 102,000 per version, using the same label-permutation maps for legacy and corrected portfolios
