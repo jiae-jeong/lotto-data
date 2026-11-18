@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract through E074 verifies pending preregistration and completed evidence states.
+# Queue contract through E074 verifies pending preregistration, terminal execution state, and evidence metadata.
 
 on:
   workflow_dispatch:
