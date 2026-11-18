@@ -5,29 +5,114 @@
   "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
   "daily_master_status": "PARTIAL",
   "completed_today": [
-    "GitHub main/protocol/AGENTS and latest operational scorecards inspected",
-    "historical recommendation and error-note originals searched",
-    "E069 frozen blobs and cutoff/geometry audited",
-    "E070 preregistered implementation-conformance and two-stage diagnostic calculated and saved",
-    "target 1251 strict fail status updated"
+    "DAILY MASTER #117 actually recomputed cumulative statistics through verified cutoff 1250.",
+    "B full walk-forward completed: 1,050 targets, 8,400 predictions, 1,050,000 random tickets, leakage failures 0.",
+    "Successor A_v2/C_v2/contrarian_v2 walk-forward completed; these are not substitutes for unrecovered legacy A/C/contrarian models.",
+    "Candidate-recall stage completed on 1,050 targets with 210,000 matched-random sets and no future leakage.",
+    "E070 E069 implementation-conformance and candidate/portfolio-stage audit completed.",
+    "E069 fixed-prior corrective re-execution completed; same hypothesis, historical only, STRICT_FAIL, not an independent axis.",
+    "E071 preregistered previous-bonus-distance feature-family study completed; historical_gate_pass=False; result=analysis/2026-11-18/gha_44219073207_1/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1."
   ],
   "not_recomputed_today": [
-    "full long vs recent 10/30/50/100 scorecard",
-    "full B-model rolling walk-forward",
-    "A/C/contrarian v2 walk-forward",
-    "pair/triple full multiple-testing family",
-    "structure transition ablation"
+    "Legacy A/C/contrarian original-model walk-forward: original source implementations remain unavailable; successor_v2 outputs are not substitutes.",
+    "Historical actual-purchase/error-note closed-loop aggregate: PURCHASE_CONFIRMATION_REGISTRY contains zero confirmed purchases.",
+    "Prospective confirmation: minimum target count and completion rule remain unspecified."
   ],
   "blockers": [
-    "Legacy A/C/contrarian original implementations remain unavailable; v2 diagnostics are not substitutes.",
-    "PURCHASE_CONFIRMATION_REGISTRY has zero confirmed purchases; historical recommendation files cannot be treated as actual purchases.",
-    "Prospective confirmation minimum target count and completion rule remain unspecified.",
-    "E069 executed estimator does not match its preregistered fixed 6/45 prior; original artifacts are preserved and the run is not promoted.",
-    "E070 registered-formula candidate and portfolio historical diagnostics did not pass; no prospective confirmation."
+    "Legacy A/C/contrarian original implementations remain unavailable; successor_v2 diagnostics do not satisfy the legacy model gates.",
+    "PURCHASE_CONFIRMATION_REGISTRY has zero confirmed purchases; historical recommendations cannot be treated as actual purchases.",
+    "Prospective confirmation minimum target count and completion rule remain unspecified; historical results cannot create STRICT_PASS_READY.",
+    "E069 original runner was nonconformant; its separate fixed-prior corrective re-execution completed and failed the historical strict gate.",
+    "DAILY MASTER model validation tested 11 models and validated_models is empty; the E045 primary failed max_hits, any2, any3, winning_union_coverage and 50-target block stability.",
+    "E071 historical gate failed; no purchase readiness is granted."
   ],
   "no_future_leakage": true,
   "strict_pass_ready": false,
   "final_purchase_lines_generated": false,
   "freeze_or_seal_created": false,
-  "next_start": "Correct E069 in a separate version with formula unit test; then audit E045 selector structure penalty; policy-design prospective confirmation count without changing strict thresholds."
+  "next_start": "E071 historical strict gate failed. Preserve the unchanged strict thresholds; prioritize recovery of legacy A/C/contrarian sources and verified actual-purchase records, and do not run historical microvariants.",
+  "daily_master_run": {
+    "workflow_run_id": 44208557983,
+    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44208557983",
+    "conclusion": "SUCCESS",
+    "trigger_commit": "e75d5b8944d85866f9df320f5ff0b8a8a51ecf31",
+    "result_commit": "88f0c10265e108eb524bee043b9e53285b653a82",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "b_targets": 1050,
+    "b_predictions": 8400,
+    "random_tickets": 1050000,
+    "leakage_failures": 0,
+    "v5_manifest_entries": 14,
+    "v5_manifest_status": "PASS"
+  },
+  "latest_research_cutoff": 1250,
+  "master_data_cutoff": 1250,
+  "cutoff_match": true,
+  "latest_historical_axis": {
+    "study_id": "E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
+    "evidence_class": "HISTORICAL_EXPLORATORY_DISTINCT_FEATURE_FAMILY_NOT_PROSPECTIVE_CONFIRMATION",
+    "historical_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "metrics": {
+      "max_hits": {
+        "observed_mean": 1.4870588235294118,
+        "random_mean": 1.5122058823529412,
+        "delta_mean": -0.02514705882352941,
+        "adjusted_moving_block_ci": [
+          -0.0612156862745098,
+          0.014343137254901958
+        ],
+        "lower_bound_strictly_gt_zero": false
+      },
+      "any2": {
+        "observed_mean": 0.46352941176470586,
+        "random_mean": 0.4735686274509804,
+        "delta_mean": -0.010039215686274508,
+        "adjusted_moving_block_ci": [
+          -0.03552941176470588,
+          0.0181078431372549
+        ],
+        "lower_bound_strictly_gt_zero": false
+      },
+      "any3": {
+        "observed_mean": 0.06352941176470588,
+        "random_mean": 0.0706078431372549,
+        "delta_mean": -0.007078431372549019,
+        "adjusted_moving_block_ci": [
+          -0.025941176470588235,
+          0.009421568627450982
+        ],
+        "lower_bound_strictly_gt_zero": false
+      },
+      "winning_union_coverage": {
+        "observed_mean": 2.3117647058823527,
+        "random_mean": 2.3973333333333335,
+        "delta_mean": -0.0855686274509804,
+        "adjusted_moving_block_ci": [
+          -0.16900980392156864,
+          0.00750980392156862
+        ],
+        "lower_bound_strictly_gt_zero": false
+      }
+    },
+    "any2_positive_50_target_block_share": 0.5882352941176471,
+    "data_cutoff": 1250,
+    "target_count": 850,
+    "random_bundles_total": 102000,
+    "manifest_entries": 8,
+    "workflow_run_id": 44219073207,
+    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44219073207",
+    "result_path": "analysis/2026-11-18/gha_44219073207_1/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
+  }
 }
