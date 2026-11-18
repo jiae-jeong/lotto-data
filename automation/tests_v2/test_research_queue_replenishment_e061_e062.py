@@ -202,8 +202,8 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
                     self.assertEqual(len(payload), int(row["bytes"]), row["path"])
                     self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
 
-    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068_e069_e071_e072(self):
-        self.assertEqual([task["id"] for task in self.tasks[-10:]], [
+    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068_e069_e071_e072_e073(self):
+        self.assertEqual([task["id"] for task in self.tasks[-11:]], [
             "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
             "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
             "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
@@ -214,7 +214,68 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
             "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
             "E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
             "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
+            "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
         ])
+
+    def test_e073_three_draw_membership_count_is_frozen_and_never_purchase_ready(self):
+        task = self.by_id["E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1"]
+        self.assertEqual(task["kind"], "three_line_three_draw_membership_count_transition")
+        self.assertEqual(task["execution_mode"], "dedicated_workflow")
+        self.assertEqual(task["execution_entrypoint"], "automation/three_line_three_draw_membership_count_e073.py")
+        self.assertEqual(task["workflow_entrypoint"], ".github/workflows/target-1251-e073-three-draw-membership-count.yml")
+        self.assertTrue(task["independent_research_axis"])
+        self.assertFalse(task["independent_sample"])
+        self.assertFalse(task["target_1251_three_line_readiness_eligible"])
+        self.assertIn(task["execution_status"], (
+            "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+            "EXECUTED_HISTORICAL_STRICT_FAIL",
+            "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING",
+        ))
+        self.assertEqual(task["spec"]["execution_status"], task["execution_status"])
+        prereg = json.loads((ROOT / task["preregistration"]).read_text(encoding="utf-8"))
+        self.assertEqual(prereg["preregistration_status"], "FROZEN_BEFORE_EXECUTION")
+        self.assertTrue(prereg["independent_research_axis"])
+        self.assertTrue(prereg["independent_signal_family"])
+        self.assertFalse(prereg["independent_sample"])
+        self.assertEqual(prereg["historical_data_cutoff"], 1250)
+        self.assertEqual(prereg["target_rounds"], "401..1250 inclusive")
+        self.assertEqual(prereg["feature_definition"]["state_encoding"], {
+            "0": "candidate absent from all three immediately preceding main draws",
+            "1": "candidate present in exactly one of the three immediately preceding main draws",
+            "2": "candidate present in exactly two of the three immediately preceding main draws",
+            "3": "candidate present in all three immediately preceding main draws",
+        })
+        self.assertEqual(prereg["estimator"]["prior_strength"], 45)
+        self.assertEqual(prereg["random_comparator"]["random_bundles_per_target"], 120)
+        self.assertEqual(prereg["inference"]["alpha_per_metric"], 0.0125)
+        self.assertEqual(prereg["inference"]["bootstrap_replicates"], 4000)
+        self.assertEqual(prereg["inference"]["block_length_targets"], 50)
+        self.assertIsNone(prereg["prospective_confirmation"]["minimum_target_count"])
+        self.assertIsNone(prereg["prospective_confirmation"]["completion_rule"])
+        if task["execution_status"] != "PREREGISTERED_PENDING_DEDICATED_WORKFLOW":
+            result = task["execution_result"]
+            self.assertEqual(result["verification_status"], "PASS")
+            self.assertFalse(result["strict_portfolio_pass"])
+            self.assertFalse(result["strict_pass_ready"])
+            self.assertFalse(result["purchase_recommendation_generated"])
+            self.assertEqual(result["data_cutoff"], 1250)
+            self.assertEqual(result["target_count"], 850)
+            self.assertEqual(result["random_bundles_total"], 102000)
+            self.assertEqual(result["manifest_entries"], 8)
+            root = ROOT / task["result_path"]
+            verification = json.loads((root / "VERIFICATION.json").read_text(encoding="utf-8"))
+            self.assertEqual(verification["status"], "PASS")
+            self.assertEqual(verification["training_cutoff_violations"], 0)
+            self.assertEqual(verification["leakage_failures"], 0)
+            self.assertEqual(verification["future_predictions"], 0)
+            self.assertFalse(verification["strict_pass_ready"])
+            with (root / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="") as stream:
+                manifest = list(csv.DictReader(stream))
+            self.assertEqual(len(manifest), 8)
+            for row in manifest:
+                payload = (root / row["path"]).read_bytes()
+                self.assertEqual(len(payload), int(row["bytes"]), row["path"])
+                self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
 
     def test_e072_rank_probability_calibration_is_historical_no_edge_and_never_purchase_ready(self):
         task = self.by_id["E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1"]
