@@ -1,0 +1,72 @@
+{
+  "study_id": "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
+  "date_kst": "2026-11-18",
+  "preregistered_at_kst": "2026-11-18T12:18:00+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "target_round": 1251,
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "study_class": "historical_candidate_rank_probability_calibration_chronological_holdout",
+  "research_question": "Does one fixed five-bin Beta-binomial calibration of the existing consensus candidate score, fitted only on targets 201..600 and frozen for targets 601..1250, improve candidate main-number inclusion probability forecasts over the exact uniform 6/45 marginal baseline under Brier score and log loss?",
+  "novelty_statement": "Prior candidate-recall work evaluated top-k capture counts, while E045/E048-E071 evaluated three-line portfolio hit metrics or distinct lagged feature families. E072 tests a different question: whether the full 45-number consensus score can be converted into calibrated marginal inclusion probabilities that improve proper scoring rules on a chronologically later holdout. One fixed score, one fixed five-bin estimator, one fixed train/test split, no variants, no parameter search. This is a new calibration research axis, not a claim of independent sample or portfolio readiness.",
+  "independent_research_axis": true,
+  "independent_signal_family": false,
+  "independent_sample": false,
+  "historical_exploration_only": true,
+  "target_1251_three_line_readiness_eligible": false,
+  "historical_data_cutoff": 1250,
+  "source_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "source_data_blob_sha1": "66431d711919f179e4cb1349e2f7295c68a8735e",
+  "feature_source": "automation/candidate_recall_v1.py::features(draws)['consensus']",
+  "feature_source_blob_sha1": "88bf52cb2918da8aeecdac60e3b63fc1f180a8de",
+  "training_targets": [201, 600],
+  "evaluation_targets": [601, 1250],
+  "training_cutoff_rule": "For each target t, compute the consensus score for each number using only draws 1..t-1. Fit quintile cutpoints and Beta-binomial bin probabilities using only candidate labels from training targets 201..600. Freeze all calibration parameters before evaluating targets 601..1250; evaluation outcomes never update cutpoints or probabilities.",
+  "score_definition": "mean(recent30_z, gap_z, momentum_z, balanced_z, contrarian_z), exactly matching the frozen candidate_recall_v1.py feature implementation",
+  "calibration": {
+    "bins": 5,
+    "binning": "nearest-rank empirical quintiles of the 18,000 training candidate scores; cutpoint index ceil(k*N/5)-1 for k=1..4",
+    "tie_rule": "bisect_right; a score equal to a cutpoint enters the higher bin",
+    "prior_mean": 0.13333333333333333,
+    "prior_strength": 45,
+    "prior_successes": 6,
+    "formula": "(bin_hits + 6) / (bin_exposures + 45)",
+    "expected_six_normalization": "For each evaluation target, add a single common logit intercept to the 45 raw probabilities by bisection until their sum is exactly six; no outcome information is used."
+  },
+  "random_comparator": {
+    "method": "For each evaluation target, randomly permute the 45 normalized model probabilities over the 45 number labels, preserving the complete probability multiset and six-probability sum.",
+    "permutations_per_target": 120,
+    "seed": 20261118072,
+    "total_permutations": 78000
+  },
+  "uniform_baseline": {
+    "method": "Exact marginal main-number inclusion probability 6/45 for each of the 45 numbers.",
+    "probability": 0.13333333333333333
+  },
+  "inference": {
+    "primary_metrics": ["Brier score", "log loss"],
+    "direction": "lower is better",
+    "comparison": "paired per-target model loss minus exact uniform-baseline loss",
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.025,
+    "ci": "two-sided percentile moving-block bootstrap; 4,000 replicates; 50-target blocks; sample 13 blocks and truncate to the original 650 targets",
+    "bootstrap_replicates": 4000,
+    "block_length_targets": 50,
+    "promotion_rule": "Both Bonferroni-adjusted 97.5% two-sided CI upper bounds for model-minus-uniform Brier and log loss must be strictly below zero. Random-permutation results are reported as an executed rank-randomization control.",
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "strict_portfolio_policy": {
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "target_1251_three_line_readiness_eligible": false,
+    "reason": "Candidate probability calibration is not a three-line portfolio evaluation and cannot qualify STRICT_PASS_READY, even if its own calibration gate passes.",
+    "purchase_recommendation_generated": false,
+    "final_purchase_lines_generated": false
+  },
+  "variants_evaluated": 1,
+  "parameter_search": false,
+  "thresholds_or_policy_changed": false
+}
