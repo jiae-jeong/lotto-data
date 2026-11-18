@@ -217,7 +217,10 @@ jobs:
           e069_id='E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1'
           e071_id='E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1'
           e072_id='E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1'
-          if e072_id in task_by_id:
+          e073_id='E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1'
+          if e073_id in task_by_id:
+              assert ids[-11:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id,e072_id,e073_id]
+          elif e072_id in task_by_id:
               assert ids[-10:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id,e072_id]
           else:
               assert ids[-9:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id]
@@ -356,6 +359,39 @@ jobs:
                   assert e072['execution_result']['verification_status']=='PASS'
                   assert e072['execution_result']['strict_pass_ready'] is False
                   assert e072['execution_result']['purchase_recommendation_generated'] is False
+          if e073_id in task_by_id:
+              e073=task_by_id[e073_id]
+              assert e073['kind']=='three_line_three_draw_membership_count_transition'
+              assert e073['execution_mode']=='dedicated_workflow'
+              assert e073['execution_entrypoint']=='automation/three_line_three_draw_membership_count_e073.py'
+              assert e073['workflow_entrypoint']=='.github/workflows/target-1251-e073-three-draw-membership-count.yml'
+              assert e073['preregistration']=='research/weekly_purchase/1251/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_PREREG_20261118.json'
+              assert e073['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+              assert e073['spec']['execution_status']==e073['execution_status']
+              assert e073['spec']['strict_pass_ready'] is False
+              assert e073['independent_research_axis'] is True
+              assert e073['independent_sample'] is False
+              assert e073['target_1251_three_line_readiness_eligible'] is False
+              e073_prereg=json.loads(Path(e073['preregistration']).read_text(encoding='utf-8'))
+              assert e073['question']==e073_prereg['research_question']
+              assert e073['novelty']==e073_prereg['novelty_statement']
+              assert e073_prereg['independent_research_axis'] is True
+              assert e073_prereg['independent_sample'] is False
+              assert e073_prereg['historical_data_cutoff']==1250
+              assert e073_prereg['target_rounds']=='401..1250 inclusive'
+              assert e073_prereg['feature_definition']['state_encoding']['3']=='candidate present in all three immediately preceding main draws'
+              assert e073_prereg['estimator']['prior_strength']==45
+              assert e073_prereg['random_comparator']['random_bundles_per_target']==120
+              assert e073_prereg['inference']['alpha_per_metric']==0.0125
+              assert e073_prereg['inference']['bootstrap_replicates']==4000
+              assert e073_prereg['inference']['block_length_targets']==50
+              assert e073_prereg['prospective_confirmation']['minimum_target_count'] is None
+              assert e073_prereg['prospective_confirmation']['completion_rule'] is None
+              if e073['execution_status']!='PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+                  assert e073['execution_result']['verification_status']=='PASS'
+                  assert e073['execution_result']['strict_pass_ready'] is False
+                  assert e073['execution_result']['purchase_recommendation_generated'] is False
+
           e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
