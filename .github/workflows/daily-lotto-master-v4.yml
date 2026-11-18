@@ -577,3 +577,4 @@ jobs:
 # Operational catch-up trigger 2026-11-17: no schedule or workflow behavior change.
 
 # Re-run full DAILY MASTER after exact-integer momentum ranking repair on 2026-11-17; no schedule or workflow behavior change.
+# Operational catch-up trigger 2026-11-18 09:30 KST: recover the missed scheduled DAILY MASTER run; schedule unchanged.
