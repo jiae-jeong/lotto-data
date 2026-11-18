@@ -1,0 +1,72 @@
+{
+  "study_id": "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
+  "feature_definition": {
+    "source": "The three immediately preceding draws' six main numbers only; bonus numbers are excluded.",
+    "state_encoding": {
+      "0": "candidate absent from all three immediately preceding main draws",
+      "1": "candidate present in exactly one of the three immediately preceding main draws",
+      "2": "candidate present in exactly two of the three immediately preceding main draws",
+      "3": "candidate present in all three immediately preceding main draws"
+    },
+    "candidate_universe": "All integers 1..45 are scored for every target.",
+    "transition_history": "For each historical outcome round u=4..t-1, classify every candidate by its count of appearances in draws u-3, u-2, and u-1, then observe inclusion in draw u."
+  },
+  "estimator": {
+    "prior_mean": "6/45 main-number inclusion probability under the uniform 6-of-45 null",
+    "prior_strength": 45,
+    "state_definition": "Count 0..3 of candidate appearances in the three immediately preceding main draws.",
+    "posterior_probability": "(success[state,n] + 45*(6/45))/(exposure[state,n] + 45)",
+    "ranking": "Score descending, then number ascending.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "portfolio": {
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "selection": "Three sequential calls to the unchanged E045 choose_disjoint_ticket selector, passing the E073 score as both role_score and global_score; remove selected numbers after each line.",
+    "line_order": "Line 1, then line 2, then line 3, each selected from the remaining unused numbers.",
+    "randomness_in_selection": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+    "random_bundles_per_target": 120,
+    "seed": 20261118073,
+    "exact_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    },
+    "randomness_used_for_final_selection": false
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null.",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261118073,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "selection_uses_randomness": false,
+  "parameter_search": false,
+  "variants_evaluated": 1,
+  "source_hashes": {
+    "research/weekly_purchase/1251/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_PREREG_20261118.json": "5c5d9a7dd3cbe3511cd26cf5a558c0cf9a82a0c28e0db147965913a1e22d2e6e",
+    "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json": "0e806768fb65a2f50ced37b1a93f681e5f96648bc6e3433c8366444398bee334",
+    "automation/three_line_research_1251_v1.py": "296181ea34f7abec078e48c345589c3023e1f81dea5822f54dc953923b0aca91",
+    "automation/three_line_three_draw_membership_count_e073.py": "81194848767dd557cc7e57cd15671e22180598e9f769983eab9d351a1c6af75d"
+  }
+}
