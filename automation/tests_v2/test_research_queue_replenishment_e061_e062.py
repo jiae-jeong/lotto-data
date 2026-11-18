@@ -1,4 +1,4 @@
-# E069 result evidence is checked after its dedicated workflow publishes the immutable manifest.
+# E069 and E071 result evidence are checked after their dedicated workflows publish immutable manifests.
 import csv
 import hashlib
 import json
@@ -202,8 +202,8 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
                     self.assertEqual(len(payload), int(row["bytes"]), row["path"])
                     self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
 
-    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068_e069(self):
-        self.assertEqual([task["id"] for task in self.tasks[-8:]], [
+    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068_e069_e071(self):
+        self.assertEqual([task["id"] for task in self.tasks[-9:]], [
             "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
             "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
             "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
@@ -212,6 +212,7 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
             "E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
             "E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1",
             "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
+            "E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
         ])
 
 
