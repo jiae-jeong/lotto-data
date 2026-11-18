@@ -4227,17 +4227,17 @@
       "id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
       "kind": "implementation_conformance_correction",
       "question": "Does the frozen E045 three-line selector evaluate the consecutive-pair penalty and lexicographic tie-break on the sorted six-number ticket, as required by its preregistration?",
-      "novelty": "A static comparison found that E045 enumerates six-number combinations in score-ranked candidate-pool order, but computes consecutive adjacency and lexicographic tie-break on that unsorted order. E075 preserves E045 as the legacy comparator and changes only those two order-dependent operations. It compares both implementations on the same cutoff-safe predictions, same role scores, same top-16 candidate pools, same target outcomes, and same per-target label-permutation maps. This is an implementation-conformance correction, not a new signal family or independent sample.",
+      "novelty": "A static comparison found that E045 enumerates six-number combinations in score-ranked candidate-pool order, but computes consecutive adjacency and lexicographic tie-break on that unsorted order. E075 preserves E045 as the legacy comparator and changes only those two order-dependent operations. Both portfolios are built independently with separate used-number sets. The same cutoff-safe predictions and role scores are used; the top-16 candidate-pool ranking rule, model weights, line order, exact null, random seed, alpha, block size, and strict gates remain unchanged. Later available candidate-pool contents may differ only because earlier selected lines differ. This is an implementation-conformance correction, not a new signal family or independent sample.",
       "independent_research_axis": false,
       "independent_sample": false,
       "data_cutoff": 1250,
       "target_rounds": "401..1250 inclusive",
       "target_1251_three_line_readiness_eligible": false,
       "execution_mode": "dedicated_workflow",
-      "execution_entrypoint": "automation/three_line_research_1251_e075_corrected_v1.py",
+      "execution_entrypoint": "automation/three_line_research_1251_e075_corrected_v2.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e075-e045-selector-order-audit.yml",
-      "preregistration": "research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119.json",
-      "preregistration_blob_sha": "29b79ca7bdd08fff21ea1df932fa12a723c3998d",
+      "preregistration": "research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119_V2.json",
+      "preregistration_blob_sha": "b149e7e338131ee9cfafb9792232fc4728b42a15",
       "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
       "spec": {
         "study_id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
@@ -4250,8 +4250,21 @@
         "target_1251_three_line_readiness_eligible": false,
         "independent_research_axis": false,
         "independent_sample": false,
-        "only_change": "sorted-ticket consecutive-pair count and sorted-ticket lexicographic tie-break"
-      }
+        "runner_version": 2,
+        "only_change": "sorted-ticket consecutive-pair count and sorted-ticket lexicographic tie-break",
+        "separate_used_sets": true,
+        "candidate_pool_ranking_rule_unchanged": true,
+        "failed_attempt_1_preserved": true
+      },
+      "attempt_history": [
+        {
+          "workflow_run_id": 44424313742,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44424313742",
+          "status": "FAILED_BEFORE_ANY_HISTORICAL_METRIC_OUTPUT",
+          "failure": "shared used-number set caused legacy portfolio union18 violation at target 248",
+          "addendum": "research/weekly_purchase/1251/E075_EXECUTION_ATTEMPT_1_REPAIR_ADDENDUM_20261119.json"
+        }
+      ]
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
