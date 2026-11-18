@@ -12,7 +12,7 @@
   "strict_portfolio_pass": false,
   "strict_pass_ready": false,
   "strict_gate_version": null,
-  "strict_gate_evaluation": "E045_HISTORICAL_STRICT_FAIL_AT_CUTOFF_1250; E069_IMPLEMENTATION_CONFORMANCE_FAIL; E070_REGISTERED_FORMULA_HISTORICAL_STRICT_FAIL",
+  "strict_gate_evaluation": "E045_HISTORICAL_STRICT_FAIL_AT_CUTOFF_1250",
   "ready_file": null,
   "ready_file_exists": false,
   "line_level_output_status": "SUPPRESSED_NOT_READY",
@@ -30,121 +30,81 @@
   "final_selection_randomness": false,
   "random_fallback_allowed": false,
   "final_purchase_freeze_allowed": false,
-  "candidate_stage": {
-    "evidence": "E070 historical diagnostic only; 401..1250, 850 targets",
-    "status": "NO_ADVANTAGE_ESTABLISHED",
-    "recall_at_k": {
-      "10": {
-        "observed": 0.216078431372549,
-        "exact_random": 0.2222222222222222,
-        "delta": -0.006143790849673203,
-        "adjusted_ci": [
-          -0.01849673202614366,
-          0.006405228758169978
-        ]
-      },
-      "15": {
-        "observed": 0.3243137254901961,
-        "exact_random": 0.3333333333333333,
-        "delta": -0.009019607843137212,
-        "adjusted_ci": [
-          -0.02156862745098037,
-          0.0037254901960784245
-        ]
-      },
-      "20": {
-        "observed": 0.44058823529411767,
-        "exact_random": 0.4444444444444444,
-        "delta": -0.0038562091503267504,
-        "adjusted_ci": [
-          -0.017777777777777795,
-          0.01124183006535947
-        ]
-      },
-      "25": {
-        "observed": 0.5529411764705883,
-        "exact_random": 0.5555555555555556,
-        "delta": -0.002614379084967311,
-        "adjusted_ci": [
-          -0.015555555555555526,
-          0.009934640522875788
-        ]
-      },
-      "30": {
-        "observed": 0.6609803921568628,
-        "exact_random": 0.6666666666666666,
-        "delta": -0.005686274509803857,
-        "adjusted_ci": [
-          -0.022156862745098028,
-          0.011568627450980414
-        ]
-      }
-    },
-    "bonferroni_alpha_per_metric": 0.01,
-    "bootstrap_replicates": 4000,
-    "block_length_targets": 50
-  },
-  "portfolio_stage_registered_formula": {
-    "evidence": "E070 historical diagnostic only; exact geometry-matched union18 null",
-    "status": "STRICT_FAIL",
+  "e045_historical_evidence": {
+    "status": "VERIFIED_HISTORICAL_STRICT_FAIL",
+    "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+    "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+    "evidence_class": "APPEND_ONLY_HISTORICAL_CUTOFF_REFRESH_NOT_INDEPENDENT",
+    "independent_research_axis": false,
+    "workflow_run_id": 43595251776,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43595251776",
+    "result_path": "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "target_count": 850,
+    "random_bundles_total": 102000,
+    "prefix_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "leakage_failures": 0,
+    "historical_strict_gate_pass": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
     "metrics": {
       "max_hits": {
-        "observed_mean": 1.4964705882352942,
-        "exact_null": 1.514256248572755,
-        "delta": -0.01778566033746093,
-        "adjusted_ci": [
-          -0.07660918974922606,
-          0.04221433966253882
-        ]
+        "observed_mean": 1.4917647058823529,
+        "exact_geometry_matched_null": 1.514256248572755,
+        "delta_mean": -0.02249154269040215,
+        "adjusted_moving_block_ci": [
+          -0.08366801327863745,
+          0.03280257495665667
+        ],
+        "lower_bound_strictly_gt_zero": false
       },
       "any2": {
-        "observed_mean": 0.46,
-        "exact_null": 0.47497624326892623,
-        "delta": -0.014976243268926432,
-        "adjusted_ci": [
-          -0.062035066798338354,
-          0.030906109672250007
-        ]
+        "observed_mean": 0.46705882352941175,
+        "exact_geometry_matched_null": 0.47497624326892623,
+        "delta_mean": -0.007917419739514445,
+        "adjusted_moving_block_ci": [
+          -0.04556447856304386,
+          0.028553168495779675
+        ],
+        "lower_bound_strictly_gt_zero": false
       },
       "any3": {
-        "observed_mean": 0.07294117647058823,
-        "exact_null": 0.07135490714617204,
-        "delta": 0.0015862693244162026,
-        "adjusted_ci": [
-          -0.016060789499113534,
-          0.019233328147945372
-        ]
+        "observed_mean": 0.058823529411764705,
+        "exact_geometry_matched_null": 0.07135490714617204,
+        "delta_mean": -0.012531377734407339,
+        "adjusted_moving_block_ci": [
+          -0.03606078949911322,
+          0.006292151677357366
+        ],
+        "lower_bound_strictly_gt_zero": false
       },
       "winning_union_coverage": {
-        "observed_mean": 2.363529411764706,
-        "exact_null": 2.4,
-        "delta": -0.03647058823529349,
-        "adjusted_ci": [
-          -0.12588235294117767,
-          0.06000000000000001
-        ]
+        "observed_mean": 2.3835294117647057,
+        "exact_geometry_matched_null": 2.4,
+        "delta_mean": -0.01647058823529403,
+        "adjusted_moving_block_ci": [
+          -0.12352941176470579,
+          0.06941176470588244
+        ],
+        "lower_bound_strictly_gt_zero": false
       }
     },
-    "any2_positive_nonoverlap_50_target_blocks": 4,
-    "nonoverlap_50_target_blocks": 17,
-    "any2_positive_block_share": 0.23529411764705882,
-    "required_share": 0.65,
-    "any4_rate_supplemental_only": 0.0058823529411764705
+    "any2_positive_50_target_block_share": 0.47058823529411764,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "prospective_minimum_target_count": null,
+    "prospective_completion_rule": null,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false
   },
-  "implementation_conformance": {
-    "E069_registered_prior": "fixed 6/45 prior, strength 45",
-    "E069_executed_prior": "number-specific global-frequency prior, strength 45",
-    "formula_match": false,
-    "E069_original_verification": "PASS but formula conformance not tested",
-    "E069_original_artifacts_preserved": true
-  },
-  "prospective_confirmation": {
-    "required": true,
-    "status": "UNSPECIFIED_IN_POLICY",
-    "minimum_target_count": null,
-    "completion_rule": null
-  },
-  "first_delivery_kst": "2026-11-20T08:00:00+09:00",
-  "preparation_deadline_kst": "2026-11-19",
-  "note": "No candidate or final purchase lines generated. No fallback, freeze, or seal. E069 original files are preserved; E070 is historical exploratory only and cannot create STRICT_PASS_READY."
+  "single_ticket_model_validation_is_not_three_line_evidence": true,
+  "note": "This guard never generates purchase lines. It prefers the latest cutoff-matched E045 refresh, treats append-only refreshes as maintenance rather than independent research, and requires a separately validated target-specific STRICT_PASS_READY artifact with exact disjoint union18 geometry, all frozen strict gates, and completed prospective confirmation.",
+  "purchase_model_status": "NO_ELIGIBLE_THREE_LINE_PORTFOLIO_CONTINUE_INDEPENDENT_RESEARCH"
 }
