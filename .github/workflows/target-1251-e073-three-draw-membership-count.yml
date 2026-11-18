@@ -258,6 +258,7 @@ jobs:
           task["spec"]["target_1251_three_line_readiness_eligible"] = False
           task["execution_completed_at_kst"] = now_kst
           task["result_path"] = str(out)
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           audit = json.loads(Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261115.json").read_text(encoding="utf-8"))
           audit["audit_id"] = "THREE_LINE_READINESS_AUDIT_1251_20261118"
           audit["date_kst"] = date
