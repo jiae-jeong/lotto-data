@@ -262,7 +262,7 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
         self.assertFalse(verification["calibrator_uses_evaluation_outcomes"])
         self.assertEqual(verification["leakage_failures"], 0)
         self.assertFalse(verification["strict_pass_ready"])
-        self.assertEqual(inference["status"], "HISTORICAL_CALIBRATION_NO_EDGE")
+        self.assertEqual(inference["study_id"], "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1")
         self.assertFalse(inference["calibration_gate_pass"])
         self.assertFalse(inference["strict_pass_ready"])
 
