@@ -216,6 +216,84 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
         ])
 
 
+    def test_e071_bonus_distance_axis_has_verified_historical_evidence_without_readiness(self):
+        task = self.by_id["E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1"]
+        self.assertEqual(task["execution_status"], "EXECUTED_HISTORICAL_STRICT_FAIL")
+        self.assertFalse(task["target_1251_three_line_readiness_eligible"])
+        result = task["execution_result"]
+        self.assertEqual(result["verification_status"], "PASS")
+        self.assertFalse(result["strict_portfolio_pass"])
+        self.assertFalse(result["strict_pass_ready"])
+        self.assertFalse(result["purchase_recommendation_generated"])
+        self.assertEqual(result["data_cutoff"], 1250)
+        self.assertEqual(result["targets"], 850)
+        self.assertEqual(result["random_bundles_total"], 102000)
+
+        prereg = json.loads((ROOT / task["preregistration"]).read_text(encoding="utf-8"))
+        self.assertTrue(prereg["independent_research_axis"])
+        self.assertFalse(prereg["independent_sample"])
+        self.assertTrue(prereg["historical_exploration_only"])
+        self.assertEqual(prereg["feature_definition"]["binning"]["cutpoints"], [5, 10, 17, 25])
+        self.assertEqual(prereg["feature_definition"]["binning"]["bin_counts"], [465, 370, 434, 376, 380])
+        self.assertEqual(prereg["estimator"]["prior_strength"], 45)
+        self.assertFalse(prereg["estimator"]["parameter_search"])
+        self.assertEqual(prereg["random_comparator"]["random_bundles_per_target"], 120)
+        self.assertEqual(prereg["inference"]["alpha_per_metric"], 0.0125)
+        self.assertEqual(prereg["inference"]["bootstrap_replicates"], 4000)
+        self.assertEqual(prereg["inference"]["block_length_targets"], 50)
+        self.assertIsNone(prereg["prospective_confirmation"]["minimum_target_count"])
+        self.assertIsNone(prereg["prospective_confirmation"]["completion_rule"])
+
+        root = ROOT / result["result_path"]
+        verification = json.loads((root / "VERIFICATION.json").read_text(encoding="utf-8"))
+        inference = json.loads((root / "INFERENCE.json").read_text(encoding="utf-8"))
+        completion = json.loads((root / "COMPLETION.json").read_text(encoding="utf-8"))
+        self.assertEqual(verification["status"], "PASS")
+        self.assertEqual(verification["data_cutoff"], 1250)
+        self.assertEqual(verification["target_count"], 850)
+        self.assertEqual(verification["random_bundles_total"], 102000)
+        self.assertEqual(verification["training_cutoff_violations"], 0)
+        self.assertEqual(verification["leakage_failures"], 0)
+        self.assertEqual(verification["manifest_entries"], 8)
+        self.assertEqual(verification["manifest_status"], "PASS")
+        self.assertFalse(inference["historical_strict_gate_pass"])
+        self.assertFalse(inference["strict_pass_ready"])
+        self.assertEqual(inference["any2_positive_nonoverlapping_50_target_blocks"], 10)
+        self.assertAlmostEqual(inference["any2_positive_block_share"], 10 / 17)
+        self.assertEqual(completion["status"], "COMPLETE")
+        self.assertFalse(completion["strict_pass_ready"])
+
+        with (root / "PREDICTIONS.csv").open(encoding="utf-8-sig", newline="") as stream:
+            predictions = list(csv.DictReader(stream))
+        self.assertEqual(len(predictions), 850)
+        self.assertEqual([int(row["target_round"]) for row in predictions], list(range(401, 1251)))
+        for row in predictions:
+            target = int(row["target_round"])
+            self.assertEqual(int(row["training_through_round"]), target - 1)
+            self.assertEqual(int(row["previous_bonus_round"]), target - 1)
+            lines = json.loads(row["model_lines"])
+            self.assertEqual(len(lines), 3)
+            self.assertTrue(all(len(line) == 6 and len(set(line)) == 6 for line in lines))
+            self.assertEqual(len(set().union(*(set(line) for line in lines))), 18)
+
+        with (root / "RANDOM_BASELINE.csv").open(encoding="utf-8-sig", newline="") as stream:
+            random_rows = list(csv.DictReader(stream))
+        self.assertEqual(len(random_rows), 850)
+        self.assertTrue(all(int(row["random_bundles"]) == 120 for row in random_rows))
+        with (root / "BLOCK_STABILITY.csv").open(encoding="utf-8-sig", newline="") as stream:
+            blocks = list(csv.DictReader(stream))
+        self.assertEqual(len(blocks), 17)
+        self.assertEqual(sum(int(row["target_count"]) for row in blocks), 850)
+
+        with (root / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="") as stream:
+            manifest = list(csv.DictReader(stream))
+        self.assertEqual(len(manifest), 8)
+        for row in manifest:
+            payload = (root / row["path"]).read_bytes()
+            self.assertEqual(len(payload), int(row["bytes"]), row["path"])
+            self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
+
+
 if __name__ == "__main__":
     unittest.main()
 
