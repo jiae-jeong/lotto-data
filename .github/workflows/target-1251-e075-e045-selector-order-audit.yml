@@ -137,7 +137,7 @@ jobs:
           PY
       - name: Compile and run frozen E075 tests
         run: |
-          python -m py_compile automation/three_line_research_1251_e075_corrected_v1.py automation/tests_v2/test_three_line_e075_selector_order_audit.py automation/tests_v2/test_e075_queue_contract.py
+          python -m py_compile automation/three_line_research_1251_e075_corrected_v2.py automation/tests_v2/test_three_line_e075_selector_order_audit_v2.py automation/tests_v2/test_e075_queue_contract_v2.py
           python -B -m unittest automation.tests_v2.test_three_line_e075_selector_order_audit_v2 automation.tests_v2.test_e075_queue_contract_v2 -v
       - name: Execute paired legacy-versus-corrected walk-forward
         id: execute
