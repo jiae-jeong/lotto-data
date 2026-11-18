@@ -1,0 +1,306 @@
+name: target-1251-e075-e045-selector-order-audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'research/weekly_purchase/1251/E075_EXECUTE_20261119.trigger'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: target-1251-e075-e045-selector-order-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen E075 specification, sources, data, and queue
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json, os, subprocess
+          from pathlib import Path
+
+          prereg_path = Path("research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119.json")
+          runner_path = Path("automation/three_line_research_1251_e075_corrected_v1.py")
+          test_path = Path("automation/tests_v2/test_three_line_e075_selector_order_audit.py")
+          queue_test_path = Path("automation/tests_v2/test_e075_queue_contract.py")
+          workflow_path = Path(".github/workflows/target-1251-e075-e045-selector-order-audit.yml")
+          base_runner_path = Path("automation/three_line_research_1251_v1.py")
+          reference_path = Path("automation/five_role_research_v9.py")
+          b_model_path = Path("research/1245_final_pipeline_v3/recovered_original_assets/b_model_backtest.py")
+          ac_model_path = Path("automation/recovered_models_v2.py")
+          policy_path = Path("research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json")
+          base_prereg_path = Path("research/weekly_purchase/1251/THREE_LINE_RESEARCH_PREREG_E045_20261114.json")
+          refresh_path = Path("research/weekly_purchase/1251/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1.json")
+          data_path = Path("lotto_data.csv")
+          queue_path = Path("automation/research_queue_v2.json")
+
+          prereg = json.loads(prereg_path.read_text(encoding="utf-8"))
+          policy = json.loads(policy_path.read_text(encoding="utf-8"))
+          base_prereg = json.loads(base_prereg_path.read_text(encoding="utf-8"))
+          refresh = json.loads(refresh_path.read_text(encoding="utf-8"))
+          queue = json.loads(queue_path.read_text(encoding="utf-8"))
+
+          def blob(path):
+              return subprocess.check_output(["git", "rev-parse", "HEAD:" + path.as_posix()], text=True).strip()
+
+          frozen = prereg["frozen_blobs"]
+          expected = {
+              "runner_blob_sha": runner_path,
+              "test_blob_sha": test_path,
+              "queue_contract_test_blob_sha": queue_test_path,
+              "workflow_blob_sha": workflow_path,
+              "base_runner_blob_sha": base_runner_path,
+              "reference_models_blob_sha": reference_path,
+              "b_model_blob_sha": b_model_path,
+              "ac_model_blob_sha": ac_model_path,
+              "policy_blob_sha": policy_path,
+              "data_blob_sha": data_path,
+              "base_prereg_blob_sha": base_prereg_path,
+              "cutoff_refresh_prereg_blob_sha": refresh_path,
+          }
+          for key, path in expected.items():
+              assert frozen[key] == blob(path), (key, frozen[key], blob(path))
+
+          assert prereg["study_id"] == "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1"
+          assert prereg["preregistration_status"] == "FROZEN_BEFORE_EXECUTION"
+          assert prereg["historical_data_cutoff"] == 1250
+          assert prereg["target_rounds"] == "401..1250 inclusive"
+          assert prereg["source_data_prefix_sha256"] == "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+          assert prereg["source_data_full_file_sha256"] == prereg["source_data_prefix_sha256"]
+          assert prereg["role_order"] == base_prereg["role_order"]
+          assert prereg["random_comparator"] == refresh["random_comparator"]
+          assert prereg["inference"] == base_prereg["inference"]
+          assert prereg["implementation_correction"]["only_change"] is True
+          assert prereg["implementation_correction"]["candidate_pool_unchanged"] is True
+          assert prereg["implementation_correction"]["model_weights_unchanged"] is True
+          assert prereg["implementation_correction"]["strict_gate_unchanged"] is True
+          assert prereg["prospective_confirmation"]["minimum_target_count"] is None
+          assert prereg["prospective_confirmation"]["completion_rule"] is None
+
+          assert policy["effective_from_target"] == 1251 and policy["purchase_lines"] == 3
+          gate = policy["strict_gate"]
+          assert gate["family_alpha"] == 0.05 and gate["alpha_per_metric"] == 0.0125
+          assert gate["any2_positive_nonoverlapping_50_target_block_share_min"] == 0.65
+          assert gate["no_threshold_relaxation"] is True
+          for key in ("mean_max_hit", "p_any2", "p_any3", "expected_union_coverage"):
+              assert abs(float(policy["exact_null"][key]) - float(prereg["random_comparator"]["exact_null"][key])) < 1e-14
+
+          task = next(x for x in queue["tasks"] if x.get("id") == prereg["study_id"])
+          assert task["execution_mode"] == "dedicated_workflow"
+          assert task["execution_entrypoint"] == runner_path.as_posix()
+          assert task["workflow_entrypoint"] == workflow_path.as_posix()
+          assert task["preregistration"] == prereg_path.as_posix()
+          assert task["preregistration_blob_sha"] == blob(prereg_path)
+          assert task["execution_status"] == "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+          assert task["target_1251_three_line_readiness_eligible"] is False
+
+          raw = data_path.read_bytes()
+          data_sha = hashlib.sha256(raw).hexdigest()
+          assert data_sha == prereg["source_data_full_file_sha256"]
+          rows = [r for r in csv.DictReader(raw.decode("utf-8-sig").splitlines()) if r.get("round")]
+          assert len(rows) == 1250 and [int(r["round"]) for r in rows] == list(range(1, 1251))
+          for row in rows:
+              nums = [int(row[f"no{i}"]) for i in range(1, 7)]
+              bonus = int(row["bonus"])
+              assert len(set(nums)) == 6 and all(1 <= n <= 45 for n in nums)
+              assert 1 <= bonus <= 45 and bonus not in nums
+
+          print(json.dumps({"status":"PREFLIGHT_PASS","study_id":prereg["study_id"],
+                            "data_cutoff":1250,"data_sha256":data_sha,
+                            "target_count":850,"runner_blob":blob(runner_path)}, ensure_ascii=False))
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write("data_sha=" + data_sha + "\n")
+          PY
+      - name: Compile and run frozen E075 tests
+        run: |
+          python -m py_compile automation/three_line_research_1251_e075_corrected_v1.py automation/tests_v2/test_three_line_e075_selector_order_audit.py automation/tests_v2/test_e075_queue_contract.py
+          python -B -m unittest automation.tests_v2.test_three_line_e075_selector_order_audit automation.tests_v2.test_e075_queue_contract -v
+      - name: Execute paired legacy-versus-corrected walk-forward
+        id: execute
+        shell: bash
+        run: |
+          set -euo pipefail
+          DATE="2026-11-19"
+          RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          python -B automation/three_line_research_1251_e075_corrected_v1.py --date "$DATE" --run-id "$RUN_ID"
+      - name: Verify manifests, cutoff, leakage, and non-promotion
+        env:
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+          DATA_SHA: ${{ steps.preflight.outputs.data_sha }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os
+          from pathlib import Path
+          out = Path("analysis") / os.environ["RUN_DATE"] / os.environ["RUN_ID"] / "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1"
+          expected = {"PREDICTIONS.csv","RANDOM_BASELINE.csv","BLOCK_STABILITY.csv","INFERENCE.json",
+                      "READINESS_UPDATE.json","VERIFICATION.json","COMPLETION.json","REPORT.md","SHA256_MANIFEST.csv"}
+          assert {p.name for p in out.iterdir() if p.is_file()} == expected
+          manifest = list(csv.DictReader((out / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="")))
+          assert len(manifest) == 8 and {x["path"] for x in manifest} == expected - {"SHA256_MANIFEST.csv"}
+          for item in manifest:
+              raw = (out / item["path"]).read_bytes()
+              assert len(raw) == int(item["bytes"]) and hashlib.sha256(raw).hexdigest() == item["sha256"]
+          inference = json.loads((out / "INFERENCE.json").read_text(encoding="utf-8"))
+          verification = json.loads((out / "VERIFICATION.json").read_text(encoding="utf-8"))
+          completion = json.loads((out / "COMPLETION.json").read_text(encoding="utf-8"))
+          assert completion["status"] == "COMPLETE" and completion["data_cutoff"] == 1250
+          assert completion["target_range"] == [401,1250] and completion["target_count"] == 850
+          assert verification["status"] == "PASS" and verification["data_sha256"] == os.environ["DATA_SHA"]
+          assert verification["training_cutoff_violations"] == 0 and verification["leakage_failures"] == 0
+          assert verification["future_predictions"] == 0 and verification["no_future_leakage"] is True
+          assert verification["portfolio_geometry_violations"] == 0 and verification["random_geometry_violations"] == 0
+          assert verification["candidate_pool_comparisons"] == 2550 and verification["candidate_pool_mismatches"] == 0
+          assert verification["strict_pass_ready"] is False and verification["purchase_recommendation_generated"] is False
+          assert inference["targets"] == 850 and inference["random_bundles_total_per_version"] == 102000
+          assert inference["block_count"] == 17
+          assert inference["strict_pass_ready"] is False
+          assert completion["strict_pass_ready"] is False and completion["purchase_recommendation_generated"] is False
+          print(json.dumps({"status":"OUTPUTS_VERIFIED","corrected_gate":inference["historical_strict_gate_pass_corrected"],
+                            "changed_targets":inference["targets_with_changed_lines"],
+                            "changed_lines":inference["changed_line_count"],
+                            "legacy_order_mismatches":inference["legacy_order_consecutive_mismatches"]}, ensure_ascii=False))
+          PY
+      - name: Persist append-only E075 result and daily report
+        env:
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          DATA_SHA: ${{ steps.preflight.outputs.data_sha }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone, timedelta
+          from pathlib import Path
+          study_id = "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1"
+          out = Path("analysis") / os.environ["RUN_DATE"] / os.environ["RUN_ID"] / study_id
+          inference = json.loads((out / "INFERENCE.json").read_text(encoding="utf-8"))
+          verification = json.loads((out / "VERIFICATION.json").read_text(encoding="utf-8"))
+          completion = json.loads((out / "COMPLETION.json").read_text(encoding="utf-8"))
+          queue_path = Path("automation/research_queue_v2.json")
+          queue = json.loads(queue_path.read_text(encoding="utf-8"))
+          task = next(x for x in queue["tasks"] if x.get("id") == study_id)
+          status = "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING" if inference["historical_strict_gate_pass_corrected"] else "EXECUTED_HISTORICAL_STRICT_FAIL"
+          now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9))).isoformat()
+          result = {
+              "study_id": study_id,
+              "evidence_class": "HISTORICAL_IMPLEMENTATION_CONFORMANCE_CORRECTION_NOT_INDEPENDENT_SIGNAL_OR_PROSPECTIVE_CONFIRMATION",
+              "independent_research_axis": False,
+              "independent_sample": False,
+              "workflow_name": "target-1251-e075-e045-selector-order-audit",
+              "workflow_run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "workflow_run_number": int(os.environ["RUN_NUMBER"]),
+              "run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "workflow_run_conclusion": "success",
+              "run_url": f"https://github.com/jiae-jeong/lotto-data/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+              "completed_at_kst": now,
+              "result_path": out.as_posix(),
+              "data_cutoff": 1250,
+              "data_sha256": os.environ["DATA_SHA"],
+              "target_range": [401,1250],
+              "target_count": 850,
+              "random_bundles_per_target_per_version": 120,
+              "random_bundles_total_per_version": 102000,
+              "candidate_pool_comparisons": verification["candidate_pool_comparisons"],
+              "candidate_pool_mismatches": verification["candidate_pool_mismatches"],
+              "legacy_order_consecutive_mismatches": verification["legacy_order_consecutive_mismatches"],
+              "targets_with_changed_lines": verification["targets_with_changed_lines"],
+              "changed_line_count": verification["changed_line_count"],
+              "training_cutoff_violations": 0,
+              "leakage_failures": 0,
+              "portfolio_geometry_violations": 0,
+              "random_geometry_violations": 0,
+              "manifest_status": "PASS",
+              "historical_strict_gate_pass_legacy": inference["historical_strict_gate_pass_legacy"],
+              "historical_strict_gate_pass_corrected": inference["historical_strict_gate_pass_corrected"],
+              "strict_pass_ready": False,
+              "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+              "purchase_recommendation_generated": False
+          }
+          task["execution_status"] = status
+          task["execution_result"] = result
+          task["spec"]["execution_status"] = status
+          task["spec"]["execution_result"] = result
+          task["spec"]["strict_pass_ready"] = False
+          queue["latest_queue_validation"] = {
+              "status": "E075_EXECUTION_RECORDED",
+              "study_id": study_id,
+              "checked_at_kst": now,
+              "preregistration_blob_sha": task["preregistration_blob_sha"],
+              "execution_status": status
+          }
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          report = f"""# 2026-11-19 Daily Lotto Research Report
+
+          ## NEW STUDY — E075 E045 selector-order implementation-conformance correction
+
+          The frozen E045 specification defines consecutive pairs on the sorted six-number ticket and specifies a lexicographically lower sorted-ticket tie-break. The original implementation generated combinations in score-ranked candidate-pool order and evaluated both operations on that unsorted order. The original E045 source and outputs remain unchanged.
+
+          ### Actual execution
+
+          - Source cutoff: 1250; rows: 1250; SHA-256: {os.environ["DATA_SHA"]}
+          - Walk-forward targets: 401–1250 (850); every target used training through t-1
+          - Candidate-pool comparisons: {verification["candidate_pool_comparisons"]}; mismatches: {verification["candidate_pool_mismatches"]}
+          - Legacy score-order adjacency mismatches: {verification["legacy_order_consecutive_mismatches"]}
+          - Targets with changed line assignments: {verification["targets_with_changed_lines"]}/850; changed role-lines: {verification["changed_line_count"]}
+          - Matched random bundles: 102,000 per version, using the same label-permutation maps for legacy and corrected portfolios
+          - Leakage failures: 0; portfolio/random geometry violations: 0; manifest: PASS
+
+          ### Historical results
+
+          | Metric | Legacy delta vs exact null | Corrected delta vs exact null | Corrected minus legacy |
+          |---|---:|---:|---:|
+          """
+          for metric in ("max_hits","any2","any3","winning_union_coverage"):
+              old = inference["legacy_vs_exact_null"][metric]["delta_mean"]
+              new = inference["corrected_vs_exact_null"][metric]["delta_mean"]
+              paired = inference["corrected_minus_legacy"][metric]["delta_mean"]
+              report += f"| {metric} | {old:.6f} | {new:.6f} | {paired:.6f} |\n"
+          report += f"""
+
+          - Legacy any2-positive 50-target block share: {inference["legacy_any2_positive_50_target_block_share"]:.2%}
+          - Corrected any2-positive 50-target block share: {inference["corrected_any2_positive_50_target_block_share"]:.2%}
+          - Legacy historical strict gate: {"PASS" if inference["historical_strict_gate_pass_legacy"] else "FAIL"}
+          - Corrected historical strict gate: {"PASS" if inference["historical_strict_gate_pass_corrected"] else "FAIL"}
+          - Prospective confirmation remains unspecified in policy; this historical correction cannot create STRICT_PASS_READY.
+          - No candidate/final purchase lines, fallback, freeze, or seal were generated.
+
+          ## MAINTENANCE/RECHECK
+
+          - Read current MASTER protocol, AGENTS rules, latest daily reports, queue, 1251 policy/status, and E045/E074 source artifacts.
+          - Rechecked original pre-draw recommendation/error-note sources for 1245–1248. The 1249 displayed candidate is recorded in DELIVERY_LOG but no pre-draw sealed original was found; 1250 delivery evidence remains unverified. PURCHASE_CONFIRMATION_REGISTRY remains empty.
+          - Source data remains cutoff 1250; no new draw was added.
+
+          ## Interpretation
+
+          This is a reproducible implementation correction, not a new predictive signal and not independent evidence. The corrected selector must be evaluated on its own merits against the unchanged exact null and strict gates. No threshold or parameter was changed.
+          """
+          Path("research/daily/2026-11-19_DAILY_RESEARCH_REPORT.md").write_text(report, encoding="utf-8")
+          PY
+          git add analysis/2026-11-19 automation/research_queue_v2.json research/daily/2026-11-19_DAILY_RESEARCH_REPORT.md
+          git -c core.whitespace=cr-at-eol diff --cached --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "research: record E075 E045 selector-order correction"
+          git push origin HEAD:main
