@@ -3833,20 +3833,20 @@
             "brier": {
               "model_mean": 0.11557033635476797,
               "uniform_mean": 0.11555555555555556,
-              "delta_model_minus_uniform": 1.4780799212416788e-05,
+              "delta_model_minus_uniform": 0.000014780799212416788,
               "adjusted_moving_block_ci_vs_uniform": {
-                "lower": -2.2928106310301404e-05,
-                "upper": 5.975578124223004e-05,
+                "lower": -0.000022928106310301404,
+                "upper": 0.00005975578124223004,
                 "replicates": 4000,
                 "block_length": 50,
                 "alpha_two_sided": 0.025,
                 "sample_targets": 650
               },
               "random_permutation_mean": 0.11557233129114587,
-              "delta_model_minus_random": -1.994936377892203e-06,
+              "delta_model_minus_random": -0.000001994936377892203,
               "adjusted_moving_block_ci_vs_random": {
-                "lower": -3.9294601352589707e-05,
-                "upper": 4.149720156938804e-05,
+                "lower": -0.000039294601352589707,
+                "upper": 0.00004149720156938804,
                 "replicates": 4000,
                 "block_length": 50,
                 "alpha_two_sided": 0.025,
@@ -3857,7 +3857,7 @@
             "log_loss": {
               "model_mean": 0.3927385046838188,
               "uniform_mean": 0.39267446722755217,
-              "delta_model_minus_uniform": 6.40374562666557e-05,
+              "delta_model_minus_uniform": 0.0000640374562666557,
               "adjusted_moving_block_ci_vs_uniform": {
                 "lower": -0.00010404908449172959,
                 "upper": 0.00025301618434617705,
@@ -3867,7 +3867,7 @@
                 "sample_targets": 650
               },
               "random_permutation_mean": 0.3927469570574102,
-              "delta_model_minus_random": -8.452373591389695e-06,
+              "delta_model_minus_random": -0.000008452373591389695,
               "adjusted_moving_block_ci_vs_random": {
                 "lower": -0.0001698759918589075,
                 "upper": 0.00017433507107498129,
@@ -3902,20 +3902,20 @@
           "brier": {
             "model_mean": 0.11557033635476797,
             "uniform_mean": 0.11555555555555556,
-            "delta_model_minus_uniform": 1.4780799212416788e-05,
+            "delta_model_minus_uniform": 0.000014780799212416788,
             "adjusted_moving_block_ci_vs_uniform": {
-              "lower": -2.2928106310301404e-05,
-              "upper": 5.975578124223004e-05,
+              "lower": -0.000022928106310301404,
+              "upper": 0.00005975578124223004,
               "replicates": 4000,
               "block_length": 50,
               "alpha_two_sided": 0.025,
               "sample_targets": 650
             },
             "random_permutation_mean": 0.11557233129114587,
-            "delta_model_minus_random": -1.994936377892203e-06,
+            "delta_model_minus_random": -0.000001994936377892203,
             "adjusted_moving_block_ci_vs_random": {
-              "lower": -3.9294601352589707e-05,
-              "upper": 4.149720156938804e-05,
+              "lower": -0.000039294601352589707,
+              "upper": 0.00004149720156938804,
               "replicates": 4000,
               "block_length": 50,
               "alpha_two_sided": 0.025,
@@ -3926,7 +3926,7 @@
           "log_loss": {
             "model_mean": 0.3927385046838188,
             "uniform_mean": 0.39267446722755217,
-            "delta_model_minus_uniform": 6.40374562666557e-05,
+            "delta_model_minus_uniform": 0.0000640374562666557,
             "adjusted_moving_block_ci_vs_uniform": {
               "lower": -0.00010404908449172959,
               "upper": 0.00025301618434617705,
@@ -3936,7 +3936,7 @@
               "sample_targets": 650
             },
             "random_permutation_mean": 0.3927469570574102,
-            "delta_model_minus_random": -8.452373591389695e-06,
+            "delta_model_minus_random": -0.000008452373591389695,
             "adjusted_moving_block_ci_vs_random": {
               "lower": -0.0001698759918589075,
               "upper": 0.00017433507107498129,
@@ -4328,18 +4328,66 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
       "validated_at_kst": "2026-11-18T23:34:01+09:00",
       "note": "Validate job succeeded; 227 unit tests passed, including the E073 queue-persistence contract; the generic E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    },
+    {
+      "run_id": 44327476089,
+      "run_number": 151,
+      "conclusion": "SUCCESS",
+      "tests": 227,
+      "queue_contract": "E030-E072 PASS",
+      "source_commit_sha": "10662178ae4dd6e63f19a7c045c5bed2d64f53ca",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44327476089",
+      "validated_at_kst": "2026-11-18T23:43:55+09:00",
+      "note": "Validate job succeeded; 227 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    },
+    {
+      "run_id": 44333631771,
+      "run_number": 152,
+      "conclusion": "FAILURE",
+      "tests": 234,
+      "queue_contract": "FAIL",
+      "source_commit_sha": "24724ff0dce1cacb3da0c23b76d03def146425d0",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44333631771",
+      "validated_at_kst": "2026-11-19T00:16:28+09:00",
+      "cause": "All 234 unit tests passed, but the post-test queue-tail assertion still ended at E073 after E074 was appended. The assertion was extended through E074 and the subsequent #153 and #154 validation runs passed."
+    },
+    {
+      "run_id": 44336400065,
+      "run_number": 153,
+      "conclusion": "SUCCESS",
+      "tests": 234,
+      "queue_contract": "E030-E074 PASS",
+      "source_commit_sha": "2019055af741d1ee28ee228e14994c716c595084",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44336400065",
+      "validated_at_kst": "2026-11-19T00:30:43+09:00",
+      "note": "Validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    },
+    {
+      "run_id": 44337603144,
+      "run_number": 154,
+      "conclusion": "SUCCESS",
+      "tests": 234,
+      "queue_contract": "E030-E074 PASS",
+      "source_commit_sha": "bbe2a68b8782f8b05abcd4a29a8d76690f035858",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44337603144",
+      "validated_at_kst": "2026-11-19T00:36:48+09:00",
+      "note": "Final validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44325592651,
-    "run_number": 150,
+    "run_id": 44337603144,
+    "run_number": 154,
     "conclusion": "SUCCESS",
-    "tests": 227,
-    "queue_contract": "E030-E072 PASS; E073 persistence contract PASS",
-    "source_commit_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
+    "tests": 234,
+    "queue_contract": "E030-E074 PASS",
+    "source_commit_sha": "bbe2a68b8782f8b05abcd4a29a8d76690f035858",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
-    "validated_at_kst": "2026-11-18T23:34:01+09:00",
-    "note": "Validate job succeeded; 227 unit tests passed, including the E073 queue-persistence contract; the generic E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44337603144",
+    "validated_at_kst": "2026-11-19T00:36:48+09:00",
+    "note": "Final validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
   }
 }
