@@ -11,7 +11,8 @@
     "Candidate-recall stage completed on 1,050 targets with 210,000 matched-random sets and no future leakage.",
     "E070 E069 implementation-conformance and candidate/portfolio-stage audit completed.",
     "E069 fixed-prior corrective re-execution completed; same hypothesis, historical only, STRICT_FAIL, not an independent axis.",
-    "E071 preregistered previous-bonus-distance feature-family study completed; historical_gate_pass=False; result=analysis/2026-11-18/gha_44219073207_1/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1."
+    "E071 preregistered previous-bonus-distance feature-family study completed; historical_gate_pass=False; result=analysis/2026-11-18/gha_44219073207_1/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1.",
+    "E072 frozen consensus-rank probability calibration completed; calibration_gate_pass=False; historical candidate-level only; no STRICT_PASS_READY. Result: analysis/2026-11-18/gha_44230929833_1/E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1."
   ],
   "not_recomputed_today": [
     "Legacy A/C/contrarian original-model walk-forward: original source implementations remain unavailable; successor_v2 outputs are not substitutes.",
@@ -30,7 +31,7 @@
   "strict_pass_ready": false,
   "final_purchase_lines_generated": false,
   "freeze_or_seal_created": false,
-  "next_start": "E071 historical strict gate failed. Preserve the unchanged strict thresholds; prioritize recovery of legacy A/C/contrarian sources and verified actual-purchase records, and do not run historical microvariants.",
+  "next_start": "E072 candidate-level calibration is historical-only and cannot create STRICT_PASS_READY. Preserve frozen strict gates; await a formally specified prospective confirmation rule and recovery of legacy A/C/contrarian source implementations and confirmed purchase records.",
   "daily_master_run": {
     "workflow_run_id": 44208557983,
     "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44208557983",

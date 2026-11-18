@@ -239,5 +239,153 @@
     "result_path": "analysis/2026-11-18/gha_44219073207_1/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
     "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
     "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
+  },
+  "additional_calibration_studies": [
+    {
+      "study_id": "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
+      "evidence_class": "HISTORICAL_CANDIDATE_PROBABILITY_CALIBRATION_NOT_THREE_LINE_PORTFOLIO_CONFIRMATION",
+      "calibration_gate_pass": false,
+      "strict_portfolio_pass": false,
+      "strict_pass_ready": false,
+      "target_1251_three_line_readiness_eligible": false,
+      "metrics": {
+        "brier": {
+          "model_mean": 0.11557033635476797,
+          "uniform_mean": 0.11555555555555556,
+          "delta_model_minus_uniform": 1.4780799212416788e-05,
+          "adjusted_moving_block_ci_vs_uniform": {
+            "lower": -2.2928106310301404e-05,
+            "upper": 5.975578124223004e-05,
+            "replicates": 4000,
+            "block_length": 50,
+            "alpha_two_sided": 0.025,
+            "sample_targets": 650
+          },
+          "random_permutation_mean": 0.11557233129114587,
+          "delta_model_minus_random": -1.994936377892203e-06,
+          "adjusted_moving_block_ci_vs_random": {
+            "lower": -3.9294601352589707e-05,
+            "upper": 4.149720156938804e-05,
+            "replicates": 4000,
+            "block_length": 50,
+            "alpha_two_sided": 0.025,
+            "sample_targets": 650
+          },
+          "improvement_supported_vs_uniform": false
+        },
+        "log_loss": {
+          "model_mean": 0.3927385046838188,
+          "uniform_mean": 0.39267446722755217,
+          "delta_model_minus_uniform": 6.40374562666557e-05,
+          "adjusted_moving_block_ci_vs_uniform": {
+            "lower": -0.00010404908449172959,
+            "upper": 0.00025301618434617705,
+            "replicates": 4000,
+            "block_length": 50,
+            "alpha_two_sided": 0.025,
+            "sample_targets": 650
+          },
+          "random_permutation_mean": 0.3927469570574102,
+          "delta_model_minus_random": -8.452373591389695e-06,
+          "adjusted_moving_block_ci_vs_random": {
+            "lower": -0.0001698759918589075,
+            "upper": 0.00017433507107498129,
+            "replicates": 4000,
+            "block_length": 50,
+            "alpha_two_sided": 0.025,
+            "sample_targets": 650
+          },
+          "improvement_supported_vs_uniform": false
+        }
+      },
+      "data_cutoff": 1250,
+      "training_targets": [
+        201,
+        600
+      ],
+      "evaluation_targets": [
+        601,
+        1250
+      ],
+      "random_permutations_total": 78000,
+      "manifest_entries": 8,
+      "workflow_run_id": 44230929833,
+      "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44230929833",
+      "result_path": "analysis/2026-11-18/gha_44230929833_1/E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
+      "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+    }
+  ],
+  "latest_calibration_study": {
+    "study_id": "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
+    "evidence_class": "HISTORICAL_CANDIDATE_PROBABILITY_CALIBRATION_NOT_THREE_LINE_PORTFOLIO_CONFIRMATION",
+    "calibration_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "target_1251_three_line_readiness_eligible": false,
+    "metrics": {
+      "brier": {
+        "model_mean": 0.11557033635476797,
+        "uniform_mean": 0.11555555555555556,
+        "delta_model_minus_uniform": 1.4780799212416788e-05,
+        "adjusted_moving_block_ci_vs_uniform": {
+          "lower": -2.2928106310301404e-05,
+          "upper": 5.975578124223004e-05,
+          "replicates": 4000,
+          "block_length": 50,
+          "alpha_two_sided": 0.025,
+          "sample_targets": 650
+        },
+        "random_permutation_mean": 0.11557233129114587,
+        "delta_model_minus_random": -1.994936377892203e-06,
+        "adjusted_moving_block_ci_vs_random": {
+          "lower": -3.9294601352589707e-05,
+          "upper": 4.149720156938804e-05,
+          "replicates": 4000,
+          "block_length": 50,
+          "alpha_two_sided": 0.025,
+          "sample_targets": 650
+        },
+        "improvement_supported_vs_uniform": false
+      },
+      "log_loss": {
+        "model_mean": 0.3927385046838188,
+        "uniform_mean": 0.39267446722755217,
+        "delta_model_minus_uniform": 6.40374562666557e-05,
+        "adjusted_moving_block_ci_vs_uniform": {
+          "lower": -0.00010404908449172959,
+          "upper": 0.00025301618434617705,
+          "replicates": 4000,
+          "block_length": 50,
+          "alpha_two_sided": 0.025,
+          "sample_targets": 650
+        },
+        "random_permutation_mean": 0.3927469570574102,
+        "delta_model_minus_random": -8.452373591389695e-06,
+        "adjusted_moving_block_ci_vs_random": {
+          "lower": -0.0001698759918589075,
+          "upper": 0.00017433507107498129,
+          "replicates": 4000,
+          "block_length": 50,
+          "alpha_two_sided": 0.025,
+          "sample_targets": 650
+        },
+        "improvement_supported_vs_uniform": false
+      }
+    },
+    "data_cutoff": 1250,
+    "training_targets": [
+      201,
+      600
+    ],
+    "evaluation_targets": [
+      601,
+      1250
+    ],
+    "random_permutations_total": 78000,
+    "manifest_entries": 8,
+    "workflow_run_id": 44230929833,
+    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44230929833",
+    "result_path": "analysis/2026-11-18/gha_44230929833_1/E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
   }
 }
