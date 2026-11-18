@@ -582,6 +582,8 @@ def run(date_kst: str, run_id: str):
         ROOT / "automation/three_line_research_1251_v1.py",
         ROOT / "automation/three_line_research_1251_e075_corrected_v1.py",
         ROOT / "automation/three_line_research_1251_e075_corrected_v2.py",
+        ROOT / "research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119.json",
+        ROOT / "research/weekly_purchase/1251/E075_EXECUTION_ATTEMPT_1_REPAIR_ADDENDUM_20261119.json",
         ROOT / "automation/five_role_research_v9.py",
         ROOT / "research/1245_final_pipeline_v3/recovered_original_assets/b_model_backtest.py",
         ROOT / "automation/recovered_models_v2.py",
@@ -749,9 +751,9 @@ Purchase readiness: **NOT_READY**
 
 - Historical data cutoff: {cutoff}; targets {targets[0]}–{targets[-1]} ({len(targets)})
 - Training cutoff: target round minus one; both selectors receive the same pre-target predictions and scores
-- Candidate-pool ranking rule: identical top-16 ordering formula; first-role pool mismatches: {first_role_pool_mismatches}; downstream pool-content differences after earlier line selections: {downstream_pool_content_differences}/{candidate_pool_comparisons - 3*len(targets)}
+- Candidate-pool ranking rule: identical top-16 ordering formula; first-role pool mismatches: {first_role_pool_mismatches}; downstream pool-content differences after earlier line selections: {downstream_pool_content_differences}/{2*len(targets)}
 - Correction: compute consecutive pairs and lexicographic tie-break on sorted ticket values, as the E045 preregistration specifies
-- Unchanged: model predictions, role order, role/global scores, top-16 candidate pool, objective weights, line order, disjoint union18 geometry, exact null, random seed, alpha, block length, bootstrap count, strict thresholds
+- Unchanged: model predictions, role order, role/global scores, top-16 candidate-pool ranking rule, objective weights, line order, disjoint union18 geometry, exact null, random seed, alpha, block length, bootstrap count, strict thresholds
 - Random comparator: {random_count} shared label-permutation maps per target and per version ({len(targets) * random_count:,} per version)
 - Moving-block bootstrap: {bootstrap_reps:,} replicates; 50-target blocks; final remainder retained
 - Any2 positive block threshold: 0.65
