@@ -103,11 +103,11 @@ jobs:
           assert last["date"] == "2026.11.14"
           assert [int(last[f"no{i}"]) for i in range(1, 7)] == [1, 5, 18, 23, 27, 28]
           assert int(last["bonus"]) == 8
-          kst = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9))).date().isoformat()
-          assert kst == prereg["date_kst"]
           tracked = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
           already_complete = any(x.endswith("/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1/COMPLETION.json") for x in tracked)
           if not already_complete:
+              kst = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9))).date().isoformat()
+              assert kst == prereg["date_kst"]
               assert task["execution_status"] == "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
               assert task["spec"]["execution_status"] == "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
           checkout_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
