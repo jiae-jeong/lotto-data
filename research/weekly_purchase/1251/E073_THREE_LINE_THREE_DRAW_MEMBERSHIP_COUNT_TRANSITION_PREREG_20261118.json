@@ -92,7 +92,7 @@
     "BLOCK_STABILITY": 17
   },
   "frozen_blobs": {
-    "runner_blob_sha": "76b4a2e504a1925673a3a0864d2c4532b691590a",
+    "runner_blob_sha": "b8499b7998d5ed7212d78237fd14b4937beefc1d",
     "test_blob_sha": "bee354e620be062ee9aca16c67845b3aeb880279",
     "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
     "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
