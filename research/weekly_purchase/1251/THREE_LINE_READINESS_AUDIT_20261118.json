@@ -96,14 +96,14 @@
       ".github/workflows/lotto-finalize-r3.yml",
       ".github/workflows/lotto-finalize-v3.yml"
     ],
-    "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 43739056958 (run #88); E030-E055 queue contract and unit tests passed.",
+    "queue_contract_validation": "SUCCESS: orthogonal-research-v2 run 44325592651 (run #150); 227 tests passed; E073 queue-persistence contract and E030-E072 queue contract passed.",
     "generic_queue_preflight_validation": "NO_GENERIC_RESEARCH_PENDING; E073 dedicated three-draw membership-count axis completed; no unexecuted current-cutoff preregistered three-line axis remains.",
     "runnable_generic_task_count": 0,
     "target_1251_three_line_e048_workflow_run_id": 43547128786,
     "target_1251_three_line_e048_preregistration": "research/weekly_purchase/1251/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_PREREG_20261114.json",
     "target_1251_three_line_e048_runner": "automation/three_line_bonus_transition_e048.py",
     "target_1251_three_line_e048_workflow": ".github/workflows/target-1251-e048-three-line-bonus-transition.yml",
-    "queue_contract_validation_run_id": 43739056958,
+    "queue_contract_validation_run_id": 44325592651,
     "queue_contract_validation_history": [
       {
         "run_id": 43548096755,
@@ -146,6 +146,18 @@
         "run_id": 43739056958,
         "conclusion": "SUCCESS",
         "cause": "Post-E055 execution queue and audit update validated; E030-E055 contract and unit tests passed."
+      },
+      {
+        "run_id": 44325592651,
+        "run_number": 150,
+        "conclusion": "SUCCESS",
+        "tests": 227,
+        "queue_contract": "E030-E072 PASS; E073 persistence contract PASS",
+        "source_commit_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
+        "workflow": "orthogonal-research-v2",
+        "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
+        "validated_at_kst": "2026-11-18T23:34:01+09:00",
+        "note": "Validate job succeeded; 227 unit tests passed, including the E073 queue-persistence contract; the generic E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
       }
     ],
     "target_1251_three_line_e048_duplicate_reproduction_run_id": 43547345879,
@@ -235,12 +247,17 @@
       "manifest_verification": "workflow verified per-study and root SHA256 manifests before publishing"
     },
     "latest_queue_validation": {
-      "workflow_run_id": 43739056958,
-      "workflow_run_number": 88,
+      "workflow_run_id": 44325592651,
+      "workflow_run_number": 150,
       "conclusion": "success",
       "validation_job": "success",
       "research_job": "skipped",
-      "prospective_ledger_job": "skipped"
+      "prospective_ledger_job": "skipped",
+      "tests": 227,
+      "queue_contract": "E030-E072 PASS; E073 persistence contract PASS",
+      "source_commit_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
+      "validated_at_kst": "2026-11-18T23:34:01+09:00"
     },
     "target_1251_three_line_e052_workflow_run_id": 43674223135,
     "target_1251_three_line_e052_preregistration": "research/weekly_purchase/1251/E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_PREREG_20261115.json",
@@ -550,8 +567,8 @@
     "winning_union_coverage",
     "any2_positive_50_target_block_share"
   ],
-  "audit_reconciled_at_kst": "2026-11-18T23:19:30.357057+09:00",
-  "reconciled_main_sha": "8e27d0e6b3af44e727394ad2e21a3c8940a0748f",
+  "audit_reconciled_at_kst": "2026-11-18T23:34:01+09:00",
+  "reconciled_main_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
   "e050_execution": {
     "workflow_name": "target-1251-e050-three-line-neighbor-transition",
     "workflow_run_id": 43564631433,
@@ -638,7 +655,7 @@
   "daily_master_generated_kst": "2026-11-15T15:25:23.478758+09:00",
   "daily_master_verification_status": "PARTIAL",
   "daily_master_v4_path": "analysis/2026-11-15/MASTER_FULL_V4_061932_948530",
-  "audit_updated_kst": "2026-11-18T23:19:30.357057+09:00",
+  "audit_updated_kst": "2026-11-18T23:34:01+09:00",
   "e045_cutoff_refresh": {
     "study_id": "E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1",
     "base_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
@@ -1090,20 +1107,20 @@
         "brier": {
           "model_mean": 0.11557033635476797,
           "uniform_mean": 0.11555555555555556,
-          "delta_model_minus_uniform": 1.4780799212416788e-05,
+          "delta_model_minus_uniform": 0.000014780799212416788,
           "adjusted_moving_block_ci_vs_uniform": {
-            "lower": -2.2928106310301404e-05,
-            "upper": 5.975578124223004e-05,
+            "lower": -0.000022928106310301404,
+            "upper": 0.00005975578124223004,
             "replicates": 4000,
             "block_length": 50,
             "alpha_two_sided": 0.025,
             "sample_targets": 650
           },
           "random_permutation_mean": 0.11557233129114587,
-          "delta_model_minus_random": -1.994936377892203e-06,
+          "delta_model_minus_random": -0.000001994936377892203,
           "adjusted_moving_block_ci_vs_random": {
-            "lower": -3.9294601352589707e-05,
-            "upper": 4.149720156938804e-05,
+            "lower": -0.000039294601352589707,
+            "upper": 0.00004149720156938804,
             "replicates": 4000,
             "block_length": 50,
             "alpha_two_sided": 0.025,
@@ -1114,7 +1131,7 @@
         "log_loss": {
           "model_mean": 0.3927385046838188,
           "uniform_mean": 0.39267446722755217,
-          "delta_model_minus_uniform": 6.40374562666557e-05,
+          "delta_model_minus_uniform": 0.0000640374562666557,
           "adjusted_moving_block_ci_vs_uniform": {
             "lower": -0.00010404908449172959,
             "upper": 0.00025301618434617705,
@@ -1124,7 +1141,7 @@
             "sample_targets": 650
           },
           "random_permutation_mean": 0.3927469570574102,
-          "delta_model_minus_random": -8.452373591389695e-06,
+          "delta_model_minus_random": -0.000008452373591389695,
           "adjusted_moving_block_ci_vs_random": {
             "lower": -0.0001698759918589075,
             "upper": 0.00017433507107498129,
@@ -1568,20 +1585,20 @@
       "brier": {
         "model_mean": 0.11557033635476797,
         "uniform_mean": 0.11555555555555556,
-        "delta_model_minus_uniform": 1.4780799212416788e-05,
+        "delta_model_minus_uniform": 0.000014780799212416788,
         "adjusted_moving_block_ci_vs_uniform": {
-          "lower": -2.2928106310301404e-05,
-          "upper": 5.975578124223004e-05,
+          "lower": -0.000022928106310301404,
+          "upper": 0.00005975578124223004,
           "replicates": 4000,
           "block_length": 50,
           "alpha_two_sided": 0.025,
           "sample_targets": 650
         },
         "random_permutation_mean": 0.11557233129114587,
-        "delta_model_minus_random": -1.994936377892203e-06,
+        "delta_model_minus_random": -0.000001994936377892203,
         "adjusted_moving_block_ci_vs_random": {
-          "lower": -3.9294601352589707e-05,
-          "upper": 4.149720156938804e-05,
+          "lower": -0.000039294601352589707,
+          "upper": 0.00004149720156938804,
           "replicates": 4000,
           "block_length": 50,
           "alpha_two_sided": 0.025,
@@ -1592,7 +1609,7 @@
       "log_loss": {
         "model_mean": 0.3927385046838188,
         "uniform_mean": 0.39267446722755217,
-        "delta_model_minus_uniform": 6.40374562666557e-05,
+        "delta_model_minus_uniform": 0.0000640374562666557,
         "adjusted_moving_block_ci_vs_uniform": {
           "lower": -0.00010404908449172959,
           "upper": 0.00025301618434617705,
@@ -1602,7 +1619,7 @@
           "sample_targets": 650
         },
         "random_permutation_mean": 0.3927469570574102,
-        "delta_model_minus_random": -8.452373591389695e-06,
+        "delta_model_minus_random": -0.000008452373591389695,
         "adjusted_moving_block_ci_vs_random": {
           "lower": -0.0001698759918589075,
           "upper": 0.00017433507107498129,

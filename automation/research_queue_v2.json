@@ -4179,18 +4179,30 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44272115784",
       "validated_at_kst": "2026-11-18T18:02:19+09:00",
       "note": "Validate job succeeded; 220 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    },
+    {
+      "run_id": 44325592651,
+      "run_number": 150,
+      "conclusion": "SUCCESS",
+      "tests": 227,
+      "queue_contract": "E030-E072 PASS; E073 persistence contract PASS",
+      "source_commit_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
+      "validated_at_kst": "2026-11-18T23:34:01+09:00",
+      "note": "Validate job succeeded; 227 unit tests passed, including the E073 queue-persistence contract; the generic E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44272115784,
-    "run_number": 147,
+    "run_id": 44325592651,
+    "run_number": 150,
     "conclusion": "SUCCESS",
-    "tests": 220,
-    "queue_contract": "E030-E072 PASS",
-    "source_commit_sha": "875505b801754e5fee40586423bc07cb40199df3",
+    "tests": 227,
+    "queue_contract": "E030-E072 PASS; E073 persistence contract PASS",
+    "source_commit_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44272115784",
-    "validated_at_kst": "2026-11-18T18:02:19+09:00",
-    "note": "Validate job succeeded; 220 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
+    "validated_at_kst": "2026-11-18T23:34:01+09:00",
+    "note": "Validate job succeeded; 227 unit tests passed, including the E073 queue-persistence contract; the generic E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
   }
 }
