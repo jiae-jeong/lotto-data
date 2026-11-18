@@ -118,7 +118,7 @@ def _verify_preregistration(prereg: dict, policy: dict):
         raise ValueError("E073 preregistration/policy identity mismatch")
     if prereg.get("preregistration_status") != "FROZEN_BEFORE_EXECUTION":
         raise ValueError("E073 preregistration is not frozen")
-    if prereg.get("independent_research_axis") is not True or prereg.get("independent_signal_family") is not True:
+    if prereg.get("independent_research_axis") is not True or prereg.get("independent_signal_family") is not True or prereg.get("independent_sample") is not False:
         raise ValueError("E073 must remain one independent signal-family axis")
     if prereg.get("historical_data_cutoff") != 1250 or prereg.get("target_rounds") != "401..1250 inclusive":
         raise ValueError("E073 historical cutoff/target range changed")
@@ -143,6 +143,7 @@ def _verify_preregistration(prereg: dict, policy: dict):
     if (
         estimator.get("prior_mean") != "6/45 main-number inclusion probability under the uniform 6-of-45 null"
         or float(estimator.get("prior_strength", -1)) != PRIOR_STRENGTH
+        or estimator.get("state_definition") != "Count 0..3 of candidate appearances in the three immediately preceding main draws."
         or estimator.get("posterior_probability") != "(success[state,n] + 45*(6/45))/(exposure[state,n] + 45)"
         or estimator.get("ranking") != "Score descending, then number ascending."
         or estimator.get("variants") != 1
@@ -490,6 +491,7 @@ def run(date_kst: str, run_id: str):
         "random_baseline_executed": True,
         "independent_research_axis": True,
         "independent_signal_family": True,
+        "independent_sample": False,
         "parameter_search": False,
         "thresholds_changed": False,
         "alpha_changed": False,
@@ -514,6 +516,7 @@ def run(date_kst: str, run_id: str):
         "evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
         "independent_research_axis": True,
         "independent_signal_family": True,
+        "independent_sample": False,
         "purchase_recommendation_generated": False,
     }
     base.write_json(outdir / "COMPLETION.json", completion)
