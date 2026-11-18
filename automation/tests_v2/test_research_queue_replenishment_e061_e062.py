@@ -1,4 +1,4 @@
-# E069 and E071 result evidence are checked after their dedicated workflows publish immutable manifests.
+# E069, E071, and E072 result evidence are checked after their dedicated workflows publish immutable manifests.
 import csv
 import hashlib
 import json
@@ -202,8 +202,8 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
                     self.assertEqual(len(payload), int(row["bytes"]), row["path"])
                     self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
 
-    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068_e069_e071(self):
-        self.assertEqual([task["id"] for task in self.tasks[-9:]], [
+    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068_e069_e071_e072(self):
+        self.assertEqual([task["id"] for task in self.tasks[-10:]], [
             "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
             "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
             "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
@@ -213,7 +213,66 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
             "E068_THREE_LINE_PREVIOUS_TWO_DRAW_OVERLAP_COUNT_TRANSITION_v1",
             "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
             "E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
+            "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
         ])
+
+    def test_e072_rank_probability_calibration_is_historical_no_edge_and_never_purchase_ready(self):
+        task = self.by_id["E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1"]
+        self.assertEqual(task["execution_status"], "EXECUTED_HISTORICAL_CALIBRATION_NO_EDGE")
+        self.assertFalse(task["target_1251_three_line_readiness_eligible"])
+        self.assertEqual(task["result_path"], "analysis/2026-11-18/gha_44230929833_1/E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1")
+
+        prereg = json.loads((ROOT / task["preregistration"]).read_text(encoding="utf-8"))
+        self.assertEqual(prereg["preregistration_status"], "FROZEN_BEFORE_EXECUTION")
+        self.assertTrue(prereg["independent_research_axis"])
+        self.assertFalse(prereg["independent_sample"])
+        self.assertEqual(prereg["training_targets"], [201, 600])
+        self.assertEqual(prereg["evaluation_targets"], [601, 1250])
+        self.assertEqual(prereg["calibration"]["bins"], 5)
+        self.assertEqual(prereg["calibration"]["prior_strength"], 45)
+        self.assertEqual(prereg["random_comparator"]["total_permutations"], 78000)
+        self.assertEqual(prereg["inference"]["bootstrap_replicates"], 4000)
+        self.assertEqual(prereg["inference"]["block_length_targets"], 50)
+        self.assertEqual(prereg["variants_evaluated"], 1)
+        self.assertFalse(prereg["parameter_search"])
+        self.assertFalse(prereg["strict_portfolio_policy"]["strict_pass_ready"])
+
+        result = task["execution_result"]
+        self.assertEqual(result["verification_status"], "PASS")
+        self.assertFalse(result["calibration_gate_pass"])
+        self.assertFalse(result["strict_portfolio_pass"])
+        self.assertFalse(result["strict_pass_ready"])
+        self.assertFalse(result["purchase_recommendation_generated"])
+        self.assertEqual(result["data_cutoff"], 1250)
+        self.assertEqual(result["training_targets"], 400)
+        self.assertEqual(result["evaluation_targets"], 650)
+        self.assertEqual(result["random_permutations_total"], 78000)
+        self.assertEqual(result["manifest_entries"], 8)
+
+        root = ROOT / task["result_path"]
+        verification = json.loads((root / "VERIFICATION.json").read_text(encoding="utf-8"))
+        inference = json.loads((root / "INFERENCE.json").read_text(encoding="utf-8"))
+        self.assertEqual(verification["status"], "PASS")
+        self.assertEqual(verification["data_cutoff"], 1250)
+        self.assertEqual(verification["evaluation_targets_count"], 650)
+        self.assertEqual(verification["random_permutations_total"], 78000)
+        self.assertEqual(verification["feature_cutoff_violations"], 0)
+        self.assertEqual(verification["training_feature_cutoff_violations"], 0)
+        self.assertEqual(verification["future_predictions"], 0)
+        self.assertFalse(verification["calibrator_uses_evaluation_outcomes"])
+        self.assertEqual(verification["leakage_failures"], 0)
+        self.assertFalse(verification["strict_pass_ready"])
+        self.assertEqual(inference["status"], "HISTORICAL_CALIBRATION_NO_EDGE")
+        self.assertFalse(inference["calibration_gate_pass"])
+        self.assertFalse(inference["strict_pass_ready"])
+
+        with (root / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="") as stream:
+            manifest = list(csv.DictReader(stream))
+        self.assertEqual(len(manifest), 8)
+        for row in manifest:
+            payload = (root / row["path"]).read_bytes()
+            self.assertEqual(len(payload), int(row["bytes"]), row["path"])
+            self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
 
 
     def test_e071_bonus_distance_axis_has_verified_historical_evidence_without_readiness(self):
