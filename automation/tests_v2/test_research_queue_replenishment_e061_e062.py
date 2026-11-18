@@ -1,4 +1,4 @@
-# E069, E071, and E072 result evidence are checked after their dedicated workflows publish immutable manifests.
+# E069, E071, E072, and E073 result evidence is checked after dedicated workflows publish immutable manifests.
 import csv
 import hashlib
 import json
