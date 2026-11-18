@@ -459,6 +459,9 @@ def run(date_kst: str, run_id: str):
         "strict_portfolio_pass": strict_portfolio_pass,
         "strict_pass_ready": False,
         "readiness_status": readiness_status,
+        "independent_research_axis": True,
+        "independent_signal_family": True,
+        "independent_sample": False,
         "prospective_minimum_target_count": prospective["minimum_target_count"],
         "prospective_completion_rule": prospective["completion_rule"],
         "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
@@ -521,7 +524,7 @@ def run(date_kst: str, run_id: str):
     }
     base.write_json(outdir / "COMPLETION.json", completion)
     report = [
-        "# E073 — Three-draw membership-state conditional inclusion model",
+        "# E073 — Three-draw membership-count conditional inclusion model",
         "",
         f"- Study status: **{readiness_status}**",
         f"- Data cutoff: **{cutoff}**; source rows: **{current_rows}**",
