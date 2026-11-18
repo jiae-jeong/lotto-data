@@ -4085,6 +4085,35 @@
       },
       "execution_completed_at_kst": "2026-11-18T23:19:30.357057+09:00",
       "result_path": "analysis/2026-11-18/gha_44322687962_1/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1"
+    },
+    {
+      "id": "E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+      "kind": "three_line_calendar_month_conditional_frequency",
+      "question": "Does one fixed calendar-month-conditioned Beta-smoothed inclusion-frequency ranking improve a three-line disjoint union18 portfolio over the exact geometry-matched null on targets 401..1250, using only earlier draws from the target's calendar month?",
+      "novelty": "One exogenous calendar-month conditioning feature. Prior axes use number history, lagged draw states, bonus distance, gap shape, overlap, or score calibration; this axis uses only the target draw's known calendar month to condition a single historical inclusion-frequency estimator. One fixed Beta(6,39) prior, one deterministic top-18 partition, one walk-forward, no variants or parameter search. Historical screening only; not an independent sample or prospective confirmation.",
+      "independent_research_axis": true,
+      "independent_sample": false,
+      "data_cutoff": 1250,
+      "target_rounds": "401..1250 inclusive",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_calendar_month_frequency_e074.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e074-calendar-month-frequency.yml",
+      "preregistration": "research/weekly_purchase/1251/E074_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_PREREG_20261118.json",
+      "preregistration_blob_sha": "af9c775829d229e1bc7bf060325f2f409674e8ee",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "spec": {
+        "study_id": "E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+        "kind": "three_line_calendar_month_conditional_frequency",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "strict_pass_ready": false,
+        "target_1251_three_line_readiness_eligible": false,
+        "independent_research_axis": true,
+        "independent_sample": false
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
