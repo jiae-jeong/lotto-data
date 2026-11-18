@@ -122,7 +122,7 @@ jobs:
         if: steps.preflight.outputs.already_complete != 'true'
         run: |
           python -m py_compile automation/three_line_three_draw_membership_count_e073.py automation/three_line_research_1251_v1.py automation/tests_v2/test_three_line_three_draw_membership_count_e073.py
-          python -B -m unittest automation.tests_v2.test_three_line_three_draw_membership_count_e073 -v
+          python -B -m unittest automation.tests_v2.test_three_line_three_draw_membership_count_e073 automation.tests_v2.test_e073_queue_persistence_contract -v
 
       - name: Execute preregistered E073 walk-forward and matched-random baseline
         if: steps.preflight.outputs.already_complete != 'true'

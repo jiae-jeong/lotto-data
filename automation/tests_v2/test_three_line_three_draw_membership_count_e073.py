@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 
 from automation.three_line_three_draw_membership_count_e073 import (
     BASE_RATE,
@@ -75,14 +74,6 @@ class ThreeDrawMembershipCountE073Tests(unittest.TestCase):
         successes = [[0] * 46 for _ in range(4)]
         with self.assertRaises(ValueError):
             update_lag3_counts({1, 2}, {3, 4, 5, 6}, {7, 8, 9, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, exposures, successes)
-
-
-    def test_workflow_persists_execution_status_to_queue(self):
-        workflow_path = Path(".github/workflows/target-1251-e073-three-draw-membership-count.yml")
-        workflow = workflow_path.read_text(encoding="utf-8")
-        status_update = workflow.index('task["execution_status"] =')
-        queue_persist = workflow.index("queue_path.write_text(")
-        self.assertLess(status_update, queue_persist)
 
 
 if __name__ == "__main__":
