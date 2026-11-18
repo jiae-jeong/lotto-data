@@ -4035,17 +4035,30 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44263814843",
       "validated_at_kst": "2026-11-18T17:04:18+09:00",
       "note": "Reconciled from the successful validate job; research and prospective-ledger jobs were correctly skipped for this push."
+    },
+    {
+      "run_id": 44272115784,
+      "run_number": 147,
+      "conclusion": "SUCCESS",
+      "tests": 220,
+      "queue_contract": "E030-E072 PASS",
+      "source_commit_sha": "875505b801754e5fee40586423bc07cb40199df3",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44272115784",
+      "validated_at_kst": "2026-11-18T18:02:19+09:00",
+      "note": "Validate job succeeded; 220 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44263814843,
-    "run_number": 146,
+    "run_id": 44272115784,
+    "run_number": 147,
     "conclusion": "SUCCESS",
+    "tests": 220,
     "queue_contract": "E030-E072 PASS",
-    "source_commit_sha": "3d59d86cd249aca62e6093a66cb6217fabe745fe",
+    "source_commit_sha": "875505b801754e5fee40586423bc07cb40199df3",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44263814843",
-    "validated_at_kst": "2026-11-18T17:04:18+09:00",
-    "note": "Reconciled from the successful validate job; research and prospective-ledger jobs were correctly skipped for this push."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44272115784",
+    "validated_at_kst": "2026-11-18T18:02:19+09:00",
+    "note": "Validate job succeeded; 220 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
   }
 }
