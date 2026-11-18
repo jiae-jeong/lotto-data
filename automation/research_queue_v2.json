@@ -3532,6 +3532,159 @@
       "registered_hypothesis_valid": false,
       "implementation_audit_path": "analysis/2026-11-18/E070_E069_IMPLEMENTATION_AND_CANDIDATE_STAGE_AUDIT_v1",
       "corrective_reexecution_path": "analysis/2026-11-18/gha_44200988606_1/E069_CORRECTIVE_REEXECUTION_v1"
+    },
+    {
+      "id": "E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
+      "kind": "three_line_previous_bonus_distance_transition",
+      "question": "Does a candidate number's absolute distance from the immediately preceding draw's bonus ball, binned by fixed theoretical 6/45 distance quintiles, contain cutoff-safe information about next-draw main-number inclusion sufficient to improve one frozen three-line disjoint union18 portfolio over the exact geometry-matched null?",
+      "novelty": "One bonus-ball distance feature family. E048 tests the exact previous bonus value; E050 tests minimum distance to the previous draw's six main numbers. E071 uses only absolute distance to the previous draw's bonus ball, with bins fixed from the complete 45x45 theoretical distance distribution before historical evaluation. This is a distinct feature definition, not a claim of statistical independence; one fixed estimator, one E045 selector, one historical evaluation, no variants or parameter search.",
+      "execution_mode": "dedicated_workflow",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "execution_entrypoint": "automation/three_line_previous_bonus_distance_e071.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e071-previous-bonus-distance-transition.yml",
+      "preregistration": "research/weekly_purchase/1251/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_PREREG_20261118.json",
+      "preregistration_blob_sha": "287df7d67e452a3c4884c19f1d1136e564b6df30",
+      "target_1251_three_line_readiness_eligible": false,
+      "spec": {
+        "study_id": "E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1",
+        "kind": "three_line_previous_bonus_distance_transition",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "execution_mode": "dedicated_workflow",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "strict_pass_ready": false,
+        "target_1251_three_line_readiness_eligible": false,
+        "independent_research_axis": true,
+        "independent_sample": false,
+        "feature_definition": {
+          "source": "The immediately preceding draw's bonus ball only; previous main numbers are not used as feature inputs.",
+          "distance": "Absolute numeric distance abs(candidate_number - previous_draw_bonus); no circular wrap; distance 0 is allowed.",
+          "binning": {
+            "method": "Five discrete quintile bins derived only from all 45*45 ordered (candidate, bonus) pairs under the uniform 1..45 geometry; no historical outcomes are used to choose cutpoints.",
+            "theoretical_pair_count": 2025,
+            "cutpoints": [
+              5,
+              10,
+              17,
+              25
+            ],
+            "cumulative_counts": [
+              465,
+              835,
+              1269,
+              1645
+            ],
+            "bin_counts": [
+              465,
+              370,
+              434,
+              376,
+              380
+            ],
+            "bins": [
+              {
+                "id": 0,
+                "distance_inclusive": [
+                  0,
+                  5
+                ],
+                "ordered_pair_count": 465
+              },
+              {
+                "id": 1,
+                "distance_inclusive": [
+                  6,
+                  10
+                ],
+                "ordered_pair_count": 370
+              },
+              {
+                "id": 2,
+                "distance_inclusive": [
+                  11,
+                  17
+                ],
+                "ordered_pair_count": 434
+              },
+              {
+                "id": 3,
+                "distance_inclusive": [
+                  18,
+                  25
+                ],
+                "ordered_pair_count": 376
+              },
+              {
+                "id": 4,
+                "distance_inclusive": [
+                  26,
+                  44
+                ],
+                "ordered_pair_count": 380
+              }
+            ]
+          },
+          "candidate_universe": "All integers 1..45; every candidate receives exactly one distance bin for each target.",
+          "outcome": "The six main numbers of the following draw; the bonus number is excluded."
+        },
+        "estimator": {
+          "prior_mean": "6/45 under the uniform six-of-45 main-number null",
+          "prior_strength": 45,
+          "posterior_probability": "(success[bin,n] + 45*(6/45)) / (exposure[bin,n] + 45)",
+          "ranking": "Score descending, then number ascending.",
+          "variants": 1,
+          "parameter_search": false
+        },
+        "random_comparator": {
+          "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+          "random_bundles_per_target": 120,
+          "seed": 20261118071,
+          "exact_null": {
+            "mean_max_hit": 1.514256248572755,
+            "p_any2": 0.47497624326892623,
+            "p_any3": 0.07135490714617204,
+            "expected_union_coverage": 2.4
+          },
+          "randomness_used_for_final_selection": false
+        },
+        "inference": {
+          "metrics": [
+            "max_hits",
+            "any2",
+            "any3",
+            "winning_union_coverage"
+          ],
+          "family_alpha": 0.05,
+          "alpha_per_metric": 0.0125,
+          "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null; sample overlapping contiguous blocks while preserving the fixed final remainder-block length.",
+          "bootstrap_replicates": 4000,
+          "bootstrap_seed": 20261118071,
+          "block_length_targets": 50,
+          "retain_final_remainder_block": true,
+          "all_adjusted_ci_lower_bounds_strictly_gt_zero": true,
+          "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+          "no_threshold_relaxation": true,
+          "no_alpha_change": true,
+          "no_block_length_change": true,
+          "no_comparator_change": true,
+          "no_unbounded_microvariants": true
+        },
+        "prospective_confirmation": {
+          "required_by_policy": true,
+          "minimum_target_count": null,
+          "completion_rule": null,
+          "status": "UNSPECIFIED_IN_POLICY",
+          "readiness_rule": "Even if the historical gate passes, do not create STRICT_PASS_READY or release purchase lines until the policy owner formally predeclares the prospective minimum target count and completion rule."
+        },
+        "frozen_blobs": {
+          "runner_blob_sha": "a5007cad14326ff73d9c45213ac27786bd5ecff4",
+          "test_blob_sha": "28e973a53fcc2e37cc3758cd3b6cb7eb70a255fb",
+          "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+          "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+          "data_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e"
+        },
+        "preregistration_blob_sha": "287df7d67e452a3c4884c19f1d1136e564b6df30"
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
