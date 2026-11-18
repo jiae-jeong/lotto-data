@@ -3953,6 +3953,34 @@
         "target_1251_three_line_readiness_eligible": false
       },
       "execution_completed_at_kst": "2026-11-18"
+    },
+    {
+      "id": "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
+      "kind": "three_line_three_draw_membership_count_transition",
+      "question": "Does one frozen three-draw candidate-membership-count estimator improve a three-line disjoint union18 portfolio on targets 401..1250 under the unchanged four-metric strict gate?",
+      "novelty": "One candidate-specific four-state count feature using exactly the three immediately preceding main draws. It differs from E053's two-draw bit pattern and E069's one-draw membership indicator. One fixed Beta-smoothed estimator, one deterministic portfolio, one historical walk-forward, and one geometry-matched random comparator; no variants or parameter search.",
+      "independent_research_axis": true,
+      "independent_sample": false,
+      "data_cutoff": 1250,
+      "target_rounds": "401..1250 inclusive",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/three_line_three_draw_membership_count_e073.py",
+      "workflow_entrypoint": ".github/workflows/target-1251-e073-three-draw-membership-count.yml",
+      "preregistration": "research/weekly_purchase/1251/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_PREREG_20261118.json",
+      "preregistration_blob_sha": "916a954f3d01b3c1797421482e9eef362e754d85",
+      "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+      "spec": {
+        "study_id": "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
+        "kind": "three_line_three_draw_membership_count_transition",
+        "data_cutoff": 1250,
+        "target_rounds": "401..1250 inclusive",
+        "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
+        "strict_pass_ready": false,
+        "target_1251_three_line_readiness_eligible": false,
+        "independent_research_axis": true,
+        "independent_sample": false
+      }
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
