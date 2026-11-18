@@ -3833,20 +3833,20 @@
             "brier": {
               "model_mean": 0.11557033635476797,
               "uniform_mean": 0.11555555555555556,
-              "delta_model_minus_uniform": 0.000014780799212416788,
+              "delta_model_minus_uniform": 1.4780799212416788e-05,
               "adjusted_moving_block_ci_vs_uniform": {
-                "lower": -0.000022928106310301404,
-                "upper": 0.00005975578124223004,
+                "lower": -2.2928106310301404e-05,
+                "upper": 5.975578124223004e-05,
                 "replicates": 4000,
                 "block_length": 50,
                 "alpha_two_sided": 0.025,
                 "sample_targets": 650
               },
               "random_permutation_mean": 0.11557233129114587,
-              "delta_model_minus_random": -0.000001994936377892203,
+              "delta_model_minus_random": -1.994936377892203e-06,
               "adjusted_moving_block_ci_vs_random": {
-                "lower": -0.000039294601352589707,
-                "upper": 0.00004149720156938804,
+                "lower": -3.9294601352589707e-05,
+                "upper": 4.149720156938804e-05,
                 "replicates": 4000,
                 "block_length": 50,
                 "alpha_two_sided": 0.025,
@@ -3857,7 +3857,7 @@
             "log_loss": {
               "model_mean": 0.3927385046838188,
               "uniform_mean": 0.39267446722755217,
-              "delta_model_minus_uniform": 0.0000640374562666557,
+              "delta_model_minus_uniform": 6.40374562666557e-05,
               "adjusted_moving_block_ci_vs_uniform": {
                 "lower": -0.00010404908449172959,
                 "upper": 0.00025301618434617705,
@@ -3867,7 +3867,7 @@
                 "sample_targets": 650
               },
               "random_permutation_mean": 0.3927469570574102,
-              "delta_model_minus_random": -0.000008452373591389695,
+              "delta_model_minus_random": -8.452373591389695e-06,
               "adjusted_moving_block_ci_vs_random": {
                 "lower": -0.0001698759918589075,
                 "upper": 0.00017433507107498129,
@@ -3902,20 +3902,20 @@
           "brier": {
             "model_mean": 0.11557033635476797,
             "uniform_mean": 0.11555555555555556,
-            "delta_model_minus_uniform": 0.000014780799212416788,
+            "delta_model_minus_uniform": 1.4780799212416788e-05,
             "adjusted_moving_block_ci_vs_uniform": {
-              "lower": -0.000022928106310301404,
-              "upper": 0.00005975578124223004,
+              "lower": -2.2928106310301404e-05,
+              "upper": 5.975578124223004e-05,
               "replicates": 4000,
               "block_length": 50,
               "alpha_two_sided": 0.025,
               "sample_targets": 650
             },
             "random_permutation_mean": 0.11557233129114587,
-            "delta_model_minus_random": -0.000001994936377892203,
+            "delta_model_minus_random": -1.994936377892203e-06,
             "adjusted_moving_block_ci_vs_random": {
-              "lower": -0.000039294601352589707,
-              "upper": 0.00004149720156938804,
+              "lower": -3.9294601352589707e-05,
+              "upper": 4.149720156938804e-05,
               "replicates": 4000,
               "block_length": 50,
               "alpha_two_sided": 0.025,
@@ -3926,7 +3926,7 @@
           "log_loss": {
             "model_mean": 0.3927385046838188,
             "uniform_mean": 0.39267446722755217,
-            "delta_model_minus_uniform": 0.0000640374562666557,
+            "delta_model_minus_uniform": 6.40374562666557e-05,
             "adjusted_moving_block_ci_vs_uniform": {
               "lower": -0.00010404908449172959,
               "upper": 0.00025301618434617705,
@@ -3936,7 +3936,7 @@
               "sample_targets": 650
             },
             "random_permutation_mean": 0.3927469570574102,
-            "delta_model_minus_random": -0.000008452373591389695,
+            "delta_model_minus_random": -8.452373591389695e-06,
             "adjusted_moving_block_ci_vs_random": {
               "lower": -0.0001698759918589075,
               "upper": 0.00017433507107498129,
@@ -4227,170 +4227,157 @@
   "trigger_mode": "workflow_dispatch_only",
   "trigger_note": "E064 is null calibration only. E066 gap-shape and E067 prime-count are historical exploratory axes, not prospective confirmation or purchase readiness. No target-1251 three-line model is promoted or ready; the strict gate and prospective-confirmation policy remain unchanged. Do not create post-hoc microvariants or infer purchase readiness from null calibration. E069 implementation-conformance correction (2026-11-18): E070 found the original E069 runner used a number-specific historical-frequency prior instead of the frozen fixed 6/45 prior. Original E069 artifacts are preserved but invalid for the registered estimator; the separately versioned corrective re-execution is historical-only, not independent, not prospective confirmation, and never STRICT_PASS_READY.",
   "queue_contract_validation_history": [
-    {
-      "run_id": 43763359441,
-      "conclusion": "FAILURE",
-      "cause": "E056 append left the existing E043-E055 queue-suffix assertion stale; validation failed in test_independent_five_line.py."
-    },
-    {
-      "run_id": 43763373109,
-      "conclusion": "FAILURE",
-      "cause": "Same stale E043-E055 queue-suffix assertion; the new E056 queue assertions themselves passed."
-    },
-    {
-      "run_id": 43763579367,
-      "conclusion": "SUCCESS",
-      "tests": 145,
-      "queue_contract": "E030-E056 PASS",
-      "cause": "Updated suffix assertion and E056 queue contract validated."
-    },
-    {
-      "run_id": 43763587906,
-      "conclusion": "SUCCESS",
-      "queue_contract": "E030-E056 PASS",
-      "cause": "Post-fix full validation and queue contract passed."
-    },
-    {
-      "run_id": 43764040297,
-      "conclusion": "SUCCESS",
-      "tests": 145,
-      "queue_contract": "E030-E056 PASS",
-      "cause": "Post-E056 execution queue and non-promotion result fields validated."
-    },
-    {
-      "run_id": 43764065860,
-      "conclusion": "SUCCESS",
-      "tests": 145,
-      "queue_contract": "E030-E056 PASS",
-      "cause": "Post-execution E056 evidence assertions and full queue contract passed."
-    },
-    {
-      "run_id": 43807592154,
-      "run_number": 101,
-      "conclusion": "FAILURE",
-      "cause": "E062 result manifest used an incorrect SHA256 implementation; corrected exact-byte SHA256 fields were committed before final validation."
-    },
-    {
-      "run_id": 43807829261,
-      "run_number": 102,
-      "conclusion": "SUCCESS",
-      "tests": 148,
-      "queue_contract": "E030-E062 PASS",
-      "cause": "Post-repair full unit suite and E061/E062 queue assertions passed; research and prospective-ledger jobs skipped as intended."
-    },
-    {
-      "run_id": 43808228629,
-      "run_number": 104,
-      "conclusion": "SUCCESS",
-      "tests": 148,
-      "queue_contract": "E030-E062 PASS",
-      "cause": "Corrected 97.5% Bonferroni-adjusted interval labels and exact-byte manifest validated; research jobs skipped."
-    },
-    {
-      "run_id": 43865941655,
-      "run_number": 115,
-      "conclusion": "SUCCESS",
-      "tests": 160,
-      "queue_contract": "E030-E064 PASS",
-      "cause": "E064 frozen preregistration, runner, and test contracts validated; all 160 unit tests passed; research and prospective-ledger jobs skipped because no pending task was eligible."
-    },
-    {
-      "run_id": 44263814843,
-      "run_number": 146,
-      "conclusion": "SUCCESS",
-      "queue_contract": "E030-E072 PASS",
-      "source_commit_sha": "3d59d86cd249aca62e6093a66cb6217fabe745fe",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44263814843",
-      "validated_at_kst": "2026-11-18T17:04:18+09:00",
-      "note": "Reconciled from the successful validate job; research and prospective-ledger jobs were correctly skipped for this push."
-    },
-    {
-      "run_id": 44272115784,
-      "run_number": 147,
-      "conclusion": "SUCCESS",
-      "tests": 220,
-      "queue_contract": "E030-E072 PASS",
-      "source_commit_sha": "875505b801754e5fee40586423bc07cb40199df3",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44272115784",
-      "validated_at_kst": "2026-11-18T18:02:19+09:00",
-      "note": "Validate job succeeded; 220 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
-    },
-    {
-      "run_id": 44325592651,
-      "run_number": 150,
-      "conclusion": "SUCCESS",
-      "tests": 227,
-      "queue_contract": "E030-E072 PASS; E073 persistence contract PASS",
-      "source_commit_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
-      "validated_at_kst": "2026-11-18T23:34:01+09:00",
-      "note": "Validate job succeeded; 227 unit tests passed, including the E073 queue-persistence contract; the generic E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
-    },
-    {
-      "run_id": 44327476089,
-      "run_number": 151,
-      "conclusion": "SUCCESS",
-      "tests": 227,
-      "queue_contract": "E030-E072 PASS",
-      "source_commit_sha": "10662178ae4dd6e63f19a7c045c5bed2d64f53ca",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44327476089",
-      "validated_at_kst": "2026-11-18T23:43:55+09:00",
-      "note": "Validate job succeeded; 227 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
-    },
-    {
-      "run_id": 44333631771,
-      "run_number": 152,
-      "conclusion": "FAILURE",
-      "tests": 234,
-      "queue_contract": "FAIL",
-      "source_commit_sha": "24724ff0dce1cacb3da0c23b76d03def146425d0",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44333631771",
-      "validated_at_kst": "2026-11-19T00:16:28+09:00",
-      "cause": "All 234 unit tests passed, but the post-test queue-tail assertion still ended at E073 after E074 was appended. The assertion was extended through E074 and the subsequent #153 and #154 validation runs passed."
-    },
-    {
-      "run_id": 44336400065,
-      "run_number": 153,
-      "conclusion": "SUCCESS",
-      "tests": 234,
-      "queue_contract": "E030-E074 PASS",
-      "source_commit_sha": "2019055af741d1ee28ee228e14994c716c595084",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44336400065",
-      "validated_at_kst": "2026-11-19T00:30:43+09:00",
-      "note": "Validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
-    },
-    {
-      "run_id": 44337603144,
-      "run_number": 154,
-      "conclusion": "SUCCESS",
-      "tests": 234,
-      "queue_contract": "E030-E074 PASS",
-      "source_commit_sha": "bbe2a68b8782f8b05abcd4a29a8d76690f035858",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44337603144",
-      "validated_at_kst": "2026-11-19T00:36:48+09:00",
-      "note": "Final validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
-    },
-    {
-      "run_id": 44345996070,
-      "run_number": 155,
-      "conclusion": "SUCCESS",
-      "tests": 234,
-      "queue_contract": "E030-E074 PASS",
-      "source_commit_sha": "563a643a6eb44a7ec8e6531ec42db1597e7aadc5",
-      "workflow": "orthogonal-research-v2",
-      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44345996070",
-      "validated_at_kst": "2026-11-19T01:20:22+09:00",
-      "note": "Post-reconciliation validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; dedicated push-triggered studies also performed duplicate guards and skipped execution."
-    }
-  ],
-  "latest_queue_validation": {
+  {
+    "run_id": 43763359441,
+    "conclusion": "FAILURE",
+    "cause": "E056 append left the existing E043-E055 queue-suffix assertion stale; validation failed in test_independent_five_line.py."
+  },
+  {
+    "run_id": 43763373109,
+    "conclusion": "FAILURE",
+    "cause": "Same stale E043-E055 queue-suffix assertion; the new E056 queue assertions themselves passed."
+  },
+  {
+    "run_id": 43763579367,
+    "conclusion": "SUCCESS",
+    "tests": 145,
+    "queue_contract": "E030-E056 PASS",
+    "cause": "Updated suffix assertion and E056 queue contract validated."
+  },
+  {
+    "run_id": 43763587906,
+    "conclusion": "SUCCESS",
+    "queue_contract": "E030-E056 PASS",
+    "cause": "Post-fix full validation and queue contract passed."
+  },
+  {
+    "run_id": 43764040297,
+    "conclusion": "SUCCESS",
+    "tests": 145,
+    "queue_contract": "E030-E056 PASS",
+    "cause": "Post-E056 execution queue and non-promotion result fields validated."
+  },
+  {
+    "run_id": 43764065860,
+    "conclusion": "SUCCESS",
+    "tests": 145,
+    "queue_contract": "E030-E056 PASS",
+    "cause": "Post-execution E056 evidence assertions and full queue contract passed."
+  },
+  {
+    "run_id": 43807592154,
+    "run_number": 101,
+    "conclusion": "FAILURE",
+    "cause": "E062 result manifest used an incorrect SHA256 implementation; corrected exact-byte SHA256 fields were committed before final validation."
+  },
+  {
+    "run_id": 43807829261,
+    "run_number": 102,
+    "conclusion": "SUCCESS",
+    "tests": 148,
+    "queue_contract": "E030-E062 PASS",
+    "cause": "Post-repair full unit suite and E061/E062 queue assertions passed; research and prospective-ledger jobs skipped as intended."
+  },
+  {
+    "run_id": 43808228629,
+    "run_number": 104,
+    "conclusion": "SUCCESS",
+    "tests": 148,
+    "queue_contract": "E030-E062 PASS",
+    "cause": "Corrected 97.5% Bonferroni-adjusted interval labels and exact-byte manifest validated; research jobs skipped."
+  },
+  {
+    "run_id": 43865941655,
+    "run_number": 115,
+    "conclusion": "SUCCESS",
+    "tests": 160,
+    "queue_contract": "E030-E064 PASS",
+    "cause": "E064 frozen preregistration, runner, and test contracts validated; all 160 unit tests passed; research and prospective-ledger jobs skipped because no pending task was eligible."
+  },
+  {
+    "run_id": 44263814843,
+    "run_number": 146,
+    "conclusion": "SUCCESS",
+    "queue_contract": "E030-E072 PASS",
+    "source_commit_sha": "3d59d86cd249aca62e6093a66cb6217fabe745fe",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44263814843",
+    "validated_at_kst": "2026-11-18T17:04:18+09:00",
+    "note": "Reconciled from the successful validate job; research and prospective-ledger jobs were correctly skipped for this push."
+  },
+  {
+    "run_id": 44272115784,
+    "run_number": 147,
+    "conclusion": "SUCCESS",
+    "tests": 220,
+    "queue_contract": "E030-E072 PASS",
+    "source_commit_sha": "875505b801754e5fee40586423bc07cb40199df3",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44272115784",
+    "validated_at_kst": "2026-11-18T18:02:19+09:00",
+    "note": "Validate job succeeded; 220 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+  },
+  {
+    "run_id": 44325592651,
+    "run_number": 150,
+    "conclusion": "SUCCESS",
+    "tests": 227,
+    "queue_contract": "E030-E072 PASS; E073 persistence contract PASS",
+    "source_commit_sha": "b70e91bc33be1b81925fdcb13a1803d1f38767e7",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44325592651",
+    "validated_at_kst": "2026-11-18T23:34:01+09:00",
+    "note": "Validate job succeeded; 227 unit tests passed, including the E073 queue-persistence contract; the generic E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+  },
+  {
+    "run_id": 44327476089,
+    "run_number": 151,
+    "conclusion": "SUCCESS",
+    "tests": 227,
+    "queue_contract": "E030-E072 PASS",
+    "source_commit_sha": "10662178ae4dd6e63f19a7c045c5bed2d64f53ca",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44327476089",
+    "validated_at_kst": "2026-11-18T23:43:55+09:00",
+    "note": "Validate job succeeded; 227 unit tests passed and E030-E072 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+  },
+  {
+    "run_id": 44333631771,
+    "run_number": 152,
+    "conclusion": "FAILURE",
+    "tests": 234,
+    "queue_contract": "FAIL",
+    "source_commit_sha": "24724ff0dce1cacb3da0c23b76d03def146425d0",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44333631771",
+    "validated_at_kst": "2026-11-19T00:16:28+09:00",
+    "cause": "All 234 unit tests passed, but the post-test queue-tail assertion still ended at E073 after E074 was appended. The assertion was extended through E074 and the subsequent #153 and #154 validation runs passed."
+  },
+  {
+    "run_id": 44336400065,
+    "run_number": 153,
+    "conclusion": "SUCCESS",
+    "tests": 234,
+    "queue_contract": "E030-E074 PASS",
+    "source_commit_sha": "2019055af741d1ee28ee228e14994c716c595084",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44336400065",
+    "validated_at_kst": "2026-11-19T00:30:43+09:00",
+    "note": "Validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+  },
+  {
+    "run_id": 44337603144,
+    "run_number": 154,
+    "conclusion": "SUCCESS",
+    "tests": 234,
+    "queue_contract": "E030-E074 PASS",
+    "source_commit_sha": "bbe2a68b8782f8b05abcd4a29a8d76690f035858",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44337603144",
+    "validated_at_kst": "2026-11-19T00:36:48+09:00",
+    "note": "Final validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+  },
+  {
     "run_id": 44345996070,
     "run_number": 155,
     "conclusion": "SUCCESS",
@@ -4402,4 +4389,17 @@
     "validated_at_kst": "2026-11-19T01:20:22+09:00",
     "note": "Post-reconciliation validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; dedicated push-triggered studies also performed duplicate guards and skipped execution."
   }
+],
+  "latest_queue_validation": {
+  "run_id": 44345996070,
+  "run_number": 155,
+  "conclusion": "SUCCESS",
+  "tests": 234,
+  "queue_contract": "E030-E074 PASS",
+  "source_commit_sha": "563a643a6eb44a7ec8e6531ec42db1597e7aadc5",
+  "workflow": "orthogonal-research-v2",
+  "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44345996070",
+  "validated_at_kst": "2026-11-19T01:20:22+09:00",
+  "note": "Post-reconciliation validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; dedicated push-triggered studies also performed duplicate guards and skipped execution."
+}
 }
