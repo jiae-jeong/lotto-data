@@ -305,7 +305,7 @@ jobs:
           audit["audit_updated_kst"] = now_kst
           audit["audit_reconciled_at_kst"] = now_kst
           audit["reconciled_main_sha"] = os.environ["CHECKOUT_SHA"]
-          audit["note"] = audit.get("note", "") + "\\n2026-11-18: E073 three-draw membership-count signal-family screen completed at cutoff 1250; historical only, not an independent sample or prospective confirmation; strict gates and readiness remain unchanged."
+          audit["note"] = audit.get("note", "") + "\n2026-11-18: E073 three-draw membership-count signal-family screen completed at cutoff 1250; historical only, not an independent sample or prospective confirmation; strict gates and readiness remain unchanged."
           audit_path = Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261118.json")
           audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           daily_path = Path("research/weekly_purchase/1251/DAILY_MASTER_STATUS_1251_20261118.json")
