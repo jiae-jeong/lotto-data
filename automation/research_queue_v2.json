@@ -4376,18 +4376,30 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44337603144",
       "validated_at_kst": "2026-11-19T00:36:48+09:00",
       "note": "Final validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    },
+    {
+      "run_id": 44345996070,
+      "run_number": 155,
+      "conclusion": "SUCCESS",
+      "tests": 234,
+      "queue_contract": "E030-E074 PASS",
+      "source_commit_sha": "563a643a6eb44a7ec8e6531ec42db1597e7aadc5",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44345996070",
+      "validated_at_kst": "2026-11-19T01:20:22+09:00",
+      "note": "Post-reconciliation validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; dedicated push-triggered studies also performed duplicate guards and skipped execution."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44337603144,
-    "run_number": 154,
+    "run_id": 44345996070,
+    "run_number": 155,
     "conclusion": "SUCCESS",
     "tests": 234,
     "queue_contract": "E030-E074 PASS",
-    "source_commit_sha": "bbe2a68b8782f8b05abcd4a29a8d76690f035858",
+    "source_commit_sha": "563a643a6eb44a7ec8e6531ec42db1597e7aadc5",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44337603144",
-    "validated_at_kst": "2026-11-19T00:36:48+09:00",
-    "note": "Final validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44345996070",
+    "validated_at_kst": "2026-11-19T01:20:22+09:00",
+    "note": "Post-reconciliation validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; dedicated push-triggered studies also performed duplicate guards and skipped execution."
   }
 }
