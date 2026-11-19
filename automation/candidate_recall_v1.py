@@ -145,7 +145,7 @@ def build_candidate_recall(rows, dated: Path):
 
     write_csv(dated / "CANDIDATE_RECALL_SCORECARD.csv", score_rows)
     payload = {
-        "generated_kst": datetime.now(KST).isoformat(),
+        "generated_date_kst": datetime.now(KST).date().isoformat(),
         "data_cutoff": rounds[-1],
         "walkforward_start_round": rounds[start] if len(rounds) > start else None,
         "targets": len(draws) - start,
