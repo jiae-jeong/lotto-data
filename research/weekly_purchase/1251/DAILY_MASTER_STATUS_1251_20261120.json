@@ -118,7 +118,13 @@
       "prospective_ledger_job": "SKIPPED",
       "note": "Rerun attempt 2 checked out current main; 251 unit tests and E030-E076 queue contract passed. No historical study was recomputed."
     },
-    "next_step": "No new E077 or post-hoc variants created. A new 1251 three-line axis requires a distinct preregistered hypothesis or new source data."
+    "next_step": "No new E077 or post-hoc variants created. A new 1251 three-line axis requires a distinct preregistered hypothesis or new source data.",
+    "current_queue_blob_sha": "a830d03dd5bab001eba1b4a35f6830efb3d2d505",
+    "task_definitions_unchanged_since_validation": true,
+    "current_task_count": 56,
+    "current_unknown_tasks": 0,
+    "current_unfinished_target_1251_three_line_eligible_tasks": 0,
+    "validation_blob_note": "Current queue blob differs from validated_queue_blob_sha because commit 80a63b0 appended the validation run metadata itself. The tasks array at f42fd2f and current main is byte-for-byte JSON-identical (56/56 task definitions); validation #178 therefore still covers the current task definitions."
   },
   "publication_recovery": {
     "prior_run_id": 44543882888,
@@ -156,7 +162,77 @@
   },
   "user_decisions_required": [
     "Prospective confirmation minimum target count and completion rule remain unspecified in the frozen policy.",
-    "No preregistered 1251 three-line independent research axis remains. Do not invent post-hoc variants; a new axis needs a distinct hypothesis or new data source."
+    "No preregistered 1251 three-line independent research axis remains. Do not invent post-hoc variants; a new axis needs a distinct hypothesis or new data source.",
+    "The saved Friday and daily research automation prompts still contain legacy five-line instructions. Both prompt-update attempts were blocked because 5 tasks are active against a 3-task plan limit; no schedule was changed and no task was disabled or deleted."
   ],
-  "no_purchase_output": true
+  "no_purchase_output": true,
+  "latest_published_master": {
+    "commit_sha": "c22f23bdb3db8d8cf0df7ed39521a33bebf10464",
+    "commit_url": "https://github.com/jiae-jeong/lotto-data/commit/c22f23bdb3db8d8cf0df7ed39521a33bebf10464",
+    "created_at_utc": "2026-11-19T23:40:53Z",
+    "created_at_kst": "2026-11-20T08:40:53+09:00",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "v4_path": "analysis/2026-11-20/MASTER_FULL_V4_233558_588998",
+    "v5_path": "analysis/2026-11-20/MASTER_FULL_V5_234044_863877",
+    "v4_manifest": {
+      "entries": 19,
+      "status": "PASS",
+      "independent_sha256_and_byte_size_recheck": "19/19 PASS"
+    },
+    "v5_manifest": {
+      "entries": 14,
+      "status": "PASS",
+      "independent_sha256_and_byte_size_recheck": "14/14 PASS"
+    },
+    "B_full_walkforward": {
+      "targets": 1050,
+      "prediction_records": 8400,
+      "random_tickets": 1050000,
+      "leakage_failures": 0
+    },
+    "successor_models": {
+      "model_version": "RECOVERED_SUCCESSOR_V2",
+      "targets_each": 1050,
+      "prediction_records_total": 3150,
+      "leakage_failures": 0
+    },
+    "compute_status": "COMPUTE_PARTIAL",
+    "protocol_status": "PROTOCOL_PARTIAL",
+    "study_status": "PARTIAL",
+    "recommendation_generation": false,
+    "actions_run_metadata": {
+      "run_id": null,
+      "run_number": null,
+      "status": "NOT_RECORDED_IN_THIS_PUBLISHED_COMMIT",
+      "note": "Do not infer an Actions run ID or run number from the output-directory timestamp. daily_master_run above remains the last separately confirmed Actions run #124."
+    },
+    "interpretation": "Fresh full V4/V5 outputs were published. They do not promote a model or create a weekly candidate; the five-ticket portfolio remains research-only."
+  },
+  "friday_automation_configuration": {
+    "task_id": "6ab7d55c427881919c4fba9f0c727762",
+    "enabled": true,
+    "schedule": "Weekly Friday 08:00 Asia/Seoul",
+    "saved_prompt_policy": "LEGACY_FIVE_LINE_INSTRUCTION_PRESENT",
+    "target_1251_policy": "EXACTLY_THREE_LINES",
+    "prompt_update_attempts": {
+      "friday": {
+        "status": "BLOCKED",
+        "error_code": "too_many_active_automations",
+        "current_count": 5,
+        "plan_limit": 3
+      },
+      "daily_research": {
+        "task_id": "6ab7d4ff7e888191bb5010a100cb04ba",
+        "status": "BLOCKED",
+        "error_code": "too_many_active_automations",
+        "current_count": 5,
+        "plan_limit": 3
+      }
+    },
+    "schedule_changed": false,
+    "task_disabled": false,
+    "task_deleted": false,
+    "user_action_required": "Free two active automation slots or edit the saved prompts manually if the UI permits; no automation was disabled, deleted, or rescheduled."
+  }
 }
