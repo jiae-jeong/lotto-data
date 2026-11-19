@@ -106,11 +106,17 @@
     "latest_validation": {
       "run_number": 178,
       "run_id": 44543887535,
+      "run_attempt": 2,
       "status": "SUCCESS",
       "unit_tests": 251,
       "queue_contract": "E030-E076 PASS",
+      "source_commit_sha": "f42fd2f419c03deb267b0b9f746ad8d5eefc81ef",
+      "validated_queue_blob_sha": "12e0a21b2d13b635bb9807136f354db8a243d85d",
+      "validated_at_kst": "2026-11-20T03:02:28+09:00",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44543887535",
       "research_job": "SKIPPED",
-      "prospective_ledger_job": "SKIPPED"
+      "prospective_ledger_job": "SKIPPED",
+      "note": "Rerun attempt 2 checked out current main; 251 unit tests and E030-E076 queue contract passed. No historical study was recomputed."
     },
     "next_step": "No new E077 or post-hoc variants created. A new 1251 three-line axis requires a distinct preregistered hypothesis or new source data."
   },
