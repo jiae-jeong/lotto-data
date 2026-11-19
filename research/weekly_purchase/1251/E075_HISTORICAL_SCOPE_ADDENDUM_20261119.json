@@ -1,0 +1,12 @@
+{
+  "addendum_id": "E075_HISTORICAL_SCOPE_ADDENDUM_20261119",
+  "study_id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+  "date_kst": "2026-11-19",
+  "historical_evaluation_targets": "401..1250 inclusive",
+  "evidence_class": "HISTORICAL_DIAGNOSTIC_ONLY",
+  "contaminated_live_history_rounds": [1244, 1245, 1246, 1247, 1248, 1249],
+  "holdout_statement": "No target in this historical re-execution is described as a clean holdout or final blind performance. Rounds 1244-1249 are explicitly treated as contaminated live-history diagnostics because their results were previously examined.",
+  "prospective_confirmation": "Only the next undrawn target can begin prospective confirmation, and only after a model/policy/threshold/final portfolio is frozen before the draw. E075 does not generate such a freeze or purchase portfolio.",
+  "no_threshold_change": true,
+  "no_model_promotion": true
+}
