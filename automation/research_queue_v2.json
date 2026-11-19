@@ -4236,8 +4236,8 @@
       "execution_mode": "dedicated_workflow",
       "execution_entrypoint": "automation/three_line_research_1251_e075_corrected_v2.py",
       "workflow_entrypoint": ".github/workflows/target-1251-e075-e045-selector-order-audit.yml",
-      "preregistration": "research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119_V2.json",
-      "preregistration_blob_sha": "b149e7e338131ee9cfafb9792232fc4728b42a15",
+      "preregistration": "research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119_V3.json",
+      "preregistration_blob_sha": "5d042c1f76f0e447900f37c966548833ec833d72",
       "execution_status": "PREREGISTERED_PENDING_DEDICATED_WORKFLOW",
       "spec": {
         "study_id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
@@ -4251,10 +4251,14 @@
         "independent_research_axis": false,
         "independent_sample": false,
         "runner_version": 2,
+        "workflow_verifier_version": 3,
+        "selector_diagnostic_rounds": 1050,
+        "scored_walkforward_targets": 850,
+        "expected_selector_decision_count": 3150,
         "only_change": "sorted-ticket consecutive-pair count and sorted-ticket lexicographic tie-break",
         "separate_used_sets": true,
         "candidate_pool_ranking_rule_unchanged": true,
-        "failed_attempt_1_preserved": true
+        "failed_attempts_1_and_2_preserved": true
       },
       "attempt_history": [
         {
@@ -4263,6 +4267,13 @@
           "status": "FAILED_BEFORE_ANY_HISTORICAL_METRIC_OUTPUT",
           "failure": "shared used-number set caused legacy portfolio union18 violation at target 248",
           "addendum": "research/weekly_purchase/1251/E075_EXECUTION_ATTEMPT_1_REPAIR_ADDENDUM_20261119.json"
+        },
+        {
+          "workflow_run_id": 44424750856,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44424750856",
+          "status": "CALCULATION_COMPLETE_MANIFEST_PASS_BUT_POST_RUN_VERIFIER_FAILED",
+          "failure": "verifier expected 2550 selector decisions; actual count is 3150 including warmup targets 201-400",
+          "addendum": "research/weekly_purchase/1251/E075_EXECUTION_ATTEMPT_2_REPAIR_ADDENDUM_20261119.json"
         }
       ]
     }
