@@ -16,7 +16,8 @@
     "E075 calculation, verification, manifest, and git push succeeded; the Actions run itself concluded FAILURE only at the final post-push clean-worktree assertion.",
     "E075 post-push clean-worktree failure was corrected in workflow commit 7292759097e59d37313073cc01c8f897da1fc99f by removing generated Python bytecode before the final assertion; validation #167 passed 251 tests and E030-E076 queue contract. The already-published E075 calculation was not duplicated.",
     "DAILY MASTER #121 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets / 8,400 predictions), 1,050,000 matched random tickets, successor diagnostics, leakage checks, and 14-file SHA-256 manifest passed; status remains PARTIAL because original legacy A/C/Contrarian sources and closed-loop purchase evidence remain missing.",
-    "Orthogonal queue validation #170 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by eligibility and duplicate guards, so no historical study was recomputed."
+    "Orthogonal queue validation #170 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by eligibility and duplicate guards, so no historical study was recomputed.",
+    "DAILY MASTER #122 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets / 8,400 predictions), 1,050,000 matched random portfolios, successor diagnostics, leakage checks, and 14-file SHA-256 manifest passed; status remains PARTIAL because original legacy A/C/Contrarian sources and closed-loop purchase evidence remain missing."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -94,15 +95,15 @@
     "status": "CROSS_CHECK_PASS"
   },
   "daily_master_run": {
-    "run_id": 44454579341,
-    "run_number": 121,
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44454579341",
+    "run_id": 44478272980,
+    "run_number": 122,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44478272980",
     "status": "SUCCESS",
-    "completed_at_utc": "2026-11-19T03:59:08Z",
-    "result_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831",
-    "report_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831/REPORT.md",
-    "verification_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831/VERIFICATION.json",
-    "completion_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831/COMPLETION.json",
+    "completed_at_utc": "2026-11-19T07:20:16Z",
+    "result_path": "analysis/2026-11-19/MASTER_FULL_V5_072004_661805",
+    "report_path": "analysis/2026-11-19/MASTER_FULL_V5_072004_661805/REPORT.md",
+    "verification_path": "analysis/2026-11-19/MASTER_FULL_V5_072004_661805/VERIFICATION.json",
+    "completion_path": "analysis/2026-11-19/MASTER_FULL_V5_072004_661805/COMPLETION.json",
     "manifest_entries": 14,
     "manifest_status": "PASS",
     "data_cutoff": 1250,
@@ -170,6 +171,47 @@
     "validated_at_kst": "2026-11-19T15:15:33+09:00"
   },
   "previous_daily_master_run": {
+    "run_id": 44454579341,
+    "run_number": 121,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44454579341",
+    "status": "SUCCESS",
+    "completed_at_utc": "2026-11-19T03:59:08Z",
+    "result_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831",
+    "report_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831/REPORT.md",
+    "verification_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831/VERIFICATION.json",
+    "completion_path": "analysis/2026-11-19/MASTER_FULL_V5_035854_060831/COMPLETION.json",
+    "manifest_entries": 14,
+    "manifest_status": "PASS",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "fresh_cumulative_stats": true,
+    "B_full_walkforward": true,
+    "B_targets": 1050,
+    "B_prediction_records": 8400,
+    "fresh_random_baseline": true,
+    "random_portfolios": 1050000,
+    "no_future_leakage": true,
+    "legacy_model_sources_recovered": false,
+    "A_full_walkforward": false,
+    "C_full_walkforward": false,
+    "contrarian_full_walkforward": false,
+    "compute_status": "COMPUTE_PARTIAL",
+    "protocol_status": "PROTOCOL_PARTIAL",
+    "study_status": "PARTIAL"
+  },
+  "legacy_queue_reconciliation": {
+    "date_kst": "2026-11-19",
+    "reconciled_task_ids": [
+      "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+      "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+      "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+      "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "E029_FIVE_LINE_PROMOTION_GATE_v2"
+    ],
+    "evidence": "Existing COMPLETE.json and VERIFICATION.json files were matched to the frozen task IDs and result paths. Historical/post-hoc classifications were preserved; none is eligible for target-1251 three-line strict readiness."
+  },
+  "prior_daily_master_run": {
     "run_id": 44429869133,
     "run_number": 120,
     "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44429869133",
@@ -196,17 +238,5 @@
     "compute_status": "COMPUTE_PARTIAL",
     "protocol_status": "PROTOCOL_PARTIAL",
     "study_status": "PARTIAL"
-  },
-  "legacy_queue_reconciliation": {
-    "date_kst": "2026-11-19",
-    "reconciled_task_ids": [
-      "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
-      "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
-      "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
-      "E027_FIVE_LINE_CANDIDATE_BANK_v1",
-      "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
-      "E029_FIVE_LINE_PROMOTION_GATE_v2"
-    ],
-    "evidence": "Existing COMPLETE.json and VERIFICATION.json files were matched to the frozen task IDs and result paths. Historical/post-hoc classifications were preserved; none is eligible for target-1251 three-line strict readiness."
   }
 }
