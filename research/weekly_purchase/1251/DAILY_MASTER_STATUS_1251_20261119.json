@@ -19,7 +19,8 @@
     "Orthogonal queue validation #170 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by eligibility and duplicate guards, so no historical study was recomputed.",
     "DAILY MASTER #122 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets / 8,400 predictions), 1,050,000 matched random portfolios, successor diagnostics, leakage checks, and 14-file SHA-256 manifest passed; status remains PARTIAL because original legacy A/C/Contrarian sources and closed-loop purchase evidence remain missing.",
     "Orthogonal queue validation #172 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by duplicate/eligibility guards, so no historical study was recomputed.",
-    "Legacy queue audit on 2026-11-19 reconciled 18 status-less task entries against preserved completion/verification artifacts or frozen blocked/superseded states; no historical study was recomputed."
+    "Legacy queue audit on 2026-11-19 reconciled 18 status-less task entries against preserved completion/verification artifacts or frozen blocked/superseded states; no historical study was recomputed.",
+    "Orthogonal queue validation #175 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by duplicate/eligibility guards, so no historical study was recomputed."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -163,16 +164,17 @@
     "e075_recomputed_after_fix": false
   },
   "queue_validation_reconciliation": {
-    "latest_run_id": 44514807309,
-    "latest_run_number": 174,
+    "latest_run_id": 44525543491,
+    "latest_run_number": 175,
     "conclusion": "SUCCESS",
     "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "d926b4b3bcf2f504b306b45e6454a4d08d5dbc66",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44514807309",
-    "validated_at_kst": "2026-11-19T20:26:35+09:00",
-    "validated_queue_blob_sha": "2d4da6c80b7b09706b5271c6cc715415b5c96636",
-    "note": "Validate job checked out d926b4b3bcf2f504b306b45e6454a4d08d5dbc66; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
+    "source_commit_sha": "336c90c7bb32b29c039848fe6f73abafc591aec8",
+    "workflow": "orthogonal-research-v2",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44525543491",
+    "validated_at_kst": "2026-11-19T21:37:26+09:00",
+    "validated_queue_blob_sha": "58d7fafe2941e710acb3da064fcef03406340af7",
+    "note": "Validate job checked out 336c90c7bb32b29c039848fe6f73abafc591aec8; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
   },
   "previous_daily_master_run": {
     "run_id": 44454579341,

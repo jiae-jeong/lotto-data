@@ -29,6 +29,8 @@ env:
 
 jobs:
   validate:
+    # Audit-only self-record commits do not re-run validation and create an endless record loop.
+    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message || '', 'audit: record queue validation #') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
