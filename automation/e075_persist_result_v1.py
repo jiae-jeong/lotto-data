@@ -65,6 +65,17 @@ def build_report(inference,verification,data_sha,run_url,workflow_run_id):
     return "\n".join(lines)
 
 
+def workflow_persistence_metadata():
+    # The overall Actions conclusion is not available while this step is running.
+    # Record verified computation now; never pre-claim that the workflow succeeded.
+    return {
+        "workflow_run_conclusion":None,
+        "workflow_run_phase":"PERSISTENCE_BEFORE_FINAL_PUSH",
+        "publication_status":"PENDING_PUSH",
+        "verification_status":"PASS",
+    }
+
+
 def persist(root,date,run_id,workflow_run_id,run_number,run_attempt,run_url,data_sha):
     out=root/"analysis"/date/run_id/STUDY_ID
     inference=json.loads((out/"INFERENCE.json").read_text(encoding="utf-8"))
@@ -99,7 +110,7 @@ def persist(root,date,run_id,workflow_run_id,run_number,run_attempt,run_url,data
         "independent_research_axis":False,"independent_sample":False,
         "workflow_name":"target-1251-e075-publication-recovery",
         "workflow_run_id":int(workflow_run_id),"workflow_run_number":int(run_number),"run_attempt":int(run_attempt),
-        "workflow_run_conclusion":"success","run_url":run_url,"completed_at_kst":now,
+        **workflow_persistence_metadata(),"run_url":run_url,"completed_at_kst":now,
         "result_path":out.relative_to(root).as_posix(),"data_cutoff":1250,"data_sha256":data_sha,
         "target_range":[401,1250],"target_count":850,
         "random_bundles_per_target_per_version":120,"random_bundles_total_per_version":102000,

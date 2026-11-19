@@ -3833,20 +3833,20 @@
             "brier": {
               "model_mean": 0.11557033635476797,
               "uniform_mean": 0.11555555555555556,
-              "delta_model_minus_uniform": 1.4780799212416788e-05,
+              "delta_model_minus_uniform": 0.000014780799212416788,
               "adjusted_moving_block_ci_vs_uniform": {
-                "lower": -2.2928106310301404e-05,
-                "upper": 5.975578124223004e-05,
+                "lower": -0.000022928106310301404,
+                "upper": 0.00005975578124223004,
                 "replicates": 4000,
                 "block_length": 50,
                 "alpha_two_sided": 0.025,
                 "sample_targets": 650
               },
               "random_permutation_mean": 0.11557233129114587,
-              "delta_model_minus_random": -1.994936377892203e-06,
+              "delta_model_minus_random": -0.000001994936377892203,
               "adjusted_moving_block_ci_vs_random": {
-                "lower": -3.9294601352589707e-05,
-                "upper": 4.149720156938804e-05,
+                "lower": -0.000039294601352589707,
+                "upper": 0.00004149720156938804,
                 "replicates": 4000,
                 "block_length": 50,
                 "alpha_two_sided": 0.025,
@@ -3857,7 +3857,7 @@
             "log_loss": {
               "model_mean": 0.3927385046838188,
               "uniform_mean": 0.39267446722755217,
-              "delta_model_minus_uniform": 6.40374562666557e-05,
+              "delta_model_minus_uniform": 0.0000640374562666557,
               "adjusted_moving_block_ci_vs_uniform": {
                 "lower": -0.00010404908449172959,
                 "upper": 0.00025301618434617705,
@@ -3867,7 +3867,7 @@
                 "sample_targets": 650
               },
               "random_permutation_mean": 0.3927469570574102,
-              "delta_model_minus_random": -8.452373591389695e-06,
+              "delta_model_minus_random": -0.000008452373591389695,
               "adjusted_moving_block_ci_vs_random": {
                 "lower": -0.0001698759918589075,
                 "upper": 0.00017433507107498129,
@@ -3902,20 +3902,20 @@
           "brier": {
             "model_mean": 0.11557033635476797,
             "uniform_mean": 0.11555555555555556,
-            "delta_model_minus_uniform": 1.4780799212416788e-05,
+            "delta_model_minus_uniform": 0.000014780799212416788,
             "adjusted_moving_block_ci_vs_uniform": {
-              "lower": -2.2928106310301404e-05,
-              "upper": 5.975578124223004e-05,
+              "lower": -0.000022928106310301404,
+              "upper": 0.00005975578124223004,
               "replicates": 4000,
               "block_length": 50,
               "alpha_two_sided": 0.025,
               "sample_targets": 650
             },
             "random_permutation_mean": 0.11557233129114587,
-            "delta_model_minus_random": -1.994936377892203e-06,
+            "delta_model_minus_random": -0.000001994936377892203,
             "adjusted_moving_block_ci_vs_random": {
-              "lower": -3.9294601352589707e-05,
-              "upper": 4.149720156938804e-05,
+              "lower": -0.000039294601352589707,
+              "upper": 0.00004149720156938804,
               "replicates": 4000,
               "block_length": 50,
               "alpha_two_sided": 0.025,
@@ -3926,7 +3926,7 @@
           "log_loss": {
             "model_mean": 0.3927385046838188,
             "uniform_mean": 0.39267446722755217,
-            "delta_model_minus_uniform": 6.40374562666557e-05,
+            "delta_model_minus_uniform": 0.0000640374562666557,
             "adjusted_moving_block_ci_vs_uniform": {
               "lower": -0.00010404908449172959,
               "upper": 0.00025301618434617705,
@@ -3936,7 +3936,7 @@
               "sample_targets": 650
             },
             "random_permutation_mean": 0.3927469570574102,
-            "delta_model_minus_random": -8.452373591389695e-06,
+            "delta_model_minus_random": -0.000008452373591389695,
             "adjusted_moving_block_ci_vs_random": {
               "lower": -0.0001698759918589075,
               "upper": 0.00017433507107498129,
@@ -4268,7 +4268,7 @@
           "workflow_run_id": 44430718493,
           "workflow_run_number": 1,
           "run_attempt": 1,
-          "workflow_run_conclusion": "success",
+          "workflow_run_conclusion": "failure",
           "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44430718493",
           "completed_at_kst": "2026-11-19T09:44:25.049646+09:00",
           "result_path": "analysis/2026-11-19/gha_44430718493_1/E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
@@ -4312,7 +4312,15 @@
           "no_threshold_changes": true,
           "parameter_search": false,
           "purchase_recommendation_generated": false,
-          "daily_report_addendum_path": "research/daily/2026-11-19_E075_PUBLICATION_RECOVERY_ADDENDUM.md"
+          "daily_report_addendum_path": "research/daily/2026-11-19_E075_PUBLICATION_RECOVERY_ADDENDUM.md",
+          "verification_status": "PASS",
+          "workflow_run_phase": "COMPLETED",
+          "workflow_run_completed_at_kst": "2026-11-19T09:44:28+09:00",
+          "publication_status": "PUSHED",
+          "push_status": "SUCCESS",
+          "post_push_check_status": "FAIL",
+          "post_push_check_failure_step": "test -z \"$(git status --porcelain)\"",
+          "post_push_check_failure_detail": "The git push succeeded (6be9e19..dfde545 HEAD -> main); the following final clean-worktree assertion exited 1. The job log does not list the residual paths. The preceding python -m py_compile step can create untracked automation/**/__pycache__/*.pyc files; the recovery workflow now removes Python bytecode before the assertion."
         }
       },
       "attempt_history": [
@@ -4359,7 +4367,7 @@
         "workflow_run_id": 44430718493,
         "workflow_run_number": 1,
         "run_attempt": 1,
-        "workflow_run_conclusion": "success",
+        "workflow_run_conclusion": "failure",
         "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44430718493",
         "completed_at_kst": "2026-11-19T09:44:25.049646+09:00",
         "result_path": "analysis/2026-11-19/gha_44430718493_1/E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
@@ -4403,10 +4411,34 @@
         "no_threshold_changes": true,
         "parameter_search": false,
         "purchase_recommendation_generated": false,
-        "daily_report_addendum_path": "research/daily/2026-11-19_E075_PUBLICATION_RECOVERY_ADDENDUM.md"
+        "daily_report_addendum_path": "research/daily/2026-11-19_E075_PUBLICATION_RECOVERY_ADDENDUM.md",
+        "verification_status": "PASS",
+        "workflow_run_phase": "COMPLETED",
+        "workflow_run_completed_at_kst": "2026-11-19T09:44:28+09:00",
+        "publication_status": "PUSHED",
+        "push_status": "SUCCESS",
+        "post_push_check_status": "FAIL",
+        "post_push_check_failure_step": "test -z \"$(git status --porcelain)\"",
+        "post_push_check_failure_detail": "The git push succeeded (6be9e19..dfde545 HEAD -> main); the following final clean-worktree assertion exited 1. The job log does not list the residual paths. The preceding python -m py_compile step can create untracked automation/**/__pycache__/*.pyc files; the recovery workflow now removes Python bytecode before the assertion."
       },
       "execution_completed_at_kst": "2026-11-19T09:44:25.049646+09:00",
-      "result_path": "analysis/2026-11-19/gha_44430718493_1/E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1"
+      "result_path": "analysis/2026-11-19/gha_44430718493_1/E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+      "recovery_attempt_history": [
+        {
+          "workflow_run_id": 44430718493,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44430718493",
+          "workflow_run_conclusion": "failure",
+          "workflow_run_completed_at_kst": "2026-11-19T09:44:28+09:00",
+          "computation_status": "SUCCESS",
+          "verification_status": "PASS",
+          "manifest_status": "PASS",
+          "publication_status": "PUSHED",
+          "push_status": "SUCCESS",
+          "post_push_check_status": "FAIL",
+          "post_push_check_failure_step": "test -z \"$(git status --porcelain)\"",
+          "post_push_check_failure_detail": "The git push succeeded (6be9e19..dfde545 HEAD -> main); the following final clean-worktree assertion exited 1. The job log does not list the residual paths. The preceding python -m py_compile step can create untracked automation/**/__pycache__/*.pyc files; the recovery workflow now removes Python bytecode before the assertion."
+        }
+      ]
     },
     {
       "id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",

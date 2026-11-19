@@ -31,6 +31,10 @@ class E075QueueContractV4Tests(unittest.TestCase):
         else:
             result = task["execution_result"]
             self.assertEqual(result["verification_status"], "PASS")
+            self.assertEqual(result["workflow_run_conclusion"], "failure")
+            self.assertEqual(result["publication_status"], "PUSHED")
+            self.assertEqual(result["push_status"], "SUCCESS")
+            self.assertEqual(result["post_push_check_status"], "FAIL")
             self.assertEqual(result["manifest_status"], "PASS")
             self.assertFalse(result["strict_pass_ready"])
             self.assertFalse(result["purchase_recommendation_generated"])

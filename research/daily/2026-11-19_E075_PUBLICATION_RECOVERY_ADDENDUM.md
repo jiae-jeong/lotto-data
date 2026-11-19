@@ -42,3 +42,11 @@ The frozen E045 specification evaluates consecutive pairs and lexicographic tie-
 This is a reproducible implementation-conformance correction, not new predictive evidence. Historical results remain contaminated live-history diagnostics and cannot create purchase readiness.
 
 No thresholds, alpha levels, block lengths, comparators, model weights, or parameter variants were changed.
+
+
+### Workflow publication status
+
+- Research calculation, cutoff/leakage/geometry verification, and the 8/8 output manifest succeeded.
+- The commit was pushed to `main` successfully (`6be9e19..dfde545 HEAD -> main`).
+- The overall Actions run nevertheless concluded **FAILURE** because the final `test -z "$(git status --porcelain)"` assertion exited 1 after the push. The job log does not print the residual paths. The earlier `python -m py_compile` step can leave untracked Python bytecode under `automation/**/__pycache__`; the recovery workflow now removes those generated files before the final cleanliness check.
+- This was a post-publication workflow-cleanup failure, not a research-calculation, leakage, or manifest failure. The run is recorded as a workflow failure while its successful publication is recorded separately.

@@ -12,7 +12,8 @@
     "E076 preregistered and computed six preserved recommendation artifacts across four contaminated live-history rounds; candidate-union misses and allocator concentration failures were reported separately.",
     "E076 outputs and UTF-8 SHA-256 manifest committed; queue updated with execution result.",
     "DAILY MASTER #120 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets), 1,050,000 matched random portfolios, successor A_v2/C_v2/Contrarian_v2 diagnostics, leakage checks, and 14-file SHA-256 manifest all passed; status remains PARTIAL because legacy A/C/Contrarian originals and closed-loop purchase evidence remain missing.",
-    "E075 v3 historical implementation-conformance correction completed with verified 8/8 manifest; no independent signal, prospective confirmation, or purchase readiness was created."
+    "E075 v3 historical implementation-conformance correction completed with verified 8/8 manifest; no independent signal, prospective confirmation, or purchase readiness was created.",
+    "E075 calculation, verification, manifest, and git push succeeded; the Actions run itself concluded FAILURE only at the final post-push clean-worktree assertion."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -132,6 +133,14 @@
     "result_path": "analysis/2026-11-19/gha_44430718493_1/E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
     "manifest_status": "PASS",
     "strict_pass_ready": false,
-    "purchase_recommendation_generated": false
+    "purchase_recommendation_generated": false,
+    "verification_status": "PASS",
+    "workflow_run_conclusion": "failure",
+    "workflow_run_completed_at_kst": "2026-11-19T09:44:28+09:00",
+    "publication_status": "PUSHED",
+    "push_status": "SUCCESS",
+    "post_push_check_status": "FAIL",
+    "post_push_check_failure_step": "test -z \"$(git status --porcelain)\"",
+    "post_push_check_failure_detail": "The git push succeeded (6be9e19..dfde545 HEAD -> main); the following final clean-worktree assertion exited 1. The job log does not list the residual paths. The preceding python -m py_compile step can create untracked automation/**/__pycache__/*.pyc files; the recovery workflow now removes Python bytecode before the assertion."
   }
 }

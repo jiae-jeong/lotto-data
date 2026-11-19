@@ -1,8 +1,15 @@
 import unittest
-from automation.e075_persist_result_v1 import build_report
+from automation.e075_persist_result_v1 import build_report, workflow_persistence_metadata
 
 
 class E075PersistenceSchemaTests(unittest.TestCase):
+    def test_workflow_conclusion_is_not_claimed_before_final_push(self):
+        metadata = workflow_persistence_metadata()
+        self.assertIsNone(metadata["workflow_run_conclusion"])
+        self.assertEqual(metadata["workflow_run_phase"], "PERSISTENCE_BEFORE_FINAL_PUSH")
+        self.assertEqual(metadata["publication_status"], "PENDING_PUSH")
+        self.assertEqual(metadata["verification_status"], "PASS")
+
     def test_report_reads_metric_groups_from_inference_metrics_object(self):
         inference = {
             "data_cutoff":1250,"target_range":[401,1250],"targets":850,
