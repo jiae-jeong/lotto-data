@@ -1,0 +1,62 @@
+{
+  "audit_id": "MASTER_SOURCE_AUDIT_1251_20261119",
+  "date_kst": "2026-11-19",
+  "repository": "jiae-jeong/lotto-data",
+  "master_sources": [
+    {
+      "path": "LOTTO_PROJECT_PROTOCOL.md",
+      "blob_sha": "f770eb2215eb1acfb50ac1d79273c62d9b142084",
+      "bytes": 11255
+    },
+    {
+      "path": "AGENTS.md",
+      "blob_sha": "796f8a4367b6a4f64cbd4ec5615de75c992c7e0f",
+      "bytes": 11395
+    },
+    {
+      "path": "research/weekly_purchase/1250/REMEDIATION_PLAN_2026-11-06.md",
+      "blob_sha": "4017ba64479b6b0b132aae386ae453c583458937",
+      "bytes": 2762
+    },
+    {
+      "path": "lotto_data.csv",
+      "blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+      "bytes": 43449
+    },
+    {
+      "path": "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json",
+      "blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+      "bytes": 1938
+    },
+    {
+      "path": "automation/research_queue_v2.json",
+      "blob_sha": "a686673c9fb039cbe1e14b19a4eab7da43e9d1a3",
+      "bytes": 236067
+    },
+    {
+      "path": "research/weekly_purchase/1251/STRICT_PASS_STATUS_1251_20261118.json",
+      "blob_sha": "1b4c9fdb1d6a1a07b259ee03b6400ef3a06190bc",
+      "bytes": 4128
+    },
+    {
+      "path": "research/weekly_purchase/1251/MODEL_GATE_1251_20261118.json",
+      "blob_sha": "42cad55a35a6d1f9a71b20340581b5910ea50a21",
+      "bytes": 4221
+    }
+  ],
+  "data_integrity": {
+    "cutoff_round": 1250,
+    "rows": 1250,
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "no_new_draw_since_cutoff_as_of": "2026-11-19",
+    "future_leakage_policy": "target t may use draws only through t-1"
+  },
+  "purchase_readiness": {
+    "target_round": 1251,
+    "effective_policy": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+    "lines": 3,
+    "strict_pass_ready": false,
+    "freeze_or_seal_created": false,
+    "fallback_allowed": false
+  }
+}
