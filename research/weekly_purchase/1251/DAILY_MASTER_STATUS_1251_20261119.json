@@ -21,7 +21,10 @@
     "Orthogonal queue validation #172 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by duplicate/eligibility guards, so no historical study was recomputed.",
     "Legacy queue audit on 2026-11-19 reconciled 18 status-less task entries against preserved completion/verification artifacts or frozen blocked/superseded states; no historical study was recomputed.",
     "Orthogonal queue validation #175 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by duplicate/eligibility guards, so no historical study was recomputed.",
-    "The first audit-only workflow guard expression was unquoted and caused orthogonal-research-v2 #176 to fail before jobs were created; the YAML expression was quoted in workflow commit ab81de51757297669390dc6cfdd6c9bdba1c21d6, and validation #177 then passed 251 tests plus E030-E076 queue contract."
+    "The first audit-only workflow guard expression was unquoted and caused orthogonal-research-v2 #176 to fail before jobs were created; the YAML expression was quoted in workflow commit ab81de51757297669390dc6cfdd6c9bdba1c21d6, and validation #177 then passed 251 tests plus E030-E076 queue contract.",
+    "Orthogonal queue validation #178 completed on the restored full repository tree: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped, with no historical study recomputed.",
+    "Repository tree recovery was independently checked against its intact parent: all 4,760 paths retained, no missing or added paths, and only the queue/status file contents differ. AGENTS.md, LOTTO_PROJECT_PROTOCOL.md, lotto_data.csv, and THREE_LINE_POLICY_1251_PLUS.json blobs remain unchanged.",
+    "The restoration push also re-triggered frozen legacy cutoff-1247 workflows. They failed before verification/publication because their hard-coded 1247 assertions do not match canonical cutoff 1250; no current 1251 strict portfolio or final purchase lines were generated. The V7 fallback failed during pre-execution source normalization, so its fallback/freeze steps were skipped."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -165,17 +168,17 @@
     "e075_recomputed_after_fix": false
   },
   "queue_validation_reconciliation": {
-    "latest_run_id": 44543497796,
-    "latest_run_number": 177,
+    "latest_run_id": 44543887535,
+    "latest_run_number": 178,
     "conclusion": "SUCCESS",
     "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "ab81de51757297669390dc6cfdd6c9bdba1c21d6",
+    "source_commit_sha": "e54be393a3cd3f489fb19157a0150509917268f9",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44543497796",
-    "validated_at_kst": "2026-11-19T23:25:17+09:00",
-    "validated_queue_blob_sha": "2c3e809a9cdca594db46e6cb10993c7f34da1220",
-    "note": "Validate job checked out ab81de51757297669390dc6cfdd6c9bdba1c21d6; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44543887535",
+    "validated_at_kst": "2026-11-19T23:28:28+09:00",
+    "validated_queue_blob_sha": "943c7bbd577f74f98e094ee43d6c07db36f3d1af",
+    "note": "Validate job checked out e54be393a3cd3f489fb19157a0150509917268f9; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
   },
   "previous_daily_master_run": {
     "run_id": 44454579341,
