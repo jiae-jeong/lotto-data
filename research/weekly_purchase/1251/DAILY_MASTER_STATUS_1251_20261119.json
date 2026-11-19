@@ -1,0 +1,72 @@
+{
+  "date_kst": "2026-11-19",
+  "target_round": 1251,
+  "data_cutoff": 1250,
+  "data_rows": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "daily_master_status": "PARTIAL",
+  "completed_today": [
+    "Read current LOTTO_PROJECT_PROTOCOL.md, AGENTS.md, 1250 remediation plan, 1251 three-line policy, current strict gate, queue, and latest daily reports.",
+    "Searched preserved pre-draw recommendation artifacts and error notes before computation; found separate preserved versions for 1245-1248; 1249 sealed pre-draw original remains NOT FOUND and was not reconstructed.",
+    "Verified canonical data blob, SHA-256, 1,250 contiguous rows, valid six-number main draws, and bonus separation.",
+    "E076 preregistered and computed six preserved recommendation artifacts across four contaminated live-history rounds; candidate-union misses and allocator concentration failures were reported separately.",
+    "E076 outputs and UTF-8 SHA-256 manifest committed; queue updated with execution result."
+  ],
+  "new_study": {
+    "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+    "evidence_class": "CONTAMINATED_LIVE_HISTORY_DIAGNOSTIC_ONLY_NOT_PROSPECTIVE_CONFIRMATION",
+    "artifact_count": 6,
+    "target_rounds": [
+      1245,
+      1246,
+      1247,
+      1248
+    ],
+    "candidate_stage_2plus_possible": 5,
+    "allocator_stage_2plus_realized": 2,
+    "candidate_stage_3plus_possible": 4,
+    "allocator_stage_3plus_realized": 2,
+    "candidate_stage_4plus_possible": 3,
+    "allocator_stage_4plus_realized": 0,
+    "result_path": "analysis/2026-11-19/E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+    "preregistration_path": "research/weekly_purchase/1251/E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_PREREG_20261119.json",
+    "verification": "PASS"
+  },
+  "maintenance_rechecks": [
+    "Purchase confirmation registry remains at zero confirmed purchases; historical recommendation artifacts are not labelled actual purchases.",
+    "1251 policy still requires exactly three lines of six numbers and the unchanged strict gate."
+  ],
+  "not_recomputed_today": [
+    "Full B-model walk-forward and legacy A/C/contrarian model reruns; no new draw data and no reason to duplicate the latest verified 2026-11-18 scorecards.",
+    "Full frequency/pair/triple signal scorecards; existing validated status remains unchanged.",
+    "No 1249 original sealed recommendation or verified purchase receipt was available."
+  ],
+  "pending_work": [
+    "E075 v3 dedicated workflow remains PREREGISTERED_PENDING_DEDICATED_WORKFLOW; no final v3 result/manifest has been committed in the latest visible repository state.",
+    "Prospective confirmation minimum target count and completion rule remain unspecified.",
+    "Historical recommendation error decomposition is not an actual-purchase closed-loop dataset."
+  ],
+  "purchase_readiness": {
+    "status": "STRICT_FAIL",
+    "validated_models": [],
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "purchase_lines_required": 3,
+    "numbers_per_line": 6,
+    "final_purchase_lines_generated": false,
+    "fallback_allowed": false,
+    "freeze_or_seal_created": false,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
+  },
+  "no_future_leakage": true,
+  "cutoff_match": true,
+  "contaminated_live_history_rounds": [
+    1244,
+    1245,
+    1246,
+    1247,
+    1248,
+    1249
+  ],
+  "next_start": "Check E075 v3 workflow result; keep strict gate unchanged; do not generate purchase lines until a separately validated and prospectively eligible artifact exists."
+}
