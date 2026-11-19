@@ -159,11 +159,14 @@
     "e075_recomputed_after_fix": false
   },
   "queue_validation_reconciliation": {
-    "latest_run_id": 44433216921,
-    "latest_run_number": 167,
+    "latest_run_id": 44457442692,
+    "latest_run_number": 169,
     "conclusion": "SUCCESS",
     "tests": 251,
-    "queue_contract": "E030-E076 PASS"
+    "queue_contract": "E030-E076 PASS",
+    "source_commit_sha": "9b46067e6eb66af6fc30eeef967816fb8fad6399",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44457442692",
+    "validated_at_kst": "2026-11-19T13:19:11+09:00"
   },
   "previous_daily_master_run": {
     "run_id": 44429869133,
