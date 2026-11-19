@@ -254,5 +254,66 @@
     },
     "interpretation": "The 2026-11-20 MASTER_FULL_V5 output is a successful rerun with refreshed random bundles, not a new independent hypothesis or model result. It must not be presented as new learning. The distinct new work in this run is the historical review-index reconciliation."
   },
-  "new_research_contribution": "analysis/2026-11-20/HISTORICAL_REVIEW_INDEX_RECONCILIATION_v1"
+  "new_research_contribution": "analysis/2026-11-20/HISTORICAL_REVIEW_INDEX_RECONCILIATION_v1",
+  "candidate_stage_existing_evidence": {
+    "E059": {
+      "preregistration": "research/weekly_purchase/1251/E059_E054_CANDIDATE_RECALL_STAGE_DECOMPOSITION_PREREG_20261116.json",
+      "prereg_blob_sha": "b97a43a2b2299fbfd5ebfb1bc8abead73235bbf8",
+      "result_path": "analysis/2026-11-16/codemode_20261116_0845/E059_E054_CANDIDATE_RECALL_STAGE_DECOMPOSITION_v1",
+      "targets": 850,
+      "winner_miss_trace_rows": 5100,
+      "cutoff_safe_score_reproduction": "850/850",
+      "candidate_recall_delta_pp_vs_exact_random": {
+        "10": -0.556,
+        "15": -0.765,
+        "20": -1.386,
+        "25": -0.654,
+        "30": -0.627
+      },
+      "bonferroni_ci_lower_upper_pp": {
+        "10": [
+          -2.183,
+          0.699
+        ],
+        "15": [
+          -2.549,
+          0.569
+        ],
+        "20": [
+          -3.19,
+          0.261
+        ],
+        "25": [
+          -2.654,
+          0.797
+        ],
+        "30": [
+          -2.451,
+          1.176
+        ]
+      },
+      "classification": "HISTORICAL_DIAGNOSTIC_FAIL_NO_PROMOTION"
+    },
+    "E065": {
+      "result_path": "analysis/2026-11-17/E065_CANDIDATE_RECALL_UNCERTAINTY_AUDIT_V2_EXACT_MOMENTUM.json",
+      "result_blob_sha": "da2a0212d3cc249e0e8fc27142dc58cc930577f2",
+      "targets": 1050,
+      "tests": 30,
+      "moving_block_replicates_per_signal_k": 20000,
+      "bonferroni_family_alpha": 0.05,
+      "all_adjusted_ci_lower_bounds_not_above_zero": true,
+      "strict_candidate_signal_pass_count": 0,
+      "largest_positive_point_delta_pp": 0.508,
+      "largest_negative_point_delta_pp": -1.238,
+      "classification": "POST_HOC_EXPLORATORY_NOT_CONFIRMATORY"
+    },
+    "current_all_signal_scorecard": {
+      "path": "analysis/2026-11-20/CANDIDATE_RECALL_SCORECARD.csv",
+      "current_blob_sha": "88b74ecca81a2e376074e27880a6a5634b12daa0",
+      "previous_day_blob_sha": "88b74ecca81a2e376074e27880a6a5634b12daa0",
+      "identical_to_2026_11_19": true,
+      "per_round_full_trace_for_all_six_signals": "NOT_PRESENT_IN_CURRENT_DAILY_STATUS; latest target 1250 trace is present; E059 has a full trace for E054 only."
+    },
+    "interpretation": "Candidate recall is separately measured and historical miss attribution exists for E054, but no signal passes adjusted uncertainty. The all-signal daily scorecard is unchanged from 2026-11-19 and is maintenance, not new learning."
+  }
 }
