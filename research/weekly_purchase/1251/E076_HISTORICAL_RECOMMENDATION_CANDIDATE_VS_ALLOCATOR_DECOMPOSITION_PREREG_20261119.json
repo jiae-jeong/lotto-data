@@ -1,0 +1,115 @@
+{
+  "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+  "date_kst": "2026-11-19",
+  "preregistered_at_kst": "2026-11-19T09:13:00+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "study_class": "historical_posthoc_recommendation_error_decomposition",
+  "evidence_class": "CONTAMINATED_LIVE_HISTORY_DIAGNOSTIC_ONLY_NOT_PROSPECTIVE_CONFIRMATION",
+  "research_question": "Across preserved pre-draw recommendation artifacts for rounds 1245-1248, how much of each portfolio's missed winning-number performance is attributable to candidate-union exclusion versus failure to co-locate already-covered winning numbers on one line?",
+  "historical_scope": {
+    "target_rounds": [
+      1245,
+      1246,
+      1247,
+      1248
+    ],
+    "contamination_note": "Rounds 1244-1249 are previously examined live-history diagnostics; these observations are not clean holdouts or blind performance.",
+    "no_claim_of_actual_purchase": true,
+    "purchase_confirmation_registry_path": "research/PURCHASE_CONFIRMATION_REGISTRY.json",
+    "confirmed_purchase_count": 0
+  },
+  "source_data": {
+    "path": "lotto_data.csv",
+    "blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250,
+    "rows": 1250,
+    "rule": "Use the preserved pre-draw recommendation file and its recorded cutoff t-1; reveal the target outcome only for post-hoc scoring."
+  },
+  "recommendation_artifacts": [
+    {
+      "id": "R1245_V4_PRIMARY_3L",
+      "path": "research/prospective_v4/decisions/1245/PRIMARY_PURCHASE_DECISION_1245_V4.json",
+      "blob_sha": "1c20549451924bc864c4cbf438c5b48a83082a1c",
+      "round": 1245,
+      "cutoff": 1244,
+      "lines": 3,
+      "source_status": "pre-draw sealed recommendation artifact; purchase not independently confirmed"
+    },
+    {
+      "id": "R1246_V2_PURCHASE_DECISION_5L",
+      "path": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+      "blob_sha": "4d50304b7aa247317e23e122b4ac4747e7145c15",
+      "round": 1246,
+      "cutoff": 1245,
+      "lines": 5,
+      "source_status": "pre-draw purchase-decision artifact; purchase not independently confirmed"
+    },
+    {
+      "id": "R1246_FALLBACK_5L",
+      "path": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+      "blob_sha": "4998f3239626de3f2c9c5939a3b2d88dbc1b7a2a",
+      "round": 1246,
+      "cutoff": 1245,
+      "lines": 5,
+      "source_status": "preserved fallback artifact; separate from V2 decision"
+    },
+    {
+      "id": "R1247_PROTOCOL_FULL_V3_5L",
+      "path": "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_PROTOCOL_FULL_V3.json",
+      "blob_sha": "2dcc2c401f58a38549e1484980988082c9060ea9",
+      "round": 1247,
+      "cutoff": 1246,
+      "lines": 5,
+      "source_status": "preserved pre-draw recommendation artifact; later strict review rejected model promotion"
+    },
+    {
+      "id": "R1248_V54_NAMED_STRICT_PASS_5L",
+      "path": "research/weekly_purchase/1248/FINAL_FIVE_LINES_1248_20261030_V54_STRICT_PASS.json",
+      "blob_sha": "ea09ff33f5158f4dbe6da3dd97a006a8d81f764f",
+      "round": 1248,
+      "cutoff": 1247,
+      "lines": 5,
+      "source_status": "preserved V54-labelled artifact; not treated as confirmed purchase"
+    },
+    {
+      "id": "R1248_FALLBACK_5L",
+      "path": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+      "blob_sha": "d952c39886626140be8fbc70bf5397fe338da0c2",
+      "round": 1248,
+      "cutoff": 1247,
+      "lines": 5,
+      "source_status": "preserved fallback artifact; distinct from V54-labelled artifact; purchase not independently confirmed"
+    }
+  ],
+  "metrics": {
+    "candidate_stage": [
+      "winning_numbers_in_union",
+      "candidate_recall_union_over_6",
+      "winning_numbers_excluded_from_union"
+    ],
+    "allocator_stage": [
+      "line_hit_distribution",
+      "max_hit",
+      "any2_plus",
+      "any3_plus",
+      "any4_plus",
+      "captured_winners_not_in_max_hit_line"
+    ],
+    "decomposition": "For each target, separate winners excluded from the union from winners present in the union but not co-located on the best line. Report whether 2+/3+ was impossible at candidate stage or lost at allocator stage."
+  },
+  "comparison_rules": [
+    "Do not pool or compare artifacts with different ticket counts as if they were matched policies.",
+    "Treat the two 1246 artifacts and two 1248 artifacts as separate preserved versions; do not select one retrospectively as the actual purchase.",
+    "No p-values, confidence intervals, significance, or predictive-superiority claims from this four-round descriptive sample.",
+    "Do not rewrite any original recommendation, error note, freeze, or seal.",
+    "No purchase lines are generated or displayed."
+  ],
+  "outputs": [
+    "RESULTS.json",
+    "LINE_HIT_DECOMPOSITION.csv",
+    "REPORT.md",
+    "SHA256_MANIFEST.json"
+  ],
+  "promotion_rule": "Descriptive failure decomposition only. No signal, model, allocator, or purchase policy promotion; no change to strict gates or prospective confirmation requirements."
+}
