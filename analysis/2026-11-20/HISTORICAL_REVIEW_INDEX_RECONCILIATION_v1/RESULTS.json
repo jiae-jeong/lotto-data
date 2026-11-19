@@ -71,8 +71,9 @@
       "any3": false,
       "any4": false,
       "winning_numbers_in_union": 1,
-      "candidate_recall": 0.16666666666666666,
-      "decomposition": "Candidate-stage failure: only one winning number survived the preserved 18-slot portfolio union; any2+ was impossible before considering within-line allocation."
+      "decomposition": "Line-union coverage was 1/6. The upstream TOP-K candidate bank and ranking trace were not recovered, so this cannot be attributed specifically to candidate selection or within-line allocation.",
+      "line_union_recall": 0.16666666666666666,
+      "upstream_candidate_bank_status": "NOT_RECOVERED"
     },
     "round_1246_v2": {
       "preserved_pre_draw_source": "FIRST_PRIZE_PURCHASE_1246_V2",
@@ -89,8 +90,9 @@
       "any3": false,
       "any4": false,
       "winning_numbers_in_union": 2,
-      "candidate_recall": 0.3333333333333333,
-      "decomposition": "Candidate-stage recall was two of six; no line concentrated those two into a 2+ result."
+      "decomposition": "Line-union coverage was 2/6. No line reached 2+; without the upstream candidate bank and full selection trace, candidate ranking and allocation contributions cannot be separated.",
+      "line_union_recall": 0.3333333333333333,
+      "upstream_candidate_bank_status": "NOT_RECOVERED"
     },
     "round_1246_fallback": {
       "preserved_pre_draw_source": "FINAL_FIVE_LINES_1246_20261016",
@@ -107,8 +109,9 @@
       "any3": false,
       "any4": false,
       "winning_numbers_in_union": 4,
-      "candidate_recall": 0.6666666666666666,
-      "decomposition": "Clear allocator/assembly failure on this diagnostic: four winning numbers were present in the union, but every line had exactly one hit. This is one historical case, not evidence that a particular allocator is generally superior."
+      "decomposition": "Four winning numbers were present in the line union, but every line had exactly one hit. This is a within-line allocation/assembly failure for this preserved set, not evidence of general allocator superiority.",
+      "line_union_recall": 0.6666666666666666,
+      "upstream_candidate_bank_status": "NOT_RECOVERED"
     }
   },
   "structured_index_reconciliation": {
@@ -148,5 +151,6 @@
     "Add a separate recommendation-review inventory in a future audited master run, preserving the existing actual-purchase registry unchanged.",
     "Retain 1246/1247/1248 source conflicts as unresolved until receipt or explicit confirmation exists.",
     "Do not use 1245-1248 diagnostic outcomes to tune 1251 thresholds or claim prospective performance."
-  ]
+  ],
+  "method_note": "Line-union recall is not the same metric as model candidate_recall@K. No upstream TOP-K bank was recovered for these historical line sets; do not infer exact candidate-ranker attribution."
 }
