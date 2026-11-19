@@ -160,14 +160,14 @@
     "e075_recomputed_after_fix": false
   },
   "queue_validation_reconciliation": {
-    "latest_run_id": 44462812796,
-    "latest_run_number": 170,
+    "latest_run_id": 44470792177,
+    "latest_run_number": 171,
     "conclusion": "SUCCESS",
     "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "f26d69369788c6d403896451fffda6aa3648ac82",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44462812796",
-    "validated_at_kst": "2026-11-19T14:06:32+09:00"
+    "source_commit_sha": "5bd0d1dcbabaf0777003633da2968efdb9b6fe93",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44470792177",
+    "validated_at_kst": "2026-11-19T15:15:33+09:00"
   },
   "previous_daily_master_run": {
     "run_id": 44429869133,
@@ -196,5 +196,17 @@
     "compute_status": "COMPUTE_PARTIAL",
     "protocol_status": "PROTOCOL_PARTIAL",
     "study_status": "PARTIAL"
+  },
+  "legacy_queue_reconciliation": {
+    "date_kst": "2026-11-19",
+    "reconciled_task_ids": [
+      "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+      "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+      "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+      "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+      "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "E029_FIVE_LINE_PROMOTION_GATE_v2"
+    ],
+    "evidence": "Existing COMPLETE.json and VERIFICATION.json files were matched to the frozen task IDs and result paths. Historical/post-hoc classifications were preserved; none is eligible for target-1251 three-line strict readiness."
   }
 }
