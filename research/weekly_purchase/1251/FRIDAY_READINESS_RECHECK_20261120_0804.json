@@ -1,0 +1,232 @@
+{
+  "audit_id": "FRIDAY_READINESS_RECHECK_20261120_0804",
+  "date_kst": "2026-11-20",
+  "audited_at_kst": "2026-11-20T08:04:02+09:00",
+  "classification": "MAINTENANCE_RECHECK_NOT_NEW_MODEL_STUDY",
+  "daily_new_study": {
+    "path": "analysis/2026-11-20/MASTER_FULL_V5_152830_935567",
+    "report_blob_sha": "886fe68f4ed1be92e4e1f2e2f54d6e28b864c993",
+    "verification_blob_sha": "8c57867083741525d680625557835f3b2fe5c0e9",
+    "status": "PARTIAL",
+    "targets": 1050,
+    "successor_prediction_records": 3150,
+    "successor_leakage_failures": 0,
+    "five_ticket_random_bundles": 1050000,
+    "five_ticket_policy_classification": "RESEARCH_ONLY_NOT_ELIGIBLE_FOR_TARGET_1251_THREE_LINE_PURCHASE",
+    "manifest_entries": 14,
+    "manifest_status": "PASS",
+    "legacy_A_C_contrarian_sources": "NOT_FOUND_NOT_EXECUTED"
+  },
+  "source_integrity": {
+    "protocol_blob_sha": "f770eb2215eb1acfb50ac1d79273c62d9b142084",
+    "agents_blob_sha": "796f8a4367b6a4f64cbd4ec5615de75c992c7e0f",
+    "target_1251_policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+    "canonical_csv_path": "lotto_data.csv",
+    "canonical_csv_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "recorded_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250,
+    "nonblank_data_rows": 1250,
+    "first_round": 1,
+    "last_round": 1250,
+    "contiguous_rounds": true,
+    "main_and_bonus_validation_failures": 0,
+    "physical_blank_lines": 2,
+    "blank_line_note": "One embedded blank line follows round 1245 and one trailing blank line; both are ignored by CSV row parsing. They do not create a missing or duplicate draw.",
+    "recorded_hash_and_git_blob_match": true
+  },
+  "preserved_recommendation_sources": {
+    "e076_prereg_path": "research/weekly_purchase/1251/E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_PREREG_20261119.json",
+    "e076_result_path": "analysis/2026-11-19/E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1/RESULTS.json",
+    "artifact_count": 6,
+    "artifacts": [
+      {
+        "path": "research/prospective_v4/decisions/1245/PRIMARY_PURCHASE_DECISION_1245_V4.json",
+        "blob_sha": "1c20549451924bc864c4cbf438c5b48a83082a1c"
+      },
+      {
+        "path": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+        "blob_sha": "4d50304b7aa247317e23e122b4ac4747e7145c15"
+      },
+      {
+        "path": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+        "blob_sha": "4998f3239626de3f2c9c5939a3b2d88dbc1b7a2a"
+      },
+      {
+        "path": "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_PROTOCOL_FULL_V3.json",
+        "blob_sha": "2dcc2c401f58a38549e1484980988082c9060ea9"
+      },
+      {
+        "path": "research/weekly_purchase/1248/FINAL_FIVE_LINES_1248_20261030_V54_STRICT_PASS.json",
+        "blob_sha": "ea09ff33f5158f4dbe6da3dd97a006a8d81f764f"
+      },
+      {
+        "path": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+        "blob_sha": "d952c39886626140be8fbc70bf5397fe338da0c2"
+      }
+    ],
+    "review_source": {
+      "path": "research/weekly_purchase/1247/MODEL_VALIDATION_REVIEW_20261023.json",
+      "blob_sha": "039a4a9ed4468a10d78716770c3b93c0a65861c4"
+    },
+    "review_finding": "No model passed strict validation; V3 failed structure-matched 30-unique random comparison.",
+    "purchase_confirmation_registry_path": "research/PURCHASE_CONFIRMATION_REGISTRY.json",
+    "confirmed_purchase_count": 0,
+    "historical_closed_loop_status": "PARTIAL_UNRESOLVED_SOURCE_CONFLICTS",
+    "conflicts": [
+      1246,
+      1247,
+      1248
+    ],
+    "note": "Preserved pre-draw recommendations are not verified actual purchases. Do not choose among conflicting records retrospectively."
+  },
+  "candidate_stage": {
+    "path": "analysis/2026-11-20/CANDIDATE_RECALL_SCORECARD.csv",
+    "blob_sha": "88b74ecca81a2e376074e27880a6a5634b12daa0",
+    "targets": 1050,
+    "k_values": [
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "signals": [
+      "recent30",
+      "gap",
+      "momentum",
+      "balanced",
+      "contrarian",
+      "consensus"
+    ],
+    "matched_random_sets_per_target": 200,
+    "matched_random_sets_total": 210000,
+    "no_future_leakage": true,
+    "delta_recall_vs_matched_random_fraction_by_k": {
+      "10": {
+        "min": -0.0021420634920635098,
+        "max": 0.005476984126984126,
+        "best": "balanced",
+        "worst": "consensus"
+      },
+      "15": {
+        "min": -0.0008142857142857304,
+        "max": 0.005376190476190461,
+        "best": "consensus",
+        "worst": "momentum"
+      },
+      "20": {
+        "min": -0.006511111111111134,
+        "max": 0.003171428571428603,
+        "best": "recent30",
+        "worst": "contrarian"
+      },
+      "25": {
+        "min": -0.012085714285714255,
+        "max": 0.0018825396825397078,
+        "best": "momentum",
+        "worst": "contrarian"
+      },
+      "30": {
+        "min": -0.005004761904761956,
+        "max": 0.0038841269841269157,
+        "best": "recent30",
+        "worst": "gap"
+      }
+    },
+    "promotion": "NONE; deltas are small and this scorecard contains no confidence intervals."
+  },
+  "successor_model_diagnostics": {
+    "path": "analysis/2026-11-20/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json",
+    "blob_sha": "a67e20ec979c381a6c5aa9d3634ec00e75052fe6",
+    "models": {
+      "A_v2": {
+        "targets": 1050,
+        "delta_mean_hits": -0.005714285714285783,
+        "delta_any2": -0.0067366722897068965,
+        "delta_any3": 0.004737350001104965,
+        "positive_mean_hit_blocks": 9,
+        "blocks": 21,
+        "positive_share": 0.42857142857142855,
+        "edge_pass": false
+      },
+      "C_v2": {
+        "targets": 1050,
+        "delta_mean_hits": -0.0019047619047619646,
+        "delta_any2": -0.00007000562304021463,
+        "delta_any3": 0.0028325880963430625,
+        "positive_mean_hit_blocks": 10,
+        "blocks": 21,
+        "positive_share": 0.47619047619047616,
+        "edge_pass": false
+      },
+      "contrarian_v2": {
+        "targets": 1050,
+        "delta_mean_hits": -0.008571428571428563,
+        "delta_any2": -0.0029271484801830783,
+        "delta_any3": 0.0037849690487240135,
+        "positive_mean_hit_blocks": 7,
+        "blocks": 21,
+        "positive_share": 0.3333333333333333,
+        "edge_pass": false
+      }
+    },
+    "note": "Successor diagnostics are not recovered legacy A/C/Contrarian models. 3+ point estimates are positive but Bonferroni-adjusted lower bounds do not establish an edge; no promotion."
+  },
+  "target_1251_policy": {
+    "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+    "lines": 3,
+    "numbers_per_line": 6,
+    "first_target_expected_date": "2026-11-21",
+    "unchanged_strict_gate": true,
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "metrics": [
+      "max_hit",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "ci_lower_bounds_all_strictly_positive_required": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "retain_final_remainder_block": true,
+    "prospective_confirmation_required": true,
+    "friday_search_or_tuning": false
+  },
+  "purchase_readiness": {
+    "status": "STRICT_FAIL",
+    "validated_models": [],
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "unevaluated_gates": [
+      "prospective_confirmation"
+    ],
+    "prospective_confirmation_minimum_and_completion_rule": "UNSPECIFIED_IN_POLICY",
+    "final_lines_generated": false,
+    "fallback_allowed": false,
+    "freeze_or_seal_created": false
+  },
+  "queue": {
+    "registered_tasks": 56,
+    "latest_validation_run_id": 44543887535,
+    "latest_validation_run_number": 178,
+    "latest_validation_attempt": 2,
+    "latest_validation_status": "SUCCESS",
+    "unit_tests": 251,
+    "queue_contract": "E030-E076 PASS",
+    "research_job": "SKIPPED",
+    "prospective_ledger_job": "SKIPPED",
+    "no_new_e077_created": true,
+    "reason": "No preregistered independent target-1251 axis remains; no post-hoc microvariant was created."
+  },
+  "next_actions": [
+    "Do not generate target-1251 purchase lines or freeze/seal while strict readiness remains FAIL.",
+    "After target 1251 is drawn, append its result only after independent source verification and evaluate the already-frozen prospective artifact without retroactive edits.",
+    "Recover explicit purchase confirmation or receipt evidence before treating historical recommendations as actual purchases.",
+    "Recover the original legacy A/C/Contrarian source implementations; successor_v2 results are not substitutes."
+  ]
+}
