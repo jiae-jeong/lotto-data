@@ -4275,6 +4275,25 @@
           "failure": "verifier expected 2550 selector decisions; actual count is 3150 including warmup targets 201-400",
           "addendum": "research/weekly_purchase/1251/E075_EXECUTION_ATTEMPT_2_REPAIR_ADDENDUM_20261119.json"
         }
+      ],
+      "recovery_workflow_entrypoint": ".github/workflows/target-1251-e075-publication-recovery.yml",
+      "recovery_trigger_path": "research/weekly_purchase/1251/E075_PUBLICATION_RECOVERY_20261119.trigger",
+      "post_v3_attempt_history": [
+        {
+          "workflow_run_id": 44426026061,
+          "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44426026061",
+          "status": "CALCULATION_COMPLETE_OUTPUTS_VERIFIED_BUT_PERSISTENCE_FAILED",
+          "failure": "Walk-forward, random comparator, leakage, geometry, and 8-file manifest passed. Final persistence raised KeyError: 'legacy_vs_exact_null' because INFERENCE.json nests metric groups under 'metrics'.",
+          "calculation_complete": true,
+          "verification_status": "PASS",
+          "manifest_status": "PASS",
+          "training_cutoff_violations": 0,
+          "leakage_failures": 0,
+          "future_predictions": 0,
+          "strict_pass_ready": false,
+          "outputs_published": false,
+          "recovery": "Preserve frozen E075 v3 blobs and use a separate publication-recovery workflow with schema-aware persistence."
+        }
       ]
     },
     {
@@ -4500,18 +4519,30 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44345996070",
       "validated_at_kst": "2026-11-19T01:20:22+09:00",
       "note": "Post-reconciliation validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; dedicated push-triggered studies also performed duplicate guards and skipped execution."
+    },
+    {
+      "run_id": 44428208026,
+      "run_number": 156,
+      "conclusion": "FAILURE",
+      "tests": 248,
+      "queue_contract": "NOT_REACHED_UNIT_TEST_FAILURE",
+      "source_commit_sha": "7712fb18307e31366984c2c7c67790c5f74aa9bb",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44428208026",
+      "validated_at_kst": "2026-11-19T09:20:58+09:00",
+      "cause": "All 248 tests ran; three legacy queue assertions were stale after E075 v3 and E076 were appended. The failing assertions expected E075 v1/v2 paths and an E074-only queue tail. No research calculation or prospective-ledger job ran."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44345996070,
-    "run_number": 155,
-    "conclusion": "SUCCESS",
-    "tests": 234,
-    "queue_contract": "E030-E074 PASS",
-    "source_commit_sha": "563a643a6eb44a7ec8e6531ec42db1597e7aadc5",
+    "run_id": 44428208026,
+    "run_number": 156,
+    "conclusion": "FAILURE",
+    "tests": 248,
+    "queue_contract": "NOT_REACHED_UNIT_TEST_FAILURE",
+    "source_commit_sha": "7712fb18307e31366984c2c7c67790c5f74aa9bb",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44345996070",
-    "validated_at_kst": "2026-11-19T01:20:22+09:00",
-    "note": "Post-reconciliation validate job succeeded; 234 unit tests passed and E030-E074 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; dedicated push-triggered studies also performed duplicate guards and skipped execution."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44428208026",
+    "validated_at_kst": "2026-11-19T09:20:58+09:00",
+    "cause": "All 248 tests ran; three legacy queue assertions were stale after E075 v3 and E076 were appended. The failing assertions expected E075 v1/v2 paths and an E074-only queue tail. No research calculation or prospective-ledger job ran."
   }
 }

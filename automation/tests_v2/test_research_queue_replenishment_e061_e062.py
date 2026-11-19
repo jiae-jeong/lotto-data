@@ -202,8 +202,8 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
                     self.assertEqual(len(payload), int(row["bytes"]), row["path"])
                     self.assertEqual(hashlib.sha256(payload).hexdigest(), row["sha256"], row["path"])
 
-    def test_queue_tail_is_append_only_e061_e062_e063_e064_e066_e067_e068_e069_e071_e072_e073_e074(self):
-        self.assertEqual([task["id"] for task in self.tasks[-12:]], [
+    def test_queue_tail_is_append_only_through_e076(self):
+        self.assertEqual([task["id"] for task in self.tasks[-14:]], [
             "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
             "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
             "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
@@ -216,6 +216,8 @@ class ResearchQueueReplenishmentTests(unittest.TestCase):
             "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
             "E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1",
             "E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+            "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+            "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
         ])
 
     def test_e073_three_draw_membership_count_is_frozen_and_never_purchase_ready(self):

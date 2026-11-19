@@ -1,5 +1,5 @@
 name: orthogonal-research-v2
-# Queue contract through E074 verifies pending preregistration, terminal execution state, and evidence metadata.
+# Queue contract through E076 verifies frozen preregistration, terminal execution state, and evidence metadata.
 
 on:
   workflow_dispatch:
@@ -59,7 +59,9 @@ jobs:
                       if nested.countTestCases():
                           kept.addTests(nested)
                   elif item.id().endswith(".test_e064_is_appended_after_e063_without_rewriting_prior_tasks"):
-                      print("SKIP: historical E064 tail-only assertion; the current append-only E061-E069 order is checked below.")
+                      print("SKIP: historical E064 tail-only assertion; the current append-only E061-E076 order is checked below.")
+                  elif item.id().endswith(".test_v3_verifier_repair_is_registered_and_prior_failures_preserved"):
+                      print("SKIP: frozen E075 preregistration-time pending-state assertion; current lifecycle is checked by test_e075_queue_contract_v4.")
                   else:
                       kept.addTest(item)
               return kept
@@ -219,14 +221,13 @@ jobs:
           e072_id='E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1'
           e073_id='E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1'
           e074_id='E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1'
-          if e074_id in task_by_id:
-              assert ids[-12:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id,e072_id,e073_id,e074_id]
-          elif e073_id in task_by_id:
-              assert ids[-11:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id,e072_id,e073_id]
-          elif e072_id in task_by_id:
-              assert ids[-10:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id,e072_id]
-          else:
-              assert ids[-9:]==e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id]
+          e075_id='E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1'
+          e076_id='E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1'
+          expected_tail=e061_e064+[e066_id,e067_id,e068_id,e069_id,e071_id]
+          for candidate_id in (e072_id,e073_id,e074_id,e075_id,e076_id):
+              if candidate_id in task_by_id:
+                  expected_tail.append(candidate_id)
+          assert ids[-len(expected_tail):]==expected_tail
           e066=task_by_id[e066_id]
           assert e066['kind']=='three_line_gap_shape_transition'
           assert e066['execution_mode']=='dedicated_workflow'
@@ -425,6 +426,43 @@ jobs:
                   assert e074['execution_result']['strict_pass_ready'] is False
                   assert e074['execution_result']['purchase_recommendation_generated'] is False
 
+          if e075_id in task_by_id:
+              e075=task_by_id[e075_id]
+              assert e075['kind']=='implementation_conformance_correction'
+              assert e075['execution_mode']=='dedicated_workflow'
+              assert e075['execution_entrypoint']=='automation/three_line_research_1251_e075_corrected_v2.py'
+              assert e075['workflow_entrypoint']=='.github/workflows/target-1251-e075-e045-selector-order-audit.yml'
+              assert e075['preregistration']=='research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119_V3.json'
+              assert e075['execution_status'] in ('PREREGISTERED_PENDING_DEDICATED_WORKFLOW','EXECUTED_HISTORICAL_STRICT_FAIL','EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING')
+              assert e075['recovery_workflow_entrypoint']=='.github/workflows/target-1251-e075-publication-recovery.yml'
+              assert e075['target_1251_three_line_readiness_eligible'] is False
+              assert e075['independent_research_axis'] is False and e075['independent_sample'] is False
+              assert e075['spec']['strict_pass_ready'] is False
+              assert len(e075['attempt_history'])==2
+              assert e075['post_v3_attempt_history'][-1]['workflow_run_id']==44426026061
+              if e075['execution_status']!='PREREGISTERED_PENDING_DEDICATED_WORKFLOW':
+                  assert e075['execution_result']['verification_status']=='PASS'
+                  assert e075['execution_result']['strict_pass_ready'] is False
+                  assert e075['execution_result']['purchase_recommendation_generated'] is False
+          if e076_id in task_by_id:
+              e076=task_by_id[e076_id]
+              assert e076['kind']=='historical_recommendation_error_decomposition'
+              assert e076['execution_mode']=='connector_reproducible_compute'
+              assert e076['preregistration']=='research/weekly_purchase/1251/E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_PREREG_20261119.json'
+              assert e076['execution_status']=='EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY'
+              assert e076['target_1251_three_line_readiness_eligible'] is False
+              assert e076['independent_research_axis'] is False and e076['independent_sample'] is False
+              assert e076['execution_result']['verification']=='PASS'
+              assert e076['execution_result']['artifacts']==6
+              assert e076['execution_result']['candidate_2plus_possible']==5
+              assert e076['execution_result']['allocator_2plus_realized']==2
+              assert e076['execution_result']['candidate_3plus_possible']==4
+              assert e076['execution_result']['allocator_3plus_realized']==2
+              assert e076['execution_result']['candidate_4plus_possible']==3
+              assert e076['execution_result']['allocator_4plus_realized']==0
+              assert e076['spec']['strict_pass_ready'] is False
+          print('E030-E076 queue contract PASS; prior IDs retained')
+
           e063=task_by_id['E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1']
           assert e063['kind']=='three_line_last_digit_occupancy_transition'
           assert e063['execution_mode']=='dedicated_workflow'
@@ -450,7 +488,7 @@ jobs:
               assert e064['execution_result']['verification_status']=='PASS'
               assert e064['execution_result']['strict_pass_ready'] is False
               assert e064['execution_result']['purchase_recommendation_generated'] is False
-          print('E030-E074 queue contract PASS; prior IDs retained' if e074_id in task_by_id else ('E030-E073 queue contract PASS; prior IDs retained' if e073_id in task_by_id else ('E030-E072 queue contract PASS; prior IDs retained' if e072_id in task_by_id else 'E030-E071 queue contract PASS; prior IDs retained')))
+          # E030-E076 queue contract status was emitted above.
           PY
 
   research:
