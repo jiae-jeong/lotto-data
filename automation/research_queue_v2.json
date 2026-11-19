@@ -4276,6 +4276,64 @@
           "addendum": "research/weekly_purchase/1251/E075_EXECUTION_ATTEMPT_2_REPAIR_ADDENDUM_20261119.json"
         }
       ]
+    },
+    {
+      "id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+      "kind": "historical_recommendation_error_decomposition",
+      "question": "Across six preserved pre-draw recommendation artifacts for rounds 1245-1248, how much of each miss is candidate-union exclusion versus failure to co-locate already-covered winning numbers on a line?",
+      "novelty": "First cross-artifact two-stage miss decomposition across six preserved recommendation versions. It separates candidate recall from line allocator outcomes and preserves distinct alternatives rather than retrospectively selecting an actual purchase. Historical diagnostic only; no predictive edge claim.",
+      "execution_mode": "connector_reproducible_compute",
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "independent_research_axis": false,
+      "independent_sample": false,
+      "target_1251_three_line_readiness_eligible": false,
+      "preregistration": "research/weekly_purchase/1251/E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_PREREG_20261119.json",
+      "preregistration_blob_sha": "4d4f73e1e8006c2eb1c6f908bfe018d6e1ac6564",
+      "data_cutoff": 1250,
+      "target_rounds": [
+        1245,
+        1246,
+        1247,
+        1248
+      ],
+      "spec": {
+        "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+        "evidence_class": "CONTAMINATED_LIVE_HISTORY_DIAGNOSTIC_ONLY_NOT_PROSPECTIVE_CONFIRMATION",
+        "artifacts": 6,
+        "target_rounds": [
+          1245,
+          1246,
+          1247,
+          1248
+        ],
+        "metrics": [
+          "candidate_recall_union_over_6",
+          "winning_numbers_excluded_from_union",
+          "max_hit",
+          "any2+",
+          "any3+",
+          "any4+",
+          "line_hit_distribution"
+        ],
+        "ticket_count_and_union_geometry_matched": false,
+        "purchase_confirmation_required": true,
+        "confirmed_purchase_count": 0,
+        "no_future_leakage": true,
+        "strict_pass_ready": false
+      },
+      "execution_result": {
+        "result_path": "analysis/2026-11-19/E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+        "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+        "artifacts": 6,
+        "candidate_2plus_possible": 5,
+        "allocator_2plus_realized": 2,
+        "candidate_3plus_possible": 4,
+        "allocator_3plus_realized": 2,
+        "candidate_4plus_possible": 3,
+        "allocator_4plus_realized": 0,
+        "verification": "PASS"
+      },
+      "promotion_rule": "Descriptive decomposition only; no model/allocator promotion, no strict gate change, no purchase lines, no freeze/seal."
     }
   ],
   "trigger_mode": "workflow_dispatch_only",
