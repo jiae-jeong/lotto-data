@@ -68,5 +68,25 @@
     1248,
     1249
   ],
-  "next_start": "Check E075 v3 workflow result; keep strict gate unchanged; do not generate purchase lines until a separately validated and prospectively eligible artifact exists."
+  "next_start": "Check E075 v3 workflow result; keep strict gate unchanged; do not generate purchase lines until a separately validated and prospectively eligible artifact exists.",
+  "external_crosscheck": {
+    "round": 1250,
+    "draw_date": "2026-11-14",
+    "sources": [
+      {
+        "name": "Yonhap News",
+        "url": "https://www.yna.co.kr/view/AKR20261114047000002",
+        "published_at": "2026-11-14T20:49:00+09:00",
+        "role": "contemporaneous report attributing result to Donghaeng Lottery"
+      },
+      {
+        "name": "LottoLottery",
+        "url": "https://www.lottolottery.co.kr/results/1250",
+        "role": "independent secondary result lookup"
+      }
+    ],
+    "agreement": "Both sources agree with the GitHub canonical data for round 1250.",
+    "new_draw_after_cutoff_as_of": "2026-11-19",
+    "status": "CROSS_CHECK_PASS"
+  }
 }
