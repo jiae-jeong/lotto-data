@@ -10,13 +10,13 @@ This is an index/scope gap, not evidence that either recommendation was actually
 
 ## Candidate stage vs. allocator stage
 
-| Preserved source | Candidate union recall | Per-line hit counts | max_hit | any2+ |
+| Preserved source | Line-union recall | Per-line hit counts | max_hit | any2+ |
 |---|---:|---|---:|---|
 | Round 1245 V4 preserved three-line source | 1/6 | 0, 0, 1 | 1 | No |
 | Round 1246 V2 preserved five-line source | 2/6 | 1, 0, 1, 0, 0 | 1 | No |
 | Round 1246 fallback five-line source | 4/6 | 1, 1, 1, 1, 1 | 1 | No |
 
-Round 1245 is a candidate-stage failure: with only one winning number in the union, a 2+ line was impossible. Round 1246 fallback is a clear allocator/assembly failure on this single historical diagnostic: four winning numbers were present in the union, but they were spread so no line reached two hits. This does not establish a generally superior allocation policy.
+Round 1245 has only one winning number in the final line union, so a 2+ line was impossible; however, the upstream TOP-K candidate bank and ranking trace were not recovered, so this cannot be attributed specifically to candidate selection or within-line allocation. Round 1246 fallback is a clear within-line allocation/assembly failure on this single historical diagnostic: four winning numbers were present in the line union, but no line reached two hits. This does not establish a generally superior allocation policy. Line-union recall is not the same metric as model candidate_recall@K.
 
 ## Provenance treatment
 
