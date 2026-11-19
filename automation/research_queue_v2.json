@@ -5267,18 +5267,32 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44486389745",
       "validated_at_kst": "2026-11-19T17:18:01+09:00",
       "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
+    },
+    {
+      "run_id": 44514807309,
+      "run_number": 174,
+      "conclusion": "SUCCESS",
+      "tests": 251,
+      "queue_contract": "E030-E076 PASS",
+      "source_commit_sha": "d926b4b3bcf2f504b306b45e6454a4d08d5dbc66",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44514807309",
+      "validated_at_kst": "2026-11-19T20:26:35+09:00",
+      "validated_queue_blob_sha": "2d4da6c80b7b09706b5271c6cc715415b5c96636",
+      "note": "Validate job checked out d926b4b3bcf2f504b306b45e6454a4d08d5dbc66; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44486389745,
-    "run_number": 173,
+    "run_id": 44514807309,
+    "run_number": 174,
     "conclusion": "SUCCESS",
     "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "2a8e246ba45d891eb77e3f252082f9720a6cfb68",
+    "source_commit_sha": "d926b4b3bcf2f504b306b45e6454a4d08d5dbc66",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44486389745",
-    "validated_at_kst": "2026-11-19T17:18:01+09:00",
-    "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44514807309",
+    "validated_at_kst": "2026-11-19T20:26:35+09:00",
+    "validated_queue_blob_sha": "2d4da6c80b7b09706b5271c6cc715415b5c96636",
+    "note": "Validate job checked out d926b4b3bcf2f504b306b45e6454a4d08d5dbc66; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
   }
 }
