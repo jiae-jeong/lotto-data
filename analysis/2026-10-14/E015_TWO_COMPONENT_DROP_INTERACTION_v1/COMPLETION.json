@@ -1,0 +1,30 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+  "question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
+  "novelty": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
+  "executed_cases": 14835,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 590,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 14835,
+    "verification": {
+      "status": "PASS",
+      "targets_checked": 645,
+      "prediction_records_checked": 14835,
+      "two_component_drop_policies": 21,
+      "single_component_loo_reference_policies": 7,
+      "paired_comparisons": 168,
+      "loo_pair_consistency_rows": 21,
+      "leakage_failures": 0,
+      "future_predictions": 0
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-14T01:44:10.186734+00:00"
+}

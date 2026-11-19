@@ -1,0 +1,4 @@
+﻿model,n,prior_chosen_component_window_mean,next_draw_mean,prior_to_next_mean_drop,model_switch_count,model_switch_rate,regime_trigger_count,regime_fallback_count,interpretation
+D001_nested_mean,645,0.9374418604651162,0.7643410852713178,0.1731007751937984,108,0.16770186335403728,0,,POST_HOC_DIAGNOSTIC; selected in-window performance is not out-of-window evidence
+D002_nested_2plus,645,0.9100155038759691,0.786046511627907,0.12396899224806213,101,0.15683229813664595,0,,POST_HOC_DIAGNOSTIC; selected in-window performance is not out-of-window evidence
+D003_nested_regime,645,0.803922480620155,0.7395348837209302,0.0643875968992248,104,0.16149068322981366,165,480,POST_HOC_DIAGNOSTIC; selected in-window performance is not out-of-window evidence

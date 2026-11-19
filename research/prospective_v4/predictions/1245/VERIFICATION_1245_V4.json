@@ -1,0 +1,163 @@
+{
+  "V3_files_changed": 0,
+  "actual_result": "NOT READ / NOT USED",
+  "all_base_files_changed": 0,
+  "determinism_execution_kind": "NOT AN OFFICIAL RUN; NEVER USED TO RESELECT",
+  "determinism_verification": "PASS",
+  "engine_result_comparison": "exact semantic equality excluding created_at_utc only",
+  "exact_file_comparisons": [
+    {
+      "file": "CANDIDATES_1245_V4.csv",
+      "match": true,
+      "official_sha256": "4895bb7fc47edb47c45bfdcdec598bc9c45efb23c0eccaf4064d2f7b6206ae0a",
+      "verification_sha256": "4895bb7fc47edb47c45bfdcdec598bc9c45efb23c0eccaf4064d2f7b6206ae0a"
+    },
+    {
+      "file": "CANDIDATE_AUDIT_1245_V4.json",
+      "match": true,
+      "official_sha256": "c4282cb1d8ded54147fe337c4425d429173026d8ed013ac12ff7311ca85ebc57",
+      "verification_sha256": "c4282cb1d8ded54147fe337c4425d429173026d8ed013ac12ff7311ca85ebc57"
+    },
+    {
+      "file": "FINAL_THREE_LINES_1245_V4.csv",
+      "match": true,
+      "official_sha256": "7ce371fe06a2e4b88f249d264e528b518e6da2fe9f54afc52fda0b26551279a0",
+      "verification_sha256": "7ce371fe06a2e4b88f249d264e528b518e6da2fe9f54afc52fda0b26551279a0"
+    },
+    {
+      "file": "FROZEN_SCORE_CAPTURE_1245_V4.json",
+      "match": true,
+      "official_sha256": "5d2bac7c243a9cbe5cf3966ef253f8cad0e897cd4be510c3734ab52c88e3edc3",
+      "verification_sha256": "5d2bac7c243a9cbe5cf3966ef253f8cad0e897cd4be510c3734ab52c88e3edc3"
+    },
+    {
+      "file": "MODEL_PREDICTIONS_1245_V4.csv",
+      "match": true,
+      "official_sha256": "92f72d1b2d83026be102810a283bbe7ac5a4f6cb9659b0d09ae37637d8df9eb6",
+      "verification_sha256": "92f72d1b2d83026be102810a283bbe7ac5a4f6cb9659b0d09ae37637d8df9eb6"
+    },
+    {
+      "file": "NUMBER_SCORES_1245_V4.csv",
+      "match": true,
+      "official_sha256": "529021f777035078985ee208cc7317883cc864f9b926ad48e14da0dfcd217771",
+      "verification_sha256": "529021f777035078985ee208cc7317883cc864f9b926ad48e14da0dfcd217771"
+    },
+    {
+      "file": "RANDOM_BASELINE_1245_V4.json",
+      "match": true,
+      "official_sha256": "c7ad364eb66f510418aa086b21b1bc772e5c5ff52f3ce96d946d8e073684b09b",
+      "verification_sha256": "c7ad364eb66f510418aa086b21b1bc772e5c5ff52f3ce96d946d8e073684b09b"
+    },
+    {
+      "file": "SELECTION_TRACE_1245_V4.csv",
+      "match": true,
+      "official_sha256": "2de572ba92aa03d70f3e9818ef1c164b0ba878d4998c4390029377facae69ca7",
+      "verification_sha256": "2de572ba92aa03d70f3e9818ef1c164b0ba878d4998c4390029377facae69ca7"
+    },
+    {
+      "file": "STRUCTURE_DIAGNOSTICS_1245_V4.csv",
+      "match": true,
+      "official_sha256": "4ec1e94d9e14221653e5a0203840bad67fd83580d2d9226e868748e16518e570",
+      "verification_sha256": "4ec1e94d9e14221653e5a0203840bad67fd83580d2d9226e868748e16518e570"
+    },
+    {
+      "file": "TICKET_SCORES_1245_V4.csv",
+      "match": true,
+      "official_sha256": "1d8b573532f6f4cd96b5314e8686c62d53b1500e83dfae41d4f7e532313899bf",
+      "verification_sha256": "1d8b573532f6f4cd96b5314e8686c62d53b1500e83dfae41d4f7e532313899bf"
+    }
+  ],
+  "frozen_V4_files_changed": 0,
+  "official_run_count": 1,
+  "official_run_exit": 0,
+  "original_worktree_preserved": true,
+  "raw_data_changed": 0,
+  "semantic_verification": {
+    "actual_nonuse_verification_method": "input pinned to cutoff1244; no outcome input/network retrieval in engine or runner; actual_numbers=null; result_rows_read=false; not comparison against unknown winning numbers",
+    "actual_result": "NOT READ / NOT USED",
+    "candidate_tickets": 592,
+    "freeze_verification": "PASS",
+    "hash_records_checked": 0,
+    "model_mode_records": 16,
+    "number_scores": 720,
+    "portfolios": {
+      "expanding": [
+        [
+          1,
+          9,
+          13,
+          24,
+          43,
+          44
+        ],
+        [
+          11,
+          13,
+          18,
+          34,
+          38,
+          43
+        ],
+        [
+          1,
+          20,
+          22,
+          25,
+          36,
+          41
+        ]
+      ],
+      "rolling300": [
+        [
+          6,
+          12,
+          15,
+          21,
+          29,
+          35
+        ],
+        [
+          1,
+          4,
+          6,
+          9,
+          12,
+          19
+        ],
+        [
+          1,
+          9,
+          14,
+          28,
+          37,
+          39
+        ]
+      ]
+    },
+    "raw_integrity": "PASS",
+    "status": "REGISTERED_UNEVALUATED",
+    "structure_veto_count": 0,
+    "target": 1245,
+    "ticket_scores": 20518,
+    "trace_rows": 222,
+    "training_cutoff": 1244,
+    "unique_portfolio_lines_each_mode": 3,
+    "verification": "PASS"
+  },
+  "semantic_verifier_exit": 0,
+  "status": "REGISTERED_UNEVALUATED",
+  "summary_comparison": "exact semantic equality excluding run-specific timestamps/command/kind/engine byte-hash only",
+  "target": 1245,
+  "training_cutoff": 1244,
+  "verification_command": [
+    "C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\prospective_v4\\predictions\\1245\\run_prediction_1245_v4.py",
+    "--data",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\lotto_data.csv",
+    "--output-dir",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_determinism_verification_only_20261009",
+    "--execution-kind",
+    "determinism_verification_only"
+  ],
+  "verified_at_utc": "2026-10-09T05:26:56.866176+00:00"
+}

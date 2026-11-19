@@ -1,0 +1,16 @@
+{
+  "bonus_range_disjoint": "PASS",
+  "date_format_and_order": "PASS",
+  "duplicate_rounds": "PASS",
+  "error_count": 0,
+  "first_round": 1,
+  "integrity": "PASS",
+  "latest_date": "2026-10-10",
+  "latest_round": 1245,
+  "main_number_count_range_duplicates": "PASS",
+  "normalized_lf_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "raw_bytes_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "round_continuity": "PASS",
+  "rows": 1245,
+  "source": "GitHub main API snapshot; local canonical file left unchanged"
+}

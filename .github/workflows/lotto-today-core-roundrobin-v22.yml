@@ -1,0 +1,53 @@
+name: lotto-today-core-roundrobin-v22
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-core-roundrobin-v22.yml'
+      - 'automation/today_core_roundrobin_v22.py'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v22:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V22 core round-robin
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_core_roundrobin_v22.py | tee "$RUNNER_TEMP/v22.log"
+      - name: Independently verify V22
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_CORE_ROUNDROBIN_1247_V22.json').read_text())
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert d['policy']=='CORE6_PLUS_ROUNDROBIN_RANK30_V22'
+          lines=d['current']['lines'];flat=set().union(*map(set,lines))
+          assert len(lines)==5 and len({tuple(x) for x in lines})==5 and len(flat)==30
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'final_status':d['final_status'],'lines':lines},ensure_ascii=False))
+          PY
+      - name: Commit V22 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_CORE_ROUNDROBIN_1247_V22.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: core round-robin rank30 v22 for 1247'
+          git pull --rebase origin main
+          git push origin HEAD:main

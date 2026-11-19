@@ -1,0 +1,36 @@
+SOURCE ASSET SEARCH v2 — ACTUAL READ-ONLY SEARCH LOG
+Date: 2026-10-09 Asia/Seoul
+
+Requested root checks:
+ROOT|C:\Users\user\Documents\Codex\2026-10-06\cloud-x20|False
+ROOT|C:\Users\user\Documents\Codex\2026-10-08\b-model-backtest-py-b-1201|False
+ROOT|C:\Users\admin\Documents\Codex|True
+ROOT|C:\Users\admin\.codex|True
+ROOT|C:\Users\Public\Documents\Codex|False
+Profiles enumerated under C:\Users: admin, Public
+
+Exact-name recursive search set:
+b_model_backtest.py
+b_model_predictions.csv
+b_model_holdout_metrics.csv
+b_model_classification.csv
+b_model_50_round_trends.csv
+b_model_backtest_report.md
+run_b_model_backtest.ps1
+prospective_protocol_v1.md
+prospective_registry_v1.csv
+prospective_model_manifest_v1.csv
+prospective_seal_v1.txt
+
+Search results in C:\Users\admin\Documents\Codex: 0 exact-name matches.
+Search results in C:\Users\admin\.codex: 0 exact-name matches.
+Search results in all existing profile Documents\Codex roots: 0 exact-name matches.
+
+Related but non-matching artifacts found in current repo:
+B_MODEL_RESULTS.md|lotto-repo/analysis/2026-10-06/B_MODEL_RESULTS.md|2340|ec771a8d4a6a3ad340e6df126b0da20afbe74b317bf963dac0e37e9cfe095e22
+b_model_comparison.csv|lotto-repo/research/expansion_framework_v1/studies/study_batch_001/b_model_comparison.csv|6745|14c4f44b6cf95bef701fe2201465b409e6f78d28e4a48ce4da07041a3a432ad7
+project_baseline_manifest.csv|lotto-repo/research/expansion_framework_v1/project_baseline_manifest.csv|f9e74a4b7e15631aaebdfdd7d58ae3ace6df64a8b5d115f4ac32ed35d639c4b2
+
+V3 check-only in this pass: NOT RUN. No required originals were recovered. Existing script inspection shows --check-only overwrites four audit artifacts in-place, conflicting with the explicit preserve-existing-results constraint. Prior actual recorded run: exit=1; BLOCKING_ERROR=18; ADVISORY_WARNING=2; EXPECTED_UNAVAILABLE=1; FINAL_STATUS=NOT_READY. See the pre-existing PIPELINE_ERROR_REPORT.md for recorded errors.
+
+No source/result files copied or changed. No candidate file changed. No automation settings changed.

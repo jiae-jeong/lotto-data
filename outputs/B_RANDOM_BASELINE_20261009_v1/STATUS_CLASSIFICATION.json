@@ -1,0 +1,52 @@
+[
+  {
+    "item": "B reproducibility preservation",
+    "status": "REPRODUCED",
+    "detail": "33408records,byte-identical4CSV and original screening classes are frozen in separate reference JSON."
+  },
+  {
+    "item": "GitHub B audit storage",
+    "status": "VERIFIED",
+    "detail": "43files,commit=remote main;all43downloaded raw Git blobs hash verified."
+  },
+  {
+    "item": "Actual uniform ticket baseline",
+    "status": "MONTE_CARLO_VERIFIED",
+    "detail": "Seed20261009,350targets x10000tickets=3500000actual comparisons,exit0,stderr0bytes."
+  },
+  {
+    "item": "Matched350-target comparison",
+    "status": "VERIFIED",
+    "detail": "Exactlyseven specified non-overlapping50round blocks and8Bmodels,all aggregates checked."
+  },
+  {
+    "item": "Original historical full report bytes",
+    "status": "NOT FOUND",
+    "detail": "Inherited issue;regenerated report path/EOL hashes differ(MISMATCH) but reproduced CSV evidence remains unchanged."
+  },
+  {
+    "item": "Historical0.7743/0.7571/0.8065 trio",
+    "status": "NOT FOUND",
+    "detail": "UNRESOLVED_HISTORICAL_RESULT;causeunknown,excluded,noaveraging."
+  },
+  {
+    "item": "B predictive superiority",
+    "status": "INSUFFICIENT EVIDENCE",
+    "detail": "Observedpositive/negative differences and varyingblocks;primary mean/rate2CIcontain theoreticalbaseline;Holm16all1.0;posthoclimitations."
+  },
+  {
+    "item": "Precise6-hit rate empirical estimation",
+    "status": "INSUFFICIENT EVIDENCE",
+    "detail": "3.5million yields expected0.43six-hit events;observed1six-hit;precision remains limited."
+  },
+  {
+    "item": "1245actual/newpurchase tickets",
+    "status": "NOT EXECUTED",
+    "detail": "No1245actualread/use,newrecommendationorfinalthree-linegeneration."
+  },
+  {
+    "item": "Prior report file hash",
+    "status": "MISMATCH",
+    "detail": "Historical full report original hashunavailable;thisnewreportdoesnotalterBcsvreproduction."
+  }
+]

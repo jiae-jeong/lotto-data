@@ -1,0 +1,29 @@
+{
+  "target_round": 1246,
+  "created_date_kst": "2026-10-16",
+  "training_cutoff": 1245,
+  "data_blob_sha": "a898f212846057af9e79c8ebbbe3a33347c63898",
+  "ticket_count": 5,
+  "classification": "FALLBACK_PORTFOLIO_NO_VALIDATED_EDGE",
+  "source_status": {
+    "five_line_operational_standard": "CURRENT_OPERATIONAL_STANDARD",
+    "E024_promotion_status": "DO_NOT_PROMOTE",
+    "V4_three_ticket_policy": "not silently converted into a five-ticket rule"
+  },
+  "selection_method": "Cutoff-safe descriptive fallback using only rounds through 1245: five predeclared recent-30 score families (frequency30, gap30, recent10-vs-prior20 momentum, equal frequency-gap, contrarian low-frequency-plus-gap), candidate search within each score family's top set, with portfolio overlap penalty. No round-1246 outcome read or used.",
+  "final_lines": [
+    [13,15,18,28,31,32],
+    [3,8,17,27,30,45],
+    [5,13,18,23,34,38],
+    [13,14,15,17,22,45],
+    [5,17,21,27,35,40]
+  ],
+  "portfolio": {
+    "unique_number_coverage": 21,
+    "pairwise_overlaps": [0,2,2,0,0,2,2,1,1,1],
+    "max_pairwise_overlap": 2,
+    "line_sums": [137,130,131,126,145]
+  },
+  "evidence_note": "Historical E024 five-line selector was not promoted: matched-random deltas were negative for max_hits, any_3plus, any_4plus, and winning_union_coverage. These five lines therefore must not be described as proven superior to automatic/random five lines.",
+  "integrity_note": "This record preserves the Friday pre-draw purchase set. It is not a V4 freeze/seal and does not modify prior V3/V4 artifacts."
+}

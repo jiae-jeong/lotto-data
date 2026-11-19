@@ -1,0 +1,108 @@
+{
+  "study_id": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+  "date_kst": "2026-11-14",
+  "preregistered_at_kst": "2026-11-14T14:51:23+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "target_round": 1251,
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "study_class": "preregistered_independent_number_level_previous_main_neighborhood_transition_three_line_walkforward",
+  "hypothesis": "The minimum absolute distance of each candidate number to the immediately preceding draw's six main numbers may carry cutoff-safe information about its inclusion in the next main draw. A single fixed distance-bin conditional-inclusion estimator may improve a deterministic three-line disjoint union18 portfolio over the exact geometry-matched null.",
+  "feature_definition": {
+    "source": "The immediately preceding draw's six main numbers only; bonus is excluded.",
+    "distance": "Minimum absolute numeric distance from candidate n to any of the previous draw's six main numbers; no circular wrap.",
+    "bins": {
+      "0": "distance exactly 0 (number is one of the previous six main numbers)",
+      "1": "minimum distance exactly 1",
+      "2": "minimum distance exactly 2",
+      "3": "minimum distance at least 3"
+    },
+    "candidate_universe": "All integers 1..45 are assigned to exactly one bin for each target."
+  },
+  "historical_data_cutoff": 1249,
+  "source_data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_data_full_file_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_data_hash_scope_note": "Count non-empty CSV draw records, preserve internal and trailing blank lines in the frozen prefix, and stop before any next non-empty record after round 1249.",
+  "target_rounds": "401..1249 inclusive",
+  "training_cutoff_rule": "For target t, use only draws 1..t-1. Historical transitions u=2..t-1 use previous main draw u-1 as the feature and main draw u as the outcome. Add target draw t only after scoring target t.",
+  "estimator": {
+    "conditional_exposure": "For each historical transition and candidate number, increment the exposure for the candidate's distance bin relative to the previous draw's six main numbers.",
+    "conditional_hits": "Increment the matching bin/number hit count when that candidate is in the following draw's six main numbers.",
+    "global_rate": "Count of each main number in draws 1..t-1 divided by t-1.",
+    "smoothing_alpha": 60,
+    "score_formula": "(conditional_hits[bin,n] + 60 * global_main_inclusion_rate[n]) / (conditional_exposures[bin,n] + 60).",
+    "ranking": "Score descending, then number ascending."
+  },
+  "portfolio": {
+    "selected_union": "Top 18 ranked numbers.",
+    "line_assignment": "Deterministic rank interleaving: line 1 uses ranks 1,4,7,10,13,16; line 2 uses ranks 2,5,8,11,14,17; line 3 uses ranks 3,6,9,12,15,18.",
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "randomness_in_selection": false,
+    "parameter_tuning": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line incidence geometry.",
+    "random_bundles_per_target": 120,
+    "seed": 2026111405,
+    "exact_null": {
+      "max_hits": 1.514256248572755,
+      "any2": 0.47497624326892623,
+      "any3": 0.07135490714617204,
+      "winning_union_coverage": 2.4
+    },
+    "randomness_used_for_final_selection": false
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null.",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 2026111405,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "prospective_confirmation": {
+    "required_by_policy": true,
+    "minimum_target_count": null,
+    "completion_rule": null,
+    "status": "UNSPECIFIED_IN_POLICY",
+    "readiness_rule": "Even if the historical gate passes, do not create STRICT_PASS_READY or release purchase lines until the policy owner formally predeclares the prospective minimum target count and completion rule."
+  },
+  "promotion_rule": "Evaluate this single preregistered axis once. No variants, threshold changes, or parameter search after observing results. Historical failure remains failure. Historical pass alone cannot create purchase readiness because prospective confirmation is required and currently unspecified.",
+  "expected_output_files": [
+    "PREDICTIONS.csv",
+    "RANDOM_BASELINE.csv",
+    "BLOCK_STABILITY.csv",
+    "INFERENCE.json",
+    "VERIFICATION.json",
+    "COMPLETION.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.csv"
+  ],
+  "expected_record_counts": {
+    "PREDICTIONS.csv": 849,
+    "RANDOM_BASELINE.csv": 849,
+    "BLOCK_STABILITY.csv": 17
+  },
+  "frozen_blobs": {
+    "runner_blob_sha": "bccc39830b6be4512a97f0cdd43320204be9d07f",
+    "test_blob_sha": "fd57aa77d0ecc4bdcac064786f5194d3a5ebd9f5",
+    "workflow_blob_sha": "f7a94dab06dcd11b807fcf63f3e192e51fe0fbb2",
+    "shared_helper_blob_sha": "aef1471b141a57984b9fb58ca02367ddf661dbc9",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  },
+  "no_future_leakage": true,
+  "strict_pass_ready_requires_prospective_rule": true
+}

@@ -1,0 +1,9 @@
+﻿model_id,model,family,candidate_numbers,generation_rule,generated_from_rounds,candidate_ticket_only_not_backtest_result
+S001,multi_window_frequency,multi_window_frequency,13 15 16 18 31 38,"sum of per-window standardized rates: last 10/30/100/300; equal window weights; top six, ties lower number",1-1244,YES
+S002,gap_regime_hazard,gap_time,2 4 10 16 31 41,"empirical next-occurrence rate by current age regime [0,1,2,3-5,6-10,11+], Beta(20, prior 6/45) shrinkage; top six",1-1244,YES
+S003,momentum_state_transition,momentum,3 10 17 23 25 27,"smoothed P(number next | hot/cold transition from prior20 to recent20), pooled only from historical transitions; top six",1-1244,YES
+S004,conditional_probability,conditional,11 13 18 34 38 43,"per-number Beta(30, prior 6/45) probability conditioned on its count in trailing 10 draws; top six",1-1244,YES
+S005,structure_transition,structure_transition,1 5 22 29 32 36,"fixed candidate bank seed=20261008,size=5000; Laplace-smoothed marginal log likelihood of target structure given previous-round structure; lexical bank tie-break",1-1244,YES
+S006,pair_residual_node,pair_relation_residual,12 13 18 27 33 34,"sum over number partners of standardized pair residual O-E, E conditional on single-number marginals; top six",1-1244,YES
+S007,triple_residual_node,triple_relation_residual,12 13 18 27 33 34,"sum over triples containing number of standardized triple residual O-E, E conditional on single-number marginals; top six",1-1244,YES
+S008,family_balanced_hybrid,hybrid,11 12 13 16 27 34,equal rank blend of S001-S007 family scores; deterministic lower-number tie-break; shared inputs acknowledged,1-1244,YES

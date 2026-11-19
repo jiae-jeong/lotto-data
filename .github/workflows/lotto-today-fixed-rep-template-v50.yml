@@ -1,0 +1,48 @@
+name: lotto-today-fixed-rep-template-v50
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-fixed-rep-template-v50.yml'
+      - 'automation/today_fixed_rep_template_v50.py'
+permissions:
+  contents: read
+jobs:
+  validate-v50:
+    strategy:
+      fail-fast: false
+      matrix:
+        rep: [1, 2, 3]
+        template: [rr, contig, snake, paired]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run fixed rep/template
+        shell: bash
+        env:
+          FIXED_REP: ${{ matrix.rep }}
+          FIXED_TEMPLATE: ${{ matrix.template }}
+        run: |
+          set -euo pipefail
+          python -B automation/today_fixed_rep_template_v50.py | tee "$RUNNER_TEMP/v50-r${FIXED_REP}-${FIXED_TEMPLATE}.log"
+      - name: Verify and print result
+        shell: bash
+        env:
+          FIXED_REP: ${{ matrix.rep }}
+          FIXED_TEMPLATE: ${{ matrix.template }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          r=int(os.environ['FIXED_REP']);t=os.environ['FIXED_TEMPLATE']
+          d=json.loads(Path(f'analysis/2026-10-30/TODAY_FIXED_REP{r}_{t.upper()}_1248_V50.json').read_text())
+          print(json.dumps({'rep':r,'template':t,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'inference':{k:{'ci':v['adjusted_ci_delta'],'share':v['positive_50_round_block_share']} for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'union_size':d['current']['union_size']},ensure_ascii=False))
+          PY

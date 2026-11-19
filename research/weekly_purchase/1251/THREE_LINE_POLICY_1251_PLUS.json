@@ -1,0 +1,52 @@
+{
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "effective_from_target": 1251,
+  "first_target_expected_date": "2026-11-21",
+  "first_delivery_kst": "2026-11-20T08:00:00+09:00",
+  "preparation_deadline_kst": "2026-11-19",
+  "purchase_lines": 3,
+  "numbers_per_line": 6,
+  "preserve_historical_five_line_records": true,
+  "exact_null": {
+    "draw_space": "C(45,6)=8145060",
+    "geometry": "three pairwise-disjoint six-number tickets, union18",
+    "mean_max_hit": 1.514256248572755,
+    "p_any2": 0.47497624326892623,
+    "p_any3": 0.07135490714617204,
+    "expected_union_coverage": 2.4,
+    "overlapping_ticket_rule": "Compute exact target-specific null preserving actual number-to-line incidence geometry; do not reuse union18 constants."
+  },
+  "strict_gate": {
+    "metrics": [
+      "max_hit",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "all_adjusted_moving_block_ci_lower_bounds_strictly_gt_zero": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "retain_final_remainder_block": true,
+    "no_threshold_relaxation": true,
+    "cutoff_safe_nested_rolling_walkforward": true,
+    "prospective_confirmation_required": true
+  },
+  "weekly_process": {
+    "prepare_by_thursday": true,
+    "friday_delivery_hour_kst": 8,
+    "deliver_only_exact_thursday_sealed_three_lines": true,
+    "friday_model_search_or_number_tuning": false,
+    "failure_action": "No verified final purchase lines; never issue fallback or random final lines."
+  },
+  "status_enum": [
+    "THURSDAY_VERIFIED_3_LINE_READY",
+    "STRICT_FAIL",
+    "NOT_READY"
+  ],
+  "automation_state_2026_11_13": {
+    "existing_daily_research_0800_kst": "enabled; existing schedule not changed",
+    "existing_friday_delivery_0800_kst": "enabled; existing schedule not changed",
+    "separate_thursday_automation": "not_created_due_plan_limit_error"
+  }
+}

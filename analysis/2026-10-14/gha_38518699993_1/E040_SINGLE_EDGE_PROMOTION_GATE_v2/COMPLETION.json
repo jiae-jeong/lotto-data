@@ -1,0 +1,15 @@
+{
+  "study_id": "E040_SINGLE_EDGE_PROMOTION_GATE_v2",
+  "status": "NO_VALIDATED_EDGE",
+  "completed_at_utc": "2026-10-14T05:50:32.176107+00:00",
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "019111859fa612b1b39acd387870edc0cb68e451d14981a840239a283c3cc58f",
+  "seed": 20261016036,
+  "target_rounds": "601..1245",
+  "historical_evidence": "screening/OOS, not untouched holdout",
+  "reason": "No validated edge exists because E036/E037/E039 promotion conditions are not met.",
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "recommendation_numbers_generated": false
+}

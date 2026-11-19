@@ -1,0 +1,175 @@
+{
+  "date_kst": "2026-11-18",
+  "target_round": 1251,
+  "data_cutoff": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "daily_master_status": "PARTIAL",
+  "completed_today": [
+    "DAILY MASTER #118 (workflow run 44233788299) actually recalculated cumulative statistics through verified cutoff 1250; result commit 58c9dd13b8cace8fb6ccc7e35f56bab99f02fbb5.",
+    "B full walk-forward completed: 1,050 targets, 8,400 predictions, 1,050,000 random tickets, leakage failures 0.",
+    "Successor A_v2/C_v2/contrarian_v2 walk-forward completed; these are not substitutes for unrecovered legacy A/C/contrarian models.",
+    "Candidate-recall stage completed on 1,050 targets with 210,000 matched-random sets and no future leakage.",
+    "E070 E069 implementation-conformance and candidate/portfolio-stage audit completed.",
+    "E069 fixed-prior corrective re-execution completed; same hypothesis, historical only, STRICT_FAIL, not an independent axis.",
+    "E071 preregistered previous-bonus-distance feature-family study completed; historical_gate_pass=False; result=analysis/2026-11-18/gha_44219073207_1/E071_THREE_LINE_PREVIOUS_BONUS_DISTANCE_TRANSITION_v1.",
+    "E072 frozen consensus-rank probability calibration completed; calibration_gate_pass=False; historical candidate-level only; no STRICT_PASS_READY. Result: analysis/2026-11-18/gha_44230929833_1/E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1.",
+    "DAILY MASTER #119 (workflow run 44257737102) actually recalculated cumulative statistics through verified cutoff 1250; result commit 215fa1576fb428b09f0d34815bf53169d71878c1. V4 B walk-forward: 1,050 targets/8,400 predictions/1,050,000 random tickets/leakage 0; V5 successor and research-only five-ticket matched-random validation completed; V5 manifest 14/14 PASS. Status remains PARTIAL because legacy A/C/contrarian source implementations and historical purchase/error-note evidence are unavailable.",
+    "E073 preregistered three-draw membership-count signal-family study completed at cutoff 1250; historical_gate_pass=False; strict_pass_ready=false; result=analysis/2026-11-18/gha_44322687962_1/E073_THREE_LINE_THREE_DRAW_MEMBERSHIP_COUNT_TRANSITION_v1.",
+    "E074 calendar-month conditional-frequency axis completed at cutoff 1250; historical_gate_pass=False; strict_pass_ready=false; result=analysis/2026-11-18/gha_44336729151_1/E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1."
+  ],
+  "not_recomputed_today": [
+    "Legacy A/C/contrarian original-model walk-forward: original source implementations remain unavailable; successor_v2 outputs are not substitutes.",
+    "Historical actual-purchase/error-note closed-loop aggregate: PURCHASE_CONFIRMATION_REGISTRY contains zero confirmed purchases.",
+    "Prospective confirmation: minimum target count and completion rule remain unspecified."
+  ],
+  "blockers": [
+    "Legacy A/C/contrarian original implementations remain unavailable; successor_v2 diagnostics do not satisfy the legacy model gates.",
+    "PURCHASE_CONFIRMATION_REGISTRY has zero confirmed purchases; historical recommendations cannot be treated as actual purchases.",
+    "Prospective confirmation minimum target count and completion rule remain unspecified; historical results cannot create STRICT_PASS_READY.",
+    "E069 original runner was nonconformant; its separate fixed-prior corrective re-execution completed and failed the historical strict gate.",
+    "DAILY MASTER model validation tested 11 models and validated_models is empty; the E045 primary failed max_hits, any2, any3, winning_union_coverage and 50-target block stability.",
+    "E071 historical gate failed; no purchase readiness is granted."
+  ],
+  "no_future_leakage": true,
+  "strict_pass_ready": false,
+  "final_purchase_lines_generated": false,
+  "freeze_or_seal_created": false,
+  "next_start": "E074 completed as historical-only. Preserve strict gates; prospective confirmation minimum and completion rule remain unspecified.",
+  "daily_master_run": {
+    "workflow_run_id": 44257737102,
+    "workflow_run_number": 119,
+    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44257737102",
+    "conclusion": "SUCCESS",
+    "trigger_commit": "47fee5b9b219cc5ad942ab95ff7f0698f9b7c47b",
+    "result_commit": "215fa1576fb428b09f0d34815bf53169d71878c1",
+    "report_path": "analysis/2026-11-18/MASTER_FULL_V5_072240_478862/REPORT.md",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "b_targets": 1050,
+    "b_predictions": 8400,
+    "random_tickets": 1050000,
+    "leakage_failures": 0,
+    "v5_manifest_entries": 14,
+    "v5_manifest_status": "PASS",
+    "daily_master_status": "PARTIAL"
+  },
+  "latest_research_cutoff": 1250,
+  "master_data_cutoff": 1250,
+  "cutoff_match": true,
+  "latest_historical_axis": {
+    "study_id": "E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+    "evidence_class": "HISTORICAL_NEW_CALENDAR_FEATURE_SCREEN_NOT_INDEPENDENT_SAMPLE_OR_PROSPECTIVE_CONFIRMATION",
+    "historical_gate_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "metrics": {
+      "max_hits": {
+        "observed_mean": 1.5070588235294118,
+        "exact_geometry_matched_null": 1.514256248572755,
+        "delta_mean": -0.007197425043343326,
+        "adjusted_moving_block_ci": [
+          -0.06366801327863744,
+          0.05750845730959785
+        ],
+        "lower_bound_strictly_gt_zero": false
+      },
+      "any2": {
+        "observed_mean": 0.4541176470588235,
+        "exact_geometry_matched_null": 0.47497624326892623,
+        "delta_mean": -0.020858596210102682,
+        "adjusted_moving_block_ci": [
+          -0.06791741973951444,
+          0.026200227319309086
+        ],
+        "lower_bound_strictly_gt_zero": false
+      },
+      "any3": {
+        "observed_mean": 0.07411764705882352,
+        "exact_geometry_matched_null": 0.07135490714617204,
+        "delta_mean": 0.002762739912651483,
+        "adjusted_moving_block_ci": [
+          -0.014884318910877927,
+          0.022762739912651483
+        ],
+        "lower_bound_strictly_gt_zero": false
+      },
+      "winning_union_coverage": {
+        "observed_mean": 2.387058823529412,
+        "exact_geometry_matched_null": 2.4,
+        "delta_mean": -0.012941176470588147,
+        "adjusted_moving_block_ci": [
+          -0.09529411764705874,
+          0.07176470588235304
+        ],
+        "lower_bound_strictly_gt_zero": false
+      }
+    },
+    "data_cutoff": 1250,
+    "target_count": 850,
+    "random_bundles_total": 102000,
+    "manifest_entries": 8,
+    "workflow_run_id": 44336729151,
+    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44336729151",
+    "result_path": "analysis/2026-11-18/gha_44336729151_1/E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
+  },
+  "daily_master_run_history": [
+    {
+      "workflow_run_id": 44208557983,
+      "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44208557983",
+      "conclusion": "SUCCESS",
+      "trigger_commit": "e75d5b8944d85866f9df320f5ff0b8a8a51ecf31",
+      "result_commit": "88f0c10265e108eb524bee043b9e53285b653a82",
+      "data_cutoff": 1250,
+      "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "b_targets": 1050,
+      "b_predictions": 8400,
+      "random_tickets": 1050000,
+      "leakage_failures": 0,
+      "v5_manifest_entries": 14,
+      "v5_manifest_status": "PASS"
+    },
+    {
+      "workflow_run_id": 44233788299,
+      "workflow_run_number": 118,
+      "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44233788299",
+      "conclusion": "SUCCESS",
+      "trigger_commit": "e6b1c013989cf35e778d850fba0eefb36af560c7",
+      "result_commit": "58c9dd13b8cace8fb6ccc7e35f56bab99f02fbb5",
+      "data_cutoff": 1250,
+      "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "b_targets": 1050,
+      "b_predictions": 8400,
+      "random_tickets": 1050000,
+      "leakage_failures": 0,
+      "v5_manifest_entries": 14,
+      "v5_manifest_status": "PASS",
+      "daily_master_status": "PARTIAL"
+    },
+    {
+      "workflow_run_id": 44257737102,
+      "workflow_run_number": 119,
+      "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44257737102",
+      "conclusion": "SUCCESS",
+      "trigger_commit": "47fee5b9b219cc5ad942ab95ff7f0698f9b7c47b",
+      "result_commit": "215fa1576fb428b09f0d34815bf53169d71878c1",
+      "data_cutoff": 1250,
+      "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "b_targets": 1050,
+      "b_predictions": 8400,
+      "random_tickets": 1050000,
+      "leakage_failures": 0,
+      "v5_manifest_entries": 14,
+      "v5_manifest_status": "PASS",
+      "daily_master_status": "PARTIAL"
+    }
+  ]
+}

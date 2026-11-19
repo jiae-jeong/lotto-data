@@ -1,0 +1,94 @@
+{
+  "study_id": "E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+  "date_kst": "2026-11-18",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "research_question": "Does one fixed calendar-month-conditioned Beta-smoothed inclusion-frequency ranking improve a three-line disjoint union18 portfolio over the exact geometry-matched null on targets 401..1250, using only earlier draws from the target's calendar month?",
+  "novelty_statement": "One exogenous calendar-month conditioning feature. Prior axes use number history, lagged draw states, bonus distance, gap shape, overlap, or score calibration; this axis uses only the target draw's known calendar month to condition a single historical inclusion-frequency estimator. One fixed Beta(6,39) prior, one deterministic top-18 partition, one walk-forward, no variants or parameter search. Historical screening only; not an independent sample or prospective confirmation.",
+  "independent_research_axis": true,
+  "independent_signal_family": true,
+  "independent_sample": false,
+  "historical_exploration_only": true,
+  "historical_data_cutoff": 1250,
+  "target_rounds": "401..1250 inclusive",
+  "source_data_prefix_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "source_data_full_file_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "feature_definition": {
+    "conditioning": "calendar month of target draw date",
+    "availability": "target draw calendar month is known before the draw",
+    "history": "only draws with round < target_round and calendar month equal to target_month",
+    "exposure": "one exposure per prior same-month draw",
+    "success": "candidate number appears among the six main numbers; bonus excluded",
+    "future_data": "no target or later draw numbers enter the estimator"
+  },
+  "estimator": {
+    "prior_distribution": "Beta(6,39)",
+    "prior_mean": "6/45 under uniform six-of-45 inclusion",
+    "prior_strength": 45,
+    "prior_successes": 6,
+    "posterior_probability": "(same_month_hits + 6) / (same_month_prior_draws + 45)",
+    "ranking": "posterior probability descending, then number ascending",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "portfolio_construction": {
+    "candidate_universe": "1..45",
+    "selected_candidates": 18,
+    "line_count": 3,
+    "numbers_per_line": 6,
+    "partition": "ranked positions 1..6, 7..12, and 13..18",
+    "pairwise_disjoint": true,
+    "union_size": 18,
+    "randomness_used_for_final_selection": false
+  },
+  "random_comparator": {
+    "method": "uniformly permute labels 1..45 jointly over the three fixed model lines, preserving line sizes, pairwise disjointness, union18, and line-incidence geometry",
+    "random_bundles_per_target": 120,
+    "seed": 20261118074,
+    "exact_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    }
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261118074,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "prospective_confirmation": {
+    "required_by_policy": true,
+    "minimum_target_count": null,
+    "completion_rule": null,
+    "status": "UNSPECIFIED_IN_POLICY",
+    "readiness_rule": "Even if historical gates pass, do not create STRICT_PASS_READY or release purchase lines until the policy owner formally predeclares the prospective minimum target count and completion rule."
+  },
+  "promotion_rule": "This historical screen cannot create STRICT_PASS_READY. Any historical gate pass remains prospective-confirmation-pending.",
+  "frozen_blobs": {
+    "runner_blob_sha": "abb7a2b32167d2fc73398abd94f1e279ec9ce339",
+    "test_blob_sha": "6f8d4cfe8fb40811f7d4021c35e03e03cb48ff49",
+    "queue_contract_test_blob_sha": "4da3062385022c7496926c32af4edcffcaa3adb1",
+    "queue_tail_test_blob_sha": "2286943a8caf6999930f73aa42bd33a8b47118bb",
+    "workflow_blob_sha": "821ee201d5008b6ca14a926c02c3cc632cca0786",
+    "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+    "data_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e"
+  }
+}

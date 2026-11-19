@@ -1,0 +1,11 @@
+{
+  "task_id": "E025_INDEPENDENT_SIGNAL_DISCOVERY_v1",
+  "status": "FAILED",
+  "stage": "completion_validation",
+  "error_type": "ValueError",
+  "reason": "Frozen record count mismatch for TARGET_SIMILARITY.csv: 15480 != 1935",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 71, in run\n    record = daily.validate_completion(stage, task[\"id\"])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\daily_research_v2.py\", line 53, in validate_completion\n    raise ValueError(f'Frozen record count mismatch for {name}: {len(rows)} != {expected}')\nValueError: Frozen record count mismatch for TARGET_SIMILARITY.csv: 15480 != 1935\n",
+  "protected_files_unchanged": true,
+  "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+  "attempt_path": "analysis\\2026-10-14\\.attempts\\E025_INDEPENDENT_SIGNAL_DISCOVERY_v1-0srtvlws"
+}

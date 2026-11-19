@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "target_count": 645,
+  "signals": 3,
+  "similarity_rows": 15480,
+  "cutoff_violations": 0,
+  "invalid_lines": 0,
+  "screening_uses_outcomes": false,
+  "future_predictions": 0,
+  "survivors": [
+    "CALENDAR_SEASON_CONDITIONAL_v1",
+    "PREVIOUS_SUM_REGIME_CONDITIONAL_v1"
+  ],
+  "dropped": [
+    "CROSS_ROUND_MARKOV_v1"
+  ]
+}

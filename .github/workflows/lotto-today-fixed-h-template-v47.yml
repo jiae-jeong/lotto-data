@@ -1,0 +1,46 @@
+name: lotto-today-fixed-h-template-v47
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-fixed-h-template-v47.yml'
+      - 'automation/today_fixed_h_template_v47.py'
+permissions:
+  contents: read
+jobs:
+  validate-v47:
+    strategy:
+      fail-fast: false
+      matrix:
+        template: [rr, contig, snake, paired]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run fixed template
+        shell: bash
+        env:
+          FIXED_TEMPLATE: ${{ matrix.template }}
+        run: |
+          set -euo pipefail
+          python -B automation/today_fixed_h_template_v47.py | tee "$RUNNER_TEMP/v47-${FIXED_TEMPLATE}.log"
+      - name: Verify and print result
+        shell: bash
+        env:
+          FIXED_TEMPLATE: ${{ matrix.template }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          t=os.environ['FIXED_TEMPLATE']
+          p=Path(f'analysis/2026-10-30/TODAY_FIXED_H_{t.upper()}_1248_V47.json')
+          d=json.loads(p.read_text())
+          print(json.dumps({'template':t,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'inference':{k:{'ci':v['adjusted_ci_delta'],'share':v['positive_50_round_block_share']} for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines']},ensure_ascii=False))
+          PY

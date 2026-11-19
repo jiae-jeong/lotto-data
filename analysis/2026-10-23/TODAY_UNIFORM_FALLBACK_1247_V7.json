@@ -1,0 +1,115 @@
+{
+  "created_kst": "2026-10-23T12:52:15.064573+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "V7_UNIFORM_30_UNIQUE_FALLBACK",
+  "classification": "PRIMARY_ACTUAL_PURCHASE_FALLBACK_AFTER_MODEL_REJECTION",
+  "reason": "Strict model validation found no reproducible predictive edge; use the predeclared non-predictive 30-unique diversification fallback rather than force an unvalidated model.",
+  "data_sha256": "023200840e2325321b0ecf0a088b9ccb67b1c0a37b2c90683fb4425e112a18b7",
+  "seed_sha256": "9024432f72859cddc00cad9aee75114c507606d02962bb9e7ec54a16d6491247",
+  "selection": "uniform sample of 30 distinct numbers from 1..45, then uniform deterministic partition into five disjoint six-number tickets",
+  "predictive_superiority_claim": false,
+  "mathematical_properties": {
+    "ticket_count": 5,
+    "numbers_per_ticket": 6,
+    "unique_union_size": 30,
+    "cross_ticket_overlap": 0,
+    "expected_winning_union_coverage": 4.0
+  },
+  "walkforward_targets": 1046,
+  "matched_random_bundles_per_target": 200,
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.808795411089866,
+      "any2": 0.6969407265774379,
+      "any3": 0.1118546845124283,
+      "any4": 0.0009560229445506692,
+      "any5": 0.0,
+      "any6": 0.0,
+      "winning_union_coverage": 3.9349904397705546,
+      "union_size": 30.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    },
+    "matched_30_unique_random": {
+      "max_hits": 1.8330162523900573,
+      "any2": 0.7084751434034416,
+      "any3": 0.11812619502868069,
+      "any4": 0.006888145315487572,
+      "any5": 0.00011950286806883365,
+      "any6": 0.0,
+      "winning_union_coverage": 3.997060229445507,
+      "union_size": 30.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    },
+    "diagnostic_delta": {
+      "max_hits": -0.024220841300191198,
+      "any2": -0.011534416826003757,
+      "any3": -0.006271510516252382,
+      "any4": -0.0059321223709369025,
+      "any5": -0.00011950286806883365,
+      "any6": 0.0,
+      "winning_union_coverage": -0.06206978967495225,
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    },
+    "interpretation": "Same probability family by construction; deltas are finite-sample noise and are not used to claim an edge."
+  },
+  "final_lines": [
+    [
+      6,
+      10,
+      14,
+      17,
+      32,
+      34
+    ],
+    [
+      3,
+      9,
+      16,
+      20,
+      43,
+      45
+    ],
+    [
+      1,
+      12,
+      13,
+      28,
+      37,
+      38
+    ],
+    [
+      5,
+      15,
+      27,
+      36,
+      39,
+      44
+    ],
+    [
+      7,
+      11,
+      22,
+      24,
+      33,
+      42
+    ]
+  ],
+  "integrity": {
+    "validator_1": "PASS",
+    "validator_2": "PASS",
+    "final_text_parse": "PASS",
+    "line_count": 5,
+    "numbers_per_line": 6,
+    "range_1_45": "PASS",
+    "within_line_unique": "PASS",
+    "duplicate_ticket": "PASS",
+    "cross_line_unique_30": "PASS",
+    "stored_vs_display": "PASS"
+  },
+  "freeze_payload_sha256": "408501559203e8a0098c71a67f90da3cd702ebb7265b17ce42b37a76035c1394"
+}

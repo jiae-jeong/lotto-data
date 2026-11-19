@@ -1,0 +1,11 @@
+{
+  "command": [
+    "C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\a_source_relation_followup_20261010.py",
+    "verify"
+  ],
+  "exit_code": 0,
+  "completed_utc": "2026-10-09T15:06:25.716960+00:00",
+  "stdout_sha256": "986d09c4332c7f5194155118357b8936b60eceb47eac34fdbcbbda2f3ef4a0f9",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

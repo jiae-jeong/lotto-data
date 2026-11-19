@@ -1,0 +1,1 @@
+Actual first report preparation: exit1 before report creation. UnicodeDecodeError: cp949 codec cannot decode byte 0xeb in SEARCH_SCOPE_AND_ERRORS.json. Repair: explicit UTF-8 read only; numerical outputs unchanged. Full traceback recorded by exec tool.

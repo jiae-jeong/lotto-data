@@ -1,0 +1,78 @@
+{
+  "date_kst": "2026-11-09",
+  "repo_data_cutoff": 1249,
+  "repo_round": {
+    "round": 1249,
+    "draw_date": "2026-11-07",
+    "main_numbers": [
+      2,
+      11,
+      16,
+      25,
+      34,
+      35
+    ],
+    "bonus": 14,
+    "source": "automation/data_freshness_guard.py verified recovery row; the DAILY MASTER freshness guard appends this row before the protocol audit"
+  },
+  "official_source_attempt": {
+    "name": "Donghaeng Lottery",
+    "url": "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1249",
+    "round": 1249,
+    "draw_date": "2026-11-07",
+    "main_numbers": [
+      2,
+      11,
+      16,
+      25,
+      34,
+      35
+    ],
+    "bonus": 14,
+    "status": "CONFIRMED",
+    "confirmation_mode": "Two independent news agencies explicitly attribute the result to Donghaeng Lottery.",
+    "direct_endpoint_status": "NOT_DIRECTLY_RETRIEVED",
+    "note": "The official API endpoint could not be directly retrieved in this run. No direct API fetch is claimed; official-result attribution is corroborated by Yonhap and Newsis."
+  },
+  "fallback_sources": [
+    {
+      "name": "Yonhap News Agency",
+      "url": "https://www.yna.co.kr/view/AKR20261107051500002",
+      "published": "2026-11-07T20:40:00+09:00",
+      "round": 1249,
+      "draw_date": "2026-11-07",
+      "main_numbers": [
+        2,
+        11,
+        16,
+        25,
+        34,
+        35
+      ],
+      "bonus": 14,
+      "attribution": "Donghaeng Lottery result"
+    },
+    {
+      "name": "Newsis",
+      "url": "https://files.newsis.com/view/NISX20261107_0003859041",
+      "published": "2026-11-07T21:09:41+09:00",
+      "round": 1249,
+      "draw_date": "2026-11-07",
+      "main_numbers": [
+        2,
+        11,
+        16,
+        25,
+        34,
+        35
+      ],
+      "bonus": 14,
+      "attribution": "Donghaeng Lottery result"
+    }
+  ],
+  "independent_fallback_sources_agree": true,
+  "repo_vs_fallback_round_and_date_match": true,
+  "repo_vs_fallback_numbers_match": true,
+  "status": "PASS",
+  "integrity_note": "Two independently published news reports agree on the completed 1249th draw. The row is recovered only after the 2026-11-07 draw; no future outcome is inferred."
+}

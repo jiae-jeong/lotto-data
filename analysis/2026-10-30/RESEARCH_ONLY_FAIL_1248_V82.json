@@ -1,0 +1,40 @@
+{
+  "target": 1248,
+  "cutoff": 1247,
+  "version": "V82",
+  "policy": "H:hybrid27",
+  "status": "RESEARCH_ONLY_FAIL",
+  "strict_portfolio_pass": false,
+  "no_future_leakage": true,
+  "randomness": false,
+  "workflow_run_id": 40998493642,
+  "workflow_job_id": 123877120819,
+  "selection_counts": {"H:hybrid27": 847},
+  "scorecard": {
+    "delta": {
+      "max_hits": 0.03992559461027434,
+      "any2": 0.026778306002768537,
+      "any3": 0.006169606876047298,
+      "any4": 0.006024019467014365,
+      "winning_union_coverage": 0.06942148760330813
+    },
+    "matched_exact_label_null": {
+      "max_hits": 1.7924238741028307,
+      "any2": 0.670978482663111,
+      "any3": 0.11661669772843912,
+      "any4": 0.006962993519998623,
+      "winning_union_coverage": 3.599999999999998,
+      "union_size": 27.0
+    }
+  },
+  "inference": {
+    "max_hits": {"adjusted_ci_delta": [-0.01595328586753654, 0.09934083177952228], "positive_50_round_block_share": 0.6470588235294118},
+    "any2": {"adjusted_ci_delta": [-0.0003763575155313047, 0.05725681145453606], "positive_50_round_block_share": 0.6470588235294118},
+    "any3": {"adjusted_ci_delta": [-0.02064513374739646, 0.03439400381733972], "positive_50_round_block_share": 0.5882352941176471},
+    "winning_union_coverage": {"adjusted_ci_delta": [-0.011764705882350809, 0.16269185360094665], "positive_50_round_block_share": 0.5882352941176471}
+  },
+  "research_only_lines": [[6,12,17,23,27,35],[3,9,10,26,29,37],[6,17,30,39,40,45],[4,9,11,14,21,33],[5,7,15,16,24,32]],
+  "integrity": {"five_lines": true, "six_each": true, "numbers_1_to_45": true, "no_within_line_duplicates": true, "no_identical_tickets": true},
+  "reason_not_final": "Existing strict gate failed. Adjusted CI lower bounds for max_hits, any2, and any3 are not all > 0 and required stability conditions are not all satisfied. This candidate must not be promoted to actual purchase.",
+  "selection_bias_guard": "Further post-hoc tuning of the same 401..1247 evaluation outcomes after observing V53..V82 results is not permitted as a way to force PASS. New structural research must be prospectively frozen or evaluated under a fresh/nested protocol."
+}

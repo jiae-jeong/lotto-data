@@ -1,0 +1,15 @@
+{
+  "target_round": 1251,
+  "data_cutoff": 1249,
+  "primary_model": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+  "primary_status": "STRICT_FAIL",
+  "additional_axis": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+  "additional_axis_historical_gate_pass": false,
+  "additional_axis_readiness_status": "STRICT_FAIL",
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "ready_file_exists": false,
+  "line_level_output_status": "SUPPRESSED_NOT_READY",
+  "final_purchase_freeze_allowed": false,
+  "reason": "Historical nested selector evidence is not prospective confirmation; the prospective minimum target count and completion rule remain unspecified."
+}

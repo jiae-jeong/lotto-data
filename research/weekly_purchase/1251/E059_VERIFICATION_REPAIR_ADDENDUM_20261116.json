@@ -1,0 +1,30 @@
+{
+  "correction_id": "E059_VERIFICATION_REPAIR_ADDENDUM_20261116",
+  "date_kst": "2026-11-16",
+  "classification": "POST_COMPUTE_REPORTING_CHECK_ONLY",
+  "original_verification_path": "analysis/2026-11-16/codemode_20261116_0845/E059_E054_CANDIDATE_RECALL_STAGE_DECOMPOSITION_v1/VERIFICATION.json",
+  "original_verification_status": "FAIL",
+  "issue": "The Code Mode summary builder excluded the target identifier from aggregate checkCounts, then mistakenly requested checkCounts.target==850 when assigning the status. This produced a false FAIL label even though the target sequence and all model reproduction checks were complete.",
+  "independent_recheck": {
+    "e054_prediction_rows": 850,
+    "target_sequence_401_to_1250_valid": true,
+    "e054_reproduction_checks": {
+      "training": 850,
+      "regime": 850,
+      "current_hhi": 850,
+      "threshold_hhi": 850,
+      "reference_count": 850,
+      "exposure": 850,
+      "score_sha256": 850
+    },
+    "all_checks_850_of_850": true,
+    "score_hash_matches_850_of_850": true
+  },
+  "correction": "Use the explicit 850-row target sequence check plus the six aggregate reproduction checks. No model scores, rankings, recall values, bootstrap samples, or inference results are changed.",
+  "scientific_calculation_changed": false,
+  "data_or_cutoff_changed": false,
+  "candidate_ranks_changed": false,
+  "bootstrap_or_ci_changed": false,
+  "baseline_or_comparator_changed": false,
+  "strict_thresholds_changed": false
+}

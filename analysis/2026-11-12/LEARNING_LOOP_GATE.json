@@ -1,0 +1,185 @@
+{
+  "date": "2026-11-12",
+  "status": "PASS",
+  "data_cutoff": 1249,
+  "checks": {
+    "actual_purchase_precedence": true,
+    "latest_review_has_failure_decomposition": true,
+    "all_reviews_have_failure_decomposition": true,
+    "candidate_recall_status_present": true,
+    "candidate_recall_cutoff_matches_master": true,
+    "candidate_recall_no_future_leakage": true,
+    "candidate_recall_required_k": true,
+    "candidate_recall_scorecard_complete": true,
+    "candidate_recall_targets_consistent": true,
+    "candidate_recall_matched_random_run": true,
+    "whole_history_not_overstated": true,
+    "actual_purchase_source_is_canonical": true,
+    "historical_source_conflicts_disclosed_and_excluded": true
+  },
+  "actual_purchase_source_mismatches": [],
+  "historical_preserved_scope_complete": false,
+  "unresolved_source_conflicts": [
+    {
+      "target_round": 1246,
+      "status": "EXCLUDED_UNRESOLVED",
+      "reason": "Distinct pre-draw five-line sources are preserved for this target, and no receipt evidence establishes which set was delivered or purchased.",
+      "sources": [
+        {
+          "path": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+          "role": "FINAL_PREDRAW",
+          "line_set": [
+            [
+              13,
+              15,
+              18,
+              28,
+              31,
+              32
+            ],
+            [
+              3,
+              8,
+              17,
+              27,
+              30,
+              45
+            ],
+            [
+              5,
+              13,
+              18,
+              23,
+              34,
+              38
+            ],
+            [
+              13,
+              14,
+              15,
+              17,
+              22,
+              45
+            ],
+            [
+              5,
+              17,
+              21,
+              27,
+              35,
+              40
+            ]
+          ]
+        },
+        {
+          "path": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+          "role": "FIRST_PRIZE_PRE_DRAW_PURCHASE_DESIGN",
+          "line_set": [
+            [
+              5,
+              8,
+              19,
+              24,
+              29,
+              36
+            ],
+            [
+              2,
+              13,
+              18,
+              32,
+              34,
+              38
+            ],
+            [
+              6,
+              12,
+              15,
+              21,
+              22,
+              29
+            ],
+            [
+              1,
+              5,
+              7,
+              9,
+              12,
+              19
+            ],
+            [
+              1,
+              13,
+              18,
+              26,
+              34,
+              38
+            ]
+          ]
+        }
+      ],
+      "receipt_evidence": "NOT_FOUND",
+      "aggregate_action": "EXCLUDED_FROM_SINGLE_CANONICAL_AGGREGATE"
+    }
+  ],
+  "excluded_conflict_rounds": [
+    1246
+  ],
+  "whole_history_complete": false,
+  "latest_review": {
+    "target_round": 1248,
+    "source": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+    "source_role": "ACTUAL_PURCHASE",
+    "candidate_recall_failure": true,
+    "ticket_construction_gap": 2,
+    "winning_union_coverage": 5,
+    "max_hits": 3
+  },
+  "candidate_recall": {
+    "targets": 1049,
+    "matched_random_sets_total": 209800,
+    "best_delta_by_k": {
+      "10": {
+        "signal": "balanced",
+        "mean_recall": 0.22735938989513824,
+        "random_mean_recall": 0.22184064188115668,
+        "delta_recall_vs_random": 0.005518748013981556,
+        "delta_3plus_vs_random": 0.01157292659675882,
+        "delta_4plus_vs_random": 0.00856053384175405
+      },
+      "15": {
+        "signal": "consensus",
+        "mean_recall": 0.33841754051477596,
+        "random_mean_recall": 0.332887670797585,
+        "delta_recall_vs_random": 0.005529869717190938,
+        "delta_3plus_vs_random": 0.028794089609151585,
+        "delta_4plus_vs_random": -0.0009246901811248848
+      },
+      "20": {
+        "signal": "recent30",
+        "mean_recall": 0.4475691134413728,
+        "random_mean_recall": 0.44429853829043536,
+        "delta_recall_vs_random": 0.003270575150937427,
+        "delta_3plus_vs_random": 0.014456625357483377,
+        "delta_4plus_vs_random": 0.0010581506196377377
+      },
+      "25": {
+        "signal": "consensus",
+        "mean_recall": 0.5571973307912298,
+        "random_mean_recall": 0.555276453765491,
+        "delta_recall_vs_random": 0.001920877025738843,
+        "delta_3plus_vs_random": -0.0016301239275500201,
+        "delta_4plus_vs_random": 0.012249761677788351
+      },
+      "30": {
+        "signal": "recent30",
+        "mean_recall": 0.6704798220527487,
+        "random_mean_recall": 0.6664331108992692,
+        "delta_recall_vs_random": 0.004046711153479506,
+        "delta_3plus_vs_random": -0.0046043851286939885,
+        "delta_4plus_vs_random": 0.014461391801715906
+      }
+    }
+  },
+  "policy": "Candidate recall and ticket construction are separate learning stages. Actual delivered/purchased lines are canonical for post-draw learning."
+}

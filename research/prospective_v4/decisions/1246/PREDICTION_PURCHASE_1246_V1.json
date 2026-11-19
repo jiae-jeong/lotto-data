@@ -1,0 +1,112 @@
+{
+  "version": "PREDICTION_PURCHASE_1246_V1",
+  "created_at_utc": "2026-10-16T01:18:06Z",
+  "target_round": 1246,
+  "target_outcome_status": "NOT AVAILABLE / NOT READ",
+  "repository_base_main": "2f7ee00f472129fb3691bf18bfc9c20c6e863992",
+  "training_cutoff_round": 1245,
+  "training_snapshot_rows": 1245,
+  "training_snapshot_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "training_semantic_sha256": "92b52296d340330ddeb0d7325701ae14bd2c10b673ae8775f1de2abee0c6056a",
+  "round_1245_verified_result": {
+    "numbers": [4,5,25,28,32,42],
+    "bonus": 12
+  },
+  "validation": {
+    "first_1244_semantic_sha256": "a49e74f93e2335a1d7462bbe1424f056f35fd9006499ecf3797dec791324761f",
+    "first_1244_semantic_match": true,
+    "v4_1245_reproduction": "PASS_EXACT",
+    "v4_1245_reproduced_expanding": [[1,9,13,24,43,44],[11,13,18,34,38,43],[1,20,22,25,36,41]],
+    "v4_1245_reproduced_rolling300": [[6,12,15,21,29,35],[1,4,6,9,12,19],[1,9,14,28,37,39]],
+    "b_model_current_status": "NO_COMPONENT_HAS_POSITIVE_95_PERCENT_PAIRED_MEAN_HIT_INTERVAL_VS_FRESH_RANDOM",
+    "pair_triple_bh_q_lt_0_05_survivors": {"pairs": 0, "triples": 0},
+    "leakage_failures_in_latest_b_recovery": 0
+  },
+  "v4_prediction_1246": {
+    "classification": "FROZEN_V4_FORMULAS_REEXECUTED_PRE_DRAW",
+    "expanding": {
+      "model_predictions": {
+        "V4_F": [12,13,18,27,33,34],
+        "V4_G": [1,13,18,26,34,38],
+        "V4_C": [2,13,18,32,34,38],
+        "V4_M": [3,8,9,10,17,25],
+        "V4_P": [12,13,18,27,33,34],
+        "V4_T": [12,13,18,27,33,34],
+        "V4_S": [5,8,19,24,29,36],
+        "V4_U": [5,16,20,37,38,41]
+      },
+      "portfolio": [[1,13,18,26,34,38],[2,4,13,18,32,34],[5,8,19,24,29,36]],
+      "selection_trace": [
+        {"model":"V4_G","candidate_rank":1,"fallback":false},
+        {"model":"V4_C","candidate_rank":8,"fallback":true},
+        {"model":"V4_S","candidate_rank":1,"fallback":false}
+      ]
+    },
+    "rolling300": {
+      "model_predictions": {
+        "V4_F": [3,6,13,16,35,38],
+        "V4_G": [6,12,15,21,22,29],
+        "V4_C": [1,5,7,9,12,19],
+        "V4_M": [3,8,9,10,17,25],
+        "V4_P": [11,12,16,20,28,31],
+        "V4_T": [11,12,16,20,28,31],
+        "V4_S": [6,13,20,24,26,35],
+        "V4_U": [1,4,20,21,24,26]
+      },
+      "portfolio": [[6,12,15,21,22,29],[1,5,7,9,12,19],[6,13,20,24,26,35]],
+      "selection_trace": [
+        {"model":"V4_G","candidate_rank":1,"fallback":false},
+        {"model":"V4_C","candidate_rank":1,"fallback":false},
+        {"model":"V4_S","candidate_rank":1,"fallback":false}
+      ]
+    }
+  },
+  "primary_mode_update": {
+    "method": "shift the prior fixed 200-target comparison window from 1045..1244 to 1046..1245 by removing target 1045 and adding the newly completed target 1245; apply the same deterministic tie-break order",
+    "expanding": {
+      "portfolio_3plus_count": 20,
+      "portfolio_4plus_count": 1,
+      "portfolio_max_hits_sum": 289,
+      "total_ticket_hits": 472,
+      "mean_ticket_hits": 0.7866666666666666
+    },
+    "rolling300": {
+      "portfolio_3plus_count": 12,
+      "portfolio_4plus_count": 0,
+      "portfolio_max_hits_sum": 291,
+      "total_ticket_hits": 489,
+      "mean_ticket_hits": 0.815
+    },
+    "selected_primary_mode": "expanding",
+    "selection_reason": "deterministic tie-break criterion 1: higher 200-target portfolio 3+ count (20 > 12)",
+    "verified_superiority_claim": false
+  },
+  "five_line_extension_policy": {
+    "status": "PURCHASE_ONLY_EXTENSION_DOES_NOT_AMEND_FROZEN_V4",
+    "rule": "Keep all three selected primary-mode V4 lines unchanged. Select two additional lines from the alternate-mode V4 candidate pools, from distinct model families, maximizing 5-line union coverage; then minimize total pair intersections, repeated pairs, rank sum, max rank, fixed model order, and lexical tuple. No target outcome is used.",
+    "selected_extras": [
+      {"model":"rolling300/V4_G","candidate_rank":2,"numbers":[6,12,15,21,22,33]},
+      {"model":"rolling300/V4_S","candidate_rank":2,"numbers":[9,11,16,24,30,40]}
+    ]
+  },
+  "actual_purchase_final_5": [
+    [1,13,18,26,34,38],
+    [2,4,13,18,32,34],
+    [5,8,19,24,29,36],
+    [6,12,15,21,22,33],
+    [9,11,16,24,30,40]
+  ],
+  "five_line_structure": {
+    "union_coverage": 26,
+    "pair_intersection_sum_across_10_line_pairs": 4,
+    "maximum_line_intersection": 3,
+    "exact_null_mean_total_hits": 4.0,
+    "exact_null_any_line_2plus": 0.656987793828,
+    "exact_null_any_line_3plus": 0.114466928420,
+    "exact_null_any_line_4plus": 0.006922109843,
+    "exact_null_any_line_5plus": 0.000144259220,
+    "exact_null_any_line_6": 0.000000613869,
+    "independent_uniform_5_ticket_any_line_3plus_reference": 0.113623546704,
+    "note": "Null coverage metrics describe ticket diversification only and are not evidence of predictive edge."
+  }
+}

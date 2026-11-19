@@ -1,0 +1,32 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+  "question": "How does a pre-frozen three-component ticket bundle compare with same-target random three-ticket bundles on OOS coverage?",
+  "novelty": "fixed three-component bundle versus 100 independently simulated same-target three-ticket bundles; evaluate union coverage, overlap and bundle maxima across 601..1245.",
+  "executed_cases": 65145,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 590,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 65145,
+    "verification": {
+      "status": "PASS",
+      "target_rounds": 645,
+      "fixed_bundle_records": 645,
+      "random_bundle_records": 64500,
+      "bundle_components_frozen": [
+        "long_frequency",
+        "structure_profile",
+        "pair_association"
+      ],
+      "future_predictions": 0,
+      "component_sources": "cutoff-safe stored OOS forecasts"
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-14T01:44:12.045838+00:00"
+}

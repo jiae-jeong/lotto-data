@@ -1,0 +1,69 @@
+{
+  "study_id": "AUXILIARY_SINGLE_TICKET_TRAILING100_SELECTOR_CROSSCHECK_20261116",
+  "classification": "MAINTENANCE_RECHECK_NOT_NEW_INDEPENDENT_AXIS_NOT_PROSPECTIVE",
+  "source": {
+    "path": "analysis/2026-11-15/MASTER_FULL_V4_000153_214928/B_PREDICTIONS_UNIQUE.csv",
+    "git_blob_sha": "83e9772654466c092ccef7a7287d8106359a6c80",
+    "sha256": "c1a342cab80b73703410dd4485427d2ce0cdd2aabfe199fccd6d556723e8ab40"
+  },
+  "source_audit": {
+    "rows": 8400,
+    "targets": 1050,
+    "range": [
+      201,
+      1250
+    ],
+    "models": 8,
+    "all_targets_have_all_models": true,
+    "all_cutoffs_equal_target_minus_one": true,
+    "duplicate_target_model_rows": 0
+  },
+  "rule": "At each target t>=301, select the fixed B model with the highest mean hits over exactly the preceding 100 targets; lexical model ID breaks ties. Evaluate only target t. No window search or tuning.",
+  "evaluation": {
+    "range": [
+      301,
+      1250
+    ],
+    "targets": 950
+  },
+  "exact_random_single_ticket": {
+    "mean_hits": 0.8,
+    "any2": 0.17530810086113546,
+    "any3": 0.023834078570323606,
+    "any4": 0.0013934826753885178
+  },
+  "selector": {
+    "mean_hits": 0.7947368421052632,
+    "any2": 0.17473684210526316,
+    "any3": 0.014736842105263158,
+    "any4": 0.0010526315789473684,
+    "switches": 116,
+    "switch_rate": 0.1222339300010548,
+    "correlation_prior100_mean_to_next_target_hits": 0.047
+  },
+  "delta_vs_exact_random": {
+    "mean_hits": -0.005263157894736858,
+    "any2": -0.0005712587558723,
+    "any3": -0.009097236465060448,
+    "any4": -0.0003408510960058854
+  },
+  "adjusted_circular_moving_block_ci_vs_random": {
+    "mean_hits": [
+      -0.07894736842105265,
+      0.07263157894736837
+    ],
+    "any2": [
+      -0.0332,
+      0.03522
+    ],
+    "any3": [
+      -0.01752,
+      0.00143
+    ],
+    "any4": [
+      -0.0013934826753885178,
+      0.002817
+    ]
+  },
+  "interpretation": "No positive adjusted lower bound; mean and all tail rates are at or below exact random point expectations. E052 already tested trailing-performance selection at the three-line portfolio level, so this single-ticket check is auxiliary only and cannot be treated as independent evidence or purchase readiness."
+}

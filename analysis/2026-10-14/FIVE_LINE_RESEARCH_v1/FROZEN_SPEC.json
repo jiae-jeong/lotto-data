@@ -1,0 +1,98 @@
+{
+  "plan": {
+    "version": 1,
+    "status": "CURRENT_OPERATIONAL_STANDARD",
+    "effective_date": "2026-10-14",
+    "operational_ticket_count": 5,
+    "legacy_three_line_research": {
+      "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1": "HISTORICAL_ONLY",
+      "rule": "Do not cite a three-line portfolio as the current purchase/recommendation standard."
+    },
+    "data_cutoff": 1245,
+    "training_rule": "For target t, use only forecasts/features available through t-1. No target outcome may affect portfolio construction.",
+    "research_sequence": [
+      {
+        "id": "E020_RANDOM_THREE_VS_FIVE_BASELINE_v1",
+        "question": "How much of the apparent performance increase comes mechanically from buying 5 lines instead of 3?",
+        "primary_metrics": [
+          "bundle max hits",
+          "any 3+",
+          "any 4+",
+          "unique-number coverage",
+          "winning-number union coverage"
+        ],
+        "baseline": "100 deterministic same-target random bundles for 3 lines and 5 lines on each target 601..1245"
+      },
+      {
+        "id": "E021_FIVE_LINE_OVERLAP_STRUCTURE_v1",
+        "question": "Does lower or higher line-to-line overlap in a 5-line component portfolio associate with better tail outcomes?",
+        "rule": "Assign LOW/MID/HIGH overlap strata before seeing target outcomes."
+      },
+      {
+        "id": "E022_FIVE_LINE_CONSTRUCTION_STRATEGIES_v1",
+        "question": "Which pre-specified five-component portfolio structures deserve further study?",
+        "strategies": [
+          "all 21 fixed C(7,5) bundles",
+          "MIN_OVERLAP_5",
+          "MAX_OVERLAP_5"
+        ],
+        "classification": "EXPLORATORY; full-sample winners cannot be promoted directly"
+      },
+      {
+        "id": "E023_NESTED_FIVE_LINE_SELECTOR_v1",
+        "question": "Can a portfolio selector using only the previous 200 targets beat a same-target random-five baseline?",
+        "lookback": 200,
+        "objective_order": [
+          "past any 3+ count",
+          "past any 4+ count",
+          "past mean bundle max hits",
+          "lower past overlap"
+        ]
+      },
+      {
+        "id": "E024_FIVE_LINE_PROMOTION_GATE_v1",
+        "question": "Does the nested 5-line selector show enough out-of-sample tail and stability evidence to enter prospective confirmation?",
+        "promotion_rule": {
+          "any3_block_bootstrap_lower_95_gt_0": true,
+          "max_hits_block_bootstrap_lower_95_gt_0": true,
+          "any4_block_bootstrap_lower_95_ge_0": true,
+          "positive_any3_delta_blocks": "at least 60%, minimum three ~100-target blocks"
+        }
+      }
+    ],
+    "weekly_reporting_rule": {
+      "current_final_lines": 5,
+      "portfolio_metrics_required": [
+        "per-line hits",
+        "best line hits",
+        "any 2+/3+/4+/5+/6",
+        "pairwise overlap",
+        "unique-number coverage",
+        "winning-number union coverage in backtests",
+        "same-target random-five comparison"
+      ],
+      "prohibited_shortcut": "Do not take the top five nearly identical lines and call them diversified."
+    },
+    "promotion_discipline": "If E024 fails, retain the method as research only; do not silently tune it into the weekly purchase rule."
+  },
+  "verification_basis": {
+    "status": "PASS",
+    "data_cutoff": 1245,
+    "targets_601_1245": 645,
+    "nested_selector_targets": 445,
+    "five_component_bundle_count": 21,
+    "random_repeats_per_target_per_size": 100,
+    "random_three_bundle_count": 64500,
+    "random_five_bundle_count": 64500,
+    "bundle_target_records": 13545,
+    "leakage_failures": 0,
+    "future_predictions": 0,
+    "current_operational_standard": "FIVE_LINES",
+    "legacy_three_line_E019": "PRESERVED_AS_HISTORICAL_ONLY",
+    "plan_sha256": "96932e6f5df12608cd7e13a71e77ca6bf70a577f536bec5a1ee5073a269a0745",
+    "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+    "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+    "code_sha256": "5cbe321ac7805db5d3b9238b5aad63075e2ac97a348610d204536ab6a19eeccc"
+  },
+  "created_local_date": "2026-10-14"
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+  "status": "FAILED",
+  "stage": "engine_execution",
+  "error_type": "FileNotFoundError",
+  "reason": "Expected one completed E025_INDEPENDENT_SIGNAL_DISCOVERY_v1; found 2",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 70, in run\n    engine.run(root, stage, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 347, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 800, in run_study\n    return handlers[kind](root, out, task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 428, in _e027\n    e025 = _task_path(root, \"E025_INDEPENDENT_SIGNAL_DISCOVERY_v1\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 287, in _task_path\n    if len(matches) != 1: raise FileNotFoundError(f\"Expected one completed {task_id}; found {len(matches)}\")\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: Expected one completed E025_INDEPENDENT_SIGNAL_DISCOVERY_v1; found 2\n",
+  "protected_files_unchanged": true,
+  "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+  "attempt_path": "analysis\\2026-10-14\\.attempts\\E027_FIVE_LINE_CANDIDATE_BANK_v1-zf79nqjd"
+}

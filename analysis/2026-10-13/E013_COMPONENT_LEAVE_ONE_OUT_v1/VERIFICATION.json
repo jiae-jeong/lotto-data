@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "targets_checked": 645,
+  "prediction_records_checked": 5805,
+  "policies": 9,
+  "paired_comparisons": 56,
+  "leakage_failures": 0,
+  "independent_ticket_replay": "PASS",
+  "future_predictions": 0
+}

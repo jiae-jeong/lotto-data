@@ -1,0 +1,45 @@
+name: lotto-today-capped-ensemble-v3
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/today_capped_ensemble_v3.py'
+      - '.github/workflows/lotto-today-capped-ensemble-v3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run capped ensemble validation
+        run: python -B automation/today_capped_ensemble_v3.py | tee "$RUNNER_TEMP/capped-v3.log"
+      - name: Verify report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_CAPPED_ENSEMBLE_1247_V3.json').read_text())
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(d['variants'])==9 and len(d['current_five_candidates']['tickets'])==5
+          print(json.dumps({'status':d['final_status'],'validated':d['validated_variants'],'best':d['current_best_variant']},ensure_ascii=False))
+          PY
+      - name: Commit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_CAPPED_ENSEMBLE_1247_V3.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: 1247 capped ensemble v3'
+          git pull --rebase origin main
+          git push origin HEAD:main

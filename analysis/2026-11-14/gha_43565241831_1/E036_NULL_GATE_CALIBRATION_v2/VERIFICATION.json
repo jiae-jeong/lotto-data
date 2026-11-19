@@ -1,0 +1,56 @@
+{
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+  "seed": 20261016036,
+  "target_rounds": "601..1245",
+  "historical_evidence": "screening/OOS, not untouched holdout",
+  "status": "CALIBRATED",
+  "max_statistic": "max(delta_mean_hits/0.03, delta_rate_3plus/0.01, delta_rate_4plus/0.003)",
+  "per_mechanism_thresholds": {
+    "EXACT_UNIFORM_TICKET": 3.0883720930232545,
+    "TARGET_OUTCOME_PERMUTATION": 3.1679586563307494,
+    "TEMPORAL_BLOCK_PERMUTATION": 3.9152454780361743,
+    "SIGNAL_RANK_RANDOM_SCORE": 3.2284237726098195
+  },
+  "frozen_global_threshold": 3.9152454780361743,
+  "calibration_replicates_per_mechanism": 1000,
+  "independent_verification_replicates_per_mechanism": 1000,
+  "total_replicates": 8000,
+  "pooled_verification_false_promotion_rate": 0.008,
+  "verification_by_mechanism": {
+    "EXACT_UNIFORM_TICKET": {
+      "false_promotions": 7,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.007,
+      "pass_le_5pct": true
+    },
+    "TARGET_OUTCOME_PERMUTATION": {
+      "false_promotions": 12,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.012,
+      "pass_le_5pct": true
+    },
+    "TEMPORAL_BLOCK_PERMUTATION": {
+      "false_promotions": 6,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.006,
+      "pass_le_5pct": true
+    },
+    "SIGNAL_RANK_RANDOM_SCORE": {
+      "false_promotions": 7,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.007,
+      "pass_le_5pct": true
+    }
+  },
+  "familywise_false_promotion_ceiling": 0.05,
+  "candidate_outcomes_used_for_calibration": false,
+  "calibration_uses_unpermuted_candidate_target_pairing": false,
+  "permutation_sources": "Observed target outcomes are permuted or block-permuted relative to frozen t-1 candidate tickets; unpermuted candidate hit alignment is not scored.",
+  "supersedes_prior_run": "gha_38518699993_1",
+  "supersession_reason": "The earlier run used hypergeometric hit-array permutations rather than distinct outcome-level permutation and random-score generators.",
+  "historical_evidence_label": "screening/OOS evidence; not untouched holdout",
+  "leakage_failures": 0,
+  "future_predictions": 0
+}

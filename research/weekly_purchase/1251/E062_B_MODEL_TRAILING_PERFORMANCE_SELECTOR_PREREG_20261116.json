@@ -1,0 +1,82 @@
+{
+  "study_id": "E062_B_MODEL_TRAILING_PERFORMANCE_SELECTOR_v1",
+  "registered_at_kst": "2026-11-16T12:10:53+09:00",
+  "evidence_class": "HISTORICAL_NESTED_SINGLE_TICKET_DIAGNOSTIC_NOT_THREE_LINE_PURCHASE_EVIDENCE",
+  "research_question": "Can a single B component model be selected for each target using only the previous 100 target outcomes, and does this prequential selector outperform the fixed combined_equal_rank B model and exact single-ticket random expectation?",
+  "source": {
+    "path": "analysis/2026-11-16/MASTER_FULL_V4_022804_577202/B_PREDICTIONS_UNIQUE.csv",
+    "git_blob_sha": "83e9772654466c092ccef7a7287d8106359a6c80",
+    "cutoff": 1250,
+    "source_targets": [
+      201,
+      1250
+    ],
+    "source_rows": 8400
+  },
+  "frozen_rule": {
+    "candidate_models": [
+      "long_frequency",
+      "current_gap",
+      "frequency_plus_gap",
+      "recent_momentum",
+      "structure_profile",
+      "pair_association",
+      "triple_association"
+    ],
+    "excluded_from_selection": [
+      "combined_equal_rank"
+    ],
+    "warmup_targets": [
+      201,
+      300
+    ],
+    "evaluation_targets": [
+      301,
+      1250
+    ],
+    "lookback_targets": 100,
+    "selection_rule": "For target t, choose the component with the largest arithmetic mean of its cached OOS main-hit count over targets t-100 through t-1; score only the chosen component's hit count at target t.",
+    "tie_break": "Lexicographically ascending model ID.",
+    "no_parameter_search": true,
+    "no_variant_sweep": true
+  },
+  "inference": {
+    "primary_metrics": [
+      "mean main-number hits per target",
+      "mean hit difference versus fixed combined_equal_rank",
+      "mean hit difference versus exact random expectation 0.8"
+    ],
+    "secondary_metrics": [
+      "2+ rate",
+      "3+ rate",
+      "4+ rate",
+      "selected model frequency"
+    ],
+    "block_length_targets": 50,
+    "nonoverlapping_blocks": 19,
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261117,
+    "family_alpha": 0.05,
+    "primary_comparisons": 2,
+    "bonferroni_two_sided_quantiles": [
+      0.0125,
+      0.9875
+    ]
+  },
+  "integrity_gates": {
+    "one_row_per_target_model": true,
+    "expected_targets": 950,
+    "expected_models_per_target": 8,
+    "training_through_round_equals_target_minus_one": true,
+    "selection_uses_only_previous_100_target_outcomes": true,
+    "no_future_outcomes_in_selection": true
+  },
+  "exclusions": [
+    "No candidate or purchase-number generation.",
+    "No three-line portfolio claim or STRICT_PASS_READY promotion.",
+    "No change to strict thresholds, alpha, block length, comparator, weekly policy, or finalizer.",
+    "No selection of a static winner using the full evaluation sample."
+  ],
+  "relation_to_E061": "E061 is a descriptive error-correlation diagnostic. E062 is a separately preregistered prequential model-selection rule; it does not use E061's observed ranking to choose a fixed winning component.",
+  "next_action": "Pending execution in a later research cycle after the E061 queue registration is validated."
+}

@@ -1,0 +1,10 @@
+{
+  "actual_uniform_ticket_combinations_generated": 1045000,
+  "by_target_csv": "RANDOM_BASELINE_BY_TARGET.csv",
+  "full_path_mc": 20000,
+  "full_path_mc_outcomes": "RANDOM_COMPLETE_PATHS.csv",
+  "note": "20,000 full paths use exact hypergeometric hit-count sampling; the daily B runner separately generated explicit ticket combinations per target.",
+  "seed": 20261014,
+  "targets": 1045,
+  "tickets_per_target": 1000
+}

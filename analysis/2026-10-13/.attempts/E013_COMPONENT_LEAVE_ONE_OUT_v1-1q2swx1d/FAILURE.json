@@ -1,0 +1,13 @@
+{
+  "task_id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+  "error_type": "KeyError",
+  "reason": "'FULL_EQUAL_VOTE'",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\daily_research_v2.py\", line 244, in run\n    engine.run(root, output, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 339, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 431, in run_study\n    if kind==\"component_loo\": return study_component_loo(root,out,task)\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 174, in study_component_loo\n    predictions, series = _ticket_rows(actual, lookup, policies, task[\"spec\"][\"random_seed\"])\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 116, in _ticket_rows\n    value = len(set(ticket) & outcomes); hits[name].append(value)\n                                         ~~~~^^^^^^\nKeyError: 'FULL_EQUAL_VOTE'\n",
+  "data_cutoff": 1245,
+  "failing_stage": "engine_execution",
+  "protected_files_unchanged": true,
+  "recovery_attempted": "Advanced to next independent registered task",
+  "retryable": true,
+  "user_action_required": false,
+  "preserved_attempt": "C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\analysis\\2026-10-13\\.attempts\\E013_COMPONENT_LEAVE_ONE_OUT_v1-1q2swx1d"
+}

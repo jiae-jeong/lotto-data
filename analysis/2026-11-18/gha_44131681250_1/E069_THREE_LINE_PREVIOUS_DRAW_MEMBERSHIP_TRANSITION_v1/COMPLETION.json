@@ -1,0 +1,9 @@
+{
+  "study_id": "E069_THREE_LINE_PREVIOUS_DRAW_MEMBERSHIP_TRANSITION_v1",
+  "status": "COMPLETE",
+  "data_cutoff": 1250,
+  "target_count": 850,
+  "historical_strict_gate_pass": false,
+  "strict_pass_ready": false,
+  "purchase_recommendation_generated": false
+}

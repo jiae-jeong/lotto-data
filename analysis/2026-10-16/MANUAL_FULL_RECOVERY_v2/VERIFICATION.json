@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "data_integrity": "PASS",
+  "data_rows": 1245,
+  "latest_round": 1245,
+  "pair_universe": 990,
+  "triple_universe": 14190,
+  "pair_bh_q_lt_0_05": 0,
+  "triple_bh_q_lt_0_05": 0,
+  "b_overlapping_prediction_records": 33480,
+  "b_unique_target_model_forecasts": 8360,
+  "b_unique_targets": 1045,
+  "random_tickets_generated": 1045000,
+  "random_seed": 20261016,
+  "leakage_failures": 0,
+  "recommendation_generation": false,
+  "master_status": "PARTIAL",
+  "partial_reason": "Authoritative integrated A/C/contrarian sources were not recovered or executed."
+}

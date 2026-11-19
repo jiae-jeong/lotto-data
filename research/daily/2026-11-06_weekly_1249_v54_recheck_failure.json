@@ -1,0 +1,24 @@
+{
+  "date_kst": "2026-11-06",
+  "target_round": 1249,
+  "data_cutoff": 1248,
+  "source_blob_sha": "ce7333969c963fb16d8c43ff9cb131ae0d86388f",
+  "policy": "META_V43_V52_V54_FROZEN_REPLAY",
+  "test_definition": "V54 policy, model weights, selection rules, exact matched-label null, 50-round blocks, bootstrap seed and strict gate unchanged; updated input through round 1248",
+  "evidence": {
+    "source_pre_draw_V54": "analysis/2026-10-30/TODAY_META_V43_V52_1248_V54.json",
+    "workflow": "https://github.com/jiae-jeong/lotto-data/actions/runs/42131843814",
+    "workflow_run": 42131843814,
+    "workflow_job": 127610124695,
+    "code_commit": "0a07983a91f51feae48d8254e76407fd0964556d",
+    "calculation_step": "success",
+    "independent_strict_verification_step": "failure",
+    "log_excerpt": "strict_check False gate False; AssertionError: STRICT GATE FAIL: no tickets can be released"
+  },
+  "strict_portfolio_pass": false,
+  "final_purchase_artifact_created": false,
+  "final_lines_disclosed": false,
+  "status": "RESEARCH_ONLY_FAIL",
+  "reporting_limitations": "Full rerun scorecard was written to the ephemeral GitHub Actions workspace but was not committed because strict check failed. No metric values or candidate lines are inferred from job logs. The first run was discarded due to output directory mismatch and was corrected without changing the policy.",
+  "next_research": "Preserve full failed-run scorecard without releasing tickets; diagnose which adjusted-CI/positive-block conditions failed, and preregister a genuinely independent prospective/nested validation instead of tuning the already inspected holdout for PASS."
+}

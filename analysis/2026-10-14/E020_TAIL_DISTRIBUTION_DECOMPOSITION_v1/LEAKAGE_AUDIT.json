@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "raw_prediction_rows_checked": 33480,
+  "unique_target_model_forecasts": 8360,
+  "unique_target_rounds": 1045,
+  "target_min": 201,
+  "target_max": 1245,
+  "target_1245_present": true,
+  "rule": "for target t, training_through_round=t-1; source builds one incremental feature state before evaluating t",
+  "feature_max_round": "t-1",
+  "rolling_window_end_round": "t-1 (50-round recency features are sliced only from draws[:train_n])",
+  "source_order": "predictions_for_round(draws, train_n, ...) is called before draws[train_n] is incorporated",
+  "duplicate_forecast_consistency": "PASS"
+}

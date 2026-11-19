@@ -1,0 +1,52 @@
+name: lotto-today-static-hm-v55
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-static-hm-v55.yml'
+      - 'automation/today_static_hm_v55.py'
+permissions:
+  contents: write
+jobs:
+  validate-v55:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run preregistered static H rr
+        shell: bash
+        env:
+          STATIC_POLICY: H:rr
+        run: |
+          set -euo pipefail
+          python -B automation/today_static_hm_v55.py | tee "$RUNNER_TEMP/v55.log"
+      - name: Verify strict result
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/2026-10-30/TODAY_STATIC_HM_H_rr_1248_V55.json')
+          d=json.loads(p.read_text())
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines']},ensure_ascii=False))
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert len(d['current']['lines'])==5 and all(len(x)==6 and len(set(x))==6 and all(1<=n<=45 for n in x) for x in d['current']['lines'])
+          PY
+      - name: Commit V55 evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_STATIC_HM_H_rr_1248_V55.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'research: store V55 static H rr result'
+          git pull --rebase origin main
+          git push origin HEAD:main

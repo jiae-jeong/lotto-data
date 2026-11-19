@@ -1,0 +1,50 @@
+name: lotto-today-blocklocked-balanced-hm-v49
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-blocklocked-balanced-hm-v49.yml'
+      - 'automation/today_blocklocked_balanced_hm_v49.py'
+permissions:
+  contents: write
+jobs:
+  validate-v49:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V49
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_blocklocked_balanced_hm_v49.py | tee "$RUNNER_TEMP/v49.log"
+      - name: Verify V49
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-30/TODAY_BLOCKLOCKED_BALANCED_HM_1248_V49.json').read_text())
+          L=d['current']['lines']
+          assert d['target_round']==1248 and d['data_cutoff']==1247 and d['no_future_leakage'] is True
+          assert len(L)==5 and len({tuple(x) for x in L})==5 and len(set().union(*map(set,L)))==30
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'selection_counts':d['selection_counts'],'current':d['current'],'delta':d['scorecard']['delta'],'inference':{k:{'ci':v['adjusted_ci_delta'],'share':v['positive_50_round_block_share']} for k,v in d['inference'].items() if isinstance(v,dict)}},ensure_ascii=False))
+          PY
+      - name: Commit V49 report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-30/TODAY_BLOCKLOCKED_BALANCED_HM_1248_V49.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: balanced block-locked H/M v49 for 1248'
+          git pull --rebase origin main
+          git push origin HEAD:main

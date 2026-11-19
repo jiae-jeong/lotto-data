@@ -1,0 +1,13 @@
+{
+  "status": "VERIFIED",
+  "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\lotto_data.csv",
+  "sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "rows": 1244,
+  "min_round": 1,
+  "max_round": 1244,
+  "missing": [],
+  "duplicate_rounds": 0,
+  "number_errors": 0,
+  "bonus_errors": 0,
+  "actual_1245": "NOT READ / NOT USED"
+}

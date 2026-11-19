@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "signals": [
+    {
+      "signal": "CROSS_FIT_RESIDUAL_SIGNAL",
+      "status": "NO_VALIDATED_EDGE",
+      "checks": {
+        "positive_mean_ci": false,
+        "holm_adjusted_p_below_0_05": false,
+        "rate_3plus_noninferior": true,
+        "positive_blocks_at_least_60pct": false,
+        "positive_after_every_50_block_removed": false,
+        "independence_screen_passed": true,
+        "negative_controls_within_5pct": false,
+        "leakage_zero": true
+      },
+      "mean_delta": 0.008356589147286814,
+      "mean_ci95_low": -0.047089922480620175,
+      "mean_ci95_high": 0.06612751937984494,
+      "rate_3plus_delta": -0.005627906976744188,
+      "p_holm": 1.0
+    },
+    {
+      "signal": "ONLINE_CHANGE_POINT_SCORE",
+      "status": "NO_VALIDATED_EDGE",
+      "checks": {
+        "positive_mean_ci": false,
+        "holm_adjusted_p_below_0_05": false,
+        "rate_3plus_noninferior": true,
+        "positive_blocks_at_least_60pct": false,
+        "positive_after_every_50_block_removed": false,
+        "independence_screen_passed": true,
+        "negative_controls_within_5pct": false,
+        "leakage_zero": true
+      },
+      "mean_delta": -0.011798449612403098,
+      "mean_ci95_low": -0.08310000000000001,
+      "mean_ci95_high": 0.05579922480620156,
+      "rate_3plus_delta": -0.004077519379844965,
+      "p_holm": 1.0
+    },
+    {
+      "signal": "DIRICHLET_GAP_TICKET_GENERATOR",
+      "status": "NO_VALIDATED_EDGE",
+      "checks": {
+        "positive_mean_ci": false,
+        "holm_adjusted_p_below_0_05": false,
+        "rate_3plus_noninferior": true,
+        "positive_blocks_at_least_60pct": false,
+        "positive_after_every_50_block_removed": false,
+        "independence_screen_passed": true,
+        "negative_controls_within_5pct": false,
+        "leakage_zero": true
+      },
+      "mean_delta": -0.008697674418604645,
+      "mean_ci95_low": -0.06676782945736434,
+      "mean_ci95_high": 0.0512492248062015,
+      "rate_3plus_delta": 0.0005736434108527106,
+      "p_holm": 1.0
+    }
+  ],
+  "validated_edges": [],
+  "overall_status": "NO_VALIDATED_EDGE",
+  "future_predictions": 0,
+  "recommendation_generation": false
+}

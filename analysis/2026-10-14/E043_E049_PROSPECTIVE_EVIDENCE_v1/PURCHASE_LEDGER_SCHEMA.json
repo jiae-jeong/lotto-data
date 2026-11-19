@@ -1,0 +1,36 @@
+{
+  "study_id": "E044_REAL_PURCHASE_FIVE_LINE_LEDGER_v1",
+  "status": "READY_AWAITING_VERIFIED_ACTUAL_PURCHASE",
+  "immutable_rule": "one file per target round, create-exclusive; never replace",
+  "prediction_and_outcome_separation": true,
+  "required_fields": [
+    "target_round",
+    "purchase_timestamp_utc",
+    "lines[5][6]",
+    "per-line source_model/model_version/training_cutoff/score/reason",
+    "per-line SHA256",
+    "bundle SHA256",
+    "purchase",
+    "sealed_before_draw",
+    "source_evidence"
+  ],
+  "outcome_fields_separate": [
+    "target_round",
+    "official_draw_source",
+    "official_main_numbers",
+    "official_bonus",
+    "line_hits",
+    "max_hits",
+    "any2plus",
+    "any3plus",
+    "any4plus",
+    "any5plus",
+    "any6",
+    "winning_union_coverage",
+    "missed_winning_numbers",
+    "pre_draw_rank",
+    "overestimated_nonwinners"
+  ],
+  "past_purchase_reconstruction": "prohibited without primary evidence",
+  "actual_purchase_records": []
+}

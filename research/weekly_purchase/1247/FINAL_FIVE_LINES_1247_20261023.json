@@ -1,0 +1,153 @@
+{
+  "target_round": 1247,
+  "created_kst": "2026-10-23T08:34:24.535582+09:00",
+  "data_cutoff": 1246,
+  "data_sha256": "023200840e2325321b0ecf0a088b9ccb67b1c0a37b2c90683fb4425e112a18b7",
+  "policy_version": "WEEKLY_FIVE_TICKET_PORTFOLIO_V1",
+  "classification": "PRIMARY_WEEKLY_PURCHASE_POLICY",
+  "selection_sources": [
+    {
+      "family": "recent30",
+      "candidate_rank": 1,
+      "overlaps_to_prior": []
+    },
+    {
+      "family": "gap",
+      "candidate_rank": 1,
+      "overlaps_to_prior": [
+        0
+      ]
+    },
+    {
+      "family": "momentum",
+      "candidate_rank": 1,
+      "overlaps_to_prior": [
+        1,
+        0
+      ]
+    },
+    {
+      "family": "balanced",
+      "candidate_rank": 1,
+      "overlaps_to_prior": [
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "family": "contrarian",
+      "candidate_rank": 11,
+      "overlaps_to_prior": [
+        0,
+        4,
+        0,
+        2
+      ]
+    }
+  ],
+  "final_lines": [
+    [
+      13,
+      18,
+      22,
+      28,
+      31,
+      32
+    ],
+    [
+      3,
+      8,
+      14,
+      17,
+      30,
+      45
+    ],
+    [
+      10,
+      13,
+      16,
+      23,
+      24,
+      38
+    ],
+    [
+      13,
+      15,
+      17,
+      18,
+      31,
+      45
+    ],
+    [
+      3,
+      17,
+      21,
+      30,
+      35,
+      45
+    ]
+  ],
+  "portfolio": {
+    "unique_number_coverage": 20,
+    "pairwise_overlaps": [
+      0,
+      1,
+      3,
+      0,
+      0,
+      2,
+      4,
+      1,
+      0,
+      2
+    ]
+  },
+  "historical_matched_random_backtest": {
+    "targets": 200,
+    "random_bundles_per_target": 300,
+    "policy": {
+      "max_hits": 1.615,
+      "any_2plus": 0.525,
+      "any_3plus": 0.1,
+      "any_4plus": 0.0,
+      "winning_union_coverage": 2.76,
+      "ticket_union_size": 21.305,
+      "mean_pair_overlap": 1.0310000000000001,
+      "max_pair_overlap": 3.215
+    },
+    "matched_uniform_random": {
+      "max_hits": 1.7313666666666667,
+      "any_2plus": 0.6195666666666667,
+      "any_3plus": 0.115,
+      "any_4plus": 0.00685,
+      "winning_union_coverage": 3.06755,
+      "ticket_union_size": 23.00325,
+      "mean_pair_overlap": 0.79936,
+      "max_pair_overlap": 2.0957166666666667
+    },
+    "delta_policy_minus_random": {
+      "max_hits": -0.11636666666666673,
+      "any_2plus": -0.09456666666666669,
+      "any_3plus": -0.015,
+      "any_4plus": -0.00685,
+      "winning_union_coverage": -0.30755000000000043,
+      "ticket_union_size": -1.6982500000000016,
+      "mean_pair_overlap": 0.23164000000000018,
+      "max_pair_overlap": 1.1192833333333332
+    }
+  },
+  "integrity": {
+    "pass_1": true,
+    "pass_2": true,
+    "final_text_parse": "PASS",
+    "line_count": 5,
+    "numbers_per_line": 6,
+    "range_1_45": "PASS",
+    "within_line_unique": "PASS",
+    "duplicate_ticket": "PASS"
+  },
+  "evidence_note": "Policy is cutoff-safe and benchmarked; matched-random results are reported without claiming superiority unless positive evidence exists.",
+  "historical_closed_loop_scope": "All verifiable preserved weekly-purchase records are reviewed; missing older originals are not reconstructed.",
+  "freeze_payload_sha256": "9a08899bbea2aaa38a32df7f34083bafe51453f25d5ea89f3dda57c758a57a32"
+}

@@ -1,0 +1,273 @@
+{
+  "study_id": "E070_E069_IMPLEMENTATION_AND_CANDIDATE_STAGE_AUDIT_v1",
+  "evidence_class": "HISTORICAL_EXPLORATORY_IMPLEMENTATION_CORRECTION_NOT_PROSPECTIVE_CONFIRMATION",
+  "data_cutoff": 1250,
+  "data_rows": 1250,
+  "data_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "e069_preregistration_conformance": {
+    "registered_prior": "fixed uniform 6/45 prior, strength 45",
+    "actual_runner_prior": "number-specific historical frequency prior, strength 45",
+    "formula_match": false,
+    "reason": "E069 score_numbers uses 45 * global_counts[number-1] / global_draws rather than 45 * (6/45).",
+    "existing_e069_verification_status": "PASS",
+    "verification_gap": "E069 preflight checked metadata and frozen blobs but did not assert that score_numbers implemented the registered prior; unit tests omitted prior-formula conformance.",
+    "original_e069_artifacts_preserved": true
+  },
+  "cutoff_and_integrity": {
+    "candidate_stage_cutoff_violations": 0,
+    "e069_output_rows": 850,
+    "e069_output_cutoff_violations": 0,
+    "e069_output_geometry_violations": 0,
+    "registered_formula_portfolio_geometry_violations": 0,
+    "future_leakage": false
+  },
+  "candidate_stage_registered_formula": {
+    "formula": "(success + 45*(6/45)) / (exposure + 45)",
+    "recall_at_k": {
+      "10": {
+        "candidate_recall": 0.216078431372549,
+        "mean_winner_hits": 1.296470588235294,
+        "exact_random_expected_recall": 0.2222222222222222,
+        "delta_vs_exact_random": -0.006143790849673203,
+        "positive_nonoverlap_50_target_blocks": 4,
+        "nonoverlap_50_target_blocks": 17,
+        "positive_block_share": 0.23529411764705882,
+        "adjusted_moving_block_ci": [
+          -0.01849673202614366,
+          0.006405228758169978
+        ],
+        "ci_lower_strictly_gt_zero": false
+      },
+      "15": {
+        "candidate_recall": 0.3243137254901961,
+        "mean_winner_hits": 1.9458823529411764,
+        "exact_random_expected_recall": 0.3333333333333333,
+        "delta_vs_exact_random": -0.009019607843137212,
+        "positive_nonoverlap_50_target_blocks": 5,
+        "nonoverlap_50_target_blocks": 17,
+        "positive_block_share": 0.29411764705882354,
+        "adjusted_moving_block_ci": [
+          -0.02156862745098037,
+          0.0037254901960784245
+        ],
+        "ci_lower_strictly_gt_zero": false
+      },
+      "20": {
+        "candidate_recall": 0.44058823529411767,
+        "mean_winner_hits": 2.643529411764706,
+        "exact_random_expected_recall": 0.4444444444444444,
+        "delta_vs_exact_random": -0.0038562091503267504,
+        "positive_nonoverlap_50_target_blocks": 6,
+        "nonoverlap_50_target_blocks": 17,
+        "positive_block_share": 0.35294117647058826,
+        "adjusted_moving_block_ci": [
+          -0.017777777777777795,
+          0.01124183006535947
+        ],
+        "ci_lower_strictly_gt_zero": false
+      },
+      "25": {
+        "candidate_recall": 0.5529411764705883,
+        "mean_winner_hits": 3.3176470588235296,
+        "exact_random_expected_recall": 0.5555555555555556,
+        "delta_vs_exact_random": -0.002614379084967311,
+        "positive_nonoverlap_50_target_blocks": 7,
+        "nonoverlap_50_target_blocks": 17,
+        "positive_block_share": 0.4117647058823529,
+        "adjusted_moving_block_ci": [
+          -0.015555555555555526,
+          0.009934640522875788
+        ],
+        "ci_lower_strictly_gt_zero": false
+      },
+      "30": {
+        "candidate_recall": 0.6609803921568628,
+        "mean_winner_hits": 3.9658823529411764,
+        "exact_random_expected_recall": 0.6666666666666666,
+        "delta_vs_exact_random": -0.005686274509803857,
+        "positive_nonoverlap_50_target_blocks": 6,
+        "nonoverlap_50_target_blocks": 17,
+        "positive_block_share": 0.35294117647058826,
+        "adjusted_moving_block_ci": [
+          -0.022156862745098028,
+          0.011568627450980414
+        ],
+        "ci_lower_strictly_gt_zero": false
+      }
+    },
+    "missed_winner_count_below_top30": 1729,
+    "missed_winners_by_previous_draw_membership": {
+      "member": 216,
+      "non_member": 1513
+    },
+    "missed_winners_by_rank_band": {
+      "31_35": 608,
+      "36_40": 562,
+      "41_45": 559
+    },
+    "mean_topk_overlap_with_as_built_formula": {
+      "10": 0.974588235294115,
+      "15": 0.9780392156862684,
+      "20": 0.9805294117647082,
+      "25": 0.9860705882352956,
+      "30": 0.9861568627450976
+    },
+    "bonferroni_family_alpha": 0.05,
+    "bonferroni_per_metric_alpha": 0.01,
+    "bootstrap_replicates": 4000,
+    "bootstrap_block_length": 50,
+    "nonoverlap_blocks": 17,
+    "residual_targets": 0
+  },
+  "candidate_stage_as_built_formula_diagnostic_only": {
+    "formula": "(success + 45*per_number_global_frequency_rate) / (exposure + 45)",
+    "recall_at_k": {
+      "10": {
+        "candidate_recall": 0.21529411764705883,
+        "mean_winner_hits": 1.291764705882353,
+        "exact_random_expected_recall": 0.2222222222222222,
+        "delta_vs_exact_random": -0.00692810457516338,
+        "positive_nonoverlap_50_target_blocks": 4,
+        "positive_block_share": 0.23529411764705882,
+        "adjusted_moving_block_ci": null
+      },
+      "15": {
+        "candidate_recall": 0.3256862745098039,
+        "mean_winner_hits": 1.9541176470588235,
+        "exact_random_expected_recall": 0.3333333333333333,
+        "delta_vs_exact_random": -0.007647058823529396,
+        "positive_nonoverlap_50_target_blocks": 6,
+        "positive_block_share": 0.35294117647058826,
+        "adjusted_moving_block_ci": null
+      },
+      "20": {
+        "candidate_recall": 0.43862745098039213,
+        "mean_winner_hits": 2.631764705882353,
+        "exact_random_expected_recall": 0.4444444444444444,
+        "delta_vs_exact_random": -0.005816993464052289,
+        "positive_nonoverlap_50_target_blocks": 5,
+        "positive_block_share": 0.29411764705882354,
+        "adjusted_moving_block_ci": null
+      },
+      "25": {
+        "candidate_recall": 0.5488235294117647,
+        "mean_winner_hits": 3.2929411764705883,
+        "exact_random_expected_recall": 0.5555555555555556,
+        "delta_vs_exact_random": -0.00673202614379087,
+        "positive_nonoverlap_50_target_blocks": 5,
+        "positive_block_share": 0.29411764705882354,
+        "adjusted_moving_block_ci": null
+      },
+      "30": {
+        "candidate_recall": 0.6588235294117647,
+        "mean_winner_hits": 3.9529411764705884,
+        "exact_random_expected_recall": 0.6666666666666666,
+        "delta_vs_exact_random": -0.007843137254901933,
+        "positive_nonoverlap_50_target_blocks": 5,
+        "positive_block_share": 0.29411764705882354,
+        "adjusted_moving_block_ci": null
+      }
+    },
+    "promotion_eligible": false
+  },
+  "portfolio_stage_registered_formula": {
+    "metrics": {
+      "max_hits": {
+        "observed_mean": 1.4964705882352942,
+        "exact_geometry_matched_null": 1.514256248572755,
+        "delta_mean": -0.01778566033746093,
+        "adjusted_moving_block_ci": [
+          -0.07660918974922606,
+          0.04221433966253882
+        ],
+        "lower_bound_strictly_gt_zero": false,
+        "positive_nonoverlap_50_target_blocks": 6,
+        "nonoverlap_50_target_block_count": 17
+      },
+      "any2": {
+        "observed_mean": 0.46,
+        "exact_geometry_matched_null": 0.47497624326892623,
+        "delta_mean": -0.014976243268926432,
+        "adjusted_moving_block_ci": [
+          -0.062035066798338354,
+          0.030906109672250007
+        ],
+        "lower_bound_strictly_gt_zero": false,
+        "positive_nonoverlap_50_target_blocks": 4,
+        "nonoverlap_50_target_block_count": 17
+      },
+      "any3": {
+        "observed_mean": 0.07294117647058823,
+        "exact_geometry_matched_null": 0.07135490714617204,
+        "delta_mean": 0.0015862693244162026,
+        "adjusted_moving_block_ci": [
+          -0.016060789499113534,
+          0.019233328147945372
+        ],
+        "lower_bound_strictly_gt_zero": false,
+        "positive_nonoverlap_50_target_blocks": 9,
+        "nonoverlap_50_target_block_count": 17
+      },
+      "winning_union_coverage": {
+        "observed_mean": 2.363529411764706,
+        "exact_geometry_matched_null": 2.4,
+        "delta_mean": -0.03647058823529349,
+        "adjusted_moving_block_ci": [
+          -0.12588235294117767,
+          0.06000000000000001
+        ],
+        "lower_bound_strictly_gt_zero": false,
+        "positive_nonoverlap_50_target_blocks": 7,
+        "nonoverlap_50_target_block_count": 17
+      }
+    },
+    "any2_positive_nonoverlap_50_target_blocks": {
+      "positive_blocks": 4,
+      "block_count": 17,
+      "positive_share": 0.23529411764705882,
+      "block_deltas": [
+        -0.03497624326892619,
+        0.10502375673107373,
+        -0.0349762432689262,
+        0.20502375673107356,
+        -0.014976243268926192,
+        -0.03497624326892619,
+        -0.05497624326892619,
+        -0.11497624326892641,
+        0.005023756731073816,
+        -0.03497624326892619,
+        -0.03497624326892619,
+        -0.07497624326892642,
+        -0.014976243268926192,
+        -0.014976243268926217,
+        -0.034976243268926205,
+        -0.1349762432689264,
+        0.06502375673107381
+      ]
+    },
+    "historical_strict_gate_pass": false,
+    "prospective_confirmation_required": true,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+    "promotion_eligible": false,
+    "any4_rate_supplemental_only": 0.0058823529411764705
+  },
+  "portfolio_stage_original_e069_as_built_formula": {
+    "observed_means_from_preserved_predictions": {
+      "max_hits": 1.4905882352941175,
+      "any2": 0.4623529411764706,
+      "any3": 0.06705882352941177,
+      "winning_union_coverage": 2.363529411764706
+    },
+    "promotion_eligible": false,
+    "note": "Preserved metrics are from the implementation-mismatched E069 run and are not evidence for the registered fixed-prior estimator."
+  },
+  "no_model_selection_or_tuning": true,
+  "no_purchase_lines_generated": true,
+  "no_freeze_or_seal_created": true
+}

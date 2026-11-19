@@ -1,0 +1,73 @@
+{
+  "study_id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+  "feature_definition": {
+    "source": "For target t, calculate main-number inclusion concentration using only the six main numbers in draws t-100..t-1; exclude bonus numbers.",
+    "rolling_window_draws": 100,
+    "reference_window_count": 200,
+    "concentration_metric": "HHI=sum_n((count_n/600)^2) over all 45 main-number inclusion frequencies in the immediately preceding 100 draws.",
+    "classification": "At target t, HIGH when current HHI is greater than or equal to the median of up to 200 earlier valid rolling-100-draw HHI values ending t-300..t-101 (minimum 100; exactly 200 when available); otherwise LOW.",
+    "historical_outcome_regime": "For outcome u, classify using draws u-100..u-1 and valid HHI reference windows ending max(100,u-300)..u-101; minimum 100, exactly 200 when available; all inputs precede outcome u.",
+    "candidate_universe": "All integers 1..45 are scored for every target.",
+    "training_outcome_start_round": 301,
+    "training_rule": "At target t, use only historical outcomes u=301..t-1. Each historical outcome u is assigned its regime from information through u-1, then contributes to that regime's number-inclusion counts.",
+    "minimum_reference_window_count": 100
+  },
+  "estimator": {
+    "prior_mean": "6/45 main-number inclusion probability under the uniform 6-of-45 null",
+    "prior_strength": 45,
+    "posterior_probability": "(success[regime,n] + 45*(6/45))/(exposure[regime,n] + 45)",
+    "ranking": "Score descending, then number ascending.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "portfolio": {
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "selection": "Three sequential calls to the unchanged E045 choose_disjoint_ticket selector, passing the E054 regime-conditional score as both role_score and global_score; remove selected numbers after each line.",
+    "randomness_in_selection": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "random_bundles_per_target": 120,
+    "seed": 20261116054,
+    "randomness_used_for_final_selection": false,
+    "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+    "exact_null": {
+      "draw_space": "C(45,6)=8145060",
+      "geometry": "three pairwise-disjoint six-number tickets, union18",
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4,
+      "overlapping_ticket_rule": "Compute exact target-specific null preserving actual number-to-line incidence geometry; do not reuse union18 constants."
+    }
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261116054,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "selection_uses_randomness": false,
+  "parameter_search": false,
+  "variants_evaluated": 1,
+  "source_hashes": {
+    "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json": "fbfec3cf589ada070b47d88e1b9cf8ff182ccca8a133258c52c70ecb7f6273c3",
+    "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json": "0e806768fb65a2f50ced37b1a93f681e5f96648bc6e3433c8366444398bee334",
+    "automation/three_line_research_1251_v1.py": "296181ea34f7abec078e48c345589c3023e1f81dea5822f54dc953923b0aca91",
+    "automation/three_line_rolling_concentration_regime_e054_v1.py": "5ccfcad38f3d3e375e93711626190c02591ff085730bebf690eb72220f902346"
+  }
+}

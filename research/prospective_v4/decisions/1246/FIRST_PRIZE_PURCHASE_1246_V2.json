@@ -1,0 +1,44 @@
+{
+  "version": "FIRST_PRIZE_PURCHASE_1246_V2",
+  "target_round": 1246,
+  "target_outcome_status": "NOT AVAILABLE / NOT READ",
+  "supersedes_purchase_only_v1_for_actual_purchase": true,
+  "does_not_amend_frozen_v4": true,
+  "objective": "Prioritize one-line exact-six/high-hit-tail candidate quality over union coverage or cosmetic overlap reduction.",
+  "rationale": {
+    "exact_six_null_fact": "For any five distinct 6/45 tickets under a fair draw, exact first-prize probability is 5/C(45,6) regardless of how many numbers overlap between lines. Union coverage and overlap mainly change lower-hit dispersion, not the exact-six null probability.",
+    "policy_change_reason": "The user explicitly prioritizes first prize rather than fifth-prize/low-hit coverage. Therefore V1 coverage-first extra-line selection is no longer the purchase objective.",
+    "selection_source": "Only pre-draw frozen V4 challenger model top tickets (G/C/S, expanding and rolling300) are eligible. No target-1246 outcome is used.",
+    "ranking_rule": "Rank eligible model/mode top tickets by historical high-hit tail of the same frozen model/mode over the preserved 200-target diagnostic: ticket_4plus_count descending, then ticket_3plus_count descending, then mean_hits descending. Keep the top five distinct complete tickets. Do not demote a high-ranked complete ticket merely because it overlaps another line."
+  },
+  "historical_200_target_model_tail": [
+    {"mode":"expanding","model":"V4_S","mean_hits":0.79,"ticket_3plus_count":7,"ticket_4plus_count":1},
+    {"mode":"expanding","model":"V4_C","mean_hits":0.795,"ticket_3plus_count":11,"ticket_4plus_count":0},
+    {"mode":"rolling300","model":"V4_G","mean_hits":0.925,"ticket_3plus_count":6,"ticket_4plus_count":0},
+    {"mode":"rolling300","model":"V4_C","mean_hits":0.78,"ticket_3plus_count":5,"ticket_4plus_count":0},
+    {"mode":"expanding","model":"V4_G","mean_hits":0.78,"ticket_3plus_count":3,"ticket_4plus_count":0},
+    {"mode":"rolling300","model":"V4_S","mean_hits":0.735,"ticket_3plus_count":2,"ticket_4plus_count":0}
+  ],
+  "eligible_target_1246_top_tickets": [
+    {"mode":"expanding","model":"V4_G","numbers":[1,13,18,26,34,38]},
+    {"mode":"expanding","model":"V4_C","numbers":[2,13,18,32,34,38]},
+    {"mode":"expanding","model":"V4_S","numbers":[5,8,19,24,29,36]},
+    {"mode":"rolling300","model":"V4_G","numbers":[6,12,15,21,22,29]},
+    {"mode":"rolling300","model":"V4_C","numbers":[1,5,7,9,12,19]},
+    {"mode":"rolling300","model":"V4_S","numbers":[6,13,20,24,26,35]}
+  ],
+  "actual_purchase_final_5": [
+    [5,8,19,24,29,36],
+    [2,13,18,32,34,38],
+    [6,12,15,21,22,29],
+    [1,5,7,9,12,19],
+    [1,13,18,26,34,38]
+  ],
+  "excluded_sixth_ticket": {
+    "mode":"rolling300",
+    "model":"V4_S",
+    "numbers":[6,13,20,24,26,35],
+    "reason":"lowest historical high-hit-tail rank among the six eligible frozen challenger top tickets"
+  },
+  "important_note": "This ranking is a pre-draw purchase policy aligned to an exact-six objective. It is not a claim of proven predictive superiority over uniform random; the preserved validation still shows no established edge."
+}

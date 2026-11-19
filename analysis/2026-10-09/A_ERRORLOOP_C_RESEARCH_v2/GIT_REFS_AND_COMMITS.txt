@@ -1,0 +1,44 @@
+refs/heads/main 6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d
+refs/heads/prospective-v4-freeze-20261009 746efc843d53dff4e61394e26d458ea3f50c93e4
+refs/heads/restore-b-model-hash-verified-20261009-v4 bdc38abdcb6a7f511ad2ee39914f9126a69aeb05
+refs/heads/seal-v4-prediction-1245-20261009 c8782a6063c6148fea0d7292b2a5c1a61fe2b974
+refs/heads/seal-v4-primary-mode-1245-20261009 fa5b248b190b204da60f509afa26ffaa0bbe77af
+refs/remotes/origin/HEAD fa5b248b190b204da60f509afa26ffaa0bbe77af
+refs/remotes/origin/main fa5b248b190b204da60f509afa26ffaa0bbe77af
+
+fa5b248b190b204da60f509afa26ffaa0bbe77af|2026-10-09T21:28:31+09:00|2026-10-09T21:28:31+09:00|Verify matched Monte Carlo random baseline for B model v1
+2892b0d4424c72554612d464b7a7093f814e3fc3|2026-10-09T21:13:11+09:00|2026-10-09T21:13:11+09:00|Preserve reproduced B model v1 audit and execution evidence
+f777d7888bce208fa7b196689278f41fec387caf|2026-10-09T15:18:38+09:00|2026-10-09T15:18:38+09:00|Seal primary V4 purchase mode for draw 1245
+c8782a6063c6148fea0d7292b2a5c1a61fe2b974|2026-10-09T14:28:54+09:00|2026-10-09T14:28:54+09:00|Seal V4 prospective prediction for draw 1245
+746efc843d53dff4e61394e26d458ea3f50c93e4|2026-10-09T13:49:08+09:00|2026-10-09T13:49:08+09:00|Freeze prospective V4 research protocol at cutoff 1244
+bdc38abdcb6a7f511ad2ee39914f9126a69aeb05|2026-10-09T13:25:38+09:00|2026-10-09T13:25:38+09:00|Restore hash-verified B model v1 outputs
+ef192c7df6ca614515e8993914e400ed2dc09340|2026-10-09T10:43:31+09:00|2026-10-09T10:43:31+09:00|Revert incomplete oversized B model recovery upload
+990cceb539322a7c742b5b4058490c1369ecad99|2026-10-09T10:41:27+09:00|2026-10-09T10:41:27+09:00|Restore hash-verified B model v1 outputs
+852a6a8698e4599c5702f280521ac799f77eaf2c|2026-10-09T10:32:33+09:00|2026-10-09T10:32:33+09:00|Update current status with hash-verified B-model recovery
+00031b1be4dcef526cb0a78ed92905d61c511c1a|2026-10-09T10:30:49+09:00|2026-10-09T10:30:49+09:00|Document hash-verified B-model artifact recovery
+36281dd200bca0d201ba02a8d022a4a3dde28436|2026-10-09T10:26:21+09:00|2026-10-09T10:26:21+09:00|Recover pinned B-model backtest source from ChatGPT file archive
+6f55ccaa098ff7f7c40623453c259fa5eff005d9|2026-10-09T10:22:51+09:00|2026-10-09T10:22:51+09:00|Add authoritative 1245 V3 status and stale-snapshot clarification
+1ae9e4fe55db5aadce4cc095d7cce14ce4a36f4c|2026-10-09T10:16:18+09:00|2026-10-09T10:16:18+09:00|Record actual local asset search log
+9916c5f86150614d9215b0916a8369c842342a96|2026-10-09T10:16:16+09:00|2026-10-09T10:16:16+09:00|Add corrected local asset search report
+bc04c5276103bfeba6cccba7e7a2aa0441079288|2026-10-09T10:09:23+09:00|2026-10-09T10:09:23+09:00|Fix random interval rendering in validation report
+17abd009c9b0c4d815b9c845b980b27d6580b740|2026-10-09T10:08:04+09:00|2026-10-09T10:08:04+09:00|Add independent lottery validation and candidate reassessment
+f11a0e1a6d170bb76df83b8aea6fc3e259fae286|2026-10-09T09:54:38+09:00|2026-10-09T09:54:38+09:00|Make recovery runner rerunnable with unique output IDs
+90a852ca170aa10e7161ab3dae75efc2f4868620|2026-10-09T09:46:20+09:00|2026-10-09T09:46:20+09:00|Add reproducible 1245 pipeline recovery run
+6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d|2026-10-09T09:34:58+09:00|2026-10-09T09:34:58+09:00|Add reproducible 1245 pipeline recovery run
+20f74ee6a323d15c4962b93ad8b040e55aece6a4|2026-10-08T17:20:47+09:00|2026-10-08T17:20:47+09:00|Add 1245 final pipeline V3
+4b78821a45258b263c7918e4b9e194039d900093|2026-10-08T17:20:43+09:00|2026-10-08T17:20:43+09:00|Add 1245 final pipeline V3
+e19d7675ec901bb382082e6b672fb0ae2af78c40|2026-10-08T17:20:39+09:00|2026-10-08T17:20:39+09:00|Add 1245 final pipeline V3
+cf9bce8dbb543ab8ba5a61d7342c1d696aab3be7|2026-10-08T17:20:34+09:00|2026-10-08T17:20:34+09:00|Add 1245 final pipeline V3
+0e72b65b5293628bb763d6900e656e8764f7e45c|2026-10-08T17:20:29+09:00|2026-10-08T17:20:29+09:00|Add 1245 final pipeline V3
+767f1cea7fbb23f2fe03bdc72546e69f4600629f|2026-10-08T17:20:25+09:00|2026-10-08T17:20:25+09:00|Add 1245 final pipeline V3
+a8e1a4456ce196763a4fd76ab40b40bb529181af|2026-10-08T17:20:21+09:00|2026-10-08T17:20:21+09:00|Add 1245 final pipeline V3
+6e450bcaba3be3c78f43b67a1110a03397bfca46|2026-10-08T17:20:10+09:00|2026-10-08T17:20:10+09:00|Add 1245 final pipeline V3
+616dbccd1e5ff5b0259cb85b35f58412a47680d8|2026-10-08T15:58:41+09:00|2026-10-08T15:58:41+09:00|Require GitHub research review before new studies
+d813f5ecc235a14eb70f8f002e82bd5f78506d21|2026-10-08T15:50:24+09:00|2026-10-08T15:50:24+09:00|Add research expansion framework v1
+83c0ded77c56f7719cc9168bbcd1fb15f11b0253|2026-10-07T14:18:04+09:00|2026-10-07T14:18:04+09:00|Restore full master prompt and strengthen anti-shortcut execution rules
+d806217447eb22a6ae9da0fe0b23ea3834d1a1af|2026-10-07T14:16:24+09:00|2026-10-07T14:16:24+09:00|Strengthen daily analysis execution gate and verification requirements
+f806c80322c8cbef280d40647938315da6429d10|2026-10-07T13:41:32+09:00|2026-10-07T13:41:32+09:00|Preserve B model walk-forward backtest results
+887c7fe0c4f4cd1cfcedb35b174aff5fc87e9fd4|2026-10-06T16:37:05+09:00|2026-10-06T16:37:05+09:00|Add persistent lotto project protocol and continuation rules
+46aa6c17d110b9bb1588d6a68d4c47c34b1c0f5e|2026-10-06T16:36:18+09:00|2026-10-06T16:36:18+09:00|Save lotto project state and B model backtest results for 2026-10-06
+9058e4d963585f5fef6f124c09b54af979d1f4b0|2026-10-06T14:15:41+09:00|2026-10-06T14:15:41+09:00|Update print statement from 'Hello' to 'Goodbye'
+1efa5bbaa89d6b747da414d1289eb641cc2856a4|2026-10-01T14:22:21+09:00|2026-10-01T14:22:21+09:00|Create lotto_data.csv

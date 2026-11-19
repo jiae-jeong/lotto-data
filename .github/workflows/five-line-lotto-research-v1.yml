@@ -1,0 +1,55 @@
+name: five-line-lotto-research-v1
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'automation/five_line_research_v1.py'
+      - 'automation/five_line_research_plan_v1.json'
+      - '.github/workflows/five-line-lotto-research-v1.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: five-line-lotto-research-v1
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate five-line research script
+        run: |
+          python -m py_compile automation/five_line_research_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          plan=json.loads(Path('automation/five_line_research_plan_v1.json').read_text(encoding='utf-8'))
+          assert plan['operational_ticket_count'] == 5
+          assert [x['id'][:4] for x in plan['research_sequence']] == ['E020','E021','E022','E023','E024']
+          print('five-line plan validation PASS')
+          PY
+      - name: Run E020-E024 five-line research
+        run: python -B automation/five_line_research_v1.py
+      - name: Commit validated five-line research
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/
+          if git diff --cached --quiet; then
+            echo 'No new five-line research output'
+          else
+            git commit -m 'research: validate five-line portfolio E020-E024'
+            git push origin HEAD:main
+          fi

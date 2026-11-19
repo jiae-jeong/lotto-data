@@ -1,0 +1,186 @@
+{
+  "PRIMARY_PURCHASE_LINES_1245": [
+    [
+      1,
+      9,
+      13,
+      24,
+      43,
+      44
+    ],
+    [
+      11,
+      13,
+      18,
+      34,
+      38,
+      43
+    ],
+    [
+      1,
+      20,
+      22,
+      25,
+      36,
+      41
+    ]
+  ],
+  "PRIMARY_PURCHASE_MODE_1245": "expanding",
+  "actual_result": "NOT READ / NOT USED",
+  "all_200_target_summary": {
+    "expanding": {
+      "hit_distribution_0_to_6": [
+        247,
+        255,
+        77,
+        20,
+        1,
+        0,
+        0
+      ],
+      "mean_pair_overlap": 0.9733333333333333,
+      "mean_ticket_hits": 0.7883333333333333,
+      "mean_union_coverage": 15.245,
+      "portfolio_3plus_count": 20,
+      "portfolio_3plus_rate": 0.1,
+      "portfolio_4plus_count": 1,
+      "portfolio_4plus_rate": 0.005,
+      "portfolio_max_hits_mean": 1.445,
+      "portfolio_max_hits_sum": 289,
+      "targets": 200,
+      "ticket_2plus_rate": 0.16333333333333333,
+      "ticket_3plus_rate": 0.035,
+      "ticket_4plus_rate": 0.0016666666666666668,
+      "tickets": 600,
+      "total_hits": 473
+    },
+    "rolling300": {
+      "hit_distribution_0_to_6": [
+        240,
+        245,
+        102,
+        13,
+        0,
+        0,
+        0
+      ],
+      "mean_pair_overlap": 0.8183333333333332,
+      "mean_ticket_hits": 0.8133333333333334,
+      "mean_union_coverage": 15.67,
+      "portfolio_3plus_count": 12,
+      "portfolio_3plus_rate": 0.06,
+      "portfolio_4plus_count": 0,
+      "portfolio_4plus_rate": 0.0,
+      "portfolio_max_hits_mean": 1.455,
+      "portfolio_max_hits_sum": 291,
+      "targets": 200,
+      "ticket_2plus_rate": 0.19166666666666668,
+      "ticket_3plus_rate": 0.021666666666666667,
+      "ticket_4plus_rate": 0.0,
+      "tickets": 600,
+      "total_hits": 488
+    }
+  },
+  "created_at_utc": "2026-10-09T06:14:31.877472+00:00",
+  "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+  "historical_evaluation_targets": [
+    1045,
+    1244
+  ],
+  "historical_target_count": 200,
+  "limitations": "Historical V4 design reused these data; mode selection is an additional pre-target decision, not untouched holdout validation or amendment of frozen future evaluation criteria.",
+  "new_target1245_numbers_generated": false,
+  "prediction_commit": "c8782a6063c6148fea0d7292b2a5c1a61fe2b974",
+  "prediction_seal_sha256": "5300807aacfba8b37f3f8db5aaf5eefcb7e522e910d79fc016e37bc86ca61fe5",
+  "prerun_lock_sha256": "ec0708d733123a2b214cdf48679f162fa365df6b21263469d76ef967c2acef36",
+  "prospective_model_status": "REGISTERED_UNEVALUATED",
+  "random_200_target_summary": {
+    "exact_mean_ticket_hits": 0.8,
+    "hit_distribution_0_to_6": [
+      2402828,
+      2545247,
+      908398,
+      135090,
+      8253,
+      184,
+      0
+    ],
+    "mean_pair_overlap": 0.7453394999999999,
+    "mean_ticket_hits": 0.8002075,
+    "mean_union_coverage": 15.849640999999998,
+    "portfolio_3plus_expected_targets": 14.0586,
+    "portfolio_3plus_monte_carlo_se": 0.0001807555001929402,
+    "portfolio_3plus_rate": 0.070293,
+    "portfolio_4plus_expected_targets": 0.843,
+    "portfolio_4plus_monte_carlo_se": 4.580841844028235e-05,
+    "portfolio_4plus_rate": 0.004215,
+    "portfolio_max_hits_mean": 1.4546145000000001,
+    "portfolio_simulations": 2000000,
+    "replicates_per_target": 10000,
+    "targets": 200,
+    "ticket_2plus_rate": 0.17532083333333334,
+    "ticket_3plus_rate": 0.023921166666666667,
+    "ticket_4plus_rate": 0.0014061666666666667,
+    "tickets": 6000000
+  },
+  "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "selection_trace": {
+    "four_block_variance": {
+      "expanding": 0.0018,
+      "rolling300": 0.0014
+    },
+    "support_gate": {
+      "expanding": {
+        "conditions": {
+          "all_four_blocks_nonnegative_paired_3plus_and_mean": false,
+          "all_four_blocks_nonnegative_random_3plus_and_mean": false,
+          "mean_ticket_hits_holm_significant": false,
+          "mean_ticket_hits_positive_ci": false,
+          "mean_ticket_hits_positive_paired_delta": false,
+          "nonnegative_max_hits_paired_delta": false,
+          "overall_positive_random_delta": false,
+          "portfolio_3plus_holm_significant": false,
+          "portfolio_3plus_positive_ci": false,
+          "portfolio_3plus_positive_paired_delta": true,
+          "portfolio_4plus_holm_significant": false,
+          "portfolio_4plus_positive_ci": false,
+          "portfolio_4plus_positive_paired_delta": true
+        },
+        "passed": false
+      },
+      "rolling300": {
+        "conditions": {
+          "all_four_blocks_nonnegative_paired_3plus_and_mean": false,
+          "all_four_blocks_nonnegative_random_3plus_and_mean": false,
+          "mean_ticket_hits_holm_significant": false,
+          "mean_ticket_hits_positive_ci": false,
+          "mean_ticket_hits_positive_paired_delta": true,
+          "nonnegative_max_hits_paired_delta": true,
+          "overall_positive_random_delta": false,
+          "portfolio_3plus_holm_significant": false,
+          "portfolio_3plus_positive_ci": false,
+          "portfolio_3plus_positive_paired_delta": false,
+          "portfolio_4plus_holm_significant": false,
+          "portfolio_4plus_positive_ci": false,
+          "portfolio_4plus_positive_paired_delta": false
+        },
+        "passed": false
+      }
+    },
+    "tie_break_applied": true,
+    "tie_break_trace": [
+      {
+        "criterion": "portfolio_3plus_count",
+        "selected_if_unequal": "expanding",
+        "values": {
+          "expanding": 20,
+          "rolling300": 12
+        }
+      }
+    ]
+  },
+  "selection_type": "DETERMINISTIC_TIE_BREAK_NO_VERIFIED_SUPERIORITY",
+  "source_final_lines_sha256": "7ce371fe06a2e4b88f249d264e528b518e6da2fe9f54afc52fda0b26551279a0",
+  "target": 1245,
+  "training_cutoff": 1244
+}

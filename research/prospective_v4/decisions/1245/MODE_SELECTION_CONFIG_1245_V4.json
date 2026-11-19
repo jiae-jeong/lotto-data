@@ -1,0 +1,78 @@
+{
+  "actual_1245": "NOT READ / NOT USED",
+  "alpha": 0.05,
+  "blocks": [
+    [
+      1045,
+      1094
+    ],
+    [
+      1095,
+      1144
+    ],
+    [
+      1145,
+      1194
+    ],
+    [
+      1195,
+      1244
+    ]
+  ],
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 2026100905,
+  "created_at_utc": "2026-10-09T06:11:46.262519+00:00",
+  "decision_target": 1245,
+  "diagnostic_features": [
+    "overlap",
+    "union_coverage",
+    "G/C/S contributions"
+  ],
+  "diagnostics_affect_selection": false,
+  "exclusions": "none; any invalid/missing target, training integrity failure or engine failure aborts entire decision, no performance-based exclusion",
+  "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+  "freeze_seal_sha256": "6a018e3036187a26ac9bcffda9fd7379d65d86cde84514faa08f4ea349b0f4bb",
+  "historical_first_target": 1045,
+  "historical_last_target": 1244,
+  "historical_target_count": 200,
+  "model_order": [
+    "V4_G",
+    "V4_C",
+    "V4_S"
+  ],
+  "new_prediction_numbers_allowed": false,
+  "numpy_version": "2.3.5",
+  "past_data_reuse": "retrospective reused V4 development data; no untouched validation, no future predictive edge claim",
+  "permutation_replicates": 50000,
+  "permutation_seed": 2026100906,
+  "prediction_commit": "c8782a6063c6148fea0d7292b2a5c1a61fe2b974",
+  "prediction_seal_sha256": "5300807aacfba8b37f3f8db5aaf5eefcb7e522e910d79fc016e37bc86ca61fe5",
+  "primary_test_family": [
+    "portfolio_3plus",
+    "portfolio_4plus",
+    "portfolio_max_hits",
+    "mean_ticket_hits"
+  ],
+  "random_generator": "NumPy PCG64, first8 big-endian SHA256(seed|historical_target|t); uniform sample via random45 argpartition6; unique candidate prefixes max37; same greedy overlap<=2 and exact fallback; no actual outcome in generation",
+  "random_replicates_per_target": 10000,
+  "random_seed": 2026100904,
+  "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "recent_windows": [
+    50,
+    100,
+    200
+  ],
+  "resampling_block_length": 10,
+  "selected_lines": "copy three rows of selected mode from sealed FINAL_THREE_LINES only, no mixing",
+  "statistical_tests": "paired nonoverlapping10-target block sign-flip Monte Carlo two-sided + Holm4; circular10-target block bootstrap95%; exact McNemar secondary",
+  "support_gate": "positive paired 3+,4+,mean deltas, all three Holm p<.05 and bootstrap CI excludes0 in same direction; nonnegative max delta; positive overall random 3+/4+/mean; all4 blocks nonnegative random3+/mean and paired3+/mean; otherwise deterministic tie-break",
+  "tie_break": [
+    "higher 200-target portfolio3+ count",
+    "higher sum portfolio max hits",
+    "higher all600-ticket mean hits",
+    "lower population variance of four50-block portfolio3+ rates, exact integer numerator /40000",
+    "expanding"
+  ],
+  "tie_break_is_predictive_superiority": false,
+  "training": "frozen engine fit/candidates/portfolio, expanding1..t-1 and rolling last300; prospective predict/load guards are not modified"
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "target_count": 645,
+  "candidate_families": 4,
+  "survivors": [
+    "CROSS_FIT_RESIDUAL_SIGNAL",
+    "ONLINE_CHANGE_POINT_SCORE",
+    "DIRICHLET_GAP_TICKET_GENERATOR"
+  ],
+  "cutoff_violations": 0,
+  "future_predictions": 0,
+  "screen_uses_target_outcomes": false
+}

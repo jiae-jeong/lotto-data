@@ -1,0 +1,31 @@
+name: lotto-today-twoexpert-v80
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-twoexpert-v80.yml'
+      - 'automation/today_twoexpert_v80.py'
+      - 'automation/today_expanded_overlap_v76.py'
+permissions:
+  contents: read
+jobs:
+  validate-v80:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V80 two-expert selector
+        run: python -B automation/today_twoexpert_v80.py
+      - name: Print strict result
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('analysis/2026-10-30/TODAY_TWOEXPERT_1248_V80.json'))
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy'],'null':d['scorecard']['matched_exact_label_null']},ensure_ascii=False))
+          PY

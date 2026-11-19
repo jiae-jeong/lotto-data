@@ -1,0 +1,45 @@
+{
+  "date_kst": "2026-11-02",
+  "repo_data_cutoff": 1248,
+  "repo_round": {
+    "round": 1248,
+    "draw_date": "2026-10-31",
+    "main_numbers": [16, 18, 27, 36, 38, 42],
+    "bonus": 22,
+    "source": "lotto_data.csv via verified recovery row"
+  },
+  "official_source_attempt": {
+    "name": "Donghaeng Lottery",
+    "url": "https://m.dhlottery.co.kr/smarPage",
+    "round": 1248,
+    "draw_date": "2026-10-31",
+    "main_numbers": [16, 18, 27, 36, 38, 42],
+    "bonus": 22,
+    "status": "CONFIRMED"
+  },
+  "fallback_sources": [
+    {
+      "name": "Yonhap News Agency",
+      "url": "https://www.yna.co.kr/view/AKR20261031047300002",
+      "published": "2026-10-31T20:56:00+09:00",
+      "round": 1248,
+      "draw_date": "2026-10-31",
+      "main_numbers": [16, 18, 27, 36, 38, 42],
+      "bonus": 22
+    },
+    {
+      "name": "Newsis",
+      "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20261031_0003849425",
+      "published": "2026-10-31T20:58:09+09:00",
+      "round": 1248,
+      "draw_date": "2026-10-31",
+      "main_numbers": [16, 18, 27, 36, 38, 42],
+      "bonus": 22
+    }
+  ],
+  "independent_fallback_sources_agree": true,
+  "repo_vs_fallback_round_and_date_match": true,
+  "repo_vs_fallback_numbers_match": true,
+  "status": "PASS",
+  "integrity_note": "Official Donghaeng Lottery and two independently published news records agree on round 1248. The verified row is used only after the draw was completed; no future outcome is inferred."
+}

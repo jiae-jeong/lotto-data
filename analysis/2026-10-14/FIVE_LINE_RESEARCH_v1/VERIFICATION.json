@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "data_cutoff": 1245,
+  "targets_601_1245": 645,
+  "nested_selector_targets": 445,
+  "five_component_bundle_count": 21,
+  "random_repeats_per_target_per_size": 100,
+  "random_three_bundle_count": 64500,
+  "random_five_bundle_count": 64500,
+  "bundle_target_records": 13545,
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "current_operational_standard": "FIVE_LINES",
+  "legacy_three_line_E019": "PRESERVED_AS_HISTORICAL_ONLY",
+  "plan_sha256": "96932e6f5df12608cd7e13a71e77ca6bf70a577f536bec5a1ee5073a269a0745",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "5cbe321ac7805db5d3b9238b5aad63075e2ac97a348610d204536ab6a19eeccc"
+}

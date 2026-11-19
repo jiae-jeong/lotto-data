@@ -1,0 +1,49 @@
+{
+  "addendum_id": "E075_EXECUTION_ATTEMPT_2_REPAIR_ADDENDUM_20261119",
+  "study_id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+  "date_kst": "2026-11-19",
+  "attempt": 2,
+  "workflow_run_id": 44424750856,
+  "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44424750856",
+  "status": "CALCULATION_COMPLETE_MANIFEST_PASS_BUT_POST_RUN_VERIFIER_FAILED",
+  "calculation": {
+    "runner_status": "COMPLETE",
+    "data_cutoff": 1250,
+    "targets_evaluated": 850,
+    "random_bundles_per_version": 102000,
+    "manifest_entries": 8,
+    "manifest_status": "PASS",
+    "legacy_historical_gate_pass": false,
+    "corrected_historical_gate_pass": false,
+    "strict_pass_ready": false,
+    "candidate_pool_rule_identical": true,
+    "first_role_pool_mismatches": 0,
+    "downstream_pool_content_differences": 7,
+    "legacy_order_consecutive_mismatches": 1229,
+    "targets_with_changed_lines": 5,
+    "changed_line_count": 10
+  },
+  "failure": {
+    "stage": "post-run output verification",
+    "failed_assertion": "verification.candidate_pool_comparisons == 2550",
+    "root_cause": "The runner counts all selector decisions from warmup target 201 through target 1250: 1,050 targets × 3 roles = 3,150 comparisons. Only the metric-evaluation observations are restricted to targets 401–1250 (850 targets). The verifier incorrectly expected 850 × 3 and failed despite successful calculation and manifest verification.",
+    "correct_expected_selector_decision_count": 3150
+  },
+  "impact": {
+    "detailed_metric_outputs_committed": false,
+    "queue_execution_status_updated": false,
+    "daily_report_committed": false,
+    "purchase_lines_generated": false,
+    "freeze_or_seal_created": false
+  },
+  "repair": {
+    "workflow_verifier_expected_count": 3150,
+    "reporting_scope": "Explicitly distinguish 1,050 warmup-plus-evaluation selector diagnostics from 850 scored walk-forward targets.",
+    "runner_algorithm_changed": false,
+    "model_weights_changed": false,
+    "strict_gate_changed": false,
+    "thresholds_changed": false,
+    "new_preregistration": "research/weekly_purchase/1251/E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119_V3.json",
+    "original_v1_and_v2_preregistrations": "Preserved unchanged."
+  }
+}

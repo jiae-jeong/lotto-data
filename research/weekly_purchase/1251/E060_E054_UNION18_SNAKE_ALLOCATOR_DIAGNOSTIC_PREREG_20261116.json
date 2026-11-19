@@ -1,0 +1,125 @@
+{
+  "study_id": "E060_E054_UNION18_SNAKE_ALLOCATOR_DIAGNOSTIC_v1",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "date_kst": "2026-11-16",
+  "registered_at_kst": "2026-11-16T09:17:57+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION_FINAL_RUNNER_PINNED",
+  "study_class": "HISTORICAL_ALLOCATOR_PARTITION_SENSITIVITY_DIAGNOSTIC_NOT_INDEPENDENT_PREDICTIVE_EVIDENCE",
+  "research_question": "Holding the exact per-target E054 union18 candidate set fixed, does one deterministic numeric-order snake partition change line-level hit concentration metrics relative to the original E054 line assignment?",
+  "novelty_vs_completed_work": [
+    "E054 tested the frozen rolling-concentration candidate union and its original allocator; E059 decomposed candidate recall before allocation.",
+    "E060 changes no candidate number and evaluates exactly one fixed alternative partition of the same frozen union18, isolating line assignment from candidate selection.",
+    "This is a historical allocator sensitivity diagnostic only; it is not an independent signal family, model-selection sweep, prospective confirmation, or purchase candidate."
+  ],
+  "source": {
+    "data_path": "lotto_data.csv",
+    "data_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "e054_prereg_path": "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json",
+    "e054_prereg_git_blob_sha": "e58c8cd0162709a0eeaa1b6c8b69d712a2bd1356",
+    "e054_predictions_path": "analysis/2026-11-16/gha_43738196136_1/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1/PREDICTIONS.csv",
+    "e054_predictions_git_blob_sha": "3e5c84db3710a1a85f057842e5750d40717ee865",
+    "policy_path": "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json",
+    "policy_git_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  },
+  "runner": {
+    "path": "automation/e060_e054_union18_snake_allocator_diagnostic_v1.js",
+    "git_blob_sha": "5ce9b79e8594800a0bf4591375e4be8fa7773b0f",
+    "source_main_commit": "6b137803913046abe8e04809e5f10a4e7adde74c",
+    "runtime": "Node.js-compatible deterministic JavaScript; same algorithm executed in Code Mode V8",
+    "no_external_dependencies": true
+  },
+  "fixed_comparison": {
+    "reference_allocator": "Original E054 three-line partition from the frozen PREDICTIONS.csv.",
+    "alternative_allocator": "For each target, take the exact union18 from the E054 three lines, sort ascending, then assign indices [0,5,6,11,12,17] to line 1, [1,4,7,10,13,16] to line 2, and [2,3,8,9,14,15] to line 3.",
+    "candidate_union": "Exactly the same frozen 18 numbers per target for both allocators; no candidate addition, removal, re-ranking, or score calculation.",
+    "target_outcomes": "Read only after both portfolios are constructed, solely to score them.",
+    "variants": 1,
+    "parameter_search": false,
+    "model_or_weight_changes": false
+  },
+  "geometry": {
+    "line_count": 3,
+    "numbers_per_line": 6,
+    "pairwise_disjoint": true,
+    "union_size": 18,
+    "invariant": "The alternative partition must preserve the exact E054 union18 for every target."
+  },
+  "random_baseline": {
+    "bundles_per_target": 120,
+    "total_bundles": 102000,
+    "method": "Uniformly shuffle labels 1..45 with xorshift32 and partial Fisher-Yates, then partition the first 18 shuffled labels into three ordered groups of six. This is an exact-geometry disjoint-union18 null.",
+    "seed_rule": "(20261116060 + target_round*1009) mod 2^32",
+    "exact_null": {
+      "max_hits": 1.514256248572755,
+      "any2": 0.47497624326892623,
+      "any3": 0.07135490714617204,
+      "winning_union_coverage": 2.4
+    }
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "bootstrap": "Two-sided percentile moving-block bootstrap of per-target differences from the frozen exact null; for each replicate sample 17 contiguous 50-target blocks with replacement, each valid block start equally likely.",
+    "bootstrap_replicates": 4000,
+    "block_length_targets": 50,
+    "block_count": 17,
+    "remainder_targets": 0,
+    "lower_quantile_index": 24,
+    "upper_quantile_index": 3974,
+    "strict_gate_diagnostic": "All four adjusted CI lower bounds must be strictly >0 and at least 65% of the 17 non-overlapping 50-target any2-delta blocks must be positive.",
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "no_unbounded_microvariants": true,
+    "bootstrap_seed_rule": "(20261116060 + allocator_index*1000003 + metric_index*9001) mod 2^32; allocator_index 0=E054, 1=NUMERIC_SNAKE; metric_index follows the frozen metrics array order.",
+    "random_seed_rule": "(20261116060 + target_round*1009) mod 2^32."
+  },
+  "contamination": {
+    "rounds_1244_1249": "Previously inspected/live-history material; not a clean holdout.",
+    "evaluation_class": "Historical sensitivity diagnostic only; no prospective confirmation."
+  },
+  "reporting": {
+    "primary_endpoint": "Paired difference in line-level max_hits, any2, and any3 between the original E054 partition and the fixed numeric-order snake partition.",
+    "secondary_endpoint": "Strict-gate diagnostic for each partition against the unchanged exact union18 null.",
+    "union_coverage": "Must be identical by construction; any mismatch is a verification failure.",
+    "promotion_effect": "None. No model promotion, no STRICT_PASS_READY, no candidate ranking, no purchase lines, no freeze or seal."
+  },
+  "execution_limits": {
+    "one_shot_only": true,
+    "repeat_or_variant_search": false,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_model_selection": true
+  },
+  "expected_output_files": [
+    "PREDICTIONS.csv",
+    "RANDOM_BASELINE.csv",
+    "BLOCK_STABILITY.csv",
+    "INFERENCE.json",
+    "VERIFICATION.json",
+    "COMPLETION.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.csv"
+  ],
+  "purchase_recommendation_generated": false,
+  "strict_pass_ready": false,
+  "freeze_or_seal_authorized": false,
+  "pre_execution_repair_addendum": "research/weekly_purchase/1251/E060_PREEXECUTION_REPAIR_ADDENDUM_20261116.json",
+  "pre_execution_repair_addendum_blob_sha": "370586396ea99eeee85f15e0be9ac46c2bf651f5"
+}

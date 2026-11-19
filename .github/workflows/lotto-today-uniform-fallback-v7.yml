@@ -1,0 +1,73 @@
+name: lotto-today-uniform-fallback-v7
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-uniform-fallback-v7.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize-v7:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Normalize V7 source before execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('automation/today_uniform_fallback_v7.py')
+          s=p.read_text()
+          bad="'predictive_superiority_claim':false if False else False,"
+          assert s.count(bad)==1
+          s=s.replace(bad,"'predictive_superiority_claim':False,")
+          p.write_text(s)
+          PY
+      - name: Run leakage-safe V7 fallback and freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_uniform_fallback_v7.py | tee "$RUNNER_TEMP/v7.log"
+      - name: Independently verify V7 freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=Path('analysis/2026-10-23/TODAY_UNIFORM_FALLBACK_1247_V7.json')
+          f=Path('research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V7.json')
+          x=json.loads(a.read_text());y=json.loads(f.read_text())
+          assert x['target_round']==1247 and x['data_cutoff']==1246
+          assert x['policy']=='V7_UNIFORM_30_UNIQUE_FALLBACK'
+          assert x['predictive_superiority_claim'] is False
+          assert x['final_lines']==y['final_lines']
+          lines=x['final_lines'];flat=[n for row in lines for n in row]
+          assert len(lines)==5 and len({tuple(row) for row in lines})==5
+          assert all(len(row)==6 and row==sorted(row) and len(set(row))==6 and all(type(n) is int and 1<=n<=45 for n in row) for row in lines)
+          assert len(flat)==30 and len(set(flat))==30
+          g=x['integrity'];assert g['validator_1']=='PASS' and g['validator_2']=='PASS' and g['final_text_parse']=='PASS' and g['stored_vs_display']=='PASS'
+          print(json.dumps({'status':'INDEPENDENT_PASS','lines':lines,'scorecard':x['scorecard']},ensure_ascii=False))
+          PY
+      - name: Commit V7 source, audit, and freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add automation/today_uniform_fallback_v7.py analysis/2026-10-23/TODAY_UNIFORM_FALLBACK_1247_V7.json research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_V7.json research/weekly_purchase/1247/V6_REJECTION_AUDIT.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'research: freeze audited 1247 uniform fallback v7'
+          git pull --rebase origin main
+          git push origin HEAD:main

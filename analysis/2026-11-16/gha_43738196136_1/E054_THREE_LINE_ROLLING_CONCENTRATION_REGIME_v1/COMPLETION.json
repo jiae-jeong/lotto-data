@@ -1,0 +1,18 @@
+{
+  "study_id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+  "status": "COMPLETE",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL",
+  "evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+  "independent_research_axis": true,
+  "independent_signal_family": true,
+  "purchase_recommendation_generated": false
+}

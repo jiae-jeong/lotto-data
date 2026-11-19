@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-23",
+  "compute_status": "FULL_COMPUTE_COMPLETE",
+  "protocol_status": "PROTOCOL_PARTIAL",
+  "protocol_checks": {
+    "full_compute_execution": true,
+    "external_two_source_crosscheck": false,
+    "historical_errornote_aggregate_present": false,
+    "historical_errornote_closed_loop_complete": false,
+    "full_signal_scorecard": false,
+    "numeric_13_section_report": true
+  },
+  "missing_compute_keys": [],
+  "failed_compute_keys": [],
+  "protocol_missing": [
+    "external_two_source_crosscheck",
+    "historical_errornote_aggregate_present",
+    "historical_errornote_closed_loop_complete",
+    "full_signal_scorecard"
+  ]
+}

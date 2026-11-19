@@ -1,0 +1,14 @@
+{
+  "command": "python work/search_a_sources_20261009.py",
+  "exit_code": 0,
+  "observed_stdout": {
+    "local_files": 1109,
+    "git_blobs": 211,
+    "unique_contents": 316,
+    "specific_hit_files": 69,
+    "errors": 0
+  },
+  "numerical_execution": "separate v1 failed / v2 success, actual logs preserved",
+  "publication_scope": "Unrelated personal/auth content excluded",
+  "source_search_first_completed_before_numerical_run": true
+}

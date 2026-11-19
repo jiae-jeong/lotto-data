@@ -1,0 +1,2 @@
+bundle,target_rounds,mean_bundle_max_hits,mean_unique_number_coverage,mean_winning_union_coverage,rate_any_2plus,rate_any_3plus,rate_any_4plus
+FIXED_THREE_COMPONENT_BUNDLE,645,1.4186046511627908,16.052713178294574,2.0651162790697675,0.4310077519379845,0.05581395348837209,0

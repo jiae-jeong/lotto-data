@@ -1,0 +1,37 @@
+{
+  "study_id": "E045_PROSPECTIVE_RANDOM5_BASELINE_v1",
+  "target_round": 1246,
+  "status": "FROZEN_PRE_DRAW",
+  "seed": 20261015291,
+  "seed_rule": "base_seed + target_round",
+  "base_seed": 20261014045,
+  "portfolios": 10000,
+  "tickets_per_portfolio": 5,
+  "pool_path": "analysis/2026-10-14/E045_PROSPECTIVE_RANDOM5_BASELINE_v1/RANDOM5_POOL_1246.jsonl.gz",
+  "pool_sha256": "da3f890aac5c6eb4ac911bdd5d56de58a66a7bb986927791910e428858f0d583",
+  "pool_bytes": 293322,
+  "sampling": "Uniform 6-subsets from 1..45; each five-line portfolio has five distinct tickets; no outcome-conditioned generation.",
+  "exact_null_reference": {
+    "method": "exact combinatorial null; five distinct tickets sampled uniformly without replacement",
+    "single_ticket_mean_hits": 0.8,
+    "single_ticket_variance_hits": 0.6145454545454545,
+    "five_line_any_kplus_probability": {
+      "2": 0.6185316336873234,
+      "3": 0.11362357327424644,
+      "4": 0.0069480241783076435,
+      "5": 0.00014425093106840148,
+      "6": 6.138690199497532e-07
+    },
+    "five_line_max_hits_ge_probability": {
+      "1": 0.9896875411165714,
+      "2": 0.6185316336873234,
+      "3": 0.11362357327424644,
+      "4": 0.0069480241783076435,
+      "5": 0.00014425093106840148,
+      "6": 6.138690199497532e-07
+    },
+    "five_line_expected_max_hits": 1.7289356370565372,
+    "five_line_expected_unique_number_coverage": 22.997456007755464,
+    "five_line_expected_pairwise_overlap": 0.8
+  }
+}

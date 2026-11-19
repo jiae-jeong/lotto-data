@@ -1,0 +1,31 @@
+{
+  "status": "FAIL",
+  "study_id": "E059_E054_CANDIDATE_RECALL_STAGE_DECOMPOSITION_v1",
+  "data_git_blob_match": true,
+  "e054_prediction_git_blob_match": true,
+  "runner_git_blob_match": true,
+  "data_rows": 1250,
+  "target_count": 850,
+  "score_hash_match_count": 850,
+  "regime_hhi_exposure_match_counts": {
+    "training": 850,
+    "regime": 850,
+    "current_hhi": 850,
+    "threshold_hhi": 850,
+    "reference_count": 850,
+    "exposure": 850,
+    "score_sha256": 850
+  },
+  "target_cutoff_violations": 0,
+  "future_leakage_failures": 0,
+  "rank_tie_break": "score descending, number ascending",
+  "recent30_baseline": "last 30 pre-target main draws, frequency descending, number ascending",
+  "exact_random_baseline": "K/45 expected recall for a uniform K-subset of 1..45",
+  "bootstrap_comparisons": 10,
+  "bonferroni_alpha_per_comparison": 0.005,
+  "thresholds_changed": false,
+  "model_or_weights_changed": false,
+  "candidate_numbers_printed": false,
+  "purchase_lines_generated": false,
+  "strict_pass_ready_created": false
+}

@@ -1,0 +1,158 @@
+{
+  "task": {
+    "id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+    "kind": "pair_drop",
+    "question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
+    "novelty": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
+    "spec": {
+      "study_id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+      "kind": "pair_drop",
+      "research_question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
+      "data_cutoff": 1245,
+      "target_rounds": "601..1245 inclusive",
+      "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+      "primary_metric": "mean main-number hits per target round",
+      "secondary_metrics": [
+        "0..6 hit distribution",
+        "2+/3+/4+/5+/6 rates",
+        "paired difference",
+        "temporal block stability"
+      ],
+      "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+      "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+      "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+      "block_stability": [
+        50,
+        100,
+        200
+      ],
+      "tie_break": "lower number for score ties; source component order retained",
+      "random_seed": 20261013,
+      "expected_output_files": [
+        "PREDICTIONS.csv",
+        "METRICS.csv",
+        "PAIRED_COMPARISONS.csv",
+        "BLOCK_STABILITY.csv",
+        "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv",
+        "EXACT_UNIFORM_BASELINE.json",
+        "VERIFICATION.json",
+        "REPORT.md"
+      ],
+      "expected_record_counts": {
+        "PREDICTIONS.csv": 14835,
+        "METRICS.csv": 24,
+        "PAIRED_COMPARISONS.csv": 168,
+        "BLOCK_STABILITY.csv": 552,
+        "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv": 21
+      },
+      "novelty_signature": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
+      "study_class": "empirical",
+      "component_pair_count": 21,
+      "ablation": "drop each unordered component pair; equal weights"
+    }
+  },
+  "study_spec": {
+    "study_id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+    "kind": "pair_drop",
+    "research_question": "Do any of the 21 frozen two-component drops show recurring interaction beyond single-component leave-one-out?",
+    "data_cutoff": 1245,
+    "target_rounds": "601..1245 inclusive",
+    "training_cutoff_rule": "Each cached OOS prediction for target t must have training_through_round=t-1; only pre-target frozen component tickets are used.",
+    "primary_metric": "mean main-number hits per target round",
+    "secondary_metrics": [
+      "0..6 hit distribution",
+      "2+/3+/4+/5+/6 rates",
+      "paired difference",
+      "temporal block stability"
+    ],
+    "comparator": "same target-round cached B component forecasts and equal-rank B where applicable",
+    "baseline": "exact uniform 6/45 distribution; simulated same-target random tickets when specified",
+    "multiplicity_correction": "Holm step-down for registered family of contrasts; descriptive outputs labelled exploratory",
+    "block_stability": [
+      50,
+      100,
+      200
+    ],
+    "tie_break": "lower number for score ties; source component order retained",
+    "random_seed": 20261013,
+    "expected_output_files": [
+      "PREDICTIONS.csv",
+      "METRICS.csv",
+      "PAIRED_COMPARISONS.csv",
+      "BLOCK_STABILITY.csv",
+      "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv",
+      "EXACT_UNIFORM_BASELINE.json",
+      "VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "expected_record_counts": {
+      "PREDICTIONS.csv": 14835,
+      "METRICS.csv": 24,
+      "PAIRED_COMPARISONS.csv": 168,
+      "BLOCK_STABILITY.csv": 552,
+      "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv": 21
+    },
+    "novelty_signature": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
+    "study_class": "empirical",
+    "component_pair_count": 21,
+    "ablation": "drop each unordered component pair; equal weights"
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "348064d7f493f0c5f936e51804aa5b46f03d8d78f80b6b58653b9821827646ce",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "c21b7abdcff238dd88fe17f3d0da6d3c164672c9431642eaacedbd2bf535a04b",
+  "source_file_sha256": {
+    "research_engine_v2.py": "c21b7abdcff238dd88fe17f3d0da6d3c164672c9431642eaacedbd2bf535a04b",
+    "expanded_studies_v2.py": "84d9b04cb6f8ee88326141161ab1fd85a4c38f18932aa0816c5282a767d0d5a3"
+  },
+  "expected_output_files": [
+    "PREDICTIONS.csv",
+    "METRICS.csv",
+    "PAIRED_COMPARISONS.csv",
+    "BLOCK_STABILITY.csv",
+    "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv",
+    "EXACT_UNIFORM_BASELINE.json",
+    "VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "expected_record_counts": {
+    "PREDICTIONS.csv": 14835,
+    "METRICS.csv": 24,
+    "PAIRED_COMPARISONS.csv": 168,
+    "BLOCK_STABILITY.csv": 552,
+    "LOO_PAIR_DIRECTIONAL_CONSISTENCY.csv": 21
+  },
+  "created_utc": "2026-10-13T01:10:51.130482+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "all 21 C(7,2) two-component ablations; same targets; Holm-corrected paired comparisons; directional consistency with single leave-one-out.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}

@@ -1,0 +1,39 @@
+INPUT: rows=1244 rounds=1..1244 SHA256=243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f
+EXACT_MULTIPLICITY {"order": 2, "family_size": 990, "total_observed_relation_occurrences": 18660, "max_count": 34, "min_raw_p": 0.0009655413635828089, "min_bonferroni_family_p": 0.9558859499469808, "min_holm_family_p": 0.9558859499469808, "raw_p_below_005": 40, "bonferroni_family_significant": 0, "holm_family_significant": 0, "bonferroni_combined_significant": 0}
+EXACT_MULTIPLICITY {"order": 3, "family_size": 14190, "total_observed_relation_occurrences": 24880, "max_count": 8, "min_raw_p": 0.00046751079043044655, "min_bonferroni_family_p": 1, "min_holm_family_p": 1, "raw_p_below_005": 425, "bonferroni_family_significant": 0, "holm_family_significant": 0, "bonferroni_combined_significant": 0}
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo rev-parse HEAD
+EXIT: 0
+6ee07c2a5bca8f7d5e714a6d48bc5a8b7fd9cf5d
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo status --porcelain=v1 --untracked-files=all
+EXIT: 0
+ M research/1245_final_pipeline_v3/recover_and_run_20261009.py
+ M research/1245_final_pipeline_v3/recovery_run_20261009/EXECUTION_REPORT.md
+?? research/1245_final_pipeline_v3/SOURCE_ASSET_SEARCH_v2.md
+?? research/1245_final_pipeline_v3/__pycache__/prepare_1245_final_three_lines_v3.cpython-312.pyc
+?? research/1245_final_pipeline_v3/independent_validation_20261009.py
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/INDEPENDENT_VALIDATION_REPORT.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/SOURCE_ASSET_SEARCH.md
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/execution.log
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_number_frequency.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_candidate_overlaps.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_model_scorecard.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_metrics.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_portfolio_walkforward.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/fresh_walkforward_predictions.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_1245_three_lines.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/reassessed_portfolio_overlap.csv
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/run_metadata.json
+?? research/1245_final_pipeline_v3/independent_validation_20261009_independent/stored_reproduction_check.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/OUTPUT_SHA256.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/RECOVERY_README.md
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_50_round_trends.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_classification.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_holdout_metrics.csv
+?? research/1245_final_pipeline_v3/recovered_original_assets/outputs/b_model_predictions.csv
+?? research/1245_final_pipeline_v3/source_asset_search_v2.log
+?? research/expansion_framework_v1/__pycache__/walkforward_core.cpython-312.pyc
+?? research/expansion_framework_v1/studies/study_batch_001/__pycache__/run_batch.cpython-312.pyc
+COMMAND: C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd\git.exe -C C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\lotto-repo diff --cached --name-only
+EXIT: 0
+ORIGINAL_ALL_FILES_HEAD_INDEX_STATUS: PRESERVED
+RESEARCH_EXECUTION_PASS

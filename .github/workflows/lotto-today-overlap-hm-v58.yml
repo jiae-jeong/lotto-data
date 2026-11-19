@@ -1,0 +1,44 @@
+name: lotto-today-overlap-hm-v58
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-overlap-hm-v58.yml'
+      - 'automation/today_overlap_hm_v58.py'
+permissions:
+  contents: read
+jobs:
+  validate-v58:
+    strategy:
+      fail-fast: false
+      matrix:
+        policy: ['H:repeat1','H:repeat2','H:top5x2','H:top6x2','H:top10x2','H:top3x3','M:repeat1','M:repeat2','M:top5x2','M:top6x2','M:top10x2','M:top3x3']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run one V58 overlap policy
+        shell: bash
+        env:
+          POLICY: ${{ matrix.policy }}
+        run: |
+          set -euo pipefail
+          OVERLAP_POLICY="$POLICY" python -B automation/today_overlap_hm_v58.py
+      - name: Print strict result
+        shell: bash
+        env:
+          POLICY: ${{ matrix.policy }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          p=os.environ['POLICY'];tag=p.replace(':','_')
+          d=json.load(open(f'analysis/2026-10-30/TODAY_OVERLAP_HM_{tag}_1248_V58.json'))
+          print(json.dumps({'policy':p,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'null':d['scorecard']['matched_exact_label_null']},ensure_ascii=False))
+          PY

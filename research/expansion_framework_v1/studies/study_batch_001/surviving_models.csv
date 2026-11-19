@@ -1,0 +1,9 @@
+﻿research_id,model,status,reason
+S001,multi_window_frequency,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation
+S002,gap_regime_hazard,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation
+S003,momentum_state_transition,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation
+S004,conditional_probability,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation
+S005,structure_transition,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation
+S006,pair_residual_node,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation
+S007,triple_residual_node,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation
+S008,family_balanced_hybrid,NONE_PROMOTED,Post-hoc historical scan; require independent prospective validation

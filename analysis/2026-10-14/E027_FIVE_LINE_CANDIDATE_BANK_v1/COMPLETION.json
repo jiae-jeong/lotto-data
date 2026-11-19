@@ -1,0 +1,34 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E027_FIVE_LINE_CANDIDATE_BANK_v1",
+  "question": "Can a cutoff-safe five-line candidate bank preserve source provenance while removing duplicate and near-duplicate lines?",
+  "novelty": "Target-specific bank combines frozen B and E025 survivors, merges lines with at least five shared numbers, and retains every source and training cutoff.",
+  "executed_cases": 39955,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 590,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 39955,
+    "verification": {
+      "status": "PASS",
+      "target_count": 645,
+      "candidate_rows": 6251,
+      "provenance_rows": 6450,
+      "overlap_rows": 27254,
+      "cutoff_violations": 0,
+      "duplicate_or_near_duplicate_pairs": 0,
+      "independent_sources_included": [
+        "CALENDAR_SEASON_CONDITIONAL_v1",
+        "PREVIOUS_SUM_REGIME_CONDITIONAL_v1"
+      ],
+      "future_outcomes_used_for_bank": false,
+      "future_predictions": 0
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-14T02:12:51.222501+00:00"
+}

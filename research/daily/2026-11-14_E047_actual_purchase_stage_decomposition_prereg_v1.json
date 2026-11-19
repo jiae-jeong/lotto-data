@@ -1,0 +1,57 @@
+{
+  "study_id": "E047_ACTUAL_PURCHASE_STAGE_DECOMPOSITION_v1",
+  "registered_at_kst": "2026-11-14",
+  "classification": "EXPLORATORY_HISTORICAL_FAILURE_DECOMPOSITION_NOT_CONFIRMATORY_EVIDENCE",
+  "question": "For the two preserved canonical actual-purchase rounds (1247 and 1248), how many winning numbers were reachable by the six frozen reference candidate rankers at K=10/15/20/25/30, how many were in the actual purchased ticket union, and how much additional loss arose from ticket allocation within that union?",
+  "sources": {
+    "data_path": "lotto_data.csv",
+    "data_git_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def",
+    "data_sha256_expected": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "ranker_source_path": "automation/candidate_recall_v1.py",
+    "ranker_source_blob_sha": "7eaeba89f2378b0e049fe9eecd522b298dec1f36",
+    "actual_purchase_sources": [
+      {
+        "target_round": 1247,
+        "path": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+        "blob_sha": "730bb97bf4602288a74be9480941bb0532e219d7"
+      },
+      {
+        "target_round": 1248,
+        "path": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+        "blob_sha": "d952c39886626140be8fbc70bf5397fe338da0c2"
+      }
+    ],
+    "excluded_sources": {
+      "1246": "EXCLUDED_UNRESOLVED: two distinct pre-draw five-line sets exist and no receipt resolves which was actually purchased.",
+      "1245": "The preserved ERROR_NOTE_1245_AGGREGATE contains V4 recommendations without verified purchase receipts; not treated as actual purchase."
+    }
+  },
+  "method": {
+    "target_rounds": [1247, 1248],
+    "training_cutoff_rule": "For target t, ranker features use only draws 1..t-1. The target draw is read only after ranks are frozen.",
+    "rankers": ["recent30", "gap", "momentum", "balanced", "contrarian", "consensus"],
+    "ranker_formula": "Exact formulas, population z-scores, ascending-number tie-break, and windows from automation/candidate_recall_v1.py; no modifications.",
+    "candidate_k": [10, 15, 20, 25, 30],
+    "stage_metrics": [
+      "candidate_recall_at_k_by_ranker",
+      "winning_number_rank_by_ranker",
+      "actual_purchase_union_recall",
+      "per_line_hit_distribution",
+      "max_hit",
+      "union_hits_minus_max_hit"
+    ],
+    "stage_interpretation": "Reference-ranker reach is descriptive and is not the actual selector's candidate bank. A winner outside every reference top30 is labelled reference-ranker-unreached, not proven causally excluded by the actual selector. A winner in the actual ticket union but not concentrated in the best line is an observed allocation gap."
+  },
+  "limitations": [
+    "Only two canonical actual-purchase targets are currently verifiable; no population-level inference or confidence interval is authorized.",
+    "1244-1248 are previously exposed live-history diagnostics, not clean holdouts.",
+    "No model, weight, threshold, allocator, or purchase policy is selected or changed.",
+    "No future outcome after round 1249 is used.",
+    "No candidate or purchase lines are generated."
+  ],
+  "outputs": [
+    "E047_ACTUAL_PURCHASE_STAGE_DECOMPOSITION_v1.json",
+    "E047_ACTUAL_PURCHASE_STAGE_DECOMPOSITION_v1.md"
+  ],
+  "promotion_rule": "Diagnostic only. No model promotion, strict PASS, predictive superiority claim, or change to the target-1251 three-line policy is permitted."
+}

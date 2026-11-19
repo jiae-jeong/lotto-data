@@ -1,0 +1,16 @@
+{
+  "study_id": "E043_E049_PROSPECTIVE_EVIDENCE_v1",
+  "target_round": 1246,
+  "base_seed": 20261014045,
+  "n_portfolios": 10000,
+  "tickets_per_portfolio": 5,
+  "sampling": "random.Random.sample(range(1,46),6), sorted; resample duplicate tickets within portfolio",
+  "frozen_before_draw": true,
+  "code_sha256": {
+    "research/prospective_v1/prepare_prospective_v1.py": "286779d15020a5fbff3f8b5ead12073450ee7cd28bc6ee9eb77ae77c1790c295",
+    "research/prospective_v1/ledger_v1.py": "97e62470f9b4e3a662bca6020d4aa096ecea5b4985691e6e8a9eff2c154906db",
+    "research/prospective_v1/verify_prospective_v1.py": "ef4147c5a7508fa3353d69f1f0344e86f0a631841038a864b299a3e33b934714",
+    "research/prospective_v1/tests/test_prospective_v1.py": "5a9196cad97a7096f1cf3720208679d4e5d8157c9234a5678e0f57c094d2ddce",
+    ".github/workflows/prospective-evidence-v1.yml": "0ceb01eeb3b8c60f0c05f74094e4aafcdb39511f15e938d7aa4cf5f492ab1d1b"
+  }
+}

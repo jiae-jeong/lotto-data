@@ -1,0 +1,29 @@
+﻿model_a,model_b,intersection_numbers,intersection_count,jaccard,random_expected_intersection,note
+S001,S002,16 31,2,0.2,0.8,diagnostic only; generated from 1..1244
+S001,S003,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S001,S004,13 18 38,3,0.3333333333333333,0.8,diagnostic only; generated from 1..1244
+S001,S005,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S001,S006,13 18,2,0.2,0.8,diagnostic only; generated from 1..1244
+S001,S007,13 18,2,0.2,0.8,diagnostic only; generated from 1..1244
+S001,S008,13 16,2,0.2,0.8,diagnostic only; generated from 1..1244
+S002,S003,10,1,0.09090909090909091,0.8,diagnostic only; generated from 1..1244
+S002,S004,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S002,S005,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S002,S006,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S002,S007,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S002,S008,16,1,0.09090909090909091,0.8,diagnostic only; generated from 1..1244
+S003,S004,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S003,S005,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S003,S006,27,1,0.09090909090909091,0.8,diagnostic only; generated from 1..1244
+S003,S007,27,1,0.09090909090909091,0.8,diagnostic only; generated from 1..1244
+S003,S008,27,1,0.09090909090909091,0.8,diagnostic only; generated from 1..1244
+S004,S005,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S004,S006,13 18 34,3,0.3333333333333333,0.8,diagnostic only; generated from 1..1244
+S004,S007,13 18 34,3,0.3333333333333333,0.8,diagnostic only; generated from 1..1244
+S004,S008,11 13 34,3,0.3333333333333333,0.8,diagnostic only; generated from 1..1244
+S005,S006,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S005,S007,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S005,S008,,0,0.0,0.8,diagnostic only; generated from 1..1244
+S006,S007,12 13 18 27 33 34,6,1.0,0.8,diagnostic only; generated from 1..1244
+S006,S008,12 13 27 34,4,0.5,0.8,diagnostic only; generated from 1..1244
+S007,S008,12 13 27 34,4,0.5,0.8,diagnostic only; generated from 1..1244

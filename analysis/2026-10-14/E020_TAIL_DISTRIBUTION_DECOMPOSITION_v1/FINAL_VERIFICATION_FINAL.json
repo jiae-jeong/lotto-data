@@ -1,0 +1,92 @@
+{
+  "B_raw_predictions": 33480,
+  "B_targets": 1045,
+  "B_unique_target_model_predictions": 8360,
+  "calculation_wrapper_exit_code": 1,
+  "checks": [
+    {
+      "check": "full_data_validation",
+      "evidence": "DATA_VALIDATION.json",
+      "status": "PASS"
+    },
+    {
+      "check": "six_independent_source_samples",
+      "evidence": "DATA_SOURCE_CROSSCHECK_FINAL.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "canonical_source_unchanged",
+      "evidence": "lotto_data.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "B_rolling_prediction_replay",
+      "evidence": "b_model_predictions.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "leakage_zero",
+      "evidence": "B_LEAKAGE_CHECK.json",
+      "status": "PASS"
+    },
+    {
+      "check": "direct_target_matched_random",
+      "evidence": "RANDOM_BASELINE_BY_TARGET.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "complete_random_path_count",
+      "evidence": "RANDOM_COMPLETE_PATHS.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "pair_triple_universes",
+      "evidence": "PAIR_STATS.csv; TRIPLE_STATS.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "structure_formula_readback",
+      "evidence": "STRUCTURE_RANK_SOURCE_AUDIT_V2.json",
+      "status": "PASS"
+    },
+    {
+      "check": "report_readback_and_no_ticket_values",
+      "evidence": "REPORT_FINAL_V3.md",
+      "status": "PASS"
+    },
+    {
+      "check": "pre_draw_record_searched",
+      "evidence": "ROUND_1245_PROVENANCE.json",
+      "status": "PASS"
+    },
+    {
+      "check": "new_hypothesis_registered",
+      "evidence": "HYPOTHESIS_REGISTRY_UPDATE.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "tracked_project_files_unchanged",
+      "evidence": "git diff --quiet HEAD; git diff --cached --quiet",
+      "status": "PASS"
+    },
+    {
+      "check": "worktree_scope",
+      "evidence": "git status --porcelain",
+      "status": "PASS"
+    }
+  ],
+  "complete_random_paths": 20000,
+  "crosscheck_samples": 6,
+  "data_rows": 1245,
+  "direct_random_tickets": 1045000,
+  "final_report": "REPORT_FINAL_V3.md",
+  "latest_round": 1245,
+  "leakage_failures": 0,
+  "pair_count": 990,
+  "protected_original_data_unchanged": true,
+  "recommendation_lines_evaluated": 3,
+  "status": "PASS",
+  "triple_count": 14190,
+  "verified_utc": "2026-10-14",
+  "wrapper_exit_note": "Only the wrapper final report sanity predicate failed; it rejected expected training-cutoff text. All calculations were complete. Two independent read-back passes validated generated artifacts without rerunning the research."
+}

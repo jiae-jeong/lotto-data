@@ -1,0 +1,23 @@
+{
+  "addendum_id": "E075_E045_LEGACY_SOURCE_CONFORMANCE_ADDENDUM_20261119",
+  "study_id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+  "date_kst": "2026-11-19",
+  "original_e045_runner": {
+    "path": "automation/three_line_research_1251_refresh_1250_v1.py",
+    "blob_sha": "514b53c8a2bb3a57a7123a4d2c5f9b8f6751b666",
+    "frozen_in": "research/weekly_purchase/1251/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1.json"
+  },
+  "base_runner": {
+    "path": "automation/three_line_research_1251_v1.py",
+    "blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513"
+  },
+  "comparison": {
+    "e045_refresh_and_base_choose_disjoint_ticket_function_identical": true,
+    "legacy_logic_reproduced_in_e075": true,
+    "legacy_function_difference": "E075 retains the original score-ranked combination order and objective/tie-break semantics, while returning the score-order tuple and candidate pool as additional audit diagnostics. Its selected sorted ticket remains the original return value.",
+    "bug_confirmed_in_both_frozen_e045_sources": "The consecutive-pair count and lexicographic tie-break are evaluated on score-ranked combination order, not the sorted ticket specified by preregistration."
+  },
+  "no_model_or_policy_change": true,
+  "no_threshold_change": true,
+  "no_promotion": true
+}

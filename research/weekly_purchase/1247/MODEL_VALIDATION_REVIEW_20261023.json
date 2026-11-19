@@ -1,0 +1,14 @@
+{
+  "target_round": 1247,
+  "review_date_kst": "2026-10-23",
+  "data_cutoff": 1246,
+  "strict_validation_report": "analysis/2026-10-23/MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json",
+  "models_tested": 11,
+  "validated_models": [],
+  "verdict": "NO_MODEL_PASSES_STRICT_VALIDATION",
+  "v3_corrected_model_promotion_status": "FAIL",
+  "v3_final_file_preserved_for_audit": "research/weekly_purchase/1247/FINAL_FIVE_LINES_1247_20261023_PROTOCOL_FULL_V3.json",
+  "status_of_v3_lines": "NOT_MODEL_VALIDATED",
+  "reason": "The V3 promotion gate compared a 30-unique portfolio against ordinary independent random tickets. Under the correct structure-matched 30-unique random comparison, max_hits, any_2plus, any_3plus, and any_4plus were lower. The small union-coverage difference is structural and not evidence of predictive edge.",
+  "future_rule": "Do not present model-guided purchase lines as validated unless a time-ordered walk-forward model passes structure-matched baseline comparison, adjusted confidence bounds, and non-overlapping block stability checks."
+}

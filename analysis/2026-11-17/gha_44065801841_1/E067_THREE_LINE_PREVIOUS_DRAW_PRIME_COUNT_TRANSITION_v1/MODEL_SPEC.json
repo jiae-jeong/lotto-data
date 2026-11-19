@@ -1,0 +1,77 @@
+{
+  "study_id": "E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_v1",
+  "evidence_class": "PREREGISTERED_HISTORICAL_EXPLORATORY_THREE_LINE_PRIME_COUNT_SIGNAL_NOT_PROSPECTIVE_CONFIRMATION",
+  "preregistration": "research/weekly_purchase/1251/E067_THREE_LINE_PREVIOUS_DRAW_PRIME_COUNT_TRANSITION_PREREG_20261117.json",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "feature_definition": {
+    "source": "The immediately preceding draw's six main numbers only; bonus is excluded.",
+    "prime_set": "The fixed primes in 1..45: 2,3,5,7,11,13,17,19,23,29,31,37,41,43.",
+    "prime_count": "Count prime numbers among the previous draw's six main numbers.",
+    "state_components": {
+      "prime_count_bin": "0 if count<=1; 1 if count==2; 2 if count>=3"
+    },
+    "distance": "Hamming distance across the one frozen categorical prime-count component.",
+    "transition_history": "For each historical outcome round u=2..t-1, use the prime-count state of draw u-1 as the feature and the six main numbers of draw u as the outcome. Score target t from draw t-1, then add target t only after scoring.",
+    "candidate_universe": "All integers 1..45 are scored for every target."
+  },
+  "estimator": {
+    "kernel_weight": "0.5 ** HammingDistance(historical_previous_draw_prime_count_bin, target_previous_draw_prime_count_bin)",
+    "conditional_count": "Weighted count of each main number in historical transition outcomes.",
+    "global_rate": "Count of each main number in draws 1..t-1 divided by t-1.",
+    "smoothing_alpha": 60,
+    "score_formula": "(weighted_conditional_count[n] + 60 * global_main_inclusion_rate[n]) / (sum_transition_weights + 60)",
+    "ranking": "Score descending, then number ascending.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "portfolio": {
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "selection": "Three sequential calls to the unchanged E045 choose_disjoint_ticket selector, passing the E067 score as both role_score and global_score; remove selected numbers after each line.",
+    "randomness_in_selection": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line-incidence geometry.",
+    "random_bundles_per_target": 120,
+    "seed": 20261117067,
+    "randomness_used_for_final_selection": false,
+    "exact_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    }
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null.",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261117067,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "frozen_blobs": {
+    "runner_blob_sha": "dd502679cd0913b4caa12e8178af922e48498fb5",
+    "test_blob_sha": "41ea3f5a0ac38af0354546d3a6414265e0a7d24f",
+    "workflow_blob_sha": "398075603678ab6b8bb79bb2ebd945a3e625492d",
+    "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  }
+}

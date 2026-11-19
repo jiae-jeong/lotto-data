@@ -1,0 +1,13 @@
+PASS independent raw integrity 1..1244 and pinned SHA
+PASS pre-run code/config seals; successful v2 and preserved failed v1
+PASS 225 independent single-number/window counts, ranks, completed/current gaps
+PASS all 75900 pair/triple window records and exact marginal probabilities
+PASS 1244 independent draw structures, 65 incidence records and first-draw overlap missingness
+PASS all 13 exact structure baselines independently counted; no Monte Carlo or tickets generated
+PASS 5200 historical probability forecasts train strictly through t-1 and 13 coverage diagnoses
+PASS 55980 longitudinal gap records recomputed with prefix-only counters
+PASS 350 ending-digit multiplicity records
+PASS missing legacy sources/error loop recorded; six hypotheses not adopted
+PASS all pre-existing worktree and frozen B/MC file content/size/mtime unchanged
+PASS no legacy model execution import; no result after1244 used in inputs
+FINAL VERIFICATION PASS; independent computations, preserved evidence and explicit missing-source limitations

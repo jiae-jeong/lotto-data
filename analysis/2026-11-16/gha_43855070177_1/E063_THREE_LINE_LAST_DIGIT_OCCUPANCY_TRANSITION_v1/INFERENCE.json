@@ -1,0 +1,68 @@
+{
+  "study_id": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+  "evidence_class": "HISTORICAL_EXPLORATORY_INDEPENDENT_FEATURE_FAMILY_NOT_PROSPECTIVE_CONFIRMATION",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "random_bundles_per_target": 120,
+  "random_bundles_total": 102000,
+  "bootstrap_replicates": 4000,
+  "block_length_targets": 50,
+  "alpha_per_metric": 0.0125,
+  "metrics": {
+    "max_hits": {
+      "observed_mean": 1.5505882352941176,
+      "random_mean": 1.5125196078431373,
+      "delta_mean": 0.03806862745098039,
+      "adjusted_moving_block_ci": [
+        -0.012558823529411765,
+        0.07958823529411764
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.5,
+      "random_mean": 0.47411764705882353,
+      "delta_mean": 0.02588235294117647,
+      "adjusted_moving_block_ci": [
+        -0.01038235294117647,
+        0.05094117647058823
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.07764705882352942,
+      "random_mean": 0.07019607843137254,
+      "delta_mean": 0.007450980392156864,
+      "adjusted_moving_block_ci": [
+        -0.013254901960784313,
+        0.024607843137254903
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.4235294117647057,
+      "random_mean": 2.4019901960784313,
+      "delta_mean": 0.02153921568627451,
+      "adjusted_moving_block_ci": [
+        -0.036931372549019605,
+        0.09433333333333334
+      ],
+      "lower_bound_strictly_gt_zero": false
+    }
+  },
+  "any2_positive_nonoverlapping_50_target_blocks": 11,
+  "nonoverlapping_50_target_block_count": 17,
+  "any2_positive_block_share": 0.6470588235294118,
+  "all_adjusted_ci_lower_bounds_strictly_gt_zero": false,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "prospective_confirmation_required": true,
+  "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+  "purchase_recommendation_generated": false,
+  "thresholds_or_policy_changed": false
+}

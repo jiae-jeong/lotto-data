@@ -1,0 +1,17 @@
+{
+  "study_id": "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+  "status": "COMPLETE",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL",
+  "evidence_class": "HISTORICAL_INDEPENDENT_AXIS_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+  "independent_research_axis": true,
+  "purchase_recommendation_generated": false
+}

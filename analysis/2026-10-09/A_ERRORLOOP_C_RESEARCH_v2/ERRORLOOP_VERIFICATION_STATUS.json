@@ -1,0 +1,18 @@
+{
+  "source_status": "SOURCE NOT FOUND",
+  "eligible_authentic_historical_recommendations": 0,
+  "closed_loop": "NOT EXECUTED",
+  "missing_reason": "No sourced contemporaneous recommendation / target / cutoff / version / publication evidence for targets <=1244. Backtest rows are excluded.",
+  "models": [
+    "A",
+    "B",
+    "C",
+    "contrarian"
+  ],
+  "mean_hits": null,
+  "hit_distribution": null,
+  "bonus": null,
+  "winner_rank_reconstruction": "NOT EXECUTED: contemporaneous recommendation/cutoff not established",
+  "failure_reasons": "NOT RECORDED; no causal attribution invented",
+  "pending_1245": "Existing sealed predictions not evaluated; actual NOT READ / NOT USED"
+}

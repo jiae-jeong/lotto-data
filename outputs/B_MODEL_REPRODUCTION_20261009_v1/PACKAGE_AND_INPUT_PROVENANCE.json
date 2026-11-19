@@ -1,0 +1,90 @@
+{
+  "package_path": "C:\\Users\\admin\\Downloads\\lotto_b_model_recovery_package.zip",
+  "bytes": 367977,
+  "mtime_utc": "2026-10-09T01:35:29.966280+00:00",
+  "sha256": "48c85a1f7f8c67f69a4102200c71857509f3f7e71a3467dcca357091afa5cf1d",
+  "archive_files": [
+    {
+      "name": "lotto_b_model_recovery_package/",
+      "bytes": 0,
+      "crc32": "0x0"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/restore_recovered_outputs.ps1",
+      "bytes": 3026,
+      "crc32": "0xf2f8c6df"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/data/",
+      "bytes": 0,
+      "crc32": "0x0"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/data/lotto_data.csv",
+      "bytes": 43234,
+      "crc32": "0x14cc7f2e"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/run.log",
+      "bytes": 926,
+      "crc32": "0x90390517"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/OUTPUT_SHA256.csv",
+      "bytes": 1270,
+      "crc32": "0x1b6a0343"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/source/",
+      "bytes": 0,
+      "crc32": "0x0"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/source/b_model_backtest.py",
+      "bytes": 27977,
+      "crc32": "0x868cb96f"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/outputs/",
+      "bytes": 0,
+      "crc32": "0x0"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/outputs/b_model_50_round_trends.csv",
+      "bytes": 6264,
+      "crc32": "0xa92a934"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/outputs/b_model_classification.csv",
+      "bytes": 3509,
+      "crc32": "0x828327fe"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/outputs/b_model_backtest_report_regenerated_not_hash-identical.md",
+      "bytes": 10817,
+      "crc32": "0x4f9a8fee"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/outputs/b_model_predictions.csv",
+      "bytes": 3236859,
+      "crc32": "0x300ed55b"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/outputs/b_model_holdout_metrics.csv",
+      "bytes": 113856,
+      "crc32": "0xa95d7f02"
+    },
+    {
+      "name": "lotto_b_model_recovery_package/RECOVERY_README.md",
+      "bytes": 2318,
+      "crc32": "0x15fe036e"
+    }
+  ],
+  "raw_source": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\lotto_data.csv",
+  "actual_execution_input": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_reproduction_20261009_v1\\sandbox\\work\\lotto-data\\lotto_data.csv",
+  "executed_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "original_dirty_repo_data_sha256": "10beb0a7974f648b39aa130bb714b1c338296bf59ecd106e9407bee5875538aa",
+  "original_dirty_repo_data_semantically_identical": true,
+  "line_ending_note": "Original dirty repository raw CSV is CRLF; hash-pinned source input is LF. Execution uses the exact pinned LF input, copied byte-for-byte; original raw was not rewritten.",
+  "source_manifest_matches": true
+}

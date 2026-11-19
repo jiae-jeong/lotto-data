@@ -1,0 +1,6 @@
+Verification helper attempt1 exited1 before final verification.
+File:verify_b_random_baseline.py;check();UNRESOLVED_HISTORICAL_RESULT.json read_text() used Windows locale cp949.
+UnicodeDecodeError: 'cp949' codec can't decode byte 0xec in position 215: illegal multibyte sequence
+Cause: JSON was explicitly written UTF-8; verifier did not specify the encoding.
+Remedy: All verifier JSON reads now specify encoding='utf-8'.
+Scope: verifier-only correction, before publication/final manifest. Frozen Monte Carlo source/seed/config/plan and all simulation outputs unchanged. No new official Monte Carlo run.

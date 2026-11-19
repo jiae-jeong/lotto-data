@@ -1,0 +1,19 @@
+{
+  "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+  "created_date_kst": "2026-11-19",
+  "hash_algorithm": "SHA-256 over UTF-8 bytes; manifest excludes itself",
+  "files": {
+    "RESULTS.json": {
+      "sha256": "1f69de9bc289e0b46a60c9c764170317e2fc85843d2367f57f9f8bcfa8130745",
+      "bytes": 8323
+    },
+    "LINE_HIT_DECOMPOSITION.csv": {
+      "sha256": "e030fe7368c98dc89bc73046fb2a259b4fe0989fb84a5f6b76aff0aae63879bd",
+      "bytes": 967
+    },
+    "REPORT.md": {
+      "sha256": "d0fb73fe755dec5083fa483530cac5ce98c950cd13597618cbad0b070a4e6ed0",
+      "bytes": 3922
+    }
+  }
+}

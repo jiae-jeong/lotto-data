@@ -1,0 +1,52 @@
+{
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "019111859fa612b1b39acd387870edc0cb68e451d14981a840239a283c3cc58f",
+  "seed": 20261016036,
+  "target_rounds": "601..1245",
+  "historical_evidence": "screening/OOS, not untouched holdout",
+  "status": "CALIBRATED",
+  "max_statistic": "max(delta_mean_hits/0.03, delta_rate_3plus/0.01, delta_rate_4plus/0.003)",
+  "per_mechanism_thresholds": {
+    "EXACT_UNIFORM_TICKET": 3.0987080103359137,
+    "TARGET_OUTCOME_PERMUTATION": 2.9834625322997423,
+    "TEMPORAL_BLOCK_PERMUTATION": 3.1209302325581394,
+    "SIGNAL_RANK_RANDOM_SCORE": 2.8816537467700254
+  },
+  "frozen_global_threshold": 3.1209302325581394,
+  "calibration_replicates_per_mechanism": 1000,
+  "independent_verification_replicates_per_mechanism": 1000,
+  "total_replicates": 8000,
+  "pooled_verification_false_promotion_rate": 0.011,
+  "verification_by_mechanism": {
+    "EXACT_UNIFORM_TICKET": {
+      "false_promotions": 10,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.01,
+      "pass_le_5pct": true
+    },
+    "TARGET_OUTCOME_PERMUTATION": {
+      "false_promotions": 14,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.014,
+      "pass_le_5pct": true
+    },
+    "TEMPORAL_BLOCK_PERMUTATION": {
+      "false_promotions": 5,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.005,
+      "pass_le_5pct": true
+    },
+    "SIGNAL_RANK_RANDOM_SCORE": {
+      "false_promotions": 15,
+      "verification_replicates": 1000,
+      "false_promotion_rate": 0.015,
+      "pass_le_5pct": true
+    }
+  },
+  "familywise_false_promotion_ceiling": 0.05,
+  "candidate_outcomes_used_for_calibration": false,
+  "historical_evidence_label": "screening/OOS evidence; not untouched holdout",
+  "leakage_failures": 0,
+  "future_predictions": 0
+}

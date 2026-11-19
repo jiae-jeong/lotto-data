@@ -1,0 +1,45 @@
+name: lotto-today-adaptive-distributed-v57
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-adaptive-distributed-v57.yml'
+      - 'automation/today_adaptive_distributed_v57.py'
+permissions:
+  contents: read
+jobs:
+  validate-v57:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [lowerbound, any2guard, blockpareto, jointrobust]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run one V57 adaptive selector
+        shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
+        run: |
+          set -euo pipefail
+          ADAPT_MODE="$MODE" python -B automation/today_adaptive_distributed_v57.py
+      - name: Print strict result
+        shell: bash
+        env:
+          MODE: ${{ matrix.mode }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          m=os.environ['MODE']
+          f=f'analysis/2026-10-30/TODAY_ADAPTIVE_DISTRIBUTED_{m}_1248_V57.json'
+          d=json.load(open(f))
+          print(json.dumps({'mode':m,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy']},ensure_ascii=False))
+          PY

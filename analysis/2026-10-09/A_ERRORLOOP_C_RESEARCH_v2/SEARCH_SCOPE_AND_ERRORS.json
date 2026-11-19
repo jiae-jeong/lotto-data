@@ -1,0 +1,103 @@
+{
+  "scopes": [
+    {
+      "path": "C:\\Users\\admin\\Documents\\Codex",
+      "exists": true,
+      "method": "recursive filename inventory; supported text extensions; SHA deduplicated content scan"
+    },
+    {
+      "path": "C:\\Users\\admin\\Downloads",
+      "exists": true,
+      "method": "recursive filename inventory; supported text extensions; SHA deduplicated content scan"
+    },
+    {
+      "path": "C:\\Users\\admin\\Desktop",
+      "exists": true,
+      "method": "recursive filename inventory; supported text extensions; SHA deduplicated content scan"
+    },
+    {
+      "path": "C:\\Users\\admin\\Documents",
+      "exists": true,
+      "method": "recursive filename inventory; supported text extensions; SHA deduplicated content scan"
+    },
+    {
+      "path": "C:\\Users\\user\\Documents\\Codex\\2026-10-06\\cloud-x20",
+      "exists": false,
+      "method": "direct existence check"
+    },
+    {
+      "path": "C:\\Users\\user\\Documents\\Codex\\2026-10-08\\b-model-backtest-py-b-1201",
+      "exists": false,
+      "method": "direct existence check"
+    },
+    {
+      "path": "C:\\Users\\admin\\Documents\\Codex",
+      "exists": true,
+      "method": "other-profile Codex root check"
+    },
+    {
+      "path": "C:\\Users\\All Users\\Documents\\Codex",
+      "exists": false,
+      "method": "other-profile Codex root check"
+    },
+    {
+      "path": "C:\\Users\\Default\\Documents\\Codex",
+      "exists": false,
+      "method": "other-profile Codex root check"
+    },
+    {
+      "path": "C:\\Users\\Default User\\Documents\\Codex",
+      "exists": false,
+      "method": "other-profile Codex root check"
+    },
+    {
+      "path": "C:\\Users\\Public\\Documents\\Codex",
+      "exists": false,
+      "method": "other-profile Codex root check"
+    }
+  ],
+  "errors": [],
+  "local_files": 1109,
+  "historical_blobs": 211,
+  "unique_text_contents": 316,
+  "keyword_counts": {
+    "A_MODEL": 4,
+    "model_a": 70,
+    "a_model": 4,
+    "A model": 4,
+    "A 모델": 12,
+    "C_MODEL": 5,
+    "model_c": 481,
+    "c_model": 5,
+    "C model": 14,
+    "C 모델": 18,
+    "contrarian": 41,
+    "콘트라리언": 13,
+    "역발상": 14,
+    "frequency": 29304,
+    "gap": 29295,
+    "structure": 16844,
+    "pair": 35615,
+    "triple": 42623,
+    "score": 22337,
+    "weight": 59,
+    "prediction": 82102,
+    "recommendation": 19,
+    "final": 37482,
+    "candidate": 2548,
+    "selected": 122,
+    "lotto": 2043,
+    "오답": 61,
+    "추천": 140,
+    "최종": 70,
+    "당첨": 45,
+    "A/B/C": 32
+  },
+  "scope_limitations": [
+    "Only accessible current PC files and all currently reachable repository refs; no old cloud PC or prior conversation originals.",
+    "Generic model_a CSV correlation column is not proof of legacy A identity.",
+    "V4_C and S008/V3 combination implementations do not establish legacy C provenance.",
+    "Historical backtest predictions are not evidence of contemporaneous purchase recommendations.",
+    "Unknown data CSV versions inventoried by hash only; no 1245 outcome queried."
+  ]
+}

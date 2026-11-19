@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+  "question": "Does vote depth across seven frozen B component tickets associate with OOS winning-number membership under round-clustered uncertainty?",
+  "novelty": "per-target per-number depths 0..7; 45 numbers retained as a round cluster; 2000 round-cluster bootstrap replicates; 100 random seven-ticket ensembles per target.",
+  "executed_cases": 29025,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 412,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 29025,
+    "verification": {
+      "status": "PASS",
+      "targets": 645,
+      "cluster_rows": 29025,
+      "random_ensembles_per_target": 100,
+      "bootstrap_unit": "target round; all 45 number outcomes retained within cluster",
+      "bootstrap_replicates": 2000,
+      "naive_number_independence_test": "NOT USED",
+      "future_predictions": 0
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-13T01:12:50.956062+00:00"
+}

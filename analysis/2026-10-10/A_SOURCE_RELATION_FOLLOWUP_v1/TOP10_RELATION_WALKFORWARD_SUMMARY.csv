@@ -1,0 +1,11 @@
+order,anchor,training_through_round,target_start,target_end,selected_relation_count,actual_relation_occurrences,exact_null_expected,exact_null_sd,descriptive_null_z,prior_quoted_occurrences,numeric_comparison,prior_execution_reproduced,status
+2,400,400,401,500,10,12,15.151515151515152,4.047151987808241,-0.7786994807728667,8,MISMATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+2,600,600,601,700,10,16,15.151515151515152,4.174500474658443,0.2032542225436615,16,MATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+2,800,800,801,900,10,13,15.151515151515152,3.8140743256443366,-0.5640989052177642,12,MISMATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+2,1000,1000,1001,1100,10,20,15.151515151515152,3.8820961427804677,1.2489347687850474,19,MISMATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+2,1100,1100,1101,1200,10,16,15.151515151515152,3.77960437234024,0.22449038706119562,16,MATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+3,400,400,401,500,10,1,1.4094432699083863,1.1821109848621738,-0.3463661831686004,1,MATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+3,600,600,601,700,10,0,1.4094432699083863,1.1990025349105344,-1.1755131693808756,2,MISMATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+3,800,800,801,900,10,0,1.4094432699083863,1.1909888182926174,-1.1834227561673851,1,MISMATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+3,1000,1000,1001,1100,10,1,1.4094432699083863,1.2001999773935441,-0.3411458737047871,1,MATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance
+3,1100,1100,1101,1200,10,0,1.4094432699083863,1.2097368481798323,-1.1650825318159332,0,MATCH,NO; original tie rule/code unavailable,VERIFIED new retrospective computation; not ticket prediction performance

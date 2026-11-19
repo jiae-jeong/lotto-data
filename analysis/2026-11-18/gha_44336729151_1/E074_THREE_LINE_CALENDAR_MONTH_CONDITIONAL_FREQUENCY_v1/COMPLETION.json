@@ -1,0 +1,16 @@
+{
+  "study_id": "E074_THREE_LINE_CALENDAR_MONTH_CONDITIONAL_FREQUENCY_v1",
+  "status": "COMPLETE",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "historical_strict_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "purchase_recommendation_generated": false,
+  "manifest_entries": 8,
+  "completed_at_kst": "2026-11-19T00:32:17.724089+09:00"
+}

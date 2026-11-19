@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-10-09T13:49:25.236257+00:00",
+  "files": {
+    "run_independent_signal_research.py": "c49dadba0b13a6b8b390f222f8d97f7d131bcd9058241ce10a53b6dc48b321e9",
+    "RESEARCH_CONFIG.json": "e84d61bf1df128c990fa57379729313b14b081426a2bb948fc611d0ef1be6da8",
+    "RESEARCH_PROTOCOL.md": "332ff78f8816baa473916d34ed5f5a64175413c6bd9809c7d8b7824007f37f28"
+  },
+  "repair": "Duplicate-key serialization only; analytical rules unchanged; failed v1 preserved",
+  "actual_1245": "NOT READ / NOT USED"
+}

@@ -1,0 +1,149 @@
+{
+  "task": {
+    "id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+    "kind": "five_line_portfolio_selector",
+    "question": "Can any frozen five-line construction strategy repeatedly outperform same-target random five-line bundles?",
+    "novelty": "Seven distinct five-line strategies plus a nested trailing-200 dynamic selector are compared with 100 random five-line bundles on identical targets.",
+    "spec": {
+      "study_id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+      "kind": "five_line_portfolio_selector",
+      "research_question": "Can any frozen five-line construction strategy repeatedly outperform same-target random five-line bundles?",
+      "data_cutoff": 1245,
+      "target_rounds": "601..1245 inclusive; nested selector 801..1245",
+      "training_cutoff_rule": "Candidate bank uses target t-1 only; nested dynamic selector uses exactly the prior 200 completed target outcomes to choose among frozen strategies.",
+      "primary_metric": "five-line max hits, any_3plus, any_4plus, and winning-number union coverage",
+      "secondary_metrics": [
+        "any_2plus/5plus/6",
+        "unique-number coverage",
+        "mean pairwise overlap",
+        "line-hit variance"
+      ],
+      "comparator": "same-target 100-random-five-line baseline; fixed seven strategies and nested 200-target selector",
+      "baseline": "100 target-seeded portfolios of five distinct uniform six-number lines per target",
+      "multiplicity_correction": "Construction strategy comparisons are exploratory; promotion gate pre-registers only nested selector any_3plus and max_hits.",
+      "block_stability": [
+        50,
+        100,
+        200
+      ],
+      "tie_break": "strategy-specific frozen rule; lexical model/candidate order for remaining ties",
+      "random_seed": 20261015,
+      "expected_output_files": [
+        "PORTFOLIO_TICKETS.csv",
+        "RANDOM_5_BY_TARGET.csv",
+        "STRATEGY_BY_TARGET.csv",
+        "STRATEGY_SUMMARY.csv",
+        "NESTED_SELECTOR_TRACE.csv",
+        "VERIFICATION.json",
+        "REPORT.md"
+      ],
+      "expected_record_counts": {
+        "RANDOM_5_BY_TARGET.csv": 64500,
+        "STRATEGY_BY_TARGET.csv": 5605,
+        "STRATEGY_SUMMARY.csv": 9,
+        "NESTED_SELECTOR_TRACE.csv": 445
+      },
+      "novelty_signature": "five-line strategies top5/min/mid/high overlap/source diversity/independent centered/B-independent mix; nested trailing-200 selector; 100 same-target RANDOM_5_LINES bundles",
+      "study_class": "empirical"
+    }
+  },
+  "study_spec": {
+    "study_id": "E028_FIVE_LINE_PORTFOLIO_SELECTOR_v2",
+    "kind": "five_line_portfolio_selector",
+    "research_question": "Can any frozen five-line construction strategy repeatedly outperform same-target random five-line bundles?",
+    "data_cutoff": 1245,
+    "target_rounds": "601..1245 inclusive; nested selector 801..1245",
+    "training_cutoff_rule": "Candidate bank uses target t-1 only; nested dynamic selector uses exactly the prior 200 completed target outcomes to choose among frozen strategies.",
+    "primary_metric": "five-line max hits, any_3plus, any_4plus, and winning-number union coverage",
+    "secondary_metrics": [
+      "any_2plus/5plus/6",
+      "unique-number coverage",
+      "mean pairwise overlap",
+      "line-hit variance"
+    ],
+    "comparator": "same-target 100-random-five-line baseline; fixed seven strategies and nested 200-target selector",
+    "baseline": "100 target-seeded portfolios of five distinct uniform six-number lines per target",
+    "multiplicity_correction": "Construction strategy comparisons are exploratory; promotion gate pre-registers only nested selector any_3plus and max_hits.",
+    "block_stability": [
+      50,
+      100,
+      200
+    ],
+    "tie_break": "strategy-specific frozen rule; lexical model/candidate order for remaining ties",
+    "random_seed": 20261015,
+    "expected_output_files": [
+      "PORTFOLIO_TICKETS.csv",
+      "RANDOM_5_BY_TARGET.csv",
+      "STRATEGY_BY_TARGET.csv",
+      "STRATEGY_SUMMARY.csv",
+      "NESTED_SELECTOR_TRACE.csv",
+      "VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "expected_record_counts": {
+      "RANDOM_5_BY_TARGET.csv": 64500,
+      "STRATEGY_BY_TARGET.csv": 5605,
+      "STRATEGY_SUMMARY.csv": 9,
+      "NESTED_SELECTOR_TRACE.csv": 445
+    },
+    "novelty_signature": "five-line strategies top5/min/mid/high overlap/source diversity/independent centered/B-independent mix; nested trailing-200 selector; 100 same-target RANDOM_5_LINES bundles",
+    "study_class": "empirical"
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "experiment_signature": "ae177470c817970cb14217e0823492060c1c5ffc2519a7c5c2ffa271cd8a0c76",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "284d92436bc802218a3c838f21aaa9be532719b6c3367f2b67b49167ffe77d34",
+  "code_sha256": "ec39dfe8113a36b6c929619a40a04e7a9be3b832932c4b4573f87ec9bb2c8d00",
+  "source_file_sha256": {
+    "research_engine_v2.py": "ec39dfe8113a36b6c929619a40a04e7a9be3b832932c4b4573f87ec9bb2c8d00",
+    "expanded_studies_v2.py": "b94e897a7caad59299ece71b3ef73a53c4494feca47332580e6488ad5709097a",
+    "independent_signal_five_line_v1.py": "978661f72df7b3370a63756a048b1e1d895138c7cd2c549ad0cd289103402a1e"
+  },
+  "expected_output_files": [
+    "PORTFOLIO_TICKETS.csv",
+    "RANDOM_5_BY_TARGET.csv",
+    "STRATEGY_BY_TARGET.csv",
+    "STRATEGY_SUMMARY.csv",
+    "NESTED_SELECTOR_TRACE.csv",
+    "VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "expected_record_counts": {
+    "RANDOM_5_BY_TARGET.csv": 64500,
+    "STRATEGY_BY_TARGET.csv": 5605,
+    "STRATEGY_SUMMARY.csv": 9,
+    "NESTED_SELECTOR_TRACE.csv": 445
+  },
+  "created_utc": "2026-10-14T02:12:11.268151+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "Seven distinct five-line strategies plus a nested trailing-200 dynamic selector are compared with 100 random five-line bundles on identical targets.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}

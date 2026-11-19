@@ -1,0 +1,103 @@
+{
+  "study_id": "E070_E069_IMPLEMENTATION_AND_CANDIDATE_STAGE_AUDIT_v1",
+  "date_kst": "2026-11-18",
+  "preregistered_at_kst": "2026-11-18T08:20:00+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "target_round": 1251,
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "study_class": "historical_implementation_conformance_and_two_stage_diagnostic",
+  "evidence_class": "HISTORICAL_EXPLORATORY_POSTHOC_CORRECTION_NOT_PROSPECTIVE_CONFIRMATION",
+  "historical_exploration_only": true,
+  "e069_result_known_before_this_audit": true,
+  "independent_prospective_sample": false,
+  "research_question": "Does the E069 runner implement its frozen estimator exactly, and what are the separately measured candidate_recall@K and three-line portfolio results when the registered fixed 6/45 prior is implemented literally?",
+  "audit_hypothesis": "E069 preregistration specifies a fixed 6/45 prior with strength 45, while the runner may instead use per-number historical frequency as the prior. This audit will verify source-level conformance and quantify the impact without tuning or promoting either formula.",
+  "historical_data_cutoff": 1250,
+  "source_data_prefix_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "source_data_full_file_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "target_rounds": "401..1250 inclusive",
+  "target_count": 850,
+  "training_cutoff_rule": "For each target t, use only draws 1..t-1. For each historical outcome round u=2..t-1, use membership in draw u-1 as the feature and main-number inclusion in draw u as the outcome. Score target t before reading its outcome. Add target t only after scoring.",
+  "registered_estimator": {
+    "prior_mean": "6/45",
+    "prior_strength": 45,
+    "posterior_probability": "(success[k,n] + 45*(6/45))/(exposure[k,n]+45)",
+    "ranking": "Score descending, then number ascending.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "as_built_formula_to_audit": {
+    "formula": "(success[k,n] + 45*(number_specific_global_frequency_rate))/(exposure[k,n]+45)",
+    "role": "Implementation-conformance diagnostic only; not a registered model and not eligible for promotion."
+  },
+  "candidate_stage": {
+    "candidate_universe": "All numbers 1..45 scored for every target.",
+    "metrics": "candidate_recall@10, @15, @20, @25, @30; average winning-number rank; top-K overlap between registered and as-built formulas.",
+    "ranking": "Score descending, then number ascending.",
+    "exact_random_baseline": "For a uniformly random K-number subset of 45, expected candidate recall is exactly K/45.",
+    "miss_trace": "For every winning number outside registered-formula TOP30, preserve target, rank, previous-draw membership state, transition exposure, transition successes, and score.",
+    "bootstrap": {
+      "method": "Moving-block bootstrap over per-target recall differences versus exact K/45 random expectation.",
+      "block_length_targets": 50,
+      "bootstrap_replicates": 4000,
+      "family_alpha": 0.05,
+      "alpha_per_metric": 0.01,
+      "family_size": 5,
+      "seed": 20261118070,
+      "retain_final_remainder_block": true
+    },
+    "as_built_formula_inference": "Point estimates only; diagnostic and not part of the confirmatory family."
+  },
+  "portfolio_stage": {
+    "estimator": "Registered fixed 6/45 prior only.",
+    "selector": "Unchanged frozen E045 choose_disjoint_ticket selector; three sequential calls with the same score vector as role_score and global_score, removing selected numbers after each line.",
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "randomness_in_selection": false,
+    "exact_geometry_matched_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    },
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "bootstrap": {
+      "method": "Moving-block bootstrap of per-target differences from exact geometry-matched union18 null.",
+      "block_length_targets": 50,
+      "bootstrap_replicates": 4000,
+      "family_alpha": 0.05,
+      "alpha_per_metric": 0.0125,
+      "family_size": 4,
+      "seed": 20261118071,
+      "retain_final_remainder_block": true
+    },
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "any4": "Supplementary descriptive metric only; not a promotion target."
+  },
+  "promotion_rule": "This is a post-result historical implementation audit on an already inspected sample. No historical result can qualify the model for purchase readiness. No threshold, alpha, block length, candidate K, estimator, selector, or policy may be changed after execution. Prospective confirmation remains required and its minimum target count/completion rule remains unspecified.",
+  "no_future_leakage": true,
+  "no_model_search": true,
+  "no_parameter_tuning": true,
+  "no_purchase_lines_generated": true,
+  "no_freeze_or_seal_created": true,
+  "expected_outputs": [
+    "RESULTS.json",
+    "MISS_TRACE_TOP30.csv",
+    "REPORT.md"
+  ],
+  "frozen_blobs": {
+    "audit_runner_blob_sha": "48f5f31db285b95db58ec233177fc05ae4c6b482",
+    "e069_runner_blob_sha": "0d3790f9031b23367dc3c9f25438d1089b8f8329",
+    "e069_prereg_blob_sha": "2b5284b8588eea7f12a33207f5b94cdae4a105b2",
+    "e069_inference_blob_sha": "a43a6b17789290e7f07bb9c83b64bf94fc28d168",
+    "e069_verification_blob_sha": "0104b43af9f00cc80335bd76a4d15906e50c461d",
+    "e069_predictions_blob_sha": "c7f811dc0accede1f36cd96268d989e4b86cf3b8",
+    "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+    "data_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e"
+  }
+}

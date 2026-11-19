@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-22",
+  "latest_round_checked": 1246,
+  "latest_draw_date_checked": "2026-10-17",
+  "official_source_attempt": {
+    "source": "Donghaeng Lottery mobile result page",
+    "url": "https://m.dhlottery.co.kr/smarPage",
+    "status": "BLOCKED_OR_STALE_AT_1245_IN_CURRENT_ACCESS_PATH",
+    "used_as_primary_value_source": false
+  },
+  "fallback_sources": [
+    {
+      "source": "Kyunghyang Shinmun",
+      "url": "https://www.khan.co.kr/article/202610172103001",
+      "reported_latest_round": 1246,
+      "reported_draw_date": "2026-10-17"
+    },
+    {
+      "source": "Yonhap report syndicated by Financial News",
+      "url": "https://www.fnnews.com/news/202610172057444041",
+      "reported_latest_round": 1246,
+      "reported_draw_date": "2026-10-17"
+    },
+    {
+      "source": "Newsis",
+      "url": "https://www.newsis.com/view/NISX20261017_0003830131",
+      "reported_latest_round": 1246,
+      "reported_draw_date": "2026-10-17"
+    }
+  ],
+  "independent_fallback_sources_agree": true,
+  "repo_data_cutoff": 1246,
+  "repo_latest_draw_date": "2026.10.17",
+  "repo_vs_fallback_round_and_date_match": true,
+  "note": "Official source was attempted first. Because the accessible path was blocked/stale, reliable secondary sources were used as required by protocol. This evidence records round/date agreement without reproducing lottery numbers in the daily report."
+}

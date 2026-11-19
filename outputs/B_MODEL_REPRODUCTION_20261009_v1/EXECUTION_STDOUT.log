@@ -1,0 +1,11 @@
+Rows=1244; prediction_records=33408; anchors=[200, 400, 600, 800, 1000, 1100, 1150, 1200]
+Random baseline mean=0.800000; variance=0.614545; p_ge2=0.175308
+long_frequency: ADDITIONAL VALIDATION; blocks+=2/7; delta_mean=-0.063; delta_ge2_pp=-2.67
+current_gap: ADDITIONAL VALIDATION; blocks+=4/7; delta_mean=-0.026; delta_ge2_pp=-1.82
+frequency_plus_gap: ADDITIONAL VALIDATION; blocks+=5/7; delta_mean=+0.029; delta_ge2_pp=+3.04
+recent_momentum: ADDITIONAL VALIDATION; blocks+=3/7; delta_mean=-0.054; delta_ge2_pp=-2.96
+structure_profile: ADDITIONAL VALIDATION; blocks+=4/7; delta_mean=+0.051; delta_ge2_pp=+1.61
+pair_association: ADDITIONAL VALIDATION; blocks+=4/7; delta_mean=+0.034; delta_ge2_pp=+0.47
+triple_association: ADDITIONAL VALIDATION; blocks+=5/7; delta_mean=+0.026; delta_ge2_pp=+1.04
+combined_equal_rank: HOLD; blocks+=3/7; delta_mean=+0.003; delta_ge2_pp=+1.04
+Outputs: C:\Users\admin\Documents\Codex\2026-10-09\6-45-jiae-jeong-lotto-data\work\b_model_reproduction_20261009_v1\sandbox\outputs

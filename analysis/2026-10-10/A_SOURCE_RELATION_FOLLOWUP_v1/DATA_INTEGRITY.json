@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "rows": 1244,
+  "min_round": 1,
+  "max_round": 1244,
+  "missing_rounds": [],
+  "duplicate_rounds": [],
+  "main_range_duplicate_errors": 0,
+  "bonus_errors": 0,
+  "sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f"
+}

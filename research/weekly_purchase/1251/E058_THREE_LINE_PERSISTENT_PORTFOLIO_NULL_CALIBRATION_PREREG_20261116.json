@@ -1,0 +1,114 @@
+{
+  "study_id": "E058_THREE_LINE_PERSISTENT_PORTFOLIO_NULL_CALIBRATION_v1",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "date_kst": "2026-11-16",
+  "registered_at_kst": "2026-11-16T08:33:14+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "evidence_class": "NULL_GATE_CALIBRATION_ONLY_PERSISTENT_RANDOM_PORTFOLIO_MECHANISM",
+  "research_question": "Under a stationary but temporally persistent non-predictive portfolio process, how often does the unchanged target-1251 three-line strict gate falsely pass over the same 850 historical target outcomes?",
+  "novelty_vs_E057": [
+    "E057 used independent uniform disjoint-union18 portfolios at each target; E058 uses a stationary Markov process with fixed within-line carryover to test a distinct temporally dependent null.",
+    "The process never reads target outcomes and never selects a portfolio using historical winning labels.",
+    "This is a null-calibration stress test only; it does not evaluate or promote a predictive model."
+  ],
+  "source": {
+    "data_path": "lotto_data.csv",
+    "data_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "policy_path": "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json",
+    "policy_git_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+    "reference_E057_prereg_path": "research/weekly_purchase/1251/E057_THREE_LINE_NULL_GATE_CALIBRATION_PREREG_20261116.json",
+    "reference_E057_prereg_git_blob_sha": "f4cb6d2756b16d7d8fc3019f1c02e6a80c9ef9f2"
+  },
+  "runner": {
+    "path": "automation/three_line_persistent_null_calibration_e058_v1.js",
+    "git_blob_sha": "74ce6871a258250e6a7376d560587d59e6fc0179",
+    "source_main_commit": "0a8a9fa681423c0d515d3b5972a860ce089b472e",
+    "runtime": "Node.js-compatible deterministic JavaScript; same algorithm executed in Code Mode V8",
+    "no_external_dependencies": true
+  },
+  "null_process": {
+    "classification": "stationary_markov_persistent_non_predictive_portfolio",
+    "initial_state": "Uniformly sample an 18-subset from 1..45 and uniformly partition it into three labeled six-number lines.",
+    "transition": "For each of the three corresponding lines, uniformly retain exactly 3 of its 6 numbers. Fill the 9 vacancies with 9 distinct numbers sampled uniformly from the 27 numbers outside the previous union18, then assign 3 additions to each corresponding line.",
+    "persistence": "Exactly 3/6 numbers retained per corresponding line and exactly 9/18 numbers retained in the portfolio union at every transition.",
+    "stationarity_argument": "The initial ordered partition is uniform and the transition probability is symmetric under reversing old and new partitions with the same per-line intersection sizes; the uniform ordered-partition distribution is stationary.",
+    "outcome_independence": "Portfolio generation uses only its seeded PRNG and prior simulated portfolio. Target winning numbers are read only after the current portfolio is generated, solely to score the null trajectory.",
+    "target_outcomes": "Canonical historical main-number outcomes for targets 401..1250, used only as fixed conditional labels; no outcome is used to generate, select, or rank a portfolio.",
+    "geometry": "Exactly three pairwise-disjoint six-number lines with union18 at every target.",
+    "variants": 1,
+    "parameter_search": false
+  },
+  "simulation": {
+    "trajectories": 1000,
+    "portfolios_per_trajectory": 850,
+    "total_random_portfolios": 850000,
+    "seed": 20261116058,
+    "rng": "xorshift32",
+    "sampling": "partial Fisher-Yates without replacement",
+    "bootstrap_replicates_per_metric_per_trajectory": 4000,
+    "bootstrap_seed_rule": "(20261116058 + 1000003*trajectory_index + 9000 + metric_index) mod 2^32",
+    "block_length_targets": 50,
+    "nonoverlapping_blocks": 17,
+    "remainder_targets": 0
+  },
+  "strict_gate": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "exact_null": {
+      "max_hits": 1.514256248572755,
+      "any2": 0.47497624326892623,
+      "any3": 0.07135490714617204,
+      "winning_union_coverage": 2.4
+    },
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "bootstrap": "Two-sided percentile moving-block bootstrap on per-target differences from the frozen exact null; 17 blocks sampled independently with replacement, each block start uniform over every valid contiguous 50-target start.",
+    "bootstrap_quantile_indices": {
+      "lower": 24,
+      "upper": 3974
+    },
+    "gate_rule": "All four adjusted moving-block CI lower bounds must be strictly >0 AND at least 65% of 17 non-overlapping 50-target any2-delta blocks must be positive (at least 12/17).",
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false
+  },
+  "reporting": {
+    "primary_endpoint": "Empirical joint false-pass rate across 1000 persistent-null trajectories with 95% Wilson interval.",
+    "secondary_endpoints": [
+      "Per-metric empirical means versus exact uniform disjoint-union18 expectations, with trajectory-level Monte Carlo standard errors.",
+      "Distribution of positive any2 50-target blocks.",
+      "Mean lag-1 autocorrelation of any2 outcomes under the persistent portfolio process.",
+      "Geometry, transition, source-integrity, and outcome-independence checks."
+    ],
+    "promotion_effect": "None. No predictive model, candidate ranking, purchase lines, STRICT_PASS_READY, or prospective confirmation."
+  },
+  "historical_contamination": {
+    "rounds_1244_1249": "Previously inspected/live-history material; not a clean holdout and not prospective confirmation.",
+    "entire_evaluation": "Historical conditional null calibration only."
+  },
+  "expected_output_files": [
+    "INFERENCE.json",
+    "TRAJECTORY_SUMMARY.csv",
+    "BLOCK_SHARE_COUNTS.csv",
+    "SELF_TEST.json",
+    "VERIFICATION.json",
+    "COMPLETION.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.csv"
+  ],
+  "purchase_recommendation_generated": false,
+  "strict_pass_ready": false,
+  "freeze_or_seal_authorized": false
+}

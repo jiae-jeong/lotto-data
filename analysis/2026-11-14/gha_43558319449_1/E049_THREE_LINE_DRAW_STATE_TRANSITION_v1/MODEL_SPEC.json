@@ -1,0 +1,80 @@
+{
+  "study_id": "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+  "state_definition": {
+    "sum_bin": [
+      "0 if sum<120",
+      "1 if 120<=sum<145",
+      "2 if 145<=sum<170",
+      "3 if sum>=170"
+    ],
+    "odd_count_bin": [
+      "0 if odd<=2",
+      "1 if 3<=odd<=4",
+      "2 if odd>=5"
+    ],
+    "low_count_bin": [
+      "0 if count(numbers<=22)<=2",
+      "1 if 3<=count<=4",
+      "2 if count>=5"
+    ],
+    "consecutive_pair_bin": [
+      "0 if no consecutive pair",
+      "1 if exactly one consecutive pair",
+      "2 if two or more consecutive pairs"
+    ],
+    "distance": "Hamming distance across the four categorical state components."
+  },
+  "estimator": {
+    "kernel_weight": "0.5 ** HammingDistance(previous_draw_state, target_previous_draw_state)",
+    "conditional_count": "Weighted count of each main number in historical transition outcomes.",
+    "global_rate": "Count of each main number in draws 1..t-1 divided by t-1.",
+    "smoothing_alpha": 60,
+    "score_formula": "(weighted_conditional_count[n] + 60 * global_main_inclusion_rate[n]) / (sum_transition_weights + 60)",
+    "ranking": "Score descending, then number ascending."
+  },
+  "portfolio": {
+    "selected_union": "Top 18 ranked numbers.",
+    "line_assignment": "Deterministic rank interleaving: line 1 uses ranks 1,4,7,10,13,16; line 2 uses ranks 2,5,8,11,14,17; line 3 uses ranks 3,6,9,12,15,18.",
+    "geometry": "Exactly three pairwise-disjoint six-number lines, union18.",
+    "randomness_in_selection": false,
+    "parameter_tuning": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "method": "For each target, uniformly permute labels 1..45 jointly over the three fixed model lines, preserving three six-number lines, pairwise disjointness, union18, and line incidence geometry.",
+    "random_bundles_per_target": 120,
+    "seed": 2026111404,
+    "exact_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    },
+    "randomness_used_for_final_selection": false
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched union18 null.",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 2026111404,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "shared_geometry_inference_helper_git_blob_sha": "aef1471b141a57984b9fb58ca02367ddf661dbc9",
+  "selection_uses_randomness": false,
+  "parameter_tuning": false,
+  "variants_evaluated": 1
+}

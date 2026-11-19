@@ -1,0 +1,4 @@
+signal,target_count,b_component_count,mean_abs_rank_to_selection_correlation,mean_top6_jaccard,max_component_mean_jaccard,max_jaccard_component,independence_thresholds,status
+CROSS_ROUND_MARKOV_v1,645,8,0.20348659131581903,0.1513434175643478,0.34645256552233294,long_frequency,mean_abs_corr<0.20;mean_jaccard<0.20;max_component_mean_jaccard<0.35,DROPPED_AS_B_REDUNDANT
+CALENDAR_SEASON_CONDITIONAL_v1,645,8,0.16362371664585912,0.12072376589818451,0.2463015537434142,long_frequency,mean_abs_corr<0.20;mean_jaccard<0.20;max_component_mean_jaccard<0.35,SURVIVES
+PREVIOUS_SUM_REGIME_CONDITIONAL_v1,645,8,0.16178587267859687,0.1156237625423672,0.19984093425953892,long_frequency,mean_abs_corr<0.20;mean_jaccard<0.20;max_component_mean_jaccard<0.35,SURVIVES

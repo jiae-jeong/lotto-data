@@ -1,0 +1,38 @@
+{
+  "target_round": 1248,
+  "recommendation_date_kst": "2026-10-30",
+  "data_cutoff": 1247,
+  "policy": "META_V43_V52_V54",
+  "validation": "STRICT_PASS",
+  "no_future_leakage": true,
+  "write_once_sealed": true,
+  "final_lines": [
+    [6, 9, 17, 29, 30, 35],
+    [10, 15, 27, 28, 39, 45],
+    [3, 5, 14, 21, 32, 38],
+    [4, 7, 11, 26, 33, 40],
+    [12, 16, 23, 24, 37, 43]
+  ],
+  "walkforward_targets": 847,
+  "matched_exact_label_null": true,
+  "scorecard_delta": {
+    "max_hits": 0.06145074437756848,
+    "any2": 0.031964327289958794,
+    "any3": 0.027719757854342372,
+    "any4": 0.0012970494329747643,
+    "winning_union_coverage": 0.07319952774497462
+  },
+  "adjusted_ci_delta": {
+    "max_hits": [0.019762122736679568, 0.09781130324997572],
+    "any2": [0.0026092575428166595, 0.05793835326398476],
+    "any3": [0.0026048878578379645, 0.05487442137264226],
+    "winning_union_coverage": [0.002369668246437504, 0.14705882352940378]
+  },
+  "positive_50_round_block_share": {
+    "max_hits": 0.9411764705882353,
+    "any2": 0.8235294117647058,
+    "any3": 0.8235294117647058,
+    "winning_union_coverage": 0.7647058823529411
+  },
+  "source_result": "analysis/2026-10-30/TODAY_META_V43_V52_1248_V54.json"
+}

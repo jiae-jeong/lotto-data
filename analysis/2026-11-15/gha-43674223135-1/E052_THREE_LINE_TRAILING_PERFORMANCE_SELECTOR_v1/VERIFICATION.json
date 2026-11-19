@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "study_id": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+  "data_cutoff": 1249,
+  "current_source_data_rows": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_target_range": [
+    401,
+    1249
+  ],
+  "evaluation_target_range": [
+    501,
+    1249
+  ],
+  "target_count": 749,
+  "prediction_records": 749,
+  "selection_log_records": 749,
+  "candidate_model_count": 5,
+  "selection_lookback_targets": 100,
+  "selection_training_cutoff_violations": 0,
+  "training_cutoff_violations": 0,
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "portfolio_geometry_violations": 0,
+  "random_geometry_violations": 0,
+  "random_bundles_per_target": 120,
+  "random_bundles_total": 89880,
+  "no_future_leakage": true,
+  "random_baseline_executed": true,
+  "independent_research_axis": true,
+  "parameter_search": false,
+  "variants": 1,
+  "thresholds_changed": false,
+  "alpha_changed": false,
+  "block_length_changed": false,
+  "comparator_changed": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "purchase_recommendation_generated": false,
+  "source_hashes": {
+    "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1": {
+      "prediction_sha256": "63741597dced378876c7ac1d7a15fb5864e03f3a2b765a42e9452591867d3500",
+      "prediction_bytes": 80021,
+      "prediction_blob_sha": "e55b8f5997dde36ff55b93b4bb53d20b8ad2ba69",
+      "manifest_blob_sha": "3e14c3c507110bd327b26bcc5ae0faa698586ff1",
+      "verification_blob_sha": "4c6a01d239f0fe14b5c1507bf2f556eb40d36792"
+    },
+    "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1": {
+      "prediction_sha256": "7cb78740056a154d1f1f04ea7f5d38e6f76144826b67b96d18f7049ff5b68b5a",
+      "prediction_bytes": 83210,
+      "prediction_blob_sha": "59882d1af8ca087c8ab8e22d21f63eb09bcc2588",
+      "manifest_blob_sha": "1a94941a0a6d1d5d19bd0bd2e181ffb5fe3cb158",
+      "verification_blob_sha": "07d21d0b8aec55c9b5d990e94f5af7acbff9a07b"
+    },
+    "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1": {
+      "prediction_sha256": "04c68a64d549ea3c5e198da4fa08d2da291d5124f72225c7f600be9c51312fc9",
+      "prediction_bytes": 103611,
+      "prediction_blob_sha": "54e8e2a1f63e1915b37a40780dfa679ffdc894f0",
+      "manifest_blob_sha": "5d101e5608913c01d73f32ae0d3c3e75fff2adfc",
+      "verification_blob_sha": "af8ad602958e43ddc2311b33672a0dfad8fcf064"
+    },
+    "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1": {
+      "prediction_sha256": "35f28f286c7cdcaf45a6e8fca7f4bec01ef75ce3421e4928dcbe687bcee30f1a",
+      "prediction_bytes": 103104,
+      "prediction_blob_sha": "13ba8133b6f74477838701de54e552aafe08e181",
+      "manifest_blob_sha": "327d1383c5cd394124960454e022fee451de6654",
+      "verification_blob_sha": "f1c970df77fda64d86ee0eb7a97a0adb6435bfb6"
+    },
+    "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1": {
+      "prediction_sha256": "2e247152f9318d9767db7d45bbfc22e555f02787634a4395e6a3aa972664b2f1",
+      "prediction_bytes": 178376,
+      "prediction_blob_sha": "1d39cc206bed70d6086046ceefcf79ac2497c703",
+      "manifest_blob_sha": "70fd043b456d27cde23417a6f0af421b1f9e0da1",
+      "verification_blob_sha": "bd66241dc1c6c52ccb82e662768218dbc8c3f63a"
+    }
+  }
+}

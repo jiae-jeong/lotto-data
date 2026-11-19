@@ -1,0 +1,11 @@
+{
+  "task_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+  "status": "FAILED",
+  "stage": "engine_execution",
+  "error_type": "KeyError",
+  "reason": "'p_raw'",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\run_independent_five_line_v1.py\", line 69, in run\n    engine.run(root, stage, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 347, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 799, in run_study\n    return handlers[kind](root, out, task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 397, in _e026\n    _holm(paired)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 224, in _holm\n    order = sorted(range(len(rows)), key=lambda i: (rows[i][p_field], i))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\independent_signal_five_line_v1.py\", line 224, in <lambda>\n    order = sorted(range(len(rows)), key=lambda i: (rows[i][p_field], i))\n                                                    ~~~~~~~^^^^^^^^^\nKeyError: 'p_raw'\n",
+  "protected_files_unchanged": true,
+  "recovery_attempted": "Preserved exact attempt and continued to the next registered study",
+  "attempt_path": "analysis\\2026-10-14\\.attempts\\E026_INDEPENDENT_MODEL_WALKFORWARD_v1-0z59cfvn"
+}

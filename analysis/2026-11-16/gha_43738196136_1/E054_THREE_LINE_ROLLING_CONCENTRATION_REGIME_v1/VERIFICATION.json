@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "study_id": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+  "data_cutoff": 1250,
+  "current_source_data_rows": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "data_prefix_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "prediction_records": 850,
+  "random_bundles_per_target": 120,
+  "random_bundles_total": 102000,
+  "training_cutoff_violations": 0,
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "portfolio_geometry_violations": 0,
+  "random_geometry_violations": 0,
+  "no_future_leakage": true,
+  "random_baseline_executed": true,
+  "independent_research_axis": true,
+  "independent_signal_family": true,
+  "parameter_search": false,
+  "thresholds_changed": false,
+  "alpha_changed": false,
+  "block_length_changed": false,
+  "comparator_changed": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "purchase_recommendation_generated": false,
+  "source_hashes": {
+    "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json": "fbfec3cf589ada070b47d88e1b9cf8ff182ccca8a133258c52c70ecb7f6273c3",
+    "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json": "0e806768fb65a2f50ced37b1a93f681e5f96648bc6e3433c8366444398bee334",
+    "automation/three_line_research_1251_v1.py": "296181ea34f7abec078e48c345589c3023e1f81dea5822f54dc953923b0aca91",
+    "automation/three_line_rolling_concentration_regime_e054_v1.py": "5ccfcad38f3d3e375e93711626190c02591ff085730bebf690eb72220f902346"
+  }
+}

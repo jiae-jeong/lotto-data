@@ -1,0 +1,518 @@
+{
+  "study_id": "E047_ACTUAL_PURCHASE_STAGE_DECOMPOSITION_v1",
+  "classification": "EXPLORATORY_HISTORICAL_FAILURE_DECOMPOSITION_NOT_CONFIRMATORY_EVIDENCE",
+  "registered_prereg_commit": "b7a4c9e868a24e7e6c651019becd51f97c20a2e0",
+  "date_kst": "2026-11-14",
+  "data": {
+    "path": "lotto_data.csv",
+    "git_blob_sha": "d012ac7f2395e70466f0c50b71b949515dea1def",
+    "sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "nonempty_draw_rows": 1249,
+    "rounds": "1..1249 continuous",
+    "physical_blank_lines": 2,
+    "integrity_checks": {
+      "sequential_rounds": true,
+      "six_unique_main_numbers_1_to_45": true,
+      "bonus_1_to_45_and_not_in_main": true,
+      "duplicate_or_missing_rounds": false,
+      "no_target_outcome_used_for_its_own_features": true
+    }
+  },
+  "ranker_source": {
+    "path": "automation/candidate_recall_v1.py",
+    "blob_sha": "7eaeba89f2378b0e049fe9eecd522b298dec1f36",
+    "formulas": "Exact source formulas: recent30 frequency, gap, 10-vs-prior20 momentum, balanced=(recent30+gap)/2, contrarian=(-recent30+gap)/2, consensus=mean of five scores; population z-scores; descending score then lower-number tie-break."
+  },
+  "scope": {
+    "targets": [
+      1247,
+      1248
+    ],
+    "historical_classification": "Previously exposed live-history diagnostics; not clean holdouts.",
+    "excluded": {
+      "1245": "ERROR_NOTE_1245_AGGREGATE records V4 recommendations without purchase receipt; excluded from actual-purchase sample.",
+      "1246": "Two conflicting preserved pre-draw ticket sets; no receipt resolves actual purchase."
+    }
+  },
+  "target_results": {
+    "1247": {
+      "cutoff": 1246,
+      "canonical_actual_purchase_path": "research/weekly_purchase/1247/ACTUAL_PURCHASE_FIVE_LINES_1247_20261023_RESEARCH_V8.json",
+      "canonical_actual_purchase_blob_sha": "730bb97bf4602288a74be9480941bb0532e219d7",
+      "portfolio": {
+        "tickets": 5,
+        "union_size": 16,
+        "union_hits": 3,
+        "union_recall": 0.5,
+        "line_hits": [
+          2,
+          1,
+          2,
+          1,
+          1
+        ],
+        "max_hit": 2,
+        "union_hits_minus_max_hit": 1
+      },
+      "candidate_recall_counts_by_signal": {
+        "recent30": [
+          2,
+          2,
+          2,
+          2,
+          3
+        ],
+        "gap": [
+          3,
+          4,
+          4,
+          4,
+          4
+        ],
+        "momentum": [
+          0,
+          0,
+          0,
+          2,
+          2
+        ],
+        "balanced": [
+          2,
+          3,
+          4,
+          5,
+          5
+        ],
+        "contrarian": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "consensus": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      },
+      "union_of_reference_rankers_captured": [
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "exact_uniform_random_expected_candidate_hits": {
+        "10": 1.3333333333,
+        "15": 2,
+        "20": 2.6666666667,
+        "25": 3.3333333333,
+        "30": 4
+      },
+      "winning_number_trace": [
+        {
+          "outcome_number": 8,
+          "ranks": {
+            "recent30": 27,
+            "gap": 5,
+            "momentum": 40,
+            "balanced": 7,
+            "contrarian": 6,
+            "consensus": 5
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            2
+          ]
+        },
+        {
+          "outcome_number": 14,
+          "ranks": {
+            "recent30": 36,
+            "gap": 6,
+            "momentum": 34,
+            "balanced": 13,
+            "contrarian": 5,
+            "consensus": 8
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            1,
+            3
+          ]
+        },
+        {
+          "outcome_number": 21,
+          "ranks": {
+            "recent30": 38,
+            "gap": 12,
+            "momentum": 36,
+            "balanced": 32,
+            "contrarian": 8,
+            "consensus": 33
+          },
+          "actual_purchase_union_member": false,
+          "lines": []
+        },
+        {
+          "outcome_number": 22,
+          "ranks": {
+            "recent30": 5,
+            "gap": 41,
+            "momentum": 21,
+            "balanced": 21,
+            "contrarian": 42,
+            "consensus": 38
+          },
+          "actual_purchase_union_member": false,
+          "lines": []
+        },
+        {
+          "outcome_number": 42,
+          "ranks": {
+            "recent30": 8,
+            "gap": 39,
+            "momentum": 25,
+            "balanced": 18,
+            "contrarian": 40,
+            "consensus": 34
+          },
+          "actual_purchase_union_member": false,
+          "lines": []
+        },
+        {
+          "outcome_number": 45,
+          "ranks": {
+            "recent30": 34,
+            "gap": 1,
+            "momentum": 43,
+            "balanced": 1,
+            "contrarian": 2,
+            "consensus": 2
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            1,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "exact_geometry_matched_null": {
+        "method": "Exact multivariate-hypergeometric enumeration over ticket-incidence masks; all C(45,6)=8,145,060 draws.",
+        "incidence_groups": [
+          {
+            "mask": 0,
+            "size": 29
+          },
+          {
+            "mask": 2,
+            "size": 2
+          },
+          {
+            "mask": 4,
+            "size": 3
+          },
+          {
+            "mask": 5,
+            "size": 1
+          },
+          {
+            "mask": 8,
+            "size": 2
+          },
+          {
+            "mask": 10,
+            "size": 2
+          },
+          {
+            "mask": 16,
+            "size": 1
+          },
+          {
+            "mask": 19,
+            "size": 2
+          },
+          {
+            "mask": 21,
+            "size": 1
+          },
+          {
+            "mask": 25,
+            "size": 1
+          },
+          {
+            "mask": 29,
+            "size": 1
+          }
+        ],
+        "total_draws": 8145060,
+        "max_hit_distribution_0_to_6": [
+          0.058320012375599445,
+          0.4415622475463655,
+          0.4047584670953928,
+          0.08898620759085875,
+          0.006234330993264629,
+          0.0001381205294988619,
+          6.138690199949418e-7
+        ],
+        "mean_max_hit": 1.5436694143444,
+        "p_any2": 0.500117740078035,
+        "p_any3": 0.09535927298264224,
+        "p_any4": 0.006373065391783486,
+        "expected_union_coverage": 2.1333333333333333,
+        "enumerated_count_matches_C45_6": true
+      }
+    },
+    "1248": {
+      "cutoff": 1247,
+      "canonical_actual_purchase_path": "research/weekly_purchase/1248/ACTUAL_PURCHASE_FIVE_LINES_1248_20261030_FALLBACK_V1.json",
+      "canonical_actual_purchase_blob_sha": "d952c39886626140be8fbc70bf5397fe338da0c2",
+      "portfolio": {
+        "tickets": 5,
+        "union_size": 18,
+        "union_hits": 5,
+        "union_recall": 0.8333333333,
+        "line_hits": [
+          3,
+          1,
+          2,
+          1,
+          1
+        ],
+        "max_hit": 3,
+        "union_hits_minus_max_hit": 2
+      },
+      "candidate_recall_counts_by_signal": {
+        "recent30": [
+          2,
+          4,
+          4,
+          4,
+          4
+        ],
+        "gap": [
+          0,
+          1,
+          1,
+          1,
+          3
+        ],
+        "momentum": [
+          3,
+          3,
+          5,
+          6,
+          6
+        ],
+        "balanced": [
+          1,
+          2,
+          2,
+          3,
+          4
+        ],
+        "contrarian": [
+          0,
+          1,
+          1,
+          2,
+          2
+        ],
+        "consensus": [
+          2,
+          3,
+          4,
+          5,
+          5
+        ]
+      },
+      "union_of_reference_rankers_captured": [
+        4,
+        5,
+        6,
+        6,
+        6
+      ],
+      "exact_uniform_random_expected_candidate_hits": {
+        "10": 1.3333333333,
+        "15": 2,
+        "20": 2.6666666667,
+        "25": 3.3333333333,
+        "30": 4
+      },
+      "winning_number_trace": [
+        {
+          "outcome_number": 16,
+          "ranks": {
+            "recent30": 11,
+            "gap": 35,
+            "momentum": 2,
+            "balanced": 31,
+            "contrarian": 37,
+            "consensus": 13
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            1,
+            5
+          ]
+        },
+        {
+          "outcome_number": 18,
+          "ranks": {
+            "recent30": 2,
+            "gap": 27,
+            "momentum": 19,
+            "balanced": 3,
+            "contrarian": 41,
+            "consensus": 5
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            1,
+            3
+          ]
+        },
+        {
+          "outcome_number": 27,
+          "ranks": {
+            "recent30": 40,
+            "gap": 38,
+            "momentum": 17,
+            "balanced": 44,
+            "contrarian": 21,
+            "consensus": 41
+          },
+          "actual_purchase_union_member": false,
+          "lines": []
+        },
+        {
+          "outcome_number": 36,
+          "ranks": {
+            "recent30": 33,
+            "gap": 13,
+            "momentum": 25,
+            "balanced": 26,
+            "contrarian": 13,
+            "consensus": 21
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            4
+          ]
+        },
+        {
+          "outcome_number": 38,
+          "ranks": {
+            "recent30": 13,
+            "gap": 30,
+            "momentum": 4,
+            "balanced": 25,
+            "contrarian": 33,
+            "consensus": 7
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            1,
+            3
+          ]
+        },
+        {
+          "outcome_number": 42,
+          "ranks": {
+            "recent30": 5,
+            "gap": 44,
+            "momentum": 10,
+            "balanced": 13,
+            "contrarian": 43,
+            "consensus": 18
+          },
+          "actual_purchase_union_member": true,
+          "lines": [
+            2
+          ]
+        }
+      ],
+      "exact_geometry_matched_null": {
+        "method": "Exact multivariate-hypergeometric enumeration over ticket-incidence masks; all C(45,6)=8,145,060 draws.",
+        "incidence_groups": [
+          {
+            "mask": 0,
+            "size": 27
+          },
+          {
+            "mask": 2,
+            "size": 1
+          },
+          {
+            "mask": 4,
+            "size": 3
+          },
+          {
+            "mask": 5,
+            "size": 2
+          },
+          {
+            "mask": 8,
+            "size": 3
+          },
+          {
+            "mask": 9,
+            "size": 1
+          },
+          {
+            "mask": 10,
+            "size": 1
+          },
+          {
+            "mask": 11,
+            "size": 1
+          },
+          {
+            "mask": 16,
+            "size": 1
+          },
+          {
+            "mask": 17,
+            "size": 1
+          },
+          {
+            "mask": 18,
+            "size": 3
+          },
+          {
+            "mask": 21,
+            "size": 1
+          }
+        ],
+        "total_draws": 8145060,
+        "max_hit_distribution_0_to_6": [
+          0.03634227372174054,
+          0.41299474773666495,
+          0.4449160595502059,
+          0.0988833722526292,
+          0.006719287519060633,
+          0.00014364535067881636,
+          6.138690199949418e-7
+        ],
+        "mean_max_hit": 1.6270760436387208,
+        "p_any2": 0.5506629785415945,
+        "p_any3": 0.10574691899138865,
+        "p_any4": 0.006863546738759444,
+        "expected_union_coverage": 2.4,
+        "enumerated_count_matches_C45_6": true
+      }
+    }
+  },
+  "interpretation": {
+    "new_finding": "In both canonical actual-purchase rounds, all six winning numbers appeared somewhere in the union of the six reference rankers' top30; nevertheless, the actual purchased ticket union captured only 3/6 in 1247 and 5/6 in 1248. The observed union-to-best-line allocation gaps were 1 and 2.",
+    "causal_limit": "The six reference rankers are not the actual selector's frozen candidate bank. Therefore the difference is a reach-versus-purchase diagnostic, not proof that the actual selector causally discarded a candidate at a particular stage.",
+    "strict_status": "No model promotion, no strict PASS, no purchase-readiness change.",
+    "inference_limit": "Only two actual-purchase rounds are verifiable; exact null values describe the fixed ticket geometry under uniform draws and do not make a single observed round a performance test."
+  }
+}

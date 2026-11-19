@@ -1,0 +1,14 @@
+structure,blocks,min_rate,max_rate,rate_sd,blocks_above_exact,slope,evidence
+consecutive_ge1,24,0.4,0.78,0.07268176448662271,9,0.001521739130434782,Observed structural prevalence only; no edge inferred
+consecutive_ge2,24,0.04,0.24,0.04307615994440028,12,-0.0017391304347826083,Observed structural prevalence only; no edge inferred
+band_ge3,24,0.32,0.66,0.07905254932989547,11,-0.004060869565217391,Observed structural prevalence only; no edge inferred
+band_ge4,24,0.0,0.14,0.030810802578893588,8,-0.0008260869565217393,Observed structural prevalence only; no edge inferred
+odd_imbalance,24,0.08,0.26,0.04941322360124531,8,0.0017739130434782605,Observed structural prevalence only; no edge inferred
+low_high_imbalance,24,0.08,0.32,0.05734883511361751,12,-0.0009391304347826086,Observed structural prevalence only; no edge inferred
+repeated_end,24,0.7,0.92,0.05505048188304583,10,0.0007130434782608692,Observed structural prevalence only; no edge inferred
+end_multiplicity_ge3,24,0.04,0.14,0.030173111650386122,9,0.0012956521739130435,Observed structural prevalence only; no edge inferred
+multiple_repeat_end_groups,24,0.12,0.34,0.051417409503007834,13,0.0014000000000000004,Observed structural prevalence only; no edge inferred
+extreme_sum,24,0.02,0.2,0.055876848714134036,14,-0.001530434782608696,Observed structural prevalence only; no edge inferred
+narrow_three_span_le4,24,0.18,0.38,0.04965855638479861,7,0.0009304347826086955,Observed structural prevalence only; no edge inferred
+large_gap_ge15,24,0.28,0.52,0.05587684871413403,14,-0.0023478260869565204,Observed structural prevalence only; no edge inferred
+previous_overlap_ge2,24,0.1,0.3,0.049652125829879275,14,-0.0031451641526175685,Observed structural prevalence only; no edge inferred

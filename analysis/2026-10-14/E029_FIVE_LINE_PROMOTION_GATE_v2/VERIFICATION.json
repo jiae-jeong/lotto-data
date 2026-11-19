@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "test_rows": 80,
+  "block_rows": 27,
+  "random_baseline_targets": 645,
+  "nested_targets": 445,
+  "future_predictions": 0,
+  "promotion_status": "DO_NOT_PROMOTE"
+}

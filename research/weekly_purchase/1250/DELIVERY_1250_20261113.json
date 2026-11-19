@@ -1,0 +1,82 @@
+{
+  "event": "1250",
+  "delivered_at_kst": "2026-11-13T09:23:00+09:00",
+  "message_evidence": "Current conversation: user explicitly requested the five lines after verification; assistant displays them in the following response.",
+  "exact_lines": [
+    {
+      "role": "consensus",
+      "numbers": [
+        3,
+        12,
+        13,
+        25,
+        27,
+        37
+      ]
+    },
+    {
+      "role": "relation",
+      "numbers": [
+        3,
+        8,
+        13,
+        20,
+        25,
+        37
+      ]
+    },
+    {
+      "role": "frequency_gap",
+      "numbers": [
+        3,
+        12,
+        13,
+        17,
+        34,
+        37
+      ]
+    },
+    {
+      "role": "recent_structure",
+      "numbers": [
+        3,
+        18,
+        20,
+        25,
+        37,
+        40
+      ]
+    },
+    {
+      "role": "ac_crosscheck",
+      "numbers": [
+        3,
+        12,
+        13,
+        27,
+        37,
+        38
+      ]
+    }
+  ],
+  "source_policy": "ADAPTIVE_FIVE_ROLE_NONRANDOM_PORTFOLIO_V9",
+  "source_path": "analysis/2026-11-12/FIVE_ROLE_RESEARCH_1250_V9.json",
+  "source_blob_sha": "3336e50b97188c7c644c52402a90eaf7c521fc0d",
+  "target_round": 1250,
+  "data_cutoff": 1249,
+  "no_future_leakage": true,
+  "randomness": false,
+  "ticket_integrity": {
+    "five_lines": true,
+    "six_numbers_each": true,
+    "numbers_1_to_45": true,
+    "no_within_line_duplicates": true,
+    "lines_distinct": true,
+    "unique_number_union": 13
+  },
+  "strict_portfolio_pass": false,
+  "strict_status": "STRICT_PASS_NOT_READY",
+  "delivery_status": "INTERMEDIATE_CANDIDATE_DISPLAYED_NOT_STRICT_PASS",
+  "purchase_confirmation": "NOT_CONFIRMED",
+  "freeze_seal": "NOT_CREATED_STRICT_GATE_NOT_PASSED"
+}

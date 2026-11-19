@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "study_id": "E059_E054_CANDIDATE_RECALL_STAGE_DECOMPOSITION_v1",
+  "source_data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "target_sequence_valid": true,
+  "e054_reproduction_checks": {
+    "training": 850,
+    "regime": 850,
+    "current_hhi": 850,
+    "threshold_hhi": 850,
+    "reference_count": 850,
+    "exposure": 850,
+    "score_sha256": 850
+  },
+  "all_core_reproduction_checks_850_of_850": true,
+  "all_e054_score_hashes_match": true,
+  "all_regime_and_hhi_exposure_checks_match": true,
+  "future_leakage_failures": 0,
+  "cutoff_violations": 0,
+  "strict_gate_or_candidate_threshold_changed": false,
+  "model_or_weights_changed": false,
+  "inference_recomputed": false,
+  "original_false_fail_preserved": true,
+  "correction_addendum": "research/weekly_purchase/1251/E059_VERIFICATION_REPAIR_ADDENDUM_20261116.json",
+  "purchase_lines_generated": false,
+  "strict_pass_ready_created": false
+}

@@ -1,0 +1,44 @@
+{
+  "task": {
+    "id": "E010_FAMILY_DECORRELATION_v1",
+    "kind": "family",
+    "question": "Do B hybrid/family duplicate votes dilute an ensemble, and does pre-target ticket geometry provide a better weighting control?",
+    "novelty": "Controlled B-ticket ensemble ablation: remove frequency-gap hybrid, merge semantic relationship family, or weight current forecast overlap. Prior V3 used different batch001 rank/portfolio models; prior dynamic study selected single B components."
+  },
+  "scope": "POST_HOC_EXPLORATORY",
+  "data_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "cache_sha256": "0436f0c7412ecb10d0f24c25816faa991f1d704c54295db34f7bcf88d51b3320",
+  "code_sha256": "cbe4130a2685084e9cb7e32cdd78b74e3204cae9c486f1f862f1a00a4566d1dc",
+  "created_utc": "2026-10-12T08:48:09.518839+00:00",
+  "first_target": 601,
+  "last_target": 1245,
+  "weights": {
+    "drop_hybrid": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "family_balanced": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0.5,
+      0.5
+    ]
+  },
+  "tail_exponents": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "inner_targets": 200,
+  "novelty": "Controlled B-ticket ensemble ablation: remove frequency-gap hybrid, merge semantic relationship family, or weight current forecast overlap. Prior V3 used different batch001 rank/portfolio models; prior dynamic study selected single B components.",
+  "prior_completed": "B v1; large MC; H001/H002; relation tests; regime/dynamic v1"
+}

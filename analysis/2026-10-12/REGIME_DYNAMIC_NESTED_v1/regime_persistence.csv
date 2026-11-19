@@ -1,0 +1,8 @@
+﻿model,window,z_threshold,trigger_n,nontrigger_n,next_draw_mean_when_trigger,next_draw_mean_when_nontrigger,trigger_delta_vs_uniform,small_trigger_sample,evidence
+long_frequency,50,1.5,29,616,0.5862068965517241,0.7483766233766234,-0.21379310344827596,1,POST_HOC_DIAGNOSTIC; correlated model rows not independent samples
+current_gap,50,1.5,70,575,0.9,0.7930434782608695,0.09999999999999998,0,POST_HOC_DIAGNOSTIC; correlated model rows not independent samples
+frequency_plus_gap,50,1.5,39,606,0.5128205128205128,0.8201320132013201,-0.28717948717948727,0,POST_HOC_DIAGNOSTIC; correlated model rows not independent samples
+recent_momentum,50,1.5,54,591,0.7407407407407407,0.7123519458544839,-0.059259259259259345,0,POST_HOC_DIAGNOSTIC; correlated model rows not independent samples
+structure_profile,50,1.5,29,616,0.5172413793103449,0.7402597402597403,-0.2827586206896552,1,POST_HOC_DIAGNOSTIC; correlated model rows not independent samples
+pair_association,50,1.5,56,589,0.8392857142857143,0.8166383701188455,0.03928571428571426,0,POST_HOC_DIAGNOSTIC; correlated model rows not independent samples
+triple_association,50,1.5,35,610,0.7428571428571429,0.8016393442622951,-0.05714285714285716,0,POST_HOC_DIAGNOSTIC; correlated model rows not independent samples

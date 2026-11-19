@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "control_types": 4,
+  "replicates_per_control": 100,
+  "all_controls_within_5pct": false,
+  "future_predictions": 0
+}

@@ -1,0 +1,179 @@
+{
+  "study_id": "E052_THREE_LINE_TRAILING_PERFORMANCE_SELECTOR_v1",
+  "date_kst": "2026-11-15",
+  "registered_at_kst": "2026-11-15T12:36:44+09:00",
+  "preregistration_status": "FROZEN_BEFORE_EXECUTION",
+  "target_round": 1251,
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "study_class": "preregistered_nested_trailing_performance_selector_three_line_portfolio",
+  "independent_research_axis": true,
+  "independent_signal_family": false,
+  "hypothesis": "A single fixed online selector that chooses among five already frozen three-line portfolios using only each candidate's any2 rate on the immediately preceding 100 target rounds may improve the next-target three-line disjoint union18 portfolio over the exact geometry-matched null.",
+  "question": "Does nested trailing-100 any2-based selection among E045, E048, E049, E050 and E051 improve the next-target three-line portfolio under the unchanged four-metric strict gate?",
+  "historical_data_cutoff": 1249,
+  "source_target_range": [
+    401,
+    1249
+  ],
+  "evaluation_target_range": [
+    501,
+    1249
+  ],
+  "source_data_prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_data_full_file_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "source_data_hash_scope_note": "The study reads exactly the first 1,249 non-empty canonical draw records, preserving raw bytes and internal blank lines. The current canonical file contains 1,250 contiguous records; the 1250 target row is excluded from this evaluation.",
+  "training_cutoff_rule": "For target t, select one source portfolio using only recomputed any2 outcomes for targets t-100 through t-1. Every source prediction for target u must itself have training_through_round=u-1. The selected portfolio for target t is scored only after selection is complete; target t and all later outcomes are excluded from the selector window.",
+  "candidate_models": [
+    {
+      "study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+      "result_path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+      "prediction_path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1/PREDICTIONS.csv",
+      "manifest_path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1/SHA256_MANIFEST.csv",
+      "verification_path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1/VERIFICATION.json",
+      "source_data_cutoff": 1249,
+      "prediction_sha256": "63741597dced378876c7ac1d7a15fb5864e03f3a2b765a42e9452591867d3500",
+      "prediction_bytes": 80021,
+      "prediction_blob_sha": "e55b8f5997dde36ff55b93b4bb53d20b8ad2ba69",
+      "manifest_blob_sha": "3e14c3c507110bd327b26bcc5ae0faa698586ff1",
+      "verification_blob_sha": "4c6a01d239f0fe14b5c1507bf2f556eb40d36792"
+    },
+    {
+      "study_id": "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+      "result_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+      "prediction_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/PREDICTIONS.csv",
+      "manifest_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/SHA256_MANIFEST.csv",
+      "verification_path": "analysis/2026-11-14/gha_43547128786_1/E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1/VERIFICATION.json",
+      "source_data_cutoff": 1249,
+      "prediction_sha256": "7cb78740056a154d1f1f04ea7f5d38e6f76144826b67b96d18f7049ff5b68b5a",
+      "prediction_bytes": 83210,
+      "prediction_blob_sha": "59882d1af8ca087c8ab8e22d21f63eb09bcc2588",
+      "manifest_blob_sha": "1a94941a0a6d1d5d19bd0bd2e181ffb5fe3cb158",
+      "verification_blob_sha": "07d21d0b8aec55c9b5d990e94f5af7acbff9a07b"
+    },
+    {
+      "study_id": "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+      "result_path": "analysis/2026-11-14/gha_43558319449_1/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+      "prediction_path": "analysis/2026-11-14/gha_43558319449_1/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1/PREDICTIONS.csv",
+      "manifest_path": "analysis/2026-11-14/gha_43558319449_1/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1/SHA256_MANIFEST.csv",
+      "verification_path": "analysis/2026-11-14/gha_43558319449_1/E049_THREE_LINE_DRAW_STATE_TRANSITION_v1/VERIFICATION.json",
+      "source_data_cutoff": 1249,
+      "prediction_sha256": "04c68a64d549ea3c5e198da4fa08d2da291d5124f72225c7f600be9c51312fc9",
+      "prediction_bytes": 103611,
+      "prediction_blob_sha": "54e8e2a1f63e1915b37a40780dfa679ffdc894f0",
+      "manifest_blob_sha": "5d101e5608913c01d73f32ae0d3c3e75fff2adfc",
+      "verification_blob_sha": "af8ad602958e43ddc2311b33672a0dfad8fcf064"
+    },
+    {
+      "study_id": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+      "result_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+      "prediction_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1/PREDICTIONS.csv",
+      "manifest_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1/SHA256_MANIFEST.csv",
+      "verification_path": "analysis/2026-11-14/gha_43564631433_1/E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1/VERIFICATION.json",
+      "source_data_cutoff": 1249,
+      "prediction_sha256": "35f28f286c7cdcaf45a6e8fca7f4bec01ef75ce3421e4928dcbe687bcee30f1a",
+      "prediction_bytes": 103104,
+      "prediction_blob_sha": "13ba8133b6f74477838701de54e552aafe08e181",
+      "manifest_blob_sha": "327d1383c5cd394124960454e022fee451de6654",
+      "verification_blob_sha": "f1c970df77fda64d86ee0eb7a97a0adb6435bfb6"
+    },
+    {
+      "study_id": "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+      "result_path": "analysis/2026-11-15/gha_43632443475_1/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1",
+      "prediction_path": "analysis/2026-11-15/gha_43632443475_1/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1/PREDICTIONS.csv",
+      "manifest_path": "analysis/2026-11-15/gha_43632443475_1/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1/SHA256_MANIFEST.csv",
+      "verification_path": "analysis/2026-11-15/gha_43632443475_1/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1/VERIFICATION.json",
+      "source_data_cutoff": 1250,
+      "prediction_sha256": "2e247152f9318d9767db7d45bbfc22e555f02787634a4395e6a3aa972664b2f1",
+      "prediction_bytes": 178376,
+      "prediction_blob_sha": "1d39cc206bed70d6086046ceefcf79ac2497c703",
+      "manifest_blob_sha": "70fd043b456d27cde23417a6f0af421b1f9e0da1",
+      "verification_blob_sha": "bd66241dc1c6c52ccb82e662768218dbc8c3f63a"
+    }
+  ],
+  "selection": {
+    "lookback_targets": 100,
+    "metric": "any2",
+    "candidate_model_order": [
+      "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+      "E048_THREE_LINE_BONUS_TO_MAIN_TRANSITION_v1",
+      "E049_THREE_LINE_DRAW_STATE_TRANSITION_v1",
+      "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+      "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1"
+    ],
+    "tie_break": "first model in candidate_model_order",
+    "update_rule": "At each target t, compute each model's mean any2 over exactly t-100..t-1 and select the maximum. Do not use target t's outcome or any later outcome.",
+    "parameter_search": false,
+    "variants": 1
+  },
+  "random_comparator": {
+    "method": "For each target, uniformly permute labels 1..45 jointly over the selected model's three fixed lines, preserving three six-number lines, pairwise disjointness, union18 and line incidence geometry.",
+    "random_bundles_per_target": 120,
+    "seed": 202611151236,
+    "exact_null": {
+      "mean_max_hit": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    }
+  },
+  "inference": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched disjoint union18 null, using the frozen E045 helper.",
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 202611151236,
+    "block_length_targets": 50,
+    "retain_final_remainder_block": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_unbounded_microvariants": true
+  },
+  "prospective_confirmation": {
+    "required_by_policy": true,
+    "minimum_target_count": null,
+    "completion_rule": null,
+    "status": "UNSPECIFIED_IN_POLICY",
+    "note": "A historical nested-selector pass cannot create STRICT_PASS_READY until the policy owner predeclares a prospective minimum target count and completion rule."
+  },
+  "frozen_blobs": {
+    "runner_blob_sha": "85436f62cef03f04def774b4ac1333b8d0dff494",
+    "test_blob_sha": "727d5af71a5ca732f7fd586920f1a7a2dfcc8593",
+    "base_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513",
+    "policy_blob_sha": "82def2dc955fcd0383e0983c04b84810a4685b5d"
+  },
+  "expected_output_files": [
+    "PREDICTIONS.csv",
+    "MODEL_SELECTION_LOG.csv",
+    "STATIC_MODEL_SCORECARD.csv",
+    "RANDOM_BASELINE.csv",
+    "BLOCK_STABILITY.csv",
+    "INFERENCE.json",
+    "VERIFICATION.json",
+    "COMPLETION.json",
+    "READINESS_UPDATE.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.csv"
+  ],
+  "expected_record_counts": {
+    "PREDICTIONS.csv": 749,
+    "MODEL_SELECTION_LOG.csv": 749,
+    "STATIC_MODEL_SCORECARD.csv": 5,
+    "RANDOM_BASELINE.csv": 749,
+    "BLOCK_STABILITY.csv": 15
+  },
+  "exclusions": [
+    "No source model, candidate portfolio, signal formula, model weight, threshold, alpha, block length, comparator, or lookback is tuned.",
+    "The selector is one fixed nested online rule; no variants or post-result model selection are evaluated.",
+    "No purchase lines, recommendation, freeze or seal may be generated.",
+    "No historical result can substitute for untouched prospective confirmation."
+  ]
+}

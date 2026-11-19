@@ -1,0 +1,67 @@
+{
+  "date_kst": "2026-11-06",
+  "target_round": 1249,
+  "data_cutoff": 1248,
+  "policy": "META_V43_V52_V54",
+  "source": "GitHub Actions run 42132474374 / preserved frozen-v54-1249-scorecard artifact",
+  "source_artifact_sha256": "548926763bba4578e5beed7e57865fa5ff1b52c770a26f3ee436014493daa74a",
+  "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/42132474374",
+  "evaluation_targets": 848,
+  "number_of_50_round_blocks": 17,
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.8950471698113207,
+      "any2": 0.7405660377358491,
+      "any3": 0.14622641509433962,
+      "winning_union_coverage": 4.071933962264151
+    },
+    "exact_label_null": {
+      "max_hits": 1.8346531517263276,
+      "any2": 0.7094760505140554,
+      "any3": 0.1186792976356222,
+      "winning_union_coverage": 4.000000000000008
+    },
+    "delta": {
+      "max_hits": 0.06039401808499312,
+      "any2": 0.03108998722179368,
+      "any3": 0.02754711745871742,
+      "winning_union_coverage": 0.07193396226414261
+    }
+  },
+  "adjusted_ci_delta": {
+    "max_hits": [
+      0.016057748747606057,
+      0.09711155415602535
+    ],
+    "any2": [
+      -0.0009452448268515871,
+      0.05758277301535639
+    ],
+    "any3": [
+      0.0024971729526130923,
+      0.054669758968151384
+    ],
+    "winning_union_coverage": [
+      -7.993605777301127e-15,
+      0.14622641509433162
+    ]
+  },
+  "positive_50_round_block_share": {
+    "max_hits": 0.9411764705882353,
+    "any2": 0.8235294117647058,
+    "any3": 0.8235294117647058,
+    "winning_union_coverage": 0.7647058823529411
+  },
+  "latest_partial_block_deltas": {
+    "max_hits": -0.12631981839299425,
+    "any2": -0.10530938384738871,
+    "any3": -0.014512630968955534,
+    "winning_union_coverage": -0.062500000000008
+  },
+  "interpretation": "Strict FAIL because any2 Bonferroni-adjusted bootstrap CI lower bound is below 0. This is statistical instability, not a failed execution or corrupted input. Do not adjust bootstrap seed, thresholds, block lengths or cherry-pick policies to force PASS.",
+  "final_status": "RESEARCH_ONLY_FAIL",
+  "strict_portfolio_pass": false,
+  "purchase_lines_released": false,
+  "numbers_redacted": true,
+  "prospective_next_step": "For future independent validation, freeze an untouched prospectively evaluated candidate/allocator policy, compare to matched exact label null, accumulate genuinely new drawings, and only promote if the unchanged strict gate is met."
+}

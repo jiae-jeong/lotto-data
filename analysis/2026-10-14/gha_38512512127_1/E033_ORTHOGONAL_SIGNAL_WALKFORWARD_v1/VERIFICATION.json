@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "surviving_signals": [
+    "CROSS_FIT_RESIDUAL_SIGNAL",
+    "ONLINE_CHANGE_POINT_SCORE",
+    "DIRICHLET_GAP_TICKET_GENERATOR"
+  ],
+  "targets": 645,
+  "same_target_random_tickets": 64500,
+  "cutoff_violations": 0,
+  "future_predictions": 0,
+  "holm_family_size": 3
+}

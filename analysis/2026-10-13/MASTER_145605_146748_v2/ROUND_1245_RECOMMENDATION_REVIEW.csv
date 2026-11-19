@@ -1,0 +1,4 @@
+﻿round,recommendation_date,model,model_version,mode,line_id,hit_count,included_winning_numbers,excluded_winning_numbers,bonus_match,rank,result
+1245,pre-draw record; timestamp not inferred,V4_G,V4 frozen source,expanding,1,0,,4 5 25 28 32 42,0,unknown,historical outcome comparison; purchase receipt not independently located
+1245,pre-draw record; timestamp not inferred,V4_C,V4 frozen source,expanding,2,0,,4 5 25 28 32 42,0,unknown,historical outcome comparison; purchase receipt not independently located
+1245,pre-draw record; timestamp not inferred,V4_S,V4 frozen source,expanding,3,1,25,4 5 28 32 42,0,unknown,historical outcome comparison; purchase receipt not independently located

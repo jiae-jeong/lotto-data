@@ -1,0 +1,20 @@
+{
+  "correction_id": "DELIVERY_1250_EVIDENCE_CORRECTION_2026-11-13",
+  "target_round": 1250,
+  "corrects_path": "research/weekly_purchase/1250/DELIVERY_1250_20261113.json",
+  "corrects_blob_sha": "98d277ac7042dc7aa9197e5ddf0339bbecdedb1c",
+  "original_message_evidence_claim": "Current conversation: user explicitly requested the five lines after verification; assistant displays them in the following response.",
+  "verification": {
+    "current_audit_conversation_contains_explicit_request": false,
+    "prior_conversation_lookup": "NO_MATCH",
+    "user_request_independently_verified": false,
+    "assistant_display_independently_verified": false,
+    "evidence_status": "UNVERIFIED"
+  },
+  "effective_interpretation": "The five-line file is preserved as a stored intermediate candidate artifact. The available evidence does not establish that the user requested or received these lines. Do not count this record as confirmed user-visible delivery or purchase.",
+  "strict_portfolio_pass": false,
+  "strict_status": "STRICT_PASS_NOT_READY",
+  "purchase_confirmation": "NOT_CONFIRMED",
+  "freeze_seal": "NOT_CREATED_STRICT_GATE_NOT_PASSED",
+  "preservation_note": "The original delivery JSON and original ledger entry are retained unchanged. This sidecar is the append-only provenance correction."
+}

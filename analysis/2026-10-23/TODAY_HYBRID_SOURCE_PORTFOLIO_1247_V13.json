@@ -1,0 +1,246 @@
+{
+  "created_kst": "2026-10-23T13:33:37.825095+09:00",
+  "target_round": 1247,
+  "data_cutoff": 1246,
+  "policy": "HYBRID_RAW_META_PLUS_EXPERT_SOURCES_V13",
+  "no_future_leakage": true,
+  "selection": "16 candidate sources = 11 expert model tickets + five ordered V12 raw-meta tickets; trailing source performance plus current overlap penalty, all prior-only.",
+  "source_score_weights": {
+    "mean": 1.0,
+    "ge2": 0.7,
+    "ge3": 1.4,
+    "recent50_mean": 0.15
+  },
+  "current": {
+    "sources": [
+      "expert:triple_association",
+      "expert:long_frequency",
+      "expert:structure_profile",
+      "expert:A_v2",
+      "raw:raw_rank3"
+    ],
+    "lines": [
+      [
+        2,
+        8,
+        13,
+        25,
+        28,
+        37
+      ],
+      [
+        12,
+        13,
+        18,
+        27,
+        33,
+        34
+      ],
+      [
+        5,
+        9,
+        15,
+        28,
+        38,
+        40
+      ],
+      [
+        3,
+        13,
+        27,
+        37,
+        38,
+        45
+      ],
+      [
+        3,
+        5,
+        9,
+        13,
+        21,
+        23
+      ]
+    ],
+    "selection_details": [
+      {
+        "source": "expert:triple_association",
+        "prior_score": 0.036944412896196724,
+        "diversity_penalty": 0.0,
+        "ticket": [
+          2,
+          8,
+          13,
+          25,
+          28,
+          37
+        ]
+      },
+      {
+        "source": "expert:long_frequency",
+        "prior_score": 0.024277746229530044,
+        "diversity_penalty": 0.0,
+        "ticket": [
+          12,
+          13,
+          18,
+          27,
+          33,
+          34
+        ]
+      },
+      {
+        "source": "expert:structure_profile",
+        "prior_score": -0.024055587103803268,
+        "diversity_penalty": 0.0,
+        "ticket": [
+          5,
+          9,
+          15,
+          28,
+          38,
+          40
+        ]
+      },
+      {
+        "source": "expert:A_v2",
+        "prior_score": -0.027055587103803312,
+        "diversity_penalty": 0.0,
+        "ticket": [
+          3,
+          13,
+          27,
+          37,
+          38,
+          45
+        ]
+      },
+      {
+        "source": "raw:raw_rank3",
+        "prior_score": -0.03138892043713665,
+        "diversity_penalty": 0.0,
+        "ticket": [
+          3,
+          5,
+          9,
+          13,
+          21,
+          23
+        ]
+      }
+    ],
+    "raw_weights": [
+      -1.1765153010033687,
+      0.05666803745875659,
+      0.07819361982715446,
+      0.056209441087627404,
+      0.05025253565920401,
+      0.06792185019833324,
+      0.06956557640776687,
+      0.08566099426076587,
+      0.0369236890400996,
+      0.055279264807260295,
+      0.05772504484178061,
+      0.07400276138310555,
+      0.06258207408835033,
+      -0.05793246324217938,
+      -0.02120130403922555,
+      -0.019737185756373406,
+      -0.020306537174606475,
+      -0.005526809183062585,
+      -0.02818130493767454,
+      0.08062498484042897,
+      0.09660013541260884,
+      0.21472663261004746,
+      0.205142529473304
+    ]
+  },
+  "source_use_counts": {
+    "raw:raw_rank4": 129,
+    "expert:structure_profile": 383,
+    "raw:raw_rank5": 170,
+    "expert:recent_momentum": 267,
+    "expert:triple_association": 526,
+    "expert:pair_association": 506,
+    "expert:contrarian_v2": 437,
+    "expert:current_gap": 373,
+    "expert:C_v2": 228,
+    "expert:combined_equal_rank": 32,
+    "raw:raw_rank3": 365,
+    "raw:raw_rank1": 4,
+    "expert:frequency_plus_gap": 363,
+    "expert:A_v2": 84,
+    "expert:long_frequency": 255,
+    "raw:raw_rank2": 108
+  },
+  "walkforward_targets": 846,
+  "scorecard": {
+    "policy": {
+      "max_hits": 1.6879432624113475,
+      "any2": 0.5933806146572104,
+      "any3": 0.10401891252955082,
+      "any4": 0.008274231678486997,
+      "any5": 0.0,
+      "any6": 0.0,
+      "winning_union_coverage": 2.9267139479905437,
+      "union_size": 22.091016548463358,
+      "mean_overlap": 0.957210401891253,
+      "max_overlap": 2.3770685579196216
+    },
+    "matched_label_permutation": {
+      "max_hits": 1.7089021867612293,
+      "any2": 0.6032801418439716,
+      "any3": 0.11230053191489361,
+      "any4": 0.006582446808510638,
+      "any5": 0.0001551418439716312,
+      "any6": 7.387706855791963e-06,
+      "winning_union_coverage": 2.9442745271867614,
+      "union_size": 22.091016548463358,
+      "mean_overlap": 0.957210401891253,
+      "max_overlap": 2.3770685579196216
+    },
+    "delta": {
+      "max_hits": -0.02095892434988178,
+      "any2": -0.009899527186761237,
+      "any3": -0.00828161938534279,
+      "any4": 0.0016917848699763592,
+      "any5": -0.0001551418439716312,
+      "any6": -7.387706855791963e-06,
+      "winning_union_coverage": -0.017560579196217674,
+      "union_size": 0.0,
+      "mean_overlap": 0.0,
+      "max_overlap": 0.0
+    }
+  },
+  "inference": {
+    "max_hits": {
+      "adjusted_ci_delta": [
+        -0.07368616389548693,
+        0.03878414489311164
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "any2": {
+      "adjusted_ci_delta": [
+        -0.05432919621749409,
+        0.033007352941176474
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "any3": {
+      "adjusted_ci_delta": [
+        -0.035020783847981,
+        0.020801470588235293
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "winning_union_coverage": {
+      "adjusted_ci_delta": [
+        -0.1306072695035461,
+        0.1135047281323877
+      ],
+      "positive_50_round_block_share": 0.35294117647058826
+    },
+    "strict_portfolio_pass": false
+  },
+  "final_status": "FAIL_SAME_GATE"
+}

@@ -1,0 +1,18 @@
+{
+  "started_utc": "2026-10-09T13:49:26.432171+00:00",
+  "completed_utc": "2026-10-09T13:49:28.579293+00:00",
+  "duration_seconds": 2.1465874002315104,
+  "input_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "cutoff": 1244,
+  "rows": 1244,
+  "recommendation_or_candidate_generation": false,
+  "actual_1245": "NOT READ / NOT USED",
+  "B_rerun": false,
+  "numpy_version": "2.3.5",
+  "pair_combinations": 990,
+  "triple_combinations": 14190,
+  "relation_window_rows": 75900,
+  "structure_probability_forecasts": 5200,
+  "status": "EXECUTED SUCCESSFULLY",
+  "claim_limit": "Descriptive signals and post-hoc structural probability/coverage diagnosis; no original A/C reconstruction or predictive promotion"
+}

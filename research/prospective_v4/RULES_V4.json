@@ -1,0 +1,92 @@
+{
+  "active_model_ids": [
+    "V4_U",
+    "V4_F",
+    "V4_G",
+    "V4_C",
+    "V4_M",
+    "V4_P",
+    "V4_T",
+    "V4_S"
+  ],
+  "base_commit": "bdc38abdcb6a7f511ad2ee39914f9126a69aeb05",
+  "baseline_replicates": 10000,
+  "baseline_seed": 2026100903,
+  "candidate_bank": {
+    "algorithm": "Python 3.12 random.Random(seed).sample(range(1,46),6), unique sorted tuples, bank lexicographically sorted",
+    "seed": 2026100901,
+    "size": 10000
+  },
+  "candidates_per_model": 37,
+  "change_policy": "immutable V4; rules/weights/code changes require prospective_v5 or later; outcomes never used to tune V4",
+  "confirmatory_holdout": [
+    1245,
+    1444
+  ],
+  "cutoff": 1244,
+  "diagnostic_looks_after_targets": [
+    50,
+    100,
+    150,
+    200
+  ],
+  "first_prospective_target": 1245,
+  "initial_semantic_sha256": "a49e74f93e2335a1d7462bbe1424f056f35fd9006499ecf3797dec791324761f",
+  "min_training": 200,
+  "multiple_testing": {
+    "alpha": 0.05,
+    "family": "7 nonuniform models x 2 modes plus 2 portfolio modes",
+    "method": "Holm",
+    "primary_endpoint": "mean hits; single tickets exact hypergeometric convolution upper-tail; portfolios conditional-fair Hoeffding upper bound",
+    "tests": 16
+  },
+  "null_seed": 2026100902,
+  "portfolio": {
+    "maximum_pair_overlap": 2,
+    "model_order": [
+      "V4_G",
+      "V4_C",
+      "V4_S"
+    ],
+    "selection": "greedy in fixed model order; highest-ranked acceptable distinct ticket; fallback minimize sum overlap, then max overlap, then rank, then lexicographic ticket",
+    "weights": [
+      1,
+      1,
+      1
+    ]
+  },
+  "prospective_eligibility": "must publish each sealed prediction in GitHub before its official draw with independently recorded publication evidence; missed target is missing, never reconstructed after result; V4 invalid if freeze not proved prior to 1245 draw",
+  "relation_validation": "diagnostic only; never veto extreme tickets or alter ranking",
+  "rolling_window": 300,
+  "shrinkage": {
+    "conditional": 30,
+    "gap": 20,
+    "momentum": 20
+  },
+  "structure_feature_weights": {
+    "bands": 1,
+    "cluster": 1,
+    "consecutive": 1,
+    "end_repeat": 1,
+    "low": 1,
+    "odd": 1,
+    "overlap": 1,
+    "sum_bin": 1
+  },
+  "structure_support_sizes": {
+    "bands": 210,
+    "cluster": 6,
+    "consecutive": 7,
+    "end_repeat": 7,
+    "low": 7,
+    "odd": 7,
+    "overlap": 7,
+    "sum_bin": 9
+  },
+  "tie_break": "scores descending then number ascending; candidate sum scores descending then sorted tuple lexicographic ascending",
+  "version": "prospective_v4",
+  "window_modes": [
+    "expanding",
+    "rolling300"
+  ]
+}

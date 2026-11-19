@@ -1,0 +1,580 @@
+name: daily-lotto-master-v5
+
+on:
+  schedule:
+    - cron: '0 23 * * *'
+    - cron: '15 0 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/data_freshness_guard.py'
+      - 'automation/daily_master_full_v4.py'
+      - 'automation/daily_master_full_v5.py'
+      - 'automation/protocol_completion_audit.py'
+      - 'automation/protocol_recovery_v1.py'
+      - 'automation/candidate_recall_v1.py'
+      - 'automation/learning_loop_gate_v1.py'
+      - 'automation/recovered_models_v2.py'
+      - 'automation/model_validation_v5_all_models_fast.py'
+      - 'automation/five_role_research_v9.py'
+      - 'automation/three_line_readiness_guard_v1.py'
+      - 'automation/tests_v2/test_three_line_readiness_guard_v1.py'
+      - 'automation/weekly_purchase_final_v1.py'
+      - 'automation/weekly_purchase_final_v2.py'
+      - 'analysis/**/EXTERNAL_DATA_CROSSCHECK.json'
+      - 'research/PURCHASE_CONFIRMATION_REGISTRY.json'
+      - 'research/DELIVERY_LOG.md'
+      - '.github/workflows/daily-lotto-master-v4.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-lotto-master-v5
+  cancel-in-progress: true
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  OPENBLAS_NUM_THREADS: '2'
+
+jobs:
+  full-master:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile protocol and policy readiness guards
+        run: |
+          python -m py_compile automation/protocol_recovery_v1.py automation/learning_loop_gate_v1.py automation/three_line_readiness_guard_v1.py automation/tests_v2/test_three_line_readiness_guard_v1.py automation/tests_v2/test_actual_purchase_provenance_v1.py
+          python -B -m unittest automation.tests_v2.test_three_line_readiness_guard_v1 automation.tests_v2.test_actual_purchase_provenance_v1 -v
+
+      - name: Enforce draw-time-aware data freshness
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python -B automation/data_freshness_guard.py "$RUN_DATE"
+          if ! git diff --quiet -- lotto_data.csv; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add lotto_data.csv
+            git commit -m "data: add verified latest round"
+            git push origin HEAD:main
+          fi
+
+      - name: Run full DAILY MASTER compute
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          python -B automation/daily_master_full_v5.py "$RUN_DATE" | tee "$RUNNER_TEMP/master-full-v5.log"
+          RUN_DIR="$(find "analysis/$RUN_DATE" -maxdepth 1 -type d -name 'MASTER_FULL_V5_*' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
+          test -n "$RUN_DIR"
+          echo "RUN_DIR=$RUN_DIR" >> "$GITHUB_ENV"
+          echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+
+      - name: Compute candidate recall as a separate learning stage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - "$RUN_DATE" <<'PY'
+          import csv,sys
+          from pathlib import Path
+          from automation.candidate_recall_v1 import build_candidate_recall
+          date=sys.argv[1]
+          rows=[]
+          with open('lotto_data.csv',encoding='utf-8-sig') as f:
+              for r in csv.DictReader(f):
+                  rows.append({
+                      'round':int(r['round']),
+                      'date':r['date'],
+                      'nums':[int(r[f'no{i}']) for i in range(1,7)],
+                      'bonus':int(r['bonus']),
+                  })
+          out=Path('analysis')/date
+          out.mkdir(parents=True,exist_ok=True)
+          result=build_candidate_recall(rows,out)
+          assert result['no_future_leakage'] is True
+          assert result['targets'] == len(rows)-200
+          assert set(result['k_values']) == {10,15,20,25,30}
+          assert result['matched_random_sets_total'] > 0
+          print({'data_cutoff':result['data_cutoff'],'targets':result['targets'],'random_sets':result['matched_random_sets_total']})
+          PY
+
+      - name: Recover protocol evidence and audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/protocol_recovery_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-recovery.log"
+          # Reuse independently verified evidence only when the draw cutoff is unchanged.
+          # This does not claim a fresh external retrieval.
+          python - "$RUN_DATE" "$RUN_DIR" <<'PY'
+          import csv, json, sys
+          from pathlib import Path
+          date, run_dir = sys.argv[1], Path(sys.argv[2])
+          dated = Path('analysis') / date
+          target = dated / 'EXTERNAL_DATA_CROSSCHECK.json'
+          if not target.exists():
+              verification = json.loads((run_dir / 'VERIFICATION.json').read_text())
+              cutoff = int(verification['data_cutoff'])
+              rows = list(csv.DictReader(open('lotto_data.csv', encoding='utf-8-sig')))
+              last = rows[-1]
+              assert int(last['round']) == cutoff
+              for candidate in sorted(Path('analysis').glob('*/EXTERNAL_DATA_CROSSCHECK.json'), reverse=True):
+                  if candidate.parent.name >= date:
+                      continue
+                  try:
+                      evidence = json.loads(candidate.read_text())
+                      sources = evidence['fallback_sources']
+                      numbers = [int(last[f'no{i}']) for i in range(1, 7)]
+                      def normalize_date(value):
+                          raw = str(value).strip().replace('/', '-').replace('.', '-')
+                          parts = raw.split('-')
+                          if len(parts) == 3:
+                              return f"{int(parts[0]):04d}-{int(parts[1]):02d}-{int(parts[2]):02d}"
+                          return raw
+                      def agrees(s):
+                          return (int(s['round']) == cutoff
+                                  and normalize_date(s['draw_date']) == normalize_date(last['date'])
+                                  and sorted(int(n) for n in s['main_numbers']) == sorted(numbers)
+                                  and int(s['bonus']) == int(last['bonus']))
+                      source_urls = {s.get('url') for s in sources if s.get('url')}
+                      if (int(evidence['repo_data_cutoff']) == cutoff
+                          and evidence['independent_fallback_sources_agree'] is True
+                          and evidence['repo_vs_fallback_round_and_date_match'] is True
+                          and evidence.get('repo_vs_fallback_numbers_match') is True
+                          and len(sources) >= 2 and len(source_urls) >= 2
+                          and all(agrees(s) for s in sources)
+                          and agrees(evidence['repo_round'])
+                          and agrees(evidence['official_source_attempt'])
+                          and evidence['official_source_attempt']['status'] == 'CONFIRMED'):
+                          evidence['date_kst'] = date
+                          evidence['evidence_reuse_note'] = (
+                              'Reused independently confirmed records from ' + candidate.parent.name
+                              + ' for unchanged draw cutoff; no fresh external fetch is claimed.')
+                          target.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n')
+                          print('Crosscheck provenance reused:', candidate, 'cutoff:', cutoff)
+                          break
+                  except (KeyError, ValueError, TypeError, OSError):
+                      continue
+          PY
+          python -B automation/protocol_completion_audit.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/protocol-audit.log"
+          python -B automation/learning_loop_gate_v1.py "$RUN_DATE" "$RUN_DIR" | tee "$RUNNER_TEMP/learning-loop-gate.log"
+
+      - name: Finalize SHA256 manifest after protocol evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - "$RUN_DIR" <<'PY'
+          import csv, hashlib, json, sys
+          from pathlib import Path
+          d = Path(sys.argv[1])
+          verification_path = d / "VERIFICATION.json"
+          completion_path = d / "COMPLETION.json"
+          report_path = d / "REPORT.md"
+          manifest_path = d / "SHA256_MANIFEST.csv"
+          verification = json.loads(verification_path.read_text(encoding="utf-8"))
+          mandatory = verification["mandatory_checks"]
+          files = sorted(
+              (p for p in d.iterdir() if p.is_file() and p.name != manifest_path.name),
+              key=lambda p: p.name,
+          )
+          mandatory["artifact_hash_manifest"] = True
+          protocol_checks = verification.get("protocol_checks", {})
+          compute_ok = bool(mandatory) and all(bool(value) for value in mandatory.values())
+          protocol_ok = (
+              verification.get("protocol_status") == "FULL_COMPLETE"
+              and bool(protocol_checks)
+              and all(bool(value) for value in protocol_checks.values())
+          )
+          status = "FULL_COMPLETE" if compute_ok and protocol_ok else "PARTIAL"
+          verification["status"] = status
+          verification["mandatory_checks"] = mandatory
+          verification["status_basis"] = {
+              "all_compute_mandatory_checks_pass": compute_ok,
+              "all_protocol_checks_pass": protocol_ok,
+          }
+          verification["artifact_manifest"] = {
+              "path": manifest_path.name,
+              "entries": len(files),
+              "status": "PASS",
+          }
+          verification_path.write_text(
+              json.dumps(verification, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          completion = json.loads(completion_path.read_text(encoding="utf-8"))
+          completion["status"] = status
+          completion_path.write_text(
+              json.dumps(completion, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          report = report_path.read_text(encoding="utf-8").replace("\\n\\n", "\n\n")
+          report = report.replace("Status: **PARTIAL**", f"Status: **{status}**")
+          report_lines = [line for line in report.splitlines() if not line.startswith("Output integrity:")]
+          integrity_line = f"Output integrity: PASS — SHA256 manifest verified for {len(files)} files."
+          for index, line in enumerate(report_lines):
+              if line.startswith("Successor leakage failures:"):
+                  report_lines.insert(index, integrity_line)
+                  break
+          else:
+              report_lines.append(integrity_line)
+          report_path.write_text("\n".join(report_lines) + "\n", encoding="utf-8")
+
+          files = sorted(
+              (p for p in d.iterdir() if p.is_file() and p.name != manifest_path.name),
+              key=lambda p: p.name,
+          )
+          rows = [
+              {"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest(), "bytes": p.stat().st_size}
+              for p in files
+          ]
+          with manifest_path.open("w", encoding="utf-8-sig", newline="") as stream:
+              writer = csv.DictWriter(stream, fieldnames=["path", "sha256", "bytes"])
+              writer.writeheader()
+              writer.writerows(rows)
+          with manifest_path.open("r", encoding="utf-8-sig", newline="") as stream:
+              checked = list(csv.DictReader(stream))
+          expected = {p.name for p in files}
+          names = [row["path"] for row in checked]
+          assert len(names) == len(set(names))
+          assert set(names) == expected
+          assert len(checked) == verification["artifact_manifest"]["entries"]
+          for row in checked:
+              artifact = d / row["path"]
+              assert artifact.is_file() and artifact.parent == d and not artifact.is_symlink()
+              assert artifact.stat().st_size == int(row["bytes"])
+              assert hashlib.sha256(artifact.read_bytes()).hexdigest() == row["sha256"]
+          print({"status": status, "manifest_entries": len(checked), "manifest_sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest()})
+          # Preserve truthful PARTIAL evidence; research status is separate from
+          # successful execution and publication of the validation artifacts.
+          PY
+
+      - name: Verify MASTER completion status and artifact integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - "$RUN_DIR" "$RUN_DATE" <<'PY'
+          import csv,hashlib,json,sys
+          from pathlib import Path
+          d=Path(sys.argv[1]); date=sys.argv[2]
+          v=json.loads((d/'VERIFICATION.json').read_text())
+          a=json.loads((d/'PROTOCOL_AUDIT.json').read_text())
+          l=json.loads((Path('analysis')/date/'LEARNING_LOOP_GATE.json').read_text())
+          completion=json.loads((d/'COMPLETION.json').read_text())
+          required_compute={
+              'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward',
+              'fresh_random_baseline','historical_source_search','legacy_model_sources_recovered',
+              'A_full_walkforward','C_full_walkforward','contrarian_full_walkforward',
+              'successor_A_v2_full_walkforward','successor_C_v2_full_walkforward',
+              'successor_contrarian_v2_full_walkforward','AC_contrarian_leakage',
+              'successor_scorecard_complete','successor_random_comparison',
+              'successor_block_stability','successor_signal_ablation',
+              'five_ticket_portfolio_walkforward','five_ticket_matched_random_baseline',
+              'model_scorecard_complete','hypothesis_registry_written','artifact_hash_manifest'
+          }
+          required_protocol={
+              'full_compute_execution','external_two_source_crosscheck',
+              'historical_errornote_aggregate_present',
+              'historical_errornote_closed_loop_complete','historical_source_conflicts_disclosed_and_excluded','full_signal_scorecard',
+              'numeric_13_section_report','actual_purchase_learning_record',
+              'candidate_recall_separate_stage','failure_decomposition_present',
+              'whole_history_limitation_explicit','legacy_model_sources_recovered'
+          }
+          assert required_compute.issubset(v['mandatory_checks'])
+          assert required_protocol.issubset(a['protocol_checks'])
+          compute_failed={k for k,value in v['mandatory_checks'].items() if not value}
+          known_legacy_gaps={
+              'legacy_model_sources_recovered','A_full_walkforward',
+              'C_full_walkforward','contrarian_full_walkforward'
+          }
+          assert compute_failed.issubset(known_legacy_gaps), compute_failed
+          compute_ok=not compute_failed
+          assert v['compute_status']==('FULL_COMPUTE_COMPLETE' if compute_ok else 'COMPUTE_PARTIAL')
+          if not v['mandatory_checks']['legacy_model_sources_recovered']:
+              assert all(not v['mandatory_checks'][k] for k in (
+                  'A_full_walkforward','C_full_walkforward','contrarian_full_walkforward'
+              ))
+          assert all(v['mandatory_checks'][k] for k in (
+              'latest_data_integrity','fresh_cumulative_stats','B_full_walkforward',
+              'fresh_random_baseline','successor_A_v2_full_walkforward',
+              'successor_C_v2_full_walkforward','successor_contrarian_v2_full_walkforward',
+              'AC_contrarian_leakage','successor_scorecard_complete',
+              'successor_random_comparison','successor_block_stability',
+              'successor_signal_ablation','five_ticket_portfolio_walkforward',
+              'five_ticket_matched_random_baseline','model_scorecard_complete',
+              'hypothesis_registry_written','artifact_hash_manifest'
+          ))
+          protocol_failed={k for k,value in a['protocol_checks'].items() if not value}
+          # Missing purchase confirmation is an explicit evidence gap, not a compute failure.
+          known_protocol_gaps={
+              'full_compute_execution',
+              'legacy_model_sources_recovered',
+              'historical_errornote_closed_loop_complete'
+          }
+          if not l['checks']['actual_purchase_confirmation_evidence_available']:
+              known_protocol_gaps.update({
+                  'historical_errornote_aggregate_present',
+                  'actual_purchase_learning_record',
+                  'failure_decomposition_present'
+              })
+          assert protocol_failed.issubset(known_protocol_gaps), protocol_failed
+          protocol_ok=not protocol_failed
+          expected_protocol_status='FULL_COMPLETE' if protocol_ok else 'PROTOCOL_PARTIAL'
+          assert a['protocol_status']==expected_protocol_status, a
+          assert v['protocol_status']==expected_protocol_status, v.get('protocol_missing')
+          expected_status='FULL_COMPLETE' if compute_ok and protocol_ok else 'PARTIAL'
+          assert v['status']==expected_status
+          assert completion['status']==expected_status
+          assert v['successor_leakage_failures']==0
+          assert l['status']=='PASS', l
+          assert l['checks']['actual_purchase_source_is_canonical'] is True
+          assert l['checks']['unconfirmed_purchase_sources_excluded'] is True
+          assert l['checks']['historical_source_conflicts_disclosed_and_excluded'] is True
+          assert l['checks']['candidate_recall_no_future_leakage'] is True
+          assert l['checks']['candidate_recall_scorecard_complete'] is True
+          assert v['mandatory_checks']['artifact_hash_manifest'] is True
+          assert v['artifact_manifest']['status']=='PASS'
+          manifest_path=d/'SHA256_MANIFEST.csv'
+          assert manifest_path.is_file()
+          with manifest_path.open('r',encoding='utf-8-sig',newline='') as f:
+              manifest_rows=list(csv.DictReader(f))
+          expected_files={p.name for p in d.iterdir() if p.is_file() and p.name != manifest_path.name}
+          manifest_names=[row['path'] for row in manifest_rows]
+          assert len(manifest_names)==len(set(manifest_names))
+          assert set(manifest_names)==expected_files
+          assert v['artifact_manifest']['entries']==len(manifest_rows)
+          for row in manifest_rows:
+              artifact=d/row['path']
+              assert artifact.is_file() and artifact.parent==d and not artifact.is_symlink()
+              assert artifact.stat().st_size==int(row['bytes'])
+              assert hashlib.sha256(artifact.read_bytes()).hexdigest()==row['sha256']
+
+          # Independently verify the V4 base artifacts consumed by V5.
+          base=Path(v['base_v4'])
+          expected_base_parent=Path('analysis')/date
+          assert base.parent==expected_base_parent and base.name.startswith('MASTER_FULL_V4_')
+          base_manifest_path=base/'SHA256_MANIFEST.csv'
+          assert base_manifest_path.is_file()
+          with base_manifest_path.open('r',encoding='utf-8-sig',newline='') as f:
+              base_rows=list(csv.DictReader(f))
+          assert base_rows
+          base_expected_files={p.name for p in base.iterdir() if p.is_file() and p.name!='SHA256_MANIFEST.csv'}
+          base_names=[row['file'] for row in base_rows]
+          assert len(base_names)==len(set(base_names))
+          assert set(base_names)==base_expected_files
+          for row in base_rows:
+              artifact=base/row['file']
+              assert artifact.is_file() and artifact.parent==base and not artifact.is_symlink()
+              assert artifact.stat().st_size==int(row['bytes'])
+              assert hashlib.sha256(artifact.read_bytes()).hexdigest()==row['sha256']
+          print({
+              'study_status':expected_status,
+              'compute_status':v['compute_status'],
+              'protocol_status':v['protocol_status'],
+              'expected_legacy_gaps':sorted(compute_failed),
+              'manifest_entries':len(manifest_rows),
+              'manifest_status':'PASS'
+          })
+          PY
+
+      - name: Run daily strict model validation and policy-specific portfolio readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/model_validation_v5_all_models_fast.py "$RUN_DATE" "analysis/$RUN_DATE/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json" "$RUN_DIR" | tee "$RUNNER_TEMP/model-validation-v5.log"
+          TARGET_ROUND="$(python - <<'PY'
+          import csv
+          with open('lotto_data.csv', encoding='utf-8-sig', newline='') as f:
+              rows = list(csv.DictReader(f))
+          if not rows:
+              raise SystemExit('lotto_data.csv has no draw rows')
+          print(int(rows[-1]['round']) + 1)
+          PY
+          )"
+          if [ "$TARGET_ROUND" -ge 1251 ]; then
+            python -B automation/three_line_readiness_guard_v1.py "$RUN_DATE" | tee "$RUNNER_TEMP/three-line-readiness.log"
+          else
+            export LOTTO_INTERNAL_PORTFOLIO_PATH="$RUNNER_TEMP/five-role-portfolio-internal.json"
+            rm -f "$LOTTO_INTERNAL_PORTFOLIO_PATH"
+            python -B automation/five_role_research_v9.py "$RUN_DATE" | tee "$RUNNER_TEMP/five-role-v9.log"
+            python - "$RUN_DATE" <<'PY'
+          import csv,hashlib,json,os,sys
+          from pathlib import Path
+          date=sys.argv[1]
+          strict_report=Path('analysis')/date/'MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json'
+          strict=json.loads(strict_report.read_text())
+          rows=list(csv.DictReader(open('lotto_data.csv',encoding='utf-8-sig')))
+          cutoff=int(rows[-1]['round']); target=cutoff+1
+          research_report=Path('analysis')/date/f'FIVE_ROLE_RESEARCH_{target}_V9.json'
+          research=json.loads(research_report.read_text())
+          internal_path=Path(os.environ['LOTTO_INTERNAL_PORTFOLIO_PATH'])
+          internal_raw=internal_path.read_bytes()
+          assert hashlib.sha256(internal_raw).hexdigest()==research['line_level_payload_sha256']
+          internal_payload=json.loads(internal_raw)
+          final_lines=internal_payload['final_lines']
+          assert len(final_lines)==5 and all(len(row)==6 and len(set(row))==6 for row in final_lines)
+          assert int(strict['data_cutoff'])==cutoff
+          assert research['data_cutoff']==cutoff
+          assert research['target_round']==target
+          assert research['no_future_leakage'] is True
+          integ=research['integrity']
+          assert integ['five_distinct_lines'] is True
+          assert integ['five_distinct_roles'] is True
+          assert integ['selection_uses_randomness'] is False
+          assert integ['random_fallback_allowed'] is False
+
+          outdir=Path('research')/'weekly_purchase'/str(target)
+          outdir.mkdir(parents=True,exist_ok=True)
+          data_sha=hashlib.sha256(Path('lotto_data.csv').read_bytes()).hexdigest()
+          model_code_sha=hashlib.sha256(Path('automation/model_validation_v5_all_models_fast.py').read_bytes()).hexdigest()
+          portfolio_code_sha=hashlib.sha256(Path('automation/five_role_research_v9.py').read_bytes()).hexdigest()
+          validated_models=strict['validated_models']
+          model_pass=bool(validated_models)
+          portfolio_pass=bool(research['inference']['strict_portfolio_pass'])
+          ready=model_pass and portfolio_pass
+          failed_gates=list(research.get('failed_gates',[]))
+
+          ready_path=None
+          if ready:
+            model_report_sha=hashlib.sha256(strict_report.read_bytes()).hexdigest()
+            research_report_sha=hashlib.sha256(research_report.read_bytes()).hexdigest()
+            ready_path=outdir/f"STRICT_PASS_READY_{target}_{date.replace('-','')}_{data_sha[:12]}_{model_code_sha[:8]}_{portfolio_code_sha[:8]}_{model_report_sha[:8]}_{research_report_sha[:8]}.json"
+            ready_payload={
+              'status':'STRICT_PASS_READY',
+              'target_round':target,
+              'date_kst':date,
+              'data_cutoff':cutoff,
+              'data_sha256':data_sha,
+              'model_validation_report':str(strict_report),
+              'model_validation_sha256':model_report_sha,
+              'five_role_research_report':str(research_report),
+              'five_role_research_sha256':research_report_sha,
+              'model_validation_code_sha256':model_code_sha,
+              'five_role_code_sha256':portfolio_code_sha,
+              'validated_models':validated_models,
+              'model_verdict':strict['verdict'],
+              'strict_portfolio_pass':portfolio_pass,
+              'strict_gate_version':research.get('strict_gate_version'),
+              'failed_gates':[],
+              'line_level_payload_sha256':research['line_level_payload_sha256'],
+              'final_lines':final_lines,
+              'inference':research['inference'],
+              'no_future_leakage':True,
+              'selection_uses_randomness':False,
+              'random_fallback_allowed':False
+            }
+            if ready_path.exists():
+              existing=json.loads(ready_path.read_text())
+              assert existing==ready_payload, f"write-once readiness collision: {ready_path}"
+            else:
+              ready_path.write_text(json.dumps(ready_payload,ensure_ascii=False,indent=2),encoding='utf-8')
+
+          stale_ready_files=sorted(str(p) for p in outdir.glob(f"STRICT_PASS_READY_{target}_*.json") if ready_path is None or p!=ready_path)
+          status_payload={
+            'status':'STRICT_PASS_READY' if ready else 'STRICT_PASS_NOT_READY',
+            'target_round':target,
+            'date_kst':date,
+            'data_cutoff':cutoff,
+            'data_sha256':data_sha,
+            'strict_model_validation_pass':model_pass,
+            'validated_models':validated_models,
+            'model_verdict':strict['verdict'],
+            'strict_portfolio_pass':portfolio_pass,
+            'strict_gate_version':research.get('strict_gate_version'),
+            'strict_pass_ready':ready,
+            'ready_file':str(ready_path) if ready_path else None,
+            'ready_file_exists':bool(ready_path and ready_path.is_file()),
+            'line_level_output_status':'PUBLISHED_IN_STRICT_PASS_READY' if ready else 'SUPPRESSED_NOT_READY',
+            'stale_ready_files':stale_ready_files,
+            'failed_gates':failed_gates,
+            'no_future_leakage':True,
+            'final_selection_randomness':False,
+            'random_fallback_allowed':False
+          }
+          status_path=outdir/f"STRICT_PASS_STATUS_{target}_{date.replace('-','')}.json"
+          status_path.write_text(json.dumps(status_payload,ensure_ascii=False,indent=2),encoding='utf-8')
+          gate={
+            **status_payload,
+            'strict_model_validation_report':str(strict_report),
+            'five_role_research_report':str(research_report),
+            'purchase_model_status':(
+              'STRICT_PASS_READY' if ready else
+              'MODEL_EDGE_ONLY_PORTFOLIO_FAIL' if model_pass else
+              'NO_STRICT_EDGE_CONTINUE_NONRANDOM_RESEARCH'
+            )
+          }
+          gate_path=outdir/f"MODEL_GATE_{target}_{date.replace('-','')}.json"
+          gate_path.write_text(json.dumps(gate,ensure_ascii=False,indent=2),encoding='utf-8')
+          internal_path.unlink(missing_ok=True)
+          print(json.dumps(gate,ensure_ascii=False))
+          PY
+
+
+          fi
+      - name: Preserve validated outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "analysis/$RUN_DATE" research/weekly_purchase
+          if git diff --cached --quiet; then
+            echo 'No generated output changes to commit.'
+            exit 0
+          fi
+          git commit -m "research: protocol-full daily master $RUN_DATE"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+            fi
+            git rebase --abort || true
+            sleep $((attempt * 2))
+          done
+          echo 'Failed to preserve validated outputs after 3 rebase/push attempts.' >&2
+          exit 1
+
+      - name: Preserve failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-master-v5-failure-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/master-full-v5.log
+            ${{ runner.temp }}/protocol-recovery.log
+            ${{ runner.temp }}/protocol-audit.log
+            ${{ runner.temp }}/learning-loop-gate.log
+            ${{ runner.temp }}/model-validation-v5.log
+            ${{ runner.temp }}/five-role-v9.log
+            ${{ runner.temp }}/three-line-readiness.log
+            analysis/*/MASTER_FULL_V4_*/**
+            analysis/*/MASTER_FULL_V5_*/**
+            analysis/*/EXTERNAL_DATA_CROSSCHECK.json
+            analysis/*/HISTORICAL_CLOSED_LOOP_STATUS.json
+            analysis/*/FULL_SIGNAL_SCORECARD.csv
+            analysis/*/FULL_SIGNAL_SCORECARD_STATUS.json
+            analysis/*/CANDIDATE_RECALL_SCORECARD.csv
+            analysis/*/CANDIDATE_RECALL_STATUS.json
+            analysis/*/LEARNING_LOOP_GATE.json
+            analysis/*/MODEL_VALIDATION_V5_ALL_MODELS_STRICT.json
+            analysis/*/MODEL_VALIDATION_V5_ALL_MODELS_STRICT_DAILY.json
+            analysis/*/FIVE_ROLE_RESEARCH_*_V9.json
+            research/weekly_purchase/*/MODEL_GATE_*.json
+            research/weekly_purchase/*/STRICT_PASS_STATUS_*.json
+            research/weekly_purchase/*/STRICT_PASS_READY_*.json
+          if-no-files-found: warn
+# Operational catch-up trigger 2026-11-17: no schedule or workflow behavior change.
+
+# Re-run full DAILY MASTER after exact-integer momentum ranking repair on 2026-11-17; no schedule or workflow behavior change.
+# Operational catch-up trigger 2026-11-18 09:30 KST: recover the missed scheduled DAILY MASTER run; schedule unchanged.

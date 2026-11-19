@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "study_id": "E058_THREE_LINE_PERSISTENT_PORTFOLIO_NULL_CALIBRATION_v1",
+  "source_git_blob_match": true,
+  "preregistration_git_blob_match": true,
+  "runner_git_blob_match": true,
+  "policy_git_blob_match": true,
+  "data_rows": 1250,
+  "target_count": 850,
+  "target_sequence_valid": true,
+  "six_unique_main_numbers_1_to_45": true,
+  "bonus_valid_and_excluded": true,
+  "self_test": {
+    "seeds": 100,
+    "transitions": 10000,
+    "geometry_violations": 0,
+    "per_line_retention_violations": 0,
+    "union_retention_violations": 0
+  },
+  "simulation": {
+    "trajectories": 1000,
+    "random_portfolios": 850000,
+    "bootstrap_replicates": 4000,
+    "geometry_violations": 0,
+    "transition_violations": 0
+  },
+  "outcome_independence": "PORTFOLIO_GENERATION_USES_ONLY_PRNG_AND_PREVIOUS_SIMULATED_PORTFOLIO; TARGET_OUTCOME_READ_ONLY_AFTER_PORTFOLIO_GENERATION",
+  "training_cutoff_violations": 0,
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "strict_thresholds_changed": false,
+  "purchase_lines_generated": false,
+  "strict_pass_ready_created": false,
+  "freeze_or_seal_created": false
+}

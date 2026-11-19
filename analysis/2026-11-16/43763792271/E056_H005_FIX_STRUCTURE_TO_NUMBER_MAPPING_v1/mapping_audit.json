@@ -1,0 +1,22 @@
+{
+  "study_id": "E056_H005_FIX_STRUCTURE_TO_NUMBER_MAPPING_v1",
+  "legacy_s008_structure_contribution": "270/51 = 5.2941176470588235 constant for every number.",
+  "legacy_s008_rank_order": "Equivalent to the sum of the six non-structure family rank vectors; the structure ticket has no number-specific influence.",
+  "corrected_structure_vector": {
+    "length": 45,
+    "selected_number_value": 45.0,
+    "unselected_number_value": 0.0,
+    "selected_count": 6,
+    "unselected_count": 39,
+    "appended_once": true
+  },
+  "corrected_score": "(rank_S001 + rank_S002 + rank_S003 + rank_S004 + rank_S006 + rank_S007 + corrected_structure_vector)/7",
+  "legacy_mapping_algebra_checks": 1050,
+  "mapping_changed_targets": 932,
+  "candidate_bank_seed": 20261008,
+  "candidate_bank_size": 5000,
+  "candidate_bank_sha256": "134724abb3f8930fbb3cf24499e537aa00ed9e49239dbb79029163d76a412220",
+  "legacy_source_modified": false,
+  "legacy_s008_relabelled": false,
+  "h005_fix_is_separate": true
+}

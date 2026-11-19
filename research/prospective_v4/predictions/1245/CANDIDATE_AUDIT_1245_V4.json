@@ -1,0 +1,149 @@
+{
+  "audits": {
+    "expanding|V4_C": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|V4_F": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|V4_G": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|V4_M": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|V4_P": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|V4_S": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|V4_T": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|V4_U": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 1
+    },
+    "expanding|cross_model": {
+      "shared_candidates_descriptive_only": 50,
+      "total": 296,
+      "unique": 246
+    },
+    "expanding|portfolio": {
+      "distinct_tickets": 3,
+      "fallback_count": 0,
+      "pair_intersections": [
+        2,
+        1,
+        0
+      ],
+      "pair_jaccard": [
+        0.2,
+        0.09090909090909091,
+        0.0
+      ],
+      "structure_veto_count": 0,
+      "union_coverage": 15
+    },
+    "rolling300|V4_C": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|V4_F": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|V4_G": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|V4_M": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|V4_P": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|V4_S": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|V4_T": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|V4_U": {
+      "candidates": 37,
+      "duplicates_within_model": 0,
+      "training_end": 1244,
+      "training_start": 945
+    },
+    "rolling300|cross_model": {
+      "shared_candidates_descriptive_only": 31,
+      "total": 296,
+      "unique": 265
+    },
+    "rolling300|portfolio": {
+      "distinct_tickets": 3,
+      "fallback_count": 0,
+      "pair_intersections": [
+        2,
+        0,
+        2
+      ],
+      "pair_jaccard": [
+        0.2,
+        0.0,
+        0.2
+      ],
+      "structure_veto_count": 0,
+      "union_coverage": 14
+    }
+  },
+  "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+  "freeze_seal_sha256": "6a018e3036187a26ac9bcffda9fd7379d65d86cde84514faa08f4ea349b0f4bb",
+  "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "status": "REGISTERED_UNEVALUATED",
+  "target": 1245,
+  "training_cutoff": 1244,
+  "version": "prospective_v4"
+}

@@ -1,0 +1,146 @@
+{
+  "study_id": "E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_v1",
+  "hypothesis": "The E045 fixed three-line portfolio's trailing 100-target any3 rate contains ex-ante information about its next non-overlapping 50-target any3 rate, beyond the distribution observed in geometry-matched random trajectories.",
+  "statistic": "Pearson correlation across 15 block-pairs between trailing-100-target any3 rate and forward-50-target any3 rate.",
+  "trailing_window_targets": 100,
+  "forward_block_targets": 50,
+  "evaluation_blocks": [
+    {
+      "block_start_target": 501,
+      "block_end_target": 550,
+      "trailing_start_target": 401,
+      "trailing_end_target": 500,
+      "forward_start_target": 501,
+      "forward_end_target": 550
+    },
+    {
+      "block_start_target": 551,
+      "block_end_target": 600,
+      "trailing_start_target": 451,
+      "trailing_end_target": 550,
+      "forward_start_target": 551,
+      "forward_end_target": 600
+    },
+    {
+      "block_start_target": 601,
+      "block_end_target": 650,
+      "trailing_start_target": 501,
+      "trailing_end_target": 600,
+      "forward_start_target": 601,
+      "forward_end_target": 650
+    },
+    {
+      "block_start_target": 651,
+      "block_end_target": 700,
+      "trailing_start_target": 551,
+      "trailing_end_target": 650,
+      "forward_start_target": 651,
+      "forward_end_target": 700
+    },
+    {
+      "block_start_target": 701,
+      "block_end_target": 750,
+      "trailing_start_target": 601,
+      "trailing_end_target": 700,
+      "forward_start_target": 701,
+      "forward_end_target": 750
+    },
+    {
+      "block_start_target": 751,
+      "block_end_target": 800,
+      "trailing_start_target": 651,
+      "trailing_end_target": 750,
+      "forward_start_target": 751,
+      "forward_end_target": 800
+    },
+    {
+      "block_start_target": 801,
+      "block_end_target": 850,
+      "trailing_start_target": 701,
+      "trailing_end_target": 800,
+      "forward_start_target": 801,
+      "forward_end_target": 850
+    },
+    {
+      "block_start_target": 851,
+      "block_end_target": 900,
+      "trailing_start_target": 751,
+      "trailing_end_target": 850,
+      "forward_start_target": 851,
+      "forward_end_target": 900
+    },
+    {
+      "block_start_target": 901,
+      "block_end_target": 950,
+      "trailing_start_target": 801,
+      "trailing_end_target": 900,
+      "forward_start_target": 901,
+      "forward_end_target": 950
+    },
+    {
+      "block_start_target": 951,
+      "block_end_target": 1000,
+      "trailing_start_target": 851,
+      "trailing_end_target": 950,
+      "forward_start_target": 951,
+      "forward_end_target": 1000
+    },
+    {
+      "block_start_target": 1001,
+      "block_end_target": 1050,
+      "trailing_start_target": 901,
+      "trailing_end_target": 1000,
+      "forward_start_target": 1001,
+      "forward_end_target": 1050
+    },
+    {
+      "block_start_target": 1051,
+      "block_end_target": 1100,
+      "trailing_start_target": 951,
+      "trailing_end_target": 1050,
+      "forward_start_target": 1051,
+      "forward_end_target": 1100
+    },
+    {
+      "block_start_target": 1101,
+      "block_end_target": 1150,
+      "trailing_start_target": 1001,
+      "trailing_end_target": 1100,
+      "forward_start_target": 1101,
+      "forward_end_target": 1150
+    },
+    {
+      "block_start_target": 1151,
+      "block_end_target": 1200,
+      "trailing_start_target": 1051,
+      "trailing_end_target": 1150,
+      "forward_start_target": 1151,
+      "forward_end_target": 1200
+    },
+    {
+      "block_start_target": 1201,
+      "block_end_target": 1250,
+      "trailing_start_target": 1101,
+      "trailing_end_target": 1200,
+      "forward_start_target": 1201,
+      "forward_end_target": 1250
+    }
+  ],
+  "random_trajectory_count": 120,
+  "random_seed_rule": "20261116055 + replicate*1000003 + target_round",
+  "bootstrap_replicates": 4000,
+  "bootstrap_block_length_blocks": 3,
+  "alpha": 0.05,
+  "parameter_search": false,
+  "variants_evaluated": 1,
+  "source_hashes": {
+    "research/weekly_purchase/1251/E055_THREE_LINE_TRIPLE_RECENT_STRENGTH_PREREG_20261116.json": "6d9d424b3c95e349091871a726f595025ca63dc0c832d6f7b67d7c4a68b2e1e3",
+    "research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json": "0e806768fb65a2f50ced37b1a93f681e5f96648bc6e3433c8366444398bee334",
+    "automation/three_line_research_1251_v1.py": "296181ea34f7abec078e48c345589c3023e1f81dea5822f54dc953923b0aca91",
+    "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/PREDICTIONS.csv": "585ec30a6d51f7bb02b00c8497e30ec47caac8527b7baf8d6781e7017d09ca04",
+    "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/SHA256_MANIFEST.csv": "6cd8219c6c661a761ff51a1487b020c438015d3e35fc2fb449555e0ae429d41d",
+    "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/COMPLETION.json": "7abe7b2176a8f8e703030ad90b1c1362b9db5a8e70f8309f621e5902807a46c2",
+    "analysis/2026-11-14/gha_43595251776_1/E045_CUTOFF_REFRESH_1250_APPEND_ONLY_v1/VERIFICATION.json": "d71a5b656b19354336157371f490292e4a3f1f6c1dbcfa557ae6615b8db1f570",
+    "automation/three_line_triple_recent_strength_e055_v1.py": "4db98d963b67540327629fdec39719dc3ae6b0f7f904f6fedaa052b096562111"
+  }
+}

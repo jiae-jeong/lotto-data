@@ -1,0 +1,84 @@
+{
+  "study_id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+  "status": "PASS",
+  "study_classification": "DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+  "source_study_id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
+  "source_data_cutoff": 1249,
+  "source_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_prefix_sha256_rechecked": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "source_manifest_entries_verified": 8,
+  "source_targets": 849,
+  "target_range": [
+    401,
+    1249
+  ],
+  "random_bundles_per_target": 120,
+  "random_geometry_violations": 0,
+  "training_cutoff_violations": 0,
+  "future_predictions": 0,
+  "no_future_leakage": true,
+  "historical_paired_difference_means_diagnostic_only": {
+    "max_hits": -0.021912314532707977,
+    "any2": -0.007367291561034572,
+    "any3": -0.012462092069611385,
+    "winning_union_coverage": -0.017196702002355624
+  },
+  "historical_block_standard_deviations": {
+    "max_hits": 0.10561720038713017,
+    "any2": 0.06143217076954477,
+    "any3": 0.042608134434911835,
+    "winning_union_coverage": 0.16853955687877298
+  },
+  "effect_size_grid": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "prospective_target_count_grid": [
+    100,
+    125,
+    150,
+    175,
+    200,
+    250,
+    300,
+    400,
+    500,
+    600,
+    800,
+    1000
+  ],
+  "block_size": 50,
+  "final_remainder_retained": true,
+  "alpha_per_metric": 0.0125,
+  "strict_gate_thresholds_changed": false,
+  "model_or_number_search_performed": false,
+  "purchase_lines_generated": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "minimum_counts_for_80pct_approximate_power": {
+    "0.25": {
+      "first_target_count_independence_approx_at_least_80pct": null,
+      "first_target_count_conservative_union_lower_at_least_80pct": null
+    },
+    "0.5": {
+      "first_target_count_independence_approx_at_least_80pct": null,
+      "first_target_count_conservative_union_lower_at_least_80pct": null
+    },
+    "0.75": {
+      "first_target_count_independence_approx_at_least_80pct": null,
+      "first_target_count_conservative_union_lower_at_least_80pct": null
+    },
+    "1.0": {
+      "first_target_count_independence_approx_at_least_80pct": 1000,
+      "first_target_count_conservative_union_lower_at_least_80pct": 1000
+    }
+  },
+  "limitations": [
+    "This is a normal-theory planning approximation using historical block-level variance, not the operational moving-block bootstrap.",
+    "Effect sizes are hypothetical standardized shifts, not observed predictive advantages.",
+    "The independence product is only a reference approximation; metric dependence is not assumed away in the conservative union-bound lower estimate.",
+    "No prospective minimum count or completion rule is adopted by this study."
+  ]
+}

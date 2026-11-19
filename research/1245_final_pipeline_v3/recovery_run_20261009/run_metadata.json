@@ -1,0 +1,11 @@
+{
+  "raw_sha256": "10beb0a7974f648b39aa130bb714b1c338296bf59ecd106e9407bee5875538aa",
+  "raw_rows": 1244,
+  "latest_round": 1244,
+  "model_count": 8,
+  "final_line_count": 3,
+  "generator": "research\\expansion_framework_v1\\studies\\study_batch_001\\run_batch.py",
+  "selector": "research\\1245_final_pipeline_v3\\prepare_1245_final_three_lines_v3.py",
+  "gate_status": "NOT_PASSED_18_BLOCKERS",
+  "result_round_1245_read": false
+}

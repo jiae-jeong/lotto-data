@@ -1,0 +1,12 @@
+{
+  "created_utc": "2026-10-09T13:48:21.734083+00:00",
+  "start_head": "fa5b248b190b204da60f509afa26ffaa0bbe77af",
+  "files": {
+    "run_independent_signal_research.py": "a1d09446f322198aeda5a545d2447f478c57b525953d5922c19af40bc22e7fb0",
+    "RESEARCH_CONFIG.json": "cb60f9a2a4312654645ba2b7c620f4c6ef874500bfcbd506c26746dc7e0af421",
+    "RESEARCH_PROTOCOL.md": "332ff78f8816baa473916d34ed5f5a64175413c6bd9809c7d8b7824007f37f28"
+  },
+  "historical_target_max": 1244,
+  "actual_1245": "NOT READ / NOT USED",
+  "no_candidate_generation": true
+}

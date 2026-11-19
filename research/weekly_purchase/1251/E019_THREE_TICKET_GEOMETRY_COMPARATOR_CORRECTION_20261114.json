@@ -1,0 +1,56 @@
+{
+  "correction_id": "E019_THREE_TICKET_GEOMETRY_COMPARATOR_CORRECTION_20261114",
+  "date_kst": "2026-11-14",
+  "classification": "AUDIT_CORRECTION_NOT_EMPIRICAL_MODEL_EVIDENCE",
+  "target_policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "source_study": "analysis/2026-10-14/E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+  "finding": {
+    "model_bundle": "The fixed three-component bundle had mean unique-number coverage 16.0527131783 across 645 targets; it did not satisfy the policy's required 18-number union geometry.",
+    "random_comparator": "The E019 report specifies three independent uniform six-number tickets per target. Independent sampling permits overlaps and does not preserve three pairwise-disjoint tickets with union18.",
+    "random_mean_unique_number_coverage": 15.7168837209,
+    "random_bundles_per_target": 100,
+    "target_count": 645,
+    "random_bundle_records": 64500,
+    "consequence": "E019 is not a geometry-matched comparator for the 1251+ policy and cannot be used as strict three-line evidence. Its POST_HOC_EXPLORATORY classification and historical results remain unchanged."
+  },
+  "policy_geometry": {
+    "tickets": 3,
+    "numbers_per_ticket": 6,
+    "pairwise_disjoint": true,
+    "union_size": 18,
+    "outside_numbers": 27,
+    "draw_size": 6,
+    "sample_space": "C(45,6)"
+  },
+  "independently_recomputed_exact_null": {
+    "method": "Multivariate-hypergeometric enumeration over category sizes [6,6,6,27], summing all nonnegative draw allocations totaling 6 and grouping by maximum hits in any of the three disjoint tickets.",
+    "max_hit_distribution_0_to_6": [
+      0.03634227372174054,
+      0.4886814830093333,
+      0.40362133612275414,
+      0.06717445912000648,
+      0.004093892494346266,
+      0.00008618721040728982,
+      3.68321411996965e-7
+    ],
+    "mean_max_hit": 1.5142562485727544,
+    "p_any2": 0.4749762432689262,
+    "p_any3": 0.07135490714617204,
+    "expected_winning_union_coverage": 2.4,
+    "policy_constants_match": true
+  },
+  "required_for_future_1251_evaluation": [
+    "Every candidate portfolio must contain exactly three six-number tickets.",
+    "All 18 numbers must be unique across the three tickets.",
+    "The same-target random comparator must preserve the exact same disjoint-union18 geometry.",
+    "Use the policy's exact null values and preregistered adjusted moving-block CI and 50-target block-stability gates.",
+    "No threshold, alpha, block size, or comparator changes are authorized by this correction."
+  ],
+  "strict_readiness_effect": {
+    "strict_pass": "NOT_EVALUATED",
+    "strict_pass_ready": false,
+    "final_purchase_freeze_allowed": false,
+    "random_fallback_allowed": false,
+    "no_threshold_change": true
+  }
+}

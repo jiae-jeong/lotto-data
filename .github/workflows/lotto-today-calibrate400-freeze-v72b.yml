@@ -1,0 +1,30 @@
+name: lotto-today-calibrate400-freeze-v72b
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-calibrate400-freeze-v72b.yml'
+      - 'automation/today_calibrate400_freeze_v72b.py'
+permissions:
+  contents: read
+jobs:
+  validate-v72b:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V72B frozen holdout
+        run: python -B automation/today_calibrate400_freeze_v72b.py
+      - name: Print strict result
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('analysis/2026-10-30/TODAY_CALIBRATE400_FREEZE_1248_V72B.json'))
+          print(json.dumps({'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'delta':d['scorecard']['delta'],'ci':{k:v['adjusted_ci_delta'] for k,v in d['inference'].items() if isinstance(v,dict)},'share':{k:v['positive_50_round_block_share'] for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'policy':d['current']['chosen_policy'],'null':d['scorecard']['matched_exact_label_null']},ensure_ascii=False))
+          PY

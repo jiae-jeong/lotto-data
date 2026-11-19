@@ -1,0 +1,31 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+  "question": "Does outcome-free agreement geometry among seven B components classify OOS rounds with different performance?",
+  "novelty": "geometry-only rolling agreement regime using prior 200 target geometries; mean pairwise Jaccard; component and ensemble evaluation; 100 same-target random tickets.",
+  "executed_cases": 70305,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 412,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 70305,
+    "verification": {
+      "status": "PASS",
+      "primary_targets": 645,
+      "geometry_records": 645,
+      "model_prediction_records": 5805,
+      "random_records": 64500,
+      "rolling_threshold_lookback": 200,
+      "threshold_outcome_use": "NO",
+      "leakage_failures": 0,
+      "random_repeats_per_target": 100,
+      "future_predictions": 0
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-13T01:12:39.096991+00:00"
+}

@@ -1,0 +1,12 @@
+{
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+  "seed": 20261016036,
+  "target_rounds": "601..1245",
+  "historical_evidence": "screening/OOS, not untouched holdout",
+  "reason": "No validated edge exists because E036/E037/E039 promotion conditions are not met.",
+  "leakage_failures": 0,
+  "future_predictions": 0,
+  "recommendation_numbers_generated": false
+}

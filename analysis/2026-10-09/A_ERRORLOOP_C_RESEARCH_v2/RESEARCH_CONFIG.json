@@ -1,0 +1,43 @@
+{
+  "version": "A_ERRORLOOP_C_RESEARCH_20261009_v2",
+  "raw_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "cutoff": 1244,
+  "recent_windows": [
+    10,
+    30,
+    50,
+    100
+  ],
+  "time_blocks": "1..50 through 1151..1200 (24 full50); 1201..1244 partial44",
+  "historical_targets": [
+    1045,
+    1244
+  ],
+  "prior_strength": 20,
+  "mode_windows": {
+    "expanding": "all prior event observations",
+    "rolling300": "most recent300 event observations"
+  },
+  "random_baseline": "Exact combinatorial structural probabilities; previous B MC frozen reference only",
+  "seed": null,
+  "definitions": {
+    "low": "1..22",
+    "bands": "1..10;11..20;21..30;31..40;41..45",
+    "odd_imbalance": "odd<=1 or odd>=5",
+    "low_high_imbalance": "low<=1 or low>=5",
+    "extreme_sum": "sum<=90 or sum>=186; fixed symmetric thresholds around138",
+    "narrow_cluster": "any3 sorted numbers with max-min<=4",
+    "large_gap": "any adjacent sorted distance>=15",
+    "clusters": "adjacent distance<=2; separated when >2",
+    "multiple_previous_overlap": ">=2",
+    "end_multiplicity": "number mod10",
+    "consecutive_pairs": "count of adjacent sorted distance1, including within runs",
+    "gap": "current wait=cutoff-last occurrence; completed interval=next occurrence-prior occurrence; completed nonappearance=interval-1",
+    "recent_mean_gap": "completed intervals ending in window, plus separately intervals wholly inside window; censoring noted",
+    "direction": "recent rate minus disjoint preceding prefix; overlapping recent windows not independent"
+  },
+  "forecast_claim": "Post-hoc event probability / veto coverage diagnostic, not ticket performance or untouched holdout",
+  "no_ticket_generation": true,
+  "no_B_rerun": true,
+  "no_1245_result": true
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "item": "기존 자료 보존",
+    "status": "VERIFIED",
+    "details": "기존 B 관련 68개 파일의 경로·수정시간·크기·SHA 기록 및 실행 후 일치. 원본 dirty Git 상태도 동일."
+  },
+  {
+    "item": "입력 데이터",
+    "status": "VERIFIED",
+    "details": "정확히1~1244,1244행. 회차누락/중복/본번호·bonus 오류0. 실행 입력은 아래 isolated 경로."
+  },
+  {
+    "item": "코드 버전",
+    "status": "VERIFIED",
+    "details": "현재 소스 수정0. source/data 해시는 OUTPUT_SHA256.csv 기준과 일치. 고정 상수는 아래에 기록."
+  },
+  {
+    "item": "실제 B 재실행",
+    "status": "REPRODUCED",
+    "details": "2026-10-09T11:45:48.792859+00:00 ~ 2026-10-09T11:46:48.158901+00:00; 59.375s; exit0, stderr0bytes; 요청한5개 산출물 생성."
+  },
+  {
+    "item": "누수 및 scoring",
+    "status": "VERIFIED",
+    "details": "33408행 target=cutoff+1 및 적중/구조점수 재검산.17회차×8모델=136개 runtime prefix guard/미래행 변조 검사 PASS."
+  },
+  {
+    "item": "이론 기준선",
+    "status": "VERIFIED",
+    "details": "Hypergeometric PMF/평균/분산/2+..6+ 독립 유리수 계산과 source baseline()/전체256 metric 행 일치."
+  },
+  {
+    "item": "MASTER 실제 랜덤 생성",
+    "status": "NOT EXECUTED",
+    "details": "B-v1은 실제 random comparator를 생성하지 않음. MC3줄 별도 검증은 제안만 기록; 아직 실행하지 않음."
+  },
+  {
+    "item": "기존 CSV 비교",
+    "status": "REPRODUCED",
+    "details": "CSV4개 전체 bytes/SHA/rows 모두 기존 저장본 및 historical manifest 일치. 모델 분류·50회 블록·0..6·2+..5+ 모두 재현."
+  },
+  {
+    "item": "과거 전체 보고서 파일",
+    "status": "MISMATCH",
+    "details": "새 report와 패키지 regenerated report는 경로/개행을 정규화하면 동일하지만 파일 SHA는 다름. 숫자 불일치 아님."
+  },
+  {
+    "item": "정확한 과거 report 원본",
+    "status": "NOT FOUND",
+    "details": "pinned historical report hash를 가진 원본 미확보; 동일 원본 보고서를 복원했다고 말할 수 없음."
+  },
+  {
+    "item": "33408 구조",
+    "status": "REPRODUCED",
+    "details": "8모델×4176중첩 records/model=33408.8352고유 target/model;1044회차. 분류350회차/model."
+  },
+  {
+    "item": "상이한B0.7743/0.7571/random0.8065",
+    "status": "NOT FOUND",
+    "details": "현재 로컬·패키지·reachable Git refs에서 해당 세 값의 원본 코드/실행 산출물·분모·seed 근거 미확보. 원인 미확인."
+  },
+  {
+    "item": "rolling300 B 실행",
+    "status": "NOT EXECUTED",
+    "details": "현재 B-v1 소스에는 fixed rolling300 훈련 모드 없음. rolling-origin expanding만 실제 실행."
+  },
+  {
+    "item": "과거 원자료 전체 통계 연구",
+    "status": "NOT EXECUTED",
+    "details": "번호별 누적/최근10·30·50·100/pair·triple 일반 연구표를 이 코드가 재생성하지 않음. 내부 B feature와 별도 B-score slice 검산 범위만 완료."
+  },
+  {
+    "item": "추천번호/1245 결과",
+    "status": "NOT EXECUTED",
+    "details": "1245 실제 결과 조회/사용0, 새1245 추천·조합 생성0. 과거201~1244 backtest tickets만 생성."
+  },
+  {
+    "item": "Git commit/push",
+    "status": "NOT EXECUTED",
+    "details": "이번 요청의 재현 검증 산출물은 새 outputs 버전 디렉터리에 저장; 기존 repository와 automation 변경0."
+  }
+]

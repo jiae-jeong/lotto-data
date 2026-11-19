@@ -1,0 +1,67 @@
+{
+  "reconciliation_id": "DAILY_MASTER_ARTIFACT_RECONCILIATION_20261116_RUN111",
+  "date_kst": "2026-11-16",
+  "reconciled_at_kst": "2026-11-16T20:12:16.702943+09:00",
+  "classification": "LATEST_DAILY_MASTER_ACTIONS_RUN_111_VERIFIED",
+  "latest_artifact": {
+    "workflow": "daily-lotto-master-v5",
+    "workflow_run_id": 43815826760,
+    "run_number": 111,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/43815826760",
+    "conclusion": "success",
+    "artifact_commit_sha": "b8e4d0b3b23c2ff8a48d0ece71e4bf5e265544da",
+    "data_cutoff": 1250,
+    "status": "PARTIAL",
+    "v4_path": "analysis/2026-11-16/MASTER_FULL_V4_061819_985663",
+    "v5_path": "analysis/2026-11-16/MASTER_FULL_V5_062611_026797",
+    "v4": {
+      "targets": 1050,
+      "b_prediction_records": 8400,
+      "random_tickets": 1050000,
+      "leakage_failures": 0
+    },
+    "v5": {
+      "successor_prediction_records": 3150,
+      "successor_leakage_failures": 0,
+      "manifest_entries": 14,
+      "manifest_status": "PASS"
+    }
+  },
+  "data_integrity": {
+    "cutoff": 1250,
+    "rows": 1250,
+    "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+  },
+  "protected_files": {
+    "AGENTS.md": "796f8a4367b6a4f64cbd4ec5615de75c992c7e0f",
+    "LOTTO_PROJECT_PROTOCOL.md": "f770eb2215eb1acfb50ac1d79273c62d9b142084"
+  },
+  "purchase_readiness": {
+    "status": "STRICT_FAIL",
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "ready_file": null,
+    "final_purchase_freeze_allowed": false,
+    "random_fallback_allowed": false
+  },
+  "queue_replenishment": {
+    "registered_tasks": 45,
+    "latest_task": "E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+    "latest_task_status": "EXECUTED_HISTORICAL_STRICT_FAIL",
+    "generic_runnable_tasks": 0,
+    "three_line_ready_artifact": false,
+    "classification": "EXHAUSTED_AFTER_COMPLETING_LAST_PREDECLARED_INDEPENDENT_AXIS",
+    "technical_queue_failure": false,
+    "remaining_independent_three_line_axes": 0,
+    "microvariants_added": 0,
+    "no_post_hoc_threshold_relaxation": true
+  },
+  "e063": {
+    "result_path": "analysis/2026-11-16/gha_43855070177_1/E063_THREE_LINE_LAST_DIGIT_OCCUPANCY_TRANSITION_v1",
+    "historical_strict_gate_pass": false,
+    "strict_pass_ready": false,
+    "manifest_entries": 8,
+    "leakage_failures": 0
+  }
+}

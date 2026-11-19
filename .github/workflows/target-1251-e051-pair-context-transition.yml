@@ -1,0 +1,350 @@
+name: target-1251-e051-pair-context-transition
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/three_line_pair_context_transition_1251_v1.py'
+      - 'automation/tests_v2/test_three_line_pair_context_transition_1251.py'
+      - 'research/weekly_purchase/1251/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_PREREG_20261115.json'
+      - '.github/workflows/target-1251-e051-pair-context-transition.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: target-1251-e051-pair-context-transition
+  cancel-in-progress: false
+
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate frozen preregistration, implementation blobs, policy, and source bytes
+        id: preflight
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, hashlib, io, json, os, subprocess
+          from pathlib import Path
+
+          prereg_path = Path("research/weekly_purchase/1251/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_PREREG_20261115.json")
+          runner_path = Path("automation/three_line_pair_context_transition_1251_v1.py")
+          test_path = Path("automation/tests_v2/test_three_line_pair_context_transition_1251.py")
+          base_runner_path = Path("automation/three_line_research_1251_v1.py")
+          policy_path = Path("research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json")
+          prereg = json.loads(prereg_path.read_text(encoding="utf-8"))
+          policy = json.loads(policy_path.read_text(encoding="utf-8"))
+          frozen = prereg["frozen_blobs"]
+
+          def blob(path):
+              return subprocess.check_output(["git", "rev-parse", "HEAD:" + path.as_posix()], text=True).strip()
+
+          assert blob(runner_path) == frozen["runner_blob_sha"]
+          assert blob(test_path) == frozen["test_blob_sha"]
+          assert blob(base_runner_path) == frozen["base_runner_blob_sha"]
+          assert blob(policy_path) == frozen["policy_blob_sha"]
+          assert prereg["study_id"] == "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1"
+          assert prereg["preregistration_status"] == "FROZEN_BEFORE_EXECUTION"
+          assert prereg["independent_research_axis"] is True
+          assert prereg["estimator"]["parameter_search"] is False
+          assert prereg["historical_data_cutoff"] == 1250
+          assert prereg["target_rounds"] == "401..1250 inclusive"
+          assert prereg["source_data_prefix_sha256"] == "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+          assert prereg["source_data_full_file_sha256"] == prereg["source_data_prefix_sha256"]
+          assert prereg["estimator"]["prior_strength"] == 50
+          assert prereg["estimator"]["prior_mean"].startswith("6/45")
+          assert prereg["random_comparator"]["random_bundles_per_target"] == 120
+          assert prereg["inference"]["alpha_per_metric"] == 0.0125
+          assert prereg["inference"]["block_length_targets"] == 50
+          assert prereg["inference"]["any2_positive_nonoverlapping_50_target_block_share_min"] == 0.65
+          assert prereg["prospective_confirmation"]["minimum_target_count"] is None
+          assert prereg["prospective_confirmation"]["completion_rule"] is None
+
+          gate = policy["strict_gate"]
+          assert gate["family_alpha"] == prereg["inference"]["family_alpha"]
+          assert gate["alpha_per_metric"] == prereg["inference"]["alpha_per_metric"]
+          assert gate["any2_positive_nonoverlapping_50_target_block_share_min"] == prereg["inference"]["any2_positive_nonoverlapping_50_target_block_share_min"]
+          assert gate["all_adjusted_moving_block_ci_lower_bounds_strictly_gt_zero"] is True
+          assert gate["no_threshold_relaxation"] is True
+          for key in ("mean_max_hit", "p_any2", "p_any3", "expected_union_coverage"):
+              assert abs(float(policy["exact_null"][key]) - float(prereg["random_comparator"]["exact_null"][key])) < 1e-14
+
+          raw = Path("lotto_data.csv").read_bytes()
+          data_sha = hashlib.sha256(raw).hexdigest()
+          assert data_sha == prereg["source_data_full_file_sha256"]
+          rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline="")))
+          assert len(rows) == 1250
+          assert [int(row["round"]) for row in rows] == list(range(1, 1251))
+          for row in rows:
+              nums = [int(row[f"no{i}"]) for i in range(1, 7)]
+              bonus = int(row["bonus"])
+              assert len(set(nums)) == 6 and all(1 <= n <= 45 for n in nums)
+              assert 1 <= bonus <= 45 and bonus not in nums
+          last = rows[-1]
+          assert last["date"] == "2026.11.14"
+          assert [int(last[f"no{i}"]) for i in range(1, 7)] == [1, 5, 18, 23, 27, 28]
+          assert int(last["bonus"]) == 8
+
+          tracked = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
+          already_complete = any(path.endswith("/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1/COMPLETION.json") for path in tracked)
+          checkout_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
+              stream.write("data_sha=" + data_sha + "\n")
+              stream.write("prereg_blob=" + blob(prereg_path) + "\n")
+              stream.write("checkout_sha=" + checkout_sha + "\n")
+              stream.write("already_complete=" + ("true" if already_complete else "false") + "\n")
+          if already_complete:
+              print({"status": "ALREADY_COMPLETE_NOOP", "study_id": prereg["study_id"]})
+              raise SystemExit(0)
+          print({
+              "status": "PREFLIGHT_PASS",
+              "study_id": prereg["study_id"],
+              "data_cutoff": 1250,
+              "data_sha256": data_sha,
+              "target_range": prereg["target_rounds"],
+              "random_bundles_per_target": prereg["random_comparator"]["random_bundles_per_target"],
+              "alpha_per_metric": prereg["inference"]["alpha_per_metric"],
+              "block_length": prereg["inference"]["block_length_targets"],
+              "independent_research_axis": True,
+          })
+          PY
+
+      - name: Compile and run E051 contract tests
+        if: steps.preflight.outputs.already_complete != 'true'
+        run: |
+          python -m py_compile automation/three_line_pair_context_transition_1251_v1.py automation/three_line_research_1251_v1.py automation/tests_v2/test_three_line_pair_context_transition_1251.py
+          python -B -m unittest automation.tests_v2.test_three_line_pair_context_transition_1251 -v
+
+      - name: Execute preregistered E051 walk-forward and matched random baseline
+        if: steps.preflight.outputs.already_complete != 'true'
+        id: execute
+        shell: bash
+        run: |
+          set -euo pipefail
+          DATE="$(TZ=Asia/Seoul date +%F)"
+          RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          python -B automation/three_line_pair_context_transition_1251_v1.py --date "$DATE" --run-id "$RUN_ID"
+
+      - name: Verify immutable outputs, no leakage, strict gates, and update research queue
+        if: success() && steps.preflight.outputs.already_complete != 'true'
+        env:
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          GITHUB_SHA: ${{ github.sha }}
+          DATA_SHA: ${{ steps.preflight.outputs.data_sha }}
+          CHECKOUT_SHA: ${{ steps.preflight.outputs.checkout_sha }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os
+          from datetime import datetime, timezone, timedelta
+          from pathlib import Path
+
+          study_id = "E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1"
+          rid = int(os.environ["GITHUB_RUN_ID"])
+          attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          run_number = int(os.environ["RUN_NUMBER"])
+          run_id = os.environ["RUN_ID"]
+          date = os.environ["RUN_DATE"]
+          out = Path("analysis") / date / run_id / study_id
+          expected = {
+              "PREDICTIONS.csv", "RANDOM_BASELINE.csv", "BLOCK_STABILITY.csv",
+              "INFERENCE.json", "VERIFICATION.json", "COMPLETION.json",
+              "REPORT.md", "SHA256_MANIFEST.csv",
+          }
+          assert {p.name for p in out.iterdir() if p.is_file()} == expected
+
+          with (out / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="") as stream:
+              manifest = list(csv.DictReader(stream))
+          assert len(manifest) == 7
+          assert {row["path"] for row in manifest} == expected - {"SHA256_MANIFEST.csv"}
+          for row in manifest:
+              raw = (out / row["path"]).read_bytes()
+              assert len(raw) == int(row["bytes"])
+              assert hashlib.sha256(raw).hexdigest() == row["sha256"], row["path"]
+
+          verification = json.loads((out / "VERIFICATION.json").read_text(encoding="utf-8"))
+          completion = json.loads((out / "COMPLETION.json").read_text(encoding="utf-8"))
+          inference = json.loads((out / "INFERENCE.json").read_text(encoding="utf-8"))
+          prereg = json.loads(Path("research/weekly_purchase/1251/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_PREREG_20261115.json").read_text(encoding="utf-8"))
+          assert completion["study_id"] == study_id and completion["status"] == "COMPLETE"
+          assert completion["data_cutoff"] == 1250 and completion["target_range"] == [401, 1250]
+          assert completion["independent_research_axis"] is True
+          assert completion["strict_pass_ready"] is False and completion["purchase_recommendation_generated"] is False
+          assert verification["study_id"] == study_id and verification["status"] == "PASS"
+          assert verification["data_cutoff"] == 1250 and verification["current_source_data_rows"] == 1250
+          assert verification["data_sha256"] == os.environ["DATA_SHA"]
+          assert verification["target_range"] == [401, 1250] and verification["target_count"] == 850
+          assert verification["prediction_records"] == 850
+          assert verification["random_bundles_per_target"] == 120 and verification["random_bundles_total"] == 102000
+          assert verification["training_cutoff_violations"] == 0
+          assert verification["leakage_failures"] == 0 and verification["future_predictions"] == 0
+          assert verification["portfolio_geometry_violations"] == 0 and verification["random_geometry_violations"] == 0
+          assert verification["no_future_leakage"] is True and verification["random_baseline_executed"] is True
+          assert verification["independent_research_axis"] is True and verification["parameter_search"] is False
+          assert verification["thresholds_changed"] is False and verification["alpha_changed"] is False
+          assert verification["block_length_changed"] is False and verification["comparator_changed"] is False
+          assert verification["strict_pass_ready"] is False and verification["purchase_recommendation_generated"] is False
+          assert inference["study_id"] == study_id and inference["data_cutoff"] == 1250
+          assert inference["target_range"] == [401, 1250] and inference["targets"] == 850
+          assert inference["random_bundles_total"] == 102000
+          assert inference["block_size"] == 50 and inference["block_lengths"] == [50] * 17
+          assert inference["prospective_minimum_target_count"] is None
+          assert inference["prospective_completion_rule"] is None
+          assert inference["strict_pass_ready"] is False
+
+          predictions = list(csv.DictReader((out / "PREDICTIONS.csv").open(encoding="utf-8-sig", newline="")))
+          randoms = list(csv.DictReader((out / "RANDOM_BASELINE.csv").open(encoding="utf-8-sig", newline="")))
+          blocks = list(csv.DictReader((out / "BLOCK_STABILITY.csv").open(encoding="utf-8-sig", newline="")))
+          targets = list(range(401, 1251))
+          assert [int(row["target_round"]) for row in predictions] == targets and len(predictions) == 850
+          assert [int(row["target_round"]) for row in randoms] == targets and len(randoms) == 850
+          assert len(blocks) == 17 and all(int(row["n"]) == 50 for row in blocks)
+          for row in predictions:
+              target = int(row["target_round"])
+              assert int(row["training_through_round"]) == target - 1
+              lines = [set(map(int, row[f"line{i}"].split())) for i in (1, 2, 3)]
+              assert all(len(line) == 6 for line in lines)
+              assert len(set().union(*lines)) == 18
+              assert all(not (lines[i] & lines[j]) for i in range(3) for j in range(i + 1, 3))
+          assert all(int(row["random_bundles"]) == 120 and int(row["geometry_violations"]) == 0 for row in randoms)
+
+          failed_gates = [
+              name for name, item in inference["metrics"].items()
+              if not item["lower_bound_strictly_gt_zero"]
+          ]
+          if float(inference["any2_positive_50_target_block_share"]) < 0.65:
+              failed_gates.append("any2_positive_50_target_block_share")
+          historical_pass = inference["historical_strict_gate_pass"] is True
+          now_kst = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9))).isoformat()
+          completed_utc = datetime.now(timezone.utc).isoformat()
+          result = {
+              "study_id": study_id,
+              "evidence_class": "HISTORICAL_INDEPENDENT_AXIS_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+              "independent_research_axis": True,
+              "workflow_name": "target-1251-e051-pair-context-transition",
+              "workflow_run_id": rid,
+              "workflow_run_number": run_number,
+              "run_attempt": attempt,
+              "workflow_run_conclusion": "success",
+              "run_url": f"https://github.com/jiae-jeong/lotto-data/actions/runs/{rid}",
+              "completed_at_utc": completed_utc,
+              "result_path": str(out),
+              "data_cutoff": 1250,
+              "data_sha256": verification["data_sha256"],
+              "target_range": [401, 1250],
+              "target_count": 850,
+              "random_bundles_per_target": 120,
+              "random_bundles_total": 102000,
+              "block_length": 50,
+              "block_count": 17,
+              "training_cutoff_violations": 0,
+              "leakage_failures": 0,
+              "future_predictions": 0,
+              "portfolio_geometry_violations": 0,
+              "random_geometry_violations": 0,
+              "verification_status": "PASS",
+              "manifest_entries": 7,
+              "manifest_status": "PASS",
+              "historical_strict_gate_pass": historical_pass,
+              "failed_gates": failed_gates,
+              "strict_portfolio_pass": False,
+              "strict_pass_ready": False,
+              "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+              "parameter_search": False,
+              "thresholds_changed": False,
+              "alpha_changed": False,
+              "block_length_changed": False,
+              "comparator_changed": False,
+              "purchase_recommendation_generated": False,
+          }
+
+          queue_path = Path("automation/research_queue_v2.json")
+          queue = json.loads(queue_path.read_text(encoding="utf-8"))
+          task = next((item for item in queue["tasks"] if item.get("id") == study_id), None)
+          assert task is not None, "E051 missing from research queue"
+          task["execution_status"] = (
+              "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING"
+              if historical_pass else "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
+          )
+          task["execution_result"] = result
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          audit_path = Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json")
+          audit = json.loads(audit_path.read_text(encoding="utf-8"))
+          audit["e051_pair_context_axis"] = result
+          axes = audit.get("additional_independent_research_axes", [])
+          if not any(item.get("study_id") == study_id for item in axes):
+              axes.append(result)
+          audit["additional_independent_research_axes"] = axes
+          audit["strict_portfolio_pass"] = False
+          audit["strict_pass_ready"] = False
+          audit["ready_file"] = None
+          audit["ready_file_exists"] = False
+          audit["line_level_output_status"] = "SUPPRESSED_NOT_READY"
+          audit["final_purchase_freeze_allowed"] = False
+          audit["purchase_lines_generated"] = False
+          audit["audit_updated_kst"] = now_kst
+          audit["audit_reconciled_at_kst"] = now_kst
+          audit["reconciled_main_sha"] = os.environ["CHECKOUT_SHA"]
+          audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          print(json.dumps({
+              "status": "PASS",
+              "historical_strict_gate_pass": historical_pass,
+              "failed_gates": failed_gates,
+              "strict_pass_ready": False,
+              "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+          }, ensure_ascii=False))
+          PY
+
+      - name: Publish immutable E051 evidence, queue state, and readiness audit
+        if: success() && steps.preflight.outputs.already_complete != 'true'
+        shell: bash
+        env:
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/$RUN_DATE/$RUN_ID/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1"
+          test -f "$OUTDIR/VERIFICATION.json"
+          test -f "$OUTDIR/COMPLETION.json"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$OUTDIR" automation/research_queue_v2.json research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json
+          git diff --cached --check -- "$OUTDIR/REPORT.md" "$OUTDIR/INFERENCE.json" "$OUTDIR/VERIFICATION.json" "$OUTDIR/COMPLETION.json" automation/research_queue_v2.json research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261114.json
+          git diff --cached --quiet && { echo 'No E051 evidence staged'; exit 1; }
+          git commit -m 'research: preserve E051 pair-context independent-axis result'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo 'Failed to publish E051 evidence after three push attempts.' >&2
+          exit 1
+
+      - name: Preserve failed E051 evidence
+        if: failure() && steps.preflight.outputs.already_complete != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: e051-pair-context-failed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: analysis/${{ steps.execute.outputs.date }}/gha_${{ github.run_id }}_${{ github.run_attempt }}/E051_THREE_LINE_PAIR_CONTEXT_CONDITIONAL_v1/**
+          if-no-files-found: warn

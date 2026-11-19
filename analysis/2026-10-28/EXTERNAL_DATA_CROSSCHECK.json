@@ -1,0 +1,42 @@
+{
+  "generated_kst": "2026-10-28T08:12:00+09:00",
+  "purpose": "Independent two-source verification of the latest completed draw before DAILY MASTER protocol completion.",
+  "repo_data_cutoff": 1247,
+  "repo_latest": {
+    "round": 1247,
+    "date": "2026.10.24",
+    "numbers": [8, 14, 21, 22, 42, 45],
+    "bonus": 24
+  },
+  "fallback_sources": [
+    {
+      "name": "Yonhap News Agency",
+      "url": "https://www.yna.co.kr/view/AKR20261024052300002",
+      "published_kst": "2026-10-24T20:49:00+09:00",
+      "round": 1247,
+      "date": "2026.10.24",
+      "numbers": [8, 14, 21, 22, 42, 45],
+      "bonus": 24,
+      "source_note": "Freshly rechecked on 2026-10-28; reports Donghaeng Lottery's 1247th draw result."
+    },
+    {
+      "name": "Newsis",
+      "url": "https://www.newsis.com/view/NISX20261024_0003839705",
+      "published_kst": "2026-10-24T21:13:26+09:00",
+      "round": 1247,
+      "date": "2026.10.24",
+      "numbers": [8, 14, 21, 22, 42, 45],
+      "bonus": 24,
+      "source_note": "Freshly rechecked on 2026-10-28; independently reports the 1247th Donghaeng Lottery draw result."
+    }
+  ],
+  "independent_fallback_sources_agree": true,
+  "repo_vs_fallback_round_and_date_match": true,
+  "repo_vs_fallback_numbers_and_bonus_match": true,
+  "official_source_context": {
+    "operator": "Donghaeng Lottery",
+    "official_result_page": "https://www.dhlottery.co.kr/lt645/result",
+    "note": "Donghaeng Lottery result page was checked for operator context; two independent news reports quoting the operator were used as preserved numeric crosscheck evidence."
+  },
+  "crosscheck_status": "PASS"
+}

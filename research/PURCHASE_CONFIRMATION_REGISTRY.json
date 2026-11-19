@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "policy": "Only an exact source file with matching SHA256 and explicit user confirmation or a preserved receipt may enter the actual-purchase learning aggregate. Filenames, displayed recommendations, and pre-draw FINAL artifacts are not proof of purchase.",
+  "confirmed_purchases": []
+}

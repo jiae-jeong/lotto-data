@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-22",
+  "status": "PARTIAL",
+  "required_dimensions": [
+    "long_frequency",
+    "recent_frequency",
+    "gap",
+    "band",
+    "odd_even",
+    "sum",
+    "consecutive",
+    "cluster_distance",
+    "ending_digit",
+    "pair",
+    "triple"
+  ],
+  "directly_scored_or_ablated": [
+    "long_frequency",
+    "recent_frequency",
+    "gap",
+    "pair",
+    "triple"
+  ],
+  "partially_covered_inside_structure_profile_but_not_isolated": [
+    "band",
+    "odd_even",
+    "sum",
+    "consecutive",
+    "cluster_distance",
+    "ending_digit"
+  ],
+  "evidence": {
+    "B_scorecard": "analysis/2026-10-22/MASTER_FULL_V4_002338_020651/B_MODEL_SCORECARD.csv",
+    "successor_ablation": "analysis/2026-10-22/MASTER_FULL_V5_002949_050025/AC_CONTRARIAN_SIGNAL_ABLATION.csv",
+    "structure_windows": "analysis/2026-10-22/MASTER_FULL_V4_002338_020651/STRUCTURE_WINDOWS.csv",
+    "pair_stats": "analysis/2026-10-22/MASTER_FULL_V4_002338_020651/PAIR_STATS.csv",
+    "triple_stats": "analysis/2026-10-22/MASTER_FULL_V4_002338_020651/TRIPLE_STATS.csv"
+  },
+  "full_signal_scorecard_complete": false,
+  "blocking_reasons": [
+    "The current successor model has only four explicit ablatable score components, so individual band/odd-even/sum/consecutive/cluster/ending-digit contributions cannot be honestly inferred from the aggregate structure_profile component.",
+    "Those six structural dimensions must be separately frozen and walk-forward tested before they can be given individual contribution scores."
+  ],
+  "rule": "Do not label the daily study FULL_COMPLETE until each required dimension has its own cutoff-safe score/contribution evidence or is explicitly retired with validated evidence."
+}

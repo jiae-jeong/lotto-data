@@ -1,0 +1,51 @@
+{
+  "data_path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\primary_mode_1245_v4_clean_20261009\\lotto_data.csv",
+  "raw_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "cutoff": 1244,
+  "range": [
+    1,
+    1244
+  ],
+  "orders": [
+    2,
+    3
+  ],
+  "families": {
+    "2": 990,
+    "3": 14190,
+    "combined": 15180
+  },
+  "alpha": 0.05,
+  "null": "Independent draws, uniformly chosen six distinct numbers from 1..45",
+  "probability": "comb(6,r)/comb(45,r)",
+  "test": "one-sided exact binomial upper tail P(X >= observed), n=1244",
+  "multiple_testing": [
+    "Bonferroni within each family",
+    "Holm within each family",
+    "Bonferroni across both families"
+  ],
+  "zeros": "All possible pairs/triples, including zero counts",
+  "windows_for_inference": "Overall only; nested recent windows remain prior descriptive evidence",
+  "top10_walkforward": {
+    "anchors": [
+      400,
+      600,
+      800,
+      1000,
+      1100
+    ],
+    "horizon": 100,
+    "training": "1..anchor inclusive",
+    "selection": "Top ten relations by past count descending, then lexicographic tuple ascending",
+    "metric": "sum of selected relation occurrences over future 100 draws, not ticket hit performance",
+    "baseline": "100*10*comb(6,r)/comb(45,r)",
+    "uncertainty": "Null variance includes covariance of overlapping selected relations; separate independent future draws",
+    "overlap": "The five evaluation windows are disjoint",
+    "status": "New retrospective calculation; earlier conversational claims are not executable originals"
+  },
+  "seed": null,
+  "quote_audit": "Only verify cited 1244 arithmetic against pinned raw data. Not eligible for primary pre-outcome recommendation or closed-loop model evaluation",
+  "actual_1245": "NOT READ / NOT USED",
+  "existing_model_rules": "UNCHANGED",
+  "hypothesis": "H003 continuation and new H007 arithmetic-workflow evidence; no recommendation use"
+}

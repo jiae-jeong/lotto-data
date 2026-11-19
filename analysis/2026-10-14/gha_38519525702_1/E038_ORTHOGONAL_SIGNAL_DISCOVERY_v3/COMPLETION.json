@@ -1,0 +1,16 @@
+{
+  "study_id": "E038_ORTHOGONAL_SIGNAL_DISCOVERY_v3",
+  "status": "BLOCKED_INSUFFICIENT_SUPPORTED_FAMILIES",
+  "completed_at_utc": "2026-10-14T05:59:13.219016+00:00",
+  "data_cutoff": 1245,
+  "canonical_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "43f773dc4b5b98650a3dc976111df87936ae74c22b20fa6e1bb378048bed949a",
+  "seed": 20261016036,
+  "target_rounds": "601..1245",
+  "historical_evidence": "screening/OOS, not untouched holdout",
+  "candidate_families_from_E037_only": [],
+  "minimum_families_requested": 3,
+  "no_fabrication_policy": true,
+  "training_cutoff_rule": "target t uses 1..t-1",
+  "hyperparameter_grid": "none; frozen formulas from E037"
+}

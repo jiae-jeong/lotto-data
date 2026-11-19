@@ -1,0 +1,49 @@
+name: lotto-today-blocklocked-hysteresis-hm-v51
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-blocklocked-hysteresis-hm-v51.yml'
+      - 'automation/today_blocklocked_hysteresis_hm_v51.py'
+permissions:
+  contents: read
+jobs:
+  validate-v51:
+    strategy:
+      fail-fast: false
+      matrix:
+        any2_adv: ['0.00','0.01','0.02','0.03']
+        any3_tol: ['0.00','0.01']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V51
+        shell: bash
+        env:
+          ANY2_ADV: ${{ matrix.any2_adv }}
+          ANY3_TOL: ${{ matrix.any3_tol }}
+        run: |
+          set -euo pipefail
+          python -B automation/today_blocklocked_hysteresis_hm_v51.py | tee "$RUNNER_TEMP/v51.log"
+      - name: Verify and print result
+        shell: bash
+        env:
+          ANY2_ADV: ${{ matrix.any2_adv }}
+          ANY3_TOL: ${{ matrix.any3_tol }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          a=float(os.environ['ANY2_ADV']);t=float(os.environ['ANY3_TOL'])
+          tag=f'a{int(round(a*100)):02d}_t{int(round(t*100)):02d}'
+          d=json.loads(Path(f'analysis/2026-10-30/TODAY_BLOCKLOCKED_HYSTERESIS_HM_{tag}_1248_V51.json').read_text())
+          print(json.dumps({'tag':tag,'strict_pass':d['inference']['strict_portfolio_pass'],'status':d['final_status'],'selection_counts':d['selection_counts'],'delta':d['scorecard']['delta'],'inference':{k:{'ci':v['adjusted_ci_delta'],'share':v['positive_50_round_block_share']} for k,v in d['inference'].items() if isinstance(v,dict)},'lines':d['current']['lines'],'current_policy':d['current']['chosen_policy']},ensure_ascii=False))
+          PY

@@ -1,0 +1,144 @@
+{
+  "status": "INSUFFICIENT EVIDENCE",
+  "tests": [
+    {
+      "model": "long_frequency",
+      "metric": "mean_hits",
+      "p_raw": 0.14255904142415193,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "long_frequency",
+      "metric": "rate_ge_2",
+      "p_raw": 0.20572094886439177,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "current_gap",
+      "metric": "mean_hits",
+      "p_raw": 0.5622134121511314,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "current_gap",
+      "metric": "rate_ge_2",
+      "p_raw": 0.3993424250305987,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "frequency_plus_gap",
+      "metric": "mean_hits",
+      "p_raw": 0.5171466584790764,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "frequency_plus_gap",
+      "metric": "rate_ge_2",
+      "p_raw": 0.1397185616971317,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "recent_momentum",
+      "metric": "mean_hits",
+      "p_raw": 0.20707882198053812,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "recent_momentum",
+      "metric": "rate_ge_2",
+      "p_raw": 0.15956924457087399,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "structure_profile",
+      "metric": "mean_hits",
+      "p_raw": 0.2327069179367925,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "structure_profile",
+      "metric": "rate_ge_2",
+      "p_raw": 0.439151628586644,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "pair_association",
+      "metric": "mean_hits",
+      "p_raw": 0.4329548133865187,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "pair_association",
+      "metric": "rate_ge_2",
+      "p_raw": 0.8329152509039122,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "triple_association",
+      "metric": "mean_hits",
+      "p_raw": 0.5622134121511314,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "triple_association",
+      "metric": "rate_ge_2",
+      "p_raw": 0.6225253356293121,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "combined_equal_rank",
+      "metric": "mean_hits",
+      "p_raw": 0.9728058478276695,
+      "method": "Exact350-fold hypergeometric convolution;two-sided absolute distance from sum expectation280",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    },
+    {
+      "model": "combined_equal_rank",
+      "metric": "rate_ge_2",
+      "p_raw": 0.6225253356293121,
+      "method": "Exact two-sided probability-ordered Binomial(350,p_exact_2plus)",
+      "p_holm_16": 1,
+      "exploratory_only": true
+    }
+  ],
+  "family": "8 models x2 metrics=16 tests, Holm family-wise correction",
+  "pvalue_scope": "Exploratory historical tests; iid fair-draw assumption. Post-hoc models/evaluation selection remain uncorrected, no prospective proof.",
+  "confidence_intervals": "Mean95% Student-t(Cornish-Fisher df349), rate2+Wilson; separately seven-whole-block percentile bootstrap20000. Blocks are disjoint;recent overlapping windows not counted.",
+  "mc_distribution_diagnostic": {
+    "pooled_bins": "0,1,2,3,4,5+",
+    "chi_square": 4.352349362767116,
+    "df": 5,
+    "p_approx": 0.499878160140597,
+    "mean_null_z": 1.7796290228590155,
+    "interpretation": "Diagnostic only, never change seed/sample size based on this result. Rare6-hit precision is limited."
+  }
+}

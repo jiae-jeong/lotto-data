@@ -1,0 +1,76 @@
+{
+  "study_id": "E072_THREE_LINE_RANK_PROBABILITY_CALIBRATION_v1",
+  "evidence_class": "HISTORICAL_CANDIDATE_PROBABILITY_CALIBRATION_NOT_THREE_LINE_PORTFOLIO_CONFIRMATION",
+  "data_cutoff": 1250,
+  "training_targets": [
+    201,
+    600
+  ],
+  "evaluation_targets": 650,
+  "training_candidate_observations": 18000,
+  "evaluation_candidate_observations": 29250,
+  "random_permutations_per_target": 120,
+  "random_permutations_total": 78000,
+  "metrics": {
+    "brier": {
+      "model_mean": 0.11557033635476797,
+      "uniform_mean": 0.11555555555555556,
+      "delta_model_minus_uniform": 1.4780799212416788e-05,
+      "adjusted_moving_block_ci_vs_uniform": {
+        "lower": -2.2928106310301404e-05,
+        "upper": 5.975578124223004e-05,
+        "replicates": 4000,
+        "block_length": 50,
+        "alpha_two_sided": 0.025,
+        "sample_targets": 650
+      },
+      "random_permutation_mean": 0.11557233129114587,
+      "delta_model_minus_random": -1.994936377892203e-06,
+      "adjusted_moving_block_ci_vs_random": {
+        "lower": -3.9294601352589707e-05,
+        "upper": 4.149720156938804e-05,
+        "replicates": 4000,
+        "block_length": 50,
+        "alpha_two_sided": 0.025,
+        "sample_targets": 650
+      },
+      "improvement_supported_vs_uniform": false
+    },
+    "log_loss": {
+      "model_mean": 0.3927385046838188,
+      "uniform_mean": 0.39267446722755217,
+      "delta_model_minus_uniform": 6.40374562666557e-05,
+      "adjusted_moving_block_ci_vs_uniform": {
+        "lower": -0.00010404908449172959,
+        "upper": 0.00025301618434617705,
+        "replicates": 4000,
+        "block_length": 50,
+        "alpha_two_sided": 0.025,
+        "sample_targets": 650
+      },
+      "random_permutation_mean": 0.3927469570574102,
+      "delta_model_minus_random": -8.452373591389695e-06,
+      "adjusted_moving_block_ci_vs_random": {
+        "lower": -0.0001698759918589075,
+        "upper": 0.00017433507107498129,
+        "replicates": 4000,
+        "block_length": 50,
+        "alpha_two_sided": 0.025,
+        "sample_targets": 650
+      },
+      "improvement_supported_vs_uniform": false
+    }
+  },
+  "family_alpha": 0.05,
+  "alpha_per_metric": 0.025,
+  "bootstrap_replicates": 4000,
+  "block_length_targets": 50,
+  "calibration_gate_pass": false,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "target_1251_three_line_readiness_eligible": false,
+  "purchase_recommendation_generated": false,
+  "thresholds_or_policy_changed": false,
+  "parameter_search": false,
+  "variants_evaluated": 1
+}

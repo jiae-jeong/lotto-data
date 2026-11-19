@@ -1,0 +1,331 @@
+name: target-1251-e054-rolling-concentration-regime
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'research/weekly_purchase/1251/E054_EXECUTE_20261116.trigger'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: target-1251-e054-rolling-concentration-regime
+  cancel-in-progress: false
+
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate frozen preregistration, source hashes, policy, queue, and canonical data
+        id: preflight
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, hashlib, io, json, os, subprocess
+          from pathlib import Path
+          prereg_path = Path("research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json")
+          runner_path = Path("automation/three_line_rolling_concentration_regime_e054_v1.py")
+          test_path = Path("automation/tests_v2/test_three_line_rolling_concentration_regime_e054.py")
+          workflow_path = Path(".github/workflows/target-1251-e054-rolling-concentration-regime.yml")
+          base_path = Path("automation/three_line_research_1251_v1.py")
+          policy_path = Path("research/weekly_purchase/1251/THREE_LINE_POLICY_1251_PLUS.json")
+          prereg = json.loads(prereg_path.read_text(encoding="utf-8"))
+          policy = json.loads(policy_path.read_text(encoding="utf-8"))
+          queue = json.loads(Path("automation/research_queue_v2.json").read_text(encoding="utf-8"))
+          frozen = prereg["frozen_blobs"]
+          def blob(path):
+              return subprocess.check_output(["git", "rev-parse", "HEAD:" + path.as_posix()], text=True).strip()
+          assert blob(runner_path) == frozen["runner_blob_sha"]
+          assert blob(test_path) == frozen["test_blob_sha"]
+          assert blob(workflow_path) == frozen["workflow_blob_sha"]
+          assert blob(base_path) == frozen["base_runner_blob_sha"]
+          assert blob(policy_path) == frozen["policy_blob_sha"]
+          assert prereg["study_id"] == "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1"
+          assert prereg["date_kst"] == "2026-11-16" and prereg["target_round"] == 1251
+          assert prereg["preregistration_status"] == "FROZEN_BEFORE_EXECUTION"
+          assert prereg["independent_research_axis"] is True and prereg["independent_signal_family"] is True
+          assert prereg["historical_data_cutoff"] == 1250 and prereg["target_rounds"] == "401..1250 inclusive"
+          assert prereg["source_data_prefix_sha256"] == "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2"
+          assert prereg["source_data_full_file_sha256"] == prereg["source_data_prefix_sha256"]
+          assert prereg["estimator"]["prior_strength"] == 45 and prereg["estimator"]["parameter_search"] is False
+          assert prereg["random_comparator"]["random_bundles_per_target"] == 120
+          assert prereg["random_comparator"]["seed"] == 20261116054
+          assert prereg["inference"]["family_alpha"] == 0.05
+          assert prereg["inference"]["alpha_per_metric"] == 0.0125
+          assert prereg["inference"]["bootstrap_replicates"] == 4000
+          assert prereg["inference"]["block_length_targets"] == 50
+          assert prereg["inference"]["any2_positive_nonoverlapping_50_target_block_share_min"] == 0.65
+          assert prereg["prospective_confirmation"]["minimum_target_count"] is None
+          assert prereg["prospective_confirmation"]["completion_rule"] is None
+          gate = policy["strict_gate"]
+          assert gate["family_alpha"] == prereg["inference"]["family_alpha"]
+          assert gate["alpha_per_metric"] == prereg["inference"]["alpha_per_metric"]
+          assert gate["any2_positive_nonoverlapping_50_target_block_share_min"] == prereg["inference"]["any2_positive_nonoverlapping_50_target_block_share_min"]
+          assert gate["all_adjusted_moving_block_ci_lower_bounds_strictly_gt_zero"] is True
+          assert gate["no_threshold_relaxation"] is True and gate["prospective_confirmation_required"] is True
+          for key in ("mean_max_hit", "p_any2", "p_any3", "expected_union_coverage"):
+              assert abs(float(policy["exact_null"][key]) - float(prereg["random_comparator"]["exact_null"][key])) < 1e-14
+          task = next(x for x in queue["tasks"] if x.get("id") == prereg["study_id"])
+          assert task["execution_mode"] == "dedicated_workflow"
+          assert task["execution_entrypoint"] == runner_path.as_posix()
+          assert task["workflow_entrypoint"] == workflow_path.as_posix()
+          assert task["preregistration"] == prereg_path.as_posix()
+          raw = Path("lotto_data.csv").read_bytes()
+          data_sha = hashlib.sha256(raw).hexdigest()
+          assert data_sha == prereg["source_data_full_file_sha256"]
+          rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline="")))
+          assert len(rows) == 1250 and [int(x["round"]) for x in rows] == list(range(1, 1251))
+          for row in rows:
+              nums = [int(row[f"no{i}"]) for i in range(1, 7)]
+              bonus = int(row["bonus"])
+              assert len(set(nums)) == 6 and all(1 <= n <= 45 for n in nums)
+              assert 1 <= bonus <= 45 and bonus not in nums
+          last = rows[-1]
+          assert last["date"] == "2026.11.14"
+          assert [int(last[f"no{i}"]) for i in range(1, 7)] == [1, 5, 18, 23, 27, 28]
+          assert int(last["bonus"]) == 8
+          tracked = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", "HEAD"], text=True).splitlines()
+          already_complete = any(x.endswith("/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1/COMPLETION.json") for x in tracked)
+          if not already_complete:
+              assert task.get("execution_status") == "PREREGISTERED_PENDING_DEDICATED_WORKFLOW"
+          checkout_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write("data_sha=" + data_sha + "\n")
+              f.write("checkout_sha=" + checkout_sha + "\n")
+              f.write("already_complete=" + ("true" if already_complete else "false") + "\n")
+          print({"status": "ALREADY_COMPLETE_NOOP" if already_complete else "PREFLIGHT_PASS", "study_id": prereg["study_id"], "data_cutoff": 1250, "target_count": 850, "random_bundles_per_target": 120})
+          PY
+
+      - name: Compile and run E054 contract tests
+        if: steps.preflight.outputs.already_complete != 'true'
+        run: |
+          python -m py_compile automation/three_line_rolling_concentration_regime_e054_v1.py automation/three_line_research_1251_v1.py automation/tests_v2/test_three_line_rolling_concentration_regime_e054.py
+          python -B -m unittest automation.tests_v2.test_three_line_rolling_concentration_regime_e054 -v
+
+      - name: Execute preregistered E054 walk-forward and matched random baseline
+        if: steps.preflight.outputs.already_complete != 'true'
+        id: execute
+        shell: bash
+        run: |
+          set -euo pipefail
+          DATE="$(TZ=Asia/Seoul date +%F)"
+          test "$DATE" = "2026-11-16"
+          RUN_ID="gha_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          python -B automation/three_line_rolling_concentration_regime_e054_v1.py --date "$DATE" --run-id "$RUN_ID"
+
+      - name: Verify immutable outputs, no leakage, strict gates, and update queue/audit
+        if: success() && steps.preflight.outputs.already_complete != 'true'
+        env:
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          DATA_SHA: ${{ steps.preflight.outputs.data_sha }}
+          CHECKOUT_SHA: ${{ steps.preflight.outputs.checkout_sha }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, os
+          from datetime import datetime, timezone, timedelta
+          from pathlib import Path
+          study_id = "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1"
+          rid, attempt = int(os.environ["GITHUB_RUN_ID"]), int(os.environ["GITHUB_RUN_ATTEMPT"])
+          run_number, run_id, date = int(os.environ["RUN_NUMBER"]), os.environ["RUN_ID"], os.environ["RUN_DATE"]
+          out = Path("analysis") / date / run_id / study_id
+          expected = {"PREDICTIONS.csv","RANDOM_BASELINE.csv","BLOCK_STABILITY.csv","REGIME_SUMMARY.csv","MODEL_SPEC.json","INFERENCE.json","VERIFICATION.json","COMPLETION.json","REPORT.md","SHA256_MANIFEST.csv"}
+          assert {p.name for p in out.iterdir() if p.is_file()} == expected
+          manifest = list(csv.DictReader((out / "SHA256_MANIFEST.csv").open(encoding="utf-8-sig", newline="")))
+          assert len(manifest) == 9 and {x["path"] for x in manifest} == expected - {"SHA256_MANIFEST.csv"}
+          for item in manifest:
+              raw = (out / item["path"]).read_bytes()
+              assert len(raw) == int(item["bytes"]) and hashlib.sha256(raw).hexdigest() == item["sha256"]
+          verification = json.loads((out / "VERIFICATION.json").read_text(encoding="utf-8"))
+          completion = json.loads((out / "COMPLETION.json").read_text(encoding="utf-8"))
+          inference = json.loads((out / "INFERENCE.json").read_text(encoding="utf-8"))
+          assert completion["status"] == "COMPLETE" and completion["data_cutoff"] == 1250
+          assert completion["target_range"] == [401,1250] and completion["target_count"] == 850
+          assert completion["independent_research_axis"] is True and completion["strict_pass_ready"] is False
+          assert verification["status"] == "PASS" and verification["data_cutoff"] == 1250
+          assert verification["current_source_data_rows"] == 1250 and verification["data_sha256"] == os.environ["DATA_SHA"]
+          assert verification["target_range"] == [401,1250] and verification["target_count"] == 850
+          assert verification["prediction_records"] == 850
+          assert verification["random_bundles_per_target"] == 120 and verification["random_bundles_total"] == 102000
+          assert verification["training_cutoff_violations"] == 0 and verification["leakage_failures"] == 0
+          assert verification["future_predictions"] == 0 and verification["no_future_leakage"] is True
+          assert verification["random_baseline_executed"] is True
+          assert verification["portfolio_geometry_violations"] == 0 and verification["random_geometry_violations"] == 0
+          assert verification["independent_research_axis"] is True and verification["independent_signal_family"] is True
+          assert verification["parameter_search"] is False and verification["thresholds_changed"] is False
+          assert verification["alpha_changed"] is False and verification["block_length_changed"] is False
+          assert verification["comparator_changed"] is False and verification["strict_pass_ready"] is False
+          assert inference["data_cutoff"] == 1250 and inference["target_range"] == [401,1250]
+          assert inference["targets"] == 850 and inference["random_bundles_total"] == 102000
+          assert inference["block_size"] == 50 and inference["block_lengths"] == [50] * 17
+          assert inference["prospective_minimum_target_count"] is None and inference["prospective_completion_rule"] is None
+          predictions = list(csv.DictReader((out / "PREDICTIONS.csv").open(encoding="utf-8-sig", newline="")))
+          randoms = list(csv.DictReader((out / "RANDOM_BASELINE.csv").open(encoding="utf-8-sig", newline="")))
+          blocks = list(csv.DictReader((out / "BLOCK_STABILITY.csv").open(encoding="utf-8-sig", newline="")))
+          regimes = list(csv.DictReader((out / "REGIME_SUMMARY.csv").open(encoding="utf-8-sig", newline="")))
+          targets = list(range(401,1251))
+          assert [int(x["target_round"]) for x in predictions] == targets and len(predictions) == 850
+          assert [int(x["target_round"]) for x in randoms] == targets and len(randoms) == 850
+          assert len(blocks) == 17 and all(int(x["n"]) == 50 for x in blocks)
+          assert {x["regime"] for x in regimes} == {"LOW","HIGH"}
+          for row in predictions:
+              target = int(row["target_round"])
+              assert int(row["training_through_round"]) == target - 1
+              assert row["regime"] in ("LOW","HIGH")
+              assert int(row["prior_hhi_reference_count"]) == 200
+              lines = [set(map(int,row[f"line{i}"].split())) for i in (1,2,3)]
+              assert all(len(line) == 6 for line in lines) and len(set().union(*lines)) == 18
+              assert all(not (lines[i] & lines[j]) for i in range(3) for j in range(i+1,3))
+          assert all(int(x["random_bundles"]) == 120 and int(x["geometry_violations"]) == 0 for x in randoms)
+          failed = [name for name, item in inference["metrics"].items() if not item["lower_bound_strictly_gt_zero"]]
+          if float(inference["any2_positive_50_target_block_share"]) < 0.65:
+              failed.append("any2_positive_50_target_block_share")
+          historical_pass = inference["historical_strict_gate_pass"] is True
+          now_kst = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9))).isoformat()
+          result = {
+              "study_id": study_id,
+              "evidence_class": "HISTORICAL_INDEPENDENT_SIGNAL_FAMILY_SCREEN_NOT_PROSPECTIVE_CONFIRMATION",
+              "independent_research_axis": True,
+              "independent_signal_family": True,
+              "workflow_name": "target-1251-e054-rolling-concentration-regime",
+              "workflow_run_id": rid,
+              "workflow_run_number": run_number,
+              "run_attempt": attempt,
+              "workflow_run_conclusion": "success",
+              "run_url": f"https://github.com/jiae-jeong/lotto-data/actions/runs/{rid}",
+              "completed_at_kst": now_kst,
+              "result_path": str(out),
+              "data_cutoff": 1250,
+              "data_sha256": verification["data_sha256"],
+              "target_range": [401,1250],
+              "target_count": 850,
+              "random_bundles_per_target": 120,
+              "random_bundles_total": 102000,
+              "block_length": 50,
+              "block_count": 17,
+              "training_cutoff_violations": 0,
+              "leakage_failures": 0,
+              "future_predictions": 0,
+              "portfolio_geometry_violations": 0,
+              "random_geometry_violations": 0,
+              "verification_status": "PASS",
+              "manifest_entries": 9,
+              "manifest_status": "PASS",
+              "historical_strict_gate_pass": historical_pass,
+              "failed_gates": failed,
+              "strict_portfolio_pass": False,
+              "strict_pass_ready": False,
+              "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY",
+              "parameter_search": False,
+              "thresholds_changed": False,
+              "alpha_changed": False,
+              "block_length_changed": False,
+              "comparator_changed": False,
+              "purchase_recommendation_generated": False,
+              "metrics": inference["metrics"],
+              "any2_positive_50_target_block_share": inference["any2_positive_50_target_block_share"],
+              "regime_target_counts": inference["regime_target_counts"]
+          }
+          queue_path = Path("automation/research_queue_v2.json")
+          queue = json.loads(queue_path.read_text(encoding="utf-8"))
+          task = next(x for x in queue["tasks"] if x.get("id") == study_id)
+          task["execution_status"] = "EXECUTED_HISTORICAL_GATE_PASS_PROSPECTIVE_PENDING" if historical_pass else "EXECUTED_HISTORICAL_STRICT_FAIL_OUTPUTS_PRESERVED"
+          task["execution_result"] = result
+          task["spec"]["execution_status"] = task["execution_status"]
+          queue_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          audit_path = Path("research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261115.json")
+          audit = json.loads(audit_path.read_text(encoding="utf-8"))
+          audit["e054_rolling_concentration_regime_axis"] = result
+          axes = audit.get("additional_independent_research_axes", [])
+          if not any(x.get("study_id") == study_id for x in axes):
+              axes.append(result)
+          audit["additional_independent_research_axes"] = axes
+          audit["strict_portfolio_pass"] = False
+          audit["strict_pass_ready"] = False
+          audit["ready_file"] = None
+          audit["ready_file_exists"] = False
+          audit["line_level_output_status"] = "SUPPRESSED_NOT_READY"
+          audit["final_purchase_freeze_allowed"] = False
+          audit["purchase_lines_generated"] = False
+          audit["purchase_recommendation_generated"] = False
+          audit["audit_updated_kst"] = now_kst
+          audit["audit_reconciled_at_kst"] = now_kst
+          audit["reconciled_main_sha"] = os.environ["CHECKOUT_SHA"]
+          alignment = audit.setdefault("research_cutoff_alignment", {})
+          alignment["latest_additional_independent_axis"] = study_id
+          alignment["latest_additional_independent_axis_cutoff"] = 1250
+          alignment["latest_additional_independent_axis_evidence_class"] = result["evidence_class"]
+          alignment["latest_additional_independent_axis_run_id"] = rid
+          reason = ("E054 historical gate passed, but STRICT_PASS_READY remains blocked by the still-unspecified prospective confirmation rule."
+                    if historical_pass else "E054 historical strict gate failed: " + ", ".join(failed) + ".")
+          reasons = audit.get("blocking_reasons", [])
+          if reason not in reasons:
+              reasons.append(reason)
+          audit["blocking_reasons"] = reasons
+          qs = audit.setdefault("research_queue_status", {})
+          qs["registered_tasks"] = len(queue["tasks"])
+          qs.setdefault("completed_dedicated_tasks", {})["E054"] = task["execution_status"]
+          qs["pending_dedicated_tasks"] = [x for x in qs.get("pending_dedicated_tasks", []) if x != "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1"]
+          qs["pending_dedicated_task_scope"] = "Remaining E043 H1250-A and E044 H1250-B V2 are five-line studies and ineligible for target-1251 three-line readiness."
+          qs["target_1251_three_line_e054_workflow_run_id"] = rid
+          qs["target_1251_three_line_e054_preregistration"] = "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json"
+          qs["target_1251_three_line_e054_runner"] = "automation/three_line_rolling_concentration_regime_e054_v1.py"
+          qs["target_1251_three_line_e054_workflow"] = ".github/workflows/target-1251-e054-rolling-concentration-regime.yml"
+          qs["target_1251_three_line_e054_status"] = task["execution_status"]
+          qs["three_line_preregistered_axes_remaining"] = []
+          qs["three_line_axis_status"] = "E054_EXECUTED; NO_UNEXECUTED_PREREGISTERED_THREE_LINE_AXES"
+          qs["target_1251_three_line_task_status"] = "E045_E048_E049_E050_E051_E052_E053_E054_EXECUTED_HISTORICAL_STRICT_FAIL; E046_DESIGN_ONLY" if not historical_pass else "E045_E048_E049_E050_E051_E052_E053_E054_EXECUTED; HISTORICAL_GATE_PASS_REQUIRES_PROSPECTIVE_CONFIRMATION; E046_DESIGN_ONLY"
+          qs["generic_queue_preflight_validation"] = "NO_GENERIC_RESEARCH_PENDING; E054 dedicated three-line signal-family axis completed; E043/E044 remain five-line-only and ineligible for target-1251 three-line readiness."
+          qs["runnable_generic_task_count"] = 0
+          audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps({"status":"PASS","historical_strict_gate_pass":historical_pass,"failed_gates":failed,"strict_pass_ready":False}, ensure_ascii=False))
+          PY
+
+      - name: Publish immutable E054 evidence, queue state, and readiness audit
+        if: success() && steps.preflight.outputs.already_complete != 'true'
+        shell: bash
+        env:
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          OUTDIR="analysis/$RUN_DATE/$RUN_ID/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1"
+          test -f "$OUTDIR/VERIFICATION.json"
+          test -f "$OUTDIR/COMPLETION.json"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$OUTDIR" automation/research_queue_v2.json research/weekly_purchase/1251/THREE_LINE_READINESS_AUDIT_20261115.json
+          git diff --cached --check
+          git diff --cached --quiet && { echo 'No E054 evidence staged'; exit 1; }
+          git commit -m 'research: execute E054 rolling concentration regime signal'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo 'Failed to publish E054 evidence after three push attempts.' >&2
+          exit 1
+
+      - name: Preserve failed E054 evidence
+        if: failure() && steps.preflight.outputs.already_complete != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: e054-rolling-concentration-regime-failed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: analysis/${{ steps.execute.outputs.date }}/gha_${{ github.run_id }}_${{ github.run_attempt }}/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1/**
+          if-no-files-found: warn

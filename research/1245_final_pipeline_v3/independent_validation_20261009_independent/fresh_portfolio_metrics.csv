@@ -1,0 +1,3 @@
+﻿mode,target_rounds,targets,predictions,mean_hits_per_line,random_mean_per_line,delta_mean_per_line,rate_2plus_per_line,random_rate_2plus,mean_portfolio_total_hits,random_expected_portfolio_total_hits,any_line_2plus_rate,interpretation
+expanding_last200,1045-1244,200,600,0.7283333333333334,0.8,-0.07166666666666666,0.15166666666666667,0.17530810086113546,2.185,2.4000000000000004,0.38,newly recomputed; exploratory and post-hoc
+rolling300_last200,1045-1244,200,600,0.8116666666666666,0.8,0.011666666666666603,0.17,0.17530810086113546,2.435,2.4000000000000004,0.435,newly recomputed; exploratory and post-hoc

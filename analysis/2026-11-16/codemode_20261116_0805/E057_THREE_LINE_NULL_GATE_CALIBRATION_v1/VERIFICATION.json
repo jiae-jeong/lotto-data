@@ -1,0 +1,69 @@
+{
+  "study_id": "E057_THREE_LINE_NULL_GATE_CALIBRATION_v1",
+  "status": "PASS",
+  "execution_mode": "Code Mode V8; actual simulation executed in this run",
+  "data_cutoff": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "data_rows": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "source_integrity": {
+    "sequential_rounds": true,
+    "six_unique_main_numbers_1_to_45": true,
+    "bonus_valid_and_excluded_from_main": true,
+    "missing_or_duplicate_rounds": 0
+  },
+  "exact_null_implementation": {
+    "status": "PASS",
+    "max_absolute_difference_from_frozen_E045": 1.7763568394002505e-15,
+    "required_tolerance": 1e-12
+  },
+  "simulation": {
+    "null_trajectories": 1000,
+    "random_portfolios": 850000,
+    "bootstrap_replicates_per_metric_per_trajectory": 4000,
+    "block_length": 50,
+    "blocks": 17,
+    "final_remainder_length": 0,
+    "geometry_violations": 0,
+    "training_cutoff_violations": 0,
+    "leakage_failures": 0,
+    "future_predictions": 0
+  },
+  "empirical_null_check": {
+    "all_four_mean_differences_within_2_monte_carlo_standard_errors": true,
+    "max_absolute_z": 1.8097337278124663
+  },
+  "strict_gate": {
+    "thresholds_changed": false,
+    "alpha_changed": false,
+    "block_length_changed": false,
+    "comparator_changed": false,
+    "false_passes": 1,
+    "denominator": 1000,
+    "rate": 0.001,
+    "wilson_95": [
+      0.00017654637062607809,
+      0.0056425585979579355
+    ],
+    "below_familywise_5_percent_ceiling": true
+  },
+  "model_or_purchase_output": {
+    "predictive_model_evaluated": false,
+    "candidate_numbers_generated": false,
+    "purchase_lines_generated": false,
+    "strict_pass_ready_created": false,
+    "freeze_or_seal_created": false
+  },
+  "runner_reference_status": "STORED_FOR_REPRODUCTION_NOT_EXECUTED_IN_THIS_RUN",
+  "git_blob_manifest_path": "GIT_BLOB_MANIFEST.csv",
+  "git_blob_manifest_status": "PASS",
+  "output_sha256_manifest_status": "NOT_COMPUTED",
+  "source_data_sha256_verified_from_existing_1250_manifest": true,
+  "git_blob_manifest_entries": 12,
+  "git_blob_manifest_blob_sha": "3d6fb6596702bf6412d1913da0927765f4760216",
+  "output_integrity_note": "GitHub Git blob SHA and UTF-8 byte counts were re-fetched and matched for all 12 manifest entries. Source lotto_data.csv SHA-256 is the value in the existing verified 1250-round data manifest."
+}

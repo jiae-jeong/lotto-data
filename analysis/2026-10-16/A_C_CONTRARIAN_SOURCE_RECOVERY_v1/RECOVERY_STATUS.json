@@ -1,0 +1,63 @@
+{
+  "recovery_date": "2026-10-16",
+  "purpose": "Recover historical Lotto Model A, Model C, and contrarian definitions without hindsight reconstruction.",
+  "starting_main_sha_observed": "bf41eb47359c732e0515776836b77ccb99044c84",
+  "search_scope": [
+    "past ChatGPT conversation records",
+    "ChatGPT Library and prior conversation files",
+    "GitHub main branch",
+    "GitHub branch research-2026-10-11-h001-h002",
+    "GitHub commit history",
+    "2026-10-09 A_ERRORLOOP_C_RESEARCH_v2 source-recovery package",
+    "tracked related S001-S008, V3 and V4 source lineage"
+  ],
+  "legacy_A": {
+    "exact_executable_source": "NOT_RECOVERED",
+    "conceptual_definition": "RECOVERED",
+    "weighted_prototype": "RECOVERED_PARTIALLY",
+    "recovered_weight_record": {
+      "date": "2026-09-30",
+      "long_term_frequency": 0.35,
+      "recent_100": 0.25,
+      "gap": 0.20,
+      "pair": 0.20,
+      "status_at_time": "initial unvalidated weights; pre-optimization"
+    },
+    "missing_for_executable_identity": [
+      "component normalization/scoring formulas",
+      "exact pair score implementation for the weighted A",
+      "tie-breaking rule",
+      "top-six/candidate-selection implementation",
+      "script filename/hash",
+      "stable version identifier",
+      "authoritative reproducible execution artifact"
+    ],
+    "execution_authorization": "PROHIBITED_AS_LEGACY_MODEL"
+  },
+  "legacy_C": {
+    "exact_executable_source": "NOT_RECOVERED",
+    "conceptual_definition": "RECOVERED",
+    "recovered_rule": "A pattern signals are filtered/combined only after repeated B holdout validation; do not arbitrarily remove extreme-looking structures.",
+    "alternate_contemporaneous_wording": "A and B common-support signals only; later project guidance clarified A/B/C should remain independently modeled rather than blindly mixed.",
+    "numeric_weights": "NOT_FOUND",
+    "script_filename_hash": "NOT_FOUND",
+    "execution_authorization": "PROHIBITED_AS_LEGACY_MODEL"
+  },
+  "legacy_contrarian": {
+    "exact_executable_source": "NOT_RECOVERED",
+    "conceptual_definition": "RECOVERED",
+    "recovered_rule": "Keep atypical structures such as consecutive numbers, range concentration, odd/even skew, repeated endings and extreme sums as separately validated opposite-hypothesis candidates instead of excluding them for aesthetics.",
+    "numeric_score_formula": "NOT_FOUND",
+    "script_filename_hash": "NOT_FOUND",
+    "execution_authorization": "PROHIBITED_AS_LEGACY_MODEL"
+  },
+  "related_executable_lineage": {
+    "S001_S008": "FOUND_WITH_SOURCE",
+    "V3_select_portfolio": "FOUND_WITH_SOURCE",
+    "V4_C": "FOUND_AS_LATER_REGISTERED_MODEL_ID",
+    "identity_rule": "Related later models must not be relabelled as the historical A/C/contrarian models."
+  },
+  "contradictory_historical_execution_claims": "PRESENT; late-September assistant messages contain both claimed numerical backtests and explicit statements that A/B/C had not actually been run. Therefore those claims are not accepted as authoritative execution evidence.",
+  "reconstruction_policy": "No missing formula, normalization, weight, tie-break, or selection rule was invented.",
+  "final_status": "CONCEPTS_PARTIALLY_RECOVERED_EXACT_EXECUTABLE_LEGACY_SOURCES_NOT_RECOVERED"
+}

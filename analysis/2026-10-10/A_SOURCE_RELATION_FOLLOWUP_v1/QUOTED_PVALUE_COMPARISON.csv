@@ -1,0 +1,3 @@
+order,numbers,quoted_approximate_p,current_exact_p,delta,quote_rounding_tolerance,status,cause,adjusted_conclusion
+2,11-21,0.00106,0.0009655413635828089,-9.445863641719104e-05,5e-06,MISMATCH,"UNCONFIRMED; historical code, data and tail convention not authenticated",No family Bonferroni significance in current computation
+3,33-37-40,0.000474,0.00046751079043044655,-6.4892095695534275e-06,5e-07,MISMATCH,"UNCONFIRMED; historical code, data and tail convention not authenticated",No family Bonferroni significance in current computation

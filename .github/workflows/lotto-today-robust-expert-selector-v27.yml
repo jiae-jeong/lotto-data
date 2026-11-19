@@ -1,0 +1,53 @@
+name: lotto-today-robust-expert-selector-v27
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-robust-expert-selector-v27.yml'
+      - 'automation/today_robust_expert_selector_v27.py'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v27:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V27
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_robust_expert_selector_v27.py | tee "$RUNNER_TEMP/v27.log"
+      - name: Verify V27
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_ROBUST_EXPERT_SELECTOR_1247_V27.json').read_text())
+          lines=d['current']['lines']
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(lines)==5 and len(set().union(*map(set,lines)))==30
+          assert len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'expert':d['current']['chosen_expert'],'lines':lines},ensure_ascii=False))
+          PY
+      - name: Commit V27 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_ROBUST_EXPERT_SELECTOR_1247_V27.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: robust expert selector v27 for 1247'
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,0 +1,356 @@
+{
+  "decision_target": 1245,
+  "fallback_counts": {
+    "expanding": 4,
+    "rolling300": 12
+  },
+  "historical_targets": [
+    1045,
+    1244
+  ],
+  "modes": {
+    "expanding": {
+      "hit_distribution_0_to_6": [
+        247,
+        255,
+        77,
+        20,
+        1,
+        0,
+        0
+      ],
+      "mean_pair_overlap": 0.9733333333333333,
+      "mean_ticket_hits": 0.7883333333333333,
+      "mean_union_coverage": 15.245,
+      "portfolio_3plus_count": 20,
+      "portfolio_3plus_rate": 0.1,
+      "portfolio_4plus_count": 1,
+      "portfolio_4plus_rate": 0.005,
+      "portfolio_max_hits_mean": 1.445,
+      "portfolio_max_hits_sum": 289,
+      "targets": 200,
+      "ticket_2plus_rate": 0.16333333333333333,
+      "ticket_3plus_rate": 0.035,
+      "ticket_4plus_rate": 0.0016666666666666668,
+      "tickets": 600,
+      "total_hits": 473
+    },
+    "rolling300": {
+      "hit_distribution_0_to_6": [
+        240,
+        245,
+        102,
+        13,
+        0,
+        0,
+        0
+      ],
+      "mean_pair_overlap": 0.8183333333333332,
+      "mean_ticket_hits": 0.8133333333333334,
+      "mean_union_coverage": 15.67,
+      "portfolio_3plus_count": 12,
+      "portfolio_3plus_rate": 0.06,
+      "portfolio_4plus_count": 0,
+      "portfolio_4plus_rate": 0.0,
+      "portfolio_max_hits_mean": 1.455,
+      "portfolio_max_hits_sum": 291,
+      "targets": 200,
+      "ticket_2plus_rate": 0.19166666666666668,
+      "ticket_3plus_rate": 0.021666666666666667,
+      "ticket_4plus_rate": 0.0,
+      "tickets": 600,
+      "total_hits": 488
+    }
+  },
+  "prospective_model_status": "REGISTERED_UNEVALUATED",
+  "random": {
+    "exact_mean_ticket_hits": 0.8,
+    "hit_distribution_0_to_6": [
+      2402828,
+      2545247,
+      908398,
+      135090,
+      8253,
+      184,
+      0
+    ],
+    "mean_pair_overlap": 0.7453394999999999,
+    "mean_ticket_hits": 0.8002075,
+    "mean_union_coverage": 15.849640999999998,
+    "portfolio_3plus_expected_targets": 14.0586,
+    "portfolio_3plus_monte_carlo_se": 0.0001807555001929402,
+    "portfolio_3plus_rate": 0.070293,
+    "portfolio_4plus_expected_targets": 0.843,
+    "portfolio_4plus_monte_carlo_se": 4.580841844028235e-05,
+    "portfolio_4plus_rate": 0.004215,
+    "portfolio_max_hits_mean": 1.4546145000000001,
+    "portfolio_simulations": 2000000,
+    "replicates_per_target": 10000,
+    "targets": 200,
+    "ticket_2plus_rate": 0.17532083333333334,
+    "ticket_3plus_rate": 0.023921166666666667,
+    "ticket_4plus_rate": 0.0014061666666666667,
+    "tickets": 6000000
+  },
+  "target1245_actual": "NOT READ / NOT USED",
+  "windows": {
+    "100": {
+      "modes": {
+        "expanding": {
+          "hit_distribution_0_to_6": [
+            132,
+            122,
+            36,
+            10,
+            0,
+            0,
+            0
+          ],
+          "mean_pair_overlap": 0.9866666666666666,
+          "mean_ticket_hits": 0.7466666666666667,
+          "mean_union_coverage": 15.27,
+          "portfolio_3plus_count": 9,
+          "portfolio_3plus_rate": 0.09,
+          "portfolio_4plus_count": 0,
+          "portfolio_4plus_rate": 0.0,
+          "portfolio_max_hits_mean": 1.42,
+          "portfolio_max_hits_sum": 142,
+          "targets": 100,
+          "ticket_2plus_rate": 0.15333333333333332,
+          "ticket_3plus_rate": 0.03333333333333333,
+          "ticket_4plus_rate": 0.0,
+          "tickets": 300,
+          "total_hits": 224
+        },
+        "rolling300": {
+          "hit_distribution_0_to_6": [
+            122,
+            122,
+            52,
+            4,
+            0,
+            0,
+            0
+          ],
+          "mean_pair_overlap": 1.0,
+          "mean_ticket_hits": 0.7933333333333333,
+          "mean_union_coverage": 15.18,
+          "portfolio_3plus_count": 3,
+          "portfolio_3plus_rate": 0.03,
+          "portfolio_4plus_count": 0,
+          "portfolio_4plus_rate": 0.0,
+          "portfolio_max_hits_mean": 1.39,
+          "portfolio_max_hits_sum": 139,
+          "targets": 100,
+          "ticket_2plus_rate": 0.18666666666666668,
+          "ticket_3plus_rate": 0.013333333333333334,
+          "ticket_4plus_rate": 0.0,
+          "tickets": 300,
+          "total_hits": 238
+        }
+      },
+      "random": {
+        "exact_mean_ticket_hits": 0.8,
+        "hit_distribution_0_to_6": [
+          1201221,
+          1272431,
+          454862,
+          67283,
+          4106,
+          97,
+          0
+        ],
+        "mean_pair_overlap": 0.7456866666666666,
+        "mean_ticket_hits": 0.8003043333333333,
+        "mean_union_coverage": 15.848728,
+        "portfolio_3plus_expected_targets": 7.0044,
+        "portfolio_3plus_monte_carlo_se": 0.00025520865541748384,
+        "portfolio_3plus_rate": 0.07004400000000001,
+        "portfolio_4plus_expected_targets": 0.42,
+        "portfolio_4plus_monte_carlo_se": 6.466799981443682e-05,
+        "portfolio_4plus_rate": 0.0042,
+        "portfolio_max_hits_mean": 1.4545799999999998,
+        "portfolio_simulations": 1000000,
+        "replicates_per_target": 10000,
+        "targets": 100,
+        "ticket_2plus_rate": 0.17544933333333335,
+        "ticket_3plus_rate": 0.023828666666666668,
+        "ticket_4plus_rate": 0.001401,
+        "tickets": 3000000
+      },
+      "use": "overlapping descriptive windows, not independent evidence"
+    },
+    "200": {
+      "modes": {
+        "expanding": {
+          "hit_distribution_0_to_6": [
+            247,
+            255,
+            77,
+            20,
+            1,
+            0,
+            0
+          ],
+          "mean_pair_overlap": 0.9733333333333333,
+          "mean_ticket_hits": 0.7883333333333333,
+          "mean_union_coverage": 15.245,
+          "portfolio_3plus_count": 20,
+          "portfolio_3plus_rate": 0.1,
+          "portfolio_4plus_count": 1,
+          "portfolio_4plus_rate": 0.005,
+          "portfolio_max_hits_mean": 1.445,
+          "portfolio_max_hits_sum": 289,
+          "targets": 200,
+          "ticket_2plus_rate": 0.16333333333333333,
+          "ticket_3plus_rate": 0.035,
+          "ticket_4plus_rate": 0.0016666666666666668,
+          "tickets": 600,
+          "total_hits": 473
+        },
+        "rolling300": {
+          "hit_distribution_0_to_6": [
+            240,
+            245,
+            102,
+            13,
+            0,
+            0,
+            0
+          ],
+          "mean_pair_overlap": 0.8183333333333332,
+          "mean_ticket_hits": 0.8133333333333334,
+          "mean_union_coverage": 15.67,
+          "portfolio_3plus_count": 12,
+          "portfolio_3plus_rate": 0.06,
+          "portfolio_4plus_count": 0,
+          "portfolio_4plus_rate": 0.0,
+          "portfolio_max_hits_mean": 1.455,
+          "portfolio_max_hits_sum": 291,
+          "targets": 200,
+          "ticket_2plus_rate": 0.19166666666666668,
+          "ticket_3plus_rate": 0.021666666666666667,
+          "ticket_4plus_rate": 0.0,
+          "tickets": 600,
+          "total_hits": 488
+        }
+      },
+      "random": {
+        "exact_mean_ticket_hits": 0.8,
+        "hit_distribution_0_to_6": [
+          2402828,
+          2545247,
+          908398,
+          135090,
+          8253,
+          184,
+          0
+        ],
+        "mean_pair_overlap": 0.7453394999999999,
+        "mean_ticket_hits": 0.8002075,
+        "mean_union_coverage": 15.849640999999998,
+        "portfolio_3plus_expected_targets": 14.0586,
+        "portfolio_3plus_monte_carlo_se": 0.0001807555001929402,
+        "portfolio_3plus_rate": 0.070293,
+        "portfolio_4plus_expected_targets": 0.843,
+        "portfolio_4plus_monte_carlo_se": 4.580841844028235e-05,
+        "portfolio_4plus_rate": 0.004215,
+        "portfolio_max_hits_mean": 1.4546145000000001,
+        "portfolio_simulations": 2000000,
+        "replicates_per_target": 10000,
+        "targets": 200,
+        "ticket_2plus_rate": 0.17532083333333334,
+        "ticket_3plus_rate": 0.023921166666666667,
+        "ticket_4plus_rate": 0.0014061666666666667,
+        "tickets": 6000000
+      },
+      "use": "overlapping descriptive windows, not independent evidence"
+    },
+    "50": {
+      "modes": {
+        "expanding": {
+          "hit_distribution_0_to_6": [
+            70,
+            57,
+            19,
+            4,
+            0,
+            0,
+            0
+          ],
+          "mean_pair_overlap": 0.9666666666666666,
+          "mean_ticket_hits": 0.7133333333333334,
+          "mean_union_coverage": 15.32,
+          "portfolio_3plus_count": 3,
+          "portfolio_3plus_rate": 0.06,
+          "portfolio_4plus_count": 0,
+          "portfolio_4plus_rate": 0.0,
+          "portfolio_max_hits_mean": 1.36,
+          "portfolio_max_hits_sum": 68,
+          "targets": 50,
+          "ticket_2plus_rate": 0.15333333333333332,
+          "ticket_3plus_rate": 0.02666666666666667,
+          "ticket_4plus_rate": 0.0,
+          "tickets": 150,
+          "total_hits": 107
+        },
+        "rolling300": {
+          "hit_distribution_0_to_6": [
+            60,
+            59,
+            27,
+            4,
+            0,
+            0,
+            0
+          ],
+          "mean_pair_overlap": 1.0866666666666667,
+          "mean_ticket_hits": 0.8333333333333334,
+          "mean_union_coverage": 14.94,
+          "portfolio_3plus_count": 3,
+          "portfolio_3plus_rate": 0.06,
+          "portfolio_4plus_count": 0,
+          "portfolio_4plus_rate": 0.0,
+          "portfolio_max_hits_mean": 1.42,
+          "portfolio_max_hits_sum": 71,
+          "targets": 50,
+          "ticket_2plus_rate": 0.20666666666666667,
+          "ticket_3plus_rate": 0.02666666666666667,
+          "ticket_4plus_rate": 0.0,
+          "tickets": 150,
+          "total_hits": 125
+        }
+      },
+      "random": {
+        "exact_mean_ticket_hits": 0.8,
+        "hit_distribution_0_to_6": [
+          599767,
+          637313,
+          227331,
+          33509,
+          2029,
+          51,
+          0
+        ],
+        "mean_pair_overlap": 0.7457986666666666,
+        "mean_ticket_hits": 0.800582,
+        "mean_union_coverage": 15.847795999999999,
+        "portfolio_3plus_expected_targets": 3.4863,
+        "portfolio_3plus_monte_carlo_se": 0.0003601574128072335,
+        "portfolio_3plus_rate": 0.06972600000000001,
+        "portfolio_4plus_expected_targets": 0.2077,
+        "portfolio_4plus_monte_carlo_se": 9.095334408365643e-05,
+        "portfolio_4plus_rate": 0.004154000000000001,
+        "portfolio_max_hits_mean": 1.4537660000000003,
+        "portfolio_simulations": 500000,
+        "replicates_per_target": 10000,
+        "targets": 50,
+        "ticket_2plus_rate": 0.17528,
+        "ticket_3plus_rate": 0.023726,
+        "ticket_4plus_rate": 0.0013866666666666667,
+        "tickets": 1500000
+      },
+      "use": "overlapping descriptive windows, not independent evidence"
+    }
+  }
+}

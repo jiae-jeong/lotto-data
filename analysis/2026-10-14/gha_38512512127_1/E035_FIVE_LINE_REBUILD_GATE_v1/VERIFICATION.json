@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "study_status": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+  "portfolio_construction_run": false,
+  "reason": "E034 produced zero VALIDATED_EDGE signals",
+  "future_predictions": 0
+}

@@ -1,0 +1,15 @@
+{
+  "pair_association": {
+    "state": "MORE_TEST",
+    "reason": "B mean can exceed matched random, but V4 multiple-testing survivors q<.05 = 0"
+  },
+  "triple_association": {
+    "state": "MORE_TEST",
+    "reason": "B mean can exceed matched random, but V4 multiple-testing survivors q<.05 = 0"
+  },
+  "RESEARCH_ONLY_FIVE_TICKET_V1": {
+    "state": "RESEARCH_ONLY",
+    "reason": "new frozen diagnostic validated historically today; not promoted to weekly purchase policy"
+  },
+  "automatic_rule_changes": false
+}

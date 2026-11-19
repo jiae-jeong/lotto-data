@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "attachments": [
+    {
+      "path": "C:\\Users\\admin\\.codex\\attachments\\98938037-5bcd-41e6-a275-9266ee258edb\\붙여넣은 텍스트.txt",
+      "sha256": "6bef0a0f13b555bc6ebe7b2a1e27039a28436eb90844b600faf6be8e89185f11",
+      "bytes": 9644
+    },
+    {
+      "path": "C:\\Users\\admin\\.codex\\attachments\\9bd67f57-f960-4de8-bd06-241042f9d789\\붙여넣은 텍스트.txt",
+      "sha256": "6bef0a0f13b555bc6ebe7b2a1e27039a28436eb90844b600faf6be8e89185f11",
+      "bytes": 9644
+    },
+    {
+      "path": "C:\\Users\\admin\\.codex\\attachments\\4ab8437d-9dca-4969-9bd9-e0e69f652249\\붙여넣은 텍스트.txt",
+      "sha256": "6bef0a0f13b555bc6ebe7b2a1e27039a28436eb90844b600faf6be8e89185f11",
+      "bytes": 9644
+    }
+  ],
+  "handling": "Same task continuation; prior research is not repeated"
+}

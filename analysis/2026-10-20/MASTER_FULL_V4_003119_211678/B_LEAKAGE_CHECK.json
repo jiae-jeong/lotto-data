@@ -1,0 +1,6 @@
+{
+  "prediction_records": 8368,
+  "targets": 1046,
+  "leakage_failures": 0,
+  "rule": "training_through_round = target_round-1"
+}

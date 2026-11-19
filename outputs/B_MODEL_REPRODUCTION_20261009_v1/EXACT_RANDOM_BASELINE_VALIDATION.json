@@ -1,0 +1,73 @@
+{
+  "status": "VERIFIED",
+  "kind": "EXACT_THEORETICAL_HYPERGEOMETRIC_NOT_MONTE_CARLO",
+  "formula": "P(K=k)=C(6,k)*C(39,6-k)/C(45,6)",
+  "denominator": 8145060,
+  "pmf": [
+    {
+      "hits": 0,
+      "fraction": "155363/387860",
+      "probability": 0.40056463672459136,
+      "percent": 40.05646367245914
+    },
+    {
+      "hits": 1,
+      "fraction": "82251/193930",
+      "probability": 0.4241272624142732,
+      "percent": 42.412726241427315
+    },
+    {
+      "hits": 2,
+      "fraction": "82251/543004",
+      "probability": 0.15147402229081186,
+      "percent": 15.147402229081186
+    },
+    {
+      "hits": 3,
+      "fraction": "9139/407253",
+      "probability": 0.02244059589493509,
+      "percent": 2.2440595894935087
+    },
+    {
+      "hits": 4,
+      "fraction": "741/543004",
+      "probability": 0.0013646308314487555,
+      "percent": 0.13646308314487554
+    },
+    {
+      "hits": 5,
+      "fraction": "39/1357510",
+      "probability": 2.872907013576327e-05,
+      "percent": 0.002872907013576327
+    },
+    {
+      "hits": 6,
+      "fraction": "1/8145060",
+      "probability": 1.2277380399898834e-07,
+      "percent": 1.2277380399898834e-05
+    }
+  ],
+  "mean_fraction": "4/5",
+  "mean": 0.8,
+  "variance_fraction": "169/275",
+  "variance": 0.6145454545454545,
+  "tail_probabilities": {
+    "2+": 0.17530810086113546,
+    "3+": 0.023834078570323606,
+    "4+": 0.0013934826753885176,
+    "5+": 2.885184393976226e-05,
+    "6+": 1.2277380399898834e-07
+  },
+  "code_match": true,
+  "all_256_metric_rows_match": true,
+  "baseline_field_checks": 2816,
+  "master_protocol_actual_random_generated": false,
+  "master_protocol_full_compliance": "NOT EXECUTED: standalone B-v1 uses theoretical baseline only; no matched simulated random tickets are generated/evaluated by this source.",
+  "structure_bank_is_not_baseline": "The random bank is scored and maximized by structure_profile. It is a model candidate search bank, not an unselected random comparator.",
+  "proposed_separate_random_validation": {
+    "status": "NOT EXECUTED",
+    "seed": 20261009,
+    "targets": "201..1244",
+    "suggestion": "Separate new artifact: generate 10000 independent random 3-line portfolios for each historical target, each line uniformly sampled without replacement from 1..45; compare with predeclared three-line portfolio only if its B selection rule is specified. B-v1 itself emits one ticket per model, so do not claim this three-line baseline already matches a B-v1 portfolio. For strict B-v1 comparison use a one-ticket random baseline for the identical targets/anchors/horizons. Never include target 1245."
+  }
+}

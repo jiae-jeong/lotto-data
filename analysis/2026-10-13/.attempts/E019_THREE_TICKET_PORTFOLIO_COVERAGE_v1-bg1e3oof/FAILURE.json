@@ -1,0 +1,13 @@
+{
+  "task_id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+  "error_type": "ValueError",
+  "reason": "dict contains fields not in fieldnames: 'random_bundles'",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\daily_research_v2.py\", line 244, in run\n    engine.run(root, output, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 339, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 435, in run_study\n    if kind==\"portfolio\": return study_portfolio(root,out,task)\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 416, in study_portfolio\n    engine.csvfile(out/\"BUNDLE_RESULTS.csv\",records); engine.csvfile(out/\"RANDOM_BUNDLE_RESULTS.csv\",random_rows); engine.csvfile(out/\"BUNDLE_METRICS.csv\",metrics)\n                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 80, in csvfile\n    writer.writeheader(); writer.writerows(records)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\csv.py\", line 167, in writerows\n    return self.writer.writerows(map(self._dict_to_list, rowdicts))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\csv.py\", line 159, in _dict_to_list\n    raise ValueError(\"dict contains fields not in fieldnames: \"\nValueError: dict contains fields not in fieldnames: 'random_bundles'\n",
+  "data_cutoff": 1245,
+  "failing_stage": "engine_execution",
+  "protected_files_unchanged": true,
+  "recovery_attempted": "Advanced to next independent registered task",
+  "retryable": true,
+  "user_action_required": false,
+  "preserved_attempt": "C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\analysis\\2026-10-13\\.attempts\\E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1-bg1e3oof"
+}

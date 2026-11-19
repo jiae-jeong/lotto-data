@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-12",
+  "started_utc": "2026-10-12T06:26:02.954732+00:00",
+  "finished_utc": "2026-10-12T06:26:15.218099+00:00",
+  "repository": "C:\\Users\\user\\Documents\\Codex\\2026-10-08\\b-model-backtest-py-b-1201\\work\\lotto-main-2026-10-12",
+  "snapshot_sha256": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+  "code_sha256": "e296d1f0d4d02abb57dca9f5a677fde456365a0bde4632de51eb0e674582c75f",
+  "audit": {
+    "base_HEAD": "857bea9a7b258c2033f7e752808bb3e52d6de9eb",
+    "root_rows": 1244,
+    "snapshot_rows": 1245,
+    "snapshot_prefix_equals_raw": true,
+    "cached_unique_targets": 1044,
+    "cached_unique_predictions": 8352,
+    "overlapping_records_removed": 25056,
+    "base_extension_targets": 1,
+    "source_unmodified": true,
+    "sampled_prefix_checks": [
+      {
+        "target": 201,
+        "cutoff": 200,
+        "models_match": 8
+      },
+      {
+        "target": 401,
+        "cutoff": 400,
+        "models_match": 8
+      },
+      {
+        "target": 801,
+        "cutoff": 800,
+        "models_match": 8
+      },
+      {
+        "target": 1201,
+        "cutoff": 1200,
+        "models_match": 8
+      },
+      {
+        "target": 1244,
+        "cutoff": 1243,
+        "models_match": 8
+      }
+    ],
+    "future_outcome_mutation_checks": [
+      {
+        "target": 601,
+        "altered_outcomes_from": 601,
+        "strategies_invariant": 3
+      },
+      {
+        "target": 801,
+        "altered_outcomes_from": 801,
+        "strategies_invariant": 3
+      },
+      {
+        "target": 1001,
+        "altered_outcomes_from": 1001,
+        "strategies_invariant": 3
+      },
+      {
+        "target": 1201,
+        "altered_outcomes_from": 1201,
+        "strategies_invariant": 3
+      },
+      {
+        "target": 1245,
+        "altered_outcomes_from": 1245,
+        "strategies_invariant": 3
+      }
+    ],
+    "toy_tie_regime_fallback_and_nested_contract": "PASS",
+    "blocking_leakage_violations": 0,
+    "tracked_files_preserved_count": 352,
+    "tracked_files_preserved": true,
+    "new_outer_targets": 645,
+    "primary_dynamic_predictions": 1935,
+    "all_new_strategy_predictions": 5160,
+    "inner_policy_predictions": 10140,
+    "future_recommendation_generated": false,
+    "runtime_seconds": 13.546,
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.3.5"
+  },
+  "selection_counts": {
+    "D001_nested_mean": {
+      "long_frequency": 63,
+      "frequency_plus_gap": 69,
+      "current_gap": 241,
+      "triple_association": 50,
+      "recent_momentum": 26,
+      "pair_association": 176,
+      "structure_profile": 20
+    },
+    "D002_nested_2plus": {
+      "long_frequency": 47,
+      "triple_association": 65,
+      "current_gap": 185,
+      "pair_association": 210,
+      "recent_momentum": 25,
+      "frequency_plus_gap": 98,
+      "structure_profile": 15
+    },
+    "D003_nested_regime": {
+      "combined_equal_rank": 480,
+      "current_gap": 46,
+      "frequency_plus_gap": 28,
+      "pair_association": 45,
+      "long_frequency": 22,
+      "structure_profile": 12,
+      "triple_association": 1,
+      "recent_momentum": 11
+    }
+  },
+  "mean_ci": {
+    "D001_nested_mean": [
+      0.7085271317829457,
+      0.8186434108527126
+    ],
+    "D002_nested_2plus": [
+      0.7317829457364341,
+      0.8403100775193798
+    ],
+    "D003_nested_regime": [
+      0.6852713178294574,
+      0.7953488372093023
+    ]
+  }
+}

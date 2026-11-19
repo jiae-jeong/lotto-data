@@ -1,0 +1,11 @@
+{
+  "study_id": "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+  "status": "COMPLETE",
+  "executed_cases": 1935,
+  "completed_at_utc": "2026-10-14T04:41:50.593888+00:00",
+  "surviving_signals": [
+    "CROSS_FIT_RESIDUAL_SIGNAL",
+    "ONLINE_CHANGE_POINT_SCORE",
+    "DIRICHLET_GAP_TICKET_GENERATOR"
+  ]
+}

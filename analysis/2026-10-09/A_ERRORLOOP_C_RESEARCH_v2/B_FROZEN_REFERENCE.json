@@ -1,0 +1,44 @@
+{
+  "status": "REPRODUCED",
+  "version": "B_MODEL_REPRODUCTION_20261009_v1",
+  "audit_commit": "2892b0d4424c72554612d464b7a7093f814e3fc3",
+  "evaluation_records": 33408,
+  "unique_target_model_records": 8352,
+  "classification_targets_per_model": 350,
+  "pooled_means": {
+    "long_frequency": 0.7371428571428571,
+    "current_gap": 0.7742857142857142,
+    "frequency_plus_gap": 0.8285714285714286,
+    "recent_momentum": 0.7457142857142857,
+    "structure_profile": 0.8514285714285714,
+    "pair_association": 0.8342857142857143,
+    "triple_association": 0.8257142857142857,
+    "combined_equal_rank": 0.8028571428571428
+  },
+  "classification": {
+    "long_frequency": "ADDITIONAL VALIDATION",
+    "current_gap": "ADDITIONAL VALIDATION",
+    "frequency_plus_gap": "ADDITIONAL VALIDATION",
+    "recent_momentum": "ADDITIONAL VALIDATION",
+    "structure_profile": "ADDITIONAL VALIDATION",
+    "pair_association": "ADDITIONAL VALIDATION",
+    "triple_association": "ADDITIONAL VALIDATION",
+    "combined_equal_rank": "HOLD"
+  },
+  "byte_identical_csvs": 4,
+  "cutoff_and_future_blocking": "PASS",
+  "classification_and_hit_histograms_and_50round_and_2plus_through_5plus": "REPRODUCED",
+  "reference_sha256": {
+    "EXECUTED_INPUT_lotto_data.csv": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+    "EXECUTED_b_model_backtest.py": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb",
+    "b_model_predictions.csv": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be",
+    "b_model_classification.csv": "2c7a8030b0129eef55137852a8e5e297d916239c46a8fc9bbe0e0c467ecf9ff2",
+    "b_model_holdout_metrics.csv": "147765c9f3353deac5cc5c91e37ce0f80a7e4608c9e29738d4724130df5bc2a4",
+    "b_model_50_round_trends.csv": "199bd09e71f9f7171b2c26ee68a7eb8afd40edcd17a1f8907dd09c2a4e7f57df",
+    "AUDIT_SHA256.csv": "1f2f234b957b2ca4a802a6354fe8ca10c026baecc91b8fea55d6d1f42d888ed1"
+  },
+  "freeze_utc": "2026-10-09T12:18:57.788991+00:00",
+  "readonly": true,
+  "current_task_B_execution": "NOT EXECUTED; reference only",
+  "current_task_retuning": false
+}

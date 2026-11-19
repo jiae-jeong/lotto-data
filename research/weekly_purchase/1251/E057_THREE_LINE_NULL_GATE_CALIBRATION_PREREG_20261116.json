@@ -1,0 +1,92 @@
+{
+  "study_id": "E057_THREE_LINE_NULL_GATE_CALIBRATION_v1",
+  "date_kst": "2026-11-16",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "study_class": "null_only_false_pass_calibration",
+  "research_question": "Under the exact uniform null for exactly three pairwise-disjoint six-number tickets with union18, how often does the unchanged target-1251 strict gate falsely pass over an 850-target evaluation?",
+  "novelty_vs_completed_work": [
+    "E036 calibrated a different single-ticket/five-line null statistic and did not evaluate the target-1251 four-metric three-line gate.",
+    "E045 and E054 evaluated predictive portfolios against the exact union18 null but did not estimate the strict gate's false-pass rate under repeated null-only trajectories.",
+    "This study evaluates no predictive model and changes no gate threshold."
+  ],
+  "source_data": {
+    "path": "lotto_data.csv",
+    "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850
+  },
+  "frozen_reference": {
+    "e045_preregistration": "research/weekly_purchase/1251/THREE_LINE_RESEARCH_PREREG_E045_20261114.json",
+    "e045_preregistration_blob_sha": "050fbf8f17da10b7b621b50213a5d96366aa3272",
+    "e045_runner": "automation/three_line_research_1251_v1.py",
+    "e045_runner_blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513"
+  },
+  "null_geometry": {
+    "line_count": 3,
+    "numbers_per_line": 6,
+    "pairwise_disjoint": true,
+    "union_size": 18,
+    "generation": "For each target, uniformly sample an ordered 18-subset without replacement from 1..45, then partition consecutive groups of six into three lines. This is distributionally equivalent to applying a uniformly sampled label permutation to any fixed disjoint union18 three-line portfolio.",
+    "target_outcomes": "Use the fixed observed main-number outcomes for targets 401..1250 only as conditional labels. No target outcome is used to select or rank a ticket.",
+    "exact_null": {
+      "mean_max_hits": 1.514256248572755,
+      "p_any2": 0.47497624326892623,
+      "p_any3": 0.07135490714617204,
+      "expected_union_coverage": 2.4
+    },
+    "exact_null_verification": "Independently derive the four expectations from the hypergeometric distribution of the number of winning labels in a uniform 18-subset and the conditional multivariate-hypergeometric allocation across three six-slot lines; require absolute error <= 1e-12 versus the frozen E045 values."
+  },
+  "strict_gate": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "ci_method": "Two-sided percentile moving-block bootstrap of per-target differences from exact null. Match E045: block sizes are consecutive 50-target blocks, sample each block independently with replacement, each sampled block start is uniform over every valid contiguous start; retain final remainder if present.",
+    "bootstrap_replicates_per_metric_per_trajectory": 4000,
+    "block_length_targets": 50,
+    "target_count": 850,
+    "block_count": 17,
+    "remainder_targets": 0,
+    "lower_quantile_index": 24,
+    "upper_quantile_index": 3974,
+    "all_four_adjusted_ci_lower_bounds_must_be_strictly_positive": true,
+    "any2_positive_nonoverlapping_50_target_block_share_minimum": 0.65,
+    "false_pass_definition": "A null trajectory is a false pass only if all four adjusted moving-block CI lower bounds are strictly > 0 and at least 65% of its 17 non-overlapping 50-target any2-delta blocks are positive.",
+    "bootstrap_quantile_indices_rule": "For 4000 sorted bootstrap means, lower index=floor((0.0125/2)*(4000-1))=24; upper index=floor((1-0.0125/2)*(4000-1))=3974, matching the frozen E045 percentile index rule."
+  },
+  "simulation": {
+    "independent_null_trajectories": 1000,
+    "random_portfolios_per_target_per_trajectory": 1,
+    "total_random_portfolios": 850000,
+    "seed": 20261116057,
+    "rng": "xorshift32; fixed seed and deterministic stream; partial Fisher-Yates sampling without replacement",
+    "no_parameter_search": true,
+    "no_threshold_relaxation": true,
+    "no_alpha_change": true,
+    "no_block_length_change": true,
+    "no_comparator_change": true,
+    "no_model_selection": true,
+    "no_purchase_recommendation": true,
+    "bootstrap_seed_rule": "For trajectory index r=0..999 and metric index m=0..3, use xorshift32 seed (base_seed + 1000003*r + 9000 + m) mod 2^32; this varies the bootstrap stream by null trajectory while retaining deterministic reproducibility."
+  },
+  "reporting": {
+    "primary_endpoint": "Empirical joint strict-gate false-pass rate across 1000 null trajectories with 95% Wilson interval.",
+    "secondary_endpoints": [
+      "Per-metric false-positive rate for each adjusted CI lower bound.",
+      "Distribution of any2 positive 50-target block share.",
+      "Empirical null means compared with exact analytic expectations.",
+      "Geometry and source-integrity violation counts."
+    ],
+    "evidence_class": "NULL_GATE_CALIBRATION_ONLY_NOT_PREDICTIVE_EVIDENCE_NOT_PROSPECTIVE_CONFIRMATION",
+    "promotion_effect": "None. This study cannot create STRICT_PASS_READY or authorize purchase lines."
+  }
+}

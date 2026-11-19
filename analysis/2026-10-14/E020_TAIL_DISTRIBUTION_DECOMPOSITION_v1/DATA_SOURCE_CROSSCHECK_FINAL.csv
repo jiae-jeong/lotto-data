@@ -1,0 +1,7 @@
+﻿round,dataset_date_normalized,date_match,main_numbers_match,bonus_match,source_1,source_2,overall_match,normalization
+1,2002-12-07,True,True,True,jottto.com/lotto/1,lottomoney.kr/result/1,True,normalized raw dataset date dots to ISO date
+1000,2022-01-29,True,True,True,dhlottery.co.kr allWinPrint,yna.co.kr/AKR20220129053100002,True,normalized raw dataset date dots to ISO date
+1242,2026-09-19,True,True,True,yna.co.kr/AKR20260919056800002,jottto.com/lotto/1242,True,normalized raw dataset date dots to ISO date
+1243,2026-09-26,True,True,True,dhlottery.co.kr QR archive,yna.co.kr/AKR20260926047651002,True,normalized raw dataset date dots to ISO date
+1244,2026-10-03,True,True,True,yna.co.kr/AKR20261003050551002,lottostory.kr/results/by-round/1244,True,normalized raw dataset date dots to ISO date
+1245,2026-10-10,True,True,True,m.dhlottery.co.kr/smarPage,newsis.com/NISX20261010_0003820692,True,normalized raw dataset date dots to ISO date

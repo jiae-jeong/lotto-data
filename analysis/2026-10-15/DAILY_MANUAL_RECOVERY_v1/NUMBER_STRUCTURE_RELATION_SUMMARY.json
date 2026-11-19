@@ -1,0 +1,42 @@
+{
+  "frequency_count_min": 137,
+  "frequency_count_max": 187,
+  "frequency_count_mean": 166.0,
+  "frequency_count_sd_population": 10.396580634462895,
+  "current_gap_min": 0,
+  "current_gap_max": 21,
+  "current_gap_median": 4.0,
+  "historical_max_gap_across_numbers_min": 27,
+  "historical_max_gap_across_numbers_max": 73,
+  "mean_completed_gap_across_numbers_mean": 6.491590399033767,
+  "classification_rule": "strong >= 75th percentile; weak <= 25th percentile independently for full-history and each recent window; descriptive only",
+  "quartile_categories": {
+    "10": {"long_strong_recent_weak": 8, "long_weak_recent_strong": 3, "long_strong_recent_strong": 5, "long_weak_recent_weak": 9},
+    "30": {"long_strong_recent_weak": 8, "long_weak_recent_strong": 4, "long_strong_recent_strong": 5, "long_weak_recent_weak": 4},
+    "50": {"long_strong_recent_weak": 6, "long_weak_recent_strong": 2, "long_strong_recent_strong": 4, "long_weak_recent_weak": 2},
+    "100": {"long_strong_recent_weak": 4, "long_weak_recent_strong": 2, "long_strong_recent_strong": 6, "long_weak_recent_weak": 4}
+  },
+  "structure_full": {
+    "sum_mean": 138.27630522088353,
+    "sum_sd_population": 30.653091342286622,
+    "odd_count_mean": 3.068273092369478,
+    "low_1_22_count_mean": 2.942971887550201,
+    "consecutive_presence_rate": 0.5172690763052209,
+    "repeat_ending_presence_rate": 0.7815261044176707,
+    "previous_draw_overlap_mean": 0.8263665594855305,
+    "max_fixed_band_count_ge_3_rate": 0.43614457831325304,
+    "mean_min_sorted_gap": 1.8056224899598394,
+    "mean_max_sorted_gap": 14.109236947791164,
+    "mean_cluster_adjacent_gap_le_3": 1.7734939759036144
+  },
+  "structure_recent": {
+    "10": {"sum_mean": 141.8, "odd_count_mean": 2.4, "low_count_mean": 2.9, "consecutive_presence_rate": 0.5, "repeat_ending_rate": 1.0, "previous_overlap_mean": 0.9, "band_ge3_rate": 0.4},
+    "30": {"sum_mean": 138.9, "odd_count_mean": 2.7666666666666666, "low_count_mean": 3.0, "consecutive_presence_rate": 0.5333333333333333, "repeat_ending_rate": 0.9, "previous_overlap_mean": 0.8666666666666667, "band_ge3_rate": 0.3333333333333333},
+    "50": {"sum_mean": 140.82, "odd_count_mean": 2.98, "low_count_mean": 2.78, "consecutive_presence_rate": 0.48, "repeat_ending_rate": 0.82, "previous_overlap_mean": 0.9, "band_ge3_rate": 0.4},
+    "100": {"sum_mean": 137.5, "odd_count_mean": 3.14, "low_count_mean": 2.89, "consecutive_presence_rate": 0.51, "repeat_ending_rate": 0.77, "previous_overlap_mean": 0.83, "band_ge3_rate": 0.43}
+  },
+  "pair_universe": 990,
+  "triple_universe": 14190,
+  "pair_bh_q_lt_005": 0,
+  "triple_bh_q_lt_005": 0
+}

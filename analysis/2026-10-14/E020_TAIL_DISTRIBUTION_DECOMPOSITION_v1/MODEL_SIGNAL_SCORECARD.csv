@@ -1,0 +1,5 @@
+﻿model,status,definition,evidence
+A,NOT EXECUTED,NOT FOUND,only descriptive signal scorecards; no authoritative integrated formula/weights
+B,EXECUTED TODAY,frozen B source; original preserved; run path/data cutoff adapted only,B_METRICS_AND_RANDOM_COMPARISON.csv
+C,NOT EXECUTED,NOT FOUND,no frozen integrated source; no repeated eligible signal promoted
+contrarian,NOT EXECUTED,NOT FOUND,"structural occurrence rates are descriptive, no frozen integrated model"

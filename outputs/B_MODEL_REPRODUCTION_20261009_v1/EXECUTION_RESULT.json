@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_reproduction_20261009_v1\\sandbox\\scripts\\b_model_backtest.py"
+  ],
+  "cwd": "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\b_model_reproduction_20261009_v1\\sandbox",
+  "start_utc": "2026-10-09T11:45:48.792859+00:00",
+  "end_utc": "2026-10-09T11:46:48.158901+00:00",
+  "elapsed_seconds": 59.375,
+  "exit_code": 0,
+  "source_sha256": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb",
+  "input_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "actual_1245_read": false,
+  "source_modified": false,
+  "stderr_bytes": 0,
+  "outputs_present": [
+    "b_model_50_round_trends.csv",
+    "b_model_backtest_report.md",
+    "b_model_classification.csv",
+    "b_model_holdout_metrics.csv",
+    "b_model_predictions.csv"
+  ]
+}

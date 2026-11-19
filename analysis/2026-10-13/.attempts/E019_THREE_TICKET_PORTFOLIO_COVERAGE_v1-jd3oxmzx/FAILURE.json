@@ -1,0 +1,13 @@
+{
+  "task_id": "E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1",
+  "error_type": "ValueError",
+  "reason": "Published component-cache hash mismatch",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\daily_research_v2.py\", line 242, in run\n    engine.run(root, output, task)\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 333, in run\n    result = run_study(root, out, task)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 435, in run_study\n    if kind==\"portfolio\": return study_portfolio(root,out,task)\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 388, in study_portfolio\n    actual,lookup=_load(root); seed=task[\"spec\"][\"random_seed\"]; rng=random.Random(seed); records=[]; random_rows=[]; values={\"FIXED_THREE_COMPONENT_BUNDLE\":[],\"RANDOM_THREE_TICKET_BUNDLE\":[]}\n                  ^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\expanded_studies_v2.py\", line 89, in _load\n    actual, lookup = engine.load_panel(root)\n                     ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\automation\\research_engine_v2.py\", line 93, in load_panel\n    raise ValueError('Published component-cache hash mismatch')\nValueError: Published component-cache hash mismatch\n",
+  "data_cutoff": 1245,
+  "failing_stage": "engine_execution",
+  "protected_files_unchanged": true,
+  "recovery_attempted": "Advanced to next independent registered task",
+  "retryable": true,
+  "user_action_required": false,
+  "preserved_attempt": "C:\\Users\\user\\Documents\\Codex\\2026-10-07\\github-lotto-project-protocol-md-b\\work\\lotto-data\\analysis\\2026-10-13\\.attempts\\E019_THREE_TICKET_PORTFOLIO_COVERAGE_v1-jd3oxmzx"
+}

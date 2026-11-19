@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "frozen_code_and_manifest": "PASS",
+  "independent_inner_replays": 10140,
+  "independent_nested_outer_replays": 1935,
+  "new_ticket_hit_checks": 5160,
+  "metric_rows_independently_recomputed": 128,
+  "exact_null_checked": true,
+  "future_predictions_generated": false,
+  "diagnostic": [
+    {
+      "model": "D001_nested_mean",
+      "n": 645,
+      "prior_chosen_component_window_mean": 0.9374418604651162,
+      "next_draw_mean": 0.7643410852713178,
+      "prior_to_next_mean_drop": 0.1731007751937984,
+      "model_switch_count": 108,
+      "model_switch_rate": 0.16770186335403728,
+      "regime_trigger_count": 0,
+      "regime_fallback_count": "",
+      "interpretation": "POST_HOC_DIAGNOSTIC; selected in-window performance is not out-of-window evidence"
+    },
+    {
+      "model": "D002_nested_2plus",
+      "n": 645,
+      "prior_chosen_component_window_mean": 0.9100155038759691,
+      "next_draw_mean": 0.786046511627907,
+      "prior_to_next_mean_drop": 0.12396899224806213,
+      "model_switch_count": 101,
+      "model_switch_rate": 0.15683229813664595,
+      "regime_trigger_count": 0,
+      "regime_fallback_count": "",
+      "interpretation": "POST_HOC_DIAGNOSTIC; selected in-window performance is not out-of-window evidence"
+    },
+    {
+      "model": "D003_nested_regime",
+      "n": 645,
+      "prior_chosen_component_window_mean": 0.803922480620155,
+      "next_draw_mean": 0.7395348837209302,
+      "prior_to_next_mean_drop": 0.0643875968992248,
+      "model_switch_count": 104,
+      "model_switch_rate": 0.16149068322981366,
+      "regime_trigger_count": 165,
+      "regime_fallback_count": 480,
+      "interpretation": "POST_HOC_DIAGNOSTIC; selected in-window performance is not out-of-window evidence"
+    }
+  ]
+}

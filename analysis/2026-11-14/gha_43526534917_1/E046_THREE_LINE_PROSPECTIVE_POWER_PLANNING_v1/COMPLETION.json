@@ -1,0 +1,17 @@
+{
+  "study_id": "E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1",
+  "status": "COMPLETE",
+  "study_classification": "DESIGN_ONLY_NOT_MODEL_EVIDENCE",
+  "data_cutoff": 1249,
+  "target_count": 849,
+  "no_future_leakage": true,
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "purchase_lines_generated": false,
+  "outputs": [
+    "REPORT.md",
+    "DESIGN_GRID.csv",
+    "BLOCK_SUMMARIES.csv",
+    "VERIFICATION.json"
+  ]
+}

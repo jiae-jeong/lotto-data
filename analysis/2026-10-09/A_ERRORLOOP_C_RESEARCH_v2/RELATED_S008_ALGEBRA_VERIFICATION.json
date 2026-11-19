@@ -1,0 +1,14 @@
+{
+  "status": "VERIFIED_CODE_AND_ALGEBRA",
+  "source_sha256": "974f5163b95e38389d857f6ec6a2cafdb1c4b847c869f33d49808902914e3eab",
+  "number_of_component_rank_vectors": 6,
+  "number_of_constant_structure_vectors": 45,
+  "positive_constant_structure_vectors": 6,
+  "total_vectors": 51,
+  "total_added_constant_per_number": 270,
+  "effective_score_formula": "(sum_of_six_component_ranks[i]+270)/51",
+  "ranking_influence_of_structure": 0,
+  "historical_backtest_rerun": "NOT EXECUTED",
+  "legacy_C_identity": "NOT ESTABLISHED",
+  "no_numbers_or_tickets_generated": true
+}

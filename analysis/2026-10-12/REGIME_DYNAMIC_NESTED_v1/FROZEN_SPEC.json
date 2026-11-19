@@ -1,0 +1,60 @@
+{
+  "study_id": "R20261012_REGIME_DYNAMIC_NESTED_V1",
+  "evidence": "POST_HOC_EXPLORATORY",
+  "component_models": [
+    "long_frequency",
+    "current_gap",
+    "frequency_plus_gap",
+    "recent_momentum",
+    "structure_profile",
+    "pair_association",
+    "triple_association"
+  ],
+  "component_source": "unchanged preserved B v1 source",
+  "targets": {
+    "base_cache": "201..1245",
+    "inner_policy": "401..1245",
+    "outer": "601..1245"
+  },
+  "windows": [
+    25,
+    50,
+    100
+  ],
+  "regime_thresholds": [
+    1.5,
+    2.0
+  ],
+  "outer_inner_history": 200,
+  "D001": "select best trailing mean component; choose window by trailing 200 inner-policy mean hits",
+  "D002": "select best trailing 2+ component; choose window by trailing 200 inner-policy 2+ rate",
+  "D003": "z=(recent mean-previous mean)/sqrt(recent population variance/w+previous population variance/w+1e-9); positive z>=threshold eligible; choose highest recent mean eligible, else combined_equal_rank; choose window/threshold by trailing 200 inner-policy mean hits",
+  "ties": "B source model order; config list order (shorter window, then lower threshold); number ties lower number",
+  "equal_weight_ticket_vote": "seven B component tickets, 1 vote per included number per model, top six; lower number tie",
+  "equal_rank_reference": "existing combined_equal_rank, four equal rank axes; not seven-ticket vote",
+  "uniform_stream": "one six-number uniform ticket per historical target, random.Random(seed+target); exact hypergeometric primary baseline; no repeated large Monte Carlo",
+  "uncertainty": "circular moving block bootstrap length20, 5000 resamples; Wilson rate intervals",
+  "primary_tests": "3 dynamic strategies x mean/2+/3+/4+ =12 one-sided exact uniform-null tests; Holm12",
+  "paired_tests": "3 dynamic x2 ensemble controls x4 metrics=24 exploratory paired block-bootstrap tests; Holm24",
+  "recent_views": [
+    200,
+    100,
+    50
+  ],
+  "historical_holdout": "1201..1245; NOT untouched",
+  "promotion": "none without subsequent independent prospective evidence",
+  "seed": 20261012,
+  "future_predictions": "not generated",
+  "scope": "new model-selection research; not B reproduction/H001/H002/relation retest",
+  "created_utc": "2026-10-12T06:26:02.954732+00:00",
+  "base_head": "857bea9a7b258c2033f7e752808bb3e52d6de9eb",
+  "input_sha256": {
+    "lotto_data.csv": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+    "analysis/2026-10-12/lotto_data_1_1245_snapshot.csv": "e534123cd7227f8c21d32251a567edeb018e7d1d9c4b049e4d23fb987f2619a4",
+    "outputs/B_MODEL_REPRODUCTION_20261009_v1/b_model_predictions.csv": "088685b5c30275c2640dfda2001beb99cebf5855156ae54ad5e0f6f170cf39be",
+    "outputs/B_MODEL_REPRODUCTION_20261009_v1/EXECUTED_b_model_backtest.py": "3ecf4fb805c2448e49c39e01174b3a112d4865c7ff1a31157437515b78be47cb",
+    "AGENTS.md": "ffa6431f81ef4ca2504079d8d28be0a5940392571f743fe2777c0664831b034d",
+    "LOTTO_PROJECT_PROTOCOL.md": "b028a3c1d1cb2cdbb6420f3128fd4ef870aff484bf054ca17f7c2f05e5d4df07"
+  },
+  "code_sha256": "e296d1f0d4d02abb57dca9f5a677fde456365a0bde4632de51eb0e674582c75f"
+}

@@ -1,0 +1,11 @@
+{
+  "git_history": [
+    "f777d7888bce208fa7b196689278f41fec387caf|2026-10-09T15:18:38+09:00|Seal primary V4 purchase mode for draw 1245"
+  ],
+  "historical_final_recommendation_as_purchased": "NOT VERIFIED",
+  "independent_purchase_receipt": "NOT FOUND in repository search",
+  "post_draw_review": "kept separate; not accepted as purchase receipt",
+  "pre_draw_seal_commit_found": true,
+  "search_scope": "analysis/, research/, outputs/, automation/ recursive filenames containing recommend/purchase/error/mistake/wrong/review; Git history for V4 primary purchase lines and prior review path",
+  "source_path": "research/prospective_v4/decisions/1245/PRIMARY_PURCHASE_LINES_1245_V4.csv"
+}

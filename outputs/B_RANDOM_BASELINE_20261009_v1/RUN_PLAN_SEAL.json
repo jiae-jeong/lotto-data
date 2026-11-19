@@ -1,0 +1,13 @@
+{
+  "created_utc": "2026-10-09T12:18:57.796114+00:00",
+  "audit_commit": "2892b0d4424c72554612d464b7a7093f814e3fc3",
+  "actual_1245": "NOT READ / NOT USED",
+  "file_sha256": {
+    "run_b_random_baseline.py": "bc7775f4539887392dc43f7641c26640135cdc7eeaad2f3cad855d338dc9ca22",
+    "RUN_CONFIG.json": "c2d88d9b1049cd2e199df809f6ce7aae31ba11aae292581eeeb4bdb613bcb821",
+    "B_REPRODUCTION_REFERENCE_FROZEN.json": "0519838584cdbeb786bccc5a5c53e36c26e6a668e205d1e2926a57c6745952f4",
+    "UNRESOLVED_HISTORICAL_RESULT.json": "fb99c5ab018ef547687c13582330322af7c6817e0f23136dfa173d782e2c5677",
+    "MONTE_CARLO_PROTOCOL.md": "30d13609a1225d4fdaaf42fe7634edbc1e5402e13145b4cc7e8fcc8a75fae22e"
+  },
+  "configuration_frozen_before_execution": true
+}

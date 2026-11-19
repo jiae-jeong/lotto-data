@@ -1,0 +1,31 @@
+{
+  "execution_date": "2026-10-16",
+  "data_rounds": "1-1245",
+  "prediction_rows": 2935,
+  "c_validation_rows": 3380,
+  "c_targets": 845,
+  "c_fallback_targets": 29,
+  "c_selected_counts": {
+    "current_gap": 477,
+    "pair_residual_node": 445,
+    "recent100_frequency": 412,
+    "long_frequency": 292
+  },
+  "max_target_round": 1245,
+  "no_1246_prediction_generated": true,
+  "deterministic_second_run_manifest_match": true,
+  "raw_output_sha256": {
+    "walkforward_predictions.csv": "4b1cdb3def4124f2ad90437fb5712c5dd2fb3ba5d440e55a15fcf21443541262",
+    "c_nested_validation.csv": "e1514fa6379f5511b6c1eed6429566ec3fdebbb8ba86cce396a30a0636d004c7"
+  },
+  "compressed_base64_sha256": {
+    "walkforward_predictions.csv.gz.b64": "15e3a414e20af7465bafc510fd5945d1b8ed8a1a59bf5db4587f548a6b26bf93",
+    "c_nested_validation.csv.gz.b64": "8f80d63bb6326740dbb0cf5ce8825b5cdb15c5b33cd0734cd2f6be5870da3897"
+  },
+  "leakage_assertions": [
+    "training_through == target_round - 1 for every prediction row",
+    "C selector uses component hit records strictly before target t",
+    "actual target draw is added to state only after target forecasts are frozen",
+    "max target is 1245; no draw-1246 prediction generated"
+  ]
+}

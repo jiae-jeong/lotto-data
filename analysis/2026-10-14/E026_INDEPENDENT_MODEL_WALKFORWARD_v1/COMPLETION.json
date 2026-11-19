@@ -1,0 +1,35 @@
+{
+  "status": "COMPLETE",
+  "classification": "NEW_STUDY",
+  "task_id": "E026_INDEPENDENT_MODEL_WALKFORWARD_v1",
+  "question": "Do E025 independent-signal candidates improve same-target walk-forward outcomes over B and uniform random tickets?",
+  "novelty": "Frozen top-six predictors evaluated over 645 expanding-information targets with 100 same-target random tickets per target, B component comparators, block uncertainty, and Holm correction.",
+  "executed_cases": 71595,
+  "validation": "PASS",
+  "data_cutoff": 1245,
+  "evidence": "POST_HOC_EXPLORATORY",
+  "protected_existing_files": 590,
+  "protected_files_unchanged": true,
+  "future_predictions": 0,
+  "result": {
+    "executed_cases": 71595,
+    "verification": {
+      "status": "PASS",
+      "target_count": 645,
+      "candidate_signal_predictions": 1935,
+      "random_tickets": 64500,
+      "random_repeats_per_target": 100,
+      "b_comparator_predictions": 5160,
+      "cutoff_violations": 0,
+      "random_seed": 20261015,
+      "target_outcome_used_for_tuning": false,
+      "future_predictions": 0,
+      "independent_survivors": [
+        "CALENDAR_SEASON_CONDITIONAL_v1",
+        "PREVIOUS_SUM_REGIME_CONDITIONAL_v1"
+      ]
+    }
+  },
+  "report": "REPORT.md",
+  "completed_utc": "2026-10-14T02:12:07.497282+00:00"
+}

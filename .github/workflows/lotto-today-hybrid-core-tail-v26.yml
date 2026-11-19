@@ -1,0 +1,53 @@
+name: lotto-today-hybrid-core-tail-v26
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/lotto-today-hybrid-core-tail-v26.yml'
+      - 'automation/today_hybrid_core_tail_v26.py'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-v26:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run V26
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B automation/today_hybrid_core_tail_v26.py | tee "$RUNNER_TEMP/v26.log"
+      - name: Verify V26
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('analysis/2026-10-23/TODAY_HYBRID_CORE_TAIL_1247_V26.json').read_text())
+          lines=d['current']['lines']
+          assert d['target_round']==1247 and d['data_cutoff']==1246 and d['no_future_leakage'] is True
+          assert len(lines)==5 and len(set().union(*map(set,lines)))==30
+          assert len({tuple(x) for x in lines})==5
+          assert all(len(x)==6 and x==sorted(x) and len(set(x))==6 and all(1<=n<=45 for n in x) for x in lines)
+          print(json.dumps({'status':'INDEPENDENT_PASS','strict_pass':d['inference']['strict_portfolio_pass'],'template':d['current']['template'],'core':d['current']['top6_slow_core'],'lines':lines},ensure_ascii=False))
+          PY
+      - name: Commit V26 report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/2026-10-23/TODAY_HYBRID_CORE_TAIL_1247_V26.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'validation: hybrid core-tail v26 for 1247'
+          git pull --rebase origin main
+          git push origin HEAD:main

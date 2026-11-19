@@ -1,0 +1,72 @@
+{
+  "study_id": "E061_B_MODEL_ENSEMBLE_ERROR_CORRELATION_AND_DILUTION_v1",
+  "registered_at_kst": "2026-11-16T12:10:53+09:00",
+  "evidence_class": "HISTORICAL_SINGLE_TICKET_DIAGNOSTIC_NOT_THREE_LINE_PURCHASE_EVIDENCE",
+  "question": "Do the seven frozen B component models make sufficiently different per-target hit errors to justify equal-rank aggregation, and does the existing combined_equal_rank model dilute the stronger component outcomes?",
+  "source": {
+    "path": "analysis/2026-11-16/MASTER_FULL_V4_022804_577202/B_PREDICTIONS_UNIQUE.csv",
+    "git_blob_sha": "83e9772654466c092ccef7a7287d8106359a6c80",
+    "data_cutoff": 1250,
+    "target_range": [
+      201,
+      1250
+    ],
+    "expected_targets": 1050,
+    "expected_models": [
+      "long_frequency",
+      "current_gap",
+      "frequency_plus_gap",
+      "recent_momentum",
+      "structure_profile",
+      "pair_association",
+      "triple_association",
+      "combined_equal_rank"
+    ]
+  },
+  "frozen_methods": {
+    "primary": "Compute the 21 pairwise Pearson correlations of per-target main-number hit counts across the seven component models only; report mean, median, minimum, and maximum without selecting or dropping components.",
+    "secondary": "Compare combined_equal_rank mean hits with each of the seven component means and with their unweighted mean.",
+    "uncertainty": {
+      "method": "moving_nonoverlap_block_bootstrap",
+      "block_length_targets": 50,
+      "blocks": 21,
+      "replicates": 4000,
+      "seed": 20261116,
+      "contrasts": [
+        "combined_equal_rank_minus_long_frequency",
+        "combined_equal_rank_minus_current_gap",
+        "combined_equal_rank_minus_frequency_plus_gap",
+        "combined_equal_rank_minus_recent_momentum",
+        "combined_equal_rank_minus_structure_profile",
+        "combined_equal_rank_minus_pair_association",
+        "combined_equal_rank_minus_triple_association",
+        "combined_equal_rank_minus_component_mean"
+      ],
+      "family_alpha": 0.05,
+      "bonferroni_two_sided_interval_quantiles": [
+        0.003125,
+        0.996875
+      ]
+    },
+    "random_reference": {
+      "exact_expected_main_hits_per_single_ticket": 0.8,
+      "use": "descriptive reference only; do not promote a component based on this historical screen"
+    }
+  },
+  "integrity_gates": {
+    "one_row_per_target_model": true,
+    "target_rounds_contiguous": true,
+    "training_through_round_equals_target_minus_one": true,
+    "no_future_outcomes_in_predictors": true,
+    "exact_model_set_required": true,
+    "missing_or_duplicate_rows_allowed": false
+  },
+  "exclusions": [
+    "No candidate or purchase-number generation.",
+    "No three-line portfolio claim or STRICT_PASS_READY promotion.",
+    "No parameter search, model tuning, threshold relaxation, alpha change, block-length change, or comparator change.",
+    "No component promotion from same-sample historical results."
+  ],
+  "interpretation_limit": "Hit-count correlation is error dependence, not ticket-number overlap. This study is a historical B single-ticket diagnostic and cannot qualify target-1251 three-line purchase readiness.",
+  "preregistration_hashing": "The preregistration is committed before reading or calculating the E061 outcome statistics."
+}

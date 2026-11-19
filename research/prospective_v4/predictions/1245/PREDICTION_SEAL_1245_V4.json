@@ -1,0 +1,239 @@
+{
+  "V3_status": "SEALED V3 GATE NOT PASSED",
+  "actual_input_used": false,
+  "actual_numbers": null,
+  "actual_result": "NOT READ / NOT USED",
+  "artifacts": [
+    {
+      "bytes": 3581,
+      "created_at_utc": "2026-10-09T05:23:34.663948+00:00",
+      "file": "CANDIDATE_AUDIT_1245_V4.json",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "c4282cb1d8ded54147fe337c4425d429173026d8ed013ac12ff7311ca85ebc57",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 184069,
+      "created_at_utc": "2026-10-09T05:23:34.404580+00:00",
+      "file": "CANDIDATES_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "4895bb7fc47edb47c45bfdcdec598bc9c45efb23c0eccaf4064d2f7b6206ae0a",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 101402,
+      "created_at_utc": "2026-10-09T05:23:33.913507+00:00",
+      "file": "ENGINE_PREDICTION_1245_V4.json",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "581b1409044a16985a66c9b8f1bf6edd9b603f26b37c1d92e6f1b48a750a8178",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 30715,
+      "created_at_utc": "2026-10-09T05:26:56.885197+00:00",
+      "file": "EXECUTION_PRESEAL_1245_V4.log",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "bc2d8ecd1369de3da2514df41eedc0df48c25863f1033e2f74b5639a865c284d",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 2852,
+      "created_at_utc": "2026-10-09T05:23:34.620757+00:00",
+      "file": "FINAL_THREE_LINES_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "7ce371fe06a2e4b88f249d264e528b518e6da2fe9f54afc52fda0b26551279a0",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 3810109,
+      "created_at_utc": "2026-10-09T05:23:33.967030+00:00",
+      "file": "FROZEN_SCORE_CAPTURE_1245_V4.json",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "5d2bac7c243a9cbe5cf3966ef253f8cad0e897cd4be510c3734ab52c88e3edc3",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 7877,
+      "created_at_utc": "2026-10-09T05:23:34.394595+00:00",
+      "file": "MODEL_PREDICTIONS_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "92f72d1b2d83026be102810a283bbe7ac5a4f6cb9659b0d09ae37637d8df9eb6",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 219112,
+      "created_at_utc": "2026-10-09T05:23:34.396596+00:00",
+      "file": "NUMBER_SCORES_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "529021f777035078985ee208cc7317883cc864f9b926ad48e14da0dfcd217771",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 97103,
+      "created_at_utc": "2026-10-09T05:23:34.681498+00:00",
+      "file": "PREDICTION_1245_V4.json",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "589a211570e18af87a29a3723b76a0b7a3aed678eae6bcc6a8d029ea49b66f8a",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 1276,
+      "created_at_utc": "2026-10-09T05:23:34.665961+00:00",
+      "file": "RANDOM_BASELINE_1245_V4.json",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "c7ad364eb66f510418aa086b21b1bc772e5c5ff52f3ce96d946d8e073684b09b",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 1985,
+      "created_at_utc": "2026-10-09T05:23:34.687522+00:00",
+      "file": "README_1245_V4.md",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "ce678f6eeacfc6c577f3ae8dc93771f0bb31d2eab94b7a084b02e63681756cb4",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 16301,
+      "created_at_utc": "2026-10-09T05:22:40.097198+00:00",
+      "file": "run_prediction_1245_v4.py",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "2cdd219a511879bcd37b4487a767065f8a9aab17850e4d0a370fda46bfb1a67e",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 88423,
+      "created_at_utc": "2026-10-09T05:23:34.628451+00:00",
+      "file": "SELECTION_TRACE_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "2de572ba92aa03d70f3e9818ef1c164b0ba878d4998c4390029377facae69ca7",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 1932811,
+      "created_at_utc": "2026-10-09T05:23:34.632485+00:00",
+      "file": "STRUCTURE_DIAGNOSTICS_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "4ec1e94d9e14221653e5a0203840bad67fd83580d2d9226e868748e16518e570",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 6906766,
+      "created_at_utc": "2026-10-09T05:23:34.413570+00:00",
+      "file": "TICKET_SCORES_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "1d8b573532f6f4cd96b5314e8686c62d53b1500e83dfae41d4f7e532313899bf",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 5763,
+      "created_at_utc": "2026-10-09T05:26:56.866176+00:00",
+      "file": "VERIFICATION_1245_V4.json",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "62ed7f1c110aac9e59356055ce1625dbbc67b05408c62addeb63a0efb1c41939",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 12237,
+      "created_at_utc": "2026-10-09T05:25:44.138908+00:00",
+      "file": "verify_prediction_1245_v4.py",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "1f5a35f390a311dccc92aab52813951f3847b1febfe3c4371eb217d4534e63d7",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    },
+    {
+      "bytes": 3579,
+      "created_at_utc": "2026-10-09T05:26:56.886190+00:00",
+      "file": "PREDICTION_MANIFEST_1245_V4.csv",
+      "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+      "sha256": "7f697da2f727bcdeffe4e32f0b1785c7b1df4944b2c31ea23d4cfd13e8e2470d",
+      "status": "REGISTERED_UNEVALUATED",
+      "target": 1245,
+      "training_cutoff": 1244
+    }
+  ],
+  "determinism_verification": "PASS; verification replay is not an official run",
+  "draw_deadline_confirmation": "NOT INDEPENDENTLY CHECKED; no target-outcome website queried",
+  "engine_created_at_utc": "2026-10-09T05:23:33.912352+00:00",
+  "execution_command": [
+    "C:\\Users\\admin\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\prospective_v4\\predictions\\1245\\run_prediction_1245_v4.py",
+    "--data",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\lotto_data.csv",
+    "--output-dir",
+    "C:\\Users\\admin\\Documents\\Codex\\2026-10-09\\6-45-jiae-jeong-lotto-data\\work\\prediction_1245_v4_clean_20261009\\research\\prospective_v4\\predictions\\1245",
+    "--execution-kind",
+    "official"
+  ],
+  "freeze_commit": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+  "freeze_seal_sha256": "6a018e3036187a26ac9bcffda9fd7379d65d86cde84514faa08f4ea349b0f4bb",
+  "git_commit_planned_parent": "746efc843d53dff4e61394e26d458ea3f50c93e4",
+  "model_ids": [
+    "V4_U",
+    "V4_F",
+    "V4_G",
+    "V4_C",
+    "V4_M",
+    "V4_P",
+    "V4_T",
+    "V4_S"
+  ],
+  "model_versions": {
+    "V4_C": "V4_NEW_PROSPECTIVE",
+    "V4_F": "V4_NEW_PROSPECTIVE",
+    "V4_G": "V4_NEW_PROSPECTIVE",
+    "V4_M": "V4_NEW_PROSPECTIVE",
+    "V4_P": "V4_NEW_PROSPECTIVE",
+    "V4_S": "V4_NEW_PROSPECTIVE",
+    "V4_T": "V4_NEW_PROSPECTIVE",
+    "V4_U": "V4_NEW_PROSPECTIVE"
+  },
+  "modes": [
+    "expanding",
+    "rolling300"
+  ],
+  "official_run_count": 1,
+  "official_run_generated_at_utc": "2026-10-09T05:23:31.820932+00:00",
+  "prediction_seal_created_at_utc": "2026-10-09T05:26:56.886190+00:00",
+  "primary_mode_policy": "none registered; retain both mode portfolios",
+  "prospective_publication": "PENDING_GITHUB_PUBLIC_RECEIPT; record server observation externally without rewriting seal",
+  "raw_data_sha256": "243cd17e6b97a2d96709ddfc689a068038669341a52dcc0743c141d309e43b9f",
+  "self_hash_policy": "Seal self hash and publishing commit are externally recorded, avoiding circular reference. Manifest excludes itself and seal; seal binds payload plus manifest.",
+  "status": "REGISTERED_UNEVALUATED",
+  "target": 1245,
+  "training_cutoff": 1244,
+  "version": "PREDICTION_1245_PROSPECTIVE_V4"
+}

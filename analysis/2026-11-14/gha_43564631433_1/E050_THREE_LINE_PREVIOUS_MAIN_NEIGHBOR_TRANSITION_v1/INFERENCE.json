@@ -1,0 +1,86 @@
+{
+  "study_id": "E050_THREE_LINE_PREVIOUS_MAIN_NEIGHBOR_TRANSITION_v1",
+  "data_cutoff": 1249,
+  "target_range": [
+    401,
+    1249
+  ],
+  "target_count": 849,
+  "exact_geometry_matched_null": {
+    "max_hits": 1.514256248572755,
+    "any2": 0.47497624326892623,
+    "any3": 0.07135490714617204,
+    "winning_union_coverage": 2.4
+  },
+  "metrics": {
+    "max_hits": {
+      "observed_mean": 1.4888103651354534,
+      "exact_geometry_matched_null": 1.514256248572755,
+      "delta_mean": -0.025445883437301618,
+      "adjusted_moving_block_ci": [
+        -0.07609370440314378,
+        0.029913362734665404
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any2": {
+      "observed_mean": 0.46054181389870436,
+      "exact_geometry_matched_null": 0.47497624326892623,
+      "delta_mean": -0.014434429370221852,
+      "adjusted_moving_block_ci": [
+        -0.053303687320751886,
+        0.023256972278776974
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "any3": {
+      "observed_mean": 0.0706713780918728,
+      "exact_geometry_matched_null": 0.07135490714617204,
+      "delta_mean": -0.0006835290542992543,
+      "adjusted_moving_block_ci": [
+        -0.02070708618032988,
+        0.021695740674793795
+      ],
+      "lower_bound_strictly_gt_zero": false
+    },
+    "winning_union_coverage": {
+      "observed_mean": 2.3780918727915195,
+      "exact_geometry_matched_null": 2.4,
+      "delta_mean": -0.021908127208480475,
+      "adjusted_moving_block_ci": [
+        -0.11495877502944632,
+        0.07232037691401658
+      ],
+      "lower_bound_strictly_gt_zero": false
+    }
+  },
+  "block_stability": {
+    "block_length_targets": 50,
+    "total_blocks_including_remainder": 17,
+    "positive_any2_blocks": 6,
+    "any2_positive_block_share": 0.35294117647058826,
+    "required_minimum": 0.65,
+    "remainder_block": {
+      "block_index": 17,
+      "start_target": 1201,
+      "end_target": 1249,
+      "n": 49,
+      "mean_delta_max_hits": -0.0652766567360204,
+      "mean_delta_any2": -0.04640481469749764,
+      "mean_delta_any3": -0.010130417350253678,
+      "mean_delta_winning_union_coverage": 0.008163265306122538,
+      "any2_positive": 0
+    }
+  },
+  "historical_strict_gate_pass": false,
+  "prospective_confirmation": {
+    "required": true,
+    "minimum_target_count": null,
+    "completion_rule": null,
+    "status": "UNSPECIFIED_IN_POLICY",
+    "minimum_count_adopted": false
+  },
+  "strict_portfolio_pass": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL"
+}
