@@ -13,7 +13,8 @@
     "E076 outputs and UTF-8 SHA-256 manifest committed; queue updated with execution result.",
     "DAILY MASTER #120 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets), 1,050,000 matched random portfolios, successor A_v2/C_v2/Contrarian_v2 diagnostics, leakage checks, and 14-file SHA-256 manifest all passed; status remains PARTIAL because legacy A/C/Contrarian originals and closed-loop purchase evidence remain missing.",
     "E075 v3 historical implementation-conformance correction completed with verified 8/8 manifest; no independent signal, prospective confirmation, or purchase readiness was created.",
-    "E075 calculation, verification, manifest, and git push succeeded; the Actions run itself concluded FAILURE only at the final post-push clean-worktree assertion."
+    "E075 calculation, verification, manifest, and git push succeeded; the Actions run itself concluded FAILURE only at the final post-push clean-worktree assertion.",
+    "E075 post-push clean-worktree failure was corrected in workflow commit 7292759097e59d37313073cc01c8f897da1fc99f by removing generated Python bytecode before the final assertion; validation #167 passed 251 tests and E030-E076 queue contract. The already-published E075 calculation was not duplicated."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -142,5 +143,24 @@
     "post_push_check_status": "FAIL",
     "post_push_check_failure_step": "test -z \"$(git status --porcelain)\"",
     "post_push_check_failure_detail": "The git push succeeded (6be9e19..dfde545 HEAD -> main); the following final clean-worktree assertion exited 1. The job log does not list the residual paths. The preceding python -m py_compile step can create untracked automation/**/__pycache__/*.pyc files; the recovery workflow now removes Python bytecode before the assertion."
+  },
+  "e075_post_push_recovery": {
+    "workflow_fix_commit": "7292759097e59d37313073cc01c8f897da1fc99f",
+    "workflow_file": ".github/workflows/target-1251-e075-publication-recovery.yml",
+    "failure_scope": "post-push clean-worktree assertion only; E075 calculation, verification, manifest, and push had succeeded",
+    "repair": "remove automation/**/__pycache__ directories and *.pyc files after push and before final cleanliness assertion",
+    "validation_run_id": 44433216921,
+    "validation_run_number": 167,
+    "validation_conclusion": "SUCCESS",
+    "unit_tests": 251,
+    "queue_contract": "E030-E076 PASS",
+    "e075_recomputed_after_fix": false
+  },
+  "queue_validation_reconciliation": {
+    "latest_run_id": 44433216921,
+    "latest_run_number": 167,
+    "conclusion": "SUCCESS",
+    "tests": 251,
+    "queue_contract": "E030-E076 PASS"
   }
 }

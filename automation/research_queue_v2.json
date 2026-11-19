@@ -4438,7 +4438,28 @@
           "post_push_check_failure_step": "test -z \"$(git status --porcelain)\"",
           "post_push_check_failure_detail": "The git push succeeded (6be9e19..dfde545 HEAD -> main); the following final clean-worktree assertion exited 1. The job log does not list the residual paths. The preceding python -m py_compile step can create untracked automation/**/__pycache__/*.pyc files; the recovery workflow now removes Python bytecode before the assertion."
         }
-      ]
+      ],
+      "post_run_repair": {
+        "status": "WORKFLOW_CLEANUP_FIX_COMMITTED_AND_REGRESSION_VALIDATED",
+        "historical_run_id": 44430718493,
+        "historical_run_conclusion": "failure",
+        "calculation_status": "PASS",
+        "output_manifest": "8/8 PASS",
+        "publication_status": "PUSHED",
+        "push_status": "SUCCESS",
+        "failed_step": "final git status cleanliness assertion after push",
+        "root_cause": "python -m py_compile can leave untracked automation/**/__pycache__/*.pyc files",
+        "workflow_fix_commit": "7292759097e59d37313073cc01c8f897da1fc99f",
+        "workflow_file": ".github/workflows/target-1251-e075-publication-recovery.yml",
+        "repair": "remove automation/**/__pycache__ directories and *.pyc files after push and before the final clean-worktree assertion",
+        "validation_run_id": 44433216921,
+        "validation_run_number": 167,
+        "validation_conclusion": "SUCCESS",
+        "validation_tests": 251,
+        "queue_contract": "E030-E076 PASS",
+        "e075_recomputed_after_fix": false,
+        "reason": "E075 calculation, verification, manifest, and publication had already succeeded; only the post-push cleanup assertion failed, so the workflow fix was regression-validated without duplicating the completed historical study."
+      }
     },
     {
       "id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -4677,6 +4698,30 @@
       "cause": "All 248 tests ran; three legacy queue assertions were stale after E075 v3 and E076 were appended. The failing assertions expected E075 v1/v2 paths and an E074-only queue tail. No research calculation or prospective-ledger job ran."
     },
     {
+      "run_id": 44425798790,
+      "run_number": 162,
+      "conclusion": "FAILURE",
+      "tests": 248,
+      "queue_contract": "NOT_REACHED_UNIT_TEST_FAILURE",
+      "source_commit_sha": "ee7ef7533447eba438e999bcd1330cdd54142aa1",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44425798790",
+      "validated_at_kst": "2026-11-19T09:03:14+09:00",
+      "cause": "Three stale assertions expected the E075 v1 runner/preregistration and the earlier E061-E069 ordering after the frozen E075 v3 lifecycle and later queue append. Unit tests ran, but queue-contract validation was not reached; no research or prospective-ledger job executed."
+    },
+    {
+      "run_id": 44426012246,
+      "run_number": 163,
+      "conclusion": "FAILURE",
+      "tests": 248,
+      "queue_contract": "NOT_REACHED_UNIT_TEST_FAILURE",
+      "source_commit_sha": "856c15f89f17ee45ca1805cd816f5832594c8649",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44426012246",
+      "validated_at_kst": "2026-11-19T09:05:03+09:00",
+      "cause": "Three stale assertions still expected the prior E075 v2/v3 preregistration pairing and E061-E069 ordering. Unit tests ran, but queue-contract validation was not reached; no research or prospective-ledger job executed."
+    },
+    {
       "run_id": 44429620850,
       "run_number": 165,
       "conclusion": "SUCCESS",
@@ -4687,18 +4732,42 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44429620850",
       "validated_at_kst": "2026-11-19T09:31:32+09:00",
       "note": "Post-repair validation succeeded; 250 unit tests passed and the E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; no duplicate historical studies were executed."
+    },
+    {
+      "run_id": 44429769002,
+      "run_number": 166,
+      "conclusion": "SUCCESS",
+      "tests": 250,
+      "queue_contract": "E030-E076 PASS",
+      "source_commit_sha": "871c7ea437d90e650b291d40b6490bc74e3df059",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44429769002",
+      "validated_at_kst": "2026-11-19T09:32:37+09:00",
+      "note": "Validation succeeded; 250 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; no duplicate historical studies were executed."
+    },
+    {
+      "run_id": 44433216921,
+      "run_number": 167,
+      "conclusion": "SUCCESS",
+      "tests": 251,
+      "queue_contract": "E030-E076 PASS",
+      "source_commit_sha": "7292759097e59d37313073cc01c8f897da1fc99f",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44433216921",
+      "validated_at_kst": "2026-11-19T09:58:17+09:00",
+      "note": "Post-fix validation succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; no duplicate historical studies were executed."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44429620850,
-    "run_number": 165,
+    "run_id": 44433216921,
+    "run_number": 167,
     "conclusion": "SUCCESS",
-    "tests": 250,
+    "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "792d684d0d1ca38266cf1bf088b00829eca09218",
+    "source_commit_sha": "7292759097e59d37313073cc01c8f897da1fc99f",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44429620850",
-    "validated_at_kst": "2026-11-19T09:31:32+09:00",
-    "note": "Post-repair validation succeeded; 250 unit tests passed and the E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; no duplicate historical studies were executed."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44433216921",
+    "validated_at_kst": "2026-11-19T09:58:17+09:00",
+    "note": "Post-fix validation succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by workflow conditions; no duplicate historical studies were executed."
   }
 }

@@ -90,3 +90,17 @@ E076은 역사 추천 오류를 분류한 진단이며 구매 적격성을 부�
 
 - [연합뉴스, 2026-11-14 20:49](https://www.yna.co.kr/view/AKR20261114047000002)
 - [LottoLottery 1250회 결과](https://www.lottolottery.co.kr/results/1250)
+
+
+## 후속 정정 — E075 완료 및 검증 이력 갱신 (2026-11-19 10:18 KST)
+
+위의 E075 실행 대기 문구는 아래 완료 기록으로 대체한다.
+
+- E075 v3는 Actions #44430718493에서 실제 계산 완료. cutoff 1250, 평가 401~1250회(850 targets), 버전별 geometry-matched random 102,000개, 50-target block 17개, bootstrap 4,000회.
+- 계산 검증 PASS, manifest 8/8 PASS, 학습 cutoff 위반 0, 미래 데이터 누수 0, 미래 예측 0, 포트폴리오/랜덤 geometry 위반 0.
+- legacy와 corrected 모두 역사적 STRICT_FAIL. max_hits Δ=-0.022492, any2 Δ=-0.007917, any3 Δ=-0.012531, union coverage Δ=-0.016471. any2 양수 블록은 8/17(47.06%)으로 65% 기준 미달. STRICT_PASS_READY와 구매번호는 생성되지 않았다.
+- 해당 Actions 전체 결론이 FAILURE였던 원인은 push 이후 마지막 clean-worktree 검사뿐이다. 결과 파일 commit/push는 성공했다. `python -m py_compile`이 남길 수 있는 `__pycache__/*.pyc`를 push 뒤 최종 검사 전에 삭제하도록 workflow를 수정했고, 수정 커밋은 [7292759](https://github.com/jiae-jeong/lotto-data/commit/7292759097e59d37313073cc01c8f897da1fc99f)이다.
+- 후속 검증 #44433216921(#167)은 251개 테스트와 E030~E076 queue contract를 통과했다. 연구 및 prospective-ledger job은 조건에 따라 SKIPPED였고, 이미 완료된 E075를 중복 재계산하지 않았다.
+- Orthogonal validation #162~#164의 실패는 E075 v3/E076 추가 뒤 남아 있던 과거 queue assertion 3건 때문이었다. #165, #166, #167은 각각 250, 250, 251개 테스트와 E030~E076 contract를 통과했다. 상세 이력은 `automation/research_queue_v2.json`에 기록했다.
+
+DAILY MASTER #120은 cutoff 1250에서 B 1,050 targets/8,400 predictions, 랜덤 1,050,000건, 누수 0건, V5 manifest 14/14 PASS로 완료했지만 Legacy A/C/Contrarian 원본과 실제 구매 closed-loop 증빙이 없어 PARTIAL을 유지한다. E075는 구현 일치성 교정이고 E076은 과거 추천 artifact 6개의 역사 진단이므로 둘 다 독립 신호나 prospective confirmation이 아니다.
