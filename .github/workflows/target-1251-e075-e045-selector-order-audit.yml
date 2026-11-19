@@ -168,10 +168,10 @@ jobs:
           out = Path("analysis") / os.environ["RUN_DATE"] / os.environ["RUN_ID"] / "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1"
           report_path = out / "REPORT.md"
           report = report_path.read_text(encoding="utf-8")
-          report, n1 = re.subn(r"(downstream pool-content differences after earlier line selections: \\d+)/1700", r"\\1/2100 (two later-role comparisons per 1,050 warmup-plus-scored targets)", report)
-          report, n2 = re.subn(r"(Targets with one or more changed lines: \\d+)/850", r"\\1/1050 (warmup-plus-scored selector targets; outcome metrics use 850 targets)", report)
-          report, n3 = re.subn(r"(Legacy selected-ticket adjacency-order mismatches: \\d+)", r"\\1/3150 selector decisions", report)
-          report, n4 = re.subn(r"(Changed line assignments: \\d+)", r"\\1/3150 selector decisions", report)
+          report, n1 = re.subn(r"(downstream pool-content differences after earlier line selections: \d+)/1700", r"\1/2100 (two later-role comparisons per 1,050 warmup-plus-scored targets)", report)
+          report, n2 = re.subn(r"(Targets with one or more changed lines: \d+)/850", r"\1/1050 (warmup-plus-scored selector targets; outcome metrics use 850 targets)", report)
+          report, n3 = re.subn(r"(Legacy selected-ticket adjacency-order mismatches: \d+)", r"\1/3150 selector decisions", report)
+          report, n4 = re.subn(r"(Changed line assignments: \d+)", r"\1/3150 selector decisions", report)
           assert n1 == 1 and n2 == 1 and n3 == 1 and n4 == 1, (n1,n2,n3,n4)
           report_path.write_text(report, encoding="utf-8")
           manifest_path = out / "SHA256_MANIFEST.csv"
