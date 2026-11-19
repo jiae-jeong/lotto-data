@@ -83,3 +83,10 @@ E076은 역사 추천 오류를 분류한 진단이며 구매 적격성을 부�
 1. E075 v3 dedicated workflow의 실제 완료 여부와 결과/manifest를 확인하고 legacy/corrected를 별도로 감사한다.
 2. E046 design-only power 결과를 바탕으로 prospective confirmation minimum/completion rule의 비구속 정책안을 검토하되, 승인 전에는 채택하지 않는다.
 3. 1249 사전 봉인 원본은 GitHub와 검색 가능한 원본에서 계속 확인하되, 없으면 NOT FOUND를 유지하고 재구성하지 않는다.
+
+## 최신 회차 교차확인
+
+1250회(2026-11-14) 결과는 연합뉴스의 동행복권 발표 인용 보도와 별도 결과 조회 자료에서 교차 확인했다. 두 자료 모두 동일한 1250회 결과와 보너스 번호를 표시한다. GitHub 원자료의 마지막 회차 및 cutoff 1250과 일치하며, 11월 19일 현재 1251회 추첨 전이므로 데이터 추가는 없다.
+
+- [연합뉴스, 2026-11-14 20:49](https://www.yna.co.kr/view/AKR20261114047000002)
+- [LottoLottery 1250회 결과](https://www.lottolottery.co.kr/results/1250)
