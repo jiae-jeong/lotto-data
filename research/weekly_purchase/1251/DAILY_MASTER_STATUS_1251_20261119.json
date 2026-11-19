@@ -10,7 +10,8 @@
     "Searched preserved pre-draw recommendation artifacts and error notes before computation; found separate preserved versions for 1245-1248; 1249 sealed pre-draw original remains NOT FOUND and was not reconstructed.",
     "Verified canonical data blob, SHA-256, 1,250 contiguous rows, valid six-number main draws, and bonus separation.",
     "E076 preregistered and computed six preserved recommendation artifacts across four contaminated live-history rounds; candidate-union misses and allocator concentration failures were reported separately.",
-    "E076 outputs and UTF-8 SHA-256 manifest committed; queue updated with execution result."
+    "E076 outputs and UTF-8 SHA-256 manifest committed; queue updated with execution result.",
+    "DAILY MASTER #120 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets), 1,050,000 matched random portfolios, successor A_v2/C_v2/Contrarian_v2 diagnostics, leakage checks, and 14-file SHA-256 manifest all passed; status remains PARTIAL because legacy A/C/Contrarian originals and closed-loop purchase evidence remain missing."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -37,9 +38,8 @@
     "1251 policy still requires exactly three lines of six numbers and the unchanged strict gate."
   ],
   "not_recomputed_today": [
-    "Full B-model walk-forward and legacy A/C/contrarian model reruns; no new draw data and no reason to duplicate the latest verified 2026-11-18 scorecards.",
-    "Full frequency/pair/triple signal scorecards; existing validated status remains unchanged.",
-    "No 1249 original sealed recommendation or verified purchase receipt was available."
+    "Legacy A/C/Contrarian original-model full walk-forward remains unexecuted because the original model sources are not recovered. The A_v2/C_v2/Contrarian_v2 successor diagnostics ran for 1,050 targets but are not substitutes for the legacy originals.",
+    "Prospective confirmation minimum target count and completion rule remain unspecified."
   ],
   "pending_work": [
     "E075 v3 dedicated workflow remains PREREGISTERED_PENDING_DEDICATED_WORKFLOW; no final v3 result/manifest has been committed in the latest visible repository state.",
@@ -88,5 +88,41 @@
     "agreement": "Both sources agree with the GitHub canonical data for round 1250.",
     "new_draw_after_cutoff_as_of": "2026-11-19",
     "status": "CROSS_CHECK_PASS"
-  }
+  },
+  "daily_master_run": {
+    "run_id": 44429869133,
+    "run_number": 120,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44429869133",
+    "status": "SUCCESS",
+    "completed_at_utc": "2026-11-19T00:37:17Z",
+    "result_path": "analysis/2026-11-19/MASTER_FULL_V5_003708_377799",
+    "report_path": "analysis/2026-11-19/MASTER_FULL_V5_003708_377799/REPORT.md",
+    "verification_path": "analysis/2026-11-19/MASTER_FULL_V5_003708_377799/VERIFICATION.json",
+    "completion_path": "analysis/2026-11-19/MASTER_FULL_V5_003708_377799/COMPLETION.json",
+    "manifest_entries": 14,
+    "manifest_status": "PASS",
+    "data_cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "fresh_cumulative_stats": true,
+    "B_full_walkforward": true,
+    "B_targets": 1050,
+    "fresh_random_baseline": true,
+    "random_portfolios": 1050000,
+    "no_future_leakage": true,
+    "legacy_model_sources_recovered": false,
+    "A_full_walkforward": false,
+    "C_full_walkforward": false,
+    "contrarian_full_walkforward": false,
+    "compute_status": "COMPUTE_PARTIAL",
+    "protocol_status": "PROTOCOL_PARTIAL",
+    "study_status": "PARTIAL"
+  },
+  "B_full_walkforward_today": true,
+  "B_walkforward_targets_today": 1050,
+  "random_baseline_today": true,
+  "random_baseline_portfolios_today": 1050000,
+  "fresh_cumulative_stats_today": true,
+  "no_future_leakage_today": true,
+  "master_manifest_entries_today": 14,
+  "master_manifest_status_today": "PASS"
 }
