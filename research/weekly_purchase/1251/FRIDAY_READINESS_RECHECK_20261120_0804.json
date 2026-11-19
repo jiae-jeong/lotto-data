@@ -3,20 +3,6 @@
   "date_kst": "2026-11-20",
   "audited_at_kst": "2026-11-20T08:04:02+09:00",
   "classification": "MAINTENANCE_RECHECK_NOT_NEW_MODEL_STUDY",
-  "daily_new_study": {
-    "path": "analysis/2026-11-20/MASTER_FULL_V5_152830_935567",
-    "report_blob_sha": "886fe68f4ed1be92e4e1f2e2f54d6e28b864c993",
-    "verification_blob_sha": "8c57867083741525d680625557835f3b2fe5c0e9",
-    "status": "PARTIAL",
-    "targets": 1050,
-    "successor_prediction_records": 3150,
-    "successor_leakage_failures": 0,
-    "five_ticket_random_bundles": 1050000,
-    "five_ticket_policy_classification": "RESEARCH_ONLY_NOT_ELIGIBLE_FOR_TARGET_1251_THREE_LINE_PURCHASE",
-    "manifest_entries": 14,
-    "manifest_status": "PASS",
-    "legacy_A_C_contrarian_sources": "NOT_FOUND_NOT_EXECUTED"
-  },
   "source_integrity": {
     "protocol_blob_sha": "f770eb2215eb1acfb50ac1d79273c62d9b142084",
     "agents_blob_sha": "796f8a4367b6a4f64cbd4ec5615de75c992c7e0f",
@@ -228,5 +214,45 @@
     "After target 1251 is drawn, append its result only after independent source verification and evaluate the already-frozen prospective artifact without retroactive edits.",
     "Recover explicit purchase confirmation or receipt evidence before treating historical recommendations as actual purchases.",
     "Recover the original legacy A/C/Contrarian source implementations; successor_v2 results are not substitutes."
-  ]
+  ],
+  "daily_master_run": {
+    "path": "analysis/2026-11-20/MASTER_FULL_V5_152830_935567",
+    "report_blob_sha": "886fe68f4ed1be92e4e1f2e2f54d6e28b864c993",
+    "verification_blob_sha": "8c57867083741525d680625557835f3b2fe5c0e9",
+    "status": "PARTIAL",
+    "targets": 1050,
+    "successor_prediction_records": 3150,
+    "successor_leakage_failures": 0,
+    "five_ticket_random_bundles": 1050000,
+    "five_ticket_policy_classification": "RESEARCH_ONLY_NOT_ELIGIBLE_FOR_TARGET_1251_THREE_LINE_PURCHASE",
+    "manifest_entries": 14,
+    "manifest_status": "PASS",
+    "legacy_A_C_contrarian_sources": "NOT_FOUND_NOT_EXECUTED"
+  },
+  "novelty_check": {
+    "comparison": "2026-11-19 MASTER_FULL_V5_072004_661805 vs 2026-11-20 MASTER_FULL_V5_152830_935567",
+    "candidate_recall_scorecard": {
+      "previous_blob_sha": "88b74ecca81a2e376074e27880a6a5634b12daa0",
+      "current_blob_sha": "88b74ecca81a2e376074e27880a6a5634b12daa0",
+      "rows": 30,
+      "mean_recall_cells_changed": 0,
+      "classification": "IDENTICAL_RERUN"
+    },
+    "successor_ablation": {
+      "previous_blob_sha": "70e2150ea6141fe3f79753355e1a02ff7766450c",
+      "current_blob_sha": "70e2150ea6141fe3f79753355e1a02ff7766450c",
+      "rows": 12,
+      "classification": "IDENTICAL_RERUN"
+    },
+    "successor_predictions": {
+      "previous_model_scorecard_blob_sha": "7226344f858f7c5919176571fdfb5e7f2262e2a3",
+      "current_model_scorecard_blob_sha": "b27629e7430bdab565b5610b2ee39d9c874a68bb",
+      "observed_model_means_and_hit_counts": "IDENTICAL",
+      "previous_random_mean": 0.7997428571428572,
+      "current_random_mean": 0.8015295238095238,
+      "classification": "SAME_MODEL_PREDICTIONS_NEW_RANDOM_SEED_BASELINE"
+    },
+    "interpretation": "The 2026-11-20 MASTER_FULL_V5 output is a successful rerun with refreshed random bundles, not a new independent hypothesis or model result. It must not be presented as new learning. The distinct new work in this run is the historical review-index reconciliation."
+  },
+  "new_research_contribution": "analysis/2026-11-20/HISTORICAL_REVIEW_INDEX_RECONCILIATION_v1"
 }
