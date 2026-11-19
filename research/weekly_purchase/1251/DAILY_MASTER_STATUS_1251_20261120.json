@@ -1,0 +1,156 @@
+{
+  "date_kst": "2026-11-20",
+  "target_round": 1251,
+  "data_cutoff": 1250,
+  "data_rows": 1250,
+  "latest_research_cutoff": 1250,
+  "cutoff_match": true,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "data_git_blob_sha": "66431d711919f179e4b1349e2f7295c68a8735e",
+  "daily_master_run": {
+    "run_id": 44553927132,
+    "run_number": 124,
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44553927132",
+    "status": "SUCCESS",
+    "completed_at_utc": "2026-11-19T15:28:48Z",
+    "result_path": "analysis/2026-11-20/MASTER_FULL_V5_152830_935567",
+    "base_v4_path": "analysis/2026-11-20/MASTER_FULL_V4_152156_455657",
+    "v4_manifest_entries": 19,
+    "v4_manifest_status": "PASS",
+    "v5_manifest_entries": 14,
+    "v5_manifest_status": "PASS",
+    "fresh_cumulative_stats": true,
+    "B_full_walkforward": true,
+    "B_targets": 1050,
+    "B_prediction_records": 8400,
+    "fresh_random_baseline": true,
+    "random_portfolios": 1050000,
+    "no_future_leakage": true,
+    "successor_A_v2_targets": 1050,
+    "successor_C_v2_targets": 1050,
+    "successor_contrarian_v2_targets": 1050,
+    "compute_status": "COMPUTE_PARTIAL",
+    "protocol_status": "PROTOCOL_PARTIAL",
+    "study_status": "PARTIAL"
+  },
+  "candidate_recall": {
+    "status": "MEASURED_CUTOFF_SAFE_NOT_AUTO_PROMOTED",
+    "data_cutoff": 1250,
+    "targets": 1050,
+    "matched_random_sets_total": 210000,
+    "no_future_leakage": true,
+    "published": true,
+    "latest_scorecard_sha": "88b74ecca81a2e376074e27880a6a5634b12daa0",
+    "note": "Candidate-stage diagnostic only; no automatic model promotion."
+  },
+  "strict_readiness": {
+    "status": "STRICT_FAIL",
+    "validated_models": [],
+    "strict_model_validation_pass": false,
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "unevaluated_gates": [
+      "prospective_confirmation"
+    ],
+    "ready_file_exists": false,
+    "final_purchase_lines_generated": false,
+    "random_fallback_allowed": false,
+    "freeze_or_seal_created": false,
+    "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
+  },
+  "research_findings": {
+    "single_ticket_B_combined_equal_rank": {
+      "targets": 1050,
+      "observed_mean_hits": 0.7657142857142857,
+      "matched_random_mean_hits": 0.8015295238095238,
+      "delta_mean_hits": -0.03581523809523812
+    },
+    "best_positive_single_ticket_examples_not_promoted": {
+      "pair_association_delta_mean_hits": 0.004184761904761913,
+      "triple_association_delta_mean_hits": 0.014285714285714235,
+      "note": "All 11 model edge_pass values are false; validated_models is empty."
+    },
+    "pair_triple_multiple_testing": {
+      "pair_universe": 990,
+      "pair_q_below_005": 0,
+      "triple_universe": 14190,
+      "triple_q_below_005": 0
+    },
+    "five_ticket_diagnostic": {
+      "policy_version": "RESEARCH_ONLY_FIVE_TICKET_V1",
+      "targets": 1050,
+      "random_bundles": 1050000,
+      "max_hits_delta": -0.06598380952380967,
+      "any2_delta": -0.043920952380952394,
+      "any3_delta": -0.019306666666666666,
+      "winning_union_coverage_delta": -0.21948095238095222,
+      "research_only": true,
+      "promotion_to_weekly_policy": false
+    }
+  },
+  "queue_status": {
+    "registered_tasks": 56,
+    "unknown_tasks": 0,
+    "unfinished_target_1251_three_line_eligible_tasks": 0,
+    "pending_nonapplicable_tasks": [
+      "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1 (five-line research)",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2 (five-line research)"
+    ],
+    "latest_validation": {
+      "run_number": 178,
+      "run_id": 44543887535,
+      "status": "SUCCESS",
+      "unit_tests": 251,
+      "queue_contract": "E030-E076 PASS",
+      "research_job": "SKIPPED",
+      "prospective_ledger_job": "SKIPPED"
+    },
+    "next_step": "No new E077 or post-hoc variants created. A new 1251 three-line axis requires a distinct preregistered hypothesis or new source data."
+  },
+  "publication_recovery": {
+    "prior_run_id": 44543882888,
+    "prior_run_number": 123,
+    "prior_run_conclusion": "FAILURE",
+    "failure_stage": "Preserve validated outputs",
+    "failure_cause": "Concurrent daily-master and candidate-recall workflows wrote different generated_kst timestamps to the shared CANDIDATE_RECALL_STATUS.json, causing a rebase conflict after computation and manifest verification.",
+    "preserved_actions_artifact_id": 14540436494,
+    "artifact_v4_manifest_entries_rechecked": 19,
+    "artifact_v5_manifest_entries_rechecked": 14,
+    "artifact_manifest_bad_files": 0,
+    "repair_commit": "c34634e800d5f87ae8d5eb64ecf5b17a2e07f413",
+    "repair": "Replaced nondeterministic generation timestamp with generated_date_kst, making same-date candidate-recall publication deterministic.",
+    "candidate_recall_run_id": 44553927094,
+    "candidate_recall_run_status": "SUCCESS",
+    "recovery_master_run_id": 44553927132,
+    "recovery_master_run_status": "SUCCESS",
+    "recovery_commit": "6acec48b95c64a4de9ebd5172b12a5095574423a"
+  },
+  "external_crosscheck": {
+    "cutoff": 1250,
+    "status": "PASS",
+    "sources": [
+      "4th.kr",
+      "Topstarnews"
+    ],
+    "direct_official_api_retrieval": "NOT_DIRECTLY_RETRIEVED",
+    "note": "Two independent published reports agree with the canonical row; no direct official API fetch is claimed."
+  },
+  "protected_files": {
+    "AGENTS.md": "796f8a4367b6a4f64cbd4ec5615de75c992c7e0f",
+    "LOTTO_PROJECT_PROTOCOL.md": "f770eb2215eb1acfb50ac1d79273c62d9b142084",
+    "THREE_LINE_POLICY_1251_PLUS.json": "82def2dc955fcd0383e0983c04b84810a4685b5d",
+    "lotto_data.csv_git_blob": "66431d711919f179e4b1349e2f7295c68a8735e"
+  },
+  "user_decisions_required": [
+    "Prospective confirmation minimum target count and completion rule remain unspecified in the frozen policy.",
+    "No preregistered 1251 three-line independent research axis remains. Do not invent post-hoc variants; a new axis needs a distinct hypothesis or new data source."
+  ],
+  "no_purchase_output": true
+}
