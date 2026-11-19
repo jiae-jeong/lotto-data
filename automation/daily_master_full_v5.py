@@ -616,3 +616,5 @@ No candidate/recommendation/final lines generated.
 
 if __name__ == "__main__":
     main()
+
+# No-op recovery trigger: re-run the scheduled 2026-11-19 DAILY MASTER after no scheduled Actions run appeared.
