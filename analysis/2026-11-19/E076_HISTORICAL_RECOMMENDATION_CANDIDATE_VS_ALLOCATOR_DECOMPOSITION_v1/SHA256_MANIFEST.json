@@ -1,0 +1,18 @@
+{
+  "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+  "created_date_kst": "2026-11-19",
+  "files": {
+    "RESULTS.json": {
+      "sha256": "1f69de9bc289e0b46a60c9c764170317e2fc85843d2367f57f9f8bcfa8130745",
+      "characters": 8323
+    },
+    "LINE_HIT_DECOMPOSITION.csv": {
+      "sha256": "e030fe7368c98dc89bc73046fb2a259b4fe0989fb84a5f6b76aff0aae63879bd",
+      "characters": 967
+    },
+    "REPORT.md": {
+      "sha256": "7b0bcf3908c936f5858cd87cdbd0f35254b3bdd65736c07c391ae3a9edc04fb2",
+      "characters": 3914
+    }
+  }
+}
