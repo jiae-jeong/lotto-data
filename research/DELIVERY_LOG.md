@@ -75,3 +75,15 @@ This ledger records combinations displayed to the user, whether or not they were
 - SHA256 manifest 7/7 and Git blob manifest 8/8 were independently re-fetched and verified. No leakage, target mismatch, geometry violation, or candidate-union mismatch.
 - This is not independent predictive evidence or prospective confirmation. No candidate lines, STRICT_PASS_READY, freeze, seal, or purchase confirmation were created.
 - Detailed supplement: research/daily/2026-11-16_E060_SUPPLEMENT.md
+
+
+## Research run 2026-11-20 08:33 KST — target 1251 (no final purchase delivery)
+
+- Latest user policy is exactly **three lines** from target 1251 onward; historical five-line artifacts through target 1250 remain unchanged.
+- Target/cutoff: 1251 / 1250. Canonical `lotto_data.csv`: 1,250 contiguous rounds; SHA256 `7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2`; Git blob `66431d711919f179e4cb1349e2f7295c68a8735e`. Two secondary sources agree on round 1250; direct official API payload was not retrieved.
+- Readiness: `STRICT_FAIL`; `strict_portfolio_pass=false`; no validated models; failed gates: max_hits, any2, any3, winning_union_coverage, any2_positive_50_target_block_share. Prospective confirmation remains unevaluated because the frozen policy's minimum target count and completion rule are unspecified.
+- E075 corrected selector-order historical diagnostic (850 targets) also failed: corrected deltas vs exact disjoint-union18 null were max-hit -0.022492, any2 -0.007917, any3 -0.012531, union coverage -0.016471; adjusted CI lower bounds were all negative; any2-positive 50-target block share was 47.06% versus the unchanged 65% minimum. The corrected and legacy aggregate point metrics were identical. E075 is historical implementation-conformance evidence, not prospective confirmation.
+- E076 candidate-vs-allocator decomposition remains a six-artifact, four-round historical descriptive diagnostic only; it does not promote a model or allocator.
+- The 1251 prospective signal artifact is shadow-only and explicitly has `purchase_recommendation=false`; it is not a strict-passed portfolio.
+- Result: `NO_FINAL_PURCHASE_LINES_DELIVERED`. No candidate numbers, fallback numbers, or random numbers were displayed; no freeze/seal or purchase confirmation was created.
+- Existing Friday automation remains enabled. Attempted to update its stale five-line prompt and the daily research prompt to the three-line policy, but both updates were rejected with `too_many_active_automations` (plan limit 3). No schedule was changed and no automation was disabled. Repository MASTER/AGENTS already specify three lines from target 1251. Detailed audit: `research/weekly_purchase/1251/FRIDAY_DELIVERY_AUDIT_20261120_0833.json`.
