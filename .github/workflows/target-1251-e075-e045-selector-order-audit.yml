@@ -157,6 +157,32 @@ jobs:
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
           python -B automation/three_line_research_1251_e075_corrected_v2.py --date "$DATE" --run-id "$RUN_ID"
+      - name: Normalize warmup-inclusive selector diagnostic denominators
+        env:
+          RUN_DATE: ${{ steps.execute.outputs.date }}
+          RUN_ID: ${{ steps.execute.outputs.run_id }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, re, os
+          from pathlib import Path
+          out = Path("analysis") / os.environ["RUN_DATE"] / os.environ["RUN_ID"] / "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1"
+          report_path = out / "REPORT.md"
+          report = report_path.read_text(encoding="utf-8")
+          report, n1 = re.subn(r"(downstream pool-content differences after earlier line selections: \\d+)/1700", r"\\1/2100 (two later-role comparisons per 1,050 warmup-plus-scored targets)", report)
+          report, n2 = re.subn(r"(Targets with one or more changed lines: \\d+)/850", r"\\1/1050 (warmup-plus-scored selector targets; outcome metrics use 850 targets)", report)
+          report, n3 = re.subn(r"(Legacy selected-ticket adjacency-order mismatches: \\d+)", r"\\1/3150 selector decisions", report)
+          report, n4 = re.subn(r"(Changed line assignments: \\d+)", r"\\1/3150 selector decisions", report)
+          assert n1 == 1 and n2 == 1 and n3 == 1 and n4 == 1, (n1,n2,n3,n4)
+          report_path.write_text(report, encoding="utf-8")
+          manifest_path = out / "SHA256_MANIFEST.csv"
+          files = sorted((p for p in out.iterdir() if p.is_file() and p.name != manifest_path.name), key=lambda p:p.name)
+          rows = [{"path":p.name,"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"bytes":p.stat().st_size} for p in files]
+          with manifest_path.open("w",encoding="utf-8-sig",newline="") as f:
+              writer=csv.DictWriter(f,fieldnames=["path","sha256","bytes"])
+              writer.writeheader()
+              writer.writerows(rows)
+          print({"report_scope_normalized":True,"manifest_entries":len(rows)})
+          PY
       - name: Verify manifests, cutoff, leakage, and non-promotion
         env:
           RUN_DATE: ${{ steps.execute.outputs.date }}
