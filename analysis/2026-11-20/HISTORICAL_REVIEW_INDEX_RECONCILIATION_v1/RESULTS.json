@@ -1,0 +1,152 @@
+{
+  "study_id": "HISTORICAL_REVIEW_INDEX_RECONCILIATION_v1",
+  "date_kst": "2026-11-20",
+  "classification": "NEW_PROVENANCE_AND_FAILURE_DECOMPOSITION_DIAGNOSTIC_ONLY",
+  "historical_scope": "Rounds 1245-1246 only; both are contaminated live-history diagnostics, not clean holdouts and not prospective evidence.",
+  "method": "Read-only comparison of preserved pre-draw recommendation artifacts, original post-draw review notes, the canonical result rows through cutoff 1250, and the current structured historical closed-loop index. No model, weights, thresholds, candidate ranks, or purchase policy were changed.",
+  "sources": [
+    {
+      "path": "analysis/2026-10-11/ROUND_1245_REVIEW.md",
+      "blob_sha": "dfb98dfec172eacabd54eb80f40eab2690689db5",
+      "role": "original post-draw recommendation review"
+    },
+    {
+      "path": "research/prospective_v4/decisions/1245/PRIMARY_PURCHASE_DECISION_1245_V4.json",
+      "blob_sha": "1c20549451924bc864c4cbf438c5b48a83082a1c",
+      "role": "preserved pre-draw three-line source"
+    },
+    {
+      "path": "analysis/2026-10-14/E020_TAIL_DISTRIBUTION_DECOMPOSITION_v1/ERROR_NOTE_1245_AGGREGATE.csv",
+      "blob_sha": "0e1feb993d91c7c0e84ec0d32ba82c4af55f910b",
+      "role": "original model-level error-note aggregate"
+    },
+    {
+      "path": "analysis/2026-10-18/ROUND_1246_REVIEW.md",
+      "blob_sha": "3616aab5567215250acabcdcd2effcce829b9abf",
+      "role": "original post-draw purchase review"
+    },
+    {
+      "path": "research/prospective_v4/decisions/1246/FIRST_PRIZE_PURCHASE_1246_V2.json",
+      "blob_sha": "4d50304b7aa247317e23e122b4ac4747e7145c15",
+      "role": "preserved pre-draw five-line purchase design"
+    },
+    {
+      "path": "research/weekly_purchase/1246/FINAL_FIVE_LINES_1246_20261016.json",
+      "blob_sha": "4998f3239626de3f2c9c5939a3b2d88dbc1b7a2a",
+      "role": "separate preserved fallback five-line set"
+    },
+    {
+      "path": "research/weekly_purchase/1247/MODEL_VALIDATION_REVIEW_20261023.json",
+      "blob_sha": "039a4a9ed4468a10d78716770c3b93c0a65861c4",
+      "role": "model-validation review; not purchase confirmation"
+    },
+    {
+      "path": "analysis/2026-11-20/HISTORICAL_CLOSED_LOOP_STATUS.json",
+      "blob_sha": "c8d7cb84ac3db3f0cbe6f3d4bbb700cbc9980fd9",
+      "role": "current structured review/purchase index"
+    },
+    {
+      "path": "research/PURCHASE_CONFIRMATION_REGISTRY.json",
+      "blob_sha": "a6eadb56302487267d6cc5373f020361930a63d0",
+      "role": "canonical purchase confirmation registry"
+    },
+    {
+      "path": "lotto_data.csv",
+      "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+      "recorded_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "role": "canonical result source through round 1250"
+    }
+  ],
+  "calculations": {
+    "round_1245": {
+      "preserved_pre_draw_source": "PRIMARY_PURCHASE_DECISION_1245_V4",
+      "line_count": 3,
+      "line_hit_counts": [
+        0,
+        0,
+        1
+      ],
+      "max_hit": 1,
+      "any2": false,
+      "any3": false,
+      "any4": false,
+      "winning_numbers_in_union": 1,
+      "candidate_recall": 0.16666666666666666,
+      "decomposition": "Candidate-stage failure: only one winning number survived the preserved 18-slot portfolio union; any2+ was impossible before considering within-line allocation."
+    },
+    "round_1246_v2": {
+      "preserved_pre_draw_source": "FIRST_PRIZE_PURCHASE_1246_V2",
+      "line_count": 5,
+      "line_hit_counts": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "max_hit": 1,
+      "any2": false,
+      "any3": false,
+      "any4": false,
+      "winning_numbers_in_union": 2,
+      "candidate_recall": 0.3333333333333333,
+      "decomposition": "Candidate-stage recall was two of six; no line concentrated those two into a 2+ result."
+    },
+    "round_1246_fallback": {
+      "preserved_pre_draw_source": "FINAL_FIVE_LINES_1246_20261016",
+      "line_count": 5,
+      "line_hit_counts": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "max_hit": 1,
+      "any2": false,
+      "any3": false,
+      "any4": false,
+      "winning_numbers_in_union": 4,
+      "candidate_recall": 0.6666666666666666,
+      "decomposition": "Clear allocator/assembly failure on this diagnostic: four winning numbers were present in the union, but every line had exactly one hit. This is one historical case, not evidence that a particular allocator is generally superior."
+    }
+  },
+  "structured_index_reconciliation": {
+    "current_reviews_array_length": 0,
+    "current_latest_completed_review": null,
+    "existing_preserved_post_draw_reviews": [
+      "analysis/2026-10-11/ROUND_1245_REVIEW.md",
+      "analysis/2026-10-18/ROUND_1246_REVIEW.md"
+    ],
+    "existing_error_note": "analysis/2026-10-14/E020_TAIL_DISTRIBUTION_DECOMPOSITION_v1/ERROR_NOTE_1245_AGGREGATE.csv",
+    "finding": "The structured historical closed-loop status does not index the two preserved post-draw review notes or the 1245 error-note aggregate as review records. This is an inventory/scope gap; it does not invalidate the purchase-confirmation exclusion.",
+    "recommended_schema_separation": [
+      "recommendation_review_inventory: every preserved pre-draw recommendation plus its post-draw review, whether or not purchased",
+      "verified_actual_purchase_inventory: only user-confirmed purchases or receipt-backed purchases"
+    ]
+  },
+  "purchase_provenance": {
+    "confirmed_purchase_count": 0,
+    "unresolved_conflict_rounds": [
+      1246,
+      1247,
+      1248
+    ],
+    "receipts_found": false,
+    "treatment": "All reviewed sets remain preserved recommendations/designs, not verified actual purchases. Do not infer purchase from filenames or review wording."
+  },
+  "conclusions": [
+    "1245 illustrates candidate recall failure before allocation.",
+    "1246 fallback illustrates candidate numbers surviving the union but being dispersed across lines.",
+    "The 1245 and 1246 review notes exist but are not represented in the current structured review index.",
+    "The review-index gap must be fixed without converting unconfirmed recommendations into purchase records."
+  ],
+  "promotion_status": "NO_MODEL_OR_POLICY_PROMOTION",
+  "freeze_or_seal_created": false,
+  "recommendation_or_candidate_lines_generated": false,
+  "next_actions": [
+    "Add a separate recommendation-review inventory in a future audited master run, preserving the existing actual-purchase registry unchanged.",
+    "Retain 1246/1247/1248 source conflicts as unresolved until receipt or explicit confirmation exists.",
+    "Do not use 1245-1248 diagnostic outcomes to tune 1251 thresholds or claim prospective performance."
+  ]
+}
