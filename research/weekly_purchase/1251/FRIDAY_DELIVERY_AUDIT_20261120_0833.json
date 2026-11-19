@@ -1,0 +1,125 @@
+{
+  "audit_id": "FRIDAY_DELIVERY_AUDIT_20261120_0833",
+  "audited_at_kst": "2026-11-20T08:33:36+09:00",
+  "target_round": 1251,
+  "target_draw_date": "2026-11-21",
+  "active_purchase_policy": {
+    "id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+    "lines": 3,
+    "numbers_per_line": 6,
+    "source": "research/weekly_purchase/1251/THREE_LINE_POLICY_CHANGE_2026-11-13.md",
+    "applies_from_target": 1251,
+    "prior_five_line_records_preserved": true
+  },
+  "data": {
+    "source": "lotto_data.csv",
+    "cutoff": 1250,
+    "rows": 1250,
+    "first_round": 1,
+    "last_round": 1250,
+    "contiguous": true,
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "integrity_status": "MATCHES_DAILY_MASTER_AND_0804_RECHECK",
+    "external_crosscheck": "Two secondary sources agree on round 1250; direct official API payload not retrieved."
+  },
+  "research": {
+    "daily_master_run_id": 44553927132,
+    "daily_master_workflow_status": "SUCCESS",
+    "compute_status": "COMPUTE_PARTIAL",
+    "protocol_status": "PROTOCOL_PARTIAL",
+    "study_status": "PARTIAL",
+    "b_walkforward_targets": 1050,
+    "b_prediction_records": 8400,
+    "random_portfolios": 1050000,
+    "candidate_recall_targets": 1050,
+    "candidate_recall_matched_random_sets": 210000,
+    "candidate_recall_promotion": "NONE; point deltas small and scorecard has no confidence intervals.",
+    "completed_relevant_diagnostics": [
+      {
+        "id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+        "evidence_class": "HISTORICAL_IMPLEMENTATION_CONFORMANCE_CORRECTION_NOT_INDEPENDENT_SIGNAL_OR_PROSPECTIVE_CONFIRMATION",
+        "targets": 850,
+        "legacy_and_corrected_historical_gate": "FAIL",
+        "corrected_delta_vs_exact_null": {
+          "max_hits": -0.02249154269040215,
+          "any2": -0.007917419739514445,
+          "any3": -0.012531377734407339,
+          "winning_union_coverage": -0.01647058823529403
+        },
+        "corrected_adjusted_ci_lower_bounds": {
+          "max_hits": -0.08602095445510803,
+          "any2": -0.04556447856304386,
+          "any3": -0.03606078949911322,
+          "winning_union_coverage": -0.11882352941176462
+        },
+        "any2_positive_50_target_block_share": 0.47058823529411764,
+        "required_block_share": 0.65,
+        "corrected_minus_legacy_point_deltas_all_zero": true,
+        "targets_with_changed_lines": 5,
+        "changed_line_count": 10,
+        "strict_pass_ready": false,
+        "prospective_confirmation_status": "UNSPECIFIED_IN_POLICY"
+      },
+      {
+        "id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION",
+        "artifacts": 6,
+        "target_rounds": 4,
+        "two_plus_candidate_opportunity_artifacts": 5,
+        "two_plus_realized_artifacts": 2,
+        "three_plus_candidate_opportunity_artifacts": 4,
+        "three_plus_realized_artifacts": 2,
+        "evidence_class": "SMALL_HISTORICAL_POST_HOC_DIAGNOSTIC_ONLY",
+        "promotion": false
+      }
+    ],
+    "remaining_registered_target_1251_three_line_tasks": 0,
+    "posthoc_variants_created": false
+  },
+  "strict_readiness": {
+    "status": "STRICT_FAIL",
+    "strict_portfolio_pass": false,
+    "strict_pass_ready": false,
+    "validated_models": [],
+    "failed_gates": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage",
+      "any2_positive_50_target_block_share"
+    ],
+    "unevaluated_gates": [
+      "prospective_confirmation"
+    ],
+    "final_purchase_lines_generated": false,
+    "freeze_or_seal_created": false,
+    "fallback_allowed": false,
+    "no_future_leakage": true
+  },
+  "prospective": {
+    "frozen_shadow_signal_exists": true,
+    "path": "analysis/prospective/E030/FROZEN_SIGNALS_1251.json",
+    "status": "FROZEN_PROSPECTIVE_SHADOW_ONLY",
+    "purchase_recommendation": false,
+    "note": "This shadow-only signal freeze is not a strict-passed three-line purchase policy."
+  },
+  "delivery": {
+    "status": "NO_FINAL_PURCHASE_LINES_DELIVERED",
+    "lines_displayed": 0,
+    "no_random_or_fallback_used": true,
+    "purchase_confirmation": "NOT_APPLICABLE",
+    "no_freeze_or_seal_created": true
+  },
+  "automation_configuration": {
+    "friday_task_id": "6ab7d55c427881919c4fba9f0c727762",
+    "friday_task_enabled": true,
+    "prompt_still_contains_legacy_five_line_instruction": true,
+    "attempted_update_to_three_line_policy": "BLOCKED",
+    "update_error_code": "too_many_active_automations",
+    "plan_limit": 3,
+    "daily_task_update": "BLOCKED_BY_SAME_PLAN_LIMIT",
+    "schedule_changed": false,
+    "task_disabled": false,
+    "note": "Repository policy and this run follow the user's three-line instruction. The saved automation prompt could not be updated because the automation service rejected edits at the three-task plan limit."
+  }
+}
