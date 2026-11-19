@@ -7,19 +7,66 @@
       "id": "E010_FAMILY_DECORRELATION_v1",
       "kind": "family",
       "question": "Do B hybrid/family duplicate votes dilute an ensemble, and does pre-target ticket geometry provide a better weighting control?",
-      "novelty": "Controlled B-ticket ensemble ablation: remove frequency-gap hybrid, merge semantic relationship family, or weight current forecast overlap. Prior V3 used different batch001 rank/portfolio models; prior dynamic study selected single B components."
+      "novelty": "Controlled B-ticket ensemble ablation: remove frequency-gap hybrid, merge semantic relationship family, or weight current forecast overlap. Prior V3 used different batch001 rank/portfolio models; prior dynamic study selected single B components.",
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E010_FAMILY_DECORRELATION_v1",
+        "evidence_class": "POST_HOC_EXPLORATORY",
+        "data_cutoff": 1245,
+        "target_count": 645,
+        "executed_cases": 1935,
+        "verification_status": "PASS",
+        "future_predictions": 0,
+        "positive_adjusted_comparisons": 0,
+        "result_path": "analysis/2026-10-12/E010_FAMILY_DECORRELATION_v1",
+        "completion_path": "analysis/2026-10-12/E010_FAMILY_DECORRELATION_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-12/E010_FAMILY_DECORRELATION_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-12/E010_FAMILY_DECORRELATION_v1/REPORT.md"
+      }
     },
     {
       "id": "E011_NESTED_3_4_TAIL_v1",
       "kind": "tail",
       "question": "Does nested 3+ or 4+ selection of overlap-weighted ensembles improve the high-hit tail compared with fixed equal weighting?",
-      "novelty": "Select ensemble redundancy exponents, not component identity. Four pre-frozen exponents are evaluated on 200 preceding out-of-sample targets; 3+/4+ objectives remain separate from prior mean/2+ selector research."
+      "novelty": "Select ensemble redundancy exponents, not component identity. Four pre-frozen exponents are evaluated on 200 preceding out-of-sample targets; 3+/4+ objectives remain separate from prior mean/2+ selector research.",
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E011_NESTED_3_4_TAIL_v1",
+        "evidence_class": "POST_HOC_EXPLORATORY",
+        "data_cutoff": 1245,
+        "target_count": 645,
+        "executed_cases": 1290,
+        "verification_status": "PASS",
+        "future_predictions": 0,
+        "positive_adjusted_comparisons": 0,
+        "result_path": "analysis/2026-10-12/E011_NESTED_3_4_TAIL_v1",
+        "completion_path": "analysis/2026-10-12/E011_NESTED_3_4_TAIL_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-12/E011_NESTED_3_4_TAIL_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-12/E011_NESTED_3_4_TAIL_v1/REPORT.md"
+      }
     },
     {
       "id": "E012_EXACT_TAIL_POWER_v1",
       "kind": "power",
       "question": "How much confirmatory data is required for 3+/4+ effect sizes at a prespecified family error rate?",
-      "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback."
+      "novelty": "Exact high-tail power at 1.5x/2x uniform rates and several sample sizes; a study of verification sufficiency, not another Monte Carlo baseline or frequency report. Standard-library independent fallback.",
+      "execution_status": "EXECUTED_ANALYTIC_POWER_PLANNING_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E012_EXACT_TAIL_POWER_v1",
+        "evidence_class": "ANALYTIC_HYPOTHETICAL_EFFECTS",
+        "data_cutoff": null,
+        "executed_cases": 24,
+        "exact_binomial_cases": 24,
+        "verification_status": "PASS",
+        "future_predictions": 0,
+        "result_path": "analysis/2026-10-13/E012_EXACT_TAIL_POWER_v1",
+        "completion_path": "analysis/2026-10-13/E012_EXACT_TAIL_POWER_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-13/E012_EXACT_TAIL_POWER_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-13/E012_EXACT_TAIL_POWER_v1/REPORT.md"
+      }
     },
     {
       "id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
@@ -78,6 +125,22 @@
         ],
         "ablation": "drop each component once; equal ticket weights",
         "random_repeats": 0
+      },
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+        "evidence_class": "POST_HOC_EXPLORATORY",
+        "data_cutoff": 1245,
+        "target_count": 645,
+        "executed_cases": 5805,
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "result_path": "analysis/2026-10-13/E013_COMPONENT_LEAVE_ONE_OUT_v1",
+        "completion_path": "analysis/2026-10-13/E013_COMPONENT_LEAVE_ONE_OUT_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-13/E013_COMPONENT_LEAVE_ONE_OUT_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-13/E013_COMPONENT_LEAVE_ONE_OUT_v1/REPORT.md"
       }
     },
     {
@@ -139,6 +202,24 @@
         ],
         "regime_lookback": 200,
         "random_repeats": 100
+      },
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+        "evidence_class": "POST_HOC_EXPLORATORY",
+        "data_cutoff": 1245,
+        "target_count": 645,
+        "model_prediction_records": 5805,
+        "random_records": 64500,
+        "random_repeats_per_target": 100,
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "result_path": "analysis/2026-10-13/E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+        "completion_path": "analysis/2026-10-13/E014_MODEL_AGREEMENT_DISAGREEMENT_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-13/E014_MODEL_AGREEMENT_DISAGREEMENT_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-13/E014_MODEL_AGREEMENT_DISAGREEMENT_v1/REPORT.md"
       }
     },
     {
@@ -191,6 +272,22 @@
         "study_class": "empirical",
         "component_pair_count": 21,
         "ablation": "drop each unordered component pair; equal weights"
+      },
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+        "evidence_class": "POST_HOC_EXPLORATORY",
+        "data_cutoff": 1245,
+        "target_count": 645,
+        "executed_cases": 14835,
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "result_path": "analysis/2026-10-14/E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+        "completion_path": "analysis/2026-10-14/E015_TWO_COMPONENT_DROP_INTERACTION_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-14/E015_TWO_COMPONENT_DROP_INTERACTION_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-14/E015_TWO_COMPONENT_DROP_INTERACTION_v1/REPORT.md"
       }
     },
     {
@@ -241,6 +338,23 @@
         "random_ensembles_per_target": 100,
         "bootstrap_unit": "whole target round with 45 number outcomes",
         "bootstrap_replicates": 2000
+      },
+      "execution_status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E016_VOTE_DEPTH_CALIBRATION_v1",
+        "evidence_class": "POST_HOC_EXPLORATORY",
+        "data_cutoff": 1245,
+        "target_count": 645,
+        "executed_cases": 29025,
+        "random_ensembles_per_target": 100,
+        "bootstrap_replicates": 2000,
+        "verification_status": "PASS",
+        "future_predictions": 0,
+        "result_path": "analysis/2026-10-13/E016_VOTE_DEPTH_CALIBRATION_v1",
+        "completion_path": "analysis/2026-10-13/E016_VOTE_DEPTH_CALIBRATION_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-13/E016_VOTE_DEPTH_CALIBRATION_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-13/E016_VOTE_DEPTH_CALIBRATION_v1/REPORT.md"
       }
     },
     {
@@ -278,6 +392,14 @@
         "study_class": "blocked",
         "blocked_status": "BLOCKED_SOURCE_MISSING",
         "blocked_reason": "Searched tracked repository, research/, analysis/, automation/, historical docs, and Git object history for S005/S008 bank generation, score formula and rank-vector source; original artifacts are not present, so no replacement formula is authorized."
+      },
+      "execution_status": "BLOCKED_SOURCE_MISSING",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "status": "BLOCKED_SOURCE_MISSING",
+        "verification_status": "NOT_RUN",
+        "blocked_reason": "Searched tracked repository, research/, analysis/, automation/, historical docs, and Git object history for S005/S008 bank generation, score formula and rank-vector source; original artifacts are not present, so no replacement formula is authorized.",
+        "result_path": null
       }
     },
     {
@@ -337,6 +459,14 @@
             "1246 has unresolved conflicting pre-draw five-line sources and no receipt."
           ]
         }
+      },
+      "execution_status": "BLOCKED_SOURCE_MISSING",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "status": "BLOCKED_SOURCE_MISSING",
+        "verification_status": "NOT_RUN",
+        "blocked_reason": "The frozen 1245 purchase CSV and review were found, but only one round is available and the registered source lacks complete excluded-winning-number component rank vectors needed for requested attribution. No other round is reconstructed.",
+        "result_path": null
       }
     },
     {
@@ -780,7 +910,48 @@
         "training_cutoff_rule": "target t uses rounds through t-1",
         "output": "immutable shadow prediction and prospective ledger",
         "purchase_recommendation": false,
-        "novelty_signature": "freeze E026 survivors without tuning and start target 1246 shadow ledger"
+        "novelty_signature": "freeze E026 survivors without tuning and start target 1246 shadow ledger",
+        "execution_status": "EXECUTED_PROSPECTIVE_SHADOW_ONLY"
+      },
+      "execution_status": "EXECUTED_PROSPECTIVE_SHADOW_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
+        "target_round": 1246,
+        "training_through_round": 1245,
+        "frozen_signals": 2,
+        "verification_status": "PASS",
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "purchase_recommendation": false,
+        "workflow_run_id": 38512512127,
+        "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/38512512127",
+        "result_path": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
+        "completion_path": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-14/gha_38512512127_1/E030_PROSPECTIVE_SIGNAL_FREEZE_v1/REPORT.md"
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/orthogonal_research_v2.py",
+      "workflow_entrypoint": ".github/workflows/orthogonal-research-v2.yml",
+      "strict_pass_ready": false,
+      "prospective_resume": {
+        "status": "FROZEN_PROSPECTIVE_SHADOW_ONLY",
+        "target_round": 1251,
+        "training_through_round": 1250,
+        "target_draw_date": "2026-11-21",
+        "prediction_path": "analysis/prospective/E030/FROZEN_SIGNALS_1251.json",
+        "prediction_content_sha256": "e809288c6f6a2d891fb48e88810369e03ff64cea48333b5fca383d6621b316c6",
+        "prediction_git_blob_sha": "3b12bfed74fa4644dec963645eebdb45acd6f58d",
+        "training_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+        "previous_frozen_target": 1246,
+        "historical_gap_rounds": [
+          1247,
+          1248,
+          1249,
+          1250
+        ],
+        "purchase_recommendation": false
       }
     },
     {
@@ -798,8 +969,34 @@
         ],
         "independence_screen": "frozen rank/ticket membership correlation and Jaccard thresholds",
         "training_cutoff_rule": "target t uses rounds through t-1",
-        "novelty_signature": "four preregistered residual/state-transition/change-point/full-ticket likelihood families tested against B"
-      }
+        "novelty_signature": "four preregistered residual/state-transition/change-point/full-ticket likelihood families tested against B",
+        "execution_status": "EXECUTED_HISTORICAL_SIGNAL_DISCOVERY_SCREEN_ONLY"
+      },
+      "execution_status": "EXECUTED_HISTORICAL_SIGNAL_DISCOVERY_SCREEN_ONLY",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
+        "data_cutoff": 1245,
+        "targets": 645,
+        "candidate_families": 4,
+        "survivors": [
+          "CROSS_FIT_RESIDUAL_SIGNAL",
+          "ONLINE_CHANGE_POINT_SCORE",
+          "DIRICHLET_GAP_TICKET_GENERATOR"
+        ],
+        "cutoff_violations": 0,
+        "future_predictions": 0,
+        "verification_status": "PASS",
+        "workflow_run_id": 38512512127,
+        "result_path": "analysis/2026-10-14/gha_38512512127_1/E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
+        "completion_path": "analysis/2026-10-14/gha_38512512127_1/E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2/COMPLETION.json",
+        "verification_path": "analysis/2026-10-14/gha_38512512127_1/E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2/VERIFICATION.json",
+        "report_path": "analysis/2026-10-14/gha_38512512127_1/E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2/REPORT.md"
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/orthogonal_research_v2.py",
+      "workflow_entrypoint": ".github/workflows/orthogonal-research-v2.yml",
+      "strict_pass_ready": false
     },
     {
       "id": "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
@@ -816,8 +1013,31 @@
         "families_per_replicate": 4,
         "multiple_comparison": "Holm across four candidates",
         "maximum_false_promotion_rate": 0.05,
-        "novelty_signature": "four independent null control generators with same target baseline and same promotion gate"
-      }
+        "novelty_signature": "four independent null control generators with same target baseline and same promotion gate",
+        "execution_status": "EXECUTED_NEGATIVE_CONTROL_GATE_FAIL"
+      },
+      "execution_status": "EXECUTED_NEGATIVE_CONTROL_GATE_FAIL",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
+        "data_cutoff": 1245,
+        "replicates": 400,
+        "false_promotions": 24,
+        "false_promotion_rate": 0.06,
+        "maximum_false_promotion_rate": 0.05,
+        "negative_control_gate_pass": false,
+        "verification_status": "PASS",
+        "future_predictions": 0,
+        "workflow_run_id": 38512512127,
+        "result_path": "analysis/2026-10-14/gha_38512512127_1/E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
+        "completion_path": "analysis/2026-10-14/gha_38512512127_1/E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-14/gha_38512512127_1/E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-14/gha_38512512127_1/E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1/REPORT.md"
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/orthogonal_research_v2.py",
+      "workflow_entrypoint": ".github/workflows/orthogonal-research-v2.yml",
+      "strict_pass_ready": false
     },
     {
       "id": "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
@@ -833,8 +1053,35 @@
           "rate_3plus",
           "rate_4plus"
         ],
-        "novelty_signature": "walk-forward of E031 survivors against random, B and E026"
-      }
+        "novelty_signature": "walk-forward of E031 survivors against random, B and E026",
+        "execution_status": "EXECUTED_HISTORICAL_WALKFORWARD_NO_VALIDATED_EDGE"
+      },
+      "execution_status": "EXECUTED_HISTORICAL_WALKFORWARD_NO_VALIDATED_EDGE",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+        "data_cutoff": 1245,
+        "targets": 645,
+        "random_tickets": 64500,
+        "random_tickets_per_target": 100,
+        "surviving_signals": [
+          "CROSS_FIT_RESIDUAL_SIGNAL",
+          "ONLINE_CHANGE_POINT_SCORE",
+          "DIRICHLET_GAP_TICKET_GENERATOR"
+        ],
+        "cutoff_violations": 0,
+        "future_predictions": 0,
+        "verification_status": "PASS",
+        "workflow_run_id": 38512512127,
+        "result_path": "analysis/2026-10-14/gha_38512512127_1/E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+        "completion_path": "analysis/2026-10-14/gha_38512512127_1/E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-14/gha_38512512127_1/E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-14/gha_38512512127_1/E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1/REPORT.md"
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/orthogonal_research_v2.py",
+      "workflow_entrypoint": ".github/workflows/orthogonal-research-v2.yml",
+      "strict_pass_ready": false
     },
     {
       "id": "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
@@ -853,8 +1100,30 @@
           "B independence"
         ],
         "failure_status": "NO_VALIDATED_EDGE",
-        "novelty_signature": "strict single-ticket edge gate including null false-promotion rate"
-      }
+        "novelty_signature": "strict single-ticket edge gate including null false-promotion rate",
+        "execution_status": "EXECUTED_PROMOTION_GATE_NO_VALIDATED_EDGE"
+      },
+      "execution_status": "EXECUTED_PROMOTION_GATE_NO_VALIDATED_EDGE",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "study_id": "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
+        "data_cutoff": 1245,
+        "signals_evaluated": 3,
+        "validated_edges": 0,
+        "gate_pass": false,
+        "leakage_failures": 0,
+        "future_predictions": 0,
+        "verification_status": "PASS",
+        "workflow_run_id": 38512512127,
+        "result_path": "analysis/2026-10-14/gha_38512512127_1/E034_SINGLE_EDGE_PROMOTION_GATE_v1",
+        "completion_path": "analysis/2026-10-14/gha_38512512127_1/E034_SINGLE_EDGE_PROMOTION_GATE_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-14/gha_38512512127_1/E034_SINGLE_EDGE_PROMOTION_GATE_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-14/gha_38512512127_1/E034_SINGLE_EDGE_PROMOTION_GATE_v1/REPORT.md"
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/orthogonal_research_v2.py",
+      "workflow_entrypoint": ".github/workflows/orthogonal-research-v2.yml",
+      "strict_pass_ready": false
     },
     {
       "id": "E035_FIVE_LINE_REBUILD_GATE_v1",
@@ -863,8 +1132,27 @@
       "spec": {
         "condition": "run portfolio research only when E034 has at least one VALIDATED_EDGE",
         "otherwise": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
-        "novelty_signature": "conditional five-line rebuild gate requiring validated single-ticket edge"
-      }
+        "novelty_signature": "conditional five-line rebuild gate requiring validated single-ticket edge",
+        "execution_status": "BLOCKED_NO_VALIDATED_SINGLE_EDGE"
+      },
+      "execution_status": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+      "target_1251_three_line_readiness_eligible": false,
+      "execution_result": {
+        "status": "BLOCKED_NO_VALIDATED_SINGLE_EDGE",
+        "portfolio_construction_run": false,
+        "validated_edges": 0,
+        "future_predictions": 0,
+        "verification_status": "PASS",
+        "workflow_run_id": 38512512127,
+        "result_path": "analysis/2026-10-14/gha_38512512127_1/E035_FIVE_LINE_REBUILD_GATE_v1",
+        "completion_path": "analysis/2026-10-14/gha_38512512127_1/E035_FIVE_LINE_REBUILD_GATE_v1/COMPLETION.json",
+        "verification_path": "analysis/2026-10-14/gha_38512512127_1/E035_FIVE_LINE_REBUILD_GATE_v1/VERIFICATION.json",
+        "report_path": "analysis/2026-10-14/gha_38512512127_1/E035_FIVE_LINE_REBUILD_GATE_v1/REPORT.md"
+      },
+      "execution_mode": "dedicated_workflow",
+      "execution_entrypoint": "automation/orthogonal_research_v2.py",
+      "workflow_entrypoint": ".github/workflows/orthogonal-research-v2.yml",
+      "strict_pass_ready": false
     },
     {
       "id": "E036_NULL_GATE_CALIBRATION_v2",
@@ -1553,7 +1841,10 @@
         "workflow_blob_sha": "06a06bfe6ff6875bd4fe2b10dcde3fb746f5b281",
         "workflow_commit": "cf4292ef3dec440c1460e72378cc3f738d8e1c4a",
         "trace_definition": "Per-target, per-allocator, per-winning-number trace of slow-core/hybrid-tail candidate stage, rank@K retention and ticket assignment."
-      }
+      },
+      "execution_status": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH",
+      "target_1251_three_line_readiness_eligible": false,
+      "dispatch_scope": "FIVE_LINE_CUTOFF_1249_NOT_ELIGIBLE_FOR_TARGET_1251_THREE_LINE"
     },
     {
       "id": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
@@ -1606,7 +1897,10 @@
         "implementation_commit": "9ebaa3ecdb7695e1a978141ff96110db857a332c",
         "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
       },
-      "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+      "superseded_by": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
+      "execution_status": "SUPERSEDED_BEFORE_EXECUTION_OBJECTIVE_DEGENERACY",
+      "target_1251_three_line_readiness_eligible": false,
+      "dispatch_scope": "SUPERSEDED_BEFORE_EXECUTION"
     },
     {
       "id": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2",
@@ -1673,7 +1967,10 @@
         "workflow_commit": "cf4292ef3dec440c1460e72378cc3f738d8e1c4a",
         "trace_definition": "Per-target, per-ranker, per-winning-number trace of fixed-bank stage, rank@K retention, ranker signal and rr ticket assignment."
       },
-      "supersedes": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
+      "supersedes": "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
+      "execution_status": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH",
+      "target_1251_three_line_readiness_eligible": false,
+      "dispatch_scope": "FIVE_LINE_CUTOFF_1249_NOT_ELIGIBLE_FOR_TARGET_1251_THREE_LINE"
     },
     {
       "id": "E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1",
@@ -4958,18 +5255,30 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44471245647",
       "validated_at_kst": "2026-11-19T15:19:14+09:00",
       "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by duplicate/eligibility guards; no historical study was recomputed."
+    },
+    {
+      "run_id": 44486389745,
+      "run_number": 173,
+      "conclusion": "SUCCESS",
+      "tests": 251,
+      "queue_contract": "E030-E076 PASS",
+      "source_commit_sha": "2a8e246ba45d891eb77e3f252082f9720a6cfb68",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44486389745",
+      "validated_at_kst": "2026-11-19T17:18:01+09:00",
+      "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44471245647,
-    "run_number": 172,
+    "run_id": 44486389745,
+    "run_number": 173,
     "conclusion": "SUCCESS",
     "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "8c470422cdc13894a90d4847cd78573aae3fbd78",
+    "source_commit_sha": "2a8e246ba45d891eb77e3f252082f9720a6cfb68",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44471245647",
-    "validated_at_kst": "2026-11-19T15:19:14+09:00",
-    "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by duplicate/eligibility guards; no historical study was recomputed."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44486389745",
+    "validated_at_kst": "2026-11-19T17:18:01+09:00",
+    "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped; no historical study was recomputed."
   }
 }

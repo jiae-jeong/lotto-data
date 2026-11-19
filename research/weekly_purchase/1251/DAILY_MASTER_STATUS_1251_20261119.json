@@ -18,7 +18,8 @@
     "DAILY MASTER #121 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets / 8,400 predictions), 1,050,000 matched random tickets, successor diagnostics, leakage checks, and 14-file SHA-256 manifest passed; status remains PARTIAL because original legacy A/C/Contrarian sources and closed-loop purchase evidence remain missing.",
     "Orthogonal queue validation #170 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by eligibility and duplicate guards, so no historical study was recomputed.",
     "DAILY MASTER #122 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets / 8,400 predictions), 1,050,000 matched random portfolios, successor diagnostics, leakage checks, and 14-file SHA-256 manifest passed; status remains PARTIAL because original legacy A/C/Contrarian sources and closed-loop purchase evidence remain missing.",
-    "Orthogonal queue validation #172 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by duplicate/eligibility guards, so no historical study was recomputed."
+    "Orthogonal queue validation #172 completed on 2026-11-19: 251 unit tests and E030-E076 queue contract passed; research and prospective-ledger jobs were skipped by duplicate/eligibility guards, so no historical study was recomputed.",
+    "Legacy queue audit on 2026-11-19 reconciled 18 status-less task entries against preserved completion/verification artifacts or frozen blocked/superseded states; no historical study was recomputed."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -162,14 +163,15 @@
     "e075_recomputed_after_fix": false
   },
   "queue_validation_reconciliation": {
-    "latest_run_id": 44471245647,
-    "latest_run_number": 172,
+    "latest_run_id": 44486389745,
+    "latest_run_number": 173,
     "conclusion": "SUCCESS",
     "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "8c470422cdc13894a90d4847cd78573aae3fbd78",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44471245647",
-    "validated_at_kst": "2026-11-19T15:19:14+09:00"
+    "source_commit_sha": "2a8e246ba45d891eb77e3f252082f9720a6cfb68",
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44486389745",
+    "validated_at_kst": "2026-11-19T17:18:01+09:00",
+    "validated_queue_blob_sha": "f7852229865a22185130ced988b69f47512ef647"
   },
   "previous_daily_master_run": {
     "run_id": 44454579341,
@@ -239,5 +241,68 @@
     "compute_status": "COMPUTE_PARTIAL",
     "protocol_status": "PROTOCOL_PARTIAL",
     "study_status": "PARTIAL"
+  },
+  "legacy_queue_reconciliation_addendum": {
+    "date_kst": "2026-11-19",
+    "reconciled_task_ids": [
+      "E010_FAMILY_DECORRELATION_v1",
+      "E011_NESTED_3_4_TAIL_v1",
+      "E012_EXACT_TAIL_POWER_v1",
+      "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+      "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+      "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+      "E016_VOTE_DEPTH_CALIBRATION_v1",
+      "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
+      "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1",
+      "E030_PROSPECTIVE_SIGNAL_FREEZE_v1",
+      "E031_ORTHOGONAL_SIGNAL_DISCOVERY_v2",
+      "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1",
+      "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+      "E034_SINGLE_EDGE_PROMOTION_GATE_v1",
+      "E035_FIVE_LINE_REBUILD_GATE_v1",
+      "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+    ],
+    "evidence": "Existing COMPLETION.json and VERIFICATION.json files were matched to frozen task IDs and result paths; blocked and superseded tasks retain their original reasons. E030's 1251 prospective shadow freeze is recorded separately and is not purchase readiness.",
+    "classification": {
+      "completed_historical_diagnostics": [
+        "E010_FAMILY_DECORRELATION_v1",
+        "E011_NESTED_3_4_TAIL_v1",
+        "E013_COMPONENT_LEAVE_ONE_OUT_v1",
+        "E014_MODEL_AGREEMENT_DISAGREEMENT_v1",
+        "E015_TWO_COMPONENT_DROP_INTERACTION_v1",
+        "E016_VOTE_DEPTH_CALIBRATION_v1"
+      ],
+      "analytic_only": [
+        "E012_EXACT_TAIL_POWER_v1"
+      ],
+      "blocked_source_missing": [
+        "E017_S008_STRUCTURE_DIFFERENTIAL_FIX_v1",
+        "E018_HISTORICAL_PURCHASE_FAILURE_DECOMPOSITION_v1"
+      ],
+      "prospective_shadow_only": [
+        "E030_PROSPECTIVE_SIGNAL_FREEZE_v1"
+      ],
+      "negative_control_gate_fail": [
+        "E032_FALSE_DISCOVERY_NEGATIVE_CONTROL_v1"
+      ],
+      "no_validated_single_edge": [
+        "E033_ORTHOGONAL_SIGNAL_WALKFORWARD_v1",
+        "E034_SINGLE_EDGE_PROMOTION_GATE_v1"
+      ],
+      "blocked_no_validated_edge": [
+        "E035_FIVE_LINE_REBUILD_GATE_v1"
+      ],
+      "awaiting_dispatch_non_three_line": [
+        "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+        "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+      ],
+      "superseded": [
+        "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v1"
+      ]
+    },
+    "target_1251_three_line_readiness_eligible_ids": [],
+    "new_studies_executed_during_reconciliation": 0
   }
 }
