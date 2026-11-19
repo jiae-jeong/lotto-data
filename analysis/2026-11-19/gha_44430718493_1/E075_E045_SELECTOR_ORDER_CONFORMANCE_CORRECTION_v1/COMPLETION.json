@@ -1,0 +1,17 @@
+{
+  "study_id": "E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+  "status": "COMPLETE",
+  "date_kst": "2026-11-19",
+  "run_id": "gha_44430718493_1",
+  "data_cutoff": 1250,
+  "target_range": [
+    401,
+    1250
+  ],
+  "target_count": 850,
+  "historical_strict_gate_pass_legacy": false,
+  "historical_strict_gate_pass_corrected": false,
+  "strict_pass_ready": false,
+  "readiness_status": "STRICT_FAIL",
+  "purchase_recommendation_generated": false
+}

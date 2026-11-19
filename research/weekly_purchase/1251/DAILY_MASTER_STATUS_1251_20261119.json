@@ -11,7 +11,8 @@
     "Verified canonical data blob, SHA-256, 1,250 contiguous rows, valid six-number main draws, and bonus separation.",
     "E076 preregistered and computed six preserved recommendation artifacts across four contaminated live-history rounds; candidate-union misses and allocator concentration failures were reported separately.",
     "E076 outputs and UTF-8 SHA-256 manifest committed; queue updated with execution result.",
-    "DAILY MASTER #120 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets), 1,050,000 matched random portfolios, successor A_v2/C_v2/Contrarian_v2 diagnostics, leakage checks, and 14-file SHA-256 manifest all passed; status remains PARTIAL because legacy A/C/Contrarian originals and closed-loop purchase evidence remain missing."
+    "DAILY MASTER #120 completed on 2026-11-19: fresh cumulative statistics, B full walk-forward (1,050 targets), 1,050,000 matched random portfolios, successor A_v2/C_v2/Contrarian_v2 diagnostics, leakage checks, and 14-file SHA-256 manifest all passed; status remains PARTIAL because legacy A/C/Contrarian originals and closed-loop purchase evidence remain missing.",
+    "E075 v3 historical implementation-conformance correction completed with verified 8/8 manifest; no independent signal, prospective confirmation, or purchase readiness was created."
   ],
   "new_study": {
     "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
@@ -42,7 +43,6 @@
     "Prospective confirmation minimum target count and completion rule remain unspecified."
   ],
   "pending_work": [
-    "E075 v3 dedicated workflow remains PREREGISTERED_PENDING_DEDICATED_WORKFLOW; no final v3 result/manifest has been committed in the latest visible repository state.",
     "Prospective confirmation minimum target count and completion rule remain unspecified.",
     "Historical recommendation error decomposition is not an actual-purchase closed-loop dataset."
   ],
@@ -68,7 +68,7 @@
     1248,
     1249
   ],
-  "next_start": "Check E075 v3 workflow result; keep strict gate unchanged; do not generate purchase lines until a separately validated and prospectively eligible artifact exists.",
+  "next_start": "Keep the strict gate unchanged; resolve the prospective confirmation minimum/completion rule through explicit policy approval; do not generate purchase lines until a separately validated and prospectively eligible artifact exists.",
   "external_crosscheck": {
     "round": 1250,
     "draw_date": "2026-11-14",
@@ -124,5 +124,14 @@
   "fresh_cumulative_stats_today": true,
   "no_future_leakage_today": true,
   "master_manifest_entries_today": 14,
-  "master_manifest_status_today": "PASS"
+  "master_manifest_status_today": "PASS",
+  "e075_execution": {
+    "status": "EXECUTED_HISTORICAL_STRICT_FAIL",
+    "workflow_run_id": 44430718493,
+    "workflow_run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44430718493",
+    "result_path": "analysis/2026-11-19/gha_44430718493_1/E075_E045_SELECTOR_ORDER_CONFORMANCE_CORRECTION_v1",
+    "manifest_status": "PASS",
+    "strict_pass_ready": false,
+    "purchase_recommendation_generated": false
+  }
 }
