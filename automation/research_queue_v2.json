@@ -4946,18 +4946,30 @@
       "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44470792177",
       "validated_at_kst": "2026-11-19T15:15:33+09:00",
       "note": "Post-reconciliation validation succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by duplicate/eligibility guards; no historical study was recomputed."
+    },
+    {
+      "run_id": 44471245647,
+      "run_number": 172,
+      "conclusion": "SUCCESS",
+      "tests": 251,
+      "queue_contract": "E030-E076 PASS",
+      "source_commit_sha": "8c470422cdc13894a90d4847cd78573aae3fbd78",
+      "workflow": "orthogonal-research-v2",
+      "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44471245647",
+      "validated_at_kst": "2026-11-19T15:19:14+09:00",
+      "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by duplicate/eligibility guards; no historical study was recomputed."
     }
   ],
   "latest_queue_validation": {
-    "run_id": 44470792177,
-    "run_number": 171,
+    "run_id": 44471245647,
+    "run_number": 172,
     "conclusion": "SUCCESS",
     "tests": 251,
     "queue_contract": "E030-E076 PASS",
-    "source_commit_sha": "5bd0d1dcbabaf0777003633da2968efdb9b6fe93",
+    "source_commit_sha": "8c470422cdc13894a90d4847cd78573aae3fbd78",
     "workflow": "orthogonal-research-v2",
-    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44470792177",
-    "validated_at_kst": "2026-11-19T15:15:33+09:00",
-    "note": "Post-reconciliation validation succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by duplicate/eligibility guards; no historical study was recomputed."
+    "run_url": "https://github.com/jiae-jeong/lotto-data/actions/runs/44471245647",
+    "validated_at_kst": "2026-11-19T15:19:14+09:00",
+    "note": "Validate job succeeded; 251 unit tests passed and E030-E076 queue contract passed. Research and prospective-ledger jobs were skipped by duplicate/eligibility guards; no historical study was recomputed."
   }
 }
