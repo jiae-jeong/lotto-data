@@ -1,0 +1,289 @@
+{
+  "study_id": "E076_HISTORICAL_RECOMMENDATION_CANDIDATE_VS_ALLOCATOR_DECOMPOSITION_v1",
+  "preregistration_blob_sha": "4d4f73e1e8006c2eb1c6f908bfe018d6e1ac6564",
+  "evidence_class": "CONTAMINATED_LIVE_HISTORY_DIAGNOSTIC_ONLY_NOT_PROSPECTIVE_CONFIRMATION",
+  "data_integrity": {
+    "path": "lotto_data.csv",
+    "blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "row_count": 1250,
+    "round_range": [
+      1,
+      1250
+    ],
+    "contiguous": true,
+    "main_number_and_bonus_validation": "PASS"
+  },
+  "purchase_confirmation": {
+    "confirmed_purchases": 0,
+    "classification": "RECOMMENDATION_ARTIFACTS_ONLY_NOT_VERIFIED_PURCHASES"
+  },
+  "artifact_count": 6,
+  "candidate_stage": {
+    "artifacts_with_at_least_2_winners_in_union": 5,
+    "artifacts_with_at_least_3_winners_in_union": 4,
+    "artifacts_with_at_least_4_winners_in_union": 3
+  },
+  "allocator_stage": {
+    "artifacts_realizing_any2": 2,
+    "artifacts_realizing_any3": 2,
+    "artifacts_realizing_any4": 0
+  },
+  "decomposition": {
+    "candidate_2plus_possible_but_allocator_failed": [
+      "R1246_V2_PURCHASE_DECISION_5L",
+      "R1246_FALLBACK_5L",
+      "R1248_V54_NAMED_STRICT_PASS_5L"
+    ],
+    "candidate_3plus_possible_but_allocator_failed": [
+      "R1246_FALLBACK_5L",
+      "R1248_V54_NAMED_STRICT_PASS_5L"
+    ],
+    "candidate_4plus_possible_but_allocator_failed": [
+      "R1246_FALLBACK_5L",
+      "R1247_PROTOCOL_FULL_V3_5L",
+      "R1248_FALLBACK_5L"
+    ]
+  },
+  "results": [
+    {
+      "artifact_id": "R1245_V4_PRIMARY_3L",
+      "round": 1245,
+      "cutoff": 1244,
+      "line_count": 3,
+      "union_size": 15,
+      "candidate_winning_numbers": 1,
+      "candidate_recall": 0.16666666666666666,
+      "winning_numbers_excluded": 5,
+      "max_hit": 1,
+      "any2_plus": false,
+      "any3_plus": false,
+      "any4_plus": false,
+      "line_hit_distribution": [
+        0,
+        0,
+        1
+      ],
+      "line_hit_histogram": {
+        "0": 2,
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "candidate_stage_2plus_possible": false,
+      "candidate_stage_3plus_possible": false,
+      "candidate_stage_4plus_possible": false,
+      "allocator_stage_2plus_realized": false,
+      "allocator_stage_3plus_realized": false,
+      "allocator_stage_4plus_realized": false,
+      "captured_winners_not_in_best_line": 0,
+      "source_blob_sha": "1c20549451924bc864c4cbf438c5b48a83082a1c"
+    },
+    {
+      "artifact_id": "R1246_V2_PURCHASE_DECISION_5L",
+      "round": 1246,
+      "cutoff": 1245,
+      "line_count": 5,
+      "union_size": 21,
+      "candidate_winning_numbers": 2,
+      "candidate_recall": 0.3333333333333333,
+      "winning_numbers_excluded": 4,
+      "max_hit": 1,
+      "any2_plus": false,
+      "any3_plus": false,
+      "any4_plus": false,
+      "line_hit_distribution": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "line_hit_histogram": {
+        "0": 3,
+        "1": 2,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "candidate_stage_2plus_possible": true,
+      "candidate_stage_3plus_possible": false,
+      "candidate_stage_4plus_possible": false,
+      "allocator_stage_2plus_realized": false,
+      "allocator_stage_3plus_realized": false,
+      "allocator_stage_4plus_realized": false,
+      "captured_winners_not_in_best_line": 1,
+      "source_blob_sha": "4d50304b7aa247317e23e122b4ac4747e7145c15"
+    },
+    {
+      "artifact_id": "R1246_FALLBACK_5L",
+      "round": 1246,
+      "cutoff": 1245,
+      "line_count": 5,
+      "union_size": 21,
+      "candidate_winning_numbers": 4,
+      "candidate_recall": 0.6666666666666666,
+      "winning_numbers_excluded": 2,
+      "max_hit": 1,
+      "any2_plus": false,
+      "any3_plus": false,
+      "any4_plus": false,
+      "line_hit_distribution": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "line_hit_histogram": {
+        "0": 0,
+        "1": 5,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "candidate_stage_2plus_possible": true,
+      "candidate_stage_3plus_possible": true,
+      "candidate_stage_4plus_possible": true,
+      "allocator_stage_2plus_realized": false,
+      "allocator_stage_3plus_realized": false,
+      "allocator_stage_4plus_realized": false,
+      "captured_winners_not_in_best_line": 3,
+      "source_blob_sha": "4998f3239626de3f2c9c5939a3b2d88dbc1b7a2a"
+    },
+    {
+      "artifact_id": "R1247_PROTOCOL_FULL_V3_5L",
+      "round": 1247,
+      "cutoff": 1246,
+      "line_count": 5,
+      "union_size": 30,
+      "candidate_winning_numbers": 5,
+      "candidate_recall": 0.8333333333333334,
+      "winning_numbers_excluded": 1,
+      "max_hit": 3,
+      "any2_plus": true,
+      "any3_plus": true,
+      "any4_plus": false,
+      "line_hit_distribution": [
+        1,
+        3,
+        0,
+        0,
+        1
+      ],
+      "line_hit_histogram": {
+        "0": 2,
+        "1": 2,
+        "2": 0,
+        "3": 1,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "candidate_stage_2plus_possible": true,
+      "candidate_stage_3plus_possible": true,
+      "candidate_stage_4plus_possible": true,
+      "allocator_stage_2plus_realized": true,
+      "allocator_stage_3plus_realized": true,
+      "allocator_stage_4plus_realized": false,
+      "captured_winners_not_in_best_line": 2,
+      "source_blob_sha": "2dcc2c401f58a38549e1484980988082c9060ea9"
+    },
+    {
+      "artifact_id": "R1248_V54_NAMED_STRICT_PASS_5L",
+      "round": 1248,
+      "cutoff": 1247,
+      "line_count": 5,
+      "union_size": 30,
+      "candidate_winning_numbers": 3,
+      "candidate_recall": 0.5,
+      "winning_numbers_excluded": 3,
+      "max_hit": 1,
+      "any2_plus": false,
+      "any3_plus": false,
+      "any4_plus": false,
+      "line_hit_distribution": [
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "line_hit_histogram": {
+        "0": 2,
+        "1": 3,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "candidate_stage_2plus_possible": true,
+      "candidate_stage_3plus_possible": true,
+      "candidate_stage_4plus_possible": false,
+      "allocator_stage_2plus_realized": false,
+      "allocator_stage_3plus_realized": false,
+      "allocator_stage_4plus_realized": false,
+      "captured_winners_not_in_best_line": 2,
+      "source_blob_sha": "ea09ff33f5158f4dbe6da3dd97a006a8d81f764f"
+    },
+    {
+      "artifact_id": "R1248_FALLBACK_5L",
+      "round": 1248,
+      "cutoff": 1247,
+      "line_count": 5,
+      "union_size": 18,
+      "candidate_winning_numbers": 5,
+      "candidate_recall": 0.8333333333333334,
+      "winning_numbers_excluded": 1,
+      "max_hit": 3,
+      "any2_plus": true,
+      "any3_plus": true,
+      "any4_plus": false,
+      "line_hit_distribution": [
+        3,
+        1,
+        2,
+        1,
+        1
+      ],
+      "line_hit_histogram": {
+        "0": 0,
+        "1": 3,
+        "2": 1,
+        "3": 1,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "candidate_stage_2plus_possible": true,
+      "candidate_stage_3plus_possible": true,
+      "candidate_stage_4plus_possible": true,
+      "allocator_stage_2plus_realized": true,
+      "allocator_stage_3plus_realized": true,
+      "allocator_stage_4plus_realized": false,
+      "captured_winners_not_in_best_line": 2,
+      "source_blob_sha": "d952c39886626140be8fbc70bf5397fe338da0c2"
+    }
+  ],
+  "limitations": [
+    "Only six preserved recommendation artifacts across four already examined target rounds were scored; artifacts are not independent observations.",
+    "Rounds 1244-1249 are contaminated live-history diagnostics, not clean holdouts.",
+    "Ticket counts and union geometries differ; no pooled policy comparison or inferential test is valid.",
+    "The purchase confirmation registry contains zero confirmed purchases; none of these artifacts is described as a verified actual purchase.",
+    "No candidate or purchase lines are generated by this study."
+  ],
+  "promotion": {
+    "model_promotion": false,
+    "allocator_promotion": false,
+    "strict_pass_ready": false,
+    "prospective_confirmation": false
+  }
+}
