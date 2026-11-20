@@ -1,0 +1,81 @@
+{
+  "delivery_id": "TARGET_1251_RESEARCH_SELECTED_LINES_20261120",
+  "created_at_kst": "2026-11-20T10:00:00+09:00",
+  "target_round": 1251,
+  "target_draw_date": "2026-11-21",
+  "data_cutoff": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "data_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+  "model": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+  "model_preregistration_path": "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json",
+  "model_runner_path": "automation/three_line_rolling_concentration_regime_e054_v1.py",
+  "model_runner_git_blob_sha": "3a660b23fc7b74a474cfbc984e7231f33e16d595",
+  "allocator": "unchanged E045 choose_disjoint_ticket; sequential three-line pairwise-disjoint union18",
+  "model_parameters": {
+    "current_regime": "LOW",
+    "current_hhi": 0.02328888888888889,
+    "historical_reference_median": 0.02337222222222222,
+    "reference_window_count": 200,
+    "regime_training_outcomes": 416,
+    "estimator": "(successes[regime,n] + 6) / (regime_exposure + 45)",
+    "selector_randomness": false
+  },
+  "lines": [
+    {
+      "line": 1,
+      "numbers": [
+        7,
+        12,
+        18,
+        27,
+        33,
+        34
+      ]
+    },
+    {
+      "line": 2,
+      "numbers": [
+        13,
+        16,
+        21,
+        36,
+        44,
+        45
+      ]
+    },
+    {
+      "line": 3,
+      "numbers": [
+        2,
+        11,
+        17,
+        24,
+        35,
+        38
+      ]
+    }
+  ],
+  "validation": {
+    "lines": 3,
+    "numbers_per_line": 6,
+    "values_in_range_1_to_45": true,
+    "within_line_unique": true,
+    "lines_pairwise_disjoint": true,
+    "union_size": 18,
+    "historical_reproduction_check": {
+      "target_round": 1250,
+      "computed_lines_match_stored_E054_PREDICTIONS": true
+    },
+    "target_round_cutoff_safe": true,
+    "final_selection_randomness": false
+  },
+  "status": {
+    "delivery_class": "RESEARCH_SELECTED_NUMBERS_DELIVERED_ON_USER_REQUEST",
+    "strict_portfolio_pass": false,
+    "historical_E054_gate": "STRICT_FAIL",
+    "prospective_confirmation": false,
+    "claim_of_predictive_edge": false,
+    "purchase_confirmation": "NOT_CONFIRMED"
+  },
+  "disclosure": "These are the non-random target-1251 lines produced by the frozen E054 model and its unchanged deterministic three-line allocator using data through round 1250. The model failed its historical strict portfolio gate, so these numbers are not statistically validated as outperforming random selection. The numbers are delivered because the user clarified that weekly number delivery is the purpose of the research."
+}
