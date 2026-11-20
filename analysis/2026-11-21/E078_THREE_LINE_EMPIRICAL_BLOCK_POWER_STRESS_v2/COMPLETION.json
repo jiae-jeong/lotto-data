@@ -1,0 +1,22 @@
+{
+  "study_id": "E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1",
+  "status": "COMPLETE_DESIGN_ONLY",
+  "source_cutoff": 1249,
+  "target_count": 849,
+  "simulation_cells": 36,
+  "replicates_per_cell": 10000,
+  "no_future_leakage": true,
+  "strict_pass_ready": false,
+  "purchase_lines_generated": false,
+  "freeze_or_seal_created": false,
+  "output_files": [
+    "RESULTS.json",
+    "SIMULATION_GRID.csv",
+    "BLOCK_SOURCE_SUMMARIES.csv",
+    "DELIVERY_REVIEW_1249_1250_1251.json",
+    "VERIFICATION.json",
+    "REPORT.md",
+    "SHA256_MANIFEST.json",
+    "COMPLETION.json"
+  ]
+}

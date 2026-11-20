@@ -1,0 +1,120 @@
+{
+  "as_of_kst": "2026-11-21T08:03:38+09:00",
+  "source": {
+    "delivery_log_blob_sha": "98360d2348a244f321bb900fe8c19237cb910217",
+    "canonical_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "canonical_data_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "purchase_confirmation_registry_blob_sha": "a6eadb56302487267d6cc5373f020361930a63d0",
+    "confirmed_purchase_count": 0
+  },
+  "target_1249": {
+    "provenance": "USER_VISIBLE_INTERMEDIATE_CANDIDATE_RECORDED_IN_DELIVERY_LOG",
+    "strict_status": "FAIL_NOT_STRICT_PASS",
+    "purchase_confirmation": "NOT_CONFIRMED",
+    "source_presealed_artifact": "NOT_FOUND_PER_DELIVERY_LOG_CAVEAT",
+    "winning_main_numbers": [
+      2,
+      11,
+      16,
+      25,
+      34,
+      35
+    ],
+    "bonus": 14,
+    "comparison": {
+      "line_hits": [
+        2,
+        1,
+        0,
+        0,
+        1
+      ],
+      "hit_distribution_0_to_6": [
+        2,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max_hits": 2,
+      "any2": true,
+      "any3": false,
+      "any4": false,
+      "any5": false,
+      "any6": false,
+      "union_size": 30,
+      "winning_union_numbers": 4,
+      "winning_union_coverage": 4,
+      "winning_numbers_in_union": 4,
+      "bonus_match_count": 0
+    }
+  },
+  "target_1250": {
+    "provenance": "PRESERVED_CANDIDATE_LINES_IN_DELIVERY_LOG_BUT_DISPLAY_EVIDENCE_CORRECTED_AS_UNVERIFIED",
+    "strict_status": "STRICT_PASS_NOT_READY",
+    "purchase_confirmation": "NOT_CONFIRMED",
+    "canonical_source_artifact": "analysis/2026-11-14/FIVE_ROLE_RESEARCH_1250_V9.json",
+    "source_artifact_sha256": "6a221b67713242329943d16821e2fc386b2d41d889fe0a79b2605a9903f024a6",
+    "source_artifact_blob_sha": "2cd56b3688c75cab55a090e5188b108eda9c5fee",
+    "source_cutoff": 1249,
+    "winning_main_numbers": [
+      1,
+      5,
+      18,
+      23,
+      27,
+      28
+    ],
+    "bonus": 8,
+    "comparison": {
+      "line_hits": [
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      "hit_distribution_0_to_6": [
+        2,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max_hits": 1,
+      "any2": false,
+      "any3": false,
+      "any4": false,
+      "any5": false,
+      "any6": false,
+      "union_size": 13,
+      "winning_union_numbers": 2,
+      "winning_union_coverage": 2,
+      "winning_numbers_in_union": 2,
+      "bonus_match_count": 1
+    },
+    "inclusion_rule": "Descriptive saved-candidate diagnostic only; not a verified delivery and not an actual purchase."
+  },
+  "target_1251": {
+    "provenance": "RESEARCH_SELECTED_LINES_ARTIFACT_AND_DELIVERY_LOG_EVENT_2026-11-20",
+    "source_artifact_blob_sha": "9da6f5760367758896f20f8643c771452e7948cd",
+    "source_cutoff": 1250,
+    "draw_date": "2026-11-21",
+    "draw_outcome_status": "NOT_YET_PUBLISHED_AS_OF_AUDIT_TIME",
+    "comparison_status": "DEFERRED_UNTIL_OFFICIAL_DRAW_RESULT",
+    "purchase_confirmation": "NOT_CONFIRMED",
+    "strict_status": "STRICT_FAIL",
+    "line_numbers_reproduced_or_printed": false
+  },
+  "learning_boundary": {
+    "actual_purchase_learning_eligible_targets": 0,
+    "no_purchase_receipt_or_explicit_confirmation_found": true,
+    "recommendation_review_is_separate_from_actual_purchase_learning": true,
+    "no_source_lines_reconstructed": true,
+    "no_delivery_log_append_needed_in_this_run": true
+  }
+}
