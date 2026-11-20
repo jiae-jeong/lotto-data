@@ -1,0 +1,42 @@
+{
+  "study_id": "E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1",
+  "status": "PASS_DESIGN_COMPUTATION_ONLY",
+  "checks": {
+    "canonical_data_sha_and_blob_match": true,
+    "canonical_data_rows": 1250,
+    "canonical_round_sequence": true,
+    "e045_prediction_content_and_blob_match": true,
+    "e045_targets": 849,
+    "e045_target_range": [
+      401,
+      1249
+    ],
+    "cutoff_violations": 0,
+    "invalid_tickets": 0,
+    "geometry_violations": 0,
+    "stored_hit_mismatches": 0,
+    "e045_random_source_hashes_match": true,
+    "random_geometry_violations": 0,
+    "exact_null_match": true,
+    "e046_block_summary_reproduced": true,
+    "final_49_target_remainder_retained": true,
+    "simulation_cells": 36,
+    "replicates_per_cell": 10000,
+    "all_results_finite": true,
+    "no_target_1250_or_1251_outcome_used": true,
+    "no_future_leakage": true,
+    "contaminated_rounds_1244_to_1249_labelled": true,
+    "prospective_rule_not_invented": true,
+    "no_candidate_or_purchase_lines_generated": true,
+    "no_freeze_or_seal_created": true
+  },
+  "historical_live_history_scope": [
+    1244,
+    1245,
+    1246,
+    1247,
+    1248,
+    1249
+  ],
+  "evidence_class": "DESIGN_ONLY_NOT_PROSPECTIVE_CONFIRMATION"
+}

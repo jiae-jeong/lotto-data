@@ -1,0 +1,29 @@
+{
+  "study_id": "E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1",
+  "files": {
+    "RESULTS.json": {
+      "sha256": "af1674ab33a35792f9d1b63baff7b0e96f54e961006099534649093174066417",
+      "bytes": 38030
+    },
+    "SIMULATION_GRID.csv": {
+      "sha256": "c15c4d839879ffdd0741e9597204e793d2a312f0ca303b49872b0cb8c949a56b",
+      "bytes": 5855
+    },
+    "BLOCK_SOURCE_SUMMARIES.csv": {
+      "sha256": "fd124764c21a7dfa851bb03c6c7aafd02ce15afb608bd7be03bb48c0e28ddfbc",
+      "bytes": 1720
+    },
+    "DELIVERY_REVIEW_1249_1250_1251.json": {
+      "sha256": "97fff4cba20732557b4b17765a19f95e2898eb3b9b438fffac5a30eec5f41985",
+      "bytes": 3413
+    },
+    "VERIFICATION.json": {
+      "sha256": "ae1235ab04572ad3de09ae42b7cb318ab6fe0e6203a9e6846aadc65065068199",
+      "bytes": 1230
+    },
+    "REPORT.md": {
+      "sha256": "c822d1550de2f17eb1af68ae0fadd757d389f2789b71ad89746a731597e6e63c",
+      "bytes": 5839
+    }
+  }
+}
