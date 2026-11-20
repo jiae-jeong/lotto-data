@@ -1,0 +1,169 @@
+{
+  "study_id": "E077_TRAILING_100_MODEL_SELECTOR_v1",
+  "preregistration_commit": "3b5f27b0474587da2f5b00e6749bd7a1226de616",
+  "source": {
+    "predictions_blob_sha": "da19f4dc6ec500243cf7503abc096867d6dcf5db",
+    "expected_predictions_blob_sha": "575b0f03ceb7f4e8424f3826d2527fa494fdc243aa79728735b986ca200e2c5e",
+    "data_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "expected_data_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "cutoff": 1250
+  },
+  "execution": {
+    "parsed_model_rows": 3150,
+    "targets_total": 1050,
+    "evaluation_targets": 850,
+    "evaluation_targets_valid": 850,
+    "bad_cutoff_rows": 0,
+    "invalid_tickets": 0,
+    "stored_hit_mismatches": 0,
+    "duplicate_target_model_rows": 0,
+    "invalid_targets": 0,
+    "tie_targets": 105,
+    "no_future_leakage": true,
+    "integrity_pass": true
+  },
+  "selector": {
+    "window": 100,
+    "tie_break_order": [
+      "A_v2",
+      "C_v2",
+      "contrarian_v2"
+    ],
+    "selection_counts": {
+      "A_v2": 340,
+      "C_v2": 144,
+      "contrarian_v2": 366
+    },
+    "selected_summary": {
+      "n": 850,
+      "mean_hits": 0.7788235294117647,
+      "any2": 0.1588235294117647,
+      "any3": 0.029411764705882353,
+      "any4": 0.001176470588235294,
+      "hits_distribution": [
+        349,
+        366,
+        110,
+        24,
+        1,
+        0,
+        0
+      ]
+    },
+    "positive_any2_50_block_share": 0.4117647058823529,
+    "positive_blocks": 7,
+    "total_blocks": 17
+  },
+  "exact_random_null": {
+    "mean_hits": 0.8,
+    "p_any2": 0.17530810086113546,
+    "p_any3": 0.023834078570323606,
+    "p_any4": 0.0013934826753885176
+  },
+  "fixed_model_summaries": {
+    "A_v2": {
+      "n": 850,
+      "mean_hits": 0.8011764705882353,
+      "any2": 0.17058823529411765,
+      "any3": 0.03294117647058824,
+      "any4": 0.002352941176470588,
+      "hits_distribution": [
+        344,
+        361,
+        117,
+        26,
+        2,
+        0,
+        0
+      ]
+    },
+    "C_v2": {
+      "n": 850,
+      "mean_hits": 0.7988235294117647,
+      "any2": 0.17647058823529413,
+      "any3": 0.03058823529411765,
+      "any4": 0.002352941176470588,
+      "hits_distribution": [
+        349,
+        351,
+        124,
+        24,
+        2,
+        0,
+        0
+      ]
+    },
+    "contrarian_v2": {
+      "n": 850,
+      "mean_hits": 0.7917647058823529,
+      "any2": 0.17529411764705882,
+      "any3": 0.02823529411764706,
+      "any4": 0,
+      "hits_distribution": [
+        350,
+        351,
+        125,
+        24,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "descriptive_oracle_upper_bound": {
+    "n": 850,
+    "mean_hits": 1.2682352941176471,
+    "any2": 0.34352941176470586,
+    "any3": 0.06470588235294118,
+    "any4": 0.002352941176470588,
+    "hits_distribution": [
+      121,
+      437,
+      237,
+      53,
+      2,
+      0,
+      0
+    ]
+  },
+  "metrics": {
+    "names": [
+      "mean_hits",
+      "any2_rate",
+      "any3_rate",
+      "any4_rate"
+    ],
+    "selected_minus_exact_null": [
+      -0.021176470588235352,
+      -0.016484571449370766,
+      0.005577686135558747,
+      -0.0002170120871532236
+    ],
+    "bonferroni_adjusted_moving_block_ci": [
+      [
+        -0.07882352941176314,
+        0.037647058823529374
+      ],
+      [
+        -0.04707280674348783,
+        0.012934546197688053
+      ],
+      [
+        -0.007363490335029404,
+        0.020871803782617087
+      ],
+      [
+        -0.001393482675388524,
+        0.0033123996775527675
+      ]
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "bootstrap_replicates": 4000,
+    "block_length": 50,
+    "seed": 20261120077
+  },
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_DYNAMIC_SELECTOR_DIAGNOSTIC_NOT_PROSPECTIVE_CONFIRMATION",
+  "promotion": "NONE; one-ticket selector diagnostic cannot qualify three-line purchase policy."
+}
