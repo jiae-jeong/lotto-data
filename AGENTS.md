@@ -164,3 +164,16 @@ This amendment supersedes only earlier instructions that suppress all number del
 7. The target-1251 delivery on 2026-11-20 uses the frozen E054 deterministic three-line model and E045 allocator, with status STRICT_FAIL / research-selected / no predictive-edge claim. Its original artifact and DELIVERY_LOG event are preserved.
 
 The user's 2026-11-20 clarification is the authority for this delivery-priority change. Historical strict-gate results and all prior model failures remain unchanged.
+
+
+## 2026-11-21 USER DIRECTION AMENDMENT — strict-gated number visibility
+
+This dated amendment supersedes only the 2026-11-20 delivery-priority exception to the extent that it allowed research-selected lines to be displayed while the strict gate was FAIL. The target-1251+ portfolio remains exactly three lines of six numbers, and all historical five-line artifacts through target 1250 remain unchanged.
+
+- Before a verified STRICT PASS, do not display candidate numbers, TOP30, core/tail lists, intermediate research-selected lines, or any of the three purchase lines.
+- If any strict gate, prospective-confirmation, integrity, cutoff, leakage, or freeze/seal condition fails or is unevaluated, report that no verified final purchase lines are available. Do not issue random, arbitrary, or fallback numbers.
+- Keep every existing strict threshold unchanged: max-hit, any2, any3, and winning-union coverage must all have Bonferroni-adjusted moving-block CI lower bounds strictly above zero; family alpha 0.05 / per-metric alpha 0.0125; any2-positive non-overlapping 50-target block share at least 0.65; retain the final remainder block; nested/rolling cutoff-safe validation; prospective confirmation.
+- Thursday remains the freeze/seal deadline. Friday may only reproduce the exact sealed three lines and may not search or tune.
+- Append to DELIVERY_LOG only when numbers are actually displayed. Display is not purchase confirmation; purchase evidence remains separate.
+- The minimum prospective target count and completion rule remain unspecified. Do not invent them or mark readiness until a separately preregistered rule is explicitly approved and satisfied.
+- This amendment is recorded in `research/weekly_purchase/1251/POLICY_AMENDMENT_20261121_STRICT_GATED_DELIVERY.json`.
