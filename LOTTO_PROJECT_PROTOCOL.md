@@ -439,3 +439,12 @@ This amendment supersedes only earlier instructions that suppress all number del
 7. The target-1251 delivery on 2026-11-20 uses the frozen E054 deterministic three-line model and E045 allocator, with status STRICT_FAIL / research-selected / no predictive-edge claim. Its original artifact and DELIVERY_LOG event are preserved.
 
 The user's 2026-11-20 clarification is the authority for this delivery-priority change. Historical strict-gate results and all prior model failures remain unchanged.
+
+
+## 19. 2026-11-21 user direction amendment — strict-gated number visibility
+
+The user's 2026-11-21 instruction supersedes only the 2026-11-20 delivery exception insofar as it allowed research-selected numbers to be displayed while strict gate status was FAIL. From target 1251 onward, the purchase portfolio remains exactly three lines of six numbers, while all historical five-line records through target 1250 remain immutable.
+
+Before a verified STRICT PASS, do not publish candidate numbers, TOP30, core/tail lists, intermediate research-selected lines, or purchase lines. If any strict metric, prospective confirmation, data integrity, cutoff, leakage, or freeze/seal condition fails or is unevaluated, report that no verified final purchase lines are available. Never use random or fallback numbers. Keep the four-metric strict gate, family alpha 0.05, per-metric alpha 0.0125, 50-target positive-any2 block share minimum 0.65, final remainder-block inclusion, nested/rolling validation, and prospective confirmation unchanged. Thursday freeze/seal and Friday exact reproduction remain mandatory. Append delivery events only when numbers are actually displayed; never infer purchase from display. The prospective minimum target count and completion rule remain unspecified and must not be invented.
+
+The full dated amendment is preserved at `research/weekly_purchase/1251/POLICY_AMENDMENT_20261121_STRICT_GATED_DELIVERY.json`.
