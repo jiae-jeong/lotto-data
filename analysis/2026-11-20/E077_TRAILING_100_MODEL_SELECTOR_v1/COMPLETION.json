@@ -1,0 +1,73 @@
+{
+  "study_id": "E077_TRAILING_100_MODEL_SELECTOR_v1",
+  "status": "COMPLETE_HISTORICAL_DIAGNOSTIC_ONLY",
+  "preregistration_path": "research/dynamic_selection/E077_TRAILING_100_MODEL_SELECTOR_PREREG_20261120.json",
+  "preregistration_commit": "3b5f27b0474587da2f5b00e6749bd7a1226de616",
+  "results_path": "analysis/2026-11-20/E077_TRAILING_100_MODEL_SELECTOR_v1/RESULTS.json",
+  "report_path": "analysis/2026-11-20/E077_TRAILING_100_MODEL_SELECTOR_v1/REPORT.md",
+  "source_audit_path": "analysis/2026-11-20/E077_TRAILING_100_MODEL_SELECTOR_v1/SOURCE_IDENTITY_AUDIT.json",
+  "evaluation": {
+    "data_cutoff": 1250,
+    "target_range": [
+      401,
+      1250
+    ],
+    "targets": 850,
+    "component_rows": 3150,
+    "missing_or_duplicate_rows": 0,
+    "invalid_tickets": 0,
+    "recomputed_hit_mismatches": 0,
+    "leakage_failures": 0,
+    "source_content_sha256_verified": true
+  },
+  "selector": {
+    "trailing_window": 100,
+    "selection_counts": {
+      "A_v2": 340,
+      "C_v2": 144,
+      "contrarian_v2": 366
+    },
+    "mean_hits": 0.7788235294117647,
+    "mean_hits_delta_vs_uniform": -0.021176470588235352,
+    "any2_rate": 0.1588235294117647,
+    "any2_delta_vs_uniform": -0.016484571449370766,
+    "any3_rate": 0.029411764705882353,
+    "any3_delta_vs_uniform": 0.005577686135558747,
+    "any4_rate": 0.001176470588235294,
+    "any4_delta_vs_uniform": -0.0002170120871532236,
+    "positive_any2_50_target_blocks": 7,
+    "total_nonoverlap_blocks": 17,
+    "positive_block_share": 0.4117647058823529,
+    "adjusted_ci": [
+      [
+        -0.07882352941176314,
+        0.037647058823529374
+      ],
+      [
+        -0.04707280674348783,
+        0.012934546197688053
+      ],
+      [
+        -0.007363490335029404,
+        0.020871803782617087
+      ],
+      [
+        -0.001393482675388524,
+        0.0033123996775527675
+      ]
+    ]
+  },
+  "decision": {
+    "dynamic_selector_shows_confirmed_advantage": false,
+    "strict_pass_ready": false,
+    "three_line_purchase_policy_eligible": false,
+    "purchase_lines_generated": false,
+    "freeze_or_seal_created": false,
+    "prospective_confirmation": false
+  },
+  "limitations": [
+    "Recovered successor models are not the missing legacy models.",
+    "Historical targets were already observed; this is not prospective confirmation.",
+    "One-ticket selector performance cannot qualify the three-line portfolio policy."
+  ]
+}
