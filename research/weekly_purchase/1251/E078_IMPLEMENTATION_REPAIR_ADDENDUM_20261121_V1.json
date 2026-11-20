@@ -1,0 +1,21 @@
+{
+  "addendum_id": "E078_IMPLEMENTATION_REPAIR_ADDENDUM_20261121_V1",
+  "study_id": "E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1",
+  "date_kst": "2026-11-21",
+  "first_attempt": {
+    "workflow_run_id": 44834792406,
+    "status": "FAILED_BEFORE_EXECUTION",
+    "failure": "Node SyntaxError in a report string literal (escaped apostrophe); no source parsing, simulation, or results were produced.",
+    "outputs_created": false,
+    "outcomes_read_for_simulation": false,
+    "strict_gate_or_design_changed": false
+  },
+  "correction": {
+    "corrected_runner_path": "automation/e078_three_line_empirical_block_power_stress_v2.js",
+    "corrected_runner_blob_sha": "ef647f8a7a7297fb5eee089c368f40dee9e84673",
+    "change": "Only a JavaScript string-literal quoting correction; no algorithm, input, parameter, seed, metric, comparator, effect size, horizon, alpha, or gate change.",
+    "original_v1_preserved": true
+  },
+  "frozen_specification": "research/weekly_purchase/1251/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_PREREG_20261121.json",
+  "evaluation_authorization": "V2 may execute the exact preregistered specification after this addendum is committed. The initial v1 attempt produced no numerical result and is retained as a failed pre-execution attempt."
+}
