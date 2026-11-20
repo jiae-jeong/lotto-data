@@ -147,3 +147,20 @@ The user's explicit 2026-11-13 instruction changes the weekly purchase output to
 - Keep the strict gate unchanged: all four Bonferroni-adjusted moving-block CI lower bounds (max-hit, any2, any3, winning-union coverage) must be strictly above zero versus the correct exact geometry-matched null; family alpha 0.05, per-metric alpha 0.0125; positive non-overlapping 50-target any2 block share at least 0.65; retain the final remainder block; preserve cutoff-safe nested/rolling validation and prospective confirmation.
 - If any source, hash, computation, leakage, strict-gate, or freeze/seal condition is incomplete or fails, do not issue final purchase lines. Never use random or fallback candidates.
 - Preserve the existing Friday automation and schedule. Do not delete or disable the delivery task or create a separate Thursday automation without explicit user approval.
+
+
+## 2026-11-20 USER DIRECTION AMENDMENT — weekly number delivery is the primary outcome
+
+This dated amendment records the user's clarification on 2026-11-20: the purpose of ongoing lottery research is to deliver three usable number lines on Friday. Research reports and strict validation are means to improve and honestly characterize the delivered lines; they are not substitutes for weekly number delivery.
+
+This amendment supersedes only earlier instructions that suppress all number delivery whenever the strict predictive gate fails. It does **not** change, lower, waive, or bypass any statistical gate.
+
+1. Every Friday, deliver exactly three deterministic, cutoff-safe, research-selected lines when a valid frozen model and allocator can produce them, even when the model's strict portfolio status is FAIL or research-only.
+2. When the strict gate is not passed, label the lines plainly as research-selected / not statistically validated. Never call them STRICT_PASS, PASS_READY, or proven better than random. State the actual validation status separately.
+3. Keep the existing gate unchanged: geometry-matched null, Bonferroni-adjusted CI lower bounds, 50-target positive-block share, leakage checks, multiplicity control, and prospective confirmation remain mandatory for any claim of predictive superiority.
+4. Do not use random, arbitrary, hand-picked, or post-hoc cherry-picked fallback numbers. If the frozen model cannot produce valid lines, report that specific execution failure; do not fabricate numbers.
+5. Thursday remains the preparation/freeze deadline. Freeze target, cutoff, data hash, model/version, deterministic allocator, and exact three lines. Friday must reproduce and deliver exactly the frozen three lines; no Friday model or number tuning.
+6. Whenever lines are displayed, append an exact delivery event to `research/DELIVERY_LOG.md`, including the full original lines, status, model, cutoff, source hashes, and purchase-confirmation status. Never infer that the user purchased them.
+7. The target-1251 delivery on 2026-11-20 uses the frozen E054 deterministic three-line model and E045 allocator, with status STRICT_FAIL / research-selected / no predictive-edge claim. Its original artifact and DELIVERY_LOG event are preserved.
+
+The user's 2026-11-20 clarification is the authority for this delivery-priority change. Historical strict-gate results and all prior model failures remain unchanged.
