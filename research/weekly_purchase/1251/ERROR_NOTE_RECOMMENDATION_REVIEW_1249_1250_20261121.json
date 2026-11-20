@@ -1,0 +1,85 @@
+{
+  "note_id": "ERROR_NOTE_RECOMMENDATION_REVIEW_1249_1250_20261121",
+  "created_at_kst": "2026-11-21T08:03:38+09:00",
+  "classification": "POST_DRAW_RECOMMENDATION_REVIEW_ONLY_NOT_ACTUAL_PURCHASE_LEARNING",
+  "source_artifact": "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v2/DELIVERY_REVIEW_1249_1250_1251.json",
+  "source_delivery_log_blob_sha": "98360d2348a244f321bb900fe8c19237cb910217",
+  "source_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "reviews": [
+    {
+      "target_round": 1249,
+      "provenance": "USER_VISIBLE_INTERMEDIATE_CANDIDATE_RECORDED_IN_DELIVERY_LOG",
+      "purchase_confirmation": "NOT_CONFIRMED",
+      "strict_status": "FAIL_NOT_STRICT_PASS",
+      "line_count": 5,
+      "line_hits": [
+        2,
+        1,
+        0,
+        0,
+        1
+      ],
+      "portfolio_union_size": 30,
+      "winning_numbers_in_union": 4,
+      "excluded_winning_numbers": 2,
+      "max_hit": 2,
+      "any2_realized": true,
+      "any3_realized": false,
+      "any3_possible_within_union": true,
+      "failure_decomposition": {
+        "candidate_bank_recall": "UNKNOWN_NOT_AVAILABLE_NO_ORIGINAL_TOPK_BANK",
+        "observed_portfolio_union": "4/6 winning numbers retained",
+        "allocation": "The five displayed lines reached only max-hit 2 although three or more winners were present in the union; this is an allocator/concentration miss for 3+ within the preserved line set.",
+        "attribution_limit": "Cannot attribute earlier exclusions to candidate ranking because the original candidate bank and presealed source artifact were not found."
+      }
+    },
+    {
+      "target_round": 1250,
+      "provenance": "PRESERVED_CANDIDATE_LINES_IN_DELIVERY_LOG_BUT_DISPLAY_EVIDENCE_CORRECTED_AS_UNVERIFIED",
+      "source_candidate": "analysis/2026-11-14/FIVE_ROLE_RESEARCH_1250_V9.json",
+      "purchase_confirmation": "NOT_CONFIRMED",
+      "strict_status": "STRICT_PASS_NOT_READY",
+      "line_count": 5,
+      "line_hits": [
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      "portfolio_union_size": 13,
+      "winning_numbers_in_union": 2,
+      "excluded_winning_numbers": 4,
+      "max_hit": 1,
+      "any2_realized": false,
+      "any2_possible_within_union": true,
+      "any3_possible_within_union": false,
+      "failure_decomposition": {
+        "candidate_bank_recall": "UNKNOWN_NOT_AVAILABLE_NO_ORIGINAL_TOPK_BANK",
+        "observed_portfolio_union": "2/6 winning numbers retained",
+        "allocation": "The two retained winners were split across different lines; max-hit remained 1. A 2+ line was possible within the preserved union but was not formed.",
+        "attribution_limit": "This is a saved-candidate diagnostic only; the append-only evidence correction explicitly says user-visible delivery is unverified."
+      }
+    },
+    {
+      "target_round": 1251,
+      "provenance": "USER_VISIBLE_RESEARCH_SELECTED_DELIVERY_RECORDED_2026_11_20",
+      "purchase_confirmation": "NOT_CONFIRMED",
+      "strict_status": "STRICT_FAIL",
+      "line_count": 3,
+      "draw_date": "2026-11-21",
+      "as_of_status": "PRE_DRAW_PENDING",
+      "outcome_comparison": "DEFERRED",
+      "failure_decomposition": "No post-draw scoring before official result; do not inspect or reconstruct the line payload for user-facing output."
+    }
+  ],
+  "cross_round_learning": {
+    "confirmed_purchases": 0,
+    "actual_purchase_aggregate_update": false,
+    "candidate_stage_and_allocator_stage_kept_separate": true,
+    "no_candidate_bank_reconstruction": true,
+    "no_source_line_rewrite": true,
+    "no_delivery_log_mutation": true
+  },
+  "next_review_trigger": "After official target-1251 draw result is published, append a separate post-draw review against the already stored pre-draw artifact; do not alter its bytes."
+}
