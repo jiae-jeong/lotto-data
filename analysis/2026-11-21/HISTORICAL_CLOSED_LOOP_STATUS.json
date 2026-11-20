@@ -1,0 +1,87 @@
+{
+  "status_date_kst": "2026-11-21",
+  "data_cutoff": 1250,
+  "data_rows": 1250,
+  "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "delivery_log_blob_sha": "98360d2348a244f321bb900fe8c19237cb910217",
+  "review_index_status": "PARTIAL",
+  "reviews": [
+    {
+      "target_round": 1249,
+      "source": "research/DELIVERY_LOG.md#Event-2026-11-06",
+      "provenance": "USER_VISIBLE_INTERMEDIATE_CANDIDATE",
+      "purchase_confirmation": "NOT_CONFIRMED",
+      "max_hit": 2,
+      "any2": true,
+      "any3": false,
+      "union_coverage": "4/6",
+      "candidate_bank": "NOT_FOUND",
+      "allocator_diagnostic": "3+ opportunity in union not realized"
+    },
+    {
+      "target_round": 1250,
+      "source": "research/DELIVERY_LOG.md#Event-2026-11-13",
+      "provenance": "UNVERIFIED_PRESERVED_CANDIDATE",
+      "purchase_confirmation": "NOT_CONFIRMED",
+      "max_hit": 1,
+      "any2": false,
+      "any3": false,
+      "union_coverage": "2/6",
+      "candidate_bank": "NOT_FOUND",
+      "allocator_diagnostic": "2+ opportunity in union not realized"
+    },
+    {
+      "target_round": 1251,
+      "source": "research/weekly_purchase/1251/RESEARCH_SELECTED_LINES_1251_20261120.json",
+      "provenance": "RESEARCH_SELECTED_DISPLAYED_2026-11-20",
+      "purchase_confirmation": "NOT_CONFIRMED",
+      "max_hit": null,
+      "any2": null,
+      "any3": null,
+      "union_coverage": null,
+      "candidate_bank": "FROZEN_PRE_DRAW_ARTIFACT",
+      "outcome_status": "PENDING_AS_OF_2026-11-21T08:03:38+09:00"
+    }
+  ],
+  "latest_review": {
+    "target_round": 1249,
+    "source": "DELIVERY_LOG",
+    "source_role": "USER_VISIBLE_INTERMEDIATE_CANDIDATE_NOT_PURCHASE",
+    "candidate_recall_failure": "UNRESOLVED_NO_ORIGINAL_TOPK_BANK",
+    "ticket_construction_gap": "3+ was possible within the 30-number portfolio union but no line reached 3",
+    "winning_union_coverage": 4,
+    "max_hits": 2
+  },
+  "actual_purchase_learning": {
+    "confirmed_purchase_count": 0,
+    "status": "NOT_AVAILABLE_NO_CONFIRMED_PURCHASES",
+    "unconfirmed_sources_excluded": true
+  },
+  "source_conflicts": [
+    {
+      "target_round": 1250,
+      "status": "DISPLAY_EVIDENCE_UNVERIFIED",
+      "rule": "Do not treat saved candidate as actual delivery or purchase."
+    },
+    {
+      "target_round": 1246,
+      "status": "UNRESOLVED_MULTIPLE_LINESETS",
+      "rule": "No source selected as actual purchase."
+    },
+    {
+      "target_round": 1247,
+      "status": "UNRESOLVED_MULTIPLE_LINESETS",
+      "rule": "No source selected as actual purchase."
+    },
+    {
+      "target_round": 1248,
+      "status": "UNRESOLVED_MULTIPLE_LINESETS",
+      "rule": "No source selected as actual purchase."
+    }
+  ],
+  "append_only": true,
+  "no_source_line_reconstruction": true,
+  "no_purchase_aggregate_update": true,
+  "error_note_path": "research/weekly_purchase/1251/ERROR_NOTE_RECOMMENDATION_REVIEW_1249_1250_20261121.json",
+  "detailed_review_path": "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v2/DELIVERY_REVIEW_1249_1250_1251.json"
+}
