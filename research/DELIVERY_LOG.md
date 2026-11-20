@@ -87,3 +87,20 @@ This ledger records combinations displayed to the user, whether or not they were
 - The 1251 prospective signal artifact is shadow-only and explicitly has `purchase_recommendation=false`; it is not a strict-passed portfolio.
 - Result: `NO_FINAL_PURCHASE_LINES_DELIVERED`. No candidate numbers, fallback numbers, or random numbers were displayed; no freeze/seal or purchase confirmation was created.
 - Existing Friday automation remains enabled. Attempted to update its stale five-line prompt and the daily research prompt to the three-line policy, but both updates were rejected with `too_many_active_automations` (plan limit 3). No schedule was changed and no automation was disabled. Repository MASTER/AGENTS already specify three lines from target 1251. Detailed audit: `research/weekly_purchase/1251/FRIDAY_DELIVERY_AUDIT_20261120_0833.json`.
+
+
+## Event 2026-11-20 — target round 1251
+- Delivery evidence: user clarified on 2026-11-20 that the purpose of weekly research is to deliver lottery numbers on Friday and explicitly requested resolution and delivery. The assistant displayed the three lines below in the same conversation.
+- Delivery status: `RESEARCH_SELECTED_NUMBERS_DELIVERED_ON_USER_REQUEST`; this is a research-selected number delivery, **not** a strict-pass promotion.
+- Model: `E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1`, frozen preregistration `research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json`.
+- Allocator: unchanged deterministic E045 `choose_disjoint_ticket`, sequentially selecting exactly three pairwise-disjoint six-number lines (union18); no randomness in final selection.
+- Target/cutoff: 1251 / 1250. Canonical source `lotto_data.csv`; 1,250 rows; SHA256 `7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2`; Git blob `66431d711919f179e4cb1349e2f7295c68a8735e`.
+- Target-1251 regime: LOW; current prior-100-draw HHI 0.02328888888888889; prior reference median 0.02337222222222222; 200 reference windows; LOW-regime training exposure 416.
+- Exact displayed lines:
+  1. 7, 12, 18, 27, 33, 34
+  2. 13, 16, 21, 36, 44, 45
+  3. 2, 11, 17, 24, 35, 38
+- Integrity: three lines; six unique numbers each; all values 1–45; pairwise disjoint; union size 18. A reproduction check for target 1250 exactly matched the stored E054 PREDICTIONS.csv lines before applying the same frozen code path to target 1251.
+- Statistical status: E054 historical strict gate is `FAIL`; this delivery does not claim predictive superiority and is not `STRICT_PASS_READY`. Prospective confirmation not complete.
+- Purchase confirmation: `NOT_CONFIRMED`; no assumption that the user bought these lines.
+- Artifact: `research/weekly_purchase/1251/RESEARCH_SELECTED_LINES_1251_20261120.json`; commit `bb7f0239df8f388af724a06da8a85be93bc99598`.
