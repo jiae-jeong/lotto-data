@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/e078-empirical-block-power-stress.yml"
       - "automation/e078_three_line_empirical_block_power_stress_v1.js"
+      - "automation/e078_three_line_empirical_block_power_stress_v2.js"
       - "research/weekly_purchase/1251/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_PREREG_20261121.json"
 
 permissions:
@@ -28,7 +29,7 @@ jobs:
       - name: Verify preregistration and execute E078
         run: |
           test -f research/weekly_purchase/1251/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_PREREG_20261121.json
-          node automation/e078_three_line_empirical_block_power_stress_v1.js
+          node automation/e078_three_line_empirical_block_power_stress_v2.js
       - name: Preserve immutable results
         run: |
           git config user.name "github-actions[bot]"
