@@ -1,0 +1,125 @@
+{
+  "study_id": "E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1",
+  "registered_at_kst": "2026-11-21T08:03:38+09:00",
+  "registration_status": "FROZEN_BEFORE_EXECUTION",
+  "study_classification": "DESIGN_ONLY_HISTORICAL_INPUT_STRESS_TEST_NOT_MODEL_EVIDENCE",
+  "research_question": "Does empirical multivariate resampling of historical 50-target paired-difference blocks materially change the estimated joint probability of satisfying the fixed four-metric three-line strict gate, relative to E046's normal-theory independence approximation?",
+  "novelty": "New uncertainty-design method: preserve the joint four-endpoint distribution by resampling complete historical block vectors together, and preserve a final remainder block by sampling contiguous windows of exactly the remainder length. E046 used a normal-theory approximation and an independence product; this study estimates joint gate probability under an empirical dependence-preserving block-resampling stress design.",
+  "sources": {
+    "canonical_current_data": {
+      "path": "lotto_data.csv",
+      "data_cutoff": 1250,
+      "rows": 1250,
+      "sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+      "use": "Integrity/cutoff check only; target 1250 outcome is not used in E078 power simulation."
+    },
+    "historical_three_line_walkforward": {
+      "path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1/PREDICTIONS.csv",
+      "cutoff": 1249,
+      "target_range": [
+        401,
+        1249
+      ],
+      "targets": 849,
+      "content_sha256": "63741597dced378876c7ac1d7a15fb5864e03f3a2b765a42e9452591867d3500",
+      "git_blob_sha": "e55b8f5997dde36ff55b93b4bb53d20b8ad2ba69"
+    },
+    "historical_exact_null": {
+      "path": "analysis/2026-11-14/gha_43499702588_1/E045_THREE_LINE_DISJOINT_PORTFOLIO_WALKFORWARD_v1/RANDOM_BASELINE.csv",
+      "content_sha256": "19566decad6fac44651341046d10a6241ba40abc7575771736fd53ef8d035a25",
+      "git_blob_sha": "fa0fe8e2317f22b01dbd3b3aa15f4df68d8680c3"
+    },
+    "prior_design_reference": {
+      "path": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1/DESIGN_GRID.csv",
+      "git_blob_sha": "201a240028d8b7c6a6254dc33fe789a165fbc358"
+    },
+    "prior_block_summaries": {
+      "path": "analysis/2026-11-14/gha_43526534917_1/E046_THREE_LINE_PROSPECTIVE_POWER_PLANNING_v1/BLOCK_SUMMARIES.csv",
+      "git_blob_sha": "0e8ec61b8d028ddd5eaaf76f101ebe1540d601e2"
+    }
+  },
+  "runner": {
+    "path": "automation/e078_three_line_empirical_block_power_stress_v1.js",
+    "git_blob_sha": "183adc5b0114685c749f8995820075c1b39a7292"
+  },
+  "historical_scope": {
+    "targets": "401..1249 inclusive",
+    "contaminated_live_history_rounds": [
+      1244,
+      1245,
+      1246,
+      1247,
+      1248,
+      1249
+    ],
+    "clean_holdout": false,
+    "prospective_confirmation": false,
+    "use_restriction": "Historical planning variance and endpoint dependence only; no model tuning, candidate ranking, or purchase-policy promotion."
+  },
+  "endpoints": {
+    "names": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "paired_difference_definitions": [
+      "max_hits - 1.514256248572755",
+      "any2 - 0.47497624326892623",
+      "any3 - 0.07135490714617204",
+      "winning_union_coverage - 2.4"
+    ],
+    "exact_null_geometry": "Three pairwise-disjoint six-number tickets, union18; use the exact null constants from E045."
+  },
+  "frozen_design": {
+    "source_blocks": "16 consecutive non-overlapping 50-target blocks for targets 401..1200, plus final 49-target remainder 1201..1249.",
+    "full_block_resampling": "Sample complete 50-target four-metric block-mean vectors jointly with replacement from the 16 observed full blocks.",
+    "remainder_resampling": "If prospective N mod 50 is nonzero, sample the final remainder block from all contiguous historical source windows of exactly that remainder length; keep it as a separate block in both weighted mean and block-share gate.",
+    "effect_sizes_in_historical_block_sd": [
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "prospective_target_counts": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      800,
+      849,
+      1000
+    ],
+    "simulations_per_cell": 10000,
+    "random_seed": 20261121078,
+    "ci_critical_z": 2.4977054744123737,
+    "family_alpha": 0.05,
+    "per_metric_alpha": 0.0125,
+    "any2_positive_block_share_min": 0.65,
+    "strict_joint_success": "All four planning lower bounds strictly >0 AND any2-positive block share >=0.65; the final remainder block counts as a block.",
+    "comparator": "E046 joint_power_independence_approx and conservative union-bound lower at matching target counts/effect sizes."
+  },
+  "inference_limits": [
+    "This is a design-only empirical resampling approximation, not the operational moving-block bootstrap applied to prospective target observations.",
+    "Only 16 full historical blocks plus one 49-target remainder are available; empirical support is limited.",
+    "All source targets are previously observed historical data; 1244-1249 are contaminated live-history diagnostics.",
+    "The resampling model assumes exchangeability of sampled historical block vectors for planning and cannot prove future stationarity.",
+    "No model, candidate set, allocator, strict threshold, alpha, or block length is changed.",
+    "No prospective minimum target count or completion rule is selected or adopted.",
+    "No candidate numbers, top30, core/tail list, or purchase lines may be generated or displayed."
+  ],
+  "outputs": [
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/RESULTS.json",
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/SIMULATION_GRID.csv",
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/BLOCK_SOURCE_SUMMARIES.csv",
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/DELIVERY_REVIEW_1249_1250_1251.json",
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/VERIFICATION.json",
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/REPORT.md",
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/SHA256_MANIFEST.json",
+    "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1/COMPLETION.json"
+  ],
+  "promotion_effect": "NONE. Design-only result cannot create STRICT_PASS_READY, cannot satisfy prospective confirmation, and cannot release any numbers."
+}
