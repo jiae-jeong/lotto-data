@@ -1,0 +1,103 @@
+{
+  "study_id": "E077_TRAILING_100_MODEL_SELECTOR_v1",
+  "date_kst": "2026-11-20",
+  "registration_status": "FROZEN_BEFORE_EVALUATION",
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_DYNAMIC_SELECTOR_DIAGNOSTIC_NOT_PROSPECTIVE_CONFIRMATION",
+  "research_question": "Can a fixed dynamic selector choose among the three recovered successor ticket models using only their trailing 100 completed pre-target outcomes and improve one-ticket hit outcomes versus exact uniform 6-of-45 and fixed component models?",
+  "novelty": "AGENTS.md research priority 2; distinct from E054 draw-frequency HHI regime classification and E059 candidate recall. No model-score lookahead, parameter grid, or post-result selector tuning.",
+  "source": {
+    "walkforward_path": "analysis/2026-11-20/MASTER_FULL_V5_152830_935567/AC_CONTRARIAN_WALKFORWARD.csv",
+    "walkforward_git_blob_sha": "575b0f03ceb7f4e8424f3826d2527fa494fdc243aa79728735b986ca200e2c5e",
+    "data_path": "lotto_data.csv",
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "data_cutoff": 1250
+  },
+  "candidates": [
+    "A_v2",
+    "C_v2",
+    "contrarian_v2"
+  ],
+  "eligibility": {
+    "target_range": [
+      401,
+      1250
+    ],
+    "target_count": 850,
+    "required_component_predictions_per_target": 3,
+    "require_each_component_training_through_equals_target_minus_one": true,
+    "prior_performance_window": [
+      "target-100",
+      "target-1"
+    ],
+    "initial_history_available_from_target": 301,
+    "component_prediction_source": "Already frozen cutoff-safe successor walk-forward; legacy A/C/contrarian models are not represented and must not be inferred."
+  },
+  "selector": {
+    "rule": "For each target t, calculate each component's mean number of main-number hits over targets t-100..t-1. Select the model with the highest trailing mean.",
+    "window_targets": 100,
+    "tie_break_order": [
+      "A_v2",
+      "C_v2",
+      "contrarian_v2"
+    ],
+    "fallback": "None; missing component row makes target invalid and must fail completeness checks.",
+    "randomness": false,
+    "variants": 1,
+    "parameter_search": false,
+    "model_weight_tuning": false
+  },
+  "comparator": {
+    "exact_uniform_6_of_45": {
+      "expected_hits": 0.8,
+      "hit_ge_2_probability": null,
+      "hit_ge_3_probability": null,
+      "hit_ge_4_probability": null,
+      "definition": "Hypergeometric exact probabilities: P(X>=k), X~Hypergeom(N=45,K=6,n=6)."
+    },
+    "fixed_models": [
+      "A_v2",
+      "C_v2",
+      "contrarian_v2"
+    ],
+    "selection_oracle": "Per-target max of component hits, descriptive upper bound only; never eligible for deployment."
+  },
+  "endpoints": {
+    "primary": "Mean hits per selected six-number ticket versus exact expectation 0.8.",
+    "secondary": [
+      "P(hit>=2)",
+      "P(hit>=3)",
+      "P(hit>=4)",
+      "mean hits by selected component",
+      "selector component selection shares",
+      "non-overlapping 50-target block deltas"
+    ],
+    "family_alpha": 0.05,
+    "endpoint_count": 4,
+    "bonferroni_alpha_per_endpoint": 0.0125,
+    "block_bootstrap": {
+      "replicates": 4000,
+      "block_length_targets": 50,
+      "preserve_final_remainder": true,
+      "inference": "Paired per-target metric differences from exact null; moving-block bootstrap; two-sided percentile interval with alpha_per_endpoint=0.0125.",
+      "seed": 20261120077
+    },
+    "any2_positive_50_target_block_share_min_for_diagnostic": 0.65
+  },
+  "integrity_checks": [
+    "Exactly one row for each target x component",
+    "Targets 201..1250 are contiguous for all three component models",
+    "training_through_round equals target_round-1",
+    "Every ticket contains exactly six unique integers in 1..45",
+    "Recompute ticket hits against the frozen outcome count and verify stored hits exactly",
+    "Selection for target t reads only component hit rows from t-100..t-1",
+    "No target outcome is used in its own selection",
+    "No missing or duplicate candidate rows"
+  ],
+  "limitations": [
+    "Historical study on previously observed outcomes; it is not prospective confirmation.",
+    "Recovered successor models are not the missing legacy A/C/contrarian sources.",
+    "One-ticket selector performance does not qualify the separate three-line weekly purchase gate.",
+    "No final purchase lines, candidate numbers, freeze, or seal may be produced by this study."
+  ],
+  "promotion_effect": "None. No purchase policy promotion or PASS status can be created."
+}
