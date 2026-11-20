@@ -422,3 +422,20 @@ A/B/C/콘트라리언 모델을 단순 적중 개수 하나로 평가하지 않�
 6. 실제 실행하지 않은 분석은 실행했다고 보고하지 않는다. 실제 실행·검증된 결과만 당일 공부 결과로 인정한다.
 7. 실행할 수 없거나 원본이 없어 검증할 수 없는 항목은 그대로 미완료 상태로 남기고 이유를 기록한다.
 8. 일일 공부 결과는 다음 날 이어서 사용할 수 있도록 코드·결과·상태·미완료 항목·다음 시작점을 재현 가능한 형태로 보존한다.
+
+
+## 2026-11-20 USER DIRECTION AMENDMENT — weekly number delivery is the primary outcome
+
+This dated amendment records the user's clarification on 2026-11-20: the purpose of ongoing lottery research is to deliver three usable number lines on Friday. Research reports and strict validation are means to improve and honestly characterize the delivered lines; they are not substitutes for weekly number delivery.
+
+This amendment supersedes only earlier instructions that suppress all number delivery whenever the strict predictive gate fails. It does **not** change, lower, waive, or bypass any statistical gate.
+
+1. Every Friday, deliver exactly three deterministic, cutoff-safe, research-selected lines when a valid frozen model and allocator can produce them, even when the model's strict portfolio status is FAIL or research-only.
+2. When the strict gate is not passed, label the lines plainly as research-selected / not statistically validated. Never call them STRICT_PASS, PASS_READY, or proven better than random. State the actual validation status separately.
+3. Keep the existing gate unchanged: geometry-matched null, Bonferroni-adjusted CI lower bounds, 50-target positive-block share, leakage checks, multiplicity control, and prospective confirmation remain mandatory for any claim of predictive superiority.
+4. Do not use random, arbitrary, hand-picked, or post-hoc cherry-picked fallback numbers. If the frozen model cannot produce valid lines, report that specific execution failure; do not fabricate numbers.
+5. Thursday remains the preparation/freeze deadline. Freeze target, cutoff, data hash, model/version, deterministic allocator, and exact three lines. Friday must reproduce and deliver exactly the frozen three lines; no Friday model or number tuning.
+6. Whenever lines are displayed, append an exact delivery event to `research/DELIVERY_LOG.md`, including the full original lines, status, model, cutoff, source hashes, and purchase-confirmation status. Never infer that the user purchased them.
+7. The target-1251 delivery on 2026-11-20 uses the frozen E054 deterministic three-line model and E045 allocator, with status STRICT_FAIL / research-selected / no predictive-edge claim. Its original artifact and DELIVERY_LOG event are preserved.
+
+The user's 2026-11-20 clarification is the authority for this delivery-priority change. Historical strict-gate results and all prior model failures remain unchanged.
