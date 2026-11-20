@@ -1,0 +1,18 @@
+{
+  "study_id": "E077_TRAILING_100_MODEL_SELECTOR_v1",
+  "audit_status": "SOURCE_IDENTITY_VERIFIED_WITH_METADATA_LABEL_CORRECTION",
+  "audit_date_kst": "2026-11-20",
+  "preregistration_commit": "3b5f27b0474587da2f5b00e6749bd7a1226de616",
+  "prediction_source_path": "analysis/2026-11-20/MASTER_FULL_V5_152830_935567/AC_CONTRARIAN_WALKFORWARD.csv",
+  "prediction_file_git_blob_sha": "da19f4dc6ec500243cf7503abc096867d6dcf5db",
+  "prediction_file_content_sha256": "575b0f03ceb7f4e8424f3826d2527fa494fdc243aa79728735b986ca200e2c5e",
+  "prediction_file_bytes": 114412,
+  "sha256_manifest_path": "analysis/2026-11-20/MASTER_FULL_V5_152830_935567/SHA256_MANIFEST.csv",
+  "sha256_manifest_entry": "AC_CONTRARIAN_WALKFORWARD.csv,575b0f03ceb7f4e8424f3826d2527fa494fdc243aa79728735b986ca200e2c5e,114412",
+  "preregistered_value": "575b0f03ceb7f4e8424f3826d2527fa494fdc243aa79728735b986ca200e2c5e",
+  "correction": "The preregistration field named walkforward_git_blob_sha actually contains the file-content SHA-256, not the Git blob SHA. The evaluation result field predictions_blob_sha contains the Git blob SHA. These identifiers were incorrectly compared as if they were the same hash type. Recomputed SHA-256 over the exact fetched raw file contents matches both the preregistered content hash and the repository SHA256_MANIFEST entry; Git blob identity is separately da19f4dc6ec500243cf7503abc096867d6dcf5db.",
+  "impact": "No input content mismatch or data substitution was found. This is a metadata-type naming/comparison correction only. E077 calculation inputs are source-identified by the matching content SHA-256, and the preregistration remains prior to calculation.",
+  "calculation_status": "HISTORICAL_CUTOFF_SAFE_DIAGNOSTIC_REPRODUCIBLE",
+  "purchase_policy_promotion": false,
+  "strict_pass_ready": false
+}
