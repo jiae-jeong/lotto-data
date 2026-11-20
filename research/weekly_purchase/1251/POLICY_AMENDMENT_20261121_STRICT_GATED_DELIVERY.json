@@ -1,0 +1,48 @@
+{
+  "amendment_id": "POLICY_AMENDMENT_20261121_STRICT_GATED_DELIVERY",
+  "effective_at_kst": "2026-11-21T08:03:38+09:00",
+  "authority": "User direction in the 2026-11-21 daily research instruction",
+  "supersedes": "AGENTS.md section '2026-11-20 USER DIRECTION AMENDMENT — weekly number delivery is the primary outcome' only to the extent that it permits research-selected lines to be displayed while strict gate is FAIL.",
+  "unchanged": {
+    "target_1251_plus_purchase_lines": 3,
+    "numbers_per_line": 6,
+    "historical_five_line_records_through_1250_preserved": true,
+    "strict_gate_thresholds_unchanged": true,
+    "random_fallback_prohibited": true
+  },
+  "delivery_rules": {
+    "publish_candidate_top30_core_tail_or_purchase_lines_before_strict_pass": false,
+    "publish_any_intermediate_or_research_selected_lines_before_strict_pass": false,
+    "strict_fail_action": "Report that no verified final purchase lines are available; do not display candidates or fallback lines.",
+    "friday_action": "Reproduce only the exact Thursday frozen/sealed three lines; no Friday search or tuning.",
+    "freeze_deadline": "Thursday before target draw",
+    "strict_pass_required_for_any_number_display": true,
+    "prospective_confirmation_required": true
+  },
+  "strict_gate": {
+    "metrics": [
+      "max_hits",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "family_alpha": 0.05,
+    "alpha_per_metric": 0.0125,
+    "all_adjusted_moving_block_ci_lower_bounds_strictly_gt_zero": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "retain_final_remainder_block": true,
+    "cutoff_safe_nested_rolling_walkforward": true,
+    "no_leakage": true,
+    "no_threshold_relaxation": true,
+    "no_posthoc_holdout_cherry_picking": true
+  },
+  "append_only": {
+    "original_delivery_log_events_unchanged": true,
+    "append_delivery_event_only_when_numbers_are_actually_displayed": true,
+    "purchase_confirmation_requires_explicit_confirmation_or_receipt": true
+  },
+  "prospective_confirmation": {
+    "minimum_target_count_and_completion_rule": "Still unspecified; this amendment does not invent or adopt either.",
+    "consequence": "No strict PASS-ready status until a separately pre-registered prospective confirmation rule is explicitly approved and satisfied."
+  }
+}
