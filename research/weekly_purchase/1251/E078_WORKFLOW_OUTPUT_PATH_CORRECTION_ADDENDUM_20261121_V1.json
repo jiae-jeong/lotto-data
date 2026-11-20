@@ -1,0 +1,22 @@
+{
+  "addendum_id": "E078_WORKFLOW_OUTPUT_PATH_CORRECTION_ADDENDUM_20261121_V1",
+  "study_id": "E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v1",
+  "date_kst": "2026-11-21",
+  "finding": {
+    "workflow_run_id": 44835037120,
+    "runner_version": "v3",
+    "execution": "SUCCESS",
+    "simulation_cells": 36,
+    "replicates_per_cell": 10000,
+    "delivery_review_parser": "Corrected and verified in runner output.",
+    "preservation": "No result files were committed because the workflow's git add path still pointed to the v1 output directory while v3 wrote to the append-only v2 directory."
+  },
+  "correction": {
+    "workflow_path": ".github/workflows/e078-empirical-block-power-stress.yml",
+    "git_add_path": "analysis/2026-11-21/E078_THREE_LINE_EMPIRICAL_BLOCK_POWER_STRESS_v2",
+    "runner_and_prereg_unchanged": true,
+    "algorithm_and_seed_unchanged": true,
+    "deterministic_reexecution_authorized": true
+  },
+  "preservation_rule": "The earlier run and all source versions remain in Git history. This rerun exists solely to commit the already computed v2 result directory."
+}
