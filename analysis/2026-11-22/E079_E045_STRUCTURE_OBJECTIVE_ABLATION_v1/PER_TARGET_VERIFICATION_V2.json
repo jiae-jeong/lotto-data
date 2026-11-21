@@ -1,0 +1,19 @@
+{
+  "study_id": "E079",
+  "source_ledger_blob_sha": "313f1342e8f5e302cdec8d917b075686cfcbe8c7",
+  "row_count": 849,
+  "sequence_valid": true,
+  "cutoff_valid": true,
+  "geometry_valid": true,
+  "geometry_rule": "Each arm constructs exactly three six-number lines with a used-number set; the generator enforces union size 18, which implies pairwise zero overlap. V2 makes these invariants explicit per target.",
+  "schema_correction": "Original PREDICTIONS.csv columns A_union/B_union are winning-union coverage, not union size. Original file is preserved; PREDICTIONS_V2.csv uses explicit names and adds union size and pairwise overlap columns.",
+  "contaminated_rounds": [
+    1244,
+    1245,
+    1246,
+    1247,
+    1248,
+    1249
+  ],
+  "clean_holdout": false
+}
