@@ -1,0 +1,28 @@
+{
+  "addendum_id": "E079_IMPLEMENTATION_REPAIR_ADDENDUM_20261122_V1",
+  "study_id": "E079_E045_STRUCTURE_OBJECTIVE_ABLATION_v1",
+  "recorded_at_kst": "2026-11-22T08:20:00+09:00",
+  "status": "PRE_EVALUATION_IMPLEMENTATION_REPAIR",
+  "reason": "Static review of the frozen E045 helper and E075 V2 conformance preregistration showed that legacy E045 evaluates consecutive adjacency and the lexicographic tie-break in score-ranked combination order rather than on the sorted ticket. E075 V2 defines the corrected sorted-ticket semantics. E079 must isolate the structural objective, not perpetuate that known ordering defect.",
+  "authority": "E075_E045_SELECTOR_ORDER_CONFORMANCE_PREREG_20261119_V2.json; E075 legacy-source conformance addendum 2026-11-19.",
+  "unchanged": {
+    "candidate_model": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+    "candidate_scores": true,
+    "top16_pool_rule": true,
+    "three_line_disjoint_union18_geometry": true,
+    "target_range": "401..1249 inclusive",
+    "strict_gate_thresholds": true,
+    "random_comparator": true,
+    "inference_design": true,
+    "structure_objective_coefficients": true
+  },
+  "corrected_baseline_semantics": "For each six-number subset enumerated from the score-ranked top-16 pool, sort the subset ascending before counting consecutive adjacent pairs and before lexicographic tie-break; return the sorted ticket. This is the E075 V2 conformance correction.",
+  "challenger_semantics": "Keep the identical E054 scores and top-16 pool; select the six highest scores only, with number-ascending score ties; no odd/even, low/high, consecutive, or band terms.",
+  "versioning": {
+    "v1_runner": "automation/e079_e045_structure_objective_ablation_v1.js",
+    "v1_status": "PRESERVED_NOT_EXECUTED; superseded due to pre-run source-order conformance review and initialization defect.",
+    "v2_runner": "automation/e079_e045_structure_objective_ablation_v2.js",
+    "v2_status": "AUTHORITATIVE_EXECUTION_SOURCE"
+  },
+  "promotion_effect": "NONE; historical diagnostic only; no prospective confirmation or purchase readiness."
+}
