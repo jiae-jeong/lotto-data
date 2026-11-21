@@ -1,0 +1,127 @@
+{
+  "study_id": "E079_E045_STRUCTURE_OBJECTIVE_ABLATION_v1",
+  "registered_at_kst": "2026-11-22T08:17:00+09:00",
+  "registration_status": "FROZEN_BEFORE_EVALUATION",
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_ALLOCATOR_ABLATION_NOT_PROSPECTIVE_CONFIRMATION",
+  "research_question": "With E054 candidate scores and E045 top-16 candidate pools held fixed, do E045's odd/even, low/high, consecutive-number penalties and decade-band bonus improve three-line portfolio outcomes relative to a score-only allocator?",
+  "novelty": "A single pre-specified allocator ablation isolates the contribution of the existing E045 structural objective. It changes no candidate scores, candidate pool size, number of lines, line size, disjoint-union geometry, target range, random comparator, or inference thresholds.",
+  "sources": {
+    "canonical_data": {
+      "path": "lotto_data.csv",
+      "full_cutoff": 1250,
+      "rows": 1250,
+      "full_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+      "git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+      "evaluation_prefix_cutoff": 1249,
+      "prefix_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7"
+    },
+    "candidate_model": {
+      "study": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+      "preregistration": "research/weekly_purchase/1251/E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_PREREG_20261116.json",
+      "preregistration_blob_sha": "e58c8cd0162709a0eeaa1b6c8b69d712a2bd1356",
+      "runner": "automation/three_line_rolling_concentration_regime_e054_v1.py",
+      "runner_blob_sha": "3a660b23fc7b74a474cfbc984e7231f33e16d595"
+    },
+    "allocator_baseline": {
+      "name": "E045 choose_disjoint_ticket",
+      "path": "automation/three_line_research_1251_v1.py",
+      "blob_sha": "ea74fb93f9e5704810a0d51b9a08b49f29fa3513"
+    }
+  },
+  "evaluation": {
+    "target_rounds": "401..1249 inclusive",
+    "target_count": 849,
+    "cutoff_rule": "For each target t, every feature, regime, training outcome, and score uses only rounds <= t-1.",
+    "contaminated_live_history_rounds": [
+      1244,
+      1245,
+      1246,
+      1247,
+      1248,
+      1249
+    ],
+    "clean_holdout": false,
+    "prospective_confirmation": false,
+    "rolling_design": "Fixed model and allocator rules are applied independently at each target cutoff. No hyperparameter or variant selection is performed on the evaluation outcomes."
+  },
+  "fixed_candidate_stage": {
+    "model": "E054 rolling-100 main-number HHI regime",
+    "window_draws": 100,
+    "reference_windows": 200,
+    "training_outcomes": "301..t-1",
+    "prior_strength": 45,
+    "score": "(successes[regime,n]+6)/(regime_exposure+45)",
+    "ranking": "score descending, number ascending",
+    "candidate_pool": "At each sequential ticket allocation, top 16 currently unused numbers by the frozen E054 score."
+  },
+  "arms": [
+    {
+      "id": "E079-A",
+      "name": "E045_STRUCTURE_OBJECTIVE",
+      "role": "baseline",
+      "rule": "Exact frozen E045 choose_disjoint_ticket: among all 6-number subsets of the top-16 pool, maximize score sum - 0.022*abs(odd_count-3) - 0.020*abs(low_count-3) - 0.010*max(0,consecutive_pairs-2) + 0.004*decade_band_count; lexicographic lower-number tie-break."
+    },
+    {
+      "id": "E079-B",
+      "name": "SCORE_ONLY_TOP6_ABLATION",
+      "role": "single challenger",
+      "rule": "From the identical top-16 pool, choose the six highest E054 scores (same deterministic tie-break); remove selected numbers and repeat until exactly three pairwise-disjoint lines are produced. No structure terms."
+    }
+  ],
+  "geometry": {
+    "lines": 3,
+    "numbers_per_line": 6,
+    "pairwise_disjoint": true,
+    "union_size": 18
+  },
+  "metrics": [
+    "max_hits",
+    "any2",
+    "any3",
+    "any4",
+    "any5",
+    "any6",
+    "winning_union_coverage",
+    "line_hit_distribution"
+  ],
+  "exact_geometry_matched_null": {
+    "draw_space": "C(45,6)=8145060",
+    "mean_max_hits": 1.514256248572755,
+    "p_any2": 0.47497624326892623,
+    "p_any3": 0.07135490714617204,
+    "expected_union_coverage": 2.4,
+    "geometry": "three pairwise-disjoint six-number lines, union18"
+  },
+  "matched_random": {
+    "portfolios_per_target": 120,
+    "method": "uniform random relabeling of 1..45 applied jointly to the three fixed lines, preserving exact disjoint union18 geometry",
+    "seed": 20261122079
+  },
+  "inference": {
+    "bootstrap_replicates": 4000,
+    "bootstrap_seed": 20261122080,
+    "block_length_targets": 50,
+    "final_remainder_block": "49 targets retained separately",
+    "block_count": 17,
+    "family_alpha": 0.05,
+    "per_metric_alpha": 0.0125,
+    "ci": "two-sided moving-block percentile interval at per-metric alpha 0.0125",
+    "strict_historical_gate": "All four adjusted CI lower bounds (max_hits, any2, any3, winning_union_coverage) strictly >0 and any2-positive non-overlapping block share >=0.65.",
+    "paired_ablation_comparison": "Same 4-metric adjusted moving-block CI on challenger-minus-baseline paired differences."
+  },
+  "exclusions": [
+    "No use of 1250 or 1251 outcomes in the 401..1249 evaluation target results.",
+    "No tuning, threshold relaxation, post-hoc variant creation, or promotion based on these already inspected historical rounds.",
+    "Rounds 1244..1249 are contaminated live-history diagnostics, not clean holdout.",
+    "This historical ablation cannot satisfy prospective confirmation or release purchase numbers.",
+    "No candidate list or purchase lines are included in the report."
+  ],
+  "outputs": [
+    "automation/e079_e045_structure_objective_ablation_v1.js",
+    "analysis/2026-11-22/E079_E045_STRUCTURE_OBJECTIVE_ABLATION_v1/RESULTS.json",
+    "analysis/2026-11-22/E079_E045_STRUCTURE_OBJECTIVE_ABLATION_v1/REPORT.md",
+    "analysis/2026-11-22/E079_E045_STRUCTURE_OBJECTIVE_ABLATION_v1/VERIFICATION.json",
+    "research/weekly_purchase/1251/ERROR_NOTE_RECOMMENDATION_REVIEW_1251_20261122.json"
+  ],
+  "promotion_effect": "NONE; historical diagnostic only; no strict PASS-ready status, no prospective confirmation, no number release."
+}
