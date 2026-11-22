@@ -1,0 +1,87 @@
+{
+  "correction_id": "E080_OUTPUT_SHA256_MANIFEST_CORRECTION_20261123_V1",
+  "study_id": "E080_BORDA_RANK_AGGREGATION_v1",
+  "recorded_at_kst": "2026-11-23T08:45:00+09:00",
+  "supersedes": "analysis/2026-11-23/E080_BORDA_RANK_AGGREGATION_v1/SHA256_MANIFEST.json",
+  "original_manifest_git_blob_sha": "72bbb6cb6246b86b682dbe13730f450f096eb951",
+  "finding": "The first generated SHA256_MANIFEST.json contains hashes that do not match the exact files committed to GitHub. All nine output files are independently re-fetched; their recomputed Git blob SHA-1 values match the GitHub blob identifiers. The corrected SHA-256 values below are computed from those exact fetched contents.",
+  "sha256_test_vector": "abc -> ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+  "authoritative_runner": {
+    "path": "automation/e080_borda_rank_aggregation_v3.js",
+    "git_blob_sha": "313be168074e1f038822b9042f0b0b6653a015c5",
+    "sha256": "c5433bae84b8b5e5c8e08008d7af21eb708235387cc694fef752bbf3ff8bd3be"
+  },
+  "verified_outputs": {
+    "RESULTS.json": {
+      "sha256": "dda67bbf94dd815302ed8408d4e67540374fd86c4e2a3f4b1871b497217c97c1",
+      "git_blob_sha": "0d1fadb59689f8102fca2032dd20678814e83eb4",
+      "git_blob_recomputed": "0d1fadb59689f8102fca2032dd20678814e83eb4",
+      "bytes": 11014,
+      "git_blob_match": true
+    },
+    "VERIFICATION.json": {
+      "sha256": "c8a6c8c40103879557d7580471ae3ee74f4d9a914710f8450bf0f24e72bf49bb",
+      "git_blob_sha": "0445e72604726dcdae0ccd079d43fad576f879e7",
+      "git_blob_recomputed": "0445e72604726dcdae0ccd079d43fad576f879e7",
+      "bytes": 1523,
+      "git_blob_match": true
+    },
+    "CANDIDATE_RECALL.csv": {
+      "sha256": "17d8b471ccd4516f7959c9e7ab199be814331c3a12083dca681dea4f3531684a",
+      "git_blob_sha": "41324b57875bb97df6feeb25a84483c84abb884f",
+      "git_blob_recomputed": "41324b57875bb97df6feeb25a84483c84abb884f",
+      "bytes": 268648,
+      "git_blob_match": true
+    },
+    "PORTFOLIO_PREDICTIONS.csv": {
+      "sha256": "07d40bf2a69e15bc15407309b9e8c61e312dde5e8b11418fbb4e762a3de389fe",
+      "git_blob_sha": "deabb2fc6e9ee4ad56306b199b1e3c43d1798abe",
+      "git_blob_recomputed": "deabb2fc6e9ee4ad56306b199b1e3c43d1798abe",
+      "bytes": 32825,
+      "git_blob_match": true
+    },
+    "CANDIDATE_RANDOM_BASELINE.csv": {
+      "sha256": "337b1659eef572d5c74eccd36b357b86f9dea717c8d98d307c361db47629d95a",
+      "git_blob_sha": "4e99a38c9454f38a807f387e6238378b8f7206ae",
+      "git_blob_recomputed": "4e99a38c9454f38a807f387e6238378b8f7206ae",
+      "bytes": 54077,
+      "git_blob_match": true
+    },
+    "PORTFOLIO_RANDOM_BASELINE.csv": {
+      "sha256": "bf82e8a735f2c572f01d04912f7d019d135d2786fc6e863bfa0066a14b8cd629",
+      "git_blob_sha": "653d7dd42b7e24a1be5242b6821239fc5aa10246",
+      "git_blob_recomputed": "653d7dd42b7e24a1be5242b6821239fc5aa10246",
+      "bytes": 64348,
+      "git_blob_match": true
+    },
+    "BLOCK_STABILITY.csv": {
+      "sha256": "dc46a5da090a0e527f2d17258e7390d9afabfb27135e7184d0d4cb3fbd7c45b3",
+      "git_blob_sha": "659a2ff22d5e1f9f0618e47a1170a734cf38fb10",
+      "git_blob_recomputed": "659a2ff22d5e1f9f0618e47a1170a734cf38fb10",
+      "bytes": 3854,
+      "git_blob_match": true
+    },
+    "WINNER_MISS_TRACE.csv": {
+      "sha256": "d9b27e8a7f6c630ddc708746d048f4d19a7f5352e25d840e9fdb5a08ad7cd980",
+      "git_blob_sha": "149b1d8476128152e142982d04bda3715abc8322",
+      "git_blob_recomputed": "149b1d8476128152e142982d04bda3715abc8322",
+      "bytes": 165760,
+      "git_blob_match": true
+    },
+    "REPORT.md": {
+      "sha256": "f29761ba7201efd5dbe2e2f355e332aaf297d1ac92c2509215c892264a6d2c9a",
+      "git_blob_sha": "52670fc110021a9bc6577fcab4cb5b133fe89ec1",
+      "git_blob_recomputed": "52670fc110021a9bc6577fcab4cb5b133fe89ec1",
+      "bytes": 4338,
+      "git_blob_match": true
+    }
+  },
+  "decision": {
+    "output_content_integrity": "PASS_GIT_BLOB_IDENTITY_RECOMPUTED",
+    "original_manifest": "PRESERVED_BUT_NOT_AUTHORITATIVE",
+    "corrected_manifest": "THIS_APPEND_ONLY_CORRECTION_IS_AUTHORITATIVE",
+    "model_metrics_changed": false,
+    "strict_gate_changed": false,
+    "promotion_effect": "NONE"
+  }
+}
