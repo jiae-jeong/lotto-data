@@ -1,0 +1,38 @@
+{
+  "RESULTS.json": {
+    "sha256": "dda67bbf94dd815302ed8408d4e67540374fd86c4e2a3f4b1871b497217c97c1",
+    "bytes": 11014
+  },
+  "VERIFICATION.json": {
+    "sha256": "c8a6c8c40103879557d7580471ae3ee74f4d9a914710f8450bf0f24e72bf49bb",
+    "bytes": 1523
+  },
+  "CANDIDATE_RECALL.csv": {
+    "sha256": "17d8b471ccd4516f7959c9e7ab199be814331c3a12083dca681dea4f3531684a",
+    "bytes": 268648
+  },
+  "PORTFOLIO_PREDICTIONS.csv": {
+    "sha256": "07d40bf2a69e15bc15407309b9e8c61e312dde5e8b11418fbb4e762a3de389fe",
+    "bytes": 32825
+  },
+  "CANDIDATE_RANDOM_BASELINE.csv": {
+    "sha256": "337b1659eef572d5c74eccd36b357b86f9dea717c8d98d307c361db47629d95a",
+    "bytes": 54077
+  },
+  "PORTFOLIO_RANDOM_BASELINE.csv": {
+    "sha256": "bf82e8a735f2c572f01d04912f7d019d135d2786fc6e863bfa0066a14b8cd629",
+    "bytes": 64348
+  },
+  "BLOCK_STABILITY.csv": {
+    "sha256": "dc46a5da090a0e527f2d17258e7390d9afabfb27135e7184d0d4cb3fbd7c45b3",
+    "bytes": 3854
+  },
+  "WINNER_MISS_TRACE.csv": {
+    "sha256": "d9b27e8a7f6c630ddc708746d048f4d19a7f5352e25d840e9fdb5a08ad7cd980",
+    "bytes": 165760
+  },
+  "REPORT.md": {
+    "sha256": "f29761ba7201efd5dbe2e2f355e332aaf297d1ac92c2509215c892264a6d2c9a",
+    "bytes": 4338
+  }
+}
