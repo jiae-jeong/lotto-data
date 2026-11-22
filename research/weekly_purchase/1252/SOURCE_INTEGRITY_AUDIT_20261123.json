@@ -1,0 +1,49 @@
+{
+  "audit_id": "TARGET_1252_SOURCE_INTEGRITY_AUDIT_20261123",
+  "recorded_at_kst": "2026-11-23T08:42:00+09:00",
+  "target_round": 1252,
+  "required_cutoff": 1251,
+  "snapshot_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+  "snapshot_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "snapshot_content_bytes": 43485,
+  "independently_computed_sha256": "5586b6ef620c74a1aee672564d070462f835b9ad1ebe445f4765665c507dbae7",
+  "previously_recorded_corrected_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "hash_metadata_match": false,
+  "git_blob_content_identity_match": true,
+  "sha256_implementation_checks": {
+    "standard_abc_test_vector": "PASS",
+    "canonical_lotto_data_csv_expected_sha256": "PASS",
+    "git_blob_sha1_recomputed_from_snapshot_content": "PASS"
+  },
+  "structure": {
+    "header_valid": true,
+    "row_count": 1251,
+    "rounds_contiguous_1_to_1251": true,
+    "main_numbers_unique_and_in_range": true,
+    "bonus_valid_and_not_in_main": true,
+    "latest_record_matches_independent_secondary_crosscheck": true
+  },
+  "source_provenance": {
+    "official_api_direct_retrieval": false,
+    "attempted_official_urls": [
+      "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1251",
+      "https://www.dhlottery.co.kr/gameResult.do?method=byWin&drwNo=1251"
+    ],
+    "secondary_crosscheck_sources": [
+      "https://www.yna.co.kr/view/AKR20261121050800002",
+      "https://www.fnnews.com/news/202611212058363456",
+      "https://www.lottolottery.co.kr/results/1251"
+    ],
+    "classification": "SECONDARY_CROSS_CHECKED_NOT_DIRECT_OFFICIAL_API"
+  },
+  "decision": {
+    "source_integrity": "PARTIAL_PASS_GIT_BLOB_AND_ROWS_VALID_BUT_SHA256_METADATA_MISMATCH",
+    "target_1252_cutoff_data_present": true,
+    "prospective_freeze_allowed": false,
+    "strict_pass_ready": false,
+    "reason": "The exact snapshot content is identified by its Git blob SHA and the 1,251-row sequence is valid, but the independently computed SHA-256 does not match the previously recorded corrected SHA-256. The mismatch must be reconciled before a prospective freeze/seal. Direct official API retrieval is also unavailable.",
+    "candidate_or_purchase_lines_generated": false
+  },
+  "append_only": true,
+  "no_existing_snapshot_or_metadata_overwritten": true
+}
