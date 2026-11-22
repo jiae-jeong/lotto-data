@@ -1,0 +1,38 @@
+{
+  "correction_id": "TARGET_1252_SOURCE_INTEGRITY_AUDIT_CORRECTION_20261123",
+  "recorded_at_kst": "2026-11-23T08:48:00+09:00",
+  "supersedes": "research/weekly_purchase/1252/SOURCE_INTEGRITY_AUDIT_20261123.json",
+  "superseded_finding": "The previously reported SHA-256 mismatch (5586...) was caused by an audit helper that omitted the SHA-256 round constant 0xefbe4786. The 1251-row snapshot itself was not changed.",
+  "corrected_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "snapshot_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "validation": {
+    "standard_abc_vector": "PASS",
+    "canonical_lotto_data_csv_sha256": "PASS",
+    "snapshot_sha256_matches_recorded_corrected_sha256": true,
+    "git_blob_sha_recomputed_from_exact_content": true,
+    "row_count": 1251,
+    "contiguous_rounds_1_to_1251": true,
+    "main_numbers_unique_and_in_range": true,
+    "bonus_valid_and_not_in_main": true,
+    "latest_record_matches_secondary_crosscheck": true
+  },
+  "source_provenance": {
+    "official_api_direct_retrieval": false,
+    "classification": "SECONDARY_CROSS_CHECKED_NOT_DIRECT_OFFICIAL_API",
+    "corroborating_sources": [
+      "https://www.yna.co.kr/view/AKR20261121050800002",
+      "https://www.fnnews.com/news/202611212058363456",
+      "https://www.lottolottery.co.kr/results/1251"
+    ]
+  },
+  "corrected_decision": {
+    "data_integrity": "PASS",
+    "target_1252_cutoff_1251_data_present": true,
+    "source_provenance_limit_remains": true,
+    "prospective_freeze_allowed_by_data_integrity": true,
+    "strict_pass_ready": false,
+    "reason": "The snapshot hash discrepancy is resolved. Data integrity alone does not satisfy the independent model strict gate or prospective confirmation requirement."
+  },
+  "append_only": true,
+  "original_audit_preserved": true
+}
