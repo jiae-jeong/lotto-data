@@ -1,0 +1,232 @@
+{
+  "review_id": "E030_PROSPECTIVE_SHADOW_REVIEW_1251_v1",
+  "created_at_kst": "2026-11-22",
+  "evidence_class": "FIRST_RESUMED_PROSPECTIVE_SHADOW_OBSERVATION_SINGLE_TARGET_NOT_CONFIRMATION",
+  "target_round": 1251,
+  "draw_date": "2026-11-21",
+  "pre_draw_freeze": {
+    "path": "analysis/prospective/E030/FROZEN_SIGNALS_1251.json",
+    "git_blob_sha": "3b12bfed74fa4644dec963645eebdb45acd6f58d",
+    "sha256": "e809288c6f6a2d891fb48e88810369e03ff64cea48333b5fca383d6621b316c6",
+    "status": "FROZEN_PROSPECTIVE_SHADOW_ONLY",
+    "generated_at_utc": "2026-11-14T19:18:47.096007+00:00",
+    "training_cutoff": 1250,
+    "canonical_data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "resume_status_blob_sha": "aae4e271e32fc4af9ccd0ed2c4b82bca8b61ccdb"
+  },
+  "data_integrity": {
+    "canonical_path": "lotto_data.csv",
+    "canonical_rows": 1250,
+    "canonical_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "canonical_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "snapshot_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "snapshot_rows": 1251,
+    "snapshot_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "snapshot_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "snapshot_prefix_matches_canonical": true,
+    "round_sequence_valid": true,
+    "main_number_validation": true,
+    "bonus_validation": true
+  },
+  "draw_source_verification": {
+    "status": "SECONDARY_CROSS_CHECKED_NOT_DIRECT_OFFICIAL_API",
+    "official_api_direct_retrieval": false,
+    "sources": [
+      {
+        "publisher": "Yonhap News",
+        "url": "https://www.yna.co.kr/view/AKR20261121050800002",
+        "published_at_kst": "2026-11-21T20:48:00+09:00",
+        "role": "operator-attributed result report"
+      },
+      {
+        "publisher": "Newsis via FN News",
+        "url": "https://www.fnnews.com/news/202611212058363456",
+        "published_at_kst": "2026-11-21T20:58:00+09:00",
+        "role": "independent news corroboration"
+      },
+      {
+        "publisher": "LottoLottery",
+        "url": "https://www.lottolottery.co.kr/results/1251",
+        "role": "independent result listing"
+      },
+      {
+        "publisher": "LottoKing",
+        "url": "https://lotto.gon.ai.kr/lotto/1251",
+        "role": "independent result listing"
+      }
+    ]
+  },
+  "candidate_stage_only": {
+    "signals": [
+      {
+        "signal": "CALENDAR_SEASON_CONDITIONAL_v1",
+        "top6_hit_count": 3,
+        "winner_rank_positions": [
+          1,
+          3,
+          5,
+          8,
+          20,
+          41
+        ],
+        "mean_winner_rank": 13,
+        "candidate_recall_at_k": {
+          "10": {
+            "winners_retained": 4,
+            "winners_total": 6,
+            "recall": 0.6666666667,
+            "uniform_expected_hits": 1.3333333333,
+            "delta_hits": 2.6666666667
+          },
+          "15": {
+            "winners_retained": 4,
+            "winners_total": 6,
+            "recall": 0.6666666667,
+            "uniform_expected_hits": 2,
+            "delta_hits": 2
+          },
+          "20": {
+            "winners_retained": 5,
+            "winners_total": 6,
+            "recall": 0.8333333333,
+            "uniform_expected_hits": 2.6666666667,
+            "delta_hits": 2.3333333333
+          },
+          "25": {
+            "winners_retained": 5,
+            "winners_total": 6,
+            "recall": 0.8333333333,
+            "uniform_expected_hits": 3.3333333333,
+            "delta_hits": 1.6666666667
+          },
+          "30": {
+            "winners_retained": 5,
+            "winners_total": 6,
+            "recall": 0.8333333333,
+            "uniform_expected_hits": 4,
+            "delta_hits": 1
+          }
+        }
+      },
+      {
+        "signal": "PREVIOUS_SUM_REGIME_CONDITIONAL_v1",
+        "top6_hit_count": 0,
+        "winner_rank_positions": [
+          10,
+          13,
+          17,
+          19,
+          20,
+          43
+        ],
+        "mean_winner_rank": 20.3333333333,
+        "candidate_recall_at_k": {
+          "10": {
+            "winners_retained": 1,
+            "winners_total": 6,
+            "recall": 0.1666666667,
+            "uniform_expected_hits": 1.3333333333,
+            "delta_hits": -0.3333333333
+          },
+          "15": {
+            "winners_retained": 2,
+            "winners_total": 6,
+            "recall": 0.3333333333,
+            "uniform_expected_hits": 2,
+            "delta_hits": 0
+          },
+          "20": {
+            "winners_retained": 5,
+            "winners_total": 6,
+            "recall": 0.8333333333,
+            "uniform_expected_hits": 2.6666666667,
+            "delta_hits": 2.3333333333
+          },
+          "25": {
+            "winners_retained": 5,
+            "winners_total": 6,
+            "recall": 0.8333333333,
+            "uniform_expected_hits": 3.3333333333,
+            "delta_hits": 1.6666666667
+          },
+          "30": {
+            "winners_retained": 5,
+            "winners_total": 6,
+            "recall": 0.8333333333,
+            "uniform_expected_hits": 4,
+            "delta_hits": 1
+          }
+        }
+      }
+    ],
+    "top_k_overlap_counts_between_the_two_frozen_rankings": {
+      "6": 0,
+      "10": 2,
+      "15": 7,
+      "30": 23
+    }
+  },
+  "portfolio_stage": {
+    "status": "NOT_EVALUATED_FOR_E030_SHADOW_SIGNALS",
+    "allocator": "NONE",
+    "three_line_policy_eligible": false,
+    "no_candidate_or_purchase_numbers_in_this_artifact": true
+  },
+  "separate_actual_1251_delivery_review": {
+    "artifact_path": "research/weekly_purchase/1251/RESEARCH_SELECTED_LINES_1251_20261120.json",
+    "artifact_git_blob_sha": "9da6f5760367758896f20f8643c771452e7948cd",
+    "source_lines_reconstructed": false,
+    "exact_reproduction_match": true,
+    "line_hit_distribution": [
+      1,
+      1,
+      0
+    ],
+    "max_hit": 1,
+    "any2": false,
+    "any3": false,
+    "union_coverage": 2,
+    "bonus_match": false,
+    "candidate_top30_recall": "5/6",
+    "failure_decomposition": {
+      "selected_winners": 2,
+      "later_sequential_pool_winners_not_allocated": 2,
+      "outside_three_stage_pool_reach": 2
+    },
+    "purchase_confirmation": "NOT_CONFIRMED"
+  },
+  "historical_delivery_audit": {
+    "target_1249": {
+      "display_class": "INTERMEDIATE_CANDIDATE_DISPLAYED_NOT_FINAL",
+      "line_count": 5,
+      "line_hit_distribution": [
+        2,
+        1,
+        0,
+        0,
+        1
+      ],
+      "max_hit": 2,
+      "any2": true,
+      "union_coverage": 4,
+      "purchase_confirmation": "NOT_CONFIRMED"
+    },
+    "target_1250": {
+      "status": "USER_VISIBLE_DELIVERY_NOT_VERIFIED; excluded from delivered-set performance"
+    },
+    "targets_1247_1248": {
+      "status": "PURCHASE_NOT_CONFIRMED; multiple preserved line sets; excluded from actual-purchase aggregate"
+    }
+  },
+  "interpretation": {
+    "one_target_only": true,
+    "no_statistical_significance_claim": true,
+    "no_model_promotion": true,
+    "no_three_line_strict_gate_effect": true,
+    "no_prospective_completion_rule_invented": true,
+    "prospective_gap": "E030 shadow horizon had no pre-draw freezes for 1247-1250; target 1251 is the first resumed observation, not a continuous confirmation series."
+  },
+  "append_only": true,
+  "delivery_log_event_appended": false,
+  "reason_no_delivery_event": "No candidate or purchase numbers were displayed in this review."
+}
