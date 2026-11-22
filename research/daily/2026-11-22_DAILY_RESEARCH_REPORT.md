@@ -80,3 +80,8 @@ The 1251 result was cross-checked against a Yonhap report quoting the Donghaeng 
 ## Append-only hash correction — 2026-11-22
 
 The first metadata helper used for the new 1251 snapshot omitted SHA-256 round constant `0xefbe4786`. The snapshot bytes and 1,251 records are unchanged. A corrected standard SHA-256 implementation passed the published `abc` test vector and reproduced the canonical `lotto_data.csv` hash exactly. The correct snapshot SHA-256 is `2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9`; the earlier `e3a43c7ba1217597cf5827a4f10f13c038744d3795e9fdf292c52481001ab064` value is invalid and superseded. Correction artifact: `data/snapshots/lotto_data_through_1251_20261122_SOURCE_HASH_CORRECTION.json`. The original snapshot and original source metadata remain preserved.
+
+
+## Append-only source-link correction — 2026-11-22
+
+Two third-party URLs in the first source metadata/error-note drafts were not verified and are superseded. Use the verified links in `data/snapshots/lotto_data_through_1251_20261122_SOURCE_LINK_CORRECTION.json`: Yonhap, Newsis via FNNews, LottoLottery, and LottoKing. No result values changed. Direct official API retrieval remains unavailable. The prior source records remain preserved for audit.
