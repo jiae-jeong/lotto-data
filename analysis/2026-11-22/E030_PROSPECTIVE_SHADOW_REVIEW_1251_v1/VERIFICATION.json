@@ -1,0 +1,35 @@
+{
+  "status": "PASS_DATA_AND_SHADOW_LEDGER_AUDIT",
+  "checks": {
+    "frozen_artifact_sha256_matches_resume_status": true,
+    "frozen_artifact_predates_target_draw": true,
+    "frozen_training_cutoff_is_target_minus_one": true,
+    "canonical_source_sha256_and_blob_match": true,
+    "snapshot_sha256_matches_corrected_metadata": true,
+    "snapshot_has_1251_contiguous_rows": true,
+    "snapshot_prefix_exactly_matches_1250_row_canonical_source": true,
+    "main_and_bonus_numbers_valid": true,
+    "each_frozen_ranking_is_a_permutation_of_1_to_45": true,
+    "frozen_top_six_sets_match_rank_order": true,
+    "all_six_target_winners_ranked_once_per_signal": true,
+    "1251_actual_delivery_error_note_recomputed_exactly": true,
+    "1249_displayed_intermediate_set_recomputed_exactly": true,
+    "direct_official_api_retrieval": false,
+    "no_candidate_numbers_in_result_or_report": true,
+    "no_portfolio_or_purchase_promotion": true,
+    "no_purchase_confirmation_inferred": true
+  },
+  "known_limitations": [
+    "The official Donghaeng Lottery API did not return a directly retrieved payload; the draw result is cross-checked by an operator-attributed Yonhap report, Newsis/FN News, and two independent result listings.",
+    "The E030 observation is one target only and cannot establish predictive advantage or satisfy three-line prospective confirmation.",
+    "The E030 prospective horizon contains a pre-draw gap at targets 1247-1250."
+  ],
+  "code": {
+    "authoritative_runner_path": "automation/review_e030_prospective_shadow_1251_v2.js",
+    "authoritative_runner_git_blob_sha": "faf8dfcf96ab2d11d63b6face206025faeddbf24",
+    "v1_runner_path": "automation/review_e030_prospective_shadow_1251_v1.js",
+    "v1_runner_git_blob_sha": "a48de86c785a94e929c474094b89e5603f916b40",
+    "v1_status": "PRESERVED_NOT_EXECUTED; static review found missing frozen-artifact parse",
+    "v2_status": "AUTHORITATIVE_REPRODUCIBLE_SOURCE; equivalent calculation executed in this run"
+  }
+}
