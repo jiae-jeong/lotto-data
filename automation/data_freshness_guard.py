@@ -34,6 +34,10 @@ RECOVERY_ROWS = {
     1248: '1248,2026.10.31,16,18,27,36,38,42,22',
     1249: '1249,2026.11.07,2,11,16,25,34,35,14',
     1250: '1250,2026.11.14,1,5,18,23,27,28,8',
+    # 1251 is independently cross-checked against the immutable 1251 snapshot,
+    # operator-attributed Yonhap reporting, and separate Newsis/FN News reporting.
+    # Direct official API retrieval was not available; source provenance remains explicit.
+    1251: '1251,2026.11.21,14,18,19,29,40,45,1',
 }
 EXPECTED_ROWS = {
     1246: ['1246', '2026.10.17', '16', '22', '23', '24', '27', '28', '6'],
@@ -41,6 +45,7 @@ EXPECTED_ROWS = {
     1248: ['1248', '2026.10.31', '16', '18', '27', '36', '38', '42', '22'],
     1249: ['1249', '2026.11.07', '2', '11', '16', '25', '34', '35', '14'],
     1250: ['1250', '2026.11.14', '1', '5', '18', '23', '27', '28', '8'],
+    1251: ['1251', '2026.11.21', '14', '18', '19', '29', '40', '45', '1'],
 }
 FIELDS = ['round', 'date', 'no1', 'no2', 'no3', 'no4', 'no5', 'no6', 'bonus']
 
