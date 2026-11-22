@@ -1,0 +1,74 @@
+{
+  "audit_id": "ERROR_NOTE_RECALC_AUDIT_ADDENDUM_1251_20261122",
+  "created_at_kst": "2026-11-22",
+  "append_only": true,
+  "target_round": 1251,
+  "original_error_note": {
+    "path": "research/weekly_purchase/1251/ERROR_NOTE_RECOMMENDATION_REVIEW_1251_20261122.json",
+    "git_blob_sha": "7e8395a448f86ca96c04c32d90beda0c0ab2ea02",
+    "overwritten": false
+  },
+  "original_delivery": {
+    "path": "research/weekly_purchase/1251/RESEARCH_SELECTED_LINES_1251_20261120.json",
+    "git_blob_sha": "9da6f5760367758896f20f8643c771452e7948cd",
+    "source_lines_reconstructed": false,
+    "exact_reproduction_match": true,
+    "delivery_log_path": "research/DELIVERY_LOG.md",
+    "delivery_log_git_blob_sha": "24f66f12e71f7976db9d25d5bee32c12a02218b6",
+    "display_status": "RESEARCH_SELECTED_NUMBERS_DELIVERED_ON_USER_REQUEST",
+    "purchase_confirmation": "NOT_CONFIRMED"
+  },
+  "outcome_source": {
+    "snapshot_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "snapshot_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "snapshot_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "source_link_correction_path": "data/snapshots/lotto_data_through_1251_20261122_SOURCE_LINK_CORRECTION.json",
+    "source_link_correction_git_blob_sha": "8e91c9db58ed92b02b8391704ad3ac8922674b91",
+    "source_class": "SECONDARY_CROSS_CHECKED_NOT_DIRECT_OFFICIAL_API",
+    "official_api_direct_retrieval": false
+  },
+  "independent_recalculation": {
+    "line_hit_distribution": [
+      1,
+      1,
+      0
+    ],
+    "max_hit": 1,
+    "any2_plus": false,
+    "any3_plus": false,
+    "any4_plus": false,
+    "any5_plus": false,
+    "any6": false,
+    "union_coverage": 2,
+    "bonus_match": false,
+    "exact_match_with_original_error_note": true
+  },
+  "candidate_stage": {
+    "recall_at_k": {
+      "10": 1,
+      "15": 2,
+      "16": 2,
+      "20": 2,
+      "25": 4,
+      "30": 5
+    },
+    "total_winners": 6,
+    "top30_recall": 0.8333333333,
+    "stage_decomposition": {
+      "selected_winners": 2,
+      "later_sequential_pool_winners_not_allocated": 2,
+      "outside_three_stage_pool_reach": 2
+    },
+    "interpretation": "One-target descriptive decomposition only; not a basis for model tuning or allocator promotion."
+  },
+  "strict_status": {
+    "historical_status": "STRICT_FAIL",
+    "prospective_confirmation": false,
+    "strict_pass_ready": false,
+    "purchase_lines_released_in_this_audit": false
+  },
+  "delivery_log_policy": {
+    "new_delivery_event_appended": false,
+    "reason": "No numbers were displayed in this audit."
+  }
+}
