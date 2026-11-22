@@ -1,0 +1,51 @@
+{
+  "correction_id": "TARGET_1251_SOURCE_LINK_CORRECTION_20261122",
+  "created_at_kst": "2026-11-22",
+  "supersedes_unverified_links_in": [
+    "data/snapshots/lotto_data_through_1251_20261122_SOURCE.json",
+    "research/weekly_purchase/1251/ERROR_NOTE_RECOMMENDATION_REVIEW_1251_20261122.json"
+  ],
+  "rejected_unverified_urls": [
+    "https://lottofinde.kr/round/1251",
+    "https://lotto6.kr/lotto/1251"
+  ],
+  "authoritative_and_corroborating_sources": [
+    {
+      "publisher": "Yonhap News",
+      "url": "https://www.yna.co.kr/view/AKR20261121050800002",
+      "published_at_kst": "2026-11-21T20:48:00+09:00",
+      "role": "operator-attributed primary news report"
+    },
+    {
+      "publisher": "Newsis via FN News",
+      "url": "https://www.fnnews.com/news/202611212058363456",
+      "published_at_kst": "2026-11-21T20:58:00+09:00",
+      "role": "independent news corroboration"
+    },
+    {
+      "publisher": "LottoLottery",
+      "url": "https://www.lottolottery.co.kr/results/1251",
+      "role": "independent results listing"
+    },
+    {
+      "publisher": "LottoKing",
+      "url": "https://lotto.gon.ai.kr/lotto/1251",
+      "role": "independent results listing"
+    }
+  ],
+  "verified_result": {
+    "round": 1251,
+    "draw_date": "2026-11-21",
+    "main_numbers": [
+      14,
+      18,
+      19,
+      29,
+      40,
+      45
+    ],
+    "bonus": 1
+  },
+  "official_api_direct_retrieval": false,
+  "note": "The old metadata and error-note records remain preserved. Use only the verified URLs above; direct official API retrieval was not obtained."
+}
