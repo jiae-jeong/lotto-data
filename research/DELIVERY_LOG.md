@@ -104,3 +104,15 @@ This ledger records combinations displayed to the user, whether or not they were
 - Statistical status: E054 historical strict gate is `FAIL`; this delivery does not claim predictive superiority and is not `STRICT_PASS_READY`. Prospective confirmation not complete.
 - Purchase confirmation: `NOT_CONFIRMED`; no assumption that the user bought these lines.
 - Artifact: `research/weekly_purchase/1251/RESEARCH_SELECTED_LINES_1251_20261120.json`; commit `bb7f0239df8f388af724a06da8a85be93bc99598`.
+
+
+## POST-DRAW REVIEW — TARGET 1251 — 2026-11-22
+
+- Existing delivery event: TARGET_1251_RESEARCH_SELECTED_LINES_20261120. Original pre-draw artifact remains unchanged at `research/weekly_purchase/1251/RESEARCH_SELECTED_LINES_1251_20261120.json` (Git blob `9da6f5760367758896f20f8643c771452e7948cd`). No line was reconstructed or rewritten.
+- Draw date: 2026-11-21. Main result: 14, 18, 19, 29, 40, 45; bonus: 1. Direct official API retrieval was not accessible; Yonhap reported the operator's result and independent Newsis/FNNews and result listings agreed.
+- Frozen cutoff: 1250; source SHA-256: `7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2`. The E054/E045 deterministic reproduction matched the preserved delivery artifact exactly.
+- Reproduction state: LOW regime; current HHI 0.02328888888888889; prior-reference median 0.02337222222222222; 200 reference windows.
+- Outcome: line-hit distribution [1, 1, 0]; max-hit 1; any2+ false; any3+ false; any4+/5+/6+ false; union coverage 2/6; bonus match false.
+- Candidate/allocator diagnostic: winning-number rank positions [1, 11, 21, 24, 29, 38]; recall counts at TOP10/15/16/20/25/30 were 1/6, 2/6, 2/6, 2/6, 4/6, 5/6. Two winning numbers were selected into the final union; two further winners were available in later sequential top-16 pools but not allocated; two fell outside the three-stage candidate-pool reach. This is a single-target diagnosis only, not tuning evidence.
+- Purchase confirmation remains NOT_CONFIRMED. Display/delivery is not evidence of purchase.
+- Review artifact: `research/weekly_purchase/1251/ERROR_NOTE_RECOMMENDATION_REVIEW_1251_20261122.json`.
