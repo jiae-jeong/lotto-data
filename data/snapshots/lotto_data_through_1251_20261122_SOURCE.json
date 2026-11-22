@@ -1,0 +1,64 @@
+{
+  "snapshot_id": "LOTTO_DATA_THROUGH_1251_20261122",
+  "created_at_kst": "2026-11-22",
+  "snapshot_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+  "target_round": 1252,
+  "data_cutoff": 1251,
+  "row_count": 1251,
+  "source_canonical_path": "lotto_data.csv",
+  "source_canonical_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+  "source_canonical_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "source_canonical_unchanged": true,
+  "snapshot_sha256": "e3a43c7ba1217597cf5827a4f10f13c038744d3795e9fdf292c52481001ab064",
+  "sequence_and_number_validation": true,
+  "new_record": {
+    "round": 1251,
+    "date": "2026.11.21",
+    "main_numbers": [
+      14,
+      18,
+      19,
+      29,
+      40,
+      45
+    ],
+    "bonus": 1
+  },
+  "official_source_direct_retrieval": {
+    "status": "NOT_ACCESSIBLE_VIA_AVAILABLE_WEB_RETRIEVAL",
+    "attempted_urls": [
+      "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1251",
+      "https://www.dhlottery.co.kr/gameResult.do?method=byWin&drwNo=1251"
+    ]
+  },
+  "corroborating_sources": [
+    {
+      "publisher": "Yonhap News",
+      "published_at_kst": "2026-11-21T20:48:00+09:00",
+      "url": "https://www.yna.co.kr/view/AKR20261121050800002",
+      "note": "Reports the draw result as announced by Donghaeng Lottery operator."
+    },
+    {
+      "publisher": "Newsis via FN News",
+      "published_at_kst": "2026-11-21T20:58:00+09:00",
+      "url": "https://www.fnnews.com/news/202611212058363456",
+      "note": "Independent news report with the same main and bonus numbers."
+    },
+    {
+      "publisher": "LottoFinder",
+      "published_at_kst": "2026-11-22",
+      "url": "https://lottofinde.kr/round/1251",
+      "note": "Independent result listing."
+    },
+    {
+      "publisher": "Lotto6",
+      "published_at_kst": "2026-11-22",
+      "url": "https://lotto6.kr/lotto/1251",
+      "note": "Independent result listing."
+    }
+  ],
+  "source_classification": "SECONDARY_CROSS_CHECKED_NOT_DIRECT_OFFICIAL_API",
+  "policy_note": "Do not overwrite lotto_data.csv. This dated immutable snapshot appends round 1251 to the canonical 1250-row source. The source limitation is explicit; do not label this snapshot as directly retrieved from the official API.",
+  "purchase_confirmation": "NOT_CONFIRMED",
+  "candidate_or_purchase_lines_generated": false
+}
