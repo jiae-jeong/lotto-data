@@ -1,0 +1,19 @@
+{
+  "status": "PASS_DATA_AND_LEDGER",
+  "data_integrity": true,
+  "data_rows": 1250,
+  "full_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "prefix_1249_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+  "training_cutoff_violations": 0,
+  "target_sequence_valid": true,
+  "prediction_ledger_rows": 849,
+  "prediction_metric_mismatches": 0,
+  "geometry_violations": 0,
+  "exact_null_matches_prereg": true,
+  "matched_random_bundles_per_arm": 101880,
+  "matched_random_geometry_preserved": true,
+  "bootstrap_seed_schedule_preregistered": false,
+  "strict_portfolio_pass": false,
+  "prospective_confirmation": false,
+  "purchase_recommendation_generated": false
+}
