@@ -1,0 +1,168 @@
+{
+  "study_id": "E080_BORDA_RANK_AGGREGATION_v1",
+  "target_round": 1252,
+  "target_draw_date": "2026-11-28",
+  "registered_at_kst": "2026-11-23T08:35:00+09:00",
+  "registration_status": "FROZEN_BEFORE_EVALUATION",
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_CANDIDATE_AND_FIXED_ALLOCATOR_DIAGNOSTIC_NOT_CLEAN_HOLDOUT_NOT_PROSPECTIVE",
+  "research_question": "Using the exact same five cutoff-safe component signals as the existing consensus candidate ranker, does equal-weight Borda rank aggregation improve candidate_recall@K and downstream three-line portfolio outcomes without changing the allocator?",
+  "novelty_statement": "This is a single fixed rank-aggregation ablation, not a feature search. Existing candidate_recall_v1.py uses the arithmetic mean of five z-scored signals. E080 replaces only that aggregation rule with the sum of component rank positions. It adds no signal, parameter grid, weights, thresholds, or allocator variant.",
+  "prior_work_boundary": {
+    "E059": "E054 candidate-recall decomposition; not rank aggregation.",
+    "E072": "Five-bin probability calibration of the existing consensus score; proper scoring rules, not rank aggregation.",
+    "E074": "Calendar-month conditioned frequency model with fixed top-18 partition; different candidate feature family.",
+    "E079": "Fixed E054 candidate bank and allocator structural-objective ablation; not candidate rank aggregation.",
+    "no_duplicate_claim": "E080 tests the Borda-vs-mean-z aggregation question only; it does not rerun E059/E072/E074/E079 as its main study."
+  },
+  "source": {
+    "canonical_data_path": "lotto_data.csv",
+    "data_cutoff": 1250,
+    "rows": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "data_git_blob_sha": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "candidate_feature_source": "automation/candidate_recall_v1.py",
+    "candidate_feature_source_blob_sha": "65d5e68740d09eaa7a8d7e0643ed3ad9c665a014",
+    "runner_path": "automation/e080_borda_rank_aggregation_v2.js",
+    "runner_blob_sha": "5943d4e2788c542398fc17e66d3efd19d8d34c66"
+  },
+  "historical_evaluation": {
+    "target_rounds": "401..1250 inclusive",
+    "target_count": 850,
+    "cutoff_rule": "For each target t, every feature and rank uses only main-number outcomes from rounds <= t-1. The target draw is accessed only after the ranking is frozen for that target.",
+    "contaminated_live_history_rounds": [
+      1244,
+      1245,
+      1246,
+      1247,
+      1248,
+      1249
+    ],
+    "clean_holdout": false,
+    "prospective_confirmation": false,
+    "evidence_limit": "All targets are historical diagnostics. No result from this study can be called untouched, prospective, or a future confirmation."
+  },
+  "candidate_stage": {
+    "signals": [
+      "recent30",
+      "gap",
+      "momentum",
+      "balanced",
+      "contrarian"
+    ],
+    "exact_feature_definitions": "Use automation/candidate_recall_v1.py::features exactly, including population z-scores, recent30 counts over the prior 30 draws, gap in completed draws since last main-number appearance, momentum=(last10 frequency/10)-(preceding20 frequency/20), balanced=(recent30_z+gap_z)/2, contrarian=(-recent30_z+gap_z)/2. For momentum ranking use the exact integer score 2*count(last10)-count(preceding20) to avoid float tie drift.",
+    "Borda_model": {
+      "formula": "For each number n, sum its five component rank positions. Rank ascending by this sum; ties are broken by lower number.",
+      "weights": "Equal rank weight 1 for each of the five signals.",
+      "variants": 1,
+      "parameter_search": false
+    },
+    "stable_baseline": {
+      "model": "Existing candidate_recall_v1.py consensus",
+      "formula": "Arithmetic mean of the same five component z-scores; descending score, then lower number.",
+      "weights": "Unchanged equal arithmetic mean."
+    },
+    "K_values": [
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "metric": "candidate_recall@K = mean over targets of (winning main numbers among top K / 6).",
+    "random_baseline": "Exact uniform K-subset expectation: expected hits=6*K/45 and recall=K/45. Additionally generate 200 target-matched random K-subsets per target using a preregistered deterministic Fisher-Yates permutation schedule.",
+    "miss_trace": "For each of six winning numbers per target, store Borda rank, consensus rank, and five component ranks so excluded winners can be attributed to component-rank disagreement. Do not publish candidate lists or top-30 numbers.",
+    "inference": {
+      "family_alpha": 0.05,
+      "comparisons": 10,
+      "comparisons_definition": "Borda vs exact uniform and consensus vs exact uniform, for five K values each.",
+      "bonferroni_alpha_per_comparison": 0.005,
+      "bootstrap": "Two-sided percentile moving-block bootstrap of per-target recall differences; block length 50; 17 blocks sampled with replacement; each valid contiguous start is equally likely.",
+      "bootstrap_replicates": 4000,
+      "seed_schedule": {
+        "base": 20261123080,
+        "Borda_vs_uniform": "base + K",
+        "consensus_vs_uniform": "base + 100 + K"
+      },
+      "Borda_minus_consensus": "Descriptive paired point differences only; no separate confidence interval or promotion test."
+    }
+  },
+  "portfolio_stage": {
+    "allocator": "Fixed top-18 rank partition: ranks 1-6, 7-12, 13-18 become exactly three six-number lines. No allocator changes or tuning.",
+    "geometry": "Three pairwise-disjoint six-number lines; union18.",
+    "models": [
+      "Borda rank aggregation",
+      "unchanged consensus baseline"
+    ],
+    "metrics": [
+      "max_hit",
+      "any2+",
+      "any3+",
+      "any4+",
+      "any5+",
+      "any6",
+      "winning_union_coverage",
+      "line_hit_distribution"
+    ],
+    "exact_geometry_matched_null": {
+      "max_hit": 1.5142562485727544,
+      "any2": 0.4749762432689262,
+      "any3": 0.07135490714617204,
+      "any4": 0.004180448026165553,
+      "any5": 0.00008655553181928678,
+      "any6": 3.68321411996965e-7,
+      "winning_union_coverage": 2.4,
+      "geometry": "Three disjoint six-number tickets with union18."
+    },
+    "matched_random": "120 uniformly random label permutations per target, applied jointly to the fixed three-line geometry; 102,000 bundles total.",
+    "inference": {
+      "strict_metrics": [
+        "max_hit",
+        "any2",
+        "any3",
+        "winning_union_coverage"
+      ],
+      "family_alpha": 0.05,
+      "alpha_per_metric": 0.0125,
+      "bootstrap": "Two-sided percentile moving-block bootstrap of per-target differences from the exact geometry-matched null; block length 50; every valid contiguous block start equally likely.",
+      "bootstrap_replicates": 4000,
+      "seed_schedule": {
+        "base": 20261123080,
+        "Borda_metrics": "base + 300 + metric_index",
+        "metric_order": [
+          "max_hit",
+          "any2",
+          "any3",
+          "winning_union_coverage"
+        ]
+      },
+      "nonoverlapping_block_stability": "17 consecutive 50-target blocks; report any2-positive block share; minimum 0.65."
+    },
+    "strict_gate_unchanged": {
+      "all_four_adjusted_ci_lower_bounds_strictly_gt_zero": true,
+      "any2_positive_50_target_block_share_min": 0.65,
+      "no_leakage": true,
+      "prospective_confirmation_required": true,
+      "thresholds_may_not_be_relaxed": true
+    },
+    "prospective_confirmation": {
+      "minimum_target_count": null,
+      "completion_rule": null,
+      "status": "UNSPECIFIED_IN_POLICY",
+      "E080_cannot_define_or_satisfy_this_requirement": true
+    }
+  },
+  "output_rules": {
+    "append_only": true,
+    "no_candidate_numbers_in_user_report": true,
+    "no_top30_core_tail_or_purchase_lines_in_user_report": true,
+    "no_purchase_lines_generated": true,
+    "no_strict_pass_ready_from_historical_results": true,
+    "no_random_fallback": true,
+    "no_threshold_or_alpha_relaxation": true
+  },
+  "seeds": {
+    "bootstrap": 20261123080,
+    "candidate_random": 20261123081,
+    "portfolio_random": 20261123082
+  }
+}
