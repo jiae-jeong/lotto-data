@@ -1,0 +1,18 @@
+{
+  "correction_id": "E080_OUTPUT_SHA256_MANIFEST_AUDIT_CORRECTION_20261123",
+  "recorded_at_kst": "2026-11-23T08:48:00+09:00",
+  "supersedes": "analysis/2026-11-23/E080_BORDA_RANK_AGGREGATION_v1/SHA256_MANIFEST_CORRECTION_20261123.json",
+  "finding": "The prior post-run checker omitted SHA-256 round constant 0xefbe4786. Its apparent mismatch was a checker defect. Re-running the standard SHA-256 implementation with the missing constant restored makes all nine output hashes match the original SHA256_MANIFEST.json. The original manifest is authoritative; the 08:45 correction file is preserved but non-authoritative.",
+  "test_vector": "abc -> ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+  "canonical_source_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "authoritative_manifest": "analysis/2026-11-23/E080_BORDA_RANK_AGGREGATION_v1/SHA256_MANIFEST.json",
+  "authoritative_manifest_git_blob_sha": "85726399b2752fdb13d2e65c7f6072d7c59cc19c",
+  "corrected_recheck": {
+    "all_nine_output_sha256_values_match_original_manifest": true,
+    "all_nine_recomputed_git_blob_sha_values_match_github": true,
+    "model_metrics_changed": false,
+    "strict_gate_changed": false
+  },
+  "promotion_effect": "NONE",
+  "append_only": true
+}
