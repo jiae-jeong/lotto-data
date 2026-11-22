@@ -1,0 +1,36 @@
+{
+  "study_id": "E079",
+  "created_at_kst": "2026-11-22",
+  "files": [
+    {
+      "path": "INDEPENDENT_REEXECUTION_RESULTS_20261122.json",
+      "sha256": "a6fbe806d0d3d8975e9a558b5c7000bb941acd67e9629d41633ae019cc31ff8a"
+    },
+    {
+      "path": "INDEPENDENT_REEXECUTION_REPORT_20261122.md",
+      "sha256": "86509bf77a9ea555d5d3547e52bc257551d9a78ed284782e9fbd9b6ae42dbc4e"
+    },
+    {
+      "path": "INDEPENDENT_REEXECUTION_RANDOM_BASELINE_20261122.csv",
+      "sha256": "ace6383e1d1b457dcb6b0db93675243861b5bdac88747a384964e4629258202a"
+    },
+    {
+      "path": "INDEPENDENT_REEXECUTION_BLOCK_STABILITY_20261122.csv",
+      "sha256": "be5c46096c9b60782ee24ed2cd26b2ded2f088bc7f5ad38c30698f13790a93f6"
+    },
+    {
+      "path": "INDEPENDENT_REEXECUTION_CANDIDATE_RECALL_20261122.csv",
+      "sha256": "dfb031cb4b47c3f81954e6ad30918d780b3bdcef825ea089f6b6920d525f676b"
+    },
+    {
+      "path": "INDEPENDENT_REEXECUTION_VERIFICATION_20261122.json",
+      "sha256": "8210e7eb2fe5041183d0a68551425bc3d55b5914fe84b00c96725a11dea4eeca"
+    }
+  ],
+  "source_blobs": {
+    "data": "66431d711919f179e4cb1349e2f7295c68a8735e",
+    "predictions": "6dbc3ce16fd1ca92395236d0f4f249f49f53aea9",
+    "preregistration": "7ae8c0c5d3b569126fab2e2c5e62cc1bb5eec426",
+    "runner_v2": "feb66711209043a5ae14a2a926501570b6915534"
+  }
+}
