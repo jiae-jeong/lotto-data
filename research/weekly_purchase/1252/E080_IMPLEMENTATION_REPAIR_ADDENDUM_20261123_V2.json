@@ -1,0 +1,21 @@
+{
+  "addendum_id": "E080_IMPLEMENTATION_REPAIR_ADDENDUM_20261123_V2",
+  "study_id": "E080_BORDA_RANK_AGGREGATION_v1",
+  "recorded_at_kst": "2026-11-23T08:38:00+09:00",
+  "status": "PRE_ACCEPTED_EXECUTION_REPAIR",
+  "finding": {
+    "prior_runner": "automation/e080_borda_rank_aggregation_v2.js",
+    "prior_runner_blob_sha": "5943d4e2788c542398fc17e66d3efd19d8d34c66",
+    "issue": "Pre-publication execution review found the Borda portfolio summary mapped winning_union_coverage to a non-existent field name. This would yield null for that metric and invalidate the four-endpoint strict-gate summary.",
+    "outputs_published": false,
+    "results_committed": false,
+    "no_numbers_released": true
+  },
+  "correction": {
+    "runner": "automation/e080_borda_rank_aggregation_v3.js",
+    "runner_blob_sha": "313be168074e1f038822b9042f0b0b6653a015c5",
+    "change": "Correct only the portfolio summary column mapping for winning_union_coverage. The per-target predictions, candidate rankings, allocator, seeds, random baseline, bootstrap, alpha, block length, and strict gate are unchanged.",
+    "original_v1_v2_preserved": true
+  },
+  "authorization": "Use V3 as the authoritative execution source. Preserve V2 as a pre-evaluation implementation attempt; do not use its uncommitted preliminary output."
+}
