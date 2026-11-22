@@ -116,3 +116,9 @@ This ledger records combinations displayed to the user, whether or not they were
 - Candidate/allocator diagnostic: winning-number rank positions [1, 11, 21, 24, 29, 38]; recall counts at TOP10/15/16/20/25/30 were 1/6, 2/6, 2/6, 2/6, 4/6, 5/6. Two winning numbers were selected into the final union; two further winners were available in later sequential top-16 pools but not allocated; two fell outside the three-stage candidate-pool reach. This is a single-target diagnosis only, not tuning evidence.
 - Purchase confirmation remains NOT_CONFIRMED. Display/delivery is not evidence of purchase.
 - Review artifact: `research/weekly_purchase/1251/ERROR_NOTE_RECOMMENDATION_REVIEW_1251_20261122.json`.
+
+
+## SOURCE-LINK CORRECTION — TARGET 1251 — 2026-11-22
+
+- Two unverified third-party URLs in the first source metadata/error-note drafts are superseded. Verified corroborating links: Yonhap `https://www.yna.co.kr/view/AKR20261121050800002`; Newsis via FNNews `https://www.fnnews.com/news/202611212058363456`; LottoLottery `https://www.lottolottery.co.kr/results/1251`; LottoKing `https://lotto.gon.ai.kr/lotto/1251`.
+- Result values and delivered-artifact hit counts are unchanged. Direct official API retrieval remains unavailable. Correction artifact: `data/snapshots/lotto_data_through_1251_20261122_SOURCE_LINK_CORRECTION.json`.
