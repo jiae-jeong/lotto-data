@@ -1,0 +1,15 @@
+{
+  "correction_id": "LOTTO_DATA_THROUGH_1251_SHA256_CORRECTION_20261122",
+  "created_at_kst": "2026-11-22",
+  "snapshot_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+  "snapshot_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "prior_reported_sha256": "e3a43c7ba1217597cf5827a4f10f13c038744d3795e9fdf292c52481001ab064",
+  "corrected_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "correction_reason": "The first metadata helper omitted the SHA-256 round constant 0xefbe4786. The snapshot bytes and rows were not changed. The corrected implementation passed the standard SHA-256 'abc' test vector and reproduced the canonical lotto_data.csv SHA-256 exactly.",
+  "canonical_source_sha256_verified": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+  "snapshot_row_count": 1251,
+  "round_sequence_valid": true,
+  "original_snapshot_preserved": true,
+  "original_source_metadata_preserved": true,
+  "authority": "This correction supersedes only the snapshot_sha256 field in the original SOURCE.json and the initial daily report. Use corrected_sha256 for the exact snapshot content."
+}
