@@ -1,0 +1,99 @@
+{
+  "review_id": "ERROR_NOTE_RECOMMENDATION_REVIEW_1251_20261122",
+  "created_at_kst": "2026-11-22",
+  "target_round": 1251,
+  "draw_date": "2026-11-21",
+  "actual_main_numbers": [
+    14,
+    18,
+    19,
+    29,
+    40,
+    45
+  ],
+  "bonus_number": 1,
+  "source_verification": {
+    "direct_official_api_accessible": false,
+    "status": "SECONDARY_CROSS_CHECKED_OFFICIAL_ENDPOINT_NOT_DIRECTLY_RETRIEVED",
+    "sources": [
+      {
+        "publisher": "Yonhap News",
+        "url": "https://www.yna.co.kr/view/AKR20261121050800002",
+        "published_at_kst": "2026-11-21T20:48:00+09:00",
+        "basis": "reports Donghaeng Lottery operator result"
+      },
+      {
+        "publisher": "Newsis via FN News",
+        "url": "https://www.fnnews.com/news/202611212058363456"
+      },
+      {
+        "publisher": "LottoFinder",
+        "url": "https://lottofinde.kr/round/1251"
+      },
+      {
+        "publisher": "Lotto6",
+        "url": "https://lotto6.kr/lotto/1251"
+      }
+    ]
+  },
+  "original_delivery": {
+    "delivery_id": "TARGET_1251_RESEARCH_SELECTED_LINES_20261120",
+    "artifact_path": "research/weekly_purchase/1251/RESEARCH_SELECTED_LINES_1251_20261120.json",
+    "artifact_git_blob_sha": "9da6f5760367758896f20f8643c771452e7948cd",
+    "cutoff": 1250,
+    "data_sha256": "7203238dae69ce281c59e6a0928cc187b11d88ed342685cd2dd2f214f063b3c2",
+    "model": "E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1",
+    "allocator": "E045 deterministic sequential disjoint-union18 allocator",
+    "original_artifact_preserved": true,
+    "source_lines_reconstructed": false,
+    "exact_reproduction_match": true
+  },
+  "model_reproduction": {
+    "regime": "LOW",
+    "current_hhi": 0.02328888888888889,
+    "reference_median_hhi": 0.02337222222222222,
+    "reference_window_count": 200,
+    "winner_rank_positions_sorted": [
+      1,
+      11,
+      21,
+      24,
+      29,
+      38
+    ],
+    "recall_at_k": {
+      "10": 1,
+      "15": 2,
+      "16": 2,
+      "20": 2,
+      "25": 4,
+      "30": 5
+    }
+  },
+  "outcome": {
+    "line_hit_distribution": [
+      1,
+      1,
+      0
+    ],
+    "max_hit": 1,
+    "any2_plus": false,
+    "any3_plus": false,
+    "any4_plus": false,
+    "any5_plus": false,
+    "any6": false,
+    "union_coverage": 2,
+    "bonus_match": false
+  },
+  "failure_decomposition": {
+    "selected_winners": 2,
+    "later_sequential_pool_winners_not_allocated": 2,
+    "outside_three_stage_pool_reach": 2,
+    "caveat": "Single-target diagnostic only; no tuning."
+  },
+  "purchase_confirmation": "NOT_CONFIRMED",
+  "strict_portfolio_pass": false,
+  "prospective_confirmation": false,
+  "source_lines_reconstructed": false,
+  "append_only": true
+}
