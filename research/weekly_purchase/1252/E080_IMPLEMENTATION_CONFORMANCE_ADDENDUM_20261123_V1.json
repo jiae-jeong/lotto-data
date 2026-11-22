@@ -1,0 +1,44 @@
+{
+  "addendum_id": "E080_IMPLEMENTATION_CONFORMANCE_ADDENDUM_20261123_V1",
+  "study_id": "E080_BORDA_RANK_AGGREGATION_v1",
+  "recorded_at_kst": "2026-11-23T08:36:00+09:00",
+  "status": "PRE_EVALUATION_EXECUTION_DETAIL",
+  "authority": "E080 preregistration 2026-11-23; no model, feature, candidate K, allocator, target range, comparator, inference threshold, or gate change.",
+  "runner": {
+    "path": "automation/e080_borda_rank_aggregation_v2.js",
+    "blob_sha": "5943d4e2788c542398fc17e66d3efd19d8d34c66",
+    "runtime": "Node.js deterministic JavaScript; no external dependencies."
+  },
+  "deterministic_random_schedule": {
+    "prng": "Mulberry32 32-bit PRNG",
+    "permutation": "Fisher-Yates descending shuffle of integers 1..45",
+    "candidate_random": {
+      "base_seed": 20261123081,
+      "target_seed": "(base_seed + target_round * 1009) modulo 2^32",
+      "permutations_per_target": 200
+    },
+    "portfolio_random": {
+      "base_seed": 20261123082,
+      "target_seed": "(base_seed + target_round * 1013) modulo 2^32",
+      "permutations_per_target": 120,
+      "geometry": "First 6 shuffled labels, next 6, next 6; disjoint union18."
+    },
+    "bootstrap": {
+      "base_seed": 20261123080,
+      "prng": "Mulberry32",
+      "candidate_seed_derivation": "base + K for Borda-vs-uniform; base + 100 + K for consensus-vs-uniform.",
+      "portfolio_seed_derivation": "base + 300 + metric_index in preregistered metric order.",
+      "valid_block_starts": "All contiguous 50-target block starts from 0 through n-50 inclusive, sampled uniformly with replacement."
+    }
+  },
+  "conformance": {
+    "source_and_data_sha_must_match_prereg": true,
+    "target_cutoff_rule_unchanged": true,
+    "random_seed_bases_unchanged": true,
+    "random_replicates_unchanged": true,
+    "bootstrap_replicates_unchanged": true,
+    "strict_gate_unchanged": true,
+    "no_outcome_dependent_seed_or_tuning": true
+  },
+  "promotion_effect": "NONE; execution detail only."
+}
