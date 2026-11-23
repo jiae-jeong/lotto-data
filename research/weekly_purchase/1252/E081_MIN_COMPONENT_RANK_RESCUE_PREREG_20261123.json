@@ -1,0 +1,170 @@
+{
+  "study_id": "E081_MIN_COMPONENT_RANK_RESCUE_v1",
+  "registered_at_kst": "2026-11-23T09:10:00+09:00",
+  "registration_status": "FROZEN_BEFORE_EVALUATION",
+  "target_round": 1252,
+  "target_draw_date": "2026-11-28",
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_EXPLORATORY_DIAGNOSTIC_NOT_CLEAN_HOLDOUT_NOT_PROSPECTIVE",
+  "research_question": "Does a fixed minimum-component-rank rescue aggregator improve candidate_recall@K and downstream three-line portfolio outcomes versus the exact uniform baselines, with the five component signals and three-line allocator geometry held fixed?",
+  "novelty_statement": "A single fixed aggregation rule not previously found in repository search. E080 tested equal-weight Borda rank-sum; E081 tests the complementary one-expert-rescue rule. No parameter grid, feature addition, weight search, or allocator search is allowed.",
+  "prior_work_boundary": {
+    "E080": "Borda rank-sum aggregation on targets 401..1250; not minimum-component-rank rescue.",
+    "E077": "Trailing-100 dynamic selector among successor ticket models; one-ticket selector, not candidate rank aggregation.",
+    "E079": "Fixed E054 candidate bank allocator structure ablation; no candidate rank aggregation.",
+    "E044": "Prior-only tail24 dynamic ranker selection; different candidate-generation design.",
+    "duplication_control": "Only one fixed min-rank rule is registered; no post-result variants may be introduced."
+  },
+  "source": {
+    "path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "canonical_mirror_path": "lotto_data.csv",
+    "cutoff": 1251,
+    "rows": 1251,
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "integrity_audit_path": "research/weekly_purchase/1252/SOURCE_INTEGRITY_AUDIT_CORRECTION_20261123.json",
+    "direct_official_api": false,
+    "provenance": "SECONDARY_CROSS_CHECKED_NOT_DIRECT_OFFICIAL_API"
+  },
+  "code": {
+    "path": "automation/e081_min_component_rank_rescue_v1.js",
+    "git_blob_sha": "d2abdd9dd9a61ffd09cbb7a99f0c90e9f9970937",
+    "preregistered_before_evaluation": true
+  },
+  "historical_evaluation": {
+    "target_rounds": "401..1251 inclusive",
+    "target_count": 851,
+    "cutoff_rule": "For each target t, features and component ranks use only rounds 1..t-1. Target outcomes are accessed only after ranks are frozen for that target.",
+    "contaminated_live_history_rounds": [
+      1244,
+      1245,
+      1246,
+      1247,
+      1248,
+      1249,
+      1250,
+      1251
+    ],
+    "clean_holdout": false,
+    "prospective_confirmation": false,
+    "evidence_limit": "All targets are historical diagnostics. No result can be called untouched, prospective, or future confirmation."
+  },
+  "candidate_stage": {
+    "signals": [
+      "recent30",
+      "gap",
+      "momentum",
+      "balanced",
+      "contrarian"
+    ],
+    "feature_definitions": "Exact automation/candidate_recall_v1.py features: population z-scores; recent30 counts over prior 30 draws; gap in completed draws since last main-number appearance; momentum=(last10 frequency/10)-(preceding20 frequency/20), with exact integer ranking score 2*count(last10)-count(preceding20); balanced=(recent30_z+gap_z)/2; contrarian=(-recent30_z+gap_z)/2.",
+    "model": {
+      "name": "MIN_RANK",
+      "formula": "For each number n, compute five component rank positions. Sort ascending by minimum component rank; ties by ascending sum of five component ranks; then ascending number.",
+      "weights": "No weights; all five component ranks enter the tie-break sum only.",
+      "variants": 1,
+      "parameter_search": false
+    },
+    "stable_baselines": [
+      "Existing mean-z consensus ranking",
+      "E080 equal-weight Borda rank-sum ranking"
+    ],
+    "k_values": [
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "metric": "candidate_recall@K = mean over targets of winning main numbers among top K divided by 6.",
+    "random_baseline": "Exact uniform K-subset expectation K/45; 200 target-matched uniform K-subsets per target using deterministic Mulberry32/Fisher-Yates schedule.",
+    "miss_trace": "For each of six winning-number slots per target, store min-rank, Borda, consensus and five component rank positions, best component and whether min-rank top30 retained it. Do not store winning number values, candidate lists or top30 numbers.",
+    "inference": {
+      "family_alpha": 0.05,
+      "comparisons": 5,
+      "alpha_per_comparison": 0.01,
+      "bootstrap": "Two-sided percentile moving-block bootstrap, 50-target contiguous blocks, 17 full blocks sampled with replacement, final 1-target remainder retained in every replicate.",
+      "bootstrap_replicates": 4000,
+      "seeds": {
+        "bootstrap": 20261123081,
+        "candidate_random": 20261123082
+      },
+      "baselines": "Consensus and Borda comparisons are descriptive only; only MIN_RANK versus exact uniform is confirmatory within this historical diagnostic."
+    }
+  },
+  "portfolio_stage": {
+    "allocator": "Fixed top-18 MIN_RANK order partition: ranks 1-6, 7-12, 13-18 form exactly three six-number lines.",
+    "geometry": "Three pairwise-disjoint six-number lines, union18; no allocator search or modification.",
+    "metrics": [
+      "max_hit",
+      "any2+",
+      "any3+",
+      "any4+",
+      "any5+",
+      "any6",
+      "winning_union_coverage",
+      "line_hit_distribution"
+    ],
+    "exact_geometry_matched_null": {
+      "geometry": "Three disjoint six-number tickets with union18",
+      "calculation": "Independent combinatorial enumeration over hit counts a,b,c in each ticket and d=6-a-b-c outside the union; weight C(6,a)C(6,b)C(6,c)C(27,d)/C(45,6).",
+      "registered_values": {
+        "max_hits": 1.5142562485727544,
+        "any2": 0.4749762432689262,
+        "any3": 0.07135490714617204,
+        "any4": 0.004180448026165553,
+        "any5": 0.00008655553181928678,
+        "any6": 3.68321411996965e-7,
+        "winning_union_coverage": 2.4
+      }
+    },
+    "matched_random": "120 uniform random label permutations per target, partitioned into three disjoint six-number lines; deterministic Mulberry32/Fisher-Yates.",
+    "inference": {
+      "strict_metrics": [
+        "max_hits",
+        "any2",
+        "any3",
+        "winning_union_coverage"
+      ],
+      "family_alpha": 0.05,
+      "alpha_per_metric": 0.0125,
+      "bootstrap": "Two-sided percentile moving-block bootstrap, 50-target blocks; 17 full blocks sampled with replacement; final 1-target remainder retained.",
+      "bootstrap_replicates": 4000,
+      "seeds": {
+        "portfolio_random": 20261123083,
+        "bootstrap_base": 20261123081,
+        "portfolio_metric_offset": 300
+      },
+      "nonoverlapping_block_stability": "17 full non-overlapping 50-target blocks; final 1-target remainder reported separately; any2-positive full-block share minimum 0.65."
+    },
+    "strict_gate_unchanged": {
+      "all_four_adjusted_ci_lower_bounds_strictly_gt_zero": true,
+      "any2_positive_50_target_block_share_min": 0.65,
+      "no_leakage": true,
+      "prospective_confirmation_required": true,
+      "thresholds_may_not_be_relaxed": true
+    },
+    "prospective_confirmation": {
+      "minimum_target_count": null,
+      "completion_rule": null,
+      "status": "UNSPECIFIED_IN_POLICY",
+      "E081_cannot_define_or_satisfy_this_requirement": true
+    }
+  },
+  "guardrails": [
+    "No future leakage; target t uses rounds through t-1 only.",
+    "No candidate numbers, top30, core/tail or purchase lines in user-facing output.",
+    "No clean-holdout or prospective claim for historical targets.",
+    "Rounds 1244-1251 are contaminated live-history diagnostics.",
+    "No parameter search, no post-hoc threshold changes, no random fallback.",
+    "Three-line policy only; historical five-line results cannot qualify target 1252."
+  ],
+  "output_rules": {
+    "append_only": true,
+    "no_candidate_numbers_in_user_report": true,
+    "no_top30_core_tail_or_purchase_lines_in_user_report": true,
+    "no_purchase_lines_generated": true,
+    "no_strict_pass_ready_from_historical_results": true,
+    "no_random_fallback": true,
+    "no_threshold_or_alpha_relaxation": true
+  }
+}
