@@ -1,0 +1,23 @@
+{
+  "study_id": "E081_MIN_COMPONENT_RANK_RESCUE_v1",
+  "preregistration_blob_sha": "01dc08475c6fd8ca6e6ac58009a196b8160ff452",
+  "implementation_repair_addendum_blob_sha": "278bf28e5914f62be82008b770a71bdb551bb39f",
+  "v1_runner_blob_sha": "d2abdd9dd9a61ffd09cbb7a99f0c90e9f9970937",
+  "authoritative_v2_runner_blob_sha": "568269e7d89cc9dc08bef6f128d2fd3b91d9be0a",
+  "source_snapshot_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "source_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "canonical_mirror_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "canonical_mirror_content_identical": true,
+  "row_count": 1251,
+  "contiguous_rounds_1_to_1251": true,
+  "main_number_validity": true,
+  "bonus_validity": true,
+  "targets": 851,
+  "cutoff_rule": "t-1",
+  "leakage_failures": 0,
+  "invalid_portfolios": 0,
+  "exact_null_matches_registered": true,
+  "candidate_numbers_in_outputs": false,
+  "purchase_lines_generated": false,
+  "prospective_claim": false
+}
