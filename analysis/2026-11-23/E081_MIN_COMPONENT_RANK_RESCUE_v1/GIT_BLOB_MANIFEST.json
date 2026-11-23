@@ -1,0 +1,65 @@
+{
+  "study_id": "E081_MIN_COMPONENT_RANK_RESCUE_v1",
+  "created_at_kst": "2026-11-23T09:25:00+09:00",
+  "append_only": true,
+  "source": {
+    "path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834"
+  },
+  "code": {
+    "path": "automation/e081_min_component_rank_rescue_v2.js",
+    "git_blob_sha": "568269e7d89cc9dc08bef6f128d2fd3b91d9be0a"
+  },
+  "preregistration": {
+    "path": "research/weekly_purchase/1252/E081_MIN_COMPONENT_RANK_RESCUE_PREREG_20261123.json",
+    "git_blob_sha": "01dc08475c6fd8ca6e6ac58009a196b8160ff452"
+  },
+  "repair_addendum": {
+    "path": "research/weekly_purchase/1252/E081_IMPLEMENTATION_REPAIR_ADDENDUM_V2_20261123.json",
+    "git_blob_sha": "278bf28e5914f62be82008b770a71bdb551bb39f"
+  },
+  "outputs": [
+    {
+      "path": "analysis/2026-11-23/E081_MIN_COMPONENT_RANK_RESCUE_v1/RESULTS.json",
+      "git_blob_sha": "7e0e1df48fc1e1a860a518559cc078a1ea5a28d1",
+      "bytes": 21761
+    },
+    {
+      "path": "analysis/2026-11-23/E081_MIN_COMPONENT_RANK_RESCUE_v1/PER_TARGET_METRICS.csv",
+      "git_blob_sha": "4d8b78c8f744a0a5af2b0eda7dee7b1b4276ca9e",
+      "bytes": 154150
+    },
+    {
+      "path": "analysis/2026-11-23/E081_MIN_COMPONENT_RANK_RESCUE_v1/WINNER_MISS_ATTRIBUTION.csv",
+      "git_blob_sha": "c165ca813233ab362ea831ae9a0b05b592140229",
+      "bytes": 289848
+    },
+    {
+      "path": "analysis/2026-11-23/E081_MIN_COMPONENT_RANK_RESCUE_v1/BLOCK_STABILITY.csv",
+      "git_blob_sha": "829f2995935e3d9eec0ae774777e5dca73a6cce6",
+      "bytes": 1058
+    },
+    {
+      "path": "analysis/2026-11-23/E081_MIN_COMPONENT_RANK_RESCUE_v1/REPORT.md",
+      "git_blob_sha": "156e46af96e09df8fa5ecf1ae48233e001b5d21c",
+      "bytes": 3975
+    },
+    {
+      "path": "analysis/2026-11-23/E081_MIN_COMPONENT_RANK_RESCUE_v1/VERIFICATION.json",
+      "git_blob_sha": "beb030c34bbf31cf527d8ddef7460961a3be809e",
+      "bytes": 1010
+    },
+    {
+      "path": "research/weekly_purchase/1252/E081_COMPLETION_20261123.json",
+      "git_blob_sha": "8270db88efefc2353c5ae65e9e229f7683033093",
+      "bytes": 1380
+    },
+    {
+      "path": "research/daily/2026-11-23_E081_SUPPLEMENT.md",
+      "git_blob_sha": "87dbffd5b829ae0234bdb869e5aa033d30b4b69c",
+      "bytes": 5603
+    }
+  ],
+  "sha_policy": "Git blob SHA identifies each committed output. The data SHA-256 is independently recorded in the source integrity correction; code identity is recorded by Git blob SHA."
+}
