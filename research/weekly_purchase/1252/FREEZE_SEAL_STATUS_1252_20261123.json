@@ -1,0 +1,12 @@
+{
+  "target_round": 1252,
+  "status": "NOT_CREATED_STRICT_GATE_FAIL",
+  "data_cutoff": 1251,
+  "data_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "candidate_model": null,
+  "allocator": null,
+  "purchase_lines": null,
+  "reason": "E081 is historical exploratory evidence only and fails the fixed historical portfolio gate; prospective confirmation is absent and its minimum-count/completion rule remains unspecified.",
+  "no_random_fallback": true,
+  "append_only": true
+}
