@@ -1,0 +1,30 @@
+{
+  "study_id": "E081_MIN_COMPONENT_RANK_RESCUE_v1",
+  "status": "COMPLETE_HISTORICAL_DIAGNOSTIC_ONLY",
+  "preregistration_path": "research/weekly_purchase/1252/E081_MIN_COMPONENT_RANK_RESCUE_PREREG_20261123.json",
+  "preregistration_blob_sha": "01dc08475c6fd8ca6e6ac58009a196b8160ff452",
+  "implementation_repair_addendum": "research/weekly_purchase/1252/E081_IMPLEMENTATION_REPAIR_ADDENDUM_V2_20261123.json",
+  "implementation_repair_addendum_blob_sha": "278bf28e5914f62be82008b770a71bdb551bb39f",
+  "runner_path": "automation/e081_min_component_rank_rescue_v2.js",
+  "runner_blob_sha": "568269e7d89cc9dc08bef6f128d2fd3b91d9be0a",
+  "source_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+  "source_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "source_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "target_range": [
+    401,
+    1251
+  ],
+  "targets": 851,
+  "no_future_leakage": true,
+  "candidate_stage_computed": true,
+  "portfolio_stage_computed": true,
+  "matched_random_candidate_sets": 170200,
+  "matched_random_portfolios": 102120,
+  "bootstrap_replicates": 4000,
+  "block_length": 50,
+  "strict_historical_gate_pass": false,
+  "prospective_confirmation": false,
+  "strict_pass_ready": false,
+  "purchase_lines_generated": false,
+  "output_directory": "analysis/2026-11-23/E081_MIN_COMPONENT_RANK_RESCUE_v1/"
+}
