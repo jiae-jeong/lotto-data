@@ -1,0 +1,22 @@
+{
+  "addendum_id": "E081_IMPLEMENTATION_REPAIR_ADDENDUM_V2_20261123",
+  "study_id": "E081_MIN_COMPONENT_RANK_RESCUE_v1",
+  "recorded_at_kst": "2026-11-23T09:18:00+09:00",
+  "status": "PRE_EVALUATION_EXECUTION_REPAIR",
+  "prior_attempt": {
+    "path": "automation/e081_min_component_rank_rescue_v1.js",
+    "blob_sha": "d2abdd9dd9a61ffd09cbb7a99f0c90e9f9970937",
+    "failure": "V1 stopped before any target evaluation because the per-target output accumulator was referenced before initialization.",
+    "outputs_published": false,
+    "metrics_computed": false,
+    "no_candidate_or_purchase_numbers_published": true
+  },
+  "correction": {
+    "path": "automation/e081_min_component_rank_rescue_v2.js",
+    "blob_sha": "568269e7d89cc9dc08bef6f128d2fd3b91d9be0a",
+    "change": "Initialize per-target output accumulators before the target loop and collect all three fixed portfolio comparators. Model formula, signals, targets, K values, allocator, random seeds, exact null, bootstrap, alpha, block length and strict gate are unchanged.",
+    "v1_preserved": true
+  },
+  "frozen_design_unchanged": true,
+  "authorization": "Use V2 as authoritative runner; V1 remains preserved as a pre-evaluation failed implementation attempt."
+}
