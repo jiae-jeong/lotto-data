@@ -1,0 +1,37 @@
+{
+  "target_round": 1252,
+  "recorded_at_kst": "2026-11-23T09:30:00+09:00",
+  "status": "BLOCKED_NO_STRICT_PASS",
+  "blockers": [
+    {
+      "id": "B1_H1250_EXTERNAL_NESTED_NOT_EXECUTED",
+      "severity": "high",
+      "evidence": "H1250-A/B V2 preregistration is frozen, but the append-only workflow post-registration audit records no H1250-A/B workflow_dispatch execution. The planned independent nested evaluation therefore has no execution artifact.",
+      "non_transfer_rule": "H1250-A/B was a five-line research design; it cannot qualify the target-1252 three-line purchase gate."
+    },
+    {
+      "id": "B2_PROSPECTIVE_CONFIRMATION_RULE_UNSPECIFIED",
+      "severity": "high",
+      "evidence": "Current target-1251/1252 strict status files mark prospective confirmation minimum target count and completion rule as null/UNSPECIFIED_IN_POLICY. E046 is a design-only power plan; prospective_v4 is a separate 200-target protocol and cannot silently amend the current gate.",
+      "non_transfer_rule": "Do not borrow the prospective_v4 200-target endpoint as a target-1252 gate amendment without a versioned policy decision."
+    },
+    {
+      "id": "B3_NO_QUALIFIED_CHAMPION",
+      "severity": "high",
+      "evidence": "V54/V83/V84/V85/V86 all failed the unchanged 1249 five-line gate; E077/E080/E081 remain historical diagnostics with no prospective strict PASS. E081's four required adjusted CI lower bounds are all non-positive and its any2-positive 50-target block share is 8/17.",
+      "non_transfer_rule": "No model or allocator promotion; no random fallback; no purchase lines."
+    },
+    {
+      "id": "B4_SOURCE_PROVENANCE_LIMITATION",
+      "severity": "medium",
+      "evidence": "Target-1251 result source is cross-checked by independent secondary reports/listings, but direct official API retrieval is not recorded.",
+      "non_transfer_rule": "Retain the source limitation; do not claim direct official API verification."
+    },
+    {
+      "id": "B5_PURCHASE_OUTCOME_PROVENANCE",
+      "severity": "medium",
+      "evidence": "Targets 1247/1248 have preserved conflicting line sets without purchase receipts; target1250 display evidence was corrected to unverified; target1249 and target1251 were displayed but have no purchase confirmation.",
+      "non_transfer_rule": "Do not use any of these as confirmed actual-purchase outcome aggregates."
+    }
+  ]
+}
