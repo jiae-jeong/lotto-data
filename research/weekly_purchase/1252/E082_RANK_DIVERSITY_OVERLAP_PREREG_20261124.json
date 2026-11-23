@@ -1,0 +1,81 @@
+{
+  "study_id": "E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1",
+  "registered_at_kst": "2026-11-24T08:51:35+09:00",
+  "registration_status": "FROZEN_BEFORE_EVALUATION",
+  "target_round": 1252,
+  "target_draw_date": "2026-11-28",
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_RANK_DEPENDENCE_DIAGNOSTIC_NOT_CLEAN_HOLDOUT_NOT_PROSPECTIVE",
+  "research_question": "Do the E080 Borda and E081 minimum-component-rank aggregators provide meaningfully distinct candidate orderings from the existing mean-z consensus, or do they mostly reshuffle the same candidate information?",
+  "novelty_statement": "E080 and E081 measured candidate recall and portfolio outcomes but did not report the full per-target 45-number rank-correlation matrix or top-K set-overlap geometry across all three rankers. This study measures rank dependence and unique winner rescue without changing any model, feature, coefficient, candidate threshold, or allocator.",
+  "prior_work_boundary": {
+    "E080": "Borda candidate recall and fixed three-line allocator outcomes; this study adds rank-dependence and overlap metrics only.",
+    "E081": "MIN_RANK candidate recall, fixed three-line allocator outcomes, and best-component miss attribution; this study adds full-ranking dependence and pairwise top-K overlap only.",
+    "E059_E065": "Component-level candidate recall diagnostics; no component or aggregation is reweighted here.",
+    "duplication_control": "No new model variant, feature, parameter search, allocator experiment, or post-result tuning is permitted."
+  },
+  "source": {
+    "path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "cutoff": 1251,
+    "rows": 1251,
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92b8e",
+    "provenance": "repository snapshot; SHA-256 correction and Git blob identity were audited on 2026-11-23; secondary cross-check only, direct official API not retrieved"
+  },
+  "models": {
+    "CONSENSUS": "Mean of the five existing component z-scores; descending score, then ascending number.",
+    "BORDA": "Sum of the five existing component rank positions; ascending sum, then ascending number.",
+    "MIN_RANK": "Ascending minimum of the five component rank positions; tie-break by ascending sum of component ranks, then ascending number."
+  },
+  "features": {
+    "signals": ["recent30", "gap", "momentum", "balanced", "contrarian"],
+    "definitions": "Exact automation/candidate_recall_v1.py features: population z-scores; recent30 count over prior 30 draws; gap in completed draws since last main-number appearance; momentum=(last10/10)-(preceding20/20), with exact integer rank score 2*last10-preceding20; balanced=(recent30_z+gap_z)/2; contrarian=(-recent30_z+gap_z)/2.",
+    "cutoff_rule": "For every target t, all five component features and all three model rankings use only draws 1..t-1. Target outcomes are read only after all rankings for t are frozen."
+  },
+  "historical_evaluation": {
+    "target_rounds": "401..1251 inclusive",
+    "target_count": 851,
+    "full_nonoverlapping_blocks": 17,
+    "block_length": 50,
+    "final_remainder_targets": 1,
+    "contaminated_live_history_rounds": [1244, 1245, 1246, 1247, 1248, 1249, 1250, 1251],
+    "clean_holdout": false,
+    "prospective_confirmation": false
+  },
+  "primary_metrics": {
+    "full_ranking_dependence": "Per-target Spearman rank correlation over all 45 numbers for each of the three model pairs; summarize mean, median, and 10th/90th percentiles.",
+    "top_k_overlap": "For K in [10,15,20,25,30], per-target intersection size and Jaccard similarity for each model pair; summarize mean and block ranges.",
+    "exact_overlap_reference": "For two independent uniform K-subsets of 45 numbers, expected intersection is K*K/45. This is a descriptive independent-random reference, not a model performance gate.",
+    "unique_winner_rescue": "At each K, count winners captured by model A but not B and vice versa; summarize per-target means and total counts. This is descriptive only.",
+    "candidate_recall": "Report each ranker's recall@K as a supporting descriptive metric; no separate promotion test."
+  },
+  "stability": {
+    "partition": "Targets 401..1250 as 17 consecutive non-overlapping 50-target blocks; target 1251 retained and reported as a separate 1-target remainder.",
+    "report": "Per-pair Spearman and top-K overlap block means/ranges; per-pair unique-winner-rescue differences by block. Do not discard the remainder."
+  },
+  "inference_and_decision": {
+    "inferential_claims": false,
+    "p_values": false,
+    "confidence_intervals": false,
+    "multiple_testing_promotion": false,
+    "model_promotion": false,
+    "allocator_promotion": false,
+    "strict_gate_change": false,
+    "prospective_confirmation": false,
+    "purpose": "Diagnose redundancy or distinctness among existing candidate rankers and guide whether future work should focus on candidate information or allocator geometry."
+  },
+  "guardrails": [
+    "No future leakage; target t uses only rounds through t-1.",
+    "Rounds 1244-1251 are contaminated live-history diagnostics.",
+    "No clean-holdout or prospective claim.",
+    "No new candidate list, TOP30, core/tail list, purchase lines, or fallback.",
+    "No change to the fixed strict gate or prospective minimum-count policy.",
+    "No model or allocator promotion from this diagnostic."
+  ],
+  "output_rules": {
+    "append_only": true,
+    "suppress_number_values": true,
+    "no_candidate_or_purchase_lines_generated": true,
+    "no_delivery_log_event": true,
+    "no_random_fallback": true
+  }
+}
