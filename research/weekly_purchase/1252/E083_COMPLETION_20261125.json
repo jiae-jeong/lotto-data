@@ -1,0 +1,42 @@
+{
+  "study_id": "E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1",
+  "status": "COMPLETE_HISTORICAL_ROLLING_DIAGNOSTIC_ONLY",
+  "preregistration_path": "research/weekly_purchase/1252/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_PREREG_20261125.json",
+  "preregistration_blob_sha": "b5ca8ce2216ea70de7bf78125443f8bcee04c606",
+  "correction_path": "research/weekly_purchase/1252/E083_IMPLEMENTATION_CORRECTION_20261125.json",
+  "runner_path": "automation/e083_prequential_dynamic_ranker_selection_v2.js",
+  "runner_blob_sha": "d1dbb8d98baae6f72c2dc16e4265cf207bc2cfdd",
+  "runner_content_sha256": "f928638cbed23b700090856a25691076a3fb8c670a1957ab6213d723d3a75f17",
+  "source_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+  "source_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "source_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "target_range": [
+    451,
+    1251
+  ],
+  "warmup_targets": [
+    401,
+    450
+  ],
+  "targets": 801,
+  "cutoff_violations": 0,
+  "contaminated_live_history_rounds": [
+    1244,
+    1245,
+    1246,
+    1247,
+    1248,
+    1249,
+    1250,
+    1251
+  ],
+  "historical_gate_pass": false,
+  "strict_pass_ready": false,
+  "prospective_confirmation": false,
+  "external_nested_validation": false,
+  "model_or_allocator_promotion": false,
+  "purchase_lines_generated": false,
+  "delivery_log_event_created": false,
+  "output_manifest_path": "research/weekly_purchase/1252/E083_OUTPUT_MANIFEST_20261125.json",
+  "append_only": true
+}
