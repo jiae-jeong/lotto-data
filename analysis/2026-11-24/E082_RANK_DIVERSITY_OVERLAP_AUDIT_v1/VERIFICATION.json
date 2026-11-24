@@ -1,0 +1,57 @@
+{
+  "study_id": "E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1",
+  "source_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+  "rows": 1251,
+  "first_round": 1,
+  "last_round": 1251,
+  "source_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "source_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "header_valid": true,
+  "round_sequence_valid": true,
+  "main_number_validation": "PASS",
+  "bonus_validation": "PASS",
+  "target_range": [
+    401,
+    1251
+  ],
+  "target_count": 851,
+  "cutoff_violations": 0,
+  "contaminated_live_history_rounds": [
+    1244,
+    1245,
+    1246,
+    1247,
+    1248,
+    1249,
+    1250,
+    1251
+  ],
+  "clean_holdout": false,
+  "prospective_confirmation": false,
+  "models": [
+    "CONSENSUS",
+    "BORDA",
+    "MIN_RANK"
+  ],
+  "rankings_per_target": 3,
+  "full_rankings_computed": 2553,
+  "pairwise_rank_correlations": 2553,
+  "top_k_values": [
+    10,
+    15,
+    20,
+    25,
+    30
+  ],
+  "full_50_target_blocks": 17,
+  "final_remainder_targets": 1,
+  "candidate_numbers_written_to_output": false,
+  "allocator_changed": false,
+  "purchase_lines_generated": false,
+  "sha256_abc_test_vector": "PASS",
+  "git_blob_sha1_abc_test_vector": "PASS",
+  "preregistration_blob_sha": "56add5f5aa1766492869bf7769d37542523cf307",
+  "preregistration_correction_blob_sha": "21077eab57cd7e37a499bef057f006ba0436a4b4",
+  "runner_blob_sha": "fb85c15020e7f191892a2e67adb7bf2b195c013d",
+  "runner_content_sha256": "50c0c1d290416d6af622e9ea0446e8f7e13d7d80dd0d5ba2cdb284488271e6df"
+}
