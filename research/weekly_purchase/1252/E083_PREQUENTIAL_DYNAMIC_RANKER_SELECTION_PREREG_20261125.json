@@ -1,0 +1,112 @@
+{
+  "study_id": "E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1",
+  "registered_at_kst": "2026-11-25T08:30:00+09:00",
+  "registration_status": "FROZEN_BEFORE_EVALUATION",
+  "target_round": 1252,
+  "target_draw_date": "2026-11-28",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "evidence_class": "HISTORICAL_ROLLING_WALK_FORWARD_EXPLORATORY_NOT_CLEAN_HOLDOUT_NOT_PROSPECTIVE_CONFIRMATION",
+  "research_question": "Can a strictly prequential selector among the three already-frozen candidate rankers improve candidate_recall@30, and does that candidate-stage selection translate into better three-line portfolio outcomes under one unchanged deterministic allocator?",
+  "novelty_statement": "E080/E081 compared fixed rankers; E082 measured their ranking dependence. None selected among the same frozen rankers at each target using only the preceding 50 target outcomes. This study adds one pre-registered past-only dynamic-selection rule, without adding features, changing ranker formulas, searching parameters, or changing the allocator.",
+  "source": {
+    "path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "cutoff": 1251,
+    "rows": 1251,
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "integrity_recomputed_before_registration": true
+  },
+  "rankers": {
+    "CONSENSUS": "Mean of the five existing component z-scores; descending score, then ascending number.",
+    "BORDA": "Sum of the five existing component rank positions; ascending sum, then ascending number.",
+    "MIN_RANK": "Ascending minimum of the five component rank positions; tie-break by ascending sum of component ranks, then ascending number.",
+    "component_signals": ["recent30", "gap", "momentum", "balanced", "contrarian"],
+    "feature_formulas": "Exact formulas in automation/e082_rank_diversity_overlap_v1.js; no modifications.",
+    "cutoff_rule": "For every target t, all features and all three rankers use only main-number draws 1..t-1."
+  },
+  "dynamic_selector": {
+    "warmup_targets": "401..450 inclusive; used only to seed the trailing performance window.",
+    "outer_evaluation_targets": "451..1251 inclusive.",
+    "lookback_targets": 50,
+    "selection_metric": "Mean candidate_recall@30 across the immediately preceding 50 target rounds, using each ranker's own cutoff-safe ranking made before that prior target.",
+    "selection_rule": "At target t, select the ranker with the highest mean recall@30 over targets t-50..t-1. No target-t outcome is read before selection.",
+    "fixed_tie_break_priority": ["CONSENSUS", "BORDA", "MIN_RANK"],
+    "variants": 1,
+    "parameter_search": false,
+    "randomness_in_selection": false
+  },
+  "candidate_stage": {
+    "metrics": ["candidate_recall@10", "candidate_recall@15", "candidate_recall@20", "candidate_recall@25", "candidate_recall@30"],
+    "primary_metric": "candidate_recall@30",
+    "primary_comparisons": ["CONSENSUS", "BORDA", "MIN_RANK", "EXACT_UNIFORM_30_OF_45"],
+    "candidate_random_sets_per_target": 200,
+    "candidate_random_seed": 20261125081,
+    "exact_uniform_expectation": "K/45 for candidate_recall@K",
+    "miss_trace": "For each omitted winning instance, preserve selected ranker and five component rank positions; do not store winning-number values, candidate lists, or TOP30 values."
+  },
+  "portfolio_stage": {
+    "allocator": "Fixed top-18 rank partition: ranks 1-6, 7-12, and 13-18 become exactly three six-number lines.",
+    "geometry": "Three pairwise-disjoint six-number lines; union18; pairwise line overlap 0 by construction.",
+    "allocator_search": false,
+    "metrics": ["max_hit", "any2", "any3", "any4", "any5", "any6", "winning_union_coverage", "line_hit_distribution"],
+    "exact_geometry_matched_null": {
+      "method": "Enumerate a,b,c in 0..6 and d=6-a-b-c with 0<=d<=27; probability weight C(6,a)C(6,b)C(6,c)C(27,d)/C(45,6).",
+      "max_hit": 1.514256248572755,
+      "any2": 0.47497624326892623,
+      "any3": 0.07135490714617204,
+      "any4": 0.004180448026165553,
+      "any5": 0.00008655553181928678,
+      "any6": 3.68321411996965e-7,
+      "winning_union_coverage": 2.4
+    },
+    "matched_random_portfolios_per_target": 120,
+    "portfolio_random_seed": 20261125082,
+    "randomness_in_final_selection": false
+  },
+  "inference": {
+    "family_alpha": 0.05,
+    "candidate_primary_comparisons": 4,
+    "candidate_alpha_per_comparison": 0.0125,
+    "portfolio_strict_metrics": ["max_hit", "any2", "any3", "winning_union_coverage"],
+    "portfolio_alpha_per_metric": 0.0125,
+    "bootstrap": "Two-sided percentile moving-block bootstrap; 4,000 replicates; 50-target contiguous blocks sampled with replacement; retain the final one-target remainder in every replicate.",
+    "bootstrap_replicates": 4000,
+    "block_length_targets": 50,
+    "bootstrap_seed": 20261125083,
+    "nonoverlapping_block_stability": "16 full non-overlapping 50-target blocks over 451..1250; retain target 1251 as a separate final one-target remainder.",
+    "any2_positive_block_share_min": 0.65,
+    "no_threshold_relaxation": true
+  },
+  "historical_evaluation": {
+    "warmup_targets": 50,
+    "outer_targets": 801,
+    "contaminated_live_history_rounds": [1244, 1245, 1246, 1247, 1248, 1249, 1250, 1251],
+    "clean_holdout": false,
+    "prospective_confirmation": false
+  },
+  "strict_gate": {
+    "all_four_adjusted_moving_block_ci_lower_bounds_strictly_gt_zero": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_leakage": true,
+    "nested_or_rolling_cutoff_safe_validation": true,
+    "prospective_confirmation_required": true,
+    "prospective_minimum_target_count": null,
+    "prospective_completion_rule": null,
+    "no_threshold_or_alpha_change": true
+  },
+  "guardrails": [
+    "This is an exploratory historical rolling-origin study, not a clean holdout or prospective confirmation.",
+    "No target-t outcome may affect target-t ranker selection.",
+    "No Friday tuning, no fallback, and no candidate or purchase numbers may be shown to the user.",
+    "Do not transfer any historical five-line result or status to the three-line policy.",
+    "No model or allocator promotion unless all existing gates and prospective policy requirements are met.",
+    "No delivery log event because no numbers are to be displayed."
+  ],
+  "output_rules": {
+    "append_only": true,
+    "suppress_number_values": true,
+    "no_candidate_or_purchase_lines_generated_for_display": true,
+    "no_delivery_log_event": true,
+    "no_random_fallback": true
+  }
+}
