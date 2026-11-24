@@ -1,0 +1,12 @@
+{
+  "correction_id": "E083_IMPLEMENTATION_CORRECTION_20261125",
+  "preregistration_path": "research/weekly_purchase/1252/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_PREREG_20261125.json",
+  "preregistration_blob_sha": "b5ca8ce2216ea70de7bf78125443f8bcee04c606",
+  "v1_runner_path": "automation/e083_prequential_dynamic_ranker_selection_v1.js",
+  "v1_runner_status": "STATIC_AUDIT_FAILED_BEFORE_EVALUATION_NOT_EXECUTED",
+  "issue": "The first runner draft mapped aggregate ranker ranks into fields labeled as component ranks in the miss-attribution trace.",
+  "v2_runner_path": "automation/e083_prequential_dynamic_ranker_selection_v2.js",
+  "v2_runner_blob_sha": "d1dbb8d98baae6f72c2dc16e4265cf207bc2cfdd",
+  "correction": "The corrected runner reads the five component rank maps directly. No evaluation was run using v1; all calculations below use v2.",
+  "append_only": true
+}
