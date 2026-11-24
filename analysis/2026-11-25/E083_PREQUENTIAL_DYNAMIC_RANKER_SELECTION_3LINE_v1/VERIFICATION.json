@@ -1,0 +1,49 @@
+{
+  "study_id": "E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1",
+  "source_integrity": {
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "rows": 1251,
+    "first_round": 1,
+    "last_round": 1251,
+    "header_valid": true,
+    "round_sequence_valid": true,
+    "main_numbers_valid": true,
+    "bonus_valid": true
+  },
+  "target_range": {
+    "warmup": [
+      401,
+      450
+    ],
+    "outer": [
+      451,
+      1251
+    ],
+    "outer_count": 801
+  },
+  "cutoff_violations": 0,
+  "selection_lookback_violations": 0,
+  "invalid_three_line_geometries": 0,
+  "miss_trace_rows": 1621,
+  "contaminated_live_history_rounds": [
+    1244,
+    1245,
+    1246,
+    1247,
+    1248,
+    1249,
+    1250,
+    1251
+  ],
+  "clean_holdout": false,
+  "prospective_confirmation": false,
+  "exact_null_matches_registered": true,
+  "random_baseline_runs": {
+    "candidate": 160200,
+    "portfolio": 96120
+  },
+  "model_or_allocator_promotion": false,
+  "purchase_lines_generated": false,
+  "number_values_in_outputs": false
+}
