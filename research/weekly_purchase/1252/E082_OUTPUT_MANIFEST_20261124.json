@@ -1,0 +1,57 @@
+{
+  "study_id": "E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1",
+  "recorded_at_kst": "2026-11-24T08:55:00+09:00",
+  "source": {
+    "path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834"
+  },
+  "preregistration": {
+    "path": "research/weekly_purchase/1252/E082_RANK_DIVERSITY_OVERLAP_PREREG_20261124.json",
+    "blob_sha": "56add5f5aa1766492869bf7769d37542523cf307",
+    "correction_path": "research/weekly_purchase/1252/E082_PREREG_CORRECTION_20261124_V1.json",
+    "correction_blob_sha": "21077eab57cd7e37a499bef057f006ba0436a4b4"
+  },
+  "runner": {
+    "path": "automation/e082_rank_diversity_overlap_v1.js",
+    "blob_sha": "fb85c15020e7f191892a2e67adb7bf2b195c013d",
+    "content_sha256": "50c0c1d290416d6af622e9ea0446e8f7e13d7d80dd0d5ba2cdb284488271e6df"
+  },
+  "outputs": {
+    "results": {
+      "path": "analysis/2026-11-24/E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1/RESULTS.json",
+      "blob_sha": "5f80a53585cf992dab51434866ae5f287324eb90"
+    },
+    "verification": {
+      "path": "analysis/2026-11-24/E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1/VERIFICATION.json",
+      "blob_sha": "053bddcbc72b9d2aeee76ae6296f039b8d46d1a9"
+    },
+    "per_target_metrics": {
+      "path": "analysis/2026-11-24/E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1/PER_TARGET_METRICS.csv",
+      "blob_sha": "300045ea4422439a4e3036d5c9d40e37d187d115"
+    },
+    "block_summary": {
+      "path": "analysis/2026-11-24/E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1/BLOCK_SUMMARY.csv",
+      "blob_sha": "eb5bf2a5b9732cb425201095f0204d732d88ce1c"
+    },
+    "completion": {
+      "path": "research/weekly_purchase/1252/E082_COMPLETION_20261124.json",
+      "blob_sha": "8268acb513b9a685a216ff0516c62ffb82f908ee"
+    }
+  },
+  "execution": {
+    "target_range": "401..1251",
+    "targets": 851,
+    "cutoff_violations": 0,
+    "full_rankings": 2553,
+    "pairwise_rank_correlations": 2553,
+    "full_nonoverlapping_50_target_blocks": 17,
+    "final_remainder_targets": 1,
+    "clean_holdout": false,
+    "prospective_confirmation": false,
+    "candidate_numbers_in_outputs": false,
+    "purchase_lines_generated": false,
+    "model_or_allocator_promoted": false
+  },
+  "append_only": true
+}
