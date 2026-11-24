@@ -1,0 +1,10 @@
+{
+  "correction_id": "E083_OUTPUT_SCHEMA_CORRECTION_20261125",
+  "v3_runner_path": "automation/e083_prequential_dynamic_ranker_selection_v3.js",
+  "v3_runner_blob_sha": "cc09895ba0d0100504301564ea2d34ccfe682a16",
+  "v3_runner_content_sha256": "44ec8534d2860a318cad3237967ff06c04d8754829effa817d985ec90fe3d400",
+  "corrected_output_folder": "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v2",
+  "correction_status": "VERIFIED",
+  "note": "All static rankers now have recall@10/15/20/25/30 values in the corrected per-target and summary outputs. The selector, allocator, data, target range, seeds, and inference settings are unchanged. The earlier v2 output folder remains preserved and is superseded for candidate K summaries only.",
+  "append_only": true
+}
