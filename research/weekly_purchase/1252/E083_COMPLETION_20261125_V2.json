@@ -1,0 +1,40 @@
+{
+  "study_id": "E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1",
+  "status": "COMPLETE_HISTORICAL_ROLLING_DIAGNOSTIC_ONLY",
+  "preregistration_path": "research/weekly_purchase/1252/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_PREREG_20261125.json",
+  "runner_path": "automation/e083_prequential_dynamic_ranker_selection_v3.js",
+  "runner_blob_sha": "cc09895ba0d0100504301564ea2d34ccfe682a16",
+  "runner_content_sha256": "44ec8534d2860a318cad3237967ff06c04d8754829effa817d985ec90fe3d400",
+  "source_path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+  "source_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "source_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "target_range": [
+    451,
+    1251
+  ],
+  "warmup_targets": [
+    401,
+    450
+  ],
+  "target_count": 801,
+  "cutoff_violations": 0,
+  "invalid_three_line_geometries": 0,
+  "candidate_random_sets": 160200,
+  "portfolio_random_bundles": 96120,
+  "bootstrap_replicates": 4000,
+  "full_50_target_blocks": 16,
+  "final_remainder_targets": 1,
+  "miss_trace_rows": 1621,
+  "historical_gate": "FAIL",
+  "strict_pass_ready": false,
+  "prospective_confirmation": false,
+  "prospective_minimum_count_and_completion_rule": "UNSPECIFIED_IN_POLICY",
+  "external_nested_validation": false,
+  "model_or_allocator_promotion": false,
+  "freeze_or_seal_created": false,
+  "purchase_lines_generated": false,
+  "delivery_log_event_created": false,
+  "output_manifest_path": "research/weekly_purchase/1252/E083_OUTPUT_MANIFEST_20261125_V2.json",
+  "output_folder": "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v2",
+  "append_only": true
+}
