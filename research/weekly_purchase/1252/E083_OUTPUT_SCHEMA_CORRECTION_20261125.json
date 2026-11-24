@@ -1,0 +1,11 @@
+{
+  "correction_id": "E083_OUTPUT_SCHEMA_CORRECTION_20261125",
+  "prior_runner": "automation/e083_prequential_dynamic_ranker_selection_v2.js",
+  "prior_result_folder": "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1",
+  "issue": "Static ranker candidate_recall@10/15/20/25 fields were omitted from PER_TARGET_METRICS.csv, so the corresponding summary cells serialized as null. Dynamic candidate recall, all @30 comparisons, portfolio metrics, exact null, bootstrap, and block calculations were populated.",
+  "correction": "V3 emits all five K values for each static ranker and reruns the preregistered calculation. No model, selector, allocator, target range, seed, threshold, or inference rule changes.",
+  "v3_runner": "automation/e083_prequential_dynamic_ranker_selection_v3.js",
+  "v3_blob_sha": "PENDING_FETCH",
+  "evaluation_status": "V2 outputs preserved unchanged; V3 is the corrected reproducibility run.",
+  "append_only": true
+}
