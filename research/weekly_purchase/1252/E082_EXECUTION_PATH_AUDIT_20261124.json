@@ -1,0 +1,28 @@
+{
+  "audit_id": "E082_EXECUTION_PATH_AUDIT_20261124",
+  "study_id": "E082_RANK_DIVERSITY_OVERLAP_AUDIT_v1",
+  "execution_engine": "functions.exec JavaScript runtime",
+  "actual_execution": "The source CSV was fetched from the connected GitHub repository and the preregistered feature/ranking/overlap calculations were executed in JavaScript in the tool runtime.",
+  "stored_runner": {
+    "path": "automation/e082_rank_diversity_overlap_v1.js",
+    "blob_sha": "fb85c15020e7f191892a2e67adb7bf2b195c013d",
+    "purpose": "reproducible Node.js replay source"
+  },
+  "runner_invocation_note": "The stored Node.js CLI file was not directly invoked by a local Node process in this run. The executed JavaScript calculation mirrored its preregistered formulas and emitted the saved result artifacts. Do not represent the local Node CLI as having been run.",
+  "source_integrity": {
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "rows": 1251,
+    "cutoff": 1251,
+    "sha256_abc_vector": "PASS",
+    "git_blob_sha1_abc_vector": "PASS"
+  },
+  "outputs": {
+    "results_blob_sha": "5f80a53585cf992dab51434866ae5f287324eb90",
+    "verification_blob_sha": "053bddcbc72b9d2aeee76ae6296f039b8d46d1a9",
+    "per_target_metrics_blob_sha": "300045ea4422439a4e3036d5c9d40e37d187d115",
+    "block_summary_blob_sha": "eb5bf2a5b9732cb425201095f0204d732d88ce1c"
+  },
+  "append_only": true,
+  "no_model_or_allocator_promotion": true
+}
