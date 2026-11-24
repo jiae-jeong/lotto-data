@@ -1,0 +1,52 @@
+{
+  "study_id": "E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1",
+  "recorded_at_kst": "2026-11-25T08:45:00+09:00",
+  "preregistration": {
+    "path": "research/weekly_purchase/1252/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_PREREG_20261125.json",
+    "blob_sha": "b5ca8ce2216ea70de7bf78125443f8bcee04c606"
+  },
+  "correction": {
+    "path": "research/weekly_purchase/1252/E083_IMPLEMENTATION_CORRECTION_20261125.json",
+    "commit_sha": "4bb15f165ba900874885addf2a17af252755a397"
+  },
+  "source": {
+    "path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834"
+  },
+  "runner": {
+    "path": "automation/e083_prequential_dynamic_ranker_selection_v2.js",
+    "blob_sha": "d1dbb8d98baae6f72c2dc16e4265cf207bc2cfdd",
+    "content_sha256": "f928638cbed23b700090856a25691076a3fb8c670a1957ab6213d723d3a75f17"
+  },
+  "output_content_sha256": {
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/RESULTS.json": "19aef5e672f8ac62c103420f2e884dd9001b665d9057a2d3515ec2910dc5dd1a",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/VERIFICATION.json": "74d3a277c2eaec70e9caf38315115c730bed3292d7ca3cfe53c91bf400305458",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/REPORT.md": "f2909e43844ddb8302a62715cc2ced50d9a7fa4f62f29742b9fa38a8293c4054",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/PER_TARGET_METRICS.csv": "d8d356c3222d699496fcc8b56aad7cd5ebd863032549e8ef9b7d6d03a12ff180",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/WINNER_MISS_ATTRIBUTION.csv": "fa1dbcfa39bbc9d31a628bc6d54226bb46ff2e3b5d8814efe0e4abe2e0f0cd70",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/BLOCK_SUMMARY.csv": "6cd9483a13e25c9392cfe2accd628982a4fa85c2b9b5bf3dd1dc68d8f08d7f75"
+  },
+  "output_blobs": {
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/RESULTS.json": "36f936e0bf7fe6d48475d57ca0ee2d3ab09c706f",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/VERIFICATION.json": "ef4c39a327fb1584e7712200aa013f2ead32e972",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/REPORT.md": "90bf2a135dbeae99a8b37c1a9fedc89cf05de862",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/PER_TARGET_METRICS.csv": "9d95b67667948bc32aec3c1ab0e91357be6e96ba",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/WINNER_MISS_ATTRIBUTION.csv": "a6eb09aef0e6106a97daa815a05945d894c99292",
+    "analysis/2026-11-25/E083_PREQUENTIAL_DYNAMIC_RANKER_SELECTION_3LINE_v1/BLOCK_SUMMARY.csv": "25c24d4c097ddf79528cb453c63574664647438d"
+  },
+  "execution": {
+    "targets": 801,
+    "cutoff_violations": 0,
+    "invalid_portfolios": 0,
+    "candidate_random_sets": 160200,
+    "portfolio_random_bundles": 96120,
+    "bootstrap_replicates": 4000,
+    "full_50_target_blocks": 16,
+    "final_remainder_targets": 1,
+    "exact_null_probability_sum": 1.0000000000000007
+  },
+  "completion_status": "COMPLETE_HISTORICAL_EXPLORATORY_ONLY",
+  "append_only": true,
+  "number_values_in_outputs": false
+}
