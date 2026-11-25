@@ -1,0 +1,34 @@
+{
+  "study_id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "source_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "source_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "preregistration_blob_sha": "4b2a3e566754f76407cf4dd5877cc8d5f7e2b7c0",
+  "runner_blob_sha": "b7049773330c72a7909a45b56e9d2c288ac47257",
+  "outputs": {
+    "analysis/2026-11-26/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1/RESULTS.json": {
+      "bytes": 12791,
+      "sha256": "9c2494cc0ca51654edfa09eff9a103e9580d40551bae312b7eb20dce3ffd9651"
+    },
+    "analysis/2026-11-26/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1/VERIFICATION.json": {
+      "bytes": 1240,
+      "sha256": "1297948069a123a1c68c6a021ee972d71a64b45214e59b314f100e25825ff752"
+    },
+    "analysis/2026-11-26/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1/PER_TARGET_METRICS.csv": {
+      "bytes": 156300,
+      "sha256": "af6a9102880848e28870f9a56a0cadca219192359ee68f9e42e44252bc05d56e"
+    },
+    "analysis/2026-11-26/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1/WINNER_RANK_MISS_TRACE.csv": {
+      "bytes": 129168,
+      "sha256": "e4fa5cb5ff2e6fd1fadba50c3eca9ccf4dab136fa0eadb67f5d6547268cedcd8"
+    },
+    "analysis/2026-11-26/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1/BLOCK_SUMMARY.csv": {
+      "bytes": 1243,
+      "sha256": "5560683a57a67d3bcc05db562e0a0bac52777cf5076f872a46c3f72be43c7e5f"
+    },
+    "analysis/2026-11-26/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1/REPORT.md": {
+      "bytes": 4225,
+      "sha256": "bdc370f00a011bca4999f60d4ab9e0efcc7060e87f04e7b5f42ff161ba15f6f0"
+    }
+  },
+  "append_only": true
+}
