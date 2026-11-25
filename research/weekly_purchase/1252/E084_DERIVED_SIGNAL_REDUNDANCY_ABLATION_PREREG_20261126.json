@@ -1,0 +1,136 @@
+{
+  "study_id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "registered_at_kst": "2026-11-26T08:46:00+09:00",
+  "registration_status": "FROZEN_BEFORE_EVALUATION",
+  "target_round": 1252,
+  "target_draw_date": "2026-11-28",
+  "policy_id": "WEEKLY_THREE_LINE_POLICY_1251_PLUS",
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_EXPLORATORY_NOT_CLEAN_HOLDOUT_NOT_PROSPECTIVE_CONFIRMATION",
+  "research_question": "Do the derived balanced and contrarian components add independent candidate information to the five-component mean-z consensus, or do they algebraically duplicate recent30 and gap and overweight gap?",
+  "novelty_statement": "E080/E081 compared rank aggregators and E082 measured ranker dependence; none tested the algebraic redundancy of the two derived components by a single preregistered candidate-only ablation with the same fixed three-line allocator. This is one challenger, no parameter search.",
+  "source": {
+    "path": "data/snapshots/lotto_data_through_1251_20261122.csv",
+    "cutoff": 1251,
+    "rows": 1251,
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "integrity_recomputed_before_registration": true
+  },
+  "feature_definitions": {
+    "recent30": "Main-number counts over the preceding 30 draws, population z-scored over 45 numbers.",
+    "gap": "Completed draws since the last main-number appearance, population z-scored over 45 numbers.",
+    "momentum": "(frequency in last 10 draws / 10) - (frequency in preceding 20 draws / 20), population z-scored; exact ranking tie score 2*count(last10)-count(preceding20).",
+    "balanced": "(recent30_z + gap_z)/2.",
+    "contrarian": "(-recent30_z + gap_z)/2.",
+    "full_five_consensus": "(recent30_z + gap_z + momentum_z + balanced + contrarian)/5 = (recent30_z + 2*gap_z + momentum_z)/5.",
+    "challenger_base_three": "(recent30_z + gap_z + momentum_z)/3. Remove both derived components without changing the three base signal formulas."
+  },
+  "candidate_stage": {
+    "primary_estimand": "Paired difference in candidate_recall@30: challenger minus full_five_consensus.",
+    "secondary_metrics": [
+      "candidate_recall@10",
+      "candidate_recall@15",
+      "candidate_recall@20",
+      "candidate_recall@25"
+    ],
+    "candidate_random_sets_per_target": 200,
+    "candidate_random_seed": 202611260841,
+    "exact_uniform_expectation": "K/45",
+    "ranking": "Score descending, then ascending number.",
+    "miss_trace": "For each winning slot, record rank positions under both models and first K at which retained; do not store winning number values or candidate lists.",
+    "inference": {
+      "primary_comparison_count": 1,
+      "primary_alpha": 0.05,
+      "secondary_family_alpha": 0.05,
+      "secondary_comparison_count": 4,
+      "secondary_alpha_per_comparison": 0.0125,
+      "bootstrap": "Two-sided percentile moving-block bootstrap; 4,000 replicates; 50-target contiguous blocks sampled with replacement; retain final one-target remainder in every replicate."
+    }
+  },
+  "portfolio_stage": {
+    "allocator": "Fixed rank partition of each model's top 18: ranks 1-6, 7-12, and 13-18 become exactly three six-number lines.",
+    "allocator_search": false,
+    "geometry": "Three pairwise-disjoint six-number lines; union18.",
+    "metrics": [
+      "max_hit",
+      "any2",
+      "any3",
+      "any4",
+      "any5",
+      "any6",
+      "winning_union_coverage",
+      "line_hit_distribution"
+    ],
+    "matched_random_portfolios_per_target": 120,
+    "matched_random_seed": 202611260842,
+    "exact_geometry_matched_null": {
+      "max_hit": 1.514256248572755,
+      "any2": 0.47497624326892623,
+      "any3": 0.07135490714617204,
+      "any4": 0.004180448026165553,
+      "any5": 0.00008655553181928678,
+      "any6": 3.68321411996965e-7,
+      "winning_union_coverage": 2.4
+    },
+    "strict_metrics": [
+      "max_hit",
+      "any2",
+      "any3",
+      "winning_union_coverage"
+    ],
+    "inference": {
+      "family_alpha": 0.05,
+      "alpha_per_metric": 0.0125,
+      "bootstrap_replicates": 4000,
+      "block_length_targets": 50,
+      "nonoverlapping_full_blocks": 17,
+      "final_remainder_targets": 1,
+      "any2_positive_block_share_min": 0.65
+    }
+  },
+  "historical_evaluation": {
+    "target_range": [
+      401,
+      1251
+    ],
+    "target_count": 851,
+    "cutoff_rule": "For each target t, all features/ranks use only main-number draws 1..t-1; target outcome is read only after both rankings and portfolios are frozen.",
+    "contaminated_live_history_rounds": [
+      1244,
+      1245,
+      1246,
+      1247,
+      1248,
+      1249,
+      1250,
+      1251
+    ],
+    "clean_holdout": false,
+    "prospective_confirmation": false
+  },
+  "strict_gate": {
+    "unchanged": true,
+    "all_four_adjusted_moving_block_ci_lower_bounds_strictly_gt_zero": true,
+    "any2_positive_nonoverlapping_50_target_block_share_min": 0.65,
+    "no_leakage": true,
+    "prospective_confirmation_required": true,
+    "prospective_minimum_target_count": null,
+    "prospective_completion_rule": null,
+    "no_threshold_or_alpha_change": true
+  },
+  "guardrails": [
+    "One fixed challenger only; no post-result variants, weight search, threshold search, or allocator search.",
+    "Candidate selection and portfolio allocation are reported separately.",
+    "No candidate numbers, TOP30, core/tail lists, or purchase lines in user-facing output.",
+    "Targets 1244-1251 are contaminated live-history diagnostics, not clean holdout or prospective confirmation.",
+    "No model or allocator promotion unless the unchanged strict gate and prospective policy requirements are met.",
+    "No random fallback and no DELIVERY_LOG event."
+  ],
+  "output_rules": {
+    "append_only": true,
+    "suppress_number_values": true,
+    "no_candidate_or_purchase_lines_generated_for_display": true,
+    "no_delivery_log_event": true,
+    "no_random_fallback": true
+  }
+}
