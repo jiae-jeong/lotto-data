@@ -1,0 +1,10 @@
+{
+  "study_id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "correction_recorded_at_kst": "2026-11-26T08:45:46+09:00",
+  "original_preregistration_path": "research/weekly_purchase/1252/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_PREREG_20261126.json",
+  "original_preregistration_blob_sha": "4b2a3e566754f76407cf4dd5877cc8d5f7e2b7c0",
+  "correction": "The original preregistration's registered_at_kst field was entered as 08:46:00, 14 seconds after the automation runtime's stated current time. This append-only correction records the actual pre-evaluation registration time as 08:45:46 KST. No hypothesis, data, target range, metric, seed, alpha, threshold, or execution rule is changed.",
+  "authoritative_registered_at_kst": "2026-11-26T08:45:46+09:00",
+  "evaluation_started_before_correction": false,
+  "append_only": true
+}
