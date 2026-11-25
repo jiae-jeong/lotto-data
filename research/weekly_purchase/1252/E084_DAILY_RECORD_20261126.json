@@ -1,0 +1,16 @@
+{
+  "study_id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "date_kst": "2026-11-26",
+  "new_study": true,
+  "evidence_class": "HISTORICAL_CUTOFF_SAFE_CANDIDATE_ABLATION_NOT_CLEAN_HOLDOUT_NOT_PROSPECTIVE_CONFIRMATION",
+  "source_sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "source_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "preregistration_blob_sha": "4b2a3e566754f76407cf4dd5877cc8d5f7e2b7c0",
+  "runner_blob_sha": "b7049773330c72a7909a45b56e9d2c288ac47257",
+  "completion_path": "research/weekly_purchase/1252/E084_COMPLETION_20261126.json",
+  "report_path": "research/daily/2026-11-26_DAILY_RESEARCH_REPORT.md",
+  "historical_strict_gate_pass": false,
+  "no_numbers_displayed": true,
+  "delivery_log_unchanged": true,
+  "append_only": true
+}
