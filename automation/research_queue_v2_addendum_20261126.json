@@ -1,0 +1,33 @@
+{
+  "recorded_at_kst": "2026-11-26T08:45:46+09:00",
+  "append_only": true,
+  "base_queue_path": "automation/research_queue_v2.json",
+  "base_queue_blob_sha": "a830d03dd5bab001eba1b4a35f6830efb3d2d505",
+  "base_queue_latest_validation": {
+    "run_id": 44543887535,
+    "validated_at_kst": "2026-11-20T03:02:28+09:00",
+    "queue_contract": "E030-E076 PASS",
+    "research_job": "SKIPPED",
+    "prospective_ledger_job": "SKIPPED"
+  },
+  "new_study": {
+    "id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+    "preregistration": "research/weekly_purchase/1252/E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_PREREG_20261126.json",
+    "completion": "research/weekly_purchase/1252/E084_COMPLETION_20261126.json",
+    "status": "EXECUTED_HISTORICAL_DIAGNOSTIC_ONLY",
+    "target_1252_three_line_readiness_eligible": false,
+    "question": "Do balanced and contrarian derived terms add independent candidate information to the five-component mean-z consensus?",
+    "result": "The terms algebraically duplicate recent30 and gap, adding one extra gap vote. Removing both did not produce a candidate-recall CI excluding zero; the fixed three-line portfolio failed all four strict CI conditions and any2 positive block share was 9/17."
+  },
+  "unresolved_queue_items": {
+    "E043_H1250_A": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH; five-line research only; not eligible for target 1252 three-line gate.",
+    "E044_H1250_B_v2": "IMPLEMENTED_AWAITING_WORKFLOW_DISPATCH; five-line research only; not eligible for target 1252 three-line gate.",
+    "E017_S008": "BLOCKED_SOURCE_MISSING; do not reconstruct.",
+    "E018_PURCHASE_FAILURE_DECOMPOSITION": "BLOCKED_SOURCE_MISSING; authentic purchase evidence incomplete."
+  },
+  "next_start": {
+    "priority": "Independent external/nested validation or a genuinely new preregistered three-line research gap; do not repeat E084 on the same historical target range.",
+    "prospective_policy_gap": "Minimum prospective target count and completion rule remain unspecified; do not invent or import a different protocol's count.",
+    "strict_gate": "Unchanged; no model/allocator promotion, no candidate display, no purchase lines, no random fallback."
+  }
+}
