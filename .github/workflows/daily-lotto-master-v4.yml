@@ -317,6 +317,7 @@ jobs:
           # Missing purchase confirmation is an explicit evidence gap, not a compute failure.
           known_protocol_gaps={
               'full_compute_execution',
+              'external_two_source_crosscheck',
               'legacy_model_sources_recovered',
               'historical_errornote_closed_loop_complete'
           }
