@@ -1,0 +1,30 @@
+{
+  "study_id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "recorded_at_kst": "2026-11-26T08:45:46+09:00",
+  "append_only": true,
+  "issue": "RESULTS.json contains both candidate_stage.primary_ci and candidate_stage.recall.paired_delta_base3_minus_full[30].ci for the same primary contrast. They differ slightly because the redundant primary_ci field used a separate bootstrap seed.",
+  "canonical_primary_ci": {
+    "source_field": "candidate_stage.recall.paired_delta_base3_minus_full[30].ci",
+    "seed": 202611260873,
+    "alpha": 0.05,
+    "interval": [
+      -0.00979240109674893,
+      0.011750881316098714
+    ],
+    "interpretation": "95% moving-block CI for candidate_recall@30 difference (base-three minus full-five), includes zero."
+  },
+  "redundant_field_to_ignore": {
+    "source_field": "candidate_stage.primary_ci",
+    "seed": 202611260899,
+    "interval": [
+      -0.010184097140618886,
+      0.011946729338033682
+    ],
+    "reason": "Unregistered duplicate bootstrap stream; not used in REPORT.md and not canonical."
+  },
+  "report_value_matches_canonical": true,
+  "no_metrics_or_thresholds_changed": true,
+  "strict_gate_remains_fail": true,
+  "model_promotion": false,
+  "purchase_lines_generated": false
+}
