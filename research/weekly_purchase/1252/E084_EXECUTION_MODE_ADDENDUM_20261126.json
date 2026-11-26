@@ -1,0 +1,18 @@
+{
+  "study_id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "recorded_at_kst": "2026-11-26T08:45:46+09:00",
+  "execution_mode": "CONNECTED_FUNCTIONS_JS_ISOLATE_INLINE_IMPLEMENTATION",
+  "saved_runner_path": "automation/e084_derived_signal_redundancy_ablation_v1.js",
+  "saved_runner_blob_sha": "b7049773330c72a7909a45b56e9d2c288ac47257",
+  "saved_runner_directly_executed_in_node": false,
+  "calculation_actually_executed": true,
+  "implementation_note": "The E084 algorithm was executed in the connected JavaScript execution isolate using an inline implementation matching the saved runner's feature formulas, target loop, fixed allocator, random schedules, exact-null enumeration, and moving-block bootstrap. The stored Node runner was fetched and hash-verified but could not be launched directly in a Node runtime in this run. Do not describe this as a direct Node execution.",
+  "source_sha256_recomputed": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+  "source_git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+  "external_nested_validation": false,
+  "prospective_confirmation": false,
+  "no_future_leakage": true,
+  "outputs_re_fetched_and_sha256_verified": true,
+  "strict_gate": "FAIL",
+  "append_only": true
+}
