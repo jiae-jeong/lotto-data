@@ -1,0 +1,32 @@
+{
+  "target_round": 1252,
+  "recorded_at_kst": "2026-11-26T08:45:46+09:00",
+  "append_only": true,
+  "supersedes_no_prior_record": true,
+  "new_study": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "status": "BLOCKED_NO_STRICT_PASS",
+  "findings": [
+    {
+      "id": "B6_E084_DERIVED_SIGNAL_REDUNDANCY_NOT_PROMOTED",
+      "severity": "high",
+      "evidence": "The five-component mean-z consensus algebraically reduces to recent30_z + 2*gap_z + momentum_z. Removing balanced and contrarian did not improve candidate_recall@30 with a CI excluding zero. The fixed three-line portfolio failed all four adjusted CI lower-bound conditions and had 9/17 positive any2 blocks (52.94%).",
+      "non_transfer_rule": "Do not promote the base-three challenger or treat the historical diagnostic as prospective confirmation."
+    },
+    {
+      "id": "B7_PROSPECTIVE_POLICY_STILL_UNSPECIFIED",
+      "severity": "high",
+      "evidence": "The current policy still has null prospective minimum target count and completion rule. E084 did not define or satisfy this requirement.",
+      "non_transfer_rule": "Do not invent a target count or import prospective_v4's separate 200-target rule."
+    },
+    {
+      "id": "B8_H1250_EXTERNAL_NESTED_STILL_MISSING",
+      "severity": "high",
+      "evidence": "H1250-A/B V2 remains SPEC_FROZEN_IMPLEMENTATION_PENDING; workflow post-registration audit records no dispatch execution.",
+      "non_transfer_rule": "Five-line H1250 results/design cannot qualify the three-line target-1252 gate."
+    }
+  ],
+  "no_candidate_values_emitted": true,
+  "no_purchase_lines_generated": true,
+  "no_freeze_or_seal": true,
+  "no_random_fallback": true
+}
