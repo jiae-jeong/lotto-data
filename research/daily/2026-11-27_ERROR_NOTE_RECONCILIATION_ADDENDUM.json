@@ -1,0 +1,44 @@
+{
+  "audit_id": "ERROR_NOTE_RECONCILIATION_ADDENDUM_20261127",
+  "append_only": true,
+  "target_round": 1251,
+  "original_error_note_blob_sha": "7e8395a448f86ca96c04c32d90beda0c0ab2ea02",
+  "independent_recalc_addendum_blob_sha": "43d9f990689d8cfe1e8a18198155531d65c671b9",
+  "source_link_correction_blob_sha": "8e91c9db58ed92b02b8391704ad3ac8922674b91",
+  "original_delivery_blob_sha": "9da6f5760367758896f20f8643c771452e7948cd",
+  "delivery_log_blob_sha": "24f66f12e71f7976db9d25d5bee32c12a02218b6",
+  "original_records_modified": false,
+  "delivery_artifact_matches_ledger": true,
+  "line_hit_distribution": [
+    1,
+    1,
+    0
+  ],
+  "max_hit": 1,
+  "any2plus": false,
+  "any3plus": false,
+  "any4plus": false,
+  "any5plus": false,
+  "any6": false,
+  "winning_union_coverage": 2,
+  "bonus_match": false,
+  "purchase_confirmation": "NOT_CONFIRMED",
+  "candidate_stage": {
+    "winning_main_numbers": 6,
+    "candidate_recall_at_30": 0.8333333333,
+    "winners_selected_into_three_line_portfolio": 2,
+    "winners_in_later_sequential_pools_not_allocated": 2,
+    "winners_outside_three_stage_pool_reach": 2,
+    "interpretation": "single_target_post_draw_diagnostic_only; no tuning or promotion"
+  },
+  "source_provenance": {
+    "direct_official_api_retrieval": false,
+    "corrected_sources": [
+      "https://www.yna.co.kr/view/AKR20261121050800002",
+      "https://www.fnnews.com/news/202611212058363456"
+    ],
+    "previously_unverified_sources_rejected": true
+  },
+  "no_new_delivery_event": true,
+  "no_candidate_or_purchase_lines_generated": true
+}
