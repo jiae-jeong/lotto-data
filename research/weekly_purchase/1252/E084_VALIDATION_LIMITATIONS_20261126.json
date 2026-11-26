@@ -1,0 +1,31 @@
+{
+  "target_round": 1252,
+  "study_id": "E084_DERIVED_SIGNAL_REDUNDANCY_ABLATION_3LINE_v1",
+  "recorded_at_kst": "2026-11-26T08:45:46+09:00",
+  "append_only": true,
+  "limitations": [
+    {
+      "id": "E084_EXTERNAL_NESTED_NOT_EXECUTED",
+      "severity": "high",
+      "status": "NOT_EXECUTED",
+      "detail": "E084 is a cutoff-safe historical target-by-target diagnostic with a single fixed challenger and no parameter search. It is not an independent external nested validation and cannot satisfy the policy's nested/rolling plus prospective confirmation requirement."
+    },
+    {
+      "id": "E084_NODE_RUNNER_NOT_DIRECTLY_EXECUTED",
+      "severity": "medium",
+      "status": "INLINE_JS_ISOLATE_EXECUTION",
+      "detail": "The stored Node runner was hash-verified but not launched in a Node runtime. The actual calculation was executed in the connected JavaScript isolate using an inline implementation matching the stored algorithm. See E084_EXECUTION_MODE_ADDENDUM_20261126.json."
+    },
+    {
+      "id": "PROSPECTIVE_RULE_UNSPECIFIED",
+      "severity": "high",
+      "status": "BLOCKED_BY_POLICY_GAP",
+      "detail": "The prospective minimum target count and completion rule remain null. No substitute value was invented."
+    }
+  ],
+  "historical_strict_gate_pass": false,
+  "prospective_confirmation": false,
+  "model_promotion": false,
+  "allocator_promotion": false,
+  "purchase_lines_generated": false
+}
