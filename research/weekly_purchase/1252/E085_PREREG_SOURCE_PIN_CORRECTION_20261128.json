@@ -1,0 +1,28 @@
+{
+  "correction_id": "E085_PREREG_SOURCE_PIN_CORRECTION_20261128",
+  "study_id": "E085_STRICT_GATED_VISIBILITY_GUARD_AUDIT_v1",
+  "append_only": true,
+  "original_preregistration_path": "research/weekly_purchase/1252/E085_STRICT_GATED_VISIBILITY_GUARD_PREREG_20261128.json",
+  "original_preregistration_blob_sha": "a5ac04f2a618c2ba7326b11494c841da0f0f328e",
+  "corrections": {
+    "LOTTO_PROJECT_PROTOCOL.md": {
+      "correct_blob_sha": "e3087e15499a0247afb7abce82dd0781f8b4231e",
+      "incorrect_original_value": "e3087e3"
+    },
+    "research/weekly_purchase/1250/REMEDIATION_PLAN_2026-11-06.md": {
+      "blob_sha": "4017ba64479b6b0b132aae386ae453c583458937"
+    },
+    "research/weekly_purchase/1251/E075_V54_V86_FAILURE_GATE_AUDIT_20261119.json": {
+      "blob_sha": "b8dee6a2fc72a9e01828e1a967622f46b15ca239"
+    }
+  },
+  "unchanged_pins": {
+    "AGENTS.md": "bedd02c6a6be1df60f6ba61b2de1845c3daf4fd2",
+    "research/weekly_purchase/1251/POLICY_AMENDMENT_20261121_STRICT_GATED_DELIVERY.json": "0b7916505b97296940e67e42ab785cb356b51829",
+    "lotto_data.csv": "be2fa07921a92f335aeb6e715b4f40098e297834"
+  },
+  "reason": "The preregistration was frozen before guard tests, but one protocol blob pin was abbreviated. This append-only correction supplies the exact fetched Git blob SHA without editing the preregistration.",
+  "no_research_design_change": true,
+  "no_threshold_change": true,
+  "no_number_values": true
+}
