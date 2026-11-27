@@ -1,0 +1,61 @@
+{
+  "record_id": "E085_FINAL_INTEGRITY_ADDENDUM_20261128",
+  "study_id": "E085_STRICT_GATED_VISIBILITY_GUARD_AUDIT_v1",
+  "recorded_at_kst": "2026-11-28T08:19:17+09:00",
+  "append_only": true,
+  "main_head_before_this_addendum": "3e0c3aa1dd1b8aafff0fc626a7b57b998f7cd085",
+  "source_integrity": {
+    "path": "lotto_data.csv",
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "expected_sha256_match": true,
+    "nonempty_rows": 1251,
+    "rounds_contiguous": true,
+    "blank_lines_ignored": 1,
+    "validation_errors": 0
+  },
+  "e085_sources": {
+    "prereg_blob_sha": "a5ac04f2a618c2ba7326b11494c841da0f0f328e",
+    "source_pin_correction_blob_sha": "21093019594eab6608ea8d98f9211246b56ade54",
+    "guard_git_blob_sha": "69fb4578702722d5202c403a5e440ed327cf0dfc",
+    "guard_sha256": "e7f4451177c50633d981bebdbaf40f8249dc0b485b2777cc3aa90f71636cc311",
+    "test_git_blob_sha": "88c3b2e3688533c161e4bbc21a5c35e0a2edf240",
+    "test_sha256": "4a66da9a10561ac5a6006cdb2f866dfc91964e524dcdd6c07d4c616a4431e3bd",
+    "runtime": "Node.js v22.16.0",
+    "tests": {
+      "total": 10,
+      "passed": 10,
+      "failed": 0
+    }
+  },
+  "output_manifest": {
+    "path": "analysis/2026-11-28/E085_STRICT_GATED_VISIBILITY_GUARD_v1/SHA256_MANIFEST.json",
+    "git_blob_sha": "e8f3c885923a4ed290620295b5bdd4205844bcac",
+    "sha256": "13e162dc831c0d58116155c8e07f1c62677b855ede7e4567d196b967e188c02b",
+    "all_manifest_entries_reverified": true
+  },
+  "immutable_existing_sources_rechecked": {
+    "model_gate_blob_sha_unchanged": "2740190a9bfc9324b861e73cedbcdedd13ab4487",
+    "strict_status_blob_sha_unchanged": "b050d7d9d4ca620dc0a517794e49b28679212843",
+    "freeze_seal_blob_sha_unchanged": "e8187217dee683d0bbe3f1fd4d49739488c7936f",
+    "public_line_artifact_blob_sha_unchanged": "33d6313347d8652b3ef5d0e0bcb6a558de745570",
+    "delivery_log_blob_sha_unchanged": "8b354915949a4f88e4a6ddcdedc54054ddfff3ce",
+    "purchase_registry_blob_sha_unchanged": "a6eadb56302487267d6cc5373f020361930a63d0"
+  },
+  "repository_state": {
+    "visibility": "public",
+    "current_1252_gate": "NOT_READY",
+    "current_1252_freeze_seal": "NOT_CREATED_STRICT_GATE_FAIL",
+    "delivery_artifact_conflict": "PRESENT",
+    "purchase_confirmations": 0,
+    "new_delivery_log_event": false,
+    "original_records_modified": false,
+    "line_values_read_or_emitted": false
+  },
+  "implementation_limitations": {
+    "guard_saved_and_tested": true,
+    "guard_integrated_into_existing_delivery_entrypoints": false,
+    "workflow_dispatch_or_deployment_run": false,
+    "next_required_step": "Integrate the tested guard into each authorized line-disclosure entrypoint and add workflow-level regression coverage; do not alter schedules or strict thresholds."
+  }
+}
