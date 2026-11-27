@@ -1,0 +1,11 @@
+test,decision,reason_count
+actual_target_1252_state,SUPPRESS,24
+not_ready_state,SUPPRESS,4
+missing_seal,SUPPRESS,1
+cutoff_mismatch,SUPPRESS,1
+data_hash_mismatch,SUPPRESS,2
+unevaluated_gate,SUPPRESS,1
+prospective_confirmation_missing,SUPPRESS,1
+random_fallback_enabled,SUPPRESS,1
+artifact_file_hash_mismatch,SUPPRESS,1
+synthetic_complete_ready_fixture,ALLOW_READ_FROZEN_ARTIFACT,0
