@@ -122,3 +122,20 @@ This ledger records combinations displayed to the user, whether or not they were
 
 - Two unverified third-party URLs in the first source metadata/error-note drafts are superseded. Verified corroborating links: Yonhap `https://www.yna.co.kr/view/AKR20261121050800002`; Newsis via FNNews `https://www.fnnews.com/news/202611212058363456`; LottoLottery `https://www.lottolottery.co.kr/results/1251`; LottoKing `https://lotto.gon.ai.kr/lotto/1251`.
 - Result values and delivered-artifact hit counts are unchanged. Direct official API retrieval remains unavailable. Correction artifact: `data/snapshots/lotto_data_through_1251_20261122_SOURCE_LINK_CORRECTION.json`.
+
+
+## Event 2026-11-27 — target round 1252
+- Delivery evidence: user reiterated that the weekly research exists to deliver three purchase-purpose lines and explicitly instructed delivery of an eligible deterministic model/allocator output even when strict PASS is false. This is a research-selected delivery, not a strict-pass promotion.
+- Delivery timestamp: 2026-11-27 13:47 KST.
+- Exact lines displayed:
+  1. 7, 12, 18, 27, 33, 34
+  2. 13, 16, 21, 36, 44, 45
+  3. 2, 11, 14, 24, 35, 43
+- Model: E054_THREE_LINE_ROLLING_CONCENTRATION_REGIME_v1; unchanged fixed formula and one preregistered model variant. Target 1252 regime LOW; current HHI 0.023200000000000002; reference median 0.023380555555555554; 200 reference windows; training outcomes 301..1251; LOW exposure 417 and HIGH exposure 534.
+- Allocator: unchanged deterministic E045 choose_disjoint_ticket, three sequential calls, selected numbers removed after each line. Model Git blob SHA: 3a660b23fc7b74a474cfbc984e7231f33e16d595. Allocator Git blob SHA: ea74fb93f9e5704810a0d51b9a08b49f29fa3513.
+- Data: canonical lotto_data.csv, cutoff 1251, 1,251 contiguous validated rows; SHA256 2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9; Git blob SHA be2fa07921a92f335aeb6e715b4f40098e297834. One blank physical line ignored; target-round outcome not used.
+- Integrity: exactly 3 lines × 6; all numbers 1–45; no within-line duplicates; pairwise-disjoint lines; union size 18; deterministic selection; no future leakage.
+- Statistical status: `strict_portfolio_pass=false`; E054 historical strict gate remains FAIL and prospective confirmation remains unspecified. No predictive superiority claim. Label: “연구 기반 추천번호, 통계적 우위 미입증”.
+- Freeze/seal: no Thursday seal existed; this recovery delivery is not misrepresented as a Thursday freeze. No Friday model search/tuning or random/fallback selection was performed.
+- Purchase confirmation: `NOT_CONFIRMED`; no assumption that the user purchased these lines.
+- Artifact: `research/weekly_purchase/1252/RESEARCH_SELECTED_LINES_1252_20261127.json`; artifact commit SHA: 1fde63b85aff9b3dc65bcb69a9d49284b0467746.
