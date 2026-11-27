@@ -1,0 +1,44 @@
+{
+  "study_id": "E085_STRICT_GATED_VISIBILITY_GUARD_AUDIT_v1",
+  "generated_at_kst": "2026-11-28T08:19:17+09:00",
+  "append_only": true,
+  "entries": {
+    "automation/strict_gated_visibility_guard_e085_v1.js": {
+      "git_blob_sha": "69fb4578702722d5202c403a5e440ed327cf0dfc",
+      "sha256": "e7f4451177c50633d981bebdbaf40f8249dc0b485b2777cc3aa90f71636cc311"
+    },
+    "automation/tests_v2/test_strict_gated_visibility_guard_e085.js": {
+      "git_blob_sha": "88c3b2e3688533c161e4bbc21a5c35e0a2edf240",
+      "sha256": "4a66da9a10561ac5a6006cdb2f866dfc91964e524dcdd6c07d4c616a4431e3bd"
+    },
+    "research/weekly_purchase/1252/E085_STRICT_GATED_VISIBILITY_GUARD_PREREG_20261128.json": {
+      "git_blob_sha": "a5ac04f2a618c2ba7326b11494c841da0f0f328e",
+      "sha256": "00557a1dd38a43135aede375767f8ec8f0c6df50465400648680c8ba524fd5f6"
+    },
+    "research/weekly_purchase/1252/E085_PREREG_SOURCE_PIN_CORRECTION_20261128.json": {
+      "git_blob_sha": "21093019594eab6608ea8d98f9211246b56ade54",
+      "sha256": "2cfcd1634c9266d8ac84592b93ed0cb72bf549f788bbcb22e2cd9af288cc5bf6"
+    },
+    "analysis/2026-11-28/E085_STRICT_GATED_VISIBILITY_GUARD_v1/RESULTS.json": {
+      "sha256": "2a24b408fd3adaea7fa82a99e9435e6cde8a88f1523fa89dd4e578c0a6b60ff6"
+    },
+    "analysis/2026-11-28/E085_STRICT_GATED_VISIBILITY_GUARD_v1/TEST_RESULTS.csv": {
+      "sha256": "bd4e919a03ccfe7b6bd28d83cd4dd39ff4dbd486c58e44425c3174d2164ca129"
+    },
+    "analysis/2026-11-28/E085_STRICT_GATED_VISIBILITY_GUARD_v1/VERIFICATION.json": {
+      "sha256": "39575ffbcfa755f7c80722be093c141dfb87e95e2bad61d45c676ee4c7a64277"
+    },
+    "analysis/2026-11-28/E085_STRICT_GATED_VISIBILITY_GUARD_v1/REPORT.md": {
+      "sha256": "5432e10a9024c7868cca1fc09bfa898c86b27cd3619d3c1c6f8120fe94b0ee16"
+    },
+    "research/weekly_purchase/1252/E085_COMPLETION_20261128.json": {
+      "sha256": "16f9106361f7f8b0bdf2d1262d47f58b97c4300906f5f51fc1a3e8fbdf1e9af1"
+    },
+    "research/weekly_purchase/1252/VISIBILITY_POLICY_INCIDENT_20261127_ADDENDUM.json": {
+      "sha256": "5936bc56a4323d024e1480dc389e595a658a708195fd0c470261f77b97468065"
+    },
+    "research/daily/2026-11-28_DAILY_RESEARCH_REPORT.md": {
+      "sha256": "c0d06e5d0fabd7b80d09cdab1eb33200d6603ee450f826f012850a50fd8b3a1e"
+    }
+  }
+}
