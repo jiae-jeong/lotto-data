@@ -1,0 +1,42 @@
+{
+  "record_id": "E085_POST_CORRECTION_FINAL_INTEGRITY_20261128",
+  "study_id": "E085_STRICT_GATED_VISIBILITY_GUARD_AUDIT_v1",
+  "recorded_at_kst": "2026-11-28T08:19:17+09:00",
+  "append_only": true,
+  "main_head_before_this_addendum": "9179122cc77d6d87dd1d3b7441414a364a932a01",
+  "correction_files": {
+    "json_path": "research/weekly_purchase/1252/E085_PREFLIGHT_SCOPE_CORRECTION_20261128.json",
+    "json_blob_sha": "3f38853398f7056901119bcec851cf0cc80ce4bc",
+    "markdown_path": "research/daily/2026-11-28_DAILY_RESEARCH_REPORT_ADDENDUM.md",
+    "markdown_commit_sha": "9179122cc77d6d87dd1d3b7441414a364a932a01"
+  },
+  "corrected_scope": {
+    "pre_preregistration_preflight_read_line_values_internally": true,
+    "preflight_purpose": "structural metadata validation only",
+    "line_values_disclosed_or_copied": false,
+    "post_preregistration_guard_test_read_line_values": false,
+    "earlier_line_values_read_flags_are_limited_to_guard_execution": true
+  },
+  "immutable_records_rechecked": {
+    "delivery_log_blob_sha": "8b354915949a4f88e4a6ddcdedc54054ddfff3ce",
+    "purchase_registry_blob_sha": "a6eadb56302487267d6cc5373f020361930a63d0",
+    "target_1252_gate_blob_sha": "2740190a9bfc9324b861e73cedbcdedd13ab4487",
+    "target_1252_strict_status_blob_sha": "b050d7d9d4ca620dc0a517794e49b28679212843",
+    "target_1252_freeze_seal_blob_sha": "e8187217dee683d0bbe3f1fd4d49739488c7936f",
+    "target_1252_public_artifact_blob_sha": "33d6313347d8652b3ef5d0e0bcb6a558de745570"
+  },
+  "test_summary": {
+    "runtime": "Node.js v22.16.0",
+    "passed": 10,
+    "failed": 0,
+    "actual_target_1252_decision": "SUPPRESS"
+  },
+  "deployment": {
+    "guard_integrated_into_existing_delivery_entrypoints": false,
+    "workflow_run": false
+  },
+  "no_model_change": true,
+  "no_strict_threshold_change": true,
+  "no_new_delivery_event": true,
+  "no_purchase_confirmation": true
+}
