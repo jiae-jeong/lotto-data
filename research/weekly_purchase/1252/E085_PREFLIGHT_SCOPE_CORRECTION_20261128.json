@@ -1,0 +1,32 @@
+{
+  "correction_id": "E085_PREFLIGHT_SCOPE_CORRECTION_20261128",
+  "study_id": "E085_STRICT_GATED_VISIBILITY_GUARD_AUDIT_v1",
+  "recorded_at_kst": "2026-11-28T08:19:17+09:00",
+  "append_only": true,
+  "scope_clarification": {
+    "before_preregistration": true,
+    "preflight_action": "The initial repository preflight parsed the existing public target-1252 artifact's line array internally to verify only its count, per-line length, range, uniqueness, and disjointness metadata.",
+    "values_emitted_to_user": false,
+    "values_copied_into_any_new_artifact": false,
+    "values_written_to_today_report": false,
+    "values_included_in_test_fixture": false,
+    "after_preregistration_guard_test": "The E085 guard and regression test used metadata only; they did not open or parse the target-1252 line artifact."
+  },
+  "correction_to_prior_records": {
+    "affected_fields": [
+      "analysis/2026-11-28/E085_STRICT_GATED_VISIBILITY_GUARD_v1/RESULTS.json: public_artifact_audit.line_values_read",
+      "analysis/2026-11-28/E085_STRICT_GATED_VISIBILITY_GUARD_v1/VERIFICATION.json: no_line_values_read_or_emitted",
+      "research/weekly_purchase/1252/E085_COMPLETION_20261128.json: line_values_read",
+      "research/weekly_purchase/1252/VISIBILITY_POLICY_INCIDENT_20261127_ADDENDUM.json: action_taken"
+    ],
+    "correct_interpretation": "The metadata-only statement applies to the E085 guard/test execution after preregistration, not to the earlier preflight. The earlier preflight did read the values internally for structural validation. No values were disclosed, copied, or persisted in E085 outputs.",
+    "original_files_modified": false
+  },
+  "policy_assessment": {
+    "user_visibility_rule": "No candidate, TOP30, core/tail, or purchase lines were publicly displayed by this run.",
+    "preregistration_boundary": "E085 preregistration was saved after the initial preflight and before guard/test execution.",
+    "no_predictive_evidence_claimed": true,
+    "no_model_or_allocator_change": true
+  },
+  "no_line_values_in_this_addendum": true
+}
