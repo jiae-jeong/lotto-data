@@ -1,0 +1,214 @@
+{
+  "study_id": "E085_STRICT_GATED_VISIBILITY_GUARD_AUDIT_v1",
+  "date_kst": "2026-11-28",
+  "evidence_class": "POLICY_GOVERNANCE_IMPLEMENTATION_TEST_NOT_PREDICTIVE_EVIDENCE",
+  "target_round": 1252,
+  "current_decision": "NOT_READY_STRICT_FAIL",
+  "source": {
+    "path": "lotto_data.csv",
+    "cutoff": 1251,
+    "nonempty_rows": 1251,
+    "round_range": [
+      1,
+      1251
+    ],
+    "blank_physical_lines_ignored": 1,
+    "validation_issues": 0,
+    "git_blob_sha": "be2fa07921a92f335aeb6e715b4f40098e297834",
+    "sha256": "2017cf2b76454011bf11567a40a491311bedcdf6aaf47179beba5cb399c30cb9",
+    "expected_sha256_matches": true
+  },
+  "current_gate": {
+    "status": "NOT_READY",
+    "strict_pass_ready": false,
+    "strict_portfolio_pass": false,
+    "ready_file": null,
+    "ready_file_exists": false,
+    "final_purchase_freeze_allowed": false,
+    "failed_gates": [
+      "latest_e045_evidence_cutoff_mismatch"
+    ],
+    "unevaluated_gates": [
+      "max_hits_adjusted_ci",
+      "any2_adjusted_ci",
+      "any3_adjusted_ci",
+      "winning_union_coverage_adjusted_ci",
+      "any2_positive_50_target_block_share",
+      "prospective_confirmation"
+    ],
+    "no_future_leakage": true,
+    "random_fallback_allowed": false
+  },
+  "freeze_seal": {
+    "status": "NOT_CREATED_STRICT_GATE_FAIL",
+    "candidate_model": null,
+    "allocator": null,
+    "purchase_lines": null
+  },
+  "public_artifact_audit": {
+    "repository_visibility": "public",
+    "artifact_path": "research/weekly_purchase/1252/RESEARCH_SELECTED_LINES_1252_20261127.json",
+    "artifact_git_blob_sha": "33d6313347d8652b3ef5d0e0bcb6a558de745570",
+    "metadata": {
+      "target_round": 1252,
+      "data_cutoff": 1251,
+      "line_count": 3,
+      "numbers_per_line": 6,
+      "geometry": "DISJOINT_UNION18"
+    },
+    "artifact_status": "STRICT_FAIL; historical E054 gates remain failed; prospective confirmation unspecified",
+    "delivery_status_claim": "RESEARCH_SELECTED_NUMBERS_DELIVERED_ON_USER_REQUEST_NOT_STRICT_PASS",
+    "freeze_seal_claim": "NO_THURSDAY_SEAL",
+    "delivery_log_event_present": true,
+    "delivery_log_git_blob_sha": "8b354915949a4f88e4a6ddcdedc54054ddfff3ce",
+    "ledger_user_request_provenance": "LEDGER_ASSERTION_ONLY_NOT_INDEPENDENTLY_VERIFIED",
+    "actual_chat_display_independently_verified": false,
+    "public_artifact_conflicts_with_current_strict_gated_visibility_rule": true,
+    "line_values_read": false,
+    "line_values_copied_to_report": false
+  },
+  "purchase_confirmation": {
+    "registry_path": "research/PURCHASE_CONFIRMATION_REGISTRY.json",
+    "registry_git_blob_sha": "a6eadb56302487267d6cc5373f020361930a63d0",
+    "confirmed_entry_count": 0,
+    "status": "NO_CONFIRMED_PURCHASES"
+  },
+  "guard": {
+    "source_path": "automation/strict_gated_visibility_guard_e085_v1.js",
+    "git_blob_sha": "69fb4578702722d5202c403a5e440ed327cf0dfc",
+    "sha256": "e7f4451177c50633d981bebdbaf40f8249dc0b485b2777cc3aa90f71636cc311",
+    "test_path": "automation/tests_v2/test_strict_gated_visibility_guard_e085.js",
+    "test_git_blob_sha": "88c3b2e3688533c161e4bbc21a5c35e0a2edf240",
+    "test_sha256": "4a66da9a10561ac5a6006cdb2f866dfc91964e524dcdd6c07d4c616a4431e3bd",
+    "runtime": "Node.js v22.16.0",
+    "test_count": 10,
+    "passed": 10,
+    "failed": 0,
+    "actual_target_decision": "SUPPRESS",
+    "actual_target_reason_count": 24,
+    "actual_public_artifact_conflict": true,
+    "actual_delivery_claim_present": true,
+    "line_values_read": false,
+    "synthetic_pass_fixture_is_not_a_real_model_or_seal": true,
+    "cases": [
+      {
+        "name": "actual_target_1252_state",
+        "decision": "SUPPRESS",
+        "reason_count": 24
+      },
+      {
+        "name": "not_ready_state",
+        "decision": "SUPPRESS",
+        "reason_count": 4
+      },
+      {
+        "name": "missing_seal",
+        "decision": "SUPPRESS",
+        "reason_count": 1
+      },
+      {
+        "name": "cutoff_mismatch",
+        "decision": "SUPPRESS",
+        "reason_count": 1
+      },
+      {
+        "name": "data_hash_mismatch",
+        "decision": "SUPPRESS",
+        "reason_count": 2
+      },
+      {
+        "name": "unevaluated_gate",
+        "decision": "SUPPRESS",
+        "reason_count": 1
+      },
+      {
+        "name": "prospective_confirmation_missing",
+        "decision": "SUPPRESS",
+        "reason_count": 1
+      },
+      {
+        "name": "random_fallback_enabled",
+        "decision": "SUPPRESS",
+        "reason_count": 1
+      },
+      {
+        "name": "artifact_file_hash_mismatch",
+        "decision": "SUPPRESS",
+        "reason_count": 1
+      },
+      {
+        "name": "synthetic_complete_ready_fixture",
+        "decision": "ALLOW_READ_FROZEN_ARTIFACT",
+        "reason_count": 0
+      }
+    ]
+  },
+  "h1250_remediation": {
+    "plan_path": "research/weekly_purchase/1250/REMEDIATION_PLAN_2026-11-06.md",
+    "plan_git_blob_sha": "4017ba64479b6b0b132aae386ae453c583458937",
+    "prereg_path": "research/weekly_purchase/1250/H1250_AB_PREREGISTRATION_2026-11-10_V2.json",
+    "prereg_git_blob_sha": "bcac96aa1a7db5bfb0f4e973ba7fc14a35f2b417",
+    "frozen_data_cutoff": 1249,
+    "frozen_data_sha256": "a5996af8b842799d777beae0abeef9767f79726870e4d78d6683dfb0fe4802e7",
+    "outer_targets": "401..1249",
+    "outer_target_count": 849,
+    "axes": [
+      "E043_H1250_A_FIXED_BANK_ALLOCATOR_v1",
+      "E044_H1250_B_DYNAMIC_CANDIDATE_RANKING_v2"
+    ],
+    "frozen_runner_path": "automation/h1250_ab_research_v2.py",
+    "frozen_runner_git_blob_sha": "a7a7d7792c7ba84a1c12699f53d8a3f4009d8a66",
+    "workflow_audit_blob_sha": "e4b74fb6453c41c662f32cd1ee0f31b282c1750b",
+    "workflow_dispatch_run_found_in_preserved_audits": false,
+    "external_nested_validation_available": false,
+    "evidence_class": "HISTORICAL_FIVE_LINE_ONLY_NOT_ELIGIBLE_FOR_1252_THREE_LINE_GATE"
+  },
+  "failure_audit": {
+    "path": "research/weekly_purchase/1251/E075_V54_V86_FAILURE_GATE_AUDIT_20261119.json",
+    "git_blob_sha": "b8dee6a2fc72a9e01828e1a967622f46b15ca239",
+    "all_versions_strict_pass": false,
+    "V54": "any2 adjusted CI lower bound -0.000945; union coverage lower bound effectively zero",
+    "V83": "any3 adjusted CI lower bound -0.005204; union coverage lower bound effectively zero",
+    "V84": "any2 adjusted CI lower bound -0.012794; final 48-target any2 delta -0.105309",
+    "V85": "max-hit lower bound -0.002510 and any2 lower bound -0.014901",
+    "V86": "max-hit/any2/any3 lower bounds failed; any2-positive blocks 11/17=64.71%, below 65%"
+  },
+  "carry_forward": {
+    "E083_completion_blob_sha": "dae4ae21937f7d4f92d0fda331deeb32a6e71091",
+    "E084_completion_blob_sha": "f1fbfb557c6ee23eafba7dc5a21a4b3437f0a879",
+    "E084_historical_strict_gate_pass": false,
+    "latest_2026_11_27_master_status": "PARTIAL",
+    "latest_2026_11_27_model_scorecard_blob_sha": "c3a9ea822012b45493d2b142790d35c7065b9a62",
+    "latest_2026_11_27_master_verification_blob_sha": "42f2c2664c848ff5b1b7c969df5b5df166d41d95",
+    "latest_master_data_cutoff": 1251,
+    "latest_master_leakage_failures": 0,
+    "legacy_A_C_contrarian_sources": "NOT_FOUND_NOT_EXECUTED",
+    "five_line_portfolio_results_not_transferable_to_three_line_policy": true
+  },
+  "official_result_provenance": {
+    "latest_available_round": 1251,
+    "direct_donghaeng_api_retrieval": false,
+    "secondary_operator_attributed_crosscheck": [
+      "https://www.yna.co.kr/view/AKR20261121050800002",
+      "https://www.lottolottery.co.kr/results/1251"
+    ],
+    "target_1252_result_in_source": false
+  },
+  "decisions": {
+    "strict_thresholds_changed": false,
+    "model_promoted": false,
+    "allocator_promoted": false,
+    "candidate_numbers_generated": false,
+    "purchase_lines_generated": false,
+    "random_fallback_used": false,
+    "freeze_or_seal_created": false,
+    "delivery_log_modified": false,
+    "purchase_confirmation_modified": false,
+    "actual_purchase_claimed": false
+  },
+  "next_actions": [
+    "Integrate E085 fail-closed guard into each authorized line-disclosure entrypoint with a workflow-level regression test; do not change the existing schedule.",
+    "Keep H1250-A/B pending as five-line historical work; do not transfer its results to the three-line policy.",
+    "Keep prospective confirmation blocked until a separately approved, pre-registered completion rule exists; do not invent a target count."
+  ]
+}
