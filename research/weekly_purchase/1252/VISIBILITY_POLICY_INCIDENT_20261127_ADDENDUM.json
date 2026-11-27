@@ -1,0 +1,82 @@
+{
+  "incident_id": "VISIBILITY_POLICY_INCIDENT_1252_20261127_REVIEWED_20261128",
+  "study_id": "E085_STRICT_GATED_VISIBILITY_GUARD_AUDIT_v1",
+  "recorded_at_kst": "2026-11-28T08:19:17+09:00",
+  "append_only": true,
+  "policy_authority": {
+    "path": "research/weekly_purchase/1251/POLICY_AMENDMENT_20261121_STRICT_GATED_DELIVERY.json",
+    "blob_sha": "0b7916505b97296940e67e42ab785cb356b51829",
+    "rule": "No candidate, TOP30, core/tail, intermediate, research-selected, or purchase lines may be published before verified STRICT PASS."
+  },
+  "observed_state": {
+    "target_round": 1252,
+    "model_gate_path": "research/weekly_purchase/1252/MODEL_GATE_1252_20261127.json",
+    "model_gate_blob_sha": "2740190a9bfc9324b861e73cedbcdedd13ab4487",
+    "strict_pass_status_path": "research/weekly_purchase/1252/STRICT_PASS_STATUS_1252_20261127.json",
+    "strict_pass_status_blob_sha": "b050d7d9d4ca620dc0a517794e49b28679212843",
+    "freeze_seal_path": "research/weekly_purchase/1252/FREEZE_SEAL_STATUS_1252_20261123.json",
+    "freeze_seal_blob_sha": "e8187217dee683d0bbe3f1fd4d49739488c7936f",
+    "gate_status": "NOT_READY",
+    "strict_pass_ready": false,
+    "failed_gates": [
+      "latest_e045_evidence_cutoff_mismatch"
+    ],
+    "unevaluated_gates": [
+      "max_hits_adjusted_ci",
+      "any2_adjusted_ci",
+      "any3_adjusted_ci",
+      "winning_union_coverage_adjusted_ci",
+      "any2_positive_50_target_block_share",
+      "prospective_confirmation"
+    ],
+    "ready_file": null,
+    "freeze_seal_status": "NOT_CREATED_STRICT_GATE_FAIL"
+  },
+  "artifact_observation": {
+    "path": "research/weekly_purchase/1252/RESEARCH_SELECTED_LINES_1252_20261127.json",
+    "blob_sha": "33d6313347d8652b3ef5d0e0bcb6a558de745570",
+    "repository_visibility": "PUBLIC",
+    "metadata_only": {
+      "line_count": 3,
+      "numbers_per_line": 6,
+      "geometry": "DISJOINT_UNION18"
+    },
+    "artifact_claims": "RESEARCH_SELECTED_NUMBERS_DELIVERED_ON_USER_REQUEST_NOT_STRICT_PASS",
+    "ledger_event_present": true,
+    "ledger_blob_sha": "8b354915949a4f88e4a6ddcdedc54054ddfff3ce",
+    "user_request_provenance": "LEDGER_ASSERTION_ONLY_NOT_INDEPENDENTLY_VERIFIED",
+    "actual_chat_display_independently_verified": false,
+    "purchase_confirmation": "NOT_CONFIRMED"
+  },
+  "timeline": [
+    {
+      "at": "2026-11-27T08:53 KST approximately",
+      "event": "Friday reproduction audit recorded NOT_READY and no line artifact to reproduce; its observed main commit was 6e737959d83fb0ead5f4bbbbfdccd351d30f3c5a."
+    },
+    {
+      "at": "2026-11-27T13:47:00+09:00",
+      "event": "Research-selected line artifact metadata was recorded for target 1252."
+    },
+    {
+      "at": "2026-11-27T13:50:00Z",
+      "event": "Artifact commit 1fde63b85aff9b3dc65bcb69a9d49284b0467746."
+    },
+    {
+      "at": "2026-11-27T13:50:03Z",
+      "event": "Delivery ledger append commit d26d5d6eca3b45e75a67b6e9184b2861521482f4."
+    },
+    {
+      "at": "2026-11-27T17:24:23+09:00",
+      "event": "Latest 2026-11-27 full-master commit 61c596d22bff941fe0b2c55ad5871fd43ac32b26 still had NOT_READY gate and no seal."
+    }
+  ],
+  "finding": "The public target-1252 research-selected artifact and its delivery-ledger claim coexist with NOT_READY/STRICT_FAIL status and no freeze/seal. The ledger says the user requested the delivery, but that request and actual chat display were not independently verified in this audit. This is a public visibility-policy conflict under the current strict-gated rule; it is not evidence of purchase.",
+  "action_taken": [
+    "Did not read, copy, or emit any line values.",
+    "Did not delete or rewrite the artifact or prior DELIVERY_LOG entry.",
+    "Added E085 fail-closed metadata guard and regression tests.",
+    "Recorded this incident append-only.",
+    "No new DELIVERY_LOG event was created because no numbers were displayed."
+  ],
+  "unresolved": "The existing public artifact remains in the public repository because historical records are append-only and no repository-visibility change was authorized. This audit does not remove or conceal it."
+}
